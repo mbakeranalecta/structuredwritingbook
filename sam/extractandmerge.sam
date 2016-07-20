@@ -1,0 +1,87 @@
+sam:
+article: The extract and merge algorithms
+
+    by: Mark Baker
+
+    A great deal of the content we produce, particularly technical and business content, is essentially a report in human language on the specific features of a product, process, or data set. If those features are described in any kind of formal data set, such as a database or software source code, we can use structured writing techniques to extract information from those sources to create and/or validate content. 
+    
+    We have talked throughout this series about moving content from the media domain to the document domain and from the document domain to the subject domain. We have seen the advantages that come from creating content in the subject domain, and we have looked at the processing algorithms that can use subject domain content to produce various kinds of publications in different media. 
+
+    Subject domain content is simply content that is created and annotated in structures that are based on the subject matter rather than on the structure of documents or media. Subject domain structures tell you what the content is about, rather than how it should be published. You can therefore write algorithms that processes it based on what it is about rather than how it is presented. 
+    
+    Any data source that is contained and annotated in subject domain structures is therefor a source of subject domain content, whether it was intended to produce content from or not. This includes virtually all databases and quite a bit of software code. It also includes all authored content anywhere available (under and appropriate license) that contains any usable subject domain structures or annotations. All of this material is therefore potential material for generating content as part of your overall publishing process.
+    
+    Among other things, this means that the extract and merge algorithms are actually aspects of the content {reuse algorithm}. Rather than writing new content to be reused, however, they take content that already exists in other places and reuse it. 
+
+    There is nothing new, of course, about generating content from database records. Database reporting is a highly important and sophisticated field in its own right and it would be entirely correct to characterize it as a type of structured writing. What sets it apart, largely, from other structured writing practices, is that the databases it reports on serves other business purposes besides being sources of content. An insurance company policy database, for instance, may be used to publish custom benefit booklets for plan participants as well as for processing claims. The design of the structures and data entry interfaces of these systems has tended to fall outside the realm (and the notice) of writers and authoring system designers. 
+
+    This is a pity, because it has often resulted in organizations developing separate processes, tools, and repositories for content creation in which the information already contained in databases is researched, validated, recorded, and managed entirely independently on the content side of the house. The essence of the problem is that many content organizations choose to work in the media domain or the document domain and have neither the tools not the expertize to bridge the gap to all this material already available in the subject domain. But even when content organizations do extend their efforts into the subject domain, they are often blind to the fact that the subject domain content they are proposing to create already exists in the systems of another department. 
+
+    Another way in which this is a pity is that the material produced by the database reporting process, which is often quite sophisticated and beautifully formatted and published material, exists in isolation from the rest of the content produced by the organization. It incorporates and supports an entire structured publishing chain that has to be separately developed and maintained.      
+
+    In the field of software documentation we see the same pattern in regard to programming language API documentation. Much of the matter of an API reference guide is a description of each function, what information is requires as input (its parameters or arguments), the information it produces as output, and the errors or exceptions that it can generate. All of this information already exists in the code that implements the function. API documentation tools such as JavaDoc or Sphinx extract this information and turn it into English language content. The also combine this information with formal comments written into the code itself to create an completely human language description of the function. This is an application of subject-domain structured writing and the API documentation tools that do this implement an entire structured publishing system internally, producing final output, often in multiple formats. 
+
+    And here we see all the same problems again:
+
+    * An entire publishing chain is maintained separately from the main content publishing chain. 
+
+    * The content produced from this publishing chain is isolated from all the other content produced by the organization.
+
+    * Much of the same information is often created and maintained separately in a different repository and tool chain in the form programming guides and/or knowledge base articles. 
+
+    There are a couple of ways to address these redundancies and the isolation that goes with them. One is to attempt to unify all content authoring and production in a single enterprise-wide system, often with a single set of content structures intended for use across all enterprise departments. However, this is a highly expensive and disruptive approach and tends to create interfaces and structures that are less usable and less specific to various business functions than the ones they replace. It also ignores the fact that many of the systems from which we wish to extract content exist for other purposes besides the content that is generated from them. Their subject-domain structures are specific and necessary to the database functions or software code generation they were built for. 
+
+    A better approach, therefore, is to find ways to extract content from these sources and feed them into a more unified publishing chain. This create the need for extraction and merge algorithms (which are part of the {synthesis algorithm} within the overall {publishing algorithm}).  
+
+    section: The Extraction Algorithm        
+    
+        A common example of the extraction algorithm is found in API documentation tools such as JavaDoc. These tools parse application source code to pull out things like the names of functions, parameters, and return values, which it then uses to create the outline, at least, of reference documentation. Essentially, it generates a human language translation of what the computer language code is saying. 
+        
+        How the extraction algorithm works depends entirely on how the source data is structured, but it should usually create output in the subject domain that clearly labels the pieces of information it has culled from the source. This subject domain content can then be processed through the rest of the publishing tool chain just like any other content.
+        
+        One of the downsides of API documentation tools like JavaDoc is that they tend to be tightly coupled systems that produce media domain output such as formatted HTML directly, often providing little or no control over presentation or formatting. This is a problem because it means that your API reference content does not look like the rest of your content. And worse, it is not integrated with or linked to the rest of your content. This has obvious consequences like mentions of API routines in you programmer's guide not being linked to the documentation of that routine in the API reference. It would be much better to generate subject domain content from the API documentation tool and then process it with the rest of your content. For many tools this is actually possible because many of them offer an XML output which may be either {subject domain} or {document domain}. Even if it is document domain, it may be regular enough that you can extract the subject domain structures reasonably easily. 
+        
+        #examples
+
+    section: The merge algorithm
+    
+        When you extract content from an external source, you may want to combine it either with content from other external sources or with content that you have authored to work with it. A good example of the latter is API reference content, where in addition to the information extracted from code, you wish to provide a narrative description of the function, its parameters, and its return value. Extracted data can tell you the types of parameters and return values, for instance, but not what they mean. Readers need both pieces of information, so we need to merge them. 
+        
+        In the case of API documentation tools, the authored content for merging is often written in the source code files. It is contained in code comments and is often written in small {subject domain} tagging languages that are specific to that tool. (Though as with all subject domain structures, any other tool can read them if it wants to.)
+
+        Here is an example of authored content combined with source code in JavaDoc[https://en.wikipedia.org/wiki/Javadoc#Example]:
+
+        ```(Java)
+        /**
+         * Validates a chess move.
+         *
+         * Use {@link #doMove(int theFromFile, int theFromRank, int theToFile, int theToRank)} to move a piece.
+         *
+         * @param theFromFile file from which a piece is being moved
+         * @param theFromRank rank from which a piece is being moved
+         * @param theToFile   file to which a piece is being moved
+         * @param theToRank   rank to which a piece is being moved
+         * @return            true if the move is valid, otherwise false
+         */
+        boolean isValidMove(int theFromFile, int theFromRank, int theToFile, int theToRank) {
+            // ...body
+        }
+        ```
+        
+        In this example, everything between the opening `/*` and the closing `*/` is a comment (as far as Java itself is concerned), and the rest is a function definition in Java. However, JavaDoc sees the comment block as a block of structured text using a style of {markup} specific to JavaDoc. 
+        
+        The JavaDoc processor will extract information from the function definition itself (the extract algorithm) and then merge it with information from the authored structured content (the merge algorithm). In doing so, it has the chance to validate the authored content ({the validation algorithm}), for instance by making sure that the names of parameters in the authored content match those in the function definition itself. This ability to validate authored content against extracted data is an important part of the {validation algorithm} that we will look at in a future article.
+        
+        However, the merge algorithm does not require that the authored content be part of the same file as the data you will be extracting other information from. You can just as easily place the authored content in a separate file. All you need to be able to merge the too is an unambiguous key that you can find in the source data. You then enter that key as a field in the authored content where it can be used to match the authored content to the relevant extracted data.
+        
+    section: The Diversity of Sources
+    
+        The term single sourcing can mislead us. Single source can lead us to think that it means all source content is kept in a single place. But while some vendors of content management systems would like to encourage this interpretation, what we should understand when we talk about single sourcing is that each piece of information comes from a single source. That is to say, that each piece of information comes form a unique source.
+        
+        This has nothing to do with keeping it all in the same place. Nor is keeping all content in the same place a particularly useful approach to ensuring that it is only stored once. Ensuring that content is only stored once, a process formally called "normalization" is actually about making sure that information, and the repository in which it is stored, meets an appropriate set of constraints. 
+        
+        The set of constraints that defines a piece of information as unique are not universal. The definition of what constitutes unique for different pieces of information is complex and specific to the subject matter at hand. Furthermore, the business processes and systems that ensure that these constraints are followed are not universal, but specific to each function and organization. 
+        
+        This is not to say that there are never trivial differences between the ways in which different bodies within an organization store and manage information that should not be rationalized. There are all kind of isolated and ad hoc information stores in most organizations that could potentially be much more efficient and (vitally) much more accessible, with a degree of rationalization and centralization. But it does not follow at all that absolute centralization into a single system or a single data model is appropriate, useful, or even possible. 
+        
+        The best way to ensure that information is stored once is to have it stored in a system with the right constraints and the right processes for the people who create and manage that information. This will mean that an integrated publishing system will draw from diverse sources of information and content. The ability to extract content from these sources and to merge it with other content for publication is therefore central to an effective strategy.

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter>
+<title>Algorithms: Linking</title>
+<index>
+<row>
+<type>concept</type>
+<term>linking</term>
+</row>
+<row>
+<type>concept</type>
+<term>linking algorithm</term>
+</row>
+</index>
+<p>Few readers read content straight though. Unless the content is perfectly matched to their experience and their goals, there will be points where they need more information, points where they need less, or points where they decide that they need something else altogether. These are defection points in the content, points in which the reader’s “next” may not be the thing that comes next in the linear order of the work. That may mean deflecting to other content or to a different way of finding information such as asking a friend or posting a question on a forum.</p>
+<p>Deflections are a natural part of information seeking. They are part of what is called <span><annotation type="concept">information foraging</annotation></span>. The reader, in pursuit of their individual ends, will follow where the scent of information leads and that will not always be the next paragraph of the current text.</p>
+<p>Writers know they can’t meet everyone’s needs perfectly every time so they use links and other devices to help readers deflect when they need to. If you have Model A, do this. If you have Model B do that. Supporting deflection helps readers achieve their goals and helps keep the reader in writer’s own content, or content they approve of, rather than deflecting elsewhere.</p>
+<p>Deflection points can be handled in various ways. The writer may choose to do nothing, leaving it up to the reader to look up a word if they don’t understand it, for instance. They may use footnotes, cross references, sidebars, parenthetical material, or hypertext links to provide deflection choices. They may use tables or flowcharts to allow readers to choose different paths through content. They may even attempt to anticipate and forestall deflection by using information about the individual reader to dynamically reorder the content to suit the reader’s needs.</p>
+<p>Deflection costs the reader more on paper than online. For paper, we may design content to minimize the need to deflect, or to keep deflections inside the local work. For the Web, we may organize content with deflection in mind, allow different readers to choose their own course, rather than trying to optimize one course for all readers. This difference in the ease of deflection between paper and the Web and other hypertext media is one of the main reasons we want to practice <span><annotation type="concept">differential single sourcing</annotation></span>.</p>
+<p>Deflection also enters into the discussion of <span><annotation type="concept">content reuse</annotation></span>. We reuse content in multiple documents so that readers don’t have to deflect from one document to another to find it.</p>
+<p>If we reuse content in different media, we might want to have a different reused strategy between paper and hypertext outputs. Me may want to include the same chunk of content in multiple paper documents but link to a single copy of it when creating a hypertext. (Linking, in other words, is a kind of reuse: reuse by reference rather than copying.)</p>
+<p>Thus we should not be thinking solely in terms of  managing links in our content. We should be thinking about implementing the right deflection strategy in each of our outputs. To see how that works, we need to look at deflection and linking in each of the <span><annotation type="concept">structured writing domains</annotation></span>.</p>
+<section>
+<title>Deflection in the media domain</title>
+<p>In the <span><annotation type="concept">media domain</annotation></span>, we simply record the various deflection devices as such: cross references, tables, links, etc. For example, in HTML a link simply specifies a page to load:</p>
+<codeblock language="html">
+<![CDATA[<p>In Rio Bravo, <a href="https://en.wikipedia.org/wiki/John_Wayne">the Duke</a> plays an ex-Union colonel out for revenge.</p>
+]]></codeblock>
+<p>The phrase “the Duke” is a deflection point. The reader may not know who “the Duke” is, or may want more information on him. The link supports the reader at the deflection point. The reader can either deflect by clicking the link or stay the course and read on.</p>
+<p>But if the HTML page gets printed, the link is lost. The phrase “the Duke” is still a deflection point. The reader can still deflect, by doing a search for “the Duke”, perhaps, or asking a friend what it means. But the printed version lacks any support for that deflection.</p>
+<p>If the content had been written for paper, the deflection point might be supported in a different way. For example, it might be supported by adding an explanation in parentheses. (Parenthetical material is a type of deflection; it may be read or skipped.):</p>
+<codeblock>
+<![CDATA[In Rio Bravo, the Duke (John Wayne) plays an ex-Union colonel out for revenge.
+]]></codeblock>
+<p>Or it might be handled with a footnote:</p>
+<codeblock language="text">
+<![CDATA[In Rio Bravo, the Duke* plays an ex-Union colonel out for revenge.
+        
+...
+        
+* "The Duke" is the nickname of the actor John Wayne.
+]]></codeblock>
+<p>Clearly this is a case in which we would like to do <span><annotation type="concept">differential single sourcing</annotation></span> and handle a deflection point differently in different media. To accomplish this, we need to move the content out of the media domain.</p>
+</section>
+<section>
+<title>Deflection in the document domain</title>
+<p>Moving to the <span><annotation type="concept">document domain</annotation></span> is about factoring out the formatting specific structures of the media domain. But a link is not really a piece of formatting, so conventional refactoring into abstract document structures is not going to apply. For this reason, people working in the document domain often enter hypertext links exactly the way they would in the media domain: by specifying a URL. Thus in DITA you might enter a link as:</p>
+<codeblock language="DITA">
+<![CDATA[<p>In Rio Bravo, <xref href="https://en.wikipedia.org/wiki/John_Wayne" format="html">The Duke</xref> plays an ex-Union colonel out for revenge.</p>
+]]></codeblock>
+<p>The difference from HTML is slight here. The link element is called <span><annotation type="code">xref</annotation></span> rather than <span><annotation type="code">a</annotation></span>. But the meaning of <span><annotation type="code">xref</annotation></span> is bit more general. The HTML <span><annotation type="code">a</annotation></span> element is saying, create a hypertext link to this address. The DITA <span><annotation type="code">xref</annotation></span> element is saying, create some sort of reference to this resource. (As we will see in a moment, it is capable of linking to things other than HTML pages, which is why it requires the <span><annotation type="code">format</annotation></span> attribute to specify that in this case the target is an HTML page.) This generality gives us a little more leeway in processing. We can legitimately create print output from this markup that looks like this:</p>
+<codeblock>
+<![CDATA[In Rio Bravo, the Duke (see: https://en.wikipedia.org/wiki/John_Wayne) plays and ex-Union colonel out for revenge.
+]]></codeblock>
+<p>This is not the way we would handle the deflection point if we were designing for paper, but it is a small improvement from a <span><annotation type="concept">differential single sourcing</annotation></span> point of view. At least the link is now visible to the reader. (Technically we could do this from the HTML markup as well, but that would be cheating. The HTML markup is not really giving us permission to do this. It is telling us to create a hypertext link and nothing else. The problem with cheating is that you are assuming constraints that are not being promised or enforced, and this can fail in ways you may not expect or catch. Some cheats are more reliable than others, but you probably don’t want to get into the habit.)</p>
+<p>Fundamentally, though, this is not a satisfactory <span><annotation type="concept">differential single sourcing</annotation></span> solution. Unless there were no alternative, you would not normally direct a reader of paper to the web for more information, nor vice versa. Linking to an already published file, such as an HTML page, commits us to a particular format for the link target. If we link to content that has not yet been published, we gain the freedom to link to any format of that content that we choose to publish. The simplest way to do that is to link to a source file rather than an output file.</p>
+<p>In DITA, you can link to another DITA file (the default format, so we don’t need the <span><annotation type="code">format</annotation></span> attribute):</p>
+<codeblock language="html">
+<![CDATA[<p>In Rio Bravo, <xref href="John_Wayne.dita">The Duke</xref> plays an ex-Union colonel out for revenge.</p>
+]]></codeblock>
+<p>We don’t yet know if that DITA file will be published to paper or the Web, what the address of the published topic will be, or if that topic will stand alone or be assembled into a larger page or document for publication. This means that the publishing system is taking on responsibility for both ends of the link. It has to make sure that the target page is published in a way the source page can link to, and that the source page links to the right address.  But taking on this responsibly gives us the leeway to publish this link as we see fit.</p>
+<p>If we publish as a book on paper and the target resource ends up as part of a chapter in the same book, we can render the <span><annotation type="code">xref</annotation></span> as a cross reference to the page that resource appears on. We could format that cross reference inline or as a footnote. These are all legitimate interpretations of the <span><annotation type="code">xref</annotation></span>’s instruction to create a reference to a resource.</p>
+<p>If we publish to a help system and the target resource ends up as a topic in the same help system, we could render the <span><annotation type="code">xref</annotation></span> as a hypertext link to that topic.</p>
+<p>This is a big step forward, but it still does not let us do this:</p>
+<codeblock>
+<![CDATA[In Rio Bravo, the Duke (John Wayne) plays and ex-Union colonel out for revenge.
+]]></codeblock>
+<p>In other words, we can render the <span><annotation type="code">xref</annotation></span> as a cross reference or a link or a footnote, but we can only handle the deflection point as a reference to the specified resource. We can’t decide to link to a different resource or handle it by parenthetical clarification instead. To give ourselves the ability to link to different resources, we can turn to the <span><annotation type="concept">management domain</annotation></span>.</p>
+</section>
+<section>
+<title>Deflection in the management domain</title>
+<p>Linking to a source file rather than to an address gives us more latitude about how the link or cross reference is published, but we are still always linking to the same resource. If we are doing <span><annotation type="concept">content reuse</annotation></span>, this is a problem because you do not know if the same resource will be available everywhere you reuse our topic. We need to be able to link to different resources when our topic is used in different places.</p>
+<p>To accommodate this, we can factor out the file name and replace it with an ID or a key. IDs and keys are a <span><annotation type="concept">management domain</annotation></span> structure that we looked at in the article on the reuse algorithm. They allow us to refer to resources indirectly. Using IDs lets us use an abstract identifier rather than a file name to identify a resource. Using keys lets us remap the resources we point to. This makes keys the more efficient way to address this problem. So instead of referring to a specific resource on John Wayne, we refer to the key <span><annotation type="code">John_Wayne</annotation></span> using a <span><annotation type="code">keyref</annotation></span> attribute:</p>
+<codeblock language="DITA">
+<![CDATA[<p>In Rio Bravo, <xref keyref="John_Wayne">The Duke</xref> plays an ex-Union colonel out for revenge.</p>
+]]></codeblock>
+<p>Somewhere in the <span><annotation type="concept">DITA map</annotation></span> for each publication, the key <span><annotation type="code">John_Wayne</annotation></span> points to a topic. Publications link the <span><annotation type="code">keyref</annotation></span> to the resource pointed to by that key in each of their DITA maps. This allows you to link to different resources in each publication.</p>
+</section>
+<section>
+<title>The problem with IDs and Keys</title>
+<p>However, there is still a problem with linking based on IDs and keys. Keys will let you vary which resource a <span><annotation type="code">keyref</annotation></span> resolves to, but what happens when there is no resource to which that key can seasonably be assigned?</p>
+<p>The <span><annotation type="code">xref</annotation></span> demands that a reference to a resource be created, but there is no resource to link to. You are going to have a broken link, and fixing it is not easy. You can’t simply go in and remove the <span><annotation type="code">xref</annotation></span> from the source for one publication, because that defeats the purpose of content reuse if you have to edit the content every time you reuse it. Removing the key reference would fix your broken link in one publication, but that would result in the link being removed from all the publications, even where the resource does exist and the link ought to be created.</p>
+</section>
+<section>
+<title>Relationship tables</title>
+<p>One approach to the link-only-when-resource-available problem is to use a relationship table. In a conventional linking approach, the source page contains an embedded link structure pointing to the target page. The source  knows it is pointing to the target, but the target does not know it is being pointed to.</p>
+<insert item="../graphics/simplelink.png" type="image"/>
+<p>The idea that the target resource does not know it is being pointed to is important because it means it does not have to do anything in order for other resources to point to it. The fact that only the source and not the target has to know about the link is fundamental to the rapid growth of the Web. If the target resource had to participate in the link process, it would be impossible for the Web to grow explosively and organically as it has.</p>
+<p>A relationship table takes this one step further. When you create a link using a relationship table, you factor the link out of the source document and place it in a separate table. The relationship table says resource A links to resource B, but neither resource A nor resource B knows anything about it. (Think of it like being introduced to a stranger by a third party because you share a common interest. I collect china ducklings. You make china ducklings. We don’t know each other, but our mutual friend Dave introduces us. You and I are the source and destination resource; Dave is the relationship table.</p>
+<insert item="../graphics/linktable.png" type="image"/>
+<p>Notice that Dave has three choices about how he does the introduction. He can tell me about you as a seller of ducklings, or you about me as a buyer of ducklings, or he can introduce us both to each other. In the same way a relationship table can describe a link A to B, B to A, or both ways.</p>
+<p>One the links are factored out of a piece of content, you can reuse it anywhere you like. If there is a suitable resource available to link to, you enter it in a relationship table for that build and have the presentation algorithm create the link at build time. If no suitable resource is available for a different publication, no entry is made in the relationship table for that publication, and the presentation algorithm does not create a link.</p>
+</section>
+<section>
+<title>The problem with link tables</title>
+<p>The problem with link tables is that while they address the problem of link management in reused content and allow you to link to different targets in different publications, they separate the link from the deflection point it supports. The link that marked the deflection point has been factored out of the content so there is no way to put it back inline. Links generate by relationship tables end up in a block, usually at the end of the page.</p>
+<p>Since the end of a page is a deflection point in a hypertext system, there is a legitimate case for creating and managing page-level links. But if the page is well designed to fulfill a discrete purpose for the reader, the end of the page is actually the point at which the writer knows least about what the reader might want to read next. The relationship table approach does not support the full array of foreseeable reader deflection points which occur in the body of the page rather than its end.</p>
+<p>The other problem with the relationship table approach is that it is time consuming. You have to rewrite the links for each content set, and because the deflection points are not recorded in the content source, you have to figure out the appropriate links each time. This goes against the spirit of recording something once and using it many times. A mechanism intended to help you reuse content ends up forcing you to redo the work of linking for each publication you create.</p>
+</section>
+<section>
+<title>Conditional linking</title>
+<p>Before we leave the management domain, it is worth mentioning a management domain approach that we could use to address our differential single sourcing problem and get the appropriate deflection strategy for online and paper publishing. We could use conditional structures to define both options in the source file. With a little <span><annotation type="concept" specifically="DITA specialization">specialization</annotation></span> to support <span><annotation type="code">media</annotation></span> as a conditional attribute, you could do this in DITA:</p>
+<codeblock language="DITA">
+<![CDATA[<p>In Rio Bravo, <ph media="online"><xref keyref="John_Wayne">The Duke</xref></ph><ph media="paper">The Duke (John Wayne)</ph> plays an ex-Union colonel out for revenge.</p>
+]]></codeblock>
+<p>In DITA, the <span><annotation type="code">ph</annotation></span> element is used to delineate an arbitrary phrase in the content that you want to apply management domain attributes to. Here we define two different versions of the phrase “the Duke”, each with different forms of deflection support, and each with a corresponding media condition. The <span><annotation type="concept">synthesis algorithm</annotation></span> would then choose the appropriate version of the phrase for each publication based on the conditions set for the build.</p>
+<p>There are some pretty obvious problems with this approach. It is twice the work for authors to create every link, and it doubles the maintenance cost of the content as well. It also flies in the face of the idea of creating formatting-independent content.</p>
+<p>Unfortunately, in a general purpose document domain tagging language with management domain support, it is pretty much impossible to prevent writers from doing things like this in order to achieve the effects they want. And in practice writers do end up using conditional markup like this for all kinds of differential single sourcing and reuse problems that are not easy to solve in the document and management domains. In some cases this can lead to tangles of conditions that are hard to maintain and debug.</p>
+<p>For an alternate approach to this problem, and the others we have discussed, we can to turn to the <span><annotation type="concept">subject domain</annotation></span>.</p>
+</section>
+<section>
+<title>Deflection in the subject domain</title>
+<p>There are a number of problems with the management domain approach to links.</p>
+<ul>
+<li>
+<p>Like all management domain structures, they are artificial. They don’t correspond to things in the author’s everyday world, which makes them harder to learn and use.</p>
+</li>
+<li>
+<p>You can’t link to a key or an ID that does not exist. This means that as you are developing a set of content, the first pages you write have very few other pages to link to. Authors cannot enter links to content that has not been written yet.</p>
+</li>
+<li>
+<p>In reuse scenarios, the use of IDs and keys does not solve the whole problem because it cannot guarantee that the resource that an ID or key refers to will be present in the final publication. You can use relationship tables to address this problem, but they create additional complexity for authors and have the disadvantage the you can’t use them to create inline links in your content.</p>
+</li>
+<li>
+<p>Unless you resort to ugly conditional structures, you can’t use media-appropriate deflection mechanism for differential single sourcing.</p>
+</li>
+</ul>
+<p><span><citation type="nameref" value="reuse">As we have seen before</citation></span>, we can often remove the need for management domain structures by moving content to the subject domain. The same it true with deflection points.</p>
+<p>In the document domain we handled a deflection point by specifying a resource to link to, specifying both that the deflection mechanism would be a link and that the link target would be a particular page.</p>
+<p>In the management domain we used keys to factor out the target resource but not the deflection mechanism (it was still an <span><annotation type="code">xref</annotation></span>).</p>
+<p>In the subject domain, we can factor out the target resource as well. We do this by marking up the subject of the deflection point:</p>
+<codeblock language="xml">
+<![CDATA[<p>In <movie>Rio Bravo</movie>, <actor name="John Wayne">the Duke</actor> plays an ex-Union colonel out for revenge.</p>
+]]></codeblock>
+<p>This markup clarifies that the phrase “the Duke” refers to the actor named John Wayne. These are respectively the type of the subject (actor) and its value (John Wayne).</p>
+<p>Given this markup, we can easily create the paper-style deflection mechanisms we have been looking for. We simply have the <span><annotation type="concept">presentation algorithm</annotation></span> take the value of the <span><annotation type="code">name</annotation></span> attribute and output it between parentheses:</p>
+<codeblock language="xml">
+<![CDATA[<p>In Rio Bravo, The Duke (John Wayne) plays an ex-Union colonel out for revenge.</p>
+]]></codeblock>
+<p>The subject domain markup is not link markup. Unlike the document domain markup, it does not insist that a reference should be created nor does it specify any resource to link to. This markup is a <span><annotation type="concept">subject annotation</annotation></span>. It clarifies that the phrase “the Duke” refers to the actor named John Wayne (and not the Duke of Wellington or the Duke of Earl) and that the phrase “Rio Bravo” refers to the movie (and not to <span><citation type="citation" value="https://en.wikipedia.org/wiki/R%C3%ADo_Bravo_\(disambiguation\)">the city in Texas or the nature reserve in Belize</citation></span>). That clarification is what allows us to produce the parenthetical explanation of the phrase in the example above. It also allows us to create a link if we want to. We’ll look at how in a moment. But first we should look at the implications of subject annotation more deeply.</p>
+<p>Subject annotation markup says, “this is an important subject that we care about in this context”. How is this an appropriate way to handle a deflection point? Writers cannot know with certainty what the deflection points will be for individual reader. But they can anticipate that important related subjects are likely deflection points. This is what they are doing when they create links in the document domain and it is what they are doing in the subject domain. The difference is that in the document domain they handle then mention of an important subject by creating markup that says “create a link to resource X” and in the subject domain they handle it by creating markup that says “this is a mention of important related subject Y”. This leaves us with more options about how to handle the deflection point, and that is what we have been looking for.</p>
+<p>Marking it up a phrase as a significant subject does not oblige the publishing algorithm to create a link. If you decide to have the publishing algorithm create a link on the Web and a cross reference on paper, nothing in the markup obliges you to use any particular formatting or target any particular resource. There is no question of cheating here if you decide to create one kind of deflection device or another, or not to create one at all. The markup is giving us the information to make our own decisions rather than forcing us to create a particular structure.</p>
+<p>In all our previous examples, mentions of “Rio Bravo” were not marked up, even though it is clearly an important subject and a potential deflection point. This reflects the author’s decision not to create a link to support this deflection point. But what if we want to make a different choice later? By marking up “Rio Bravo” as a significant subject, we keep our options open. Now we tell the <span><annotation type="concept">presentation algorithm</annotation></span> to create links on the names of movies if we want to, or not if we don’t want to.</p>
+<p>But there are additional reasons to annotate Rio Bravo as a significant subject, because that annotation can be used for other purposes as well. The subject annotation says that “Rio Bravo” is the title of a movie. In the media domain, the titles of movies are commonly printed in italics. We can use the subject domain <span><annotation type="code">movie</annotation></span> tags to generate media domain italic styling. We could also use this subject annotation to generate document domain index markers so that we can automatically build an index all mentions of movies in a work.</p>
+<p>Subject annotation thus serve multiple purposes, and correspondingly reduces the amount of markup that is required to support all these different publishing functions. This is a common feature of subject domain markup. None of it is directly tied to specific document domain or media domain structures which will be required to publish the content. Each piece of subject-domain markup may be used to generate multiple document domain and media domain structures. For example, we could generate the following document domain markup from from the subject domain markup above (the example is in DocBook):</p>
+<codeblock language="DocBook">
+<![CDATA[<para>
+    In 
+    <indexterm>
+       <primary>Rio Bravo</primary>
+       <secondary>Movies</secondary>
+    </indexterm>
+    <citetitle pubwork="movie">Rio Bravo</citetitle>,
+    <indexterm>
+        <primary>John Wayne</primary>
+        <secondary>Actors</secondary>
+    </indexterm>
+    <ulink url="https://en.wikipedia.org/wiki/John_Wayne">The Duke</ulink>
+    plays an ex-Union colonel out for revenge.
+</para>        
+]]></codeblock>
+<p>This sample contains index markers, formatting of movie titles, and links on actor’s names, all generated based on the subject annotations in the source text. It should be clear how much less work it is for an author to create the subject domain version of this content than the <span><annotation type="language">DocBook</annotation></span> version. Yet all the same publishing ability is maintained in both version.</p>
+<p>Generating links from subject annotations has a number of other advantages:</p>
+<ul>
+<li>
+<p>In a <span><annotation type="concept" specifically="content reuse">reuse</annotation></span> scenario, you never have to worry about broken links or creating relationship tables. You generate whatever links are appropriate to whatever topics are available in the <span><annotation type="concept">presentation algorithm</annotation></span>.</p>
+</li>
+<li>
+<p>In a <span><annotation type="concept">differential single sourcing</annotation></span> scenario, you are never tied to one deflection mechanism. You can generate any mechanism you like in whatever media you like.</p>
+</li>
+<li>
+<p>You don’t have to worry about maintaining the links in your content because you source content does not contain any links. The subject annotations in your content are objective statements about your subject matter, so they don’t change. All the links in the published content are generated by the presentation algorithm, so no management is required.</p>
+</li>
+<li>
+<p>There is no issue with wanting to link to content that has not been written yet. The subject annotation refers to the subject matter, not a resource. Links to content that is written later will appear once that content becomes available to link to.</p>
+</li>
+<li>
+<p>It is much easier for authors to write because they do not have to find content to link to or manage complex link tables or keys. They just create subject annotations when the text mentions a significant subject. This requires no knowledge of the publishing or content management system. It does not even require knowledge of any other resources in the content set. It only requires knowledge of the subject matter, which the author already has.</p>
+</li>
+</ul>
+</section>
+<section>
+<title>Finding resources to link to</title>
+<p>Of course, the question remains, what resources do we link to, since they are not specified in the text? If we choose to translate subject annotations into links, we need a way to find resource to link to.  We do this by looking up resources based on the subject information (type and value) captured by the subject annotation. For this we need content that is indexed using those types and values (or their semantic equivalents). So naturally this means that we need to index our content. If you have a page on John Wayne, you can index it like this:</p>
+<codeblock language="sam">
+<![CDATA[topic: 
+    title: Biography of John Wayne
+    index:
+        type: actor
+        value: John Wayne
+    body:
+    
+        John Wayne was an American actor known for westerns.
+]]></codeblock>
+<p>Now the linking algorithm looks like this:</p>
+<codeblock language="pseudo">
+<![CDATA[match actor
+    $target = find href of topic with index where type = actor and name = @name
+    create xref
+        attribute href = $target
+        continue
+]]></codeblock>
+<p>However, content stored in the subject domain may already be indexed effectively enough by its inherent subject domain structures:</p>
+<codeblock language="sam">
+<![CDATA[actor: 
+    name: John Wayne
+    bio: 
+        John Wayne was an American actor known for westerns.
+    filmography:
+        film: Rio Bravo
+        film: The Shootist
+]]></codeblock>
+<p>Here the topic type is actor, and the name field specifies the name of the actor in question. This is all the information we need to identify this topic as a source of information on the actor John Wayne.</p>
+<p>Only very minor changes to the linking algorithm are required to use this:</p>
+<codeblock language="pseudo">
+<![CDATA[match actor
+    $target = find href of actor topic where name = @name
+    create xref
+        attribute href = $target
+        continue
+]]></codeblock>
+<p>There is a lot more to how this mechanism works in practice, including what you do about imperfect matches and what happens when the query returns multiple resources. But that takes us into the specifics of individual systems and that is more detail than we need for present purposes.</p>
+<p>Indexing of topics may also be done by a <span><annotation type="tool">content management system</annotation></span>, in which case the linking algorithm would query to CMS to find topics to link to.</p>
+<p>A useful feature of this approach is that you can have the <span><annotation type="concept">publishing algorithm</annotation></span> fall back to creating a link to an external resource if and internal one is not available. If a search of the index of your own content fails, you can search indexes of external content. You can build such an index yourself, but some external sites may also provide indexes, APIs, or search facilities that you can use to locate appropriate pages to link to.</p>
+</section>
+<section>
+<title>Deferred Deflection</title>
+<p>Readers don’t always deflect the moment they reach a deflection point. In some cases, they choose to set the alternate material aside for later reading. This is particularly easy to do on the Web, where you can simply open pages in new browser tabs for reading later.</p>
+<p>The idea of the deferred deflection can also occur in document design. A document design that gathers a set of links together at the end of a document, rather than including them inline, is recommending deferred deflection to the reader. It attempts to keep the reader following the writer’s default course to the end of the document before they go off to other things. The relationship table approach to link management that we mentioned earlier can only produce deferred links.</p>
+<p>The merits of deferred links are debatable. Some argue that inline links are a distraction, that they actually encourage deflection. But the lack of links does not stop the reader from deflecting if they want to, and if they do deflect, the lack of a link means they may leave your content set and land on competitor’s content or content is that is of poor quality or that contradicts what you have been saying. The fact that the debate exists suggests that we may want to factor this design choice out of our source content so that we can choose between inline and deferred links later.</p>
+<p>To leave open the option of deferring or not deferring links, we have to records links at the deflection points they belong to. We can choose to defer them at publishing time if we wish, but if we defer at writing time, we can’t put the links back inline at publishing time because we don’t know where they belong.</p>
+<p>But for this strategy to work, we need to be able to tell the difference between links that can be deferred and those that cannot. An simple example of a link that cannot be deferred is one that says “For more information, click here.” Obviously this link has to remain on the words “click here”.</p>
+<p>But there is a more subtle issue as well. For a link to be deferred on publishing, it must be possible to contextualize the link in the deferred location. In other words, when the deflection point occurs inline in a paragraph the reader should be able to infer where the link will lead from the paragraph and from the text the link is applied to. But lifting the same link text out of the paragraph and putting is somewhere else is not guaranteed to provide the same context.</p>
+<p>For example, a link marked up like this is hard to defer algorithmically:</p>
+<codeblock language="DITA">
+<![CDATA[<p>In Rio Bravo, <xref href="https://en.wikipedia.org/wiki/John_Wayne">The Duke</xref> plays an ex-Union colonel out for revenge.</p>        
+]]></codeblock>
+<p>We could generate a list of links and insert it later in the document. It might look like this:</p>
+<codeblock language="HTML">
+<![CDATA[<p>For more information, see:</p>
+
+<ul>
+    <li><a href="https://en.wikipedia.org/wiki/John_Wayne">The Duke</a></li>
+    ...
+</ul>
+]]></codeblock>
+<p>But will it be clear out of the context of the original text what the words “the Duke” refer to? (Than answer here is maybe, but it is not hard to image cases where it would be a definite no.)</p>
+<p>On the other hand, if the deflection point is marked up in the <span><annotation type="concept">subject domain</annotation></span> like this:</p>
+<codeblock language="xml">
+<![CDATA[<p>In <movie>Rio Bravo</movie>, <actor name="John Wayne">The Duke</actor> plays an ex-Union colonel out for revenge.</p>
+]]></codeblock>
+<p>Then, given that we know what the subject of the deflection point is, we could use it to create a list of links that are categorized by type and use the real names of actors even when the original text use a nickname:</p>
+<codeblock language="html">
+<![CDATA[<p>For more information, see:</p>
+
+<ul>
+    <li>Actors:       
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/John_Wayne">John Wayne</a></li>
+            ...
+        </ul>
+    </li>
+    <li>Movies:       
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Rio_Bravo_(film)">Rio Bravo</a></li>
+            ...
+        </ul>
+    </li>
+</ul>
+]]></codeblock>
+<p>In short, algorithmically deferring document domain links is always tricky, but we can comfortably defer linking of subject annotations.</p>
+</section>
+<section>
+<title>Different domain, different algorithm</title>
+<p>What the linking algorithm illustrates perhaps better than any other is that the movement from one domain to another changes the algorithms in fundamental ways. While the algorithm has the same end in each domain, the way it achieves that end can be significantly different.</p>
+<p>One of the points I have tried to make about structured writing algorithms is that they always start with the content structures. How you design the content structures -- the way the author records the content -- determines everything you can do with the content. You create content structures to support algorithms. You create algorithms to improve content quality or streamline content management and publishing.</p>
+<p>In the document domain, the data structures tend to have a one to one correspondence with their algorithms. As system designers determine they need a particular algorithm, they create structures to support that algorithm. Thus document domain languages that require support for linking, reuse, indexing, and single sourcing have data structures for linking, for reuse, for indexing, and for single sourcing. (Some of these may be <span><annotation type="concept">management domain</annotation></span> structures, of course.)</p>
+<p>In the subject domain, though, the data structures reflect the subject matter. If you go looking for a one to one correspondence between a structure and the algorithm it supports, you won’t find it. Thus you will not find link markup or reuse markup or index markup or single sourcing markup in the subject domain. You will find markup that clarifies and delineates the subject matter of the content it contains. Any algorithm we want to apply has to interpret that subject domain annotation and use it as the basis for creating whatever kind of document or media domain structure you want for publishing.</p>
+<p>System designers do still have to think about what algorithms they want to apply, but that is to make sure that the aspects of the subject matter needed to drive the algorithms are captured. Since every subject structure can potentially drive many publishing algorithms, however, you will often find your subject domain content already supports any new algorithms you want to apply. This helps future proof your content.</p>
+<p>Moving from the document domain to the subject domain is not a matter of asking what the subject domain equivalent of a document domain structure is, therefore, but a matter of asking what information in the subject domain drives the creation of document domain structures. Subject domain content can look very different from its document domain counterpart and will often be starkly simpler and easier to understand.</p>
+</section>
+</chapter>

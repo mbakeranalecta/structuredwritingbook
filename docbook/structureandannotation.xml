@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbook.rng" schematypens="http://relaxng.org/ns/structure/1.0"
+?><?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbook.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"
+?>
+
+<!DOCTYPE book [
+]>
+<article>
+<db:title xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Structure and annotation</db:title>
+
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Broadly speaking, structured markup provides two things: structure and annotation. Structure governs the relationship of pieces. It is structure that says that a list consists of list items, that an API reference must begin with a function signature followed by a list of parameter values, that says that an ingredient listing consists of the ingredient name followed by a quantity followed by a unit of measure, or that a section must begin with a title. It is in structure that we create, impose, and express most of the <phrase>constraints</phrase> that are fundamental to structured writing.</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Whenever you place content in a structure, you are saying something about that content. What kind of thing you are saying about it depends on the domain of the markup.</db:para>
+<db:variablelist xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">
+<db:varlistentry>
+<db:term>Media Domain</db:term>
+<db:listitem><db:para>The structure says what the content should look like.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Document Domain</db:term>
+<db:listitem><db:para>The structure says what role the content plays in the document.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Subject Domain</db:term>
+<db:listitem><db:para>The structure relates the content to its subject matter.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Management Domain</db:term>
+<db:listitem><db:para>The structure says how the content should be managed.</db:para></db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">But markup structures, such as XML elements, only allow you to say one thing about the content they contain. Suppose you want to say more than one thing about a piece of content? In that case, you can add annotations to express additional information.</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">The information in annotations does not have to be in the same domain as the structure they apply to. For instance:</db:para>
+<db:itemizedlist xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">
+<db:listitem>
+<db:para>In <phrase>DITA</phrase>, the <phrase>keyref</phrase> attribute is used to add <phrase>management domain</phrase> metadata to a number of document structure elements.</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>In <phrase>HTML</phrase>, the style attribute can be used to add <phrase>media domain</phrase> metadata to the document structure.</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">But not all annotations add additional information to structures. It is possible to have annotations that stand alone. At a certain point in defining the structure of content we get down to what is essentially free-form narrative content -- that is, paragraphs of text. But even within a paragraph, that are pieces of text that we want to add metadata to for use by downstream processes. Examples from each of the domains include:</db:para>
+<db:variablelist xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">
+<db:varlistentry>
+<db:term>Media Domain</db:term>
+<db:listitem><db:para>A <phrase><db:code>bold</db:code></phrase> or <phrase><db:code>strong</db:code></phrase> annotation on a piece of text you want to emphasize.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Document Domain</db:term>
+<db:listitem><db:para>An <phrase><db:code>xref</db:code></phrase> annotation to create a reference to another part of the content.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Subject Domain</db:term>
+<db:listitem><db:para>A <phrase><db:code>function</db:code></phrase> annotation to identify that a piece of text is the name of a function.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Management Domain</db:term>
+<db:listitem><db:para>A conditional annotation to identify a piece of text that may be conditionally included or excluded from output.</db:para></db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Structure and annotation in SAM</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">In SAM, there are a number of types of structure, but the main extensible structure is the block. Annotations are part of the definition of the language. Annotations can be added to blocks and call also float in text.</db:para>
+<db:programlisting xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" language="SAM">
+</db:programlisting>
+<section xml:id="annotations">
+<db:title xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Annotations</db:title>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">This is a paragraph containing an <phrase>annotation</phrase>.</db:para>
+</section>
+<db:programlisting xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">
+</db:programlisting>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">In the example above, <phrase><db:code>section</db:code></phrase> is a structure containing a title and a paragraph. The <phrase><db:code>section</db:code></phrase> structure has an annotation which is contained in parentheses immediately after the colon that defines the structure. In this case it is an ID annotation and assigns the ID “annotations” to the structure.</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">The word “annotation” in the paragraph is annotated with a free-floating annotation. The curly braces delineated the text that is being annotated. The parentheses contain the annotation itself, which in this case is a type annotation, indicating that the word “annotation” is a reference to concept.</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Structure and annotation in XML</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">In XML we have two principle types of markup, the element and the attribute. These more or less correspond to the distinction I have made here between structure and annotation. Elements are for structure. Attributes are for annotation. The only caveat is that XML does not allow for free-floating annotations. To create an annotation inside a paragraph, you have to use an element. A paragraph (or any other block of text) with elements floating in it is called “mixed content”.</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">So the SAM example above could be expressed like this in XML:</db:para>
+<db:programlisting xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" language="XML">
+</db:programlisting>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">&lt;section id="annotations"&gt; &lt;title&gt;Annotations&lt;/title&gt; &lt;p&gt;This is a paragraph containing an &lt;concept&gt;annotation&lt;/concept&gt;. <phrase><db:code/></phrase>`</db:para>
+<section>
+<db:title xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Structure in attributes</db:title>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">While SAM draws a distinction between structure and annotation, XML, as we have seen, does not. Its distinction between element and attribute roughly corresponds to my distinction, but not entirely so. This is a reflection of the fact that while SAM is designed for documents, XML is deliberately more general and designed for data applications where the structure and annotation distinction may not apply, or may not apply in the same way as it does in documents.</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">This means that it is possible to design XML languages that use attributes (normally an annotation mechanism) to express structure.</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Consider these <phrase><annotation type="link" specifically="https://en.wikipedia.org/wiki/Microformat">examples of HTML Microformats from Wikipedia</annotation></phrase>. The first example shows an address formatted as a list.</db:para>
+<db:programlisting xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" language="HTML">
+</db:programlisting>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">&lt;ul&gt; &lt;li&gt;Joe Doe&lt;/li&gt; &lt;li&gt;The Example Company&lt;/li&gt; &lt;li&gt;604-555-1234&lt;/li&gt; &lt;li&gt;&lt;a href="http://example.com/"&gt;http://example.com/&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; <phrase><db:code/></phrase>`</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Here the phrase <phrase><db:code>The Example Company</db:code></phrase> is contained in <phrase><db:code>li</db:code></phrase> tags. This is part of a list structure delineated by <phrase><db:code>ul</db:code></phrase> tags, so the markup is largely structural in the document domain. The <phrase><db:code>li</db:code></phrase> does not really tell you anything useful about what the content itself is about. It does not tell you anything useful beyond what document structure it belongs to. It is not much use as an annotation.</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">The second example adds hCard microformat markup:</db:para>
+<db:programlisting xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" language="HTML">
+</db:programlisting>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">&lt;ul class="vcard"&gt; &lt;li class="fn"&gt;Joe Doe&lt;/li&gt; &lt;li class="org"&gt;The Example Company&lt;/li&gt; &lt;li class="tel"&gt;604-555-1234&lt;/li&gt; &lt;li&gt;&lt;a class="url” href="http://example.com/"&gt;http://example.com/&lt;/a&gt;&lt;/li&gt; &lt;/ul&gt; <phrase><db:code/></phrase>`</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">This example adds subject domain metadata in the form of the class attribute. For example, it says that the phrase <phrase><db:code>The Example Company</db:code></phrase> is a reference to an organization (<phrase><db:code>org</db:code></phrase>). So far this is just regular annotation.</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">However, there is not just annotation going on here. There is actually subject domain structure being expressed. Not only is the list item <phrase><db:code>The Example Company</db:code></phrase> annotated as <phrase><db:code>org</db:code></phrase>, the list that contains it is annotated as <phrase><db:code>vcard</db:code></phrase>. The meaning of <phrase><db:code>org</db:code></phrase> is actually dependent on it being part of a <phrase><db:code>vcard</db:code></phrase> structure.</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">In other words, the annotations in the sample above are equivalent to pure subject domain markup like this:</db:para>
+<db:programlisting xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" language="HTML">
+</db:programlisting>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">&lt;vcard&gt; &lt;fn&gt;Joe Doe&lt;/fn&gt; &lt;org&gt;The Example Company&lt;/org&gt; &lt;tel&gt;604-555-1234&lt;/tel&gt; &lt;url&gt;http://example.com/&lt;/url&gt; &lt;/vcard&gt; <phrase><db:code/></phrase>`</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">In other words, the microformats are overlaying a second structure on the list structure. In the world of HTML, this makes sense. HTML needs to be a standardized document domain language so that browsers can display it for human reading. Humans don’t need the vCard annotations to recognize that the content is an address, but algorithms do. So the microformat adds a second, hidden, subject domain structure to the document for readers who are algorithms rather than people.</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Authoring our content this way would obviously be inefficient. But as we have seen, we can process subject domain structures to produce document domain structures with the <phrase>presentation algorithm</phrase>. If you write this content in the subject using markup like the above, you could transform it to the HTML with microformats example shown above with a presentation algorithm like this:</db:para>
+<db:programlisting xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" language="pseudo">
+</db:programlisting>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">match vcard create ul attribute class = “vcard” continue</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">match fn create li attribute class = “fn” continue</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">match org create li attribute class = “org” continue</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">match tel create li attribute class = “tel” continue</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">match url create li create a attribute class = “url” attribute href = contents continue <phrase><db:code/></phrase>`</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">In other words, we can factor out the document domain structure from the HTML for authoring and storage and then factor it back in for output.</db:para>
+</section>
+<section>
+<db:title xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Structure or annotation</db:title>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Since both structures and annotations can contain information about content, you often have to decide whether to use one of the other to capture some of the metadata you need. Here are some of the basic considerations:</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Annotations are more difficult to constrain than structures. It is not that you can’t constrain which annotation apply to which structures. In XML, for instance, you could require that every element <phrase><db:code>a</db:code></phrase> have an attribute <phrase><db:code>b</db:code></phrase>. But while that may work in some cases, it only applies if <phrase><db:code>b</db:code></phrase> is relevant to all instance of <phrase><db:code>a</db:code></phrase>, and with most of the things you want attributes for, that is not the case. So that means the <phrase><db:code>b</db:code></phrase> needs to be optional, which means it is less constrained. (There is a constraint on which attributes <phrase><annotation type="bold">may</annotation></phrase> occur, but not on which <phrase><annotation type="bold">must</annotation></phrase> occur.)</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Structures provide superior guidance. Even if all you need for downstream processing is metadata that could be provided by annotations, using structures makes it easier to guide authors to provide the metadata you need, and to audit the content to make sure the information has been provided correctly.</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Structures establish context. As we have seen, the ability to establish context is key to many algorithms. Annotations exist in the context established by structures, but do not create new context themselves.</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Similarly, if you are annotating words and phrases within a paragraph, it is difficult to constrain which words should be annotated or how. If you really need a particular piece of information to be constrained consistently, you probably need to factor out the paragraph and capture it as a set of field structures that can be properly constrained and audited. (You can turn it back into a paragraph in the <phrase>presentation algorithm</phrase> if you want to publish it that way.}</db:para>
+<!-- example -->
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Secondly, annotation are generally harder for writers to create than structures. This depends in part on which markup languages you are using, and which editing tools, but in XML, for instance, where annotation are usually created using attributes, a string of attributes on an element can make the document very hard to read in plain text view, which most XML editors, which are generally optimized for document domain editing, make it much more difficult to add attributes than elements, and generally hide attributed from view (at least by default) making it harder to edit them, or to see how they impact the overall structure of the document.</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Of course, if you need to add more than one piece of <phrase>metadata</phrase> to a piece of content, you will have to use annotations to do it because one structure, by itself, can only express one piece of information. However, by moving your content to a different domain, you may be able to avoid the need to use as many annotations. When you write content in the document domain, for example, any media, subject, or management domain metadata you want to add to the information must be expressed as annotations. But if you move your content to the subject domain, you can often factor out the document domain, media, and management domain structures, meaning you can rely on the subject domain structures alone and have less need for additional annotations.</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">(It should be noted here that it is uncommon to have a real world tagging language that is entirely in one domain. While media domain languages are often entirely in the media domain, document domain languages commonly include some subject domain structures or annotations and often extensive management domain structures and annotations. Even subject domain languages usually need at least basic document structures like paragraphs and lists, and may also need some management domain structures and annotations for management information that cannot easily be factored out into sensible subject domain structures.)</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Structures are more expressive than annotation. Structures break a document into pieces and label the pieces. This allows you to see the structure of the document as a whole and reflect on it as a whole. It allows you to navigate the document more easily and audit it more thoroughly. In a markup language like SAM which deliberately expresses the structure, it is easier to take in the structure of the document at a glance.</db:para>
+<!--  Note that storing document domain content in a subject domain CMS schema is another case of overlying the domains. -->
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">What happens when you need to format part of your document differently, but your document domain language does not have a document domain structure for the document element you are creating? For example, if your document domain language is HTML, it does not have any structures for common document domain objects like procedures, sidebars, of bibliographies?</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Of course, you can create these things in an HTML document, using regular features like lists, divs, and paragraphs. To indicate how they are to be formatted, though, you will have to either apply style information directly in the file, or else add some kind of metadata that indicates the special role that the list, div, or paragraph is playing. In HTML, the normal strategy is to use a class attribute. So, you could support special styling of a procedure list by giving it a class attribute of “procedure”:</db:para>
+<db:programlisting xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" language="HTML">
+</db:programlisting>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">&lt;ol class="procedure"&gt; &lt;li&gt;Lather.&lt;/li&gt; &lt;li&gt;Rinse.&lt;/li&gt; &lt;li&gt;Repeat.&lt;/li&gt; &lt;ol&gt; <phrase><db:code/></phrase>`</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">This is, in some ways, like giving HTML a procedure document domain object. We can now format as a procedure. And because we are using a hierarchical system, we don’t need to add class attributes to the li elements to format them different. We can set an invariant rule that all li elements that are children of an ol element of class “procedure” will be formatted a certain way.</db:para>
+<db:programlisting xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" language="CSS">
+</db:programlisting>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">ol.procedure li <phrase> </phrase> <phrase><db:code/></phrase>`</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">We said that when we define a style, we are extending the media domain. In the same way, if we work in the document domain, we often need to extend the document domain we are working in. HTML is not an extensible language. To fill the need for an extensible document domain language, the W3C adopted XML (eXtensible Markup Language). XML allows you to extend your document domain (or any other domain) in two ways:</db:para>
+<db:orderedlist xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">
+<db:listitem>
+<db:para>by creating brand new structures in that domain.</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>by using attributes to specify additional type information for an existing structure.</db:para>
+</db:listitem>
+</db:orderedlist>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Another method for extending the document domain is provided by [DITA]<annotation type="system"/> through it specialization mechanism, which allows you to create a new structure by specializing an existing one. In practice, this means defining a new structure but with the difference that the system knows about the new structures relationship to the old one, so that if you specialize a numbered list, the system knows that your new list is a type of numbered list.</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Yet another method is provided by [SPFE]<annotation type="system"/>, which supports creating a library of structures from which you can select the ones you want to build a set of document domain (or other domain) structures for your use.</db:para>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">We will look in detail later at ways of extending your document domain objects. For now, lets begin by looking at what the document domain looks like, and why you want to add additional kinds of document domain objects.</db:para>
+</section>
+</article>

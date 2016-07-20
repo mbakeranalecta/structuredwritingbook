@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbook.rng" schematypens="http://relaxng.org/ns/structure/1.0"
+?><?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbook.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"
+?>
+
+<!DOCTYPE book [
+]>
+<article>
+<db:title xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">Active content</db:title>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">When you publish to electronic media, you can create active content, that is, content that has behavior as well as formatting. Some examples:</db:para>
+<db:variablelist xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">
+<db:varlistentry>
+<db:term>Dynamic arrangement</db:term>
+<db:listitem><db:para>Part of the presentation algorithm is arranging content on the page or screen, but with online media you can allow the reader to arrange the content. For instance, you can publish tables that readers can sort for themselves.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Adaptive content</db:term>
+<db:listitem><db:para>Similarly, you can create content that adapts itself dynamically to the view port in which it is displayed. For instance, displaying in multiple columns on a wide view port, and in a single column on a narrow one.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Progressive disclosure</db:term>
+<db:listitem><db:para>You can present content in a way that only shows part of the content on the screen initially but reveals more when the user clicks on a link or takes another action. For instance, you might show the high-level of a procedure and provide a link that opens detailed steps for those who need them. This is a way to cater to audiences with different levels of preparedness.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Transclusion</db:term>
+<db:listitem><db:para>You can pull in content from another source.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Feeds and dynamic sources</db:term>
+<db:listitem><db:para>You can include content that comes from an external source which updates independently of your content such as a feed or a web service.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Interactive media</db:term>
+<db:listitem><db:para>You can include graphics and other media that the user can interact with.</db:para></db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:para xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">As always, you can represent these behaviors in each of the structured writing domains.</db:para>
+<db:itemizedlist xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink">
+<db:listitem>
+<db:para>In the media domain, you encode the behavior itself. This means that JavaScript or other forms of executable code may become part of your media domain content.</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>In the document domain, you encode an abstract representation of these behaviors or of the document structures on which these behaviors act. In the document domain, the executable code that implements the behavior is factored out, but the document structures that support the behavior or depend on it are made explicit. The document domain, in other words, may call for the behavior, but it does not contain the implementation of the behavior.</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>In the subject domain, as always, you record information about the subject matter that may be used to make a decision to implement certain behavior. The subject domain markup neither calls for not implements the behavior. You may, however, choose which parts of the subject matter to markup us explicitly based on the behavior you want to implement.</db:para>
+</db:listitem>
+</db:itemizedlist>
+</article>

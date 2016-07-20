@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter>
+<title>Algorithms: Separating Content from Formatting</title>
+<index>
+<row>
+<type>concept</type>
+<term>separating content from formatting</term>
+</row>
+</index>
+<p>If there is one phrase that most people associate with structured writing, it is “separating content from formatting”. We structure content so that we can process it with algorithms. An algorithm is a repeatable method for doing something. If we want our processing algorithms to be repeatable, we need the structure of the content to be consistent. That means that the separation of content from formatting has to be done consistently and repeatably. That makes it the first algorithm of structured writing.</p>
+<section>
+<title>Separate out style instructions</title>
+<p>Let’s start with a simple bit of content that includes a description of its format. I’m going to use CSS syntax to describe the format, but that is not significant. This is just to show what we are doing when we do the separation. I’m also going to represents certain characters by their names in square brackets, just so we can see exactly where everything is going:</p>
+<codeblock>
+<![CDATA[{font: 10pt "Open Sans"}The box contains:
+{font: 10pt "Open Sans"}[bullet][tab]Sand
+{font: 10pt "Open Sans"}[bullet][tab]Eggs
+{font: 10pt "Open Sans"}[bullet][tab]Gold
+]]></codeblock>
+<p>This file contains content and formatting, so let’s separate the two. Of course, when we remove the formatting from the content we are going to have to add something in its place so we can add this or other formatting back later. The algorithm is not really “separate content from formatting” but “separate formatting from content and replace it with something else”.</p>
+<p>The simplest thing to replace it with is a style:</p>
+<codeblock>
+<![CDATA[{style: paragraph}The box contains:
+{style: paragraph}[bullet][tab]Sand
+{style: paragraph}[bullet][tab]Eggs
+{style: paragraph}[bullet][tab]Gold
+]]></codeblock>
+<p>Then, of course, we need to record the style (we are separating it, not eliminating it altogether):</p>
+<codeblock>
+<![CDATA[paragraph = {font: 10pt "Open Sans"}
+]]></codeblock>
+<p>Now that they are separated, we have the choice of substituting different formatting by changing the definition of the style, not the content:</p>
+<codeblock>
+<![CDATA[paragraph = {font: 12pt "Century Schoolbook"}
+]]></codeblock>
+</section>
+<section>
+<title>Separate out formatting characters</title>
+<p>Cool, but suppose we would like to change the style of the bullet we use for lists. The style of bullet used is certainly part of what we would consider “formatting”, but bullets are text characters. To change them you don’t just have to change the font applied to the characters, you have to change the characters themselves.</p>
+<p>So, it turns out that sometimes the typed characters in your text are part of the content, and sometimes they are part of the formatting. So now we need to extend our idea of a style to include content.</p>
+<codeblock>
+<![CDATA[paragraph = {font: 12pt "Century Schoolbook"}
+bullet-paragraph = {font: 12pt "Century Schoolbook"}[bullet]
+]]></codeblock>
+<p>Now our content looks like this:</p>
+<codeblock>
+<![CDATA[{style: paragraph}The box contains:
+{style: bullet-paragraph}[tab]Sand
+{style: bullet-paragraph}[tab]Eggs
+{style: bullet-paragraph}[tab]Gold
+]]></codeblock>
+<p>Except that now the writer will be starting the bulleted lines with a tab, which is awkward and probably error prone, so we move that character to the style as well.</p>
+<codeblock>
+<![CDATA[paragraph = {font: 12pt "Century Schoolbook"}
+bullet-paragraph = {font: 12pt "Century Schoolbook"}[bullet][tab]
+]]></codeblock>
+<p>Now our content looks like this:</p>
+<codeblock>
+<![CDATA[{style: paragraph}The box contains:
+{style: bullet-paragraph}Sand
+{style: bullet-paragraph}Eggs
+{style: bullet-paragraph}Gold
+]]></codeblock>
+<p>And now you can change the bullet style:</p>
+<codeblock>
+<![CDATA[bullet-paragraph = {font: 12pt "Century Schoolbook"}[em dash][tab]
+]]></codeblock>
+<p>And then we maybe realize that “bullet-paragraph” is not the best name any more, because the style is now a dash, not a bullet. In other words we discover that we had not done as good a job as we thought of separating content from formatting, because the content actually still contains formatting information in the form of a style named for a particular piece of formatting.</p>
+</section>
+<section>
+<title>Name your abstractions correctly</title>
+<p>When we separate formatting from content, we have to insert something in its place, and it matters what that something is and what it is called. If we call it the wrong thing we set up a false expectation, and that will lead to authors using it incorrectly, which will mean we can’t format it reliably.</p>
+<p>So the first lesson about the algorithm of separating content from formatting is that it matters what you call things. When you do this, you are creating an abstraction, and you need to figure out what that abstraction is and name it appropriately.</p>
+<p>So what is the abstraction here? It is a list, of course. So maybe we do this:</p>
+<codeblock>
+<![CDATA[{style: paragraph}The box contains:
+{style: list-item}[tab]Sand
+{style: list-item}[tab]Eggs
+{style: list-item}[tab]Gold
+]]></codeblock>
+<p>and</p>
+<codeblock>
+<![CDATA[list-item = {font: 12pt "Century Schoolbook"}[em dash][tab]
+]]></codeblock>
+</section>
+<section>
+<title>Make sure you have the right set of abstractions</title>
+<p>But then, of course, we run into this problem:</p>
+<codeblock>
+<![CDATA[{style: paragraph}To wash hair:
+{style: list-item}Lather
+{style: list-item}Rinse
+{style: list-item}Repeat
+]]></codeblock>
+<p>Here our list should have numbers, not dashes or bullets. So we realize that the abstraction we are after is not so broad as all list items. We look at the differences between the different kinds of list items we use and try to group them into abstract types and come up with names for those types. Maybe we come up with “ordered-list-item” and “unordered-list-item”. Then we have:</p>
+<codeblock>
+<![CDATA[{style: paragraph}The box contains:
+{style: unordered-list-item}[tab]Sand
+{style: unordered-list-item}[tab]Eggs
+{style: unordered-list-item}[tab]Gold
+]]></codeblock>
+<p>and</p>
+<codeblock>
+<![CDATA[{style: paragraph}To wash hair:
+{style: ordered-list-item}Lather
+{style: ordered-list-item}Rinse
+{style: ordered-list-item}Repeat
+]]></codeblock>
+<p>And the style for ordered-list-items now looks something like this:</p>
+<codeblock>
+<![CDATA[ordered-list-item = {font: 12pt "Century Schoolbook"}<count>.[tab]
+]]></codeblock>
+<p>And then we realize that we need a way to increment the count and to reset it to 1 for a new list. So we have:</p>
+<codeblock>
+<![CDATA[{style: paragraph}To wash hair:
+{style: first-ordered-list-item}Lather
+{style: ordered-list-item}Rinse
+{style: ordered-list-item}Repeat
+]]></codeblock>
+<p>and</p>
+<codeblock>
+<![CDATA[first-ordered-list-item = {font: 12pt "Century Schoolbook"}<count=1>.[tab]
+ordered-list-item = {font: 12pt "Century Schoolbook"}<++count>.[tab]
+]]></codeblock>
+<p>(<span><annotation type="code">++count</annotation></span> here means add one to <span><annotation type="code">count</annotation></span> and then display it.)</p>
+<p>And this is pretty much how you do lists in <span><annotation type="tool">FrameMaker</annotation></span> or <span><annotation type="tool">Microsoft Word</annotation></span> today, as well as a number of other tools. But the reason for going through it in such detail is to point out what is involved in even this simple bit of separation. We began by simply removing formatting commands, but then started to remove characters as well, which forced us to include characters in our style definitions, and then to be able to actually calculate characters in our style definitions. And we saw that in performing these separations, we were creating abstractions, and that it was important to consider all the cases we might run into and create the appropriate abstractions to handle them.</p>
+</section>
+<section>
+<title>Create containers to provide context</title>
+<p>One problem with this approach is that the writer has to remember to apply a different style to the first item of a list. It would be better if they could use the same style for each list item and have the numbering just work. But this is hard to do because there is nothing in the content to say where one numbered list ends and the next begins. For this we need a new abstraction. So far we have abstractions for two kinds of list items: ordered and unordered list items. But we don’t have an abstraction for lists themselves.</p>
+<p>So far, we have been separating content from formatting purely in the <span><annotation type="concept">media domain</annotation></span>. We have replaced direct formatting definitions with indirect definitions through styles. The only thing that abstracts any of this beyond the media domain is the names that we have given to the styles that we have created. But now we start to venture into the <span><annotation type="concept">document domain</annotation></span>, creating the abstract idea of a list and inserting that abstract idea into our content.</p>
+<codeblock>
+<![CDATA[paragraph: To wash hair:
+list:
+    ordered-list-item:Lather
+    ordered-list-item:Rinse
+    ordered-list-item:Repeat
+]]></codeblock>
+<p>There are a number of significant changes here. First, our structure is no longer flat. We have introduce the idea of a container. A list is a container for list items. In creating this container we have added something to the content that was not there before. Previously it was a series of paragraphs with different styles attached. Now we have a container, which, as far as the formatting is concerned, simply never existed in the original. The writer and reader knew that the sequence of bulleted paragraphs formed a list, but that was an interpretation of the formatting. Now we have taken that interpretation and instantiated it in the content itself. Those lines starting with bullets constitute a list, and now we have made it explicit.</p>
+<p>By creating the idea of a list, we are able to further separate list formatting from the content of the list -- because now an algorithm, one I will call the <span><annotation type="concept">formatting algorithm</annotation></span>,  can recognize it as a list and can make formatting decisions based on that knowledge.</p>
+<p>The second important thing that has happened here is that the content no longer contains references to style names. Instead we have structures. List is a structure and so are paragraph and numbered-list-items.</p>
+<p>We have replaced styles with structures because the same structure may get a different style depending on where it is in the document. The <span><annotation type="concept">formatting algorithm</annotation></span> is responsible for determining if an ordered-list-item is the first one inside a list and formatting it accordingly. (Which is just <span><citation type="citation" value="https://css-tricks.com/numbering-in-style/">how list formatting works in CSS</citation></span>.)</p>
+<p>Now authors no longer apply styles to content, even ones with abstract names. Rather they place content in structures and allow the formatting algorithm to apply styles appropriately. The content is  separated even more from the formatting.</p>
+</section>
+<section>
+<title>Move the abstractions to the containers</title>
+<p>But there is an obvious problem here. What if an author inadvertently does this:</p>
+<codeblock>
+<![CDATA[paragraph: To wash hair:
+list:
+    ordered-list-item:Lather
+    unordered-list-item:Rinse
+    ordered-list-item:Repeat
+]]></codeblock>
+<p>To avoid this, we move the abstraction outward. Instead of ordered and unordered list items, we create ordered and unordered lists:</p>
+<codeblock>
+<![CDATA[paragraph: To wash hair:
+ordered-list:
+    list-item:Lather
+    list-item:Rinse
+    list-item:Repeat
+]]></codeblock>
+<p>and</p>
+<codeblock>
+<![CDATA[paragraph: The box contains:
+unordered-list:
+    list-item:Sand
+    list-item:Eggs
+    list-item:Gold
+]]></codeblock>
+<p>And, of course, the <span><annotation type="code">list-item</annotation></span> element can be used in either an unordered list or an ordered list, because it is a list item in either case, and the <span><annotation type="concept">formatting algorithm</annotation></span> can tell the difference based on which type of list it belongs to. The element name “list-item” describes it role in the document (within its context in the document) in a way that is entirely separated from how it will be styled.</p>
+<p>Moving the abstraction out to the container is an important part of the algorithm of separating content from formatting. It helps keep things consistent and reduces the number of things authors have to remember.</p>
+<p>Creating containers and abstracting out the differences between their contents is an important piece of separating content for formatting. For example, HTML and Markdown both provide six different level of headings. But content under an <span><annotation type="code">H2</annotation></span> or an <span><annotation type="code">H5</annotation></span> heading is not in any container. The content simply comes after the heading. This means that is it perfectly possible and legal in there languages to place different heading elements in any order you want. Writers have to pay attention to which heading level they are creating and how it fits in the structure of the document they are creating.</p>
+<p>Furthermore, writers understand that the higher the number of the heading element (<span><annotation type="code">H1</annotation></span> - <span><annotation type="code">H6</annotation></span>) the larger the font will appear in the output. They don’t know which font it will be or how big it will be, but larger/smaller is still a formatting distinction. Formatting has not been completely separated from content.</p>
+<p>By contrast, in <span><annotation type="language">DocBook</annotation></span>, we have a <span><annotation type="code">section</annotation></span> element. Like a list, a section is part of the writer’s interpretation of what they are creating in the document, but it is only implied, not instantiated by the formatting. By creating a <span><annotation type="code">section</annotation></span>(structure (DocBook) element, DocBook instantiates the concept of a section. And once we have the instantiation of a section, we don’t need six levels of heading. We can have one element called <span><annotation type="structure" namespace="DITA">title</annotation></span>. Sections can be nested inside other sections, and the formatting algorithm can apply the correct style to the title based on context:</p>
+<codeblock>
+<![CDATA[section: 
+    title:
+    paragraph:
+    section:
+        title:
+]]></codeblock>
+<p>This will eliminate incorrect heading element choices, ensuring that the headings in the output consistently reflect the section and subsection structure of the document.</p>
+<p>(Now it must be said that not everyone necessarily holds to the view that heading in a text do or should reflect a hierarchy of sections. Sometimes they may be simply signposts along the way, and like any signpost, the size of the sign reflects the size of the town, not a strict hierarchy of sign sizes. So if that is how you look at document structures, you should choose a different way to separate content from formatting in your content.)</p>
+</section>
+<section>
+<title>Separate out abstract formatting</title>
+<p>We noted that in the case of ordered and unordered lists, separating content from formatting actually involved separating out some of the content as well. Or rather, that it involved separating out some of the characters. In other words, the distinction between what is represented in a document using character codes and what is represented in other data structures is not necessarily the same as the logical distinction between content and formatting from a structured writing point of view.</p>
+<p>Consider a structure that we might call a labeled list:</p>
+<ll>
+<li>
+<label>Street</label>
+<p>123 Elm Street</p>
+</li>
+<li>
+<label>Town</label>
+<p>Smallville</p>
+</li>
+<li>
+<label>Country</label>
+<p>USA</p>
+</li>
+<li>
+<label>Code</label>
+<p>12345</p>
+</li>
+</ll>
+<p>The generic structure of a labeled list might look like this:</p>
+<codeblock language="sam">
+<![CDATA[labeled-list:
+    list-item:
+        label: Street
+        content: 123 Elm Street
+]]></codeblock>
+<p>But what if you have hundreds of addresses, all with the same labels. In this case, are the labels really content, or are they format? Since they don’t change from one list to another, we could look at them as being part of how the content is presented, rather than being part of the content itself. So we look for a way to separate them from the content.</p>
+<p>As always, when we separate something from our content, we have to replace it with something else, and that something is generally an appropriately named structure. So that gets us a structure like this:</p>
+<codeblock language="sam">
+<![CDATA[address:
+    street: 123 Elm Street
+    town: Smallville
+    country: USA
+    code: 12345
+]]></codeblock>
+<p>Now, of course, we have moved our content into the <span><annotation type="concept">subject domain</annotation></span>. Notice that in our previous attempts at separation we separated out the formatting of a list and replaced it with an abstract form of a list. This certainly separated out some of the formatting, but it still left us with a list. And deciding to list items in a document is still a formatting decision.</p>
+<p>Moving content from the media domain to the document domain actually separates out the style information, but still leaves a lot of general formatting decisions, such as the decision to use lists or tables, firmly attached to the content. Separating style from content is useful in a number of ways, but it does not achieve a complete separation for content from formatting.</p>
+<p>In the subject domain example, however, we moved our content away from being a labeled list and turned it into an subject-specific record. We could how have an algorithm turn that record into several document structures. This algorithm, which I will call the “presentation” algorithm, could turn it into a labeled list, a table, a paragraph (with the fields separated by commas), or the address label for an envelope.</p>
+<p>In the subject domain, with the content entirely separated from formatting, we also gain the ability to query and reorganize the content in various interesting and useful ways (which we will explore in further articles).</p>
+<p>This is as far as we can go in separating content from formatting, and we can’t separate all content from formatting to quite this extent. It should be clear at this point that separating content from format is not a binary thing. There are various stages of separation that we can achieve for various reasons. It is important to understand exactly which degree of separation will best serve your needs.</p>
+</section>
+</chapter>

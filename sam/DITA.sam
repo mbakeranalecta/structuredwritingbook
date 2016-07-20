@@ -1,0 +1,176 @@
+sam:
+
+article: DITA
+
+    While this section is labeled systems, it really is mostly talking about specifications. Most people don't care about specifications per se. They care about systems based on those specifications. DITA is a specification. There are a number of systems based on the DITA specification. Some implement the whole specification and some implement parts of it. Some add things to it or provide additional functionality (particularly content management functionality). All of this is in line with the intention of the spec. And the specification itself is designed to be extended, constrained, added to, and subtracted from. People can and do take elements of DITA and build various things with them.
+    
+    DITA also covers a number of areas of structured writing. In particular it includes:
+    
+    * A base set of content structures designed to be extended through a process called specialization.
+    
+    * An approach to content processing, also based on specialization.
+    
+    * An approach to information typing, similar to information mapping and also based on specialization. 
+    
+    * An approach to content reuse.
+    
+    * An approach to link management.
+    
+    * An approach to metadata capture and management.
+    
+    * An approach to content management.
+    
+    * An open toolkit providing a complete working tool-chain. 
+    
+    In short, DITA is a big box with a lot of stuff in it. The bits are designed to work together, but it is also designed to let you pick and choose the pieces you want or add pieces of your own. 
+    
+    The fact that it includes so many elements, and ties them together with more of less tight bonds is the source of both its success and its problems. It provides not only a default working publishing chain, but a default working information design. This allows you to step into structured writing and some of its more compelling algorithms without doing a lot of design or development work yourself.
+
+    But this can also lead to accepting information designs and management approaches that might not actually suit your business, and lead you to being committed to a structured writing approach without having acquired the skills to manage it. DITA isn't easy. It requires planning, design, configuration, customization, training, governance, and maintenance. 
+
+    But there are also products that implement all or part of DITA that essentially make some of the key design and customization decisions for you, presenting you with something much more like an off the shelf product like {Word} or {FrameMaker}. This may include burying DITA under a layers of custom interfaces so that the writer never needs to know they are dealing with DITA at all. 
+
+    Or to put it another way, DITA is a specification for a toolkit and you can use that toolkit to build something for yourself or you can buy a system that someone else has designed and built for you. 
+
+    To take this back to the beginning, we defined structured writing as applying constraints to content to improve its quality and to allow you to apply algorithms to it. DITA, in these terms, is a collection of constraints and algorithms that you can use as a kind of Lego set for building systems of constraints and algorithms. An information typing architecture, in other words. But it is also a default configuration of those constraints and algorithms which forms a basic working system out of the box. 
+    
+    That default configuration is really your starting point for and customization you do to create constraints or algorithms of your own. The {power of defaults} is very strong, so that default configuration lies at the heart of many DITA implementations, even if it is customized to one extent or another. DITA, then, is not really an blank slate. Trying to build a system that is too far off DITA's core ideas is likely to be more difficult that starting from scratch, as well as depriving you of the community benefits of DITA -- the wide variety of tools and the growing community of writers and architects with DITA experience.      
+    
+    
+    If you merely accept the defaults of any system, you are not doing structured writing yourself. As we have noted, {all digital writing tools use structured writing techniques}. The difference is not whether your content has structure or not but whether you own that structure and use it to implement constraints and algorithms that are particular to your business. You can use DITA either way: as an off-the-shelf tool or as a structured writing toolkit. 
+    
+    
+    
+    It is probably best to think of DITA not as a tagging language at all, but as a {solution stack}(https://en.wikipedia.org/wiki/Solution_stack) for building structure writing and publishing systems. It consists of multiple components and it is possible to select different components for different applications. Some of the elements of this stack are defined by the formal OASIS DITA specification, some are provided by the open source DITA Open Toolkit, and some are provided by various open source tools that are designed to work with DITA. 
+    
+    The existence of this stack is perhaps the most compelling argument in favor of DITA.
+
+    So far, this series has focused on structured writing mostly as a means to improve content quality. But structured writing is also used as a means to automate and manage complex content management and publishing scenarios. In the past, writing, content management, and publishing were separate functions carried out by separate people with not a lot of interaction between them. But that process was expensive and slow. Modern content management attempts to unite them in a single integrated process. This does not mean that there is no division of roles in this process, but it does meant that the authoring process and the authoring product is far more integrated into the overall content management and publishing process than it was in the days when authors delivered typescript to the publishing department. 
+    
+    These processes are extremely complex. To make them work efficiently, we need a set of simplifying assumptions. It is not that the simplifying assumptions express higher truths about the content or the process. In fact, the simplifying assumptions, because they are simpler than the truth, reduce quality from its theoretical maximum. But in complex systems, actual human beings can't reach the theoretical maximum with the time and resources available to them. Simplifying assumptions may cut us off from absolute perfection, but if they are the right assumptions for the job, they can allow us to achieve a higher level of practical quality that we could without them. 
+
+    DITA is more than a structured writing system. It is a toolkit of ideas and tools from which you can draw much or little, according to your needs, but at its fullest, it is a system for powering the whole authoring, content management, and publishing process. To accomplish this, it introduces a set of simplifying assumptions.
+    
+    
+
+    In judging any set of simplifying assumptions, we should not ask if they are true: by definition they are not, since they simplify a more complex truth. The real questions are:
+    
+    * do they allow us to perform better than we would without them by real world measures     
+    
+    * are they the best set of simplifying assumptions for this purpose, or is there another?
+    
+    
+    The problem with simplifying assumptions is that there is always the temptation to add complexity to them to bring them nearer to the truth, or to extend their utility. Tinkering to find the perfect balance between simplicity and truth is a good thing, but we don't seem to be very good at finding that boundary. There seems to be a relentless push to add complexity to systems until we overwhelm them and they break. At which point a new simplifying assumption takes the field. 
+    
+    section: Specialization
+    
+        In the article on structure and annotation we looked at an example in which HTML microformats used attributes to create subject-domain annotations that overlayed a subject domain structure on an existing document domain structure. In many ways, DITA specialization does the same thing, but using the exact opposite approach to markup. Rather than document domain elements with subject domain structured captured in attributes, specialization creates subject domain structures, or more specialized document domain structures, as elements and overlays a basic document domain structured using attributes. 
+        
+        Specialization aware processing algorithms then match structures based on the attributes that define it place in the specialization hierarchy. 
+        
+        
+        Specialization takes advantage of a feature of several of the XML schemas languages, the ability to declare default attributes for an element. A default attribute is one that is added to all instance of the element by the parser. In other words, if an element `foo` has a default attribute `bar` with a default value of "bat" then when the author types"
+        
+        ```(xml)
+        <foo>
+        ```
+        
+        The parser reports this to the application as if they had typed:
+        
+        ```(xml)
+        <foo bar="bat">
+        ```
+        
+        Which in turn allows you to write an algorithm that matches the element when the attribute has a certain value:
+        
+        ```(pseudo)
+        match foo when attribute bar = "bat"
+        ```
+        The usual reason for this using this facility is to provide a default value for an attribute that the author may sometimes override. But DITA uses it for something different. DITA uses it to show that an element is a specialization of another element. 
+        
+        For instance, the `step` attribute of the `task` topic type is a specialization of the `li` element in the `topic` topic type so it has a default `class` attribute with the value `- topic/li task/step`. So when an author writes:
+        
+        ```(DITA)
+        <task>
+            ...
+            <step>
+        ```
+        
+        The processing algorithm sees:
+        
+        ```(DITA)
+        <task class="- topic task">
+            ...
+            <step class="- topic/li task/step">
+        ```
+        
+        This means that if you have a publishing algorithm like this:
+        
+        ```(pseudo) 
+        match * when attribute class contains "topic/li"
+            create li
+        ```
+
+        This rule will match either the li element in a topic topic or the step element in a task topic. Thus the specialized topic type is matched by the algorithm for the base topic type. This means you don't necessarily have to write a new algorithm to publish a specialized topic type. In an algorithm where this rule is present, steps and list items will be formatted the same way.
+        
+        You may want a new algorithm, of course, in which case you could write this rule:
+        
+        ```(pseudo)
+        match * when attribute class contains "task/step"
+            output "Step: " + position
+        ```
+        
+        This rule will match `step` in the specialized `task` topic but not `li` in the base `topic` topic. In an algorithm where both rules are present, steps and list items will be formatted differently. (Which of the two rules is fired for `step` in this scenario, since both rules match? There are rules for this in XSLT (the language used for most DITA processing), but they are out of scope for us here.)
+        
+        As you can see, DITA's specialization is a case of markup language design by extension from a base, as we saw in the article on markup languages. But this is not extension by addition, such as we see in hybrid markup languages such as reStructureText or SAM. It is extension by specialization of existing structures. This makes DITA something different from a language like DocBook that is simply an instance (albeit a highly customizable one) of an abstract markup language (XML). It makes in, in some ways at least, a higher level abstract language (albeit one written in XML).  
+        
+        This means that DITA specialization are in some ways like instances of an abstract languages, as DocBook is an instance of XML. As the DocBook specification is careful to point out, when you customize DocBook the result is no longer DocBook. But when you specialize DITA, the result is still considered to be DITA. DITA is thus like an abstract language for all of its specializations. However, while DocBook inherits only syntax, and no structures or functionality from XML, DITA specializations inherit a lot of structures and their associated default functionality from base DITA and can choose to keep or override those base structures and functionality as they please.
+
+        And if that all sounds complicated, it is, and that is one of the downsides. Specialization is simply a way to create your own customized markup languages. It requires you to devise your own structures and to create algorithms to process those structures. It does not make any of these tasks go away, it simply presents a different way of doing them. 
+        
+        It is proportionally more difficult to do the further you have to customize from the base DITA topic type (or intermediate specialization) you are specializing from. If you get very far from the base, you are probably going to have to use DITA's constrain mechanism as well, which will further complicate the effort. Finally, the further you get away from your base, the less well the base algorithms will work to publish your content, obviating any advantages for exchange that you may have been looking for. Finally, the methods for doing specialization and constraints in DITA are more abstract and more complex than the tools for creating languages from scratch. 
+        
+        In short, then, DITA specialization is probably not the means for creating your own markup languages. Rather, if you have chosen DITA because its whole package of functionality is a reasonable match for your needs, specialization and constraint make sense as ways to customize your system. 
+
+        In the end it comes down to a question of whether it is better to create X by modifying Y or by starting from scratch and building Y by itself.  
+
+
+    section: The domains in DITA
+    
+        Large generalized systems like DITA tend to create document types that are a mix of multiple domains. At its core, DITA is an information typing system based in the document domain. It creates various topic types by {specialization} of a core generic document domain "topic" type. (I'll describe specialization in a moment.)
+        
+        Like other generalized languages that originated in the technical communication space, DITA also includes some subject domain structures, most for describing computer interfaces. These are generally small scale structures, often at the level of annotation in running text, such as annotations for references to parts of a windowed screen display. 
+        
+        One of the key focuses of DITA is content reuse. It would not be far off the mark to describe DITA as a system for reusing content as the decision to use it is almost always justified on this basis. As such, DITA contains a lot of management domain structures, including all of the management domain structures for {content reuse} and {linking} that I described earlier. The description of the document/management domain approaches to reuse and linking were based almost entirely on the way DITA does these things.
+        
+    section: Specialization
+    
+        DITA takes it name from its information typing mechanism, called specialization (a reference to Darwin's description of the evolution through the specialization of species to adapt to their environments). As we saw, a schema allows you to define a document type by specifying the structures that it contains. A schema starts from scratch and defines all the structures. Specialization, by contrast, starts with an existing schema and adds new structures as specialized version of existing ones. 
+
+        For example, if you have an existing structure that defines a list structure consisting of list items, you can specialize this to create a procedure structure consisting of steps. 
+
+        ```
+        ol --> procedure
+            li --> step
+        ```
+        
+        The key feature of specialization is that specialized structures can be recognized as their base structures if there is no rule available to process them as their specialized type. Thus if you processing algorithm has rules for processing `procedure` and `step` elements, they will be processed by those rules. But if there are not rules for `procedure` and `step`, they will be processed by the rules for `ol` and `li`. 
+        
+        While nothing prevents you from specializing any element into any other element, you should probably stick to specializations that have an is-a relationship to the elements they specialize. An is-a relationship means a relation ship such as "a screw is a fastener", "a horse is a mammal", or "a procedure is a list" in which the specialized object belongs to the broader class that it is specialized from. Thus you should not create specializations such as "a pig is a washing machine" or "a title is a table". This comes down to a basic principle that structured markup should always tell the truth about what it is. Markup that cheats is markup that cannot be relied upon. 
+        
+        One of the consequences of this is that you shouldn't really specialize from one domain to another. An ingredient is not a list item. DITA includes elements from the document, management, and subject domain and it is perfectly logical to specialize from the document domain to the document domain, from the management domain to the management domain, and from the subject domain to the subject domain. But I don't believe it would be wise to attempt to create subject domain languages by specializing from DITAs document domain topic types. 
+        
+        There are two many arguments for specialization as an information typing mechanism. 
+        
+        |Fallback| Because a specialized element can be processed as the element it was specialized from, a specialized DITA document can be processed by an unspecialized DITA processor. The results may not be perfect, but at least the process won't end with an error. This can have some benefit for exchange, though in any serious exchange scenario, one would expect the recipient to create specialized processing rules to process the specialized DITA. 
+        
+        |Minimizing development| If you want a document structure that is close to an existing one, but with some specific changes, specialization lets you start with the existing structure and just change the bits you need. You don't need to design the whole document structure or write all the algorithms to process it. You just write the specialization and the rules to process the specialized structure. Other structured writing systems use different approaches to achieve the same end. DocBook using parameterization and SPFE uses modular schema and script components.
+
+        By itself, specialization allows you to add new elements to a document structure, but not to add new constraints. DITA also has a constraint mechanism to allow you to constrain you topic types.         
+                
+
+        
+            
+         
+        
+        
