@@ -1,41 +1,33 @@
 sam:
-book: Structured Writing: Theory and Practice
-    by: Mark Baker
+book: 
+    $title=Structured Writing
+    $subtitle=Theory and Practice
+    $author=Mark Baker 
+    title: >($title)
+    subtitle: >($subtitle)
+    by: >($author)
 
-    section: Definition
-
-        chapter: Defining structured writing DONE
-        
-    section: Domains
-
-        chapter: The three domains of content structure DONE
-        
-        chapter: Writing in the media domain DONE
-        
-        chapter: Writing in the document domain DONE
-        
-        chapter: Writing in the subject domain DONE
-        
-        chapter: The management domain: an intrusion DONE
-        
-    section: Algorithms
-
-        chapter: Quality in structured writing DONE
-        
-        chapter: Separating content from formatting DONE
-        
-        chapter: Processing Structured Text DONE
-        
-        chapter: Single sourcing DONE
-        
-        chapter: Content reuse DONE
-        
-        chapter: Publishing DONE
-        
-        chapter: Linking DONE
-        
+    >>>(sam whatis.sam)
+    
+    part:(#part.domains) The Structured Writing Domains   
+        >>>(sam threedomains.sam)
+        >>>(sam MediaDomain.sam)
+        >>>(sam DocumentDomain.sam)
+        >>>(sam subjectDomain.sam)
+        >>>(sam ManagementDomain.sam)
+            
+    part:(#part.algorithms) Algorithms
+        >>>(sam quality.sam)
+        >>>(sam separatecontentfromformatting.sam)
+        >>>(sam processing.sam)
+        >>>(sam SingleSourcingAlgorithm.sam)
+        #>>>(sam 1truth.sam)
+        #>>>(sam resueAlgorithm.sam)
+        #>>>(sam algorithms-publishing.sam)
+        #>>>(sam linking.sam)
+            
         chapter: Active content
-        
+            
         chapter: Extract and Merge
         
         chapter: Information Architecture
@@ -46,11 +38,11 @@ book: Structured Writing: Theory and Practice
         
         chapter: Content management
 
-    section: Structures
+    part:(#part.structures) Structures
 
         chapter: Principles of structure
         
-        chapter: Structure vs annotation  STARTED
+        chapter: Structure vs annotation  
         
         chapter: Schemas
         
@@ -60,7 +52,7 @@ book: Structured Writing: Theory and Practice
         
         chapter: Interesting problems in content structure
         
-    section: Tools
+    part:(#part.tools) Tools
 
         chapter: Markup
         
@@ -77,3 +69,13 @@ book: Structured Writing: Theory and Practice
         chapter: Subject-specific systems
         
         chapter: SPFE
+    
+    index:
+    
+    >>>(xml colophon.xml)
+
+    appendix:(?epub) Copyright and Legal Notices
+        subtitle:>($title): >($subtitle)
+
+        >>>(xml info.xml)
+
