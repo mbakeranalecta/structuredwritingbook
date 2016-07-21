@@ -54,9 +54,10 @@
 <chapter>SPFE</chapter>
 </part>
 <index/>
-<insert item="colophon.xml" type="xml">
-<!--     appendix:(?epub) Copyright and Legal Notices -->
-<!--         subtitle:>($title): >($subtitle) -->
-<!--         >>>(xml info.xml) -->
-</insert>
+<insert item="colophon.xml" type="xml"/>
+<appendix conditions="epub">
+<title>Copyright and Legal Notices</title>
+<subtitle><insert item="title" type="string"/>: <insert item="subtitle" type="string"/></subtitle>
+<insert item="info.xml" type="xml"/>
+</appendix>
 </book>
