@@ -37,7 +37,9 @@
 <p>A vector graphic program creates graphics as a collection of  objects (“vector” meaning the mathematical representation of a shape or line). For example, it allows us to create a circle as a shape, described mathematically in computer memory, rather than as a matrix of dots. Rather than recording an actual circle, the program records an abstraction of a circle: the essential properties needed to reproduce an actual circle on a media, such as its center, diameter, and line weight. The computer then lets you manipulate that abstraction as an object, only rendering it as actual dots when the graphic is displayed on screen or paper.</p>
 <figure name="object-vs-dots">
 <insert item="../graphics/object-vs-dots.png" type="image"/>
-<caption>A circle as an object, displayed in a vector graphics program (Inkscape), left, vs. a circle as a set of dots in a raster graphics program (Paint), right.</caption>
+<caption>
+<p>A circle as an object, displayed in a vector graphics program (Inkscape), left, vs. a circle as a set of dots in a raster graphics program (Paint), right.</p>
+</caption>
 </figure>
 <p>In a typical graphics program, a shape is rendered into dots on screen instantly as you draw or edit the shape. Nonetheless, the computer is storing data describing the shape, not a circular pattern of dots, as it would in a paint or photo editing program. This is an instance of what in structured writing circles is called “separating content from formatting”. The mathematical abstraction of a circle is the content; the dots that represent it on screen are the formatting, or rather, the result of applying formatting to the object.</p>
 <p>To give you some idea of how a circle might be represented as an object, here is a sample piece of Java code for creating a circle:</p>
@@ -62,7 +64,9 @@ stroke
 <p>A text object is a rectangular area that contains characters. It has numerous properties, such as margins, background and foreground colors, the text string, and the font face, size, and weight used to display that text, and in this example from InkScape:</p>
 <figure name="text-object">
 <insert item="../graphics/text-object.png" type="image"/>
-<caption>A text object in a vector graphics program, with object properties shown.</caption>
+<caption>
+<p>A text object in a vector graphics program, with object properties shown.</p>
+</caption>
 </figure>
 <section>
 <title>Abstracting out font information</title>
@@ -70,7 +74,9 @@ stroke
 <p>The shape of the characters (technically, “glyphs”) that make up the font are stored separately in font files. Font files consist of a set of shape objects that describe each glyph, together with metadata such as the name of the font and the name of each glyph. To actually display the text block on screen, the graphics program (or rather the graphics system API to which it delegates this task) combines information from the font file with information from the text object by matching the metadata to find the right font and character, and then drawing the appropriate glyph on the current media.</p>
 <figure name="merge_text_and_font">
 <insert item="../graphics/TextPlusFont.png" type="image"/>
-<caption>The vector graphic text object factors out letter shapes to a separate font file.</caption>
+<caption>
+<p>The vector graphic text object factors out letter shapes to a separate font file.</p>
+</caption>
 </figure>
 <p>This is a pattern we will see over and over again in structured writing. In order to simplify the objects that we create to store our content, we take part of the information needed to do the final rendering, like the font, and move it to a separate file. By moving out information that is constant for a given application (the shape of a capital F is the same for all capital F’s for text in a given font), we simplify the format of the information we are preparing and keep the downstream presentation more consistent.</p>
 <p>Adding more structure to content means adding more metadata to it. But if we just kept adding metadata, it would very quickly overwhelm the content. So whenever we can we carve some metadata off into separate files and create rules for pulling it back in when it is time to publish the content.</p>

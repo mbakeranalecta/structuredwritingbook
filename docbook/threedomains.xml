@@ -1,14 +1,8 @@
 <?xml version="1.0"?>
-<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbook.rng" schematypens="http://relaxng.org/ns/structure/1.0"
-?><?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbook.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"
-?>
-
-<!DOCTYPE book [
-]>
 <db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
 <db:title>The three domains of content structure</db:title>
 
-<section>
+<db:section>
 <db:title>From ideas to dots</db:title>
 <db:para>The process of creating and delivering content consists of translating ideas (stuff someone thinks or knows) into concrete physical form that can be read (dots of ink or pixel on a page or screen).</db:para>
 <db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/ideas_dots.png"/></db:imageobject></db:mediaobject>
@@ -25,8 +19,8 @@
 <db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/wordprocessing.png"/></db:imageobject></db:mediaobject>
 <db:para>Other approaches to structured content simply move the moment at which content is recorded closer to the ideas-in-a-head end of the scale.</db:para>
 <db:para>Of course, the text itself always conveys the author’s ideas, at least as well as the author is capable of expressing them. What is at issue here is what part software plays in the process by which the ideas in the author’s head make the journey to dots on a page. That role may as simple as allowing different dots to be rendered on different surfaces from the same source files, or the software may play an active role in shaping and organizing the text.</db:para>
-</section>
-<section>
+</db:section>
+<db:section>
 <db:title>The three domains</db:title>
 <db:para>We can divide this journey from ideas to dots into three domains: the subject domain, the document domain, and the media domain.</db:para>
 <db:para>Let’s suppose that an author is writing a recipe for chicken noodle soup. They start out with the idea of a soup with chicken and noodles. This is an idea about the subject matter and not yet any form of content.</db:para>
@@ -45,8 +39,8 @@
 <db:para>When the resulting page is loaded into a browser, dots are painted on the screen in the appropriate shape.</db:para>
 <db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/3d_chicken.png"/></db:imageobject></db:mediaobject>
 <db:para>This process involves translating the document and media domain information in the HTML and CSS into the graphics primitives of the platform on which the content is displayed -- basically lighting up dots on a screen or printing dots on paper. This final step will destroy all document and subject domain information, but since the browser retains the HTML source, any information that has reached that point is available to code running in the browser.</db:para>
-</section>
-<section>
+</db:section>
+<db:section>
 <db:title>Declarative vs. Imperative</db:title>
 <db:para>As we move from the subject domain through the document domain and into the media domain, we will find that we are moving from the declarative to the imperative. A declarative statement simply says what something is. An imperative statement gives an instruction. Ideas in the subject domain are purely declarative. Dots are created by purely imperative software instructions.</db:para>
 <db:para>As we proceed from the subject domain to the media domain, therefore, we are continually converting declaratives into imperatives. For example, the CSS rule:</db:para>
@@ -63,5 +57,5 @@ h1 { font: italic 24pt Comic Sans}
 <db:para>Declaratives can be constrained. We defined structured writing as the act of creating content with certain constraints. Declaratives can be constrained much more easily and with much greater precision than imperatives. Declaratives can also be audited and validated with greater precision than declaratives.</db:para>
 <db:para>Declaratives are easier to write. For an author to create declaratives, they need only a know the subject matter and the format of the declarations. For an author to create imperatives requires that they understand the language and effect of the instructions. In the case of embedded algorithms, it requires that the user understands the language of those algorithms.</db:para>
 <db:para>We will look at these advantages, and the many different content processing algorithms you can enable with a more declarative content structure, in later chapters.</db:para>
-</section>
+</db:section>
 </db:chapter>

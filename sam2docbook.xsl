@@ -15,33 +15,6 @@
         </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="/">
-        <xsl:processing-instruction name="xml-model">
-            <xsl:text>href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbook.rng" schematypens="http://relaxng.org/ns/structure/1.0"
-</xsl:text>
-         </xsl:processing-instruction>
-        <xsl:processing-instruction name="xml-model">
-            <xsl:text>href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbook.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"
-</xsl:text>
-         </xsl:processing-instruction>
-
-        <xsl:text disable-output-escaping="yes">
-<![CDATA[
-<!DOCTYPE book []]>
-</xsl:text>        
-        <xsl:for-each select="//string">
-            <xsl:text disable-output-escaping="yes"><![CDATA[<!ENTITY ]]></xsl:text>
-            <xsl:value-of select="@name"/>
-            <xsl:text> "</xsl:text>
-            <xsl:value-of select="."/>
-            <xsl:text disable-output-escaping="yes">">
-</xsl:text>  
-        </xsl:for-each>
-        <xsl:text disable-output-escaping="yes">]>
-</xsl:text>
-        <xsl:apply-templates/>
-    </xsl:template>
-    
     <xsl:template match="string"/>
     
     <xsl:template match="by"/>
@@ -95,9 +68,8 @@
     </xsl:template>
     
     <xsl:template match="insert[@type='string']">
-        <xsl:text disable-output-escaping="yes">&amp;</xsl:text>
-        <xsl:value-of select="@item"/>
-        <xsl:text>;</xsl:text>
+        <xsl:variable name="item" select="@item"/>
+        <xsl:value-of select="//string[@name=$item]"/>
     </xsl:template>
     
     <xsl:template match="insert[@type='sam']">
@@ -181,7 +153,7 @@
 
     <xsl:template match="index"/>
     
-    <xsl:template match="span">
+    <xsl:template match="phrase">
         <xsl:apply-templates/>
     </xsl:template>
     
@@ -251,7 +223,7 @@
     <xsl:template match="insert[@type='image']">
         <db:mediaobject>
             <xsl:if test="@id">
-                <xsl:attribute name="id">
+                <xsl:attribute name="xml:id">
                     <xsl:value-of select="@id"/>
                 </xsl:attribute>
             </xsl:if>
@@ -325,6 +297,18 @@
             </db:para>
         </db:listitem>
     </xsl:template>
-  
+    
+    <xsl:template match="caption">
+        <db:caption>
+            <xsl:apply-templates/>
+        </db:caption>
+    </xsl:template>
+
+    <xsl:template match="section">
+        <db:section>
+            <xsl:apply-templates/>
+        </db:section>
+    </xsl:template>
+
 </xsl:stylesheet>
 

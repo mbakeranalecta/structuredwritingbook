@@ -98,7 +98,9 @@ li:first-child
 <figure>
 <title>One document domain object, two media domain styles</title>
 <insert item="../graphics/nested-list.png" type="image"/>
-<caption>Both the inner and outer lists are ordered list items in the document domain, but in the media domain they are formatted differently based on context.</caption>
+<caption>
+<p>Both the inner and outer lists are ordered list items in the document domain, but in the media domain they are formatted differently based on context.</p>
+</caption>
 </figure>
 <p>In this case, the algorithm that formats the page distinguishes the inner and outer lists by looking at their parentage. For instance in CSS:</p>
 <codeblock language="css">
@@ -224,7 +226,9 @@ reign&amp;mdash;in Spain.&lt;/p&gt;
 <figure name="markdown-edit">
 <title>Markdown Editor</title>
 <insert item="../graphics/markdownedit.png" type="image"/>
-<caption>A detail of the Dillinger Markdown editor showing the Markdown and browser views side by side.</caption>
+<caption>
+<p>A detail of the Dillinger Markdown editor showing the Markdown and browser views side by side.</p>
+</caption>
 </figure>
 <p>Something else interesting is at work here. A list in markdown is just a sequence of paragraphs that start with asterisk characters. On the face of it, this is just like a document domain editor creating lists by styling paragraphs. But if you look at the resulting HTML, you will see that it creates a proper list wrapper element around the list. The markdown interpreter is inferring the hierarchical structure of the document domain from the essentially flat Markdown syntax.</p>
 <p>The author is working in something that looks and feels quite like the media domain, thought they have no actual styles and cannot change the formatting at all. But they use abstract formatting notation (underlines for headings, asterisks for unordered lists) to create document domain objects. The beauty of this is that the document domain constraints are preserved, while the author can work in a simple format that is easy to type, and reasonably easy to read.</p>

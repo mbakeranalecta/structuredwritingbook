@@ -1,14 +1,8 @@
 <?xml version="1.0"?>
-<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbook.rng" schematypens="http://relaxng.org/ns/structure/1.0"
-?><?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbook.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"
-?>
-
-<!DOCTYPE book [
-]>
 <db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
 <db:title>The Single Sourcing Algorithm</db:title>
 
-<db:para>Single sourcing was one of the earliest motivations for <phrase>structured writing</phrase>. However, the term “single sourcing” gets used to mean different things, all of which involve a single source in one way or another, but which use different approaches and achieve different ends. To make life easier, I will distinguish three main meanings of “single sourcing” as follows:</db:para>
+<db:para>Single sourcing was one of the earliest motivations for structured writing. However, the term “single sourcing” gets used to mean different things, all of which involve a single source in one way or another, but which use different approaches and achieve different ends. To make life easier, I will distinguish three main meanings of “single sourcing” as follows:</db:para>
 <db:variablelist>
 <db:varlistentry>
 <db:term>Single sourcing</db:term>
@@ -24,11 +18,11 @@
 </db:varlistentry>
 </db:variablelist>
 <db:para>In this article we will look at single sourcing as defined above.</db:para>
-<section>
+<db:section>
 <db:title>Basic single sourcing</db:title>
-<db:para>The basic single sourcing algorithm is straightforward and we have covered most of it already in <phrase><db:olink targetptr="processing">the discussion of basic content processing</db:olink></phrase>.</db:para>
-<db:para>Basic single sourcing involves taking a piece of content in the <phrase>document domain</phrase> and processing its document domain structures into different <phrase>media domain</phrase> structures for each of the target media.</db:para>
-<db:para>Suppose we have a recipe recorded in the document domain, using the syntax that I have been using throughout this series. (The block of text set of by blank lines is implicitly a paragraph -- a structure named <phrase><db:code>p</db:code></phrase>.)</db:para>
+<db:para>The basic single sourcing algorithm is straightforward and we have covered most of it already in <db:olink targetptr="processing">the discussion of basic content processing</db:olink>.</db:para>
+<db:para>Basic single sourcing involves taking a piece of content in the document domain and processing its document domain structures into different media domain structures for each of the target media.</db:para>
+<db:para>Suppose we have a recipe recorded in the document domain, using the syntax that I have been using throughout this series. (The block of text set of by blank lines is implicitly a paragraph -- a structure named <db:code>p</db:code>.)</db:para>
 <db:programlisting language="sam">
 page: 
     title: Hard Boiled Eggs
@@ -82,7 +76,7 @@ match li
     copy
         continue
 </db:programlisting>
-<db:para>In the code above, paragraph and list structures have the same names in the source format as they do in the output format (HTML) so we just copy the structures rather than recreating them. This is a common pattern in structured writing algorithms. (Though there may be complications with something called <phrase>namespaces</phrase>, which we will discuss later.)</db:para>
+<db:para>In the code above, paragraph and list structures have the same names in the source format as they do in the output format (HTML) so we just copy the structures rather than recreating them. This is a common pattern in structured writing algorithms. (Though there may be complications with something called namespaces, which we will discuss later.)</db:para>
 <db:para>The above algorithm should transform our source into HTML that looks like the following:</db:para>
 <db:programlisting language="html">
 &lt;html&gt;
@@ -115,7 +109,7 @@ match li
 <db:para>Outputting to paper (or to PDF, which is a kind of virtual paper) is more complex. On the Web, you output to a screen which is of flexible width and infinite length. The browser generally takes care of wrapping lines of text to the screen size (unless formatting commands tell it to do otherwise) and there is no issue with breaking text from one page to another. For paper, though, you have to format for a fixed size page. This means that formatting for paper involves fitting the content into a set of fixed size pages.</db:para>
 <db:para>This leads to a number of formatting problem, such as where to break each line of text, how to avoid a heading appearing at the bottom of a page or the last line of a paragraph appearing as the first line of a page. It also creates issues with references. For instance, a reference to content on a particular page cannot be known until the pages are paginated by the algorithm.</db:para>
 <db:para>Because of issues like this, you don’t write a formatting algorithm for paper directly, the way you would write an algorithm to output HTML. Rather, you use an intermediate typesetting system which already knows how to handle things like inserting page number references and handling line and page breaks. Rather than handling these things yourself, you tell the typesetting system how you would like it to handle them and then let it do its job.</db:para>
-<db:para>One such typesetting system is <phrase>XSL-FO</phrase> (Extensible Stylesheet Language - Formatting Objects). XSL-FO is a typesetting language written in <phrase>XML</phrase>. To format your content using <phrase>XSL-FO</phrase>, you transform your source content into <phrase>XSL-FO</phrase> markup, just the way you transform it into <phrase>HTML</phrase> for the Web. But then you run the <phrase>XSL-FO</phrase> markup through an <phrase>XSL-FO</phrase> processor to produce your final output, such as <phrase>PDF</phrase>. (I call this the <phrase>encoding algorithm</phrase>.)</db:para>
+<db:para>One such typesetting system is XSL-FO (Extensible Stylesheet Language - Formatting Objects). XSL-FO is a typesetting language written in XML. To format your content using XSL-FO, you transform your source content into XSL-FO markup, just the way you transform it into HTML for the Web. But then you run the XSL-FO markup through an XSL-FO processor to produce your final output, such as PDF. (I call this the encoding algorithm.)</db:para>
 <db:para>Here is a small example of XSL-FO markup:</db:para>
 <db:programlisting language="XSL-FO">
 &lt;fo:block space-after="4pt"&gt;
@@ -124,8 +118,8 @@ match li
    &lt;/fo:wrapper&gt;
 &lt;/fo:block&gt;
 </db:programlisting>
-<db:para>As you can see, the <phrase>XSL-FO</phrase> code contains a lot of specific <phrase>media domain</phrase> instructions for spacing and font choices. The division between <phrase>HTML</phrase> for basic structures and <phrase>CSS</phrase> for specific formatting does not exist here. Also note that as a pure media-domain language, XSL-FO does not have document domain structures like paragraphs and titles. From its point of view a document consists simply of a set of blocks with specific formatting properties attached to them.</db:para>
-<db:para>Because of all this detail, I am going to show the literal <phrase>XSL-FO</phrase> markup in the pseudocode of the algorithm, and I am not going to show the algorithm for the entire recipe. (The point is not for you to learn <phrase>XSL-FO</phrase> here, but to understand how the single-sourcing algorithm works.)</db:para>
+<db:para>As you can see, the XSL-FO code contains a lot of specific media domain instructions for spacing and font choices. The division between HTML for basic structures and CSS for specific formatting does not exist here. Also note that as a pure media-domain language, XSL-FO does not have document domain structures like paragraphs and titles. From its point of view a document consists simply of a set of blocks with specific formatting properties attached to them.</db:para>
+<db:para>Because of all this detail, I am going to show the literal XSL-FO markup in the pseudocode of the algorithm, and I am not going to show the algorithm for the entire recipe. (The point is not for you to learn XSL-FO here, but to understand how the single-sourcing algorithm works.)</db:para>
 <db:programlisting language="pseudo">
 match title
     output '&lt;fo:block space-after="4pt"&gt;'
@@ -134,16 +128,16 @@ match title
         output '&lt;/fo:wrapper&gt;'
     output '&lt;/fo:block&gt;'
 </db:programlisting>
-<db:para>Other typesetting systems you can use for print output include <phrase>TeX</phrase> and later versions of <phrase>CSS</phrase>.</db:para>
-</section>
-<section>
+<db:para>Other typesetting systems you can use for print output include TeX and later versions of CSS.</db:para>
+</db:section>
+<db:section>
 <db:title>Differential single sourcing</db:title>
-<db:para>Basic single sourcing outputs the same document to different media. But each media is different, and what works well in one media does not always work as well in another. For example, online media generally support <phrase>hypertext</phrase> links, while paper does not. Let’s suppose that we have a piece of content that includes a link.</db:para>
+<db:para>Basic single sourcing outputs the same document to different media. But each media is different, and what works well in one media does not always work as well in another. For example, online media generally support hypertext links, while paper does not. Let’s suppose that we have a piece of content that includes a link.</db:para>
 <db:programlisting>
 In Rio Bravo, {the Duke}(link "http://JohnWayne.com") plays an ex-Union colonel out for revenge.
 </db:programlisting>
-<db:para>In the markup language I am using here (and will eventually explain) the piece of markup represented by <phrase><db:code>"http://JohnWayne.com"</db:code></phrase> specifies the address to link to. In the algorithm examples below, this markup is referred to as the “specifically” attribute using the notation <phrase><db:code>@specifically</db:code></phrase>.</db:para>
-<db:para>In HTML we want this output as a link using the HTML <phrase><db:code>a</db:code></phrase> element, so we write the algorithm like this:</db:para>
+<db:para>In the markup language I am using here (and will eventually explain) the piece of markup represented by <db:code>"http://JohnWayne.com"</db:code> specifies the address to link to. In the algorithm examples below, this markup is referred to as the “specifically” attribute using the notation <db:code>@specifically</db:code>.</db:para>
+<db:para>In HTML we want this output as a link using the HTML <db:code>a</db:code> element, so we write the algorithm like this:</db:para>
 <db:programlisting>
 match p
     copy
@@ -184,9 +178,9 @@ In Rio Bravo, the Duke (see: http://JohnWayne.com) plays an ex-Union colonel out
 <db:para>The Duke (John Wayne) plays an ex-Union colonel.</db:para>
 </db:blockquote>
 <db:para>This provides the reader with less information, in the sense that it does not give them access to all the information on JohnWayne.com, but it does the disambiguation better and in a more paper-like way. The loss of the reference to JohnWayne.com is probably not an issue here. Following that link by typing it into a browser is a lot more work than simply clicking on it on a Web page. If someone reading on paper wants more information on John Wayne they are far more likely to type “John Wayne” into Google than type “JohnWayne.com” into the address bar of their browser.</db:para>
-<db:para>With the content written as it is, though, there is no easy way to produce this preferred form for paper. While the content is in the <phrase>document domain</phrase>, the choice to specify a link gives it a strong bias towards the Web and online media rather than paper. A document domain approach that favored paper would similarly lead to a poorer online presentation that omitted the link.</db:para>
+<db:para>With the content written as it is, though, there is no easy way to produce this preferred form for paper. While the content is in the document domain, the choice to specify a link gives it a strong bias towards the Web and online media rather than paper. A document domain approach that favored paper would similarly lead to a poorer online presentation that omitted the link.</db:para>
 <db:para>What we need to address the problem is a differential approach to single sourcing, one that allows us to differ not only the formatting but the presentation of the content for different media.</db:para>
-<db:para>One way to accomplish this differential single sourcing is to record the content in the <phrase>subject domain</phrase>, thus removing the prejudice of the document domain representation for one class of media or another. Here is how this might look:</db:para>
+<db:para>One way to accomplish this differential single sourcing is to record the content in the subject domain, thus removing the prejudice of the document domain representation for one class of media or another. Here is how this might look:</db:para>
 <db:programlisting language="sam">
 {The Duke}(actor "John Wayne") plays an ex-Union colonel.
 </db:programlisting>
@@ -208,21 +202,21 @@ match actor
         attribute href = $href
         continue
 </db:programlisting>
-<db:para>This supposes the existence of a system that can respond to the <phrase><db:code>get link</db:code></phrase> instruction and look up pages to link to based on the type and a name of a subject. We will look at how a system like that works in the chapter on linking<db:olink targetptr="linking"/>.</db:para>
-</section>
-<section>
+<db:para>This supposes the existence of a system that can respond to the <db:code>get link</db:code> instruction and look up pages to link to based on the type and a name of a subject. We will look at how a system like that works in the chapter on linking<db:olink targetptr="linking"/>.</db:para>
+</db:section>
+<db:section>
 <db:title>Differential organization and presentation</db:title>
 <db:para>Differences in presentation between media can be broader than this. Paper documents sometimes use complex tables and elaborate page layouts that often don’t translate well to online media. Effective table layout depends on knowing the width of the page you have available, and online you don’t now that. A table that looks great on paper may be unreadable on a mobile device, for instance.</db:para>
 <db:para>And this is more than a layout issue. Sometimes the things that paper does in a static way should be done in a dynamic way in online media. For example, airline or train schedules have traditionally been printed as timetables on paper, but you will virtually never see them presented that way online. Rather, there will be an interactive travel planner online that lets you choose your starting point, destination, and desired travel times and then presents you with the best schedule, including when and where to make connections.</db:para>
 <db:para>Single sourcing your timetable to print and PDF will not produce the kind of online presentation of your schedule that people expect, and that can have a direct impact on your business.</db:para>
-<db:para>To single source schedule information to paper and online, you can’t maintain that content in a document domain table structure. You need to maintain it in a timetable database structure (which is <phrase>subject domain</phrase>, but really looks like a database not a document at all).</db:para>
-<db:para>An algorithm (which I will call the <phrase>synthesis algorithm</phrase>) can then read the database to generate a document domain table for print publication. For the Web, however, you will create a web application that queries the database dynamically to calculate routes and schedules for individual travelers.</db:para>
-<db:para>Differences in linking between media can also go much deeper than how the links are presented. Links are not simply a piece of formatting like bold or italics. Links connect pieces of content together. On paper, documents are designed linearly, with one section or chapter after another. But online you can <phrase>organize information into a hypertext[http://everypageispageone.com/2013/03/19/web-organization-is-not-like-book-organization/]</phrase> with links that allow the reader to navigate and read in many different sequences.</db:para>
-<db:para>The difference between linear information design and hypertext information design is not a <phrase>media domain</phrase> distinction but a <phrase>document domain</phrase> distinction. But if you are thinking about single sourcing your content it is one that you have to take into consideration. In other words, single sourcing is not just about one <phrase>document domain</phrase> source with many <phrase>media domain</phrase> outputs. It can also be about a single <phrase>subject domain</phrase> source with multiple <phrase>document domain</phrase> outputs expressing different information designs, and outputting them to different media.</db:para>
+<db:para>To single source schedule information to paper and online, you can’t maintain that content in a document domain table structure. You need to maintain it in a timetable database structure (which is subject domain, but really looks like a database not a document at all).</db:para>
+<db:para>An algorithm (which I will call the synthesis algorithm) can then read the database to generate a document domain table for print publication. For the Web, however, you will create a web application that queries the database dynamically to calculate routes and schedules for individual travelers.</db:para>
+<db:para>Differences in linking between media can also go much deeper than how the links are presented. Links are not simply a piece of formatting like bold or italics. Links connect pieces of content together. On paper, documents are designed linearly, with one section or chapter after another. But online you can organize information into a hypertext[http://everypageispageone.com/2013/03/19/web-organization-is-not-like-book-organization/] with links that allow the reader to navigate and read in many different sequences.</db:para>
+<db:para>The difference between linear information design and hypertext information design is not a media domain distinction but a document domain distinction. But if you are thinking about single sourcing your content it is one that you have to take into consideration. In other words, single sourcing is not just about one document domain source with many media domain outputs. It can also be about a single subject domain source with multiple document domain outputs expressing different information designs, and outputting them to different media.</db:para>
 <db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/differential.png"/></db:imageobject></db:mediaobject>
 <db:para>More radical forms of differential single sourcing start to look a lot like reusing the same content to build quite different documents (albeit on the same subject) and therefore start to use the techniques of content reuse, which we will deal with in the next chapter.</db:para>
-</section>
-<section>
+</db:section>
+<db:section>
 <db:title>Conditional differential design</db:title>
 <db:para>You can also do differential single sourcing by using conditional (management domain) structures in the document domain.</db:para>
 <db:para>For instance, if you are writing a manual that you intend to single source to a help system, you might want to add context setting information to the start of a section when it appears in the help system. The manual may be designed to be read sequentially, meaning that the context of individual sections is established by what came before. But help systems are always accessed randomly, meaning that the context of a particular help topic may not be clear if it was single sourced from a manual. To accommodate this, you could include a context setting paragraph that is conditionalized to appear only in help output:</db:para>
@@ -239,7 +233,7 @@ section: Wrangling left-handed widgets
     2. Spin three times around under a full moon.
     3. Touch the sky.            
 </db:programlisting>
-<db:para>In the markup above, the <phrase><db:code>~~~</db:code></phrase> creates a “fragment” structure to which conditional tokens can be applied. Content indented under the fragment marker is part of the fragment.</db:para>
+<db:para>In the markup above, the <db:code>~~~</db:code> creates a “fragment” structure to which conditional tokens can be applied. Content indented under the fragment marker is part of the fragment.</db:para>
 <db:para>To output a manual, we suppress the help-only content:</db:para>
 <db:programlisting language="pseudo">
 match fragment where conditions = help-only
@@ -250,21 +244,21 @@ match fragment where conditions = help-only
 match fragment where conditions = help-only
     continue
 </db:programlisting>
-</section>
-<section>
+</db:section>
+<db:section>
 <db:title>Primary and secondary media</db:title>
 <db:para>While there is a lot you can do in the way of differential single sourcing to successfully output documents that work well in multiple media, there are limits to how far this approach can take you.</db:para>
 <db:para>In the end, linear and hypertext approach a fundamentally different ways of writing which invite fundamentally different ways of navigating and using information. Even moving content to the subject domain as much as possible will not entirely factor out these fundamental differences of approach.</db:para>
 <db:para>When single sourcing content to both linear paper-like media and hypertext web-like media, you will generally have to choose a primary media to write for. Single sourcing that content to the other media will be on a best-effort basis. It may be good enough for a particular purpose, but it will never be quite as good as it could have been had you designed for that media.</db:para>
-<db:para>Many of the tools used for single sourcing have an built in bias towards one media or another. Desktop-publishing tools like <phrase>FrameMaker</phrase>, for instance, were designed for linear media. Online collaborative tools like <phrase>wikis</phrase> were designed for <phrase>hypertext</phrase> media. It is usually a good idea to pick a tool that was designed for the media you choose as your primary.</db:para>
+<db:para>Many of the tools used for single sourcing have an built in bias towards one media or another. Desktop-publishing tools like FrameMaker, for instance, were designed for linear media. Online collaborative tools like wikis were designed for hypertext media. It is usually a good idea to pick a tool that was designed for the media you choose as your primary.</db:para>
 <db:para>In many cases, the choice of primary media is made implicitly based on the tools a group has traditionally been using. This usually means that the primary media is paper, and it often continues to be so even after the group had stopped producing paper and their readers are primarily using online formats.</db:para>
 <db:para>Some organizations seem to feel that they should only switch to tools that are designed primarily for online content when they have entirely abandoned the production of paper and paper-like formats such as PDF. This certainly does not need to be the case. It is perfectly possible to switch to an online-primary tools and still produce linear media as a secondary output format.</db:para>
 <db:para>Manual-oriented tools such as FrameMaker start with the manual format and then break it down into topics for the help system (usually by means of a third party tool). The results are often  poorly structured help topics. For instance, it is common to see the introduction to a chapter transformed into a stand alone topic that conveys no useful help information at all.</db:para>
-<db:para>Help authoring tools start with help topics and then build them up into manuals, which they may do either by stringing them together linearly, or mapping them into a hierarchy via a map or a table of contents. While help authoring tools should nominally optimize for help and then do the best they can for manuals, users of help authoring tools often focus on the manual format more than the help, so the use of a HAT does not guarantee that the help format gets design priority. The same is true of topic-oriented document domain systems like <phrase>DITA</phrase>. They are often still used to produce document-oriented manuals and help systems, with the topics being mostly used as building blocks.</db:para>
-<db:para>Changing your information design practices from linear paper based designs to hypertext <phrase><db:olink targetptr="eppo_book">Every Page is Page One</db:olink></phrase> designs is non-trivial, but such designs better suit the way many people use and access content today. Don’t expect single sourcing to successfully turn document-oriented design into effective hypertext by themselves. To best serve modern readers it will usually be much more effective to adopt an <phrase>Every Page is Page One</phrase> approach to information design and use structured writing techniques to do a best-effort single sourcing to linear media for those of your readers who still need paper or paper-like formats.</db:para>
-</section>
-<section>
+<db:para>Help authoring tools start with help topics and then build them up into manuals, which they may do either by stringing them together linearly, or mapping them into a hierarchy via a map or a table of contents. While help authoring tools should nominally optimize for help and then do the best they can for manuals, users of help authoring tools often focus on the manual format more than the help, so the use of a HAT does not guarantee that the help format gets design priority. The same is true of topic-oriented document domain systems like DITA. They are often still used to produce document-oriented manuals and help systems, with the topics being mostly used as building blocks.</db:para>
+<db:para>Changing your information design practices from linear paper based designs to hypertext <db:olink targetptr="eppo_book">Every Page is Page One</db:olink> designs is non-trivial, but such designs better suit the way many people use and access content today. Don’t expect single sourcing to successfully turn document-oriented design into effective hypertext by themselves. To best serve modern readers it will usually be much more effective to adopt an Every Page is Page One approach to information design and use structured writing techniques to do a best-effort single sourcing to linear media for those of your readers who still need paper or paper-like formats.</db:para>
+</db:section>
+<db:section>
 <db:title>Responsive Design</db:title>
 <db:para>Responsive design is a form of differential single sourcing. Many attempts at responsive design are not as responsive as we would like them to be because they content is not stored in a source format that allows a sufficient degree of differential presentation.</db:para>
-</section>
+</db:section>
 </db:chapter>

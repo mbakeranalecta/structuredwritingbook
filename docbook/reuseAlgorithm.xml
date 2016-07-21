@@ -1,17 +1,11 @@
 <?xml version="1.0"?>
-<?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbook.rng" schematypens="http://relaxng.org/ns/structure/1.0"
-?><?xml-model href="http://www.oasis-open.org/docbook/xml/5.0/rng/docbook.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"
-?>
-
-<!DOCTYPE book [
-]>
 <db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
 <db:title>The Reuse Algorithm</db:title>
 
-<db:para>The reuse of content in different contexts has become one of the main drivers of structured writing, particularly in the form of widespread adoption of <phrase>DITA</phrase>. Content reuse is not one technique, but a collection of many techniques, each of which requires specific content structures in the subject and document domains.</db:para>
+<db:para>The reuse of content in different contexts has become one of the main drivers of structured writing, particularly in the form of widespread adoption of DITA. Content reuse is not one technique, but a collection of many techniques, each of which requires specific content structures in the subject and document domains.</db:para>
 <db:para>The simplest content reuse technique is cutting and pasting content from one source to another. This approach is quick and easy to implement, but it creates a host of management problems. When people talk about content reuse they generally mean any and every means of reusing content other than cutting and pasting.</db:para>
 <db:para>This means that reusing content really means storing a piece of content in one place and inserting it into more than one publication by reference. “Reusing” can suggest that this activity is somewhat akin to rummaging through that jar of old nuts and bolts you have in the garage looking for one that is the right size to fix your lawnmower. While you can do it that way, that approach is neither efficient nor reliable. The efficient and reliable approach involves deliberately creating content for use in multiple locations. This means that you need to place constraints on the content to be reused and the content that reuses it, and that means you are in the realm of structured writing.</db:para>
-<section>
+<db:section>
 <db:title>Fitting pieces of content together</db:title>
 <db:para>If you are going to create one piece of content that can be used in many outputs, you have to make sure it fits in each of those outputs.</db:para>
 <db:para>If you cut and paste, this is not a concern. You can cut any text you like, paste it in anywhere, and edit it to fit if need be. But if the content you want to use is used in other places, you can’t edit it to fit because that might cause it to no longer fit in the other places. For reuse to work, the content must be written to fit in multiple places. In other words, it has to meet a set of constraints that will allow it to fit in multiple places.</db:para>
@@ -39,13 +33,13 @@
 <db:para>Assemble from pieces</db:para>
 </db:listitem>
 </db:itemizedlist>
-</section>
-<section>
+</db:section>
+<db:section>
 <db:title>Common into variable</db:title>
 <db:para>In the common into variable case, you have a common piece of content that occurs in many places. This could mean it occurs in many documents or in many places in the same document, or both.</db:para>
 <db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/common2variable.png"/></db:imageobject></db:mediaobject>
 <db:para>For instance, if you are writing procedures and there is a common safety warning that must appear on all dangerous procedures, each individual procedure is the variable part and the standard warning is the common part.</db:para>
-<db:para>We looked at an example of this in the chapter on the <phrase>management domain</phrase>.</db:para>
+<db:para>We looked at an example of this in the chapter on the management domain.</db:para>
 <db:programlisting language="sam">
 procedure: Blow stuff up
     &gt;&gt;&gt;(files/shared/admonitions/danger)
@@ -55,8 +49,8 @@ procedure: Blow stuff up
     step: Press the big red button.
 </db:programlisting>
 <db:para>To ensure that the included content will always fit, you need to make sure that there is a clear division of responsibilities between the common content and each of the documents it will be inserted into. The inserted content should give the safety warning, the whole safety warning, and nothing but the safety warning. Each document that includes it should include it in the required place in the procedure structure.</db:para>
-</section>
-<section>
+</db:section>
+<db:section>
 <db:title>Variable into common</db:title>
 <db:para>In the variable into common case, you have a single document that will be output in many different ways by inserting variable content at certain locations.</db:para>
 <db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/variable2common.png"/></db:imageobject></db:mediaobject>
@@ -88,10 +82,10 @@ match insert with variable where variable = $doors
     $number_of_doors = vehicles/vehicle[$model]/doors
     output $number_of_doors
 </db:programlisting>
-<db:para>All these insert and query mechanisms are <phrase>pseudocode</phrase>, of course. Exactly how things work and exactly how you delineate, identify, and insert content vary from system to system.</db:para>
+<db:para>All these insert and query mechanisms are pseudocode, of course. Exactly how things work and exactly how you delineate, identify, and insert content vary from system to system.</db:para>
 <db:para>With the variable into common technique, you are creating a common source by factoring out all the parts of the different outputs that are not common. This is, in some ways, the inverse of the usual pattern of factoring out invariants: we are actually factoring out the variants. But really, it amounts to the same thing. We are factoring variants from invariants. The only real difference between this and the common into variable is whether the common parts are embedded in the variable parts or vice versa. Either way, we still end up with two artifacts: the variable piece or pieces and the common piece or pieces.</db:para>
-</section>
-<section>
+</db:section>
+<db:section>
 <db:title>Variable into variable</db:title>
 <db:para>Variable into variable is a variation on common into variable in which you can make a wholesale change of the common elements that you are pulling into a set of variable documents.</db:para>
 <db:para>For example, suppose you decide to market your product line to a new market. The new market has different safety regulation which means you need to insert a different standard warning into all your manuals. In this case, you want to swap out the common elements used in your home market and substitute the common elements for the foreign market.</db:para>
@@ -99,7 +93,7 @@ match insert with variable where variable = $doors
 <db:para>Here we need to talk about how we identify the content to be inserted. In the common into variable example, we inserted the content of a file that contains a standard warning. But this approach is fragile. You can’t reorganize your files without breaking reuse, and you almost always need to reorganize your files eventually. Plus, it forces you to have every piece of reusable content in a separate file, which may not be efficient.</db:para>
 <db:para>But for variable into variable this approach simply does not work. Variable into variable requires loading a different file, which is difficult when the content specifies a particular file name to import.</db:para>
 <db:para>As always in structured writing, we look for a way to factor out the problematic content. So here we look for a way to factor out the file name and replace it with something else.</db:para>
-<db:para>The most basic way to factor out the file name is to give the content of the file an ID and use the ID to identify the content in a location independent way. Here is the warning file with the ID <phrase><db:code>#warn_danger</db:code></phrase> added:</db:para>
+<db:para>The most basic way to factor out the file name is to give the content of the file an ID and use the ID to identify the content in a location independent way. Here is the warning file with the ID <db:code>#warn_danger</db:code> added:</db:para>
 <db:programlisting language="sam">
 warning:(#warn_danger) 
     title: Danger
@@ -122,8 +116,8 @@ match insert with ID
     output $insert_content
 </db:programlisting>
 <db:para>This is a constant pattern in structured writing. When it comes to locating resources, you want to move that responsibility from the content to the algorithm. This makes it easier to update the locations, but it also gives you far more options for storing and managing your content, since algorithms can interact with a variety of systems in sophisticated ways, rather than just storing a static address. It also means you can make wholesale changes in how your content is stored without having to edit the content itself.</db:para>
-<db:para>This means that the <phrase>synthesis algorithm</phrase> needs some way to resolve the ID and find the content to include. In many cases, a <phrase>content management system</phrase> is used to resolve the ID. In other cases it is as simple as the algorithm searching through a set of files to find the ID or building a catalog that points to the files that contain IDs.</db:para>
-<db:para>To do variable into variable reuse in a system that uses IDs, you simply point the <phrase>synthesis algorithm</phrase> at a different set of files that contain the same IDs, but attached to different content. So if your foreign market requires a different warning, you can create a file like this:</db:para>
+<db:para>This means that the synthesis algorithm needs some way to resolve the ID and find the content to include. In many cases, a content management system is used to resolve the ID. In other cases it is as simple as the algorithm searching through a set of files to find the ID or building a catalog that points to the files that contain IDs.</db:para>
+<db:para>To do variable into variable reuse in a system that uses IDs, you simply point the synthesis algorithm at a different set of files that contain the same IDs, but attached to different content. So if your foreign market requires a different warning, you can create a file like this:</db:para>
 <db:programlisting language="sam">
 warning:(#warn_danger) 
     title: Look out!
@@ -148,7 +142,7 @@ procedure: Blow stuff up
     step: Run away.
     step: Press the big red button.
 </db:programlisting>
-<db:para>(I am using <phrase><db:code>#</db:code></phrase> to denote IDs and <phrase><db:code>%</db:code></phrase> to denote keys. This is purely arbitrary and has nothing to do with how they work. Different systems will denote IDs and keys in different ways.)</db:para>
+<db:para>(I am using <db:code>#</db:code> to denote IDs and <db:code>%</db:code> to denote keys. This is purely arbitrary and has nothing to do with how they work. Different systems will denote IDs and keys in different ways.)</db:para>
 <db:para>To connect the key to the warning file, we then create a key lookup table:</db:para>
 <db:programlisting language="sam">
 keys:
@@ -156,7 +150,7 @@ keys:
         name: warn_danger
         resource: files/shared/admonitions/domestic/danger
 </db:programlisting>
-<db:para>When the <phrase>synthesis algorithm</phrase> processes the procedure, it sees the key reference <phrase><db:code>%warn_danger</db:code></phrase> and looks it up in the key lookup table. The key lookup table tells the algorithm that the key resolves to the resource <phrase><db:code>files/shared/admonitions/domestic/danger</db:code></phrase>. The algorithm them loads that file and inserts the contents into the output.</db:para>
+<db:para>When the synthesis algorithm processes the procedure, it sees the key reference <db:code>%warn_danger</db:code> and looks it up in the key lookup table. The key lookup table tells the algorithm that the key resolves to the resource <db:code>files/shared/admonitions/domestic/danger</db:code>. The algorithm them loads that file and inserts the contents into the output.</db:para>
 <db:programlisting language="pseudo">
 match insert with key
     $resource = find key in lookup-table
@@ -169,7 +163,7 @@ keys:
         name: warn_danger
         resource: files/shared/admonitions/foreign/danger
 </db:programlisting>
-<db:para>You then tell the <phrase>synthesis algorithm</phrase> to use this lookup table instead.</db:para>
+<db:para>You then tell the synthesis algorithm to use this lookup table instead.</db:para>
 <db:para>Using keys is not necessarily better than using IDs. What it comes down to is that you need some kind of bridge between the citation of an identifier in the source file and the location of a resource with that identifier in the content store. This bridge can be created by a key lookup table, by remapping file URLs, or by modifying a query to a content repository.</db:para>
 <db:para>One feature of the key approach is that, because it does not attach the key directly to the content, it can be use to identify resources that do not have IDs, which may include resources that you do not control.</db:para>
 <db:para>On the other hand, we should note that any ID can be treated as a key simply by locating it in a lookup file. In fact, that is all a key really is: an ID that is located in a lookup file instead of directly in a resource. As such, it is perfectly possible to create a system where some IDs are located directly in the content and some are located in lookup tables. All that is required for this to work is for the synthesis algorithm to recognize when an ID is located in a lookup table and load the resource it points to. Nonetheless systems that support keys tend to implement them as separate structures from IDs.</db:para>
@@ -200,8 +194,8 @@ keys:
         name: warn_danger
         resource: files/shared/warnings#warn_danger_foreign
 </db:programlisting>
-</section>
-<section>
+</db:section>
+<db:section>
 <db:title>Common with conditions</db:title>
 <db:para>In some cases of variable into common, the variant pieces will not actually be factored out into a separate file. Rather, each of the possible alternatives is included in the file conditionally.</db:para>
 <db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/commonconditions.png"/></db:imageobject></db:mediaobject>
@@ -209,7 +203,7 @@ keys:
 <db:programlisting language="sam">
 The vehicle seats {four}(?compact){five}(?midsize){seven}(?van).
 </db:programlisting>
-<db:para>Here the main text is the fixed piece and the variable pieces are the words “four”, “five”, and “seven”. Which of these will be included in the output depends on which condition is applied during the build. If the condition <phrase><db:code>midsize</db:code></phrase> is applied, then the output text will be “five” and the other alternatives will be suppressed.</db:para>
+<db:para>Here the main text is the fixed piece and the variable pieces are the words “four”, “five”, and “seven”. Which of these will be included in the output depends on which condition is applied during the build. If the condition <db:code>midsize</db:code> is applied, then the output text will be “five” and the other alternatives will be suppressed.</db:para>
 <db:programlisting language="pseudo">
 match phrase with condition
     if condition in $build_conditions
@@ -240,7 +234,7 @@ ol:
     li:(?deluxe) Leather seats
     li: Mud flaps
 </db:programlisting>
-<db:para>In this case, the list item “Leather seats” would only be published if the condition <phrase><db:code>deluxe</db:code></phrase> was specified in the build. It would be omitted for all other builds. These are the kinds of cases where it is harder to get away from the use of conditionals as a reuse mechanism.</db:para>
+<db:para>In this case, the list item “Leather seats” would only be published if the condition <db:code>deluxe</db:code> was specified in the build. It would be omitted for all other builds. These are the kinds of cases where it is harder to get away from the use of conditionals as a reuse mechanism.</db:para>
 <db:para>This approach to reuse is often called filtering or profiling. Some systems have elaborate ways of specifying filtering or profiling of the content. The net effect is the same as the simple condition tokens shown here, but they may allow for more sophisticated or elaborate conditions than shown here.</db:para>
 <db:para>Because common with conditions is essentially a form of variable into common where the variable content is contained inside the common source, it can technically be replaced by a variable into common approach in all cases. In practice, the use of conditions tends to occur when:</db:para>
 <db:itemizedlist>
@@ -258,8 +252,8 @@ ol:
 </db:listitem>
 </db:itemizedlist>
 <db:para>How successful a common with conditions approach will be also depends on what you choose for your conditional expressions. Generally, subject domain conditions will be much more stable and manageable than document domain conditions. For instance, conditions that relate to different vehicles (subject domain) are based in the real world and are therefore objectively true as long as the subject matter remains the same. Conditions that relate to different publications or different media, on the other hand, are not objectively true and can’t be verified independently. They only way to verify them is to build the different documents or media and see if you got the content you expected. This makes maintaining such conditions cumbersome and error prone.</db:para>
-</section>
-<section>
+</db:section>
+<db:section>
 <db:title>Factor out the common</db:title>
 <db:para>In the chapter on the management domain<db:olink targetptr="management_domain"/>, we noted that the subject domain alternative to using an insertion instruction for the warning text was to specify which procedures were dangerous, thus factoring out the constraint that the warning must appear. In effect, this factors out the common content as well.</db:para>
 <db:programlisting language="sam">
@@ -285,8 +279,8 @@ match procedure/is-it-dangerous
 <db:para>The beauty of this approach is that the content is entirely neutral as to what kind of reuse may be going on or how dangerous procedures may be treated. Because the content itself contains only objective information about the procedure itself, you can implement any algorithm you like to publish or reuse the content in any way you like at any time based on this information. By making the content not specific to any form of reuse or any reuse mechanism, we effectively make it much more reusable.</db:para>
 <db:para>We are also making the content much easier to write, since this approach does not require the writer to know how the reuse mechanism works, how to identify reusable content, or even that reuse is occurring at all. All they have to do is answer a simple question about the content -- one to which they should already know the answer.</db:para>
 <db:para>Structured writing is about factoring invariants and complexities out of content and this approach enables the widest range of reuse possibilities while factoring all the complexities of reuse out of the content.</db:para>
-</section>
-<section>
+</db:section>
+<db:section>
 <db:title>Factor out the variable</db:title>
 <db:para>You can also factor out the variable content. For example, in the case of the different models of a car, rather than conditionalizing the list of features in the document, like this:</db:para>
 <db:programlisting language="sam">
@@ -318,17 +312,17 @@ keys:
         name: %warn_danger
         resource: from vehicles select features where model = $model
 </db:programlisting>
-<db:para>This retrieves a different set of features from the database depending on how the variable <phrase><db:code>$model</db:code></phrase> is defined for the build. Launch the build with <phrase><db:code>$model = 'compact'</db:code></phrase> and you get the feature set for the compact model. Launch the build with <phrase><db:code>$model = 'van'</db:code></phrase> and you get the feature set for the van model.</db:para>
+<db:para>This retrieves a different set of features from the database depending on how the variable <db:code>$model</db:code> is defined for the build. Launch the build with <db:code>$model = 'compact'</db:code> and you get the feature set for the compact model. Launch the build with <db:code>$model = 'van'</db:code> and you get the feature set for the van model.</db:para>
 <db:para>Naturally, this is leaving out a whole lot of detail about how this query gets executed and how the results get structured into a document domain list structure. But these are implementation details.</db:para>
-</section>
-<section>
+</db:section>
+<db:section>
 <db:title>Assemble from pieces</db:title>
 <db:para>In the assemble from pieces approach, there is no common vs. variable distinction and no single source document into which reused content is inserted or to which conditions are applied. Instead, there is a set of content units that are assembled to form a finished document.</db:para>
 <db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/assemble.png"/></db:imageobject></db:mediaobject>
 <db:para>For example, if you have a range of products with common features, you might assemble the documentation for those products using a common introduction with a piece representing each feature of each model.</db:para>
 <db:para>This could be a flat list, or it could be a tree structure. For instance, you might assemble a chapter of a manual with a introductory piece and then several sections below it in the tree.</db:para>
 <db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/tree.png"/></db:imageobject></db:mediaobject>
-<db:para>The assembly approach requires a structure to describe how the units are assembled. This structure is often called a map. (It is called a map in <phrase>DITA</phrase>, for instance.) Some applications may also refer to it as a table of contents.</db:para>
+<db:para>The assembly approach requires a structure to describe how the units are assembled. This structure is often called a map. (It is called a map in DITA, for instance.) Some applications may also refer to it as a table of contents.</db:para>
 <db:programlisting language="sam">
 map: Widget Wrangler Deluxe User Manual
    unit: units/ww/deluxe/intro
@@ -353,9 +347,9 @@ unit: Installing the Widget Wrangler Deluxe
     &gt;&gt;&gt;(unit units/ww/deluxe/install_options)
 </db:programlisting>
 <db:para>This avoids the need for a map, but the downside is that it can make the units less reusable. In the above example, for instance, you would need a separate introduction unit for the regular Widget Wrangler since the introduction file imports all the requirements and procedural units. By assembling units with the map, you can use a shared install intro, which increases the amount of reuse you can do.</db:para>
-<db:para>When using the map approach, it is important to think about how your content will <phrase>single source</phrase> to paper-like media and hypertext-media. Some people will output the same map to to both media. In hyper-text media that usually results in the map being turned into a table of contents, often displayed in a separate pane as in a help system. This may be fine if you are creating a help system, but it is not how Web content is usually displayed. Another approach to single sourcing content that uses the assemble from pieces approach is to create completely separate maps -- or even to use completely different assembly techniques that don’t involve maps at all -- to produce paper-like and hypertext outputs. This can help you to work around some of the design limitations that we talked about in the <phrase><db:olink targetptr="single_source">single sourcing chapter</db:olink></phrase>.</db:para>
-</section>
-<section>
+<db:para>When using the map approach, it is important to think about how your content will single source to paper-like media and hypertext-media. Some people will output the same map to to both media. In hyper-text media that usually results in the map being turned into a table of contents, often displayed in a separate pane as in a help system. This may be fine if you are creating a help system, but it is not how Web content is usually displayed. Another approach to single sourcing content that uses the assemble from pieces approach is to create completely separate maps -- or even to use completely different assembly techniques that don’t involve maps at all -- to produce paper-like and hypertext outputs. This can help you to work around some of the design limitations that we talked about in the <db:olink targetptr="single_source">single sourcing chapter</db:olink>.</db:para>
+</db:section>
+<db:section>
 <db:title>Combining multiple techniques</db:title>
 <db:para>Of course, there is one problem with the idea of using a common install intro for both the regular and deluxe widget wrangler. The intro mentions the name of the product. To solve this problem without requiring two different units, we can use the variable into common or common with conditions reuse techniques within the intro unit. Here is an example using variable into common:</db:para>
 <db:programlisting>
@@ -369,11 +363,11 @@ unit: Installing the &gt;($product_name)
     &gt;&gt;&gt;(unit unit/ww/deluxe/install_options)
 </db:programlisting>
 <db:para>There are a number of ways in which you can mix and match the basic reuse patterns to achieve an overall reuse strategies. Most systems designed to support reuse will allow you to do all these patterns and to combine them however you wish.</db:para>
-</section>
-<section>
+</db:section>
+<db:section>
 <db:title>Content reuse is not a panacea</db:title>
 <db:para>Content reuse can seem like an easy win, and in some cases it can return substantial benefits, but there are pitfalls to be aware of. You will need to plan carefully to make sure that you avoid the traps that await the unwary.</db:para>
-<section>
+<db:section>
 <db:title>Quality traps</db:title>
 <db:para>There are three main quality traps with content reuse.</db:para>
 <db:itemizedlist>
@@ -388,12 +382,12 @@ unit: Installing the &gt;($product_name)
 </db:listitem>
 </db:itemizedlist>
 <db:para>Many works on content reuse casually recommend making content more generic or more abstract as a means to making it more reusable, without saying anything about the potential downside. This is very dangerous and can do serious harm to the quality of your content. Statements that are specific and concrete are easier to understand and communicate better than statements that are generic and abstract. Replacing specific and concrete statements with generic or abstract statements will reduce the effectiveness of your content significantly.</db:para>
-<db:para>Unfortunately, human beings suffer from <phrase>the curse of knowledge</phrase>. The curse of knowledge is a cognitive bias that makes it very hard for people who understand an idea to appreciate the difficulties that idea presents to people who do not understand it. The curse of knowledge makes the generic or abstract statement of an idea appear equally communicative, and perhaps more succinct and precise, than the concrete and specific statement of it. This is a problem for writers at all times, pulling them away from the kind of specific and concrete statement that make ideas easier to comprehend. The desire to make content reusable reinforces this temptation.</db:para>
+<db:para>Unfortunately, human beings suffer from the curse of knowledge. The curse of knowledge is a cognitive bias that makes it very hard for people who understand an idea to appreciate the difficulties that idea presents to people who do not understand it. The curse of knowledge makes the generic or abstract statement of an idea appear equally communicative, and perhaps more succinct and precise, than the concrete and specific statement of it. This is a problem for writers at all times, pulling them away from the kind of specific and concrete statement that make ideas easier to comprehend. The desire to make content reusable reinforces this temptation.</db:para>
 <db:para>Replacing the specific and concrete with the generic and abstract always reduces content quality and effectiveness. You may decide that the economic benefits of content reuse outweigh the economic costs of less effective content, but you should at least be aware that there are real economic consequences to this choice.</db:para>
-<db:para>Another potential quality problem comes with the loss of narrative flow. Not all content has or needs a lengthy narrative flow, but if you start breaking your content into reusable units and putting them back together in different ways, the narrative flow can easily be lost. In some cases you can avoid this problem by making the topics you present to your audience more self contained using an <phrase>Every Page is Page One</phrase> information design. But don’t assume that you have an effective Every Page is Page One design just because you have broken your content into reusable units. If that content was written in a way that assumed a narrative flow, it is not going to work when reused in a way that breaks that flow.</db:para>
+<db:para>Another potential quality problem comes with the loss of narrative flow. Not all content has or needs a lengthy narrative flow, but if you start breaking your content into reusable units and putting them back together in different ways, the narrative flow can easily be lost. In some cases you can avoid this problem by making the topics you present to your audience more self contained using an Every Page is Page One information design. But don’t assume that you have an effective Every Page is Page One design just because you have broken your content into reusable units. If that content was written in a way that assumed a narrative flow, it is not going to work when reused in a way that breaks that flow.</db:para>
 <db:para>Finally, reuse can encourage us to come up with one way of telling our story that we present to all audiences. But not all audiences are alike, and the way we tell our story to one audience may not work for another audience. Good content tells a good story to a particular audience. Two different tellings of the same story do not constitute redundant content if they address different audiences.</db:para>
-</section>
-<section>
+</db:section>
+<db:section>
 <db:title>Cost traps</db:title>
 <db:para>It is easy to see content reuse as a big cost saving. Reusing content means you do not have to write the same content over and over again. It is easy to add up the cost of all that redundant writing and regard that number as pure cost savings from a content reuse strategy.</db:para>
 <db:para>But all of the reuse techniques create multiple artifacts that need to be managed. This includes both content and processing code. You need mechanism to make sure that your content obeys the constraints required to make the pieces of content fit together reliably. You need a mechanism to make sure that way you have done reuse actually produces the documents you want. The cost of such management can be non-trivial and the consequences of the management breaking down can be significant.</db:para>
@@ -403,6 +397,6 @@ unit: Installing the &gt;($product_name)
 <db:para>Depending of the techniques you use, content reuse strategies can complicate the lives of authors, which may reduce the pool of authors you can use or reduce their productivity. As the size of the content set grows, it can take longer and longer to determine if reusable content exists and to find and reuse it. It is possible for this to end up costing more time than was saved by not rewriting content. (Reuse techniques that factor out the reuse from the author’s work avoid this problem.)</db:para>
 <db:para>Once the cohesion and discipline of a content set starts to break down, the decline tends to accelerate. As it becomes harder to find content to reuse, more duplication occurs, which further complicates the search for reusable content, creating a vicious circle. As links and other content relationships break down, people tend to form ad hoc links and relationships to get a job finished, further tangling the existing rat’s nest. Under the gun, it is almost always easier to get the next document out by ignoring the structure and discipline of the content set structure, but the effects of this are corrosive. Without consistent discipline, even in the face of deadlines, a reuse system can fail over time.</db:para>
 <db:para>All of these issues can be managed successfully with the right techniques and the right tools, but they all introduce costs as well, both up-front costs and ongoing costs. Those costs have to be reckoned up and subtracted from the projected cost savings before you can determine if a content reuse strategy is really going to save you money.</db:para>
-</section>
-</section>
+</db:section>
+</db:section>
 </db:chapter>
