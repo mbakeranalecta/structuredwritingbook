@@ -1,7 +1,7 @@
 sam:
 chapter: Markup
 
-    Through much of this series so far I have talked about markup without really explaining it. Markup is the way much, but not all, structured writing is done. Lets look at the alternative and the varieties of approaches to markup.
+    Through much of this book so far I have talked about markup without really explaining it. Markup is the way much, but not all, structured writing is done. Lets look at the alternative and the varieties of approaches to markup.
     
     First, structured writing, in the broadest sense, is writing that applies any form of structure (any set of constraints) to writing. As such, most forms of writing on a computer, other than perhaps in a straight text editor without the use of markup, are structured writing since they all contain text in structures. 
     
@@ -90,7 +90,7 @@ chapter: Markup
         
         1. Abstract languages provide a tool chain -- software tools that work with instances of the abstract language. The existence of that tool chain means that you don't have to write all those tools yourself.
         
-          For instance, the existence of the abstract structures like elements and attributes that are shared by all instances of XML means that it is possible to create high-level programming languages and other tools to process those structures. This lets you create algorithms to process your structured writing in these high-level languages, which are easier to use and more suited to the task than general purpose programming languages. The pseudocode that we have been using throughout this series to examine structured writing algorithms is actually very close in structure (though not syntax) to XML-enabled processing languages such as {XSLT}(tool) and {OmniMark}(tool).
+          For instance, the existence of the abstract structures like elements and attributes that are shared by all instances of XML means that it is possible to create high-level programming languages and other tools to process those structures. This lets you create algorithms to process your structured writing in these high-level languages, which are easier to use and more suited to the task than general purpose programming languages. The pseudocode that we have been using throughout this book to examine structured writing algorithms is actually very close in structure (though not syntax) to XML-enabled processing languages such as {XSLT}(tool) and {OmniMark}(tool).
         
           Also, the existence of the abstract structures makes it possible to build editors that provide high-level editing functions not just for one markup language, but for all markup languages that are instance of one abstract language. This is what we mean when we talk about {XML editors}(tool "XML editor"): editors for editing all languages that are instances of XML. (This is also why the many tools, such as {Word}(tool "Microsoft Word") or {FreeMind}(tool), that save their files in XML format, are not considered XML editors, because they only edit one XML-derived language, not all of them.)
           
@@ -134,7 +134,7 @@ chapter: Markup
         
         Constraints are what bring discipline to structured writing. They drive content quality and enable efficient reliable processing with algorithms. Constraints make it easier to write good algorithms because they limit the number of permutation of structures that you have to deal with.
                
-        Some abstract and hybrid languages provide extensibility but not constrainability. For instance, {reStrucuredText}(language) and {ASCIIDoc}(language) are both extensible but not constrainable. XML, of course, is both extensible and constrainable, but it is purely abstract. {SAM}(language) the markup language in which most of the examples in this series are written, is a hybrid language that is both extensible and constrainable.
+        Some abstract and hybrid languages provide extensibility but not constrainability. For instance, {reStrucuredText}(language) and {ASCIIDoc}(language) are both extensible but not constrainable. XML, of course, is both extensible and constrainable, but it is purely abstract. {SAM}(language) the markup language in which most of the examples in this book are written, is a hybrid language that is both extensible and constrainable.
     
     section: Showing and hiding structure
     
@@ -169,7 +169,7 @@ chapter: Markup
         
         Another important note about reST is that it has no constraint mechanism. You can add new directives, but you can't constrain their use, or the use of the predefined directives. 
 
-        I have been developing such a hybrid markup language. I call it SAM (which stands either for Semantic Authoring Markdown or Semantic Authoring Markup, as you please). SAM is the language I have been using for most of the examples in this series, and have been promising all along that I would eventually explain. 
+        I have been developing such a hybrid markup language. I call it SAM (which stands either for Semantic Authoring Markdown or Semantic Authoring Markup, as you please). SAM is the language I have been using for most of the examples in this book, and have been promising all along that I would eventually explain. 
         
         Here is the same example used above, written in SAM:
         
@@ -213,13 +213,13 @@ chapter: Markup
             </section>
 
         
-        This entire series is authored in SAM. Most of its examples are in SAM. I'll describe SAM more fully another article. 
+        This book is authored in SAM. Most of its examples are in SAM. I'll describe SAM more fully another chapter. 
         
     section: Instances of hybrid markup languages
     
-        I said above that this series is written in SAM, but that is not quite accurate. As noted above, you can write anything in an abstract or hybrid language directly. You write in instances of abstract or hybrid languages. Thus DocBook is an instance of the abstract language XML. You can write documents in DocBook. We do say, of course, that we write documents in XML, but that statement is, is not wholly inaccurate, certainly non-specific. Saying the a document is written in DocBook tells you what constraints it meets. Saying it is written in XML merely tells you which syntax it uses, which is a whole lot less informative. 
+        I said above that this book is written in SAM, but that is not quite accurate. As noted above, you can write anything in an abstract or hybrid language directly. You write in instances of abstract or hybrid languages. Thus DocBook is an instance of the abstract language XML. You can write documents in DocBook. We do say, of course, that we write documents in XML, but that statement is, is not wholly inaccurate, certainly non-specific. Saying the a document is written in DocBook tells you what constraints it meets. Saying it is written in XML merely tells you which syntax it uses, which is a whole lot less informative. 
         
-        So, to be more specific, this series is written in a markup language written in SAM, one that I created for the specific purpose of writing this book. 
+        So, to be more specific, this book is written in a markup language written in SAM, one that I created for the specific purpose of writing this book. 
         
         
         Not all instances of hybrid markup languages are based on language definitions as complete and formal as XML or SAM. In some cases the hybrid language on which a instance is based my be just a vague set of conventions, and there may be no formal definition of those conventions and no other instance based on those conventions. One such language is JavaDoc, a language used for creating API reference documentation for the Java programming language[https://en.wikipedia.org/wiki/Javadoc#Example]:
@@ -240,7 +240,7 @@ chapter: Markup
                 // ...body
             }
 
-        # Duplicate of content in publishing algorithms article
+        # Duplicate of content in publishing algorithms chapter
         
         In this example, everything between the opening `/*` and the closing `*/` is a comment (as far as Java itself is concerned), and the rest is a function definition in Java. However, JavaDoc sees the comment block as a block of structured text consisting of a title, a paragraph, and a set of named blocks named `param` and `return`. I'm classifying JavaDoc as an instance of a hybrid language because it has a syntax for named blocks (the `@` sign followed by a string of letters). There is a fixed set of such blocks in JavaDoc (instances of hybrid languages have fixed sets of block; hybrid languages themselves have conventions for creating named blocks, but don't actually specify any names).
         
