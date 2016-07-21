@@ -1,6 +1,6 @@
 sam:
 
-chapter: Structures: Tables
+chapter: Tables
 
     by: Mark Baker
     
@@ -8,7 +8,7 @@ chapter: Structures: Tables
     
     Writing tables in the document domain is challenging because you do not know how they are going to be paginated. Creating a table in a word processor or desktop publishing program is relatively straightforward because you can see exactly how the table is paginating as you write. But if you work in the document domain, even in an WYSIWYG editor, you don't see what final pagination will be, in any of the media in which the content may be published. 
     
-    We commented that in the {publishing algorithm} certain aspects of pagination have to be left to an algorithm, and that algorithms may not always see an ugly break or have the same options to fix one as a human writer might have. This becomes doubly so for tables. Not only do you have to worry about breaks between pages, you have to worry about the cells fitting the page of view port and what happens to the text inside the cells. You have to worry about how wide each cell should be and decide if that is something the writer should specify or if it should be left to the algorithm. 
+    We commented that in the {publishing algorithm}(algorithm) certain aspects of pagination have to be left to an algorithm, and that algorithms may not always see an ugly break or have the same options to fix one as a human writer might have. This becomes doubly so for tables. Not only do you have to worry about breaks between pages, you have to worry about the cells fitting the page of view port and what happens to the text inside the cells. You have to worry about how wide each cell should be and decide if that is something the writer should specify or if it should be left to the algorithm.
     
     As with paginating text, you can give hints to the algorithm to help it paginate the table. For regular text you might tell the algorithm to keep a title with the paragraph that follows it. But giving hints on how to paginate a table is more complicated. 
     
@@ -24,7 +24,7 @@ chapter: Structures: Tables
         
         
         
-                Tables are a particular problem for the document domain. Regular text is one dimensional -- it is just a string of words than can fairly easily be wrapped to fit in rows on a display of page of almost any size. Tables are two dimensional objects. They don't have to have a set height or width, either for the table as a whole or for the individual cells, but to be readable they do need to fit enough words into a cell and enough cells onto the screen/page to be readable. But making text readable on a given screen/page size is a media domain problem. How do you solve it in the document domain without throwing the author back into the media domain, and without creating content that will not fit properly in some future media?
+        Tables are a particular problem for the document domain. Regular text is one dimensional -- it is just a string of words than can fairly easily be wrapped to fit in rows on a display of page of almost any size. Tables are two dimensional objects. They don't have to have a set height or width, either for the table as a whole or for the individual cells, but to be readable they do need to fit enough words into a cell and enough cells onto the screen/page to be readable. But making text readable on a given screen/page size is a media domain problem. How do you solve it in the document domain without throwing the author back into the media domain, and without creating content that will not fit properly in some future media?
 
         The problem with tables is that they prescribe a fixed horizontal and vertical orientation of one cell relative to other cells. This orientation associates the content of a cell with other information. Either it associates it with a label in a heading row or column, or it simply groups with with other similar values (leaving it to the reader to intuit the label). The problem is that this relationship between the content and its label is only expressed through this orientation, and in most document domain markup, there isn't even a formal association that says definitively, "this is the label that applies to this content". In other words, once the content is presented in a table in the document domain, the only completely reliable way to format it in the media domain is as a table with the same orientation of cells, whether that fits well onto the page or not. 
 

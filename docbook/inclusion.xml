@@ -11,12 +11,13 @@
 <db:para>In the media domain, the behavior of progressive disclosure usually takes the form of a piece of code that turns on or off the visibility of a piece of content when the user clicks something.</db:para>
 <db:para>In the document domain, we factor out the code and simply indicate that the content is optional, including whether it should default to shown of hidden. This could be done with structure for hideable content:</db:para>
 <db:programlisting language="XML">
+&lt;hideable initial="hidden"&gt;
+    &lt;section&gt;
 </db:programlisting>
-<db:para>&lt;hideable initial="hidden"&gt; &lt;section&gt; <db:code/>`</db:para>
 <db:para>or with an annotation on an existing structure:</db:para>
 <db:programlisting language="XML">
+&lt;section hidden="yes"&gt;
 </db:programlisting>
-<db:para>&lt;section hidden="yes"&gt; <db:code/>`</db:para>
 <db:para>In the subject domain, we factor out the question of hideability altogether. The subject domain markup simply divides the content into sections based on their subject matter or the contributions they make to the description of the subject. The presentation algorithm then translates certain portions of the content into hideable sections in the document domain. Progressive disclosure becomes a design decision at the document domain level that is entirely divorced from the content. Thus it can be changed at any time without any need to change the content.</db:para>
 <db:para>We should note that linking is also a form of progressive disclosure. It displays new information to the reader at the click of a button. The difference between the two is one of design. They are implemented differently at the media domain and document domain levels, but in the subject domain this design decision has been entirely factored out.</db:para>
 </db:section>

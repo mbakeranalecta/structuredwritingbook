@@ -4,7 +4,7 @@ chapter: Structure and annotation
 
     by: Mark Baker
 
-    Broadly speaking, structured markup provides two things: structure and annotation. Structure governs the relationship of pieces. It is structure that says that a list consists of list items, that an API reference must begin with a function signature followed by a list of parameter values, that says that an ingredient listing consists of the ingredient name followed by a quantity followed by a unit of measure, or that a section must begin with a title. It is in structure that we create, impose, and express most of the {constraints} that are fundamental to structured writing. 
+    Broadly speaking, structured markup provides two things: structure and annotation. Structure governs the relationship of pieces. It is structure that says that a list consists of list items, that an API reference must begin with a function signature followed by a list of parameter values, that says that an ingredient listing consists of the ingredient name followed by a quantity followed by a unit of measure, or that a section must begin with a title. It is in structure that we create, impose, and express most of the {constraints}(concept) that are fundamental to structured writing.
     
     Whenever you place content in a structure, you are saying something about that content. What kind of thing you are saying about it depends on the domain of the markup. 
     
@@ -20,9 +20,9 @@ chapter: Structure and annotation
     
     The information in annotations does not have to be in the same domain as the structure they apply to. For instance:
 
-    * In {DITA}, the {keyref} attribute is used to add {management domain} metadata to a number of document structure elements.
+    * In {DITA}(language), the {keyref}(attribute (DITA)) attribute is used to add {management domain}(concept) metadata to a number of document structure elements.
     
-    * In {HTML}, the style attribute can be used to add {media domain} metadata to the document structure.    
+    * In {HTML}(language), the style attribute can be used to add {media domain}(concept) metadata to the document structure.
     
     But not all annotations add additional information to structures. It is possible to have annotations that stand alone. At a certain point in defining the structure of content we get down to what is essentially free-form narrative content -- that is, paragraphs of text. But even within a paragraph, that are pieces of text that we want to add metadata to for use by downstream processes. Examples from each of the domains include:
     
@@ -34,30 +34,30 @@ chapter: Structure and annotation
     
     |Management Domain| A conditional annotation to identify a piece of text that may be conditionally included or excluded from output. 
     
-    Structure and annotation in SAM
+    section: Structure and annotation in SAM
     
         In SAM, there are a number of types of structure, but the main extensible structure is the block. Annotations are part of the definition of the language. Annotations can be added to blocks and call also float in text. 
         
         ```(SAM)
-        section:(#annotations) Annotations
-            This is a paragraph containing an {annotation}(concept).
-        ```
+            section:(#annotations) Annotations
+                This is a paragraph containing an {annotation}(concept).
+
         
         In the example above, `section` is a structure containing a title and a paragraph. The `section` structure has an annotation which is contained in parentheses immediately after the colon that defines the structure. In this case it is an ID annotation and assigns the ID "annotations" to the structure.
         
         The word "annotation" in the paragraph is annotated with a free-floating annotation. The curly braces delineated the text that is being annotated. The parentheses contain the annotation itself, which in this case is a type annotation, indicating that the word "annotation" is a reference to concept. 
     
-    Structure and annotation in XML    
+    section: Structure and annotation in XML
     
         In XML we have two principle types of markup, the element and the attribute. These more or less correspond to the distinction I have made here between structure and annotation. Elements are for structure. Attributes are for annotation. The only caveat is that XML does not allow for free-floating annotations. To create an annotation inside a paragraph, you have to use an element. A paragraph (or any other block of text) with elements floating in it is called "mixed content". 
 
         So the SAM example above could be expressed like this in XML:
         
         ```(XML)
-        <section id="annotations">
-            <title>Annotations</title>
-            <p>This is a paragraph containing an <concept>annotation</concept>.
-        ```
+            <section id="annotations">
+                <title>Annotations</title>
+                <p>This is a paragraph containing an <concept>annotation</concept>.
+
     
     section: Structure in attributes    
         
@@ -68,26 +68,26 @@ chapter: Structure and annotation
         Consider these {examples of HTML Microformats from Wikipedia}(https://en.wikipedia.org/wiki/Microformat). The first example shows an address formatted as a list. 
         
         ```(HTML)
-        <ul>
-           <li>Joe Doe</li>
-           <li>The Example Company</li>
-           <li>604-555-1234</li>
-           <li><a href="http://example.com/">http://example.com/</a></li>
-        </ul>
-        ```
+            <ul>
+               <li>Joe Doe</li>
+               <li>The Example Company</li>
+               <li>604-555-1234</li>
+               <li><a href="http://example.com/">http://example.com/</a></li>
+            </ul>
+
         
         Here the phrase `The Example Company` is contained in `li` tags. This is part of a list structure delineated by `ul` tags, so the markup is largely structural in the document domain. The `li` does not really tell you anything useful about what the content itself is about. It does not tell you anything useful beyond what document structure it belongs to. It is not much use as an annotation.   
 
         The second example adds hCard microformat markup:
         
         ```(HTML)
-        <ul class="vcard">
-           <li class="fn">Joe Doe</li>
-           <li class="org">The Example Company</li>
-           <li class="tel">604-555-1234</li>
-           <li><a class="url" href="http://example.com/">http://example.com/</a></li>
-        </ul>
-        ```
+            <ul class="vcard">
+               <li class="fn">Joe Doe</li>
+               <li class="org">The Example Company</li>
+               <li class="tel">604-555-1234</li>
+               <li><a class="url" href="http://example.com/">http://example.com/</a></li>
+            </ul>
+
        
         This example adds subject domain metadata in the form of the class attribute. For example, it says that the phrase `The Example Company` is a reference to an organization (`org`). So far this is just regular annotation. 
         
@@ -96,46 +96,46 @@ chapter: Structure and annotation
         In other words, the annotations in the sample above are equivalent to pure subject domain markup like this:
         
         ```(HTML)
-        <vcard>
-           <fn>Joe Doe</fn>
-           <org>The Example Company</org>
-           <tel>604-555-1234</tel>
-           <url>http://example.com/</url>
-        </vcard>
-        ```
+            <vcard>
+               <fn>Joe Doe</fn>
+               <org>The Example Company</org>
+               <tel>604-555-1234</tel>
+               <url>http://example.com/</url>
+            </vcard>
+
         
         In other words, the microformats are overlaying a second structure on the list structure. In the world of HTML, this makes sense. HTML needs to be a standardized document domain language so that browsers can display it for human reading. Humans don't need the vCard annotations to recognize that the content is an address, but algorithms do. So the microformat adds a second, hidden, subject domain structure to the document for readers who are algorithms rather than people. 
         
-        Authoring our content this way would obviously be inefficient. But as we have seen, we can process subject domain structures to produce document domain structures with the {presentation algorithm}. If you write this content in the subject using markup like the above, you could transform it to the HTML with microformats example shown above with a presentation algorithm like this:
+        Authoring our content this way would obviously be inefficient. But as we have seen, we can process subject domain structures to produce document domain structures with the {presentation algorithm}(algorithm). If you write this content in the subject using markup like the above, you could transform it to the HTML with microformats example shown above with a presentation algorithm like this:
         
         ```(pseudo)
-        match vcard
-            create ul
-                attribute class = "vcard"
-                continue
-                
-        match fn
-            create li
-                attribute class = "fn"
-                continue
-                
-        match org
-            create li
-                attribute class = "org"
-                continue
-        
-        match tel
-            create li
-                attribute class = "tel"
-                continue
-        
-        match url
-            create li
-                create a
-                    attribute class = "url"
-                    attribute href = contents
+            match vcard
+                create ul
+                    attribute class = "vcard"
                     continue
-        ```
+
+            match fn
+                create li
+                    attribute class = "fn"
+                    continue
+
+            match org
+                create li
+                    attribute class = "org"
+                    continue
+
+            match tel
+                create li
+                    attribute class = "tel"
+                    continue
+
+            match url
+                create li
+                    create a
+                        attribute class = "url"
+                        attribute href = contents
+                        continue
+
         
         In other words, we can factor out the document domain structure from the HTML for authoring and storage and then factor it back in for output. 
         
@@ -155,7 +155,7 @@ chapter: Structure and annotation
         
         Secondly, annotation are generally harder for writers to create than structures. This depends in part on which markup languages you are using, and which editing tools, but in XML, for instance, where annotation are usually created using attributes, a string of attributes on an element can make the document very hard to read in plain text view, which most XML editors, which are generally optimized for document domain editing, make it much more difficult to add attributes than elements, and generally hide attributed from view (at least by default) making it harder to edit them, or to see how they impact the overall structure of the document. 
         
-        Of course, if you need to add more than one piece of {metadata} to a piece of content, you will have to use annotations to do it because one structure, by itself, can only express one piece of information. However, by moving your content to a different domain, you may be able to avoid the need to use as many annotations. When you write content in the document domain, for example, any media, subject, or management domain metadata you want to add to the information must be expressed as annotations. But if you move your content to the subject domain, you can often factor out the document domain, media, and management domain structures, meaning you can rely on the subject domain structures alone and have less need for additional annotations.
+        Of course, if you need to add more than one piece of {metadata}(concept) to a piece of content, you will have to use annotations to do it because one structure, by itself, can only express one piece of information. However, by moving your content to a different domain, you may be able to avoid the need to use as many annotations. When you write content in the document domain, for example, any media, subject, or management domain metadata you want to add to the information must be expressed as annotations. But if you move your content to the subject domain, you can often factor out the document domain, media, and management domain structures, meaning you can rely on the subject domain structures alone and have less need for additional annotations.
 
         (It should be noted here that it is uncommon to have a real world tagging language that is entirely in one domain. While media domain languages are often entirely in the media domain, document domain languages commonly include some subject domain structures or annotations and often extensive management domain structures and annotations. Even subject domain languages usually need at least basic document structures like paragraphs and lists, and may also need some management domain structures and annotations for management information that cannot easily be factored out into sensible subject domain structures.)        
         
@@ -170,29 +170,29 @@ chapter: Structure and annotation
         Of course, you can create these things in an HTML document, using regular features like lists, divs, and paragraphs. To indicate how they are to be formatted, though, you will have to either apply style information directly in the file, or else add some kind of metadata that indicates the special role that the list, div, or paragraph is playing. In HTML, the normal strategy is to use a class attribute. So, you could support special styling of a procedure list by giving it a class attribute of "procedure":
 
         ```(HTML)
-        <ol class="procedure">
-            <li>Lather.</li>
-            <li>Rinse.</li>
-            <li>Repeat.</li>
-        <ol>
-        ```
+            <ol class="procedure">
+                <li>Lather.</li>
+                <li>Rinse.</li>
+                <li>Repeat.</li>
+            <ol>
+
 
         This is, in some ways, like giving HTML a procedure document domain object. We can now format as a procedure. And because we are using a hierarchical system, we don't need to add class attributes to the li elements to format them different. We can set an invariant rule that all li elements that are children of an ol element of class "procedure" will be formatted a certain way.
 
         ```(CSS)
-        ol.procedure li
-        {
-        }
-        ```
+            ol.procedure li
+            {
+            }
+
 
         We said that when we define a style, we are extending the media domain. In the same way, if we work in the document domain, we often need to extend the document domain we are working in. HTML is not an extensible language. To fill the need for an extensible document domain language, the W3C adopted XML (eXtensible Markup Language). XML allows you to extend your document domain (or any other domain) in two ways:
 
         1. by creating brand new structures in that domain. 
         2. by using attributes to specify additional type information for an existing structure.
 
-        Another method for extending the document domain is provided by [DITA](system) through it specialization mechanism, which allows you to create a new structure by specializing an existing one. In practice, this means defining a new structure but with the difference that the system knows about the new structures relationship to the old one, so that if you specialize a numbered list, the system knows that your new list is a type of numbered list. 
+        Another method for extending the document domain is provided by {DITA}(language) through it specialization mechanism, which allows you to create a new structure by specializing an existing one. In practice, this means defining a new structure but with the difference that the system knows about the new structures relationship to the old one, so that if you specialize a numbered list, the system knows that your new list is a type of numbered list.
 
-        Yet another method is provided by [SPFE](system), which supports creating a library of structures from which you can select the ones you want to build a set of document domain (or other domain) structures for your use.
+        Yet another method is provided by {SPFE}(tool), which supports creating a library of structures from which you can select the ones you want to build a set of document domain (or other domain) structures for your use.
 
 
 

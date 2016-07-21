@@ -27,7 +27,7 @@
 <db:para>&lt;h1&gt;Hello World&lt;/h1&gt; &lt;p&gt;The phrase “Hello World” is often use to illustrate the most basic use of a programming language using a simple program that outputs “Hello World”.&lt;/p&gt; <db:code/>`</db:para>
 <db:para>HTML uses open angle brackets <db:code>&lt;</db:code> to indicate the start of markup and closing angle brackets <db:code>&gt;</db:code> to indicate the end of markup and a return to ordinary text. Actually the recognition of markup in HTML is a little more complicated than that, but that is more detail than we need to get into at this point. What matters is that there are certain sequences in the text which trigger a processing program (generally called a “parser”) to recognize when markup starts and when it ends.</db:para>
 <db:para>What if you want to enter these “markup start” characters into the content of your document? You can’t just type them in because the parser will think they are markup. To fix this, markup languages either define “escape” characters, that signal the parser to treat the following character as content, or they include markup for inserting individual characters in a way that won’t be confused with markup. HTML takes the second approach. To include a <db:code>&lt;</db:code> character in HTML, you use another type of markup call a character entity. A character entity is a code for a character. It begins with <db:code>&amp;</db:code> (another “markup start) character, followed by an charterer code and ending with a semicolon. The character entity for <db:code>&lt;</db:code> in HTML and XML is <db:code>&amp;lt;</db:code>.</db:para>
-<db:para>Since '&amp;' is also a markup start character, we need to replace it with a character entity as well if we want to include it literally. To include a literal <db:code>&amp;</db:code> you use the character entity <db:code>&amp;amp;</db:code>. To include the literal sting<db:code>&amp;amp;</db:code> therefore, you would write <db:code>&amp;amp;amp;</db:code>.</db:para>
+<db:para>Since <db:code>&amp;</db:code> is also a markup start character, we need to replace it with a character entity as well if we want to include it literally. To include a literal <db:code>&amp;</db:code> you use the character entity <db:code>&amp;amp;</db:code>. To include the literal sting <db:code>&amp;amp;</db:code> therefore, you would write <db:code>&amp;amp;amp;</db:code>.</db:para>
 <db:para>A set of markup conventions taken together constitutes a markup language.  Markdown, DocBook, and JavaDoc are all markup languages. However, each of these languages recognizes markup in a different way. <db:code>&amp;</db:code> may be a markup start character in HTML and XML, but it is just plain text in reStructuredText.</db:para>
 <db:para>It is important to note that in some markup languages, some characters may be both text and markup. For example, Markdown recognizes a line beginning with a number followed by a period as markup for a list item. But in the source text, the number and period are also the plain text rendering of a numbered list item. Plain text conventions like this do establish structure so incorporating them into the definition of a markup language can make the markup language simpler to read and write.</db:para>
 <db:para>We can usefully divide markup languages into three types: concrete, abstract, and hybrid.</db:para>
@@ -67,13 +67,13 @@ The phrase "Hello World" is often use to illustrate the most basic use of a prog
 </db:section>
 <db:section>
 <db:title>Choosing between concrete languages and instances of abstract languages</db:title>
-<db:para>How do you choose between a concrete language such as Markdown in which paragraphs and headings are defined directly, and instances of XML such as DocBook in which you have elements named “para” and “title"?</db:para>
+<db:para>How do you choose between a concrete language such as Markdown in which paragraphs and headings are defined directly, and instances of XML such as DocBook in which you have elements named “para” and “title”?</db:para>
 <db:para>There are two basic reasons to create a markup language as an instance of an abstract (or hybrid) language:</db:para>
 <db:orderedlist>
 <db:listitem>
 <db:para>Abstract languages provide a tool chain -- software tools that work with instances of the abstract language. The existence of that tool chain means that you don’t have to write all those tools yourself.</db:para>
 <db:para>For instance, the existence of the abstract structures like elements and attributes that are shared by all instances of XML means that it is possible to create high-level programming languages and other tools to process those structures. This lets you create algorithms to process your structured writing in these high-level languages, which are easier to use and more suited to the task than general purpose programming languages. The pseudocode that we have been using throughout this series to examine structured writing algorithms is actually very close in structure (though not syntax) to XML-enabled processing languages such as XSLT and OmniMark.</db:para>
-<db:para>Also, the existence of the abstract structures makes it possible to build editors that provide high-level editing functions not just for one markup language, but for all markup languages that are instance of one abstract language. This is what we mean when we talk about XML editors: editors for editing all languages that are instances of XML. (This is also why the many tools, such as Word or “FreeMind”, that save their files in XML format, are not considered XML editors, because they only edit one XML-derived language, not all of them.)</db:para>
+<db:para>Also, the existence of the abstract structures makes it possible to build editors that provide high-level editing functions not just for one markup language, but for all markup languages that are instance of one abstract language. This is what we mean when we talk about XML editors: editors for editing all languages that are instances of XML. (This is also why the many tools, such as Word or FreeMind, that save their files in XML format, are not considered XML editors, because they only edit one XML-derived language, not all of them.)</db:para>
 <db:para>Admittedly, the support for specialized editors in not entirely a virtue, since the use of such editors is first and foremost to make up for the fact that abstract languages are harder to write in. XML editors make it easier to write XML, but this is only necessary because writing in raw XML is difficult, and writing in XML is difficult because of the verbose markup expressing abstract structures.</db:para>
 <db:para>Still, editor support provides other useful aids to the writers, such as validating their content and guiding them as to which structures are allowed/required where. If you are working with a content management system or doing complex reuse, editors can also help you find reusable content and display the result of reusing it. Finally, editors can create integrated environments in which you can write, validate, and process your content all in the same application. In short, there are many reasons to use a specialized editor, even if you didn’t want to hide the tags from the author.</db:para>
 </db:listitem>
@@ -94,7 +94,7 @@ The phrase "Hello World" is often use to illustrate the most basic use of a prog
 <db:para>You can’t do these things in languages that are instances of XML because an XML parser (the program that separated structures from content in a markup stream) only recognizes the XML abstract structures: elements, attributes, etc. To an XML parser, an asterisk is just an asterisk. Thus XML syntax does not look like anything you would write in a normal document.</db:para>
 <db:para>And because XML elements have names, all those names become part of the markup, which is verbose, is laborious to type, and confuses the eye when you try to read the text itself because of all the embedded names.</db:para>
 <db:para>Many other people, however, have no interest in writing markup languages directly. They believe all writing should be done in a word-processor-like interface. To them, the existence of mature and powerful XML editors is a key reason to prefer working in languages that are instances of XML.</db:para>
-<db:para>As we shall see, which of these sides you come down on can be strongly influenced by which structured writing domain you are working in. As we noted, a WYSIWYG display can encourage backsliding into the media domain, which may be much more of a problem in some organizations than in others.</db:para>
+<db:para>As we shall see, which of these sides you come down on can be strongly influenced by which structured writing domain you are working in. As we noted, a WYSIWYG display can encourage <db:olink targetptr="chapter.document-domain">backsliding into the media domain</db:olink>, which may be much more of a problem in some organizations than in others.</db:para>
 <db:para>We should also note that as far as structured writing itself is concerned, what counts is that your content is captured in the appropriate structures, not what syntax defines those structures. Insofar as markdown and HTML define the same structures, for instance, it should not matter which syntax the writer chooses to use to write the content.</db:para>
 </db:section>
 <db:section>
@@ -107,13 +107,13 @@ The phrase "Hello World" is often use to illustrate the most basic use of a prog
 <db:para>Extensibility allows you to add structures to a language but does not place restrictions on where they can occur.</db:para>
 <db:para>Extensibility say, now you can have elements called <db:code>ingredients</db:code> and <db:code>ingredient</db:code> and <db:code>wine-match</db:code>. Constraints say that <db:code>ingredient</db:code> can only occur inside and <db:code>ingredients</db:code> structure and that the content of the <db:code>ingredients</db:code> structure must be a sequence of <db:code>ingredient</db:code> elements and nothing else. Constraints says, no, you can’t put <db:code>wine-match</db:code> in the <db:code>introduction</db:code> or as a <db:code>step</db:code> in the <db:code>preparation</db:code>, you can only put it as a child of <db:code>recipe</db:code> after the <db:code>servings</db:code> field and before the <db:code>prep-time</db:code> field. Constraints say, you can’t publish this recipe until the full list of nutritional information is complete.</db:para>
 <db:para>Constraints are what bring discipline to structured writing. They drive content quality and enable efficient reliable processing with algorithms. Constraints make it easier to write good algorithms because they limit the number of permutation of structures that you have to deal with.</db:para>
-<db:para>Some abstract and hybrid languages provide extensibility but not constrainability. For instance, <annotation type="system">reStrucuredText</annotation> and <annotation type="system">ASCIIDoc</annotation> are both extensible but not constrainable. XML, of course, is both extensible and constrainable, but it is purely abstract. <annotation type="system">SAM</annotation> the markup language in which most of the examples in this series are written, is a hybrid language that is both extensible and constrainable.</db:para>
+<db:para>Some abstract and hybrid languages provide extensibility but not constrainability. For instance, reStrucuredText and ASCIIDoc are both extensible but not constrainable. XML, of course, is both extensible and constrainable, but it is purely abstract. SAM the markup language in which most of the examples in this series are written, is a hybrid language that is both extensible and constrainable.</db:para>
 </db:section>
 <db:section>
 <db:title>Showing and hiding structure</db:title>
 <db:para>There is another big problem with XML and XML editors. They tend to hide structure. The whole point of structured writing it to create content that meets constraints and that records the constraints it meets so that it can be reliably validated, audited, and processed. For this to happen, though,  authors need to see the structures they are creating.</db:para>
 <db:para>The problem with abstract languages like XML is that their basic syntax shows their abstract structures -- elements, attributes -- not the subject, document, management, or media domain structures the author is supposed to be create. Those structures are present in the markup because their names are there, but they are not visually distinguished they way the basic document structures are in a concrete language like Markdown.</db:para>
-<db:para>And while an XML editor removes all the visual clutter of an XML file from the author’s view, they also hide the structure. True, if you are using a simple document domain markup language, the visual editing view of your XML editor will make it look more or less like a Word document, which roughly displays the document structures. But as we have discussed before, these kinds of displays tend to encourage authors to backslide into the media domain. And we know very well how bad the structure can be that is produced by the typical HTML visual editor.</db:para>
+<db:para>And while an XML editor removes all the visual clutter of an XML file from the author’s view, they also hide the structure. True, if you are using a simple document domain markup language, the visual editing view of your XML editor will make it look more or less like a Word document, which roughly displays the document structures. But as we have discussed before, these kinds of displays tend to <db:olink targetptr="chapter.document-domain">encourage authors to backslide into the media domain</db:olink>. And we know very well how bad the structure can be that is produced by the typical HTML visual editor.</db:para>
 <db:para>If you want more strict or more abstract document domain structures, or if you want subject-domain structures that simply don’t look like documents, these word-processor like views can be more of a hindrance than a help.</db:para>
 <db:para>And then there are the problems that arise when you try to edit the WYSIWYG view of an XML document. Underneath is a hierarchical XML structure, but all you can see it the flat media-domain like view of the graphical editor. Editing or cutting and pasting structures you can’t see can be an exercise in futility and frustration. You can learn to do it, but it is frustrating and it takes time, and even when you learn, the process is still more complicated than it should be.</db:para>
 <db:para>Concrete markup languages like Markdown, on the other hand, show you the structure you are creating and are simple to edit.</db:para>
@@ -121,12 +121,12 @@ The phrase "Hello World" is often use to illustrate the most basic use of a prog
 <db:section>
 <db:title>Hybrid languages</db:title>
 <db:para>The alternative to concrete and abstract languages is hybrid languages. By hybrid, I mean a language that combines both abstract and concrete markup in one language. A hybrid language has a base set of concrete syntax describing basic text structures as well as abstract structures such as XML’s elements and attributes that can be the basis of extensibility and constraint.</db:para>
-<db:para>An example of a hybrid markup language is Restructured Text (usually shortened to “reST”). Like Markdown, it has a basic concrete syntax of things like lists and paragraphs. But it also supports what it calls “directives”, which are essentially named block structures. For example, a codeblock in reST looks like this:</db:para>
+<db:para>An example of a hybrid markup language is RestructuredText (usually shortened to “reST”). Like Markdown, it has a basic concrete syntax of things like lists and paragraphs. But it also supports what it calls “directives”, which are essentially named block structures. For example, a codeblock in reST looks like this:</db:para>
 <db:programlisting language="reST">
-</db:programlisting>
-<db:para>.. code-block:: html :linenos:</db:para>
-<db:para>&lt;h1&gt;code block example&lt;/h1&gt;</db:para>
-<db:programlisting>
+.. code-block:: html
+    :linenos:
+
+    &lt;h1&gt;code block example&lt;/h1&gt;
 </db:programlisting>
 <db:para>reST provides an extension mechanism that allows you to add new directives. But while reST directives are similar to XML elements, reST predefines a core set of directives for common document structures. The <db:code>code-block</db:code> directive above is not an extension of reST, it is part of the core language.</db:para>
 <db:para>Because it defines a large set of document oriented directives, reST is inherently a document domain language. You could, of course, add subject domain directives to it. Most document domain languages in use today include some subject domain structures, reflecting the purpose they were originally designed to serve. Nonetheless, reST is inherently document domain.</db:para>
@@ -134,24 +134,19 @@ The phrase "Hello World" is often use to illustrate the most basic use of a prog
 <db:para>I have been developing such a hybrid markup language. I call it SAM (which stands either for Semantic Authoring Markdown or Semantic Authoring Markup, as you please). SAM is the language I have been using for most of the examples in this series, and have been promising all along that I would eventually explain.</db:para>
 <db:para>Here is the same example used above, written in SAM:</db:para>
 <db:programlisting language="sam">
-</db:programlisting>
-<db:section>
-<db:title>Hello World</db:title>
-<db:para>The phrase “Hello World” is often use to illustrate the most basic use of a programming language using a simple program that outputs “Hello World”.</db:para>
-</db:section>
-<db:programlisting>
+section: Hello World
+
+    The phrase "Hello World" is often use to illustrate the most basic use of a programming language using a simple program that outputs "Hello World".
 </db:programlisting>
 <db:para>In SAM, as in Markdown and most other concrete markup languages, a paragraph is just a block of text set off by white space. Thus there is no explicit  structure named <db:code>p</db:code> or <db:code>para</db:code>.</db:para>
 <db:para>At the beginning of a line, a single word without spaces and followed by a colon is an abstract structure called a block. The word before the colon is the name of the block. Thus <db:code>section:</db:code> above creates a block structure named “section”.</db:para>
 <db:para>SAM is not intended to be nearly as general in scope as a purely abstract markup language like XML. It is meant for semantic authoring (which is to say, structured writing). As such it incorporates a number of shortcuts to make writing typical structured documents easier.</db:para>
 <db:para>In a typical document, a block of text (larger than a paragraph) typically has a title. So in SAM, a string after a block tag is considered to be a title. That means that the markup above is equivalent to:</db:para>
 <db:programlisting language="sam">
-</db:programlisting>
-<db:section>
-<db:title>Hello World</db:title>
-<db:para>The phrase “Hello World” is often use to illustrate the most basic use of a programming language using a simple program that outputs “Hello World”.</db:para>
-</db:section>
-<db:programlisting>
+section:
+    title: Hello World
+
+    The phrase "Hello World" is often use to illustrate the most basic use of a programming language using a simple program that outputs "Hello World".
 </db:programlisting>
 <db:para>Unlike reST, however, SAM does not have an extensive set of predefined blocks. It has just a few, which correspond the the basic text structures for which it provides shortcuts or concrete syntax. And SAM is designed to have a constraint mechanism, allowing you to write a schema to define what blocks and annotation are allowed in s SAM document. This will include constraining the use of the concrete syntax as well. SAM thus represents a different type of hybrid.</db:para>
 <db:para>Also unlike reST, SAM is not intended to have its own publishing tool chain. SAM is really intended for creating subject domain languages, with just enough basic concrete document domain structures to make writing easier. SAM outputs an XML file which can then be further processed by any existing publishing tool chain, by transforming it into an appropriate document domain language.</db:para>
@@ -160,8 +155,11 @@ The phrase "Hello World" is often use to illustrate the most basic use of a prog
 <db:para>Because it is meant specifically for authoring, the SAM parser outputs XML, which can then be processed by the standard XML tool chain. Below is how the SAM markup above would be changed to XML:</db:para>
 <!-- Fix use of quotes -->
 <db:programlisting language="XML">
+&lt;section&gt;
+    &lt;title&gt;Hello World&lt;/title&gt;
+    &lt;p&gt;The phrase &lt;quotes&gt;Hello World&lt;/quotes&gt; is often use to illustrate the most basic use of a programming language using a simple program that outputs &lt;quotes&gt;Hello World&lt;/quotes&gt;.&lt;/p&gt;
+&lt;/section&gt;
 </db:programlisting>
-<db:para>&lt;section&gt; &lt;title&gt;Hello World&lt;/title&gt; &lt;p&gt;The phrase &lt;quotes&gt;Hello World&lt;/quotes&gt; is often use to illustrate the most basic use of a programming language using a simple program that outputs &lt;quotes&gt;Hello World&lt;/quotes&gt;.&lt;/p&gt; &lt;/section&gt; <db:code/>`</db:para>
 <db:para>This entire series is authored in SAM. Most of its examples are in SAM. I’ll describe SAM more fully another article.</db:para>
 </db:section>
 <db:section>
@@ -170,8 +168,22 @@ The phrase "Hello World" is often use to illustrate the most basic use of a prog
 <db:para>So, to be more specific, this series is written in a markup language written in SAM, one that I created for the specific purpose of writing this book.</db:para>
 <db:para>Not all instances of hybrid markup languages are based on language definitions as complete and formal as XML or SAM. In some cases the hybrid language on which a instance is based my be just a vague set of conventions, and there may be no formal definition of those conventions and no other instance based on those conventions. One such language is JavaDoc, a language used for creating API reference documentation for the Java programming language[https://en.wikipedia.org/wiki/Javadoc#Example]:</db:para>
 <db:programlisting language="Java">
+/**
+ * Validates a chess move.
+ *
+ * Use {@link #doMove(int theFromFile, int theFromRank, int theToFile, int theToRank)} to move a piece.
+ *
+ * @param theFromFile file from which a piece is being moved
+ * @param theFromRank rank from which a piece is being moved
+ * @param theToFile   file to which a piece is being moved
+ * @param theToRank   rank to which a piece is being moved
+ * @return            true if the move is valid, otherwise false
+ */
+boolean isValidMove(int theFromFile, int theFromRank, int theToFile, int theToRank) {
+    // ...body
+}
 </db:programlisting>
-<db:para>/<annotation type="bold"/> <annotation type="bold"> Validates a chess move. </annotation> <annotation type="bold"> Use {@link #doMove(int theFromFile, int theFromRank, int theToFile, int theToRank)} to move a piece. </annotation> <annotation type="bold"> @param theFromFile file from which a piece is being moved </annotation> @param theFromRank rank from which a piece is being moved <annotation type="bold"> @param theToFile   file to which a piece is being moved </annotation> @param theToRank   rank to which a piece is being moved <annotation type="bold"> @return            true if the move is valid, otherwise false </annotation>/ boolean isValidMove(int theFromFile, int theFromRank, int theToFile, int theToRank)  // ...body  <db:code/>` # Duplicate of content in publishing algorithms article</db:para>
+<!--  Duplicate of content in publishing algorithms article -->
 <db:para>In this example, everything between the opening <db:code>/*</db:code> and the closing <db:code>*/</db:code> is a comment (as far as Java itself is concerned), and the rest is a function definition in Java. However, JavaDoc sees the comment block as a block of structured text consisting of a title, a paragraph, and a set of named blocks named <db:code>param</db:code> and <db:code>return</db:code>. I’m classifying JavaDoc as an instance of a hybrid language because it has a syntax for named blocks (the <db:code>@</db:code> sign followed by a string of letters). There is a fixed set of such blocks in JavaDoc (instances of hybrid languages have fixed sets of block; hybrid languages themselves have conventions for creating named blocks, but don’t actually specify any names).</db:para>
 <!--  Does the possession of named blocks with consistent block naming -->
 <!--  conventions mean a language is an instance of hybrid or concrete? Or should -->

@@ -11,23 +11,23 @@ chapter: Separating Content From Behavior
     In HTML the {pre}(element (HTML)) element is used to indicate preformatted text that should not be wrapped. The HTML5 spec defines its typical default formatting in CSS terms like this:
     
     ```(css)
-    pre {
-    display: block;
-    font-family: monospace;
-    white-space: pre;
-    margin: 1em 0; }
-    ```
+        pre {
+        display: block;
+        font-family: monospace;
+        white-space: pre;
+        margin: 1em 0; }
+
     
     In other words, the content of a {pre} element will be displayed in a monospace font and will keep its original line endings, even if the text runs off the page.  This is pure {media domain}(http://techwhirl.com/structured-writing-writing-in-the-media-domain/) structure, of course. It tells you nothing about what sort of content is in the {pre} element or why it is to be presented with its line endings intact.
     
     {pre} clearly has a prejudice towards preformatted text being some form or computer code, or possible output, as it defaults to a monospaced font. But what if your content is poetry? You probably don't want:
     
     ```
-    Mary had a little lamb.
-    Its fleece was white as snow.
-    And everywhere that Mary went,
-    The lamb was sure to go.
-    ```
+        Mary had a little lamb.
+        Its fleece was white as snow.
+        And everywhere that Mary went,
+        The lamb was sure to go.
+
     
     What you want is probably more like:
     
@@ -39,64 +39,64 @@ chapter: Separating Content From Behavior
     To get that from HTML, you would need to use additional CSS instructions to get it to format correctly.
     
     ```(css)
-    pre {
-    font-family: serif;}
-    ```
+        pre {
+        font-family: serif;}
+
    
     And if have both computer code and poetry in the same page (and really, who doesn't?) then you will need to go back into your source and add different class attributes to your different uses of {pre}:
     
     ```(html)
-<pre class="code">
-main( ) {
-    printf("hello, world");
-}
-</pre>    
-     ```
+        <pre class="code">
+        main( ) {
+            printf("hello, world");
+        }
+        </pre>
+
      
      and:
      
     ```(html)
-    <pre class="poetry">
-    Mary had a little lamb.
-    Its fleece was white as snow.
-    And everywhere that Mary went,
-    The lamb was sure to go.
-    </pre>
-    ```
+        <pre class="poetry">
+        Mary had a little lamb.
+        Its fleece was white as snow.
+        And everywhere that Mary went,
+        The lamb was sure to go.
+        </pre>
+
     
     And then the CSS stylesheet would look like this:
     
     ```(css)
-    pre.code {
-    font-family: monospace;}
-    
-    pre.poetry {
-    font-family: serif;}
-    ```
+        pre.code {
+        font-family: monospace;}
+
+        pre.poetry {
+        font-family: serif;}
+
     There are other ways to do this in HTML. You could style a regular {p}(element (HTML)) with `white-space: pre;`. The fact that we have these options only serves to point out that we are still in the {media domain}. The behavior of maintaining line endings when resizing the window is not being separated from the content.
 
-    To separate the behavior from the content, we need to move out of the {media domain}. In this case, however, a move into the document domain is not as straight forward as when we were {separating content from formatting}. The difference between how code is formatted and how poetry is formatted is really based on the subject matter. Any document structures we create to separate content from behavior here are going to touch into the subject domain.
+    To separate the behavior from the content, we need to move out of the {media domain}. In this case, however, a move into the document domain is not as straight forward as when we were {separating content from formatting}(algorithm). The difference between how code is formatted and how poetry is formatted is really based on the subject matter. Any document structures we create to separate content from behavior here are going to touch into the subject domain.
     
     The simplest way to do this would be to create elements for codeblocks and poetry:
     
     ```(xml)
-    <codeblock>
-    main( ) {
-        printf("hello, world");
-    }
-    </codeblock>    
-     ```
+        <codeblock>
+        main( ) {
+            printf("hello, world");
+        }
+        </codeblock>
+
      
      and:
      
     ```(xml)
-    <poetry>
-    Mary had a little lamb.
-    Its fleece was white as snow.
-    And everywhere that Mary went,
-    The lamb was sure to go.
-    </poetry>
-    ```
+        <poetry>
+        Mary had a little lamb.
+        Its fleece was white as snow.
+        And everywhere that Mary went,
+        The lamb was sure to go.
+        </poetry>
+
     
     This markup simply states what type of content is found in each block. It separates the content from both its formatting and its behavior. Both formatting and behavior for different media will be handled by the formatting algorithm. This also means that the author does not have to think about the formatting of behavior of the content as they are writing. 
     

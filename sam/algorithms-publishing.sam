@@ -56,7 +56,7 @@ chapter:(#publishing) Algorithms: Publishing
         
         This is all complex and exacting stuff and depending on your requirements you may have to pay some attention to make sure that you are using a formatting language the is capable of doing all this the way you want it done. 
         
-        Also, you are going to have to think about just how automatic you want all of this to be. In a high-volume publication environment you want it to be fully automatic, but this could involve accepting some compromises. For example, it is not uncommon for writers and editors to make slight edits to the actual text of a document in order to make pagination work better. This is very easy to do when you are working in the {media domain} in an application like {Word}(tool "Microsoft Word") or {FrameMaker}(tool). If you end up with the last two words of a chapter at the top of a page all by itself, for instance, it is usually possible to find a way to edit the final paragraph to reduce the word count just enough to pull the end of the chapter back to the preceding page. This sort of thing gets much harder to do when you are writing in the {document domain} or the {subject domain}, particularly if you are {single sourcing} content to more than one publication or {reusing content} in many places. An edit that fixes one pagination problem could cause another, and a major reason for writing in those domains it to take formatting concerns off the author's plate.
+        Also, you are going to have to think about just how automatic you want all of this to be. In a high-volume publication environment you want it to be fully automatic, but this could involve accepting some compromises. For example, it is not uncommon for writers and editors to make slight edits to the actual text of a document in order to make pagination work better. This is very easy to do when you are working in the {media domain} in an application like {Word}(tool "Microsoft Word") or {FrameMaker}(tool). If you end up with the last two words of a chapter at the top of a page all by itself, for instance, it is usually possible to find a way to edit the final paragraph to reduce the word count just enough to pull the end of the chapter back to the preceding page. This sort of thing gets much harder to do when you are writing in the {document domain} or the {subject domain}, particularly if you are {single sourcing}(algorithm) content to more than one publication or {reusing content}(algorithm "content reuse") in many places. An edit that fixes one pagination problem could cause another, and a major reason for writing in those domains it to take formatting concerns off the author's plate.
         
         For Web browsers and similar dynamic media viewers, such as E-Book readers or help systems, the whole pagination process takes place dynamically when the content is loaded into the view port, and it can be redone on the fly if the reader resizes their browser or rotates their tablet. This means the publisher has very little opportunity to tweak the pagination process. They can guide it by providing rules such as keep-together instructions through things like {CSS}(language), but they obviously cannot hand tweak the text to make it fit better each time the view port is resized. 
         
@@ -92,7 +92,7 @@ chapter:(#publishing) Algorithms: Publishing
         
     section: Differential presentation algorithms
         
-        The organization of content is an area where the {document domain} cannot ignore the differences between different media. Although the fact that a relationship exists is a pure document domain issue, how that relationship is expressed, and even whether it is expressed or not, is affected by the media and its capabilities. Following links in online media is very cheap. Following references to other works in the paper world is expensive, so document design for paper tends to favor linear relationships where document design for the web favors {hypertext}(concept) relationships. This is an area, therefore, in which you should expect to implement {differential single sourcing} and use different presentation algorithms for different media. 
+        The organization of content is an area where the {document domain} cannot ignore the differences between different media. Although the fact that a relationship exists is a pure document domain issue, how that relationship is expressed, and even whether it is expressed or not, is affected by the media and its capabilities. Following links in online media is very cheap. Following references to other works in the paper world is expensive, so document design for paper tends to favor linear relationships where document design for the web favors {hypertext}(concept) relationships. This is an area, therefore, in which you should expect to implement {differential single sourcing}(algorithm) and use different presentation algorithms for different media.
         
         >>>(image ../graphics/differential.png)
         
@@ -102,7 +102,7 @@ chapter:(#publishing) Algorithms: Publishing
                
         section: The linking algorithm
        
-            How content is linked or cross-referenced is a key part of how it is organized in different media, and a key part of differential single sourcing. We will look at the {linking algorithm} in detail in a future article.
+            How content is linked or cross-referenced is a key part of how it is organized in different media, and a key part of differential single sourcing. We will look at the {linking algorithm}(algorithm) in detail in a future article.
        
         section: The navigation algorithm
        
@@ -126,7 +126,7 @@ chapter:(#publishing) Algorithms: Publishing
         
         The synthesis algorithm transforms content and data into a fully realized set of subject domain content. Sources for the synthesis algorithm include  content written in the {subject domain}, {document domain}  or {subject domain} content with embedded {management domain}(concept) structures, and externally available subject data which you are using to generate content. 
         
-        Content that contains management domain metadata, generally used for some form of {single sourcing} or {reuse} does not represent a final set of content until the management domain structures have been resolved. In the case of document domain content, processing the management domain structures yields a document domain structure which may then be a pass-through for the presentation algorithm. In the case of the subject domain content, processing management domain structures yields a definitive set of subject domain structures which can be passed to the presentation algorithm for processing to the document domain. 
+        Content that contains management domain metadata, generally used for some form of {single sourcing}(algorithm) or {reuse}(algorithm "content reuse") does not represent a final set of content until the management domain structures have been resolved. In the case of document domain content, processing the management domain structures yields a document domain structure which may then be a pass-through for the presentation algorithm. In the case of the subject domain content, processing management domain structures yields a definitive set of subject domain structures which can be passed to the presentation algorithm for processing to the document domain.
         
         
         >>>(image ../graphics/synthesis.png)
@@ -145,13 +145,13 @@ chapter:(#publishing) Algorithms: Publishing
        
         section: The inclusion algorithm
 
-            If your content contains {management domain} include instructions, such as we identified in discussing {the reuse algorithm} these must be resolved and the indicated content found and included in the synthesis. 
+            If your content contains {management domain} include instructions, such as we identified in discussing {the reuse algorithm}(algorithm "content reuse") these must be resolved and the indicated content found and included in the synthesis.
             
             As we noted in the article on {the reuse algorithm} you can also include content based on subject domain structures, without any {management domain} include instructions. Such inclusions are purely algorithmic -- meaning that the author does not specify them in any way. It is the algorithm itself that determines if and when content will be included and where it will be included from. This too is the job of the inclusion algorithm.
             
         section: The filtering algorithm
         
-            If your content contains {management domain} {conditional structures} (filtering) they must be resolved as part of the synthesis process. In most cases, you will be using the same set of management domain structures across your content set, so maintaining your filtering algorithm separately makes it easier to maintain.  
+            If your content contains {management domain} {conditional structures}(filtering) they must be resolved as part of the synthesis process. In most cases, you will be using the same set of management domain structures across your content set, so maintaining your filtering algorithm separately makes it easier to maintain.
 
             Again note that you may be filtering on {subject domain} structures as well (or instead of) on explicit {management domain} filtering instructions. Such filtering is, again, purely algorithmic, meaning that the author has no input into it. The filtering algorithm is then wholly responsible for what gets filtered in and out and why. 
                        
@@ -165,7 +165,7 @@ chapter:(#publishing) Algorithms: Publishing
             
             The preferred option, therefore, is to run the two algorithms iteratively. Filter your initial source content. When you filter in an include instruction, immediately execute the include and run the filtering algorithm on the included content, processing any further include instructions as they are filtered in.  
             
-            The {rules based approach to content processing} that we have looked at in this series makes this kind of iterative processing relatively easy. You simply include both the filtering and inclusion rules in one program file and make sure that you submit any included content for processing by the same rules the moment it is encountered.
+            The {rules based approach to content processing}(concept "rules-base processing") that we have looked at in this series makes this kind of iterative processing relatively easy. You simply include both the filtering and inclusion rules in one program file and make sure that you submit any included content for processing by the same rules the moment it is encountered.
             
             ```(pseudo)
                 match include
