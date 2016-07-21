@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter name="subject-domain">
+<chapter name="chapter.subject-domain">
 <title>Writing in the Subject Domain</title>
 <index>
 <title>type, term</title>
@@ -30,7 +30,7 @@ Preparation
     5. Peel and serve.
 </codeblock>
 <p>However, there are specific constraints on the format of a recipe that this approach neither follows or records. To impose and record these constraints, you need a recipe document type.</p>
-<p>A recipe follows a well known pattern. It has an introduction, a list of ingredients, and a set of preparation steps. The simplest form of a recipe document type might look something like this (in the markup I have used in other articles, and will explain in a later one):</p>
+<p>A recipe follows a well known pattern. It has an introduction, a list of ingredients, and a set of preparation steps. The simplest form of a recipe document type might look something like this:</p>
 <codeblock language="sam">
 recipe: Hard Boiled Egg
     introduction:
@@ -78,7 +78,7 @@ ingredients:
         quantity: 2
         unit: qt
 </codeblock>
-<p>There are some shortcuts we can take to make this markup less verbose. The following markup accomplishes the same thing, relying in part on the ability of an algorithm to break “2qt” into quantity and unit fields without the author having to do it explicitly. (I’ll talk about this markup in a later article.):</p>
+<p>There are some shortcuts we can take to make this markup less verbose. The following markup accomplishes the same thing, relying in part on the ability of an algorithm to break “2qt” into quantity and unit fields without the author having to do it explicitly:</p>
 <codeblock language="sam">
 ingredients:: ingredient, quantity
     eggs, 12
@@ -87,7 +87,7 @@ ingredients:: ingredient, quantity
 <p>By adding and recording these constraints, we get similar benefits as before. We can better enforce any constraints we have about how ingredient lists are structured and formatted, and we gain access to the specific data involved, meaning, for example, that we could write an algorithm to convert our units from imperial to metric for publication in markets where metric units are preferred.</p>
 <section>
 <title>A key difference between subject and document domains</title>
-<p>At this point we can see that with subject domain markup, we have a lot of choices about how documents are constructed. This highlights an important difference between document domain and subject domain markup. A document domain markup language specifies the content and order of a document. We expect that the document domain markup will specify exactly what content is to appear on the page and in what order. This is necessary in the document domain because the document domain does not record any information about the specific subject matter of individual pieces of text. We can’t write an algorithm to publish certain pieces of a document domain file, because the markup does not record which are which. (More on this in the next article.)</p>
+<p>At this point we can see that with subject domain markup, we have a lot of choices about how documents are constructed. This highlights an important difference between document domain and subject domain markup. A document domain markup language specifies the content and order of a document. We expect that the document domain markup will specify exactly what content is to appear on the page and in what order. This is necessary in the document domain because the document domain does not record any information about the specific subject matter of individual pieces of text. We can’t write an algorithm to publish certain pieces of a document domain file, because the markup does not record which are which. (More on this in the next chapter.)</p>
 <p>Once we introduce subject domain markup, however, that changes. With subject domain markup in place, we can write algorithms that select certain pieces of the content to display or not display. This means that the recorded content no longer specifies exactly what content is to appear on the eventual rendered page and in what order. Rather it is a collection of identifiable pieces of content that you can select from or reorder for publication.</p>
 <p>Let’s suppose we run a publishing company that publishes a number of magazines. We want to create a common store of recipes for use in all the magazines. But different magazines have different requirements. <phrase><annotation type="italic">Wine Weenie</annotation></phrase> magazine needs to have a wine match with every recipe. <phrase><annotation type="italic">The Teetotaler's Trumpet</annotation></phrase>, naturally, wants a non-alcoholic suggestion.</p>
 <p>Here is how that might be handled in the document domain:</p>
@@ -126,7 +126,7 @@ ingredients:: ingredient, quantity
 </li>
 </ul>
 <p>As the above discussion illustrates, writing in the document domain and writing in the subject domain have very different cost and opportunity profiles. Writing in the document domain is usually cheaper to start with, but runs into maintenance cost and opportunity costs when your needs change. Writing in the subject domain incurs more up-front costs, but can save you money and create more opportunities down the road.</p>
-<p>In <phrase><citation type="nameref" value="document-domain">the document domain article</citation></phrase>, we also noted that document types are not universal. Some work better in one media, and some in another. While content recorded in the document domain can be formatted for any media, it is not necessarily structured perfectly for every media. Different media have different properties, such as behavior and navigation, which demand a different approach to document structure and even the way content is written. For hypertext environments, where readers are likely to arrive at a page by search and navigate onwards by links, a page is a hub, not a leaf, and this can make a big difference to both writing style, document structure, and the subject matter you include inline (vs. linking to it).</p>
+<p>In <phrase><citation type="nameref" value="chapters.document-domain">the document domain chapter</citation></phrase>, we also noted that document types are not universal. Some work better in one media, and some in another. While content recorded in the document domain can be formatted for any media, it is not necessarily structured perfectly for every media. Different media have different properties, such as behavior and navigation, which demand a different approach to document structure and even the way content is written. For hypertext environments, where readers are likely to arrive at a page by search and navigate onwards by links, a page is a hub, not a leaf, and this can make a big difference to both writing style, document structure, and the subject matter you include inline (vs. linking to it).</p>
 <p>If we want to create different document structures for different media, recording our content in the subject domain gives us that flexibility.</p>
 </section>
 <section>
@@ -179,7 +179,7 @@ ingredients:: ingredient, quantity
 <section>
 <title>Simplicity and Clarity</title>
 <p>One of the biggest benefits of subject domain markup for authors is a much higher degree of simplicity and clarity compared with a typical document domain language.</p>
-<p>While a general document domain language like <phrase><annotation type="language">DocBook</annotation></phrase> needs to have structures for a wide range of document structures, a recipe markup language such as we have developed in this article, has only a few simple elements. Better still, there are very few permutations of those elements. Because subject domain languages do not specify document order, we don’t need to allow for many possible document orderings in the language, thus reducing the permutations we have to allow for and deal with. The synthesis algorithm can take the named structures of the subject domain markup and order them in any way you like.</p>
+<p>While a general document domain language like <phrase><annotation type="language">DocBook</annotation></phrase> needs to have structures for a wide range of document structures, a recipe markup language such as we have developed in this chapter, has only a few simple elements. Better still, there are very few permutations of those elements. Because subject domain languages do not specify document order, we don’t need to allow for many possible document orderings in the language, thus reducing the permutations we have to allow for and deal with. The synthesis algorithm can take the named structures of the subject domain markup and order them in any way you like.</p>
 <p>Because subject domain structure describe the subject matter they contain, they are also much clearer to authors, who may not understand complex document structures (or, more often, the subtle distinctions between several similar document structures), but who do (we hope) understand their subject matter.</p>
 <p>The combination of simplicity and clarity mean that in many cases you can get authors to create subject-domain structured content with little or no training. For instance, even if we add some additional fields to our recipe markup, you could still hand a sample like the one below to an author and ask them to follow it as a template, without giving them any training or any special tools.</p>
 <codeblock language="sam">
@@ -228,7 +228,7 @@ recipe: Hard Boiled Egg
 <section>
 <title>Limits of Subject Domain Markup</title>
 <p>While all content is specific to its subject matter, not all content breaks down into such easily identifiable fields as a recipe. A generic essay document format fits equally well for an essay on radishes as an essay on asteroids. Subject-specific structures are much easier to discern for reference works. The format of a telephone directory, an API reference, or a parts list is always specific to the subject matter. In fact, we find that the format of an API reference for one programming language can be different from the format of another language because of differences between the languages.</p>
-<p>On the other hand, there are many document types that today are typically written as unstructured text. The content could be separated into distinct fields, as we separated prep time and number served into distinct fields in our recipe example, but is instead presented ad hoc as part of general text. Developing and applying subject domain templates the pull out this content into distinct and accessible fields can serve to make the content more consistent, more accessible to the reader, and more adaptable for various publishing scenarios. We will look at some examples in later articles.</p>
-<p>This only scratches the surface of what you can do when you record your content in the subject domain. In future articles, we will look at the major algorithms of structured content, the benefits the provide, and how the work with content in each of the domains.</p>
+<p>On the other hand, there are many document types that today are typically written as unstructured text. The content could be separated into distinct fields, as we separated prep time and number served into distinct fields in our recipe example, but is instead presented ad hoc as part of general text. Developing and applying subject domain templates the pull out this content into distinct and accessible fields can serve to make the content more consistent, more accessible to the reader, and more adaptable for various publishing scenarios. We will look at some examples in later chapters.</p>
+<p>This only scratches the surface of what you can do when you record your content in the subject domain. In future chapters, we will look at the major algorithms of structured content, the benefits the provide, and how the work with content in each of the domains.</p>
 </section>
 </chapter>

@@ -9,13 +9,13 @@
 </index>
 <p>All structured writing must eventually be published. Publishing structured content mean transforming it from the domain in which it was created (<phrase><annotation type="concept">subject domain</annotation></phrase>, <phrase><annotation type="concept">document domain</annotation></phrase>, or the abstract end of the <phrase><annotation type="concept">media domain</annotation></phrase>) to the most concrete end of the media domain spectrum: dots on paper or screen.</p>
 <p>In almost all structured writing tools, this process is done in multiple steps. Using multiple steps makes it easier to write and maintain code and to reuse code for multiple purposes.</p>
-<p>In this article, I am going to describe the publishing process as consisting of four basic algorithms which I have mentioned in passing in earlier articles: the synthesis, presentation, formatting, and encoding algorithms. These four stages are formalized in the <phrase><annotation type="tool">SPFE architecture</annotation></phrase>, which I will talk about later, but I think they are a fair representation of what goes on in most publishing tool chains, even if those tool chains don’t divide responsibilities exactly as I describe them here, or make such clear separation between them as I do here.</p>
+<p>In this chapter, I am going to describe the publishing process as consisting of four basic algorithms which I have mentioned in passing in earlier chapter: the synthesis, presentation, formatting, and encoding algorithms. These four stages are formalized in the <phrase><annotation type="tool">SPFE architecture</annotation></phrase>, which I will talk about later, but I think they are a fair representation of what goes on in most publishing tool chains, even if those tool chains don’t divide responsibilities exactly as I describe them here, or make such clear separation between them as I do here.</p>
 <section>
 <title>The Rendering Algorithm</title>
 <p>There is actually a fifth algorithm in the publishing chain, which we can call the rendering algorithm. The rendering algorithm is the one responsible for actually placing the right dots on the right surface, be that paper, screen, or a printing plate. But this is a low-level device-specific algorithm and no one in the structured writing business is likely to be involved in writing rendering algorithms. The closest we ever get is the next step up, the encoding algorithm.</p>
 <p>The rendering algorithm requires some form of input to tell it where to place the dots. In writing, this usually comes in the form of something called a <phrase><annotation type="tool">page description language</annotation></phrase>. Like it sounds, this is a language for describing what goes where on a page, but in higher level terms that describing where each dot of ink or pixel of light is placed. A page description language deals in things like lines, circles, gradients, margins, and fonts.</p>
 <insert item="../graphics/rendering.png" type="image"/>
-<p>One example of a page description language is <phrase><annotation type="language">PostScript</annotation></phrase>. We looked at a small example of PostScript in <phrase><annotation type="concept">the article on the media domain</annotation></phrase>:</p>
+<p>One example of a page description language is <phrase><annotation type="language">PostScript</annotation></phrase>. We looked at a small example of PostScript in <phrase><citation type="nameref" value="chapter.media-domain">the chapter on the media domain</citation></phrase>:</p>
 <codeblock language="PostScript">
 100 100 50 0 360 arc closepath
 stroke
@@ -93,7 +93,7 @@ stroke
 <p>The presentation algorithm may usefully broken down into several  sub-algorithms, each dealing with a different aspect of the presentation process. How you subdivide your publishing algorithm is something you need to decide based on your particular business needs, but the following are some operations that it may well pay to treat as separate algorithms.</p>
 <section>
 <title>The linking algorithm</title>
-<p>How content is linked or cross-referenced is a key part of how it is organized in different media, and a key part of differential single sourcing. We will look at the <phrase><annotation type="algorithm">linking algorithm</annotation></phrase> in detail in a future article.</p>
+<p>How content is linked or cross-referenced is a key part of how it is organized in different media, and a key part of differential single sourcing. We will look at the <phrase><annotation type="algorithm">linking algorithm</annotation></phrase> in detail in a future chapter.</p>
 </section>
 <section>
 <title>The navigation algorithm</title>
@@ -128,11 +128,11 @@ stroke
 <section>
 <title>The inclusion algorithm</title>
 <p>If your content contains <phrase><annotation type="concept">management domain</annotation></phrase> include instructions, such as we identified in discussing <phrase><annotation type="algorithm" specifically="content reuse">the reuse algorithm</annotation></phrase> these must be resolved and the indicated content found and included in the synthesis.</p>
-<p>As we noted in the article on <phrase><annotation type="algorithm" specifically="content reuse">the reuse algorithm</annotation></phrase> you can also include content based on subject domain structures, without any <phrase><annotation type="concept">management domain</annotation></phrase> include instructions. Such inclusions are purely algorithmic -- meaning that the author does not specify them in any way. It is the algorithm itself that determines if and when content will be included and where it will be included from. This too is the job of the inclusion algorithm.</p>
+<p>As we noted in the chapter on <phrase><annotation type="algorithm" specifically="content reuse">the reuse algorithm</annotation></phrase> you can also include content based on subject domain structures, without any <phrase><annotation type="concept">management domain</annotation></phrase> include instructions. Such inclusions are purely algorithmic -- meaning that the author does not specify them in any way. It is the algorithm itself that determines if and when content will be included and where it will be included from. This too is the job of the inclusion algorithm.</p>
 </section>
 <section>
 <title>The filtering algorithm</title>
-<p>If your content contains <phrase><annotation type="concept">management domain</annotation></phrase> <phrase><annotation type="filtering">conditional structures</annotation></phrase> they must be resolved as part of the synthesis process. In most cases, you will be using the same set of management domain structures across your content set, so maintaining your filtering algorithm separately makes it easier to maintain.</p>
+<p>If your content contains <phrase><annotation type="concept">management domain</annotation></phrase> <phrase><annotation type="concept">conditional structures</annotation></phrase> (filtering) they must be resolved as part of the synthesis process. In most cases, you will be using the same set of management domain structures across your content set, so maintaining your filtering algorithm separately makes it easier to maintain.</p>
 <p>Again note that you may be filtering on <phrase><annotation type="concept">subject domain</annotation></phrase> structures as well (or instead of) on explicit <phrase><annotation type="concept">management domain</annotation></phrase> filtering instructions. Such filtering is, again, purely algorithmic, meaning that the author has no input into it. The filtering algorithm is then wholly responsible for what gets filtered in and out and why.</p>
 </section>
 <section>
@@ -152,7 +152,7 @@ match include
 </section>
 <section>
 <title>The extraction algorithm</title>
-<p>In some cases you may wish to extract information from external sources to create content. This can include data created for other purposes, such as application code or data created and maintained as a canonical source of information, such as a database of features for different models of a car. We will look at the extraction and merge algorithms in a later article.</p>
+<p>In some cases you may wish to extract information from external sources to create content. This can include data created for other purposes, such as application code or data created and maintained as a canonical source of information, such as a database of features for different models of a car. We will look at the extraction and merge algorithms in a later chapter.</p>
 </section>
 <section>
 <title>The cataloging algorithm</title>

@@ -4,13 +4,13 @@
 
 <db:para>All structured writing must eventually be published. Publishing structured content mean transforming it from the domain in which it was created (subject domain, document domain, or the abstract end of the media domain) to the most concrete end of the media domain spectrum: dots on paper or screen.</db:para>
 <db:para>In almost all structured writing tools, this process is done in multiple steps. Using multiple steps makes it easier to write and maintain code and to reuse code for multiple purposes.</db:para>
-<db:para>In this article, I am going to describe the publishing process as consisting of four basic algorithms which I have mentioned in passing in earlier articles: the synthesis, presentation, formatting, and encoding algorithms. These four stages are formalized in the SPFE architecture, which I will talk about later, but I think they are a fair representation of what goes on in most publishing tool chains, even if those tool chains don’t divide responsibilities exactly as I describe them here, or make such clear separation between them as I do here.</db:para>
+<db:para>In this chapter, I am going to describe the publishing process as consisting of four basic algorithms which I have mentioned in passing in earlier chapter: the synthesis, presentation, formatting, and encoding algorithms. These four stages are formalized in the SPFE architecture, which I will talk about later, but I think they are a fair representation of what goes on in most publishing tool chains, even if those tool chains don’t divide responsibilities exactly as I describe them here, or make such clear separation between them as I do here.</db:para>
 <db:section>
 <db:title>The Rendering Algorithm</db:title>
 <db:para>There is actually a fifth algorithm in the publishing chain, which we can call the rendering algorithm. The rendering algorithm is the one responsible for actually placing the right dots on the right surface, be that paper, screen, or a printing plate. But this is a low-level device-specific algorithm and no one in the structured writing business is likely to be involved in writing rendering algorithms. The closest we ever get is the next step up, the encoding algorithm.</db:para>
 <db:para>The rendering algorithm requires some form of input to tell it where to place the dots. In writing, this usually comes in the form of something called a page description language. Like it sounds, this is a language for describing what goes where on a page, but in higher level terms that describing where each dot of ink or pixel of light is placed. A page description language deals in things like lines, circles, gradients, margins, and fonts.</db:para>
 <db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/rendering.png"/></db:imageobject></db:mediaobject>
-<db:para>One example of a page description language is PostScript. We looked at a small example of PostScript in the article on the media domain:</db:para>
+<db:para>One example of a page description language is PostScript. We looked at a small example of PostScript in <db:olink targetptr="chapter.media-domain">the chapter on the media domain</db:olink>:</db:para>
 <db:programlisting language="PostScript">
 100 100 50 0 360 arc closepath
 stroke
@@ -88,7 +88,7 @@ stroke
 <db:para>The presentation algorithm may usefully broken down into several  sub-algorithms, each dealing with a different aspect of the presentation process. How you subdivide your publishing algorithm is something you need to decide based on your particular business needs, but the following are some operations that it may well pay to treat as separate algorithms.</db:para>
 <db:section>
 <db:title>The linking algorithm</db:title>
-<db:para>How content is linked or cross-referenced is a key part of how it is organized in different media, and a key part of differential single sourcing. We will look at the linking algorithm in detail in a future article.</db:para>
+<db:para>How content is linked or cross-referenced is a key part of how it is organized in different media, and a key part of differential single sourcing. We will look at the linking algorithm in detail in a future chapter.</db:para>
 </db:section>
 <db:section>
 <db:title>The navigation algorithm</db:title>
@@ -123,11 +123,11 @@ stroke
 <db:section>
 <db:title>The inclusion algorithm</db:title>
 <db:para>If your content contains management domain include instructions, such as we identified in discussing the reuse algorithm these must be resolved and the indicated content found and included in the synthesis.</db:para>
-<db:para>As we noted in the article on the reuse algorithm you can also include content based on subject domain structures, without any management domain include instructions. Such inclusions are purely algorithmic -- meaning that the author does not specify them in any way. It is the algorithm itself that determines if and when content will be included and where it will be included from. This too is the job of the inclusion algorithm.</db:para>
+<db:para>As we noted in the chapter on the reuse algorithm you can also include content based on subject domain structures, without any management domain include instructions. Such inclusions are purely algorithmic -- meaning that the author does not specify them in any way. It is the algorithm itself that determines if and when content will be included and where it will be included from. This too is the job of the inclusion algorithm.</db:para>
 </db:section>
 <db:section>
 <db:title>The filtering algorithm</db:title>
-<db:para>If your content contains management domain <annotation type="filtering">conditional structures</annotation> they must be resolved as part of the synthesis process. In most cases, you will be using the same set of management domain structures across your content set, so maintaining your filtering algorithm separately makes it easier to maintain.</db:para>
+<db:para>If your content contains management domain conditional structures (filtering) they must be resolved as part of the synthesis process. In most cases, you will be using the same set of management domain structures across your content set, so maintaining your filtering algorithm separately makes it easier to maintain.</db:para>
 <db:para>Again note that you may be filtering on subject domain structures as well (or instead of) on explicit management domain filtering instructions. Such filtering is, again, purely algorithmic, meaning that the author has no input into it. The filtering algorithm is then wholly responsible for what gets filtered in and out and why.</db:para>
 </db:section>
 <db:section>
@@ -147,7 +147,7 @@ match include
 </db:section>
 <db:section>
 <db:title>The extraction algorithm</db:title>
-<db:para>In some cases you may wish to extract information from external sources to create content. This can include data created for other purposes, such as application code or data created and maintained as a canonical source of information, such as a database of features for different models of a car. We will look at the extraction and merge algorithms in a later article.</db:para>
+<db:para>In some cases you may wish to extract information from external sources to create content. This can include data created for other purposes, such as application code or data created and maintained as a canonical source of information, such as a database of features for different models of a car. We will look at the extraction and merge algorithms in a later chapter.</db:para>
 </db:section>
 <db:section>
 <db:title>The cataloging algorithm</db:title>
