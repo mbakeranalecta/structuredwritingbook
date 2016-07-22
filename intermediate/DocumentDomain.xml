@@ -64,7 +64,7 @@ li:first-child
 <p>Systems like <phrase><annotation type="tool">DITA</annotation></phrase>, <phrase><annotation type="language">DocBook</annotation></phrase>, and <phrase><annotation type="tool">SPFE</annotation></phrase> provide a default set of structures, and a way to add your own if you need to. DocBook and DITA both provide a large set of standard structures, whereas SPFE provides a library of simple structures that you can combine to meet specific needs.</p>
 </li>
 <li>
-<p>Moving content to the subject domain can factor out much of the variation in document domain structures. In many cases, you can use systems like SPFE, DocBook, and DITA to extend into the subject domain as well. There are also a large number of purpose build subject domain languages. The next article will look at how you can factor out document domain structures by moving to the subject domain.</p>
+<p>Moving content to the subject domain can factor out much of the variation in document domain structures. In many cases, you can use systems like SPFE, DocBook, and DITA to extend into the subject domain as well. There are also a large number of purpose build subject domain languages. The next chapter will look at how you can factor out document domain structures by moving to the subject domain.</p>
 </li>
 </ol>
 <p>Which of these approaches you choose will depend on what you need to do -- which constraints you need to observe and express in your content.</p>
@@ -232,7 +232,7 @@ reign&amp;mdash;in Spain.&lt;/p&gt;
 </figure>
 <p>Something else interesting is at work here. A list in markdown is just a sequence of paragraphs that start with asterisk characters. On the face of it, this is just like a document domain editor creating lists by styling paragraphs. But if you look at the resulting HTML, you will see that it creates a proper list wrapper element around the list. The markdown interpreter is inferring the hierarchical structure of the document domain from the essentially flat Markdown syntax.</p>
 <p>The author is working in something that looks and feels quite like the media domain, thought they have no actual styles and cannot change the formatting at all. But they use abstract formatting notation (underlines for headings, asterisks for unordered lists) to create document domain objects. The beauty of this is that the document domain constraints are preserved, while the author can work in a simple format that is easy to type, and reasonably easy to read.</p>
-<p>This is an important reminder that <phrase><annotation type="language">XML</annotation></phrase> and its applications are not the only route to structured writing. In fact, there are many other ways to create structured texts that obey the appropriate constraints for a particular use case. We will look at some of them in later articles.</p>
+<p>This is an important reminder that <phrase><annotation type="language">XML</annotation></phrase> and its applications are not the only route to structured writing. In fact, there are many other ways to create structured texts that obey the appropriate constraints for a particular use case. We will look at some of them in later chapters.</p>
 </section>
 <section>
 <title>Extending the document domain</title>
@@ -272,6 +272,6 @@ biblioentry:(#bib.xslttrec)
 <p>Some public markup languages support more than one document type. For instance, <phrase><annotation type="language">DocBook</annotation></phrase> supports <phrase><annotation type="structure" namespace="DocBook">book</annotation></phrase> and <phrase><annotation type="structure" namespace="DocBook">article</annotation></phrase>, <phrase><annotation type="tool">DITA</annotation></phrase> supports concept, task, and reference document types, and <phrase><annotation type="tool">SPFE</annotation></phrase> provides a range of more specific document types for different purposes. And as each of these systems is extensible, there is the opportunity to add more types to meet your needs.</p>
 <p>Some of these different document types are squarely in the document domain. For example, manual, quick-reference card, article, web-page, picture-book, novel, and catalog are all distinct document types that are distinguished by the kind of reading task they are used for, regardless of the subject matter. Thus a quick reference card can be a quick reference to any subject, a manual can be a manual for any product or service.</p>
 <p>Many more document types are specific to certain subjects. A recipe is specific to the preparation of food. A telephone directory is specific to finding telephone numbers. A knitting pattern is specific to creating knitted fabrics.</p>
-<p>Once we get into document types that are specific to a particular subject, however, we are starting to get into the subject domain. We will go there in the next article.</p>
+<p>Once we get into document types that are specific to a particular subject, however, we are starting to get into the subject domain.</p>
 </section>
 </chapter>
