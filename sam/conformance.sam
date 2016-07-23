@@ -4,74 +4,207 @@ chapter: Conformance
 
     Structured writing is about constraints. Texts that meet appropriate constraints are of higher quality and greater consistency than those that do not. Text that record the constraints they conform to can be reliably processed with algorithms. The key to any structured writing systems, therefore, it the ability to assure conformance with the desired constraints. 
     
-    At the most basic level, for any language that is {extensible}(concept) and {constrainable}(concept), the conformance algorithm is the job of the schema. The schema is a formal definition of the structural constraints a document must meet. But a schema is not the whole of the story when it comes to conformance. A schema can validate that a document conforms to its desired structure, but it can't validate that the content in those structures is correct, or even that it is the type of content that the schema says it should be.
+    Constraints have always been part of the authoring process. Style guides are grammatical reference works are express constraints that content is expected to meet. When a publisher publishes editorial guidelines to tell writes what kind of content they are looking for, at what length, and in what format, these are constraints. These constraints are imposed to improve the quality and appropriateness of the content. If a publisher says that manuscripts must be delivered in {DocBook}(language) or {Word}(tool) format, that is a technical constraint intended to make the production process flow more smoothly. When the government say that you must submit your online tax return in a particular file format, that is semantic constraint intended to make sure the the government's computers can successfully read and process our tax information. 
     
-    In other words, it does not work to design structures without any thought to conformance and then to slap a schema on them afterwards. If you want to ensure conformance, you should be designing for conformance from the beginning. 
+    Some of the constraints described above are purely informational. Authors are not given any assistance in following them nor is there any verification mechanism to tell them if they have followed them or not (other than perhaps an letter from an irate editor). Others are highly mechanical. Good tax preparation software will guide you all the way in filling out your tax forms and will run all kinds of checks to make sure that you did it correctly. It will also factor out many of the complexities of the tax code and ask you for information in a way you understand.
     
-    For most content, conformance is not about trying to catch evil doers. The authors are on side and trying to produce good content. Authors who understand structured content may seek to impose constraints as an aid to their own work, just as a carpenter, for instance, might design a jig to guide their saw. Constraints are a tool for writers, not a defense against them.
+    This higher level of conformance checking help make the process easier and the results more reliable. Structured writing is really all about improving conformance in the creation of content to enable automation and improve quality. The conformance algorithm is thus the linchpin of structured writing. Without it, none of the other algorithms will work reliably because they will not have content to work on that is structured consistently and correctly.
     
-    Lack of conformance occurs mostly for four reasons:
+    The first and best way to ensure conformance with a constraint is to factor it out. When we move content creation from the media domain to the document domain we are factoring out all of the formatting constraints of the document. When we move content from the document or document/management domain to the subject domain we are factoring out many of the document or management constraints. 
     
-    * Authors do not understand what is being asked of them.
+    But while we factor out one set of constraints when we do this, we also create a new set of constraint in the new domain. Our aim in factoring out constraints should be to end up with a set of constraints that are easier to follow, either because they require less system knowledge from the author, or because they are mechanically easier to express and enforce. 
     
-    * Authors cannot figure out how to accomplish their goals within the structure.
+    Once we have factored our constraints to this point, however, we are then left with the requirement to guide and enforce the new constraints that we have created. 
     
-    * Authors forget to supply required information or to use the desired format.
+    section: Schemas
     
-    * Authors are being asked to follow constraints that are not appropriate to the content. 
-    
-    The real core of compliance in structured writing, therefore, is not enforcement, but creating structures that:
-    
-    * Are clearly and specifically appropriate to the subject matter and the audience being addressed.
-    
-    * Clearly communicate to authors what is expected of them in terms they understand.
-    
-    * Support the author's goals.
-    
-    * Either remind authors of what is required or factor it out. 
-    
-    Auditing and enforcement still have a role to play, not because authors are hostile to the system, but because they a human. But auditing and enforcement are secondary to the main aim of conformance-friendly design. And in that spirit, auditing and conformance should be seen as part of a feedback loop that is constantly seeking to improve the design. If you keep finding the same mistakes over and over again, that is not a training problem or a human resources problem, it is a design problem. 
+        At the most basic level, the task of defining a markup language and the task of expressing constraints are one and the same. A markup language is a set of constraints. It names the allowed structures and the order and relationship in which those structures can be expressed and combined. The tool we use to do this is a schema. A schema is a document written in a schema language. Here is an example from a schema language called RelaxNG, which is used to write schemas for XML documents:
 
-    section: factor out
-    section: restrict
-    section: guide
-    section: validate
-    section: audit
-
-
-
-    The first principle of conformance should be to design something that is easy to conform to. This means using structures and terms that make intuitive sense to writers in their own domains. One of the most common mistakes is to create structures to solve technical problems and then try to teach them to writers.
-
-   
-    The compliance algorithm is about making sure that a piece of structured writing meets its intended constraints. The more robust the compliance algorithm, the more consistent the quality of the content will be (assuming that the constraints imposed are correct) and the more reliable it will be, meaning that you can run other algorithms on it with greater confidence. If you want to do any kind of real-time publishing of content, meaning there is no time to do quality assurance on the output of the algorithm, then reliable content is key, and compliance is how you ensure that content is reliable. 
+        ```(RNG)[https://en.wikipedia.org/wiki/RELAX_NG#XML_syntax]
+            <element name="book" xmlns="http://relaxng.org/ns/structure/1.0">
+               <oneOrMore>
+                  <element name="page">
+                     <text/>
+                  </element>
+               </oneOrMore>
+            </element>
+        
+        As you can see, RelaxNG schemas are written using XML syntax. So, RelaxNG is a case of a markup language for defining markup languages. This is what we should expect, since a schema language is used to drive a conformance algorithm (generally called a "validator"), so it has to be written in a format that an algorithm can understand.  
+        
+        This example defines two elements and three constraints. The first element is called "book" and the second is called "page". The constraints are:
+        
+        * The page element must occur inside the book element. 
+        * There must be at least one page element inside the book element, and there can be more. 
+        * Text can occur inside the page element, but not the book element. 
+        
+        Thus if an author wrote:
+        
+        ```(xml)
+            <book>Moby Dick
+                <page>Call me Ishmael. Some years ago- never mind how long precisely- having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.</page>
+            </book>
+            
+        the validator would raise an error because the words "Moby Dick" are directly inside the book element and text is not allowed in that position. 
+        
+        There are several different schema languages for XML each of which is capable of expressing and enforcing different set of constraints. It is not unusual to combine different schema languages to more completely constrain a markup language. In particular, it is not uncommon to use a schema language called Schematron in concert with other schema languages like RNG. While most schema languages work by modeling the structure of a document, as in the RNG example above, Schematron works by making assertions about the structure in a language called XPath. A Schematron schema would make a lousy guide for authoring, but it can test assertions, and therefore enforce constraints, that no other schema language can. 
     
-    There are essentially four approaches to compliance:
+    section: Conforming content
     
-    |Factor out the constraint| If you factor out the constraint, there is no question of compliance.
+        The basic function of schema languages is to constrain the structure of a document. But often constraining the structure is not enough. Sometimes we need to constrain the content in the structure. 
+        
+        For instance, consider this structure:
+        
+        ```(sam)
+            person:
+                name: John Smith
+                age: middle
+                date-of-birth: Christmas Day
+                
+        Some people certainly describe themselves as middle aged, and Christmas Day is certainly a date of birth, if an incomplete one. The author has complied with the structure of the document. But the creator of this markup language was probably looking for more precise information, probably in a format that an algorithm could read. What they wanted was:
+
+        ```(sam)
+            person:
+                name: John Smith
+                age: 46
+                date-of-birth: 1970-12-25
+                
+        Some schema languages, such as XML Schema, let you specify the data type of an element. So you could specify that the type of the age element must be an integer between 0 and 150 and that the date-of-birth field must be a recognizable date format. Here's what the schema for the above might look like:
+                
+        ```(xsd)
+            <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+                <xs:element name="person">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="name" type="xs:string"/>
+                            <xs:element name="age" type="age-range"/>                
+                            <xs:element name="date-of-birth" type="xs:date"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                
+                <xs:simpleType name="age-range">
+                    <xs:restriction base="xs:int">
+                        <xs:minInclusive value="0"/>
+                        <xs:maxInclusive value="150"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:schema>
     
-    |Enforce the constraint| You can use structures to enforce constraints. Compliance is not automatic since writers can still misuse the structure. Auditing is required to be sure the constraint is followed.
+        This schema uses the built in types `xs:string` and `xs:date` for the name and date-of-birth elements and defines a new type called `age-range` for the age element. Using this schema, the example above would now fail to validate with type errors reported for the age and date-of-birth fields. 
+        
+        The data types referred to in the example above are not data types are they are commonly understood in programming terms. In XML, as in all major markup languages, the data is all strings. What a data type really is in a schema is a pattern. There is a language for describing patterns in text that is called {regular expressions}. Regular expressions are a bit cryptic and take some getting used to but they are incredibly powerful at describing patterns in text. XML schema lets you define types for elements using regular expressions, so there is a huge amount you can do to constrain the content of elements in your documents. 
+        
+        However, there is a limit to how far you can go in defining useful patterns for long passages of text. If you really want to exercise fine grained control over your content, you must first break information down into individual fields and then apply type constraints to those fields. This can be particularly effective when you are creating content in the subject domain since you don't have to specify information in sentences, even if you intend to publish it that way. You can break the content out into separate structures and define the data type of those structures to ensure you get complete and accurate information, and to ensure that you can operate on that information using algorithms. 
+        
+        The ability of algorithms to read the data in your structures can have another conformance benefit because it allows you to check one piece of information against another. For instance, if you have date of birth and age you can calculate current age from the date of birth and compare it against the value of the age field. If the values don't match, you know the author made an error and you can report it. Here is a Schematron assertion that tests this constraint (in a slightly imprecise fashion: date arithmetic is surprisingly hard):
+        
+        # Come up with another example. The difficulties of data arithmetic make
+        # this example confusing.
+        
+        ```(schematron)
+            <schema xmlns="http://purl.oclc.org/dsdl/schematron"  queryBinding="xslt2">
+                <pattern>
+                    <title>Age constraint</title>
+                    <rule context="person">
+                        <assert test="age = xs:int(days-from-duration(current-date() - xs:date('1970-12-25')) div 365.25)">Age does not match the given date-of-birth.</assert>
+                    </rule>
+                </pattern>
+            </schema>
+            
+    section: Dynamic conformance
     
-    |Train the constraint| The constraint is not enforced or expressed in the content. Writers are trained to follow the constraint. Auditing is required to be sure the constraint is followed.
+        All of the examples above focus on the structures of the document and the types or patterns of the text within those structures. These can all be assessed by looking at the document by itself. But you may have other constraints on a document that cannot be evaluated by looking at the document alone. 
+        
+        You may want values in your document to match values in databases or in other documents. For instance, a technical writer documenting an API may produce an API reference, much of which may be extracted from the program source code, and also a programmers guide, which they will write from scratch. The programmer's guide will obviously mention the function in the API many times. There is the possibility that the writer may misspell one of the names, or that the API may be changed after parts of the document are written, so that a function the writer has mentioned no longer exists.
+        
+        It is clearly a constraint on the programmer's guide that all the API calls it mentions should actually be present in the API. Since the API reference is generated from the source code, we can express this constrain as, functions mentioned in the programmers guide must be listed in the API reference. 
+        
+        This is an important constraint. When we implemented this constraint on one project I worked on, it revealed all kinds of errors:
+        
+        * Misspelled function names in the programmer's guide.
+        * The inclusion in the programmer's guide of material related to a private API that was never released to the public. 
+        * The failure of the API guide to include an important section of the API due to incorrect markup in the source code. 
+        * A section of the programmer's guide that discussed how to do things using a deprecated API (and failed to discuss how to do them with the new API).
+        
+        All these errors were present in the programmer's guide despite several thorough review my multiple people over multiple software release. These are all the kinds of errors that human being have a hard time spotting in review. But they all have significant impact on users who are trying to actually use the API.
+        
+        As part of the publishing algorithm for the programmer's guide, we added a check that looked up each reference to an API call, including those in code blocks, in the source files for the API reference and reported an error if they did not match. None of the errors listed above would have been detected without this check. 
+        
+        Of course, for this check to be possible, the algorithm that did the checking had to be able to identify every time the programmer's guide mentioned an API call, and it had to be able to find all the API call names in the API reference. For this to be possible, both documents had to be written in a specific structured format that made the function names accessible to the algorithm. 
+
+    section: Design for conformance
     
-    |Audit the constraint| There are constraints that cannot be directly enforced when the writer is writing, but which can nevertheless be audited with the assistance of algorithms after the fact. 
+        But while schema 
     
-    The larger your content set becomes, the more frequent and dynamic your outputs, and the more of your processes rely on algorithms, the more pressing the issue of conformance becomes. Poor conformance can also hobble other algorithms. Content reuse, for example, relies on conformance to the constraints for writing content that fits when reused, and on conformance to the constraints on what can be reused where. 
-    
-    
-    This introduces a problem, because as your need for constraints grows, so does your need to express those constraints. This often leads to more complex structures, particularly in the document domain, and to greater intrusions of the management domain. This in turn makes your markup more complex and more abstract, which makes it harder for writers to comply with the structures. It is not uncommon to end up in a situation where you have having to spend a lot of resources on trying to train compliance to the structures designed to enforce compliance. 
-    
-    One way out of this is to focus more on factoring out constraints rather than enforcing them. This usually means moving more of your content into the {subject domain}(concept). There is a trade-off here too, of course, because the {subject domain} requires you to create custom structures rather than relying on generic document domain structures.
-    
-    Early in your move into structured writing, sticking with generic document domain structures may seem like a clear win. Over time, thought, the cost of compliance, and the costs which accumulate when compliance is not achieved, can tip the scale in favor of factoring out the constraints.  
+        A schema is a formal definition of the structural constraints a document must meet. But a schema is not the whole of the story when it comes to conformance. A schema can validate that a document conforms to its desired structure, but it can't validate that the content in those structures is correct, or even that it is the type of content that the schema says it should be.
+        
+        In other words, it does not work to design structures without any thought to conformance and then to slap a schema on them afterwards. If you want to ensure conformance, you should be designing for conformance from the beginning. 
+        
+        For most content, conformance is not about trying to catch evil doers. The authors are on side and trying to produce good content. Authors who understand structured content may seek to impose constraints as an aid to their own work, just as a carpenter, for instance, might design a jig to guide their saw. Constraints are a tool for writers, not a defense against them.
+        
+        Lack of conformance occurs mostly for four reasons:
+        
+        * Authors do not understand what is being asked of them.
+        
+        * Authors cannot figure out how to accomplish their goals within the structure.
+        
+        * Authors forget to supply required information or to use the desired format.
+        
+        * Authors are being asked to follow constraints that are not appropriate to the content. 
+        
+        The real core of compliance in structured writing, therefore, is not enforcement, but creating structures that:
+        
+        * Are clearly and specifically appropriate to the subject matter and the audience being addressed.
+        
+        * Clearly communicate to authors what is expected of them in terms they understand.
+        
+        * Support the author's goals.
+        
+        * Either remind authors of what is required or factor it out. 
+        
+        Auditing and enforcement still have a role to play, not because authors are hostile to the system, but because they a human. But auditing and enforcement are secondary to the main aim of conformance-friendly design. And in that spirit, auditing and conformance should be seen as part of a feedback loop that is constantly seeking to improve the design. If you keep finding the same mistakes over and over again, that is not a training problem or a human resources problem, it is a design problem. 
+
+        section: factor out
+        section: restrict
+        section: guide
+        section: validate
+        section: audit
 
 
 
-    Structured writing is about producing content that meets constraints. There are many reasons for wanting your content to meet constraints, and many reasons for wanting some of those constraints to be made explicit and machine readable. However, the most basic issue you will face in achieving these ends is ensuring that writers actually meet the constraints you need. 
+        The first principle of conformance should be to design something that is easy to conform to. This means using structures and terms that make intuitive sense to writers in their own domains. One of the most common mistakes is to create structures to solve technical problems and then try to teach them to writers.
 
-    And just so we are clear, this includes you as the writer. Writing is hard. It tends to occupy all of your mental energy. Keeping all of the constraints you want to meet in the forefront of your mind while also working out the story you are trying to tell and how to tell it is more than most brains can handle. Structured writing is not just about imposing a discipline on the author from without (though sometimes it is about that); it is about giving the author a tool that make it easier for them to create content that follows the constraints they themselves believe to be appropriate for the work. 
+       
+        The compliance algorithm is about making sure that a piece of structured writing meets its intended constraints. The more robust the compliance algorithm, the more consistent the quality of the content will be (assuming that the constraints imposed are correct) and the more reliable it will be, meaning that you can run other algorithms on it with greater confidence. If you want to do any kind of real-time publishing of content, meaning there is no time to do quality assurance on the output of the algorithm, then reliable content is key, and compliance is how you ensure that content is reliable. 
+        
+        There are essentially four approaches to compliance:
+        
+        |Factor out the constraint| If you factor out the constraint, there is no question of compliance.
+        
+        |Enforce the constraint| You can use structures to enforce constraints. Compliance is not automatic since writers can still misuse the structure. Auditing is required to be sure the constraint is followed.
+        
+        |Train the constraint| The constraint is not enforced or expressed in the content. Writers are trained to follow the constraint. Auditing is required to be sure the constraint is followed.
+        
+        |Audit the constraint| There are constraints that cannot be directly enforced when the writer is writing, but which can nevertheless be audited with the assistance of algorithms after the fact. 
+        
+        The larger your content set becomes, the more frequent and dynamic your outputs, and the more of your processes rely on algorithms, the more pressing the issue of conformance becomes. Poor conformance can also hobble other algorithms. Content reuse, for example, relies on conformance to the constraints for writing content that fits when reused, and on conformance to the constraints on what can be reused where. 
+        
+        
+        This introduces a problem, because as your need for constraints grows, so does your need to express those constraints. This often leads to more complex structures, particularly in the document domain, and to greater intrusions of the management domain. This in turn makes your markup more complex and more abstract, which makes it harder for writers to comply with the structures. It is not uncommon to end up in a situation where you have having to spend a lot of resources on trying to train compliance to the structures designed to enforce compliance. 
+        
+        One way out of this is to focus more on factoring out constraints rather than enforcing them. This usually means moving more of your content into the {subject domain}(concept). There is a trade-off here too, of course, because the {subject domain} requires you to create custom structures rather than relying on generic document domain structures.
+        
+        Early in your move into structured writing, sticking with generic document domain structures may seem like a clear win. Over time, thought, the cost of compliance, and the costs which accumulate when compliance is not achieved, can tip the scale in favor of factoring out the constraints.  
 
-    How do you know if you are meeting constraints -- in any activity? Feedback. With any activity, we need a way to know when we are done and when we have done it correctly. In the [media domain](concept), there is one form of feedback: how the document looks. With a true WYSIWYG display, if it looks right on the screen, it will render correctly on paper, or whatever media you are targeting as you write. That is the writer's signal that they are done, and done correctly. 
 
-    There may, of course, be other constraints that the copy is expected to obey. Those constraints might be expressed in a template or a style guide. They may be enforced by an editor, or by self-editing, or even by style checking algorithms that can process natural language text. But in the media domain, the structure of the content itself is not contributing to this validation. 
 
-    And since none of these other constraints is being recorded in the text, there is no way for an algorithm to do anything with that text except to display it. 
+        Structured writing is about producing content that meets constraints. There are many reasons for wanting your content to meet constraints, and many reasons for wanting some of those constraints to be made explicit and machine readable. However, the most basic issue you will face in achieving these ends is ensuring that writers actually meet the constraints you need. 
+
+        And just so we are clear, this includes you as the writer. Writing is hard. It tends to occupy all of your mental energy. Keeping all of the constraints you want to meet in the forefront of your mind while also working out the story you are trying to tell and how to tell it is more than most brains can handle. Structured writing is not just about imposing a discipline on the author from without (though sometimes it is about that); it is about giving the author a tool that make it easier for them to create content that follows the constraints they themselves believe to be appropriate for the work. 
+
+        How do you know if you are meeting constraints -- in any activity? Feedback. With any activity, we need a way to know when we are done and when we have done it correctly. In the [media domain](concept), there is one form of feedback: how the document looks. With a true WYSIWYG display, if it looks right on the screen, it will render correctly on paper, or whatever media you are targeting as you write. That is the writer's signal that they are done, and done correctly. 
+
+        There may, of course, be other constraints that the copy is expected to obey. Those constraints might be expressed in a template or a style guide. They may be enforced by an editor, or by self-editing, or even by style checking algorithms that can process natural language text. But in the media domain, the structure of the content itself is not contributing to this validation. 
+
+        And since none of these other constraints is being recorded in the text, there is no way for an algorithm to do anything with that text except to display it. 
