@@ -1,0 +1,115 @@
+sam:
+
+chapter:(#chapter.definition) What is structured writing?
+
+    index:: type, value
+        concept, structured writing
+        concept, constraints
+        concept, structure
+
+    I am not a fan of sweeping definitions of big terms. Definitions should clarify meaning, but attempts to define terms like “content” and “content strategy” seem only to provoke arguments. The definitions proposed often seem calculated not so much to clarify meaning as to claim territory. Still the phrase “structured writing” seem to demand something in the way of definition, not because its meanings are obscure, but because they are so varied. This is a product of diversity of interests, not lack of definition. My definition is a declaration of my interests; no more.
+
+    Let’s start with the broadest possible get-your-arms-around-the-whole-thing definition: 
+    
+    """
+        Structured writing is the act of creating content that obeys one or more constraints.
+
+    What is a constraint? Any rule that shapes, defines, or limits the content. Examples:
+
+    * A second level heading can only be used under a first level heading.
+    * A recipe must list each ingredient and the quantity used.
+    * An API reference must specify a return type for a function.
+    * A list must contain at least one item.
+    * A person's name must include a salutation.
+    * All birds must be identified using their formal names in the Linnaean taxonomy.
+    * A semicolon is used to join two independent clauses.
+    * Start every sentence with a capital letter. 
+
+    You probably see the problem here. By this definition, all writing, except perhaps the scrawls of a two-year old, is structured. And this is, in fact, the case. All content has structure. Without structure, it would not have meaning.
+
+    So our get-your-arms-around-the-whole-thing definition, while correct, is not very helpful. We need to constrain it some way. 
+
+    Let’s  begin by asking why it is useful to impose constraints on writing. Constraints make texts useful for a specific purpose. In order to know if a text is useful to us, we have to know what constraints it follows. When we do a Google search, for instance, we are expressing a constraint. We are saying, only show me content that is related to this phrase. 
+
+    This constraint is somewhat imprecise, which is why search results are not always accurate. Most of the pages that Google searches do not explicitly say which constraints they meet in a universally agreed manner, so the search engine has to try to extrapolate what constraints the page follows and what constraints the reader’s search string was meant to express. Given that imprecision on both ends, it is amazing how well Google works.
+
+    Still, the search process would be much easier if content explicitly stated what constraints it met. This is what the semantic Web initiative is trying to achieve. This is also where the idea of metadata comes in. Metadata is a record of the constraints that a particular piece of content meets. Metadata is not going to solve the global search problem, for reasons we will explore later, but it does give us a clue about how to constrain our definition of structured writing.
+
+    """
+        Structured writing is the act of creating content that obeys one or more explicitly recorded constraints.
+
+    By this definition, unstructured writing is writing that does not tell you what its structure is -- what constraints it obeys. This does not mean it lacks structure in the wider sense. It simply means that its structure is not made explicit. For our purposes, structured writing is writing that keeps a record of the constraints it obeys -- or at least some of them. 
+
+    That “or at least some of them” is important, because it is pretty difficult to record all of the constraints that a text obeys. There are few circumstances, for instance, under which you are likely to record that a text obeys the “join independent clauses with a semicolon” constraint. Nor would you need to, since this is a universal constraint that can be easily recognized in context.
+
+    This raises the question, why record the constraints at all? Why not just follow them as you write and assume that the reader will recognize them in context?
+
+    Part of the answer lies in that fact that many constraints are not universal and cannot easily be recognized in context, or that the reader can read faster and understand better if the constraints are made explicit.  Explicit constraints can take the form of labels and subheads, for instance. Thus the sections of a recipe may be labeled “Ingredients” and “Preparation”. The very fact that you call it a recipe is a record of one of the constraints it follows.
+
+    The other part of the answer, though, lies in how we manage content from creation to publication. In order to create content, we have to know what constraints it is supposed to meet. In order to manage the content, we need to know what constraints it does meet. 
+
+    Structured writing, then, plays a role in both content creation and content management. As a term, “structured writing” is part of a cluster of terms that includes “structured authoring,” “structured content,” and, more recently, “intelligent content.” Certain communities prefer one term over the other. Tool vendors, for instance, almost always use “structured authoring.” Many content strategists have recently adopted “intelligent content”. 
+
+    These terms all have the same center, if not always the same edges. “Intelligent Content,” in particular, seems to imply a particular application of structured writing, rather than being simply a synonym (though if it grows in popularity, the term’s implications will inevitably grow looser). And clearly there is a difference in emphasis between “authoring” (a verb), “content” (a noun), and “writing” (both verb and noun). I am choosing to use “structured writing” for this book because it bridges three concerns - the act of composition (writing as an act) and the act of management (writing -- or content -- as an asset to be managed) and consumption (writing as a product to be consumed). 
+
+    On the management front, suppose we manage a collection of content that includes recipes and we want to select all the recipes that are good matches for a Pinot Noir. We could attempt to do this Google style by searching for “recipe Pinot Noir”. This would probably get us a lot of correct results, but probably some incorrect ones as well. Some other types of content might contain the words “recipe” and “Pinot Noir” (such as this essay on the definition of structured writing). Some recipes might use Pinot Noir as an ingredient rather than a wine match. Some recipes might be missed because they do not include the word “recipe” (most don’t).
+
+    We could get better results if we could do a query on two explicit fields. Something like:
+
+    ```(SQL)
+        RETURN topic WHERE type=’recipe’ AND wine-match=’pinot noir’
+
+    But this can only work if our stored content contains explicit metadata that records these particular constraints, type=’recipe’ AND wine-match=’pinot noir’. 
+
+    If we did not create and store that metadata with the content when we wrote it, we will not be able to respond to this query. Supporting this type of query means that we have to explicitly create support for it in our content. 
+
+    This means that a piece of structured content is structured for a particular purpose that you thought of at the time you created it. The content is structured for that purpose or set of purposes you thought of, but is unstructured for other purposes. Just as a hat can be the right size for Tom and the wrong size for Harry, a piece of content can be structured for Mary and unstructured for Jane. It all depends on context.
+
+    So let’s further constrain our definition:
+
+    """
+        Structured writing is the act of creating content that obeys one or more explicitly recorded constraints that serve a defined purpose.
+
+    This does not mean that content that has been structured for one purpose may not also turn out to be structured for another purpose. This frequently turns out to be the case. On the other hand, it means that you cannot ever be sure that the structure you apply to your content today will apply to future purposes that you do not yet understand. In this sense, the idea that structured writing can “future proof” your content is misleading. It can only guarantee future uses you foresee today.
+
+    And what this means, in any given context, is that when someone says, “we are going to switch to structured writing”, what they really mean is that we are going to add an additional bit of structure, an additional set of constraints, that we did not apply before. Any piece of recorded content has been structured for some specific purpose or purposes. We are simply talking about adding more structure for additional specific purposes. 
+
+    In this respect, saying that we are going to start structured writing is like saying we are going to start eating healthy or adopt an active lifestyle. Assuming that your current diet was not pure poison, and that you have not been completely stationary to this point, you mean that you are going to eat a diet that is more healthy and live a lifestyle that is more active than it was before. In the same way, adopting structured writing really means being more structured than you were before.
+
+    Another use of constraints in content management is to guide authors to make sure that they create content that meets requirements (requirements is another word for constraints). Rather than authors deciding ad hoc on the constraints their content will follow and recording them as they go, it is often useful to establish a set of constraints that authors must follow while writing and to establish them up front before the content is written. So:
+
+    """
+        Structured writing is the act of creating content that obeys one or more predefined and explicitly recorded constraints that serve a defined purpose.
+
+    There is nothing new about this: templates and style guides are examples of predefined constraints that authors are required to obey. However, this is not a book about how to write a style guide, so I need to constrain the definition further:
+
+    """
+        Structured writing is the act of creating content that obeys one or more predefined and explicitly recorded constraints that serve a defined purpose, in a format readable by machines.
+
+    So far, nothing in the definition has specified that the explicitly recorded constraints have to be machine readable (though the query example above implies it). There is a lot of content out there that uses a consistent layout and headings across multiple documents to explicitly record the fact that they obey a set of constraints for a defined purpose. An API reference, a tax form, and a tide table are all examples of this type of content. All these formats are entitled to call themselves structured, but their structures may only be intended to be read by people, not machines. 
+
+    Using a format readable by machines (such as {XML}(tool)) can add several powerful capabilities to structured writing. Making the structure of a text machine readable allows us to enlist the help of machines in making the content better, and also to hand many management and production tasks over to machines so that writers can focus more on content.
+
+    Of course, any piece of content created on a computer is stored in a format that is readable by machines. In most cases, however, such formats only record those constraints as are required by the software itself for its own purposes. But since those constraints are predefined, explicitly recorded, and serve a defined purpose, any old {Word}(tool "Microsoft Word") doc technically still meets my definition. To make structured writing distinct and worth talking about, we need to constrain the definition once again:
+
+    """
+        Structured writing is the act of creating content that obeys one or more predefined and explicitly recorded constraints that serve a defined purpose, in a format readable by machines, with the goal of making the content better.
+
+    There several other ways I could have gone with this final constraint. I could have added “with the goal of separating the editing function from the publishing function to realize greater control over publishing options.”
+
+    I could have said, “with the goal of making content interchangeable between systems and organizations.”
+
+    I could have said, “with the goal of owning the content storage format so that I truly own my content and it possibilities.”
+
+    Those are all legitimate aspirations, and all things that people have done successfully. But they are not quite as interesting, nor do they have quite the same potential for good, as the goal of making the content itself better. They are publishing and content management aims, and while those aims can definitely contribute to making content better, they are only contributions. They are not the whole story of structured writing and what we can accomplish with it.
+
+    This book is about how we can use structured writing to make ourselves better writers and produce better content. That involves the use of machines as tools to help us write better -- just as many other professions use machines to make them more proficient. But the point is to be better writers. 
+    
+    One other thing that this book is not about: it is not about the use of markup for the academic study or representation of texts. This is a matter of significant concern in the humanities, where the {Text Encoding Initiative}[http://www.tei-c.org] (TEI) plays an important role in determining standards for representing texts for study. But TEI is not about the writing process. It is not about using structure writing to improve content quality. For some purposes, the TEI format might become an output format for a structured writing system, but other than that, it is outside the scope of this book. 
+
+    
+
+
+
+
+
