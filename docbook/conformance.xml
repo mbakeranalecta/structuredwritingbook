@@ -1,29 +1,23 @@
 <?xml version="1.0"?>
 <db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
 <db:title>Conformance</db:title>
-<db:para>Structured writing is about constraints. Texts that meet appropriate constraints will be of higher quality and greater consistency than those that do not. Text that record the constraints they conform to can be reliably processed with algorithms. The key to any structured writing systems, therefore, it the ability to assure conformance with the desired constraints.</db:para>
-<db:para>Constraints have always been part of the authoring process. Style guides are grammatical reference works are express constraints that content is expected to meet. When a publisher publishes editorial guidelines to tell writes what kind of content they are looking for, at what length, and in what format, these are constraints. These constraints are imposed to improve the quality and appropriateness of the content. If a publisher says that manuscripts must be delivered in DocBook or Word format, that is a technical constraint intended to make the production process flow more smoothly. When the government say that you must submit your online tax return in a particular file format, that is semantic constraint intended to make sure the the government’s computers can successfully read and process our tax information.</db:para>
-<db:para>Some of the constraints described above are purely informational. Authors are not given any assistance in following them nor is there any verification mechanism to tell them if they have followed them or not (other than perhaps an letter from an irate editor). Others are highly mechanical. Good tax preparation software will guide you all the way in filling out your tax forms and will run all kinds of checks to make sure that you did it correctly. It will also factor out many of the complexities of the tax code and ask you for information in a way you understand.</db:para>
-<db:para>This higher level of conformance checking help make the process easier and the results more reliable. Structured writing is really all about improving conformance in the creation of content to enable automation and improve quality. The conformance algorithm is thus the linchpin of structured writing. Without it, none of the other algorithms will work reliably because they will not have content to work on that is structured consistently and correctly.</db:para>
-<db:para>The larger your content set becomes, the more frequent and dynamic your outputs, and the more of your processes rely on algorithms, the more pressing the issue of conformance becomes. Poor conformance can also hobble other algorithms. Content reuse, for example, relies on conformance to the constraints for writing content that fits when reused, and on conformance to the constraints on what can be reused where.</db:para>
-<db:para>The more robust the compliance algorithm, the more consistent the quality of the content will be (assuming that the constraints imposed are correct) and the more reliable it will be, meaning that you can run other algorithms on it with greater confidence. If you want to do any kind of real-time publishing of content, meaning there is no time to do quality assurance on the output of the algorithm, then reliable content is key, and compliance is how you ensure that content is reliable.</db:para>
-<db:para>The first and best way to ensure conformance with a constraint is to factor it out. When we move content creation from the media domain to the document domain we are factoring out all of the formatting constraints of the document. When we move content from the document or document/management domain to the subject domain we are factoring out many of the document or management constraints.</db:para>
-<db:para>How do you know if you are meeting constraints -- in any activity? Feedback. With any activity, we need a way to know when we are done and when we have done it correctly. In the [media domain], there is one form of feedback: how the document looks. With a true WYSIWYG display, if it looks right on the screen, it will render correctly on paper, or whatever media you are targeting as you write. That is the writer’s signal that they are done, and done correctly.</db:para>
-<db:para>But while we factor out one set of constraints when we do this, we also create a new set of constraint in the new domain. Our aim in factoring out constraints should be to end up with a set of constraints that are easier to follow, either because they require less system knowledge from the author, or because they are mechanically easier to express and enforce.</db:para>
-<db:para>We can usefully divide constraints into two types: structural constraints and semantic constraints. Structural constraints deal with the the relationship of various structured writing structures. Semantic constraints deal with the actual semantics of the content. When we factor content into document and subject domain structures we are doing two things.</db:para>
-<db:orderedlist>
-<db:listitem>
-<db:para>We are turning semantic constraints into structural constraints.</db:para>
-</db:listitem>
-<db:listitem>
-<db:para>We are using structural constraints to isolating semantic constraints so that they are testable and enforceable.</db:para>
-</db:listitem>
-</db:orderedlist>
+<db:para>Structured writing is about constraints. Texts that meet appropriate constraints will be of higher quality and greater consistency and will be easier to manage. Texts that record the constraints they conform to can be reliably processed with algorithms. The key to any structured writing systems, therefore, it the ability to assure conformance with the desired constraints.</db:para>
+<db:para>Constraints have always been part of the authoring process. Style guides and grammatical reference works express constraints that content is expected to follow. Editorial guidelines tell writers what kind of content a publisher is looking for, at what length, and in what format. These are content constraints. If a publisher says that manuscripts must be delivered in DocBook or Word format, that is a technical constraint intended to make the production process flow more smoothly. When the government say that you must submit your online tax return in a particular file format, that is semantic constraint intended to make sure the the government’s computers can successfully read and process your tax information.</db:para>
+<db:para>Some of the constraints described above are merely statements of requirements. Authors are not given any assistance in following them nor is there any verification mechanism to tell them if they have followed them or not (other than perhaps an email from an irate editor). Others are highly mechanical. Good tax preparation software will guide you all the way in filling out your tax forms and will run all kinds of checks to make sure that you did it correctly. It will also factor out many of the complexities of the tax code and ask you for information in a way you can understand.</db:para>
+<db:para>This higher level of conformance checking helps make the process easier and the results more reliable. Structured writing is really all about improving conformance to enable automation and improve quality. The conformance algorithm is thus the linchpin of structured writing. Without it, none of the other algorithms will work reliably.</db:para>
+<db:para>How many constraints you need to place on your content depends on your quality and process goals. The larger your content set becomes, the more frequent and dynamic your outputs, and the more of your processes rely on algorithms, the more constraints you need and the more pressing the issue of conformance becomes. Content reuse, for example, relies on conformance to the constraints for writing content that fits when reused, and on conformance to the constraints on what can be reused where. If you want to do any kind of real-time publishing of content, meaning there is no time to do quality assurance on the output of the algorithm, then reliable content is key, and compliance is how you ensure that content is reliable.</db:para>
+<db:para>One of the ways in which structured writing project can get into trouble is by introducing new constraints to meet management or publishing automation goals without considering how conformance to those constraints will be achieved. In some cases, this results in a highly imperative approach to conformance, in which writers are trained to implement the constraints, but where the structures they are creating provide no guidance or validation of those constraints. The system constraints, in other words, are not reflected in the content structures. If you are creating complex structures and also creating complex constraints that are not reflected or implemented in those structures, you are going to have a twofold conformance problem: conformance will be expensive, and it will be inconsistent.</db:para>
+<db:para>The first and best way to ensure conformance with a constraint is to factor out the constraint. If the constraint is that the titles of works should always be formatted in a certain way, you can factor out this constraint by moving to the document domain and using something like DocBook’s <db:code>citetitle</db:code> element to mark up the names of works. Now it is the publishing algorithm that is responsible for the formatting. The formatting constraint has been factored out of the content.</db:para>
+<db:para>When we move content creation from the media domain to the document domain we are factoring out all of the formatting constraints of the document. When we move content from the document domain to the subject domain we are factoring out many of the document or management constraints.</db:para>
+<db:para>But while we factor out one set of constraints when we do this, we also create a new set of constraint in the new domain. When we factored out the formatting constraint for the titles of works, we introduced a new constraint, which is to markup the title of works using <db:code>citetitle</db:code>. Factoring one constraint into another is useful if it makes the constraint easier to conform to or easier to validate. A constraint may be easier to conform to if it is simpler, easier to remember, or does not require knowledge that is outside the writer’s concerns. For instance, the <db:code>citetitle</db:code> tag is a single tag, not a set of formatting instructions, and the author knows when they are citing the title of a work. It may be easier to validate if it has fewer components or can be limited to a narrower scope. For instance, the set of things that are titles is smaller than the set of things that are formatted in italic, so validating the <db:code>citetitle</db:code> constraint requires looking at a smaller and more homogeneous set.</db:para>
+<db:para>If the constraint you are introducing is not easier to conform to or easier to validate, you probably should not do it. There are certainly cases where moving content to a more formal document domain model introduces more constraints than it eliminates without making those constraints easier to comply with or validate. On the other hand, sometimes those additional constraints are required for algorithms. Inevitably, authors have to make some concessions to the needs of algorithms, but we don’t want algorithms to impose such a burden on authors that we distract them from doing good research and quality writing. So if the structures you are created for the sake of algorithms prove complex for authors to conform to or difficult to validate, it is wise to ask if you could refactor those constraints again (perhaps to the subject domain so that you get both the precision and detail that the algorithm needs and the ease of use and validation that the writer needs.</db:para>
 <db:section>
 <db:title>Schemas</db:title>
-<db:para>Concrete markup languages have fixed structures. Extensible markup languages allow you to define structures for yourself. New structures are either defined in code or in a schema language.</db:para>
-<db:para>A schema language is a structured language for defining structured languages. Defining a markup language and expressing its constraints are really the same thing. The definition of the language says what structures are allowed and in what order and relationship. Those definitions are constraints. A given document either conforms to those constraints or it does not.</db:para>
-<db:para>Here is an example from a schema language called RelaxNG, which is one of several schema languages available for creating XML-based markup languages:</db:para>
+<db:para>How do you establish constraints for content, and how do you validate against those constraints?</db:para>
+<db:para>For a concrete markup languages like MarkDown, the constraints are established in the code of the MarkDown processor. They are validated when the processor parses the MarkDown file. (In practice, though, MarkDown does no meaningful validation. Anything it does not recognize as markup, it simply outputs as text.)</db:para>
+<db:para>For extensible markup languages like XML you define structures yourself (or use an existing definition). Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a “validator”.</db:para>
+<db:para>A schema language is a structured language for defining structured languages. The schema for a markup languages says what structures are allowed and in what order and relationship. Those definitions are constraints. A given document either conforms to those constraints or it does not.</db:para>
+<db:para>Here is an example of a schema in a schema language called RelaxNG, which is one of several schema languages available for defining XML-based markup languages:</db:para>
 <db:programlisting language="RNG">
 &lt;element name="book" xmlns="http://relaxng.org/ns/structure/1.0"&gt;
    &lt;oneOrMore&gt;
@@ -33,17 +27,16 @@
    &lt;/oneOrMore&gt;
 &lt;/element&gt;
 </db:programlisting>
-<db:para>As you can see, RelaxNG schemas are written using XML syntax. So, RelaxNG is a case of a markup language for defining markup languages. This is what we should expect. A schema language is read by the conformance algorithm (generally called a piece of software called a “validator”) to determine the constraints to validate a document against. It has to be written in a format that an algorithm can understand.</db:para>
-<db:para>This example defines two elements and three constraints. The first element is called “book” and the second is called “page”. The constraints are:</db:para>
+<db:para>This example defines two elements and three constraints. The first element is called <db:code>book</db:code> and the second is called <db:code>page</db:code>. The constraints are:</db:para>
 <db:itemizedlist>
 <db:listitem>
-<db:para>The page element must occur inside the book element. (Because the page element is defined inside the book element structure.)</db:para>
+<db:para>The <db:code>page</db:code> element must occur inside the <db:code>book</db:code> element. (Because the <db:code>page</db:code> element is defined inside the <db:code>book</db:code> element structure.)</db:para>
 </db:listitem>
 <db:listitem>
-<db:para>There must be at least one page element inside the book element, and there can be more. (Because the page element is defined inside a “oneOrMore” element.)</db:para>
+<db:para>There must be at least one <db:code>page</db:code> element inside the <db:code>book</db:code> element, and there can be more. (Because the <db:code>page</db:code> element is defined inside an RNG <db:code>oneOrMore</db:code> element.)</db:para>
 </db:listitem>
 <db:listitem>
-<db:para>Text can occur inside the page element, but not the book element. (Because the “text” element occurs inside the definition of the page element, but not as a direct child of the book element.)</db:para>
+<db:para>Text can occur inside the <db:code>page</db:code> element, but not directly inside the <db:code>book</db:code> element. (Because the RNG <db:code>text</db:code> element occurs inside the definition of the <db:code>page</db:code> element, but not as a direct child of the <db:code>book</db:code> element definition.)</db:para>
 </db:listitem>
 </db:itemizedlist>
 <db:para>Thus if an author wrote:</db:para>
@@ -52,13 +45,26 @@
     &lt;page&gt;Call me Ishmael. Some years ago- never mind how long precisely- having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.&lt;/page&gt;
 &lt;/book&gt;
 </db:programlisting>
-<db:para>the validator would raise an error because the words “Moby Dick” are directly inside the book element and text is not allowed in that position.</db:para>
+<db:para>the validator would report an error because the words “Moby Dick” are directly inside the book element and text is not allowed in that position.</db:para>
 <db:para>There are several different schema languages for XML each of which is capable of expressing and enforcing different sets of constraints (with considerable overlap between them). It is not unusual to combine different schema languages to more completely constrain a markup language. In particular, it is not uncommon to use a schema language called Schematron in concert with other schema languages like RNG. While most schema languages work by modeling the structure of a document, as in the RNG example above, Schematron works by making assertions about the structure in a language called XPath. A Schematron schema would make a lousy guide for authoring, but it can test assertions, and therefore enforce constraints, that no other schema language can.</db:para>
-<!--  EXAMPLE -->
+<db:para>Here is a simple Schematron example. It defines one of the constraints listed above, namely that a book element must contain at least one page element.</db:para>
+<db:programlisting language="schematron">
+&lt;schema xmlns="http://purl.oclc.org/dsdl/schematron"  queryBinding="xslt2"&gt;
+    &lt;pattern&gt;
+        &lt;title&gt;Book constraint&lt;/title&gt;
+        &lt;rule context="book"&gt;
+            &lt;assert test="page"&gt;A book must contain at least one page.&lt;/assert&gt;
+        &lt;/rule&gt;
+    &lt;/pattern&gt;
+&lt;/schema&gt;
+</db:programlisting>
+<db:para>The rule says that in the context of the element <db:code>book</db:code> the assertion that there is an element <db:code>page</db:code> must be true. If it is not, the message within the <db:code>assert</db:code> element will be displayed.</db:para>
+<db:para>In the RNG schema example, the schema is essentially a template that models the hierarchy of the document. The constraints are consequences of the structure of that hierarchy. (The <db:code>book</db:code> element cannot contain text because there is no place for text in that part of the hierarchy.) Only documents that conform to the template are valid.</db:para>
+<db:para>In the Schematron example, the schema is a series of constraint statements. The hierarchy of the document is a consequence of meeting all the constraints. Any document is valid as long as it conforms to all the stated constraints.</db:para>
 </db:section>
 <db:section>
-<db:title>Conforming content</db:title>
-<db:para>The basic function of schema languages is to constrain the structure of a document. But often constraining the structure is not enough. Sometimes we need to constrain the content in the structure.</db:para>
+<db:title>Semantic constraints</db:title>
+<db:para>We can usefully divide constraints into two types: structural constraints and semantic constraints. Structural constraints deal with the the relationship of various text structures. Semantic constraints deal with the meaning of the content.</db:para>
 <db:para>For instance, consider this structure:</db:para>
 <db:programlisting language="sam">
 &lt;person&gt;
@@ -75,7 +81,10 @@
     &lt;date-of-birth&gt;1970-12-25&lt;/date-of-birth&gt;
 &lt;/person&gt;
 </db:programlisting>
-<db:para>Some schema languages, such as XML Schema, let you specify the data type of an element. So you could specify that the type of the age element must be an integer between 0 and 150 and that the date-of-birth field must be a recognizable date format. Here’s what the schema for the above might look like:</db:para>
+<db:para>Some schema languages, such as XML Schema, let you specify the data type<citation type="idref" value="data-type"/> of an element. You could specify that the type of the age field must be whole number between 0 and 150 and that the date-of-birth field must be a recognizable date format. Here’s what the schema for these constraints might look like:</db:para>
+<footnote id="data-type">
+<db:para>The data types referred to in the example above are not data types are they are commonly understood in programming terms (which refers to how they are stored in memory). In XML, as in all major markup languages, the data is all strings. What a data type really is in a schema is a pattern. There is a language for describing patterns in text that is called regular expressions. Regular expressions are a bit cryptic and take some getting used to but they are incredibly powerful at describing patterns in text. XML schema lets you define types for elements using regular expressions, so there is a huge amount you can do to constrain the content of elements in your documents.</db:para>
+</footnote>
 <db:programlisting language="xsd">
 &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"&gt;
 
@@ -97,13 +106,49 @@
     &lt;/xs:simpleType&gt;
 &lt;/xs:schema&gt;
 </db:programlisting>
-<db:para>This schema uses the built in types <db:code>xs:string</db:code> and <db:code>xs:date</db:code> for the name and date-of-birth elements and defines a new type called <db:code>age-range</db:code> for the age element. Using this schema, the example above would now fail to validate with type errors reported for the age and date-of-birth fields.</db:para>
-<db:para>The data types referred to in the example above are not data types are they are commonly understood in programming terms. In XML, as in all major markup languages, the data is all strings. What a data type really is in a schema is a pattern. There is a language for describing patterns in text that is called regular expressions. Regular expressions are a bit cryptic and take some getting used to but they are incredibly powerful at describing patterns in text. XML schema lets you define types for elements using regular expressions, so there is a huge amount you can do to constrain the content of elements in your documents.</db:para>
-<!--  EXAMPLE -->
-<db:para>However, there is a limit to how far you can go in defining useful patterns for long passages of text. If you really want to exercise fine grained control over your content, you must first break information down into individual fields and then apply type constraints to those fields. This can be particularly effective when you are creating content in the subject domain since you don’t have to specify information in sentences, even if you intend to publish it that way. You can break the content out into separate structures and define the data type of those structures to ensure you get complete and accurate information, and to ensure that you can operate on that information using algorithms.</db:para>
-<!-- EXAMPLE -->
+<db:para>This schema uses the built in types <db:code>xs:string</db:code> and <db:code>xs:date</db:code> for the <db:code>name</db:code> and <db:code>date-of-birth</db:code> elements and defines a new type called <db:code>age-range</db:code> for the age element. Using this schema, the example above would now fail to validate with type errors reported for the age and date-of-birth fields.</db:para>
+<db:para>Applying these kinds of semantic constraints to content is not going to work if most of your text is in free form paragraphs. It is hard to define useful patterns for long passages of text. If you want to exercise fine grained control over your content, therefore, you must first break information down into individual fields and then apply type constraints to those fields.</db:para>
+<db:para>In some cases, we create text structures purely for the purpose of being able to apply semantic constraints to their content. We use structural constraints to isolating semantic constraints so that they are testable and enforceable.</db:para>
+<db:para>This can be particularly effective when you are creating content in the subject domain since you don’t have to specify information in sentences, even if you intend to publish it that way. You can break the content out into separate structures and define the data type of those structures to ensure you get complete and accurate information, and to ensure that you can operate on that information using algorithms.</db:para>
+<db:para>The recipe text that we have used before is a good example of how content that could be expressed entirely in free-form paragraphs if we choose can be broken down in a fine-grained way that allows us to impose a variety of structural and semantic constraints.</db:para>
+<db:programlisting language="sam">
+recipe: Hard Boiled Egg
+    introduction:
+        A hard boiled egg is simple and nutritious.
+    ingredients:: ingredient, quantity
+        eggs, 12
+        water, 2qt
+    preparation:
+        1. Place eggs in pan and cover with water.
+        2. Bring water to a boil.
+        3. Remove from heat and cover for 12 minutes.
+        4. Place eggs in cold water to stop cooking.
+        5. Peel and serve.
+    prep-time: 15 minutes
+    serves: 6
+    wine-match: champagne and orange juice
+    beverage-match: orange juice
+    nutrition:
+        serving: 1 large (50 g)
+        calories: 78
+        total-fat: 5 g
+        saturated-fat: 0.7 g
+        polyunsaturated-fat: 0.7 g	
+        monounsaturated-fat: 2 g	
+        cholesterol: 186.5 mg	
+        sodium: 62 mg	
+        potassium: 63 mg	
+        total-carbohydrate: 0.6 g	
+        dietary-fiber: 0 g	
+        sugar: 0.6 g	
+        protein: 6 g	
+</db:programlisting>
+<db:para>This entire recipe could be presented free form. But when structured like this we can enforce detailed constraints like ensuring that there is always a wine match listed or calories are always given as a whole number. The publishing algorithms could actually stitch all this content into paragraphs again if that was how you wanted to publish it. But when it is created in this format the author is provided with a huge amount of guidance about the information you want, and you are able to manipulate and publish the content in many different ways. Reader’s will benefit because all the recipes will conform to what you know reader’s need and want in a recipe.</db:para>
+</db:section>
+<db:section>
+<db:title>Entry validation constraints</db:title>
 <db:para>The ability of algorithms to read the data in your structures can have another conformance benefit because it allows you to check one piece of information against another. For instance, if you have date of birth and age you can calculate current age from the date of birth and compare it against the value of the age field. If the values don’t match, you know the author made an error and you can report it. Here is a Schematron assertion that tests this constraint (in a slightly imprecise fashion: date arithmetic is surprisingly hard):</db:para>
-<!--  Come up with another example. The difficulties of data arithmetic make -->
+<!--  Come up with another example? The difficulties of data arithmetic make -->
 <!--  this example confusing. -->
 <db:programlisting language="schematron">
 &lt;schema xmlns="http://purl.oclc.org/dsdl/schematron"  queryBinding="xslt2"&gt;
@@ -117,10 +162,17 @@
 </db:programlisting>
 </db:section>
 <db:section>
+<db:title>Referential integrity constraints</db:title>
+<db:para>In the management domain, there are a set of constraints that we could call referential integrity constraints. Referential integrity simply means that if you make a reference to something, that something should exist. In the management domain, we often give IDs to structures and use those IDs to refer to those structures for purposes such as content reuse.</db:para>
+<db:para>If you are going to reuse a piece of content by referring to its ID, there is an obvious constraint that a piece of content with that ID must exist. This constraint is important enough that the XML specification actually builds in direct support for it. XML itself requires that if an attribute is defined as having the type IDREF, then there must be an element with an attribute of type ID with the same value in the same document. This can be useful for checking things like a footnote reference in a document actually corresponds to a footnote somewhere in the document.</db:para>
+<db:para>Many management domain algorithms, however, require referential integrity not only within a single document but between documents. The conformance of a document to these referential integrity constraints can sometimes only be judged by the publishing algorithm when it is published in a particular combination. In fact, it is possible for a document to have referential integrity when published in one collection and to lack it when published in another.</db:para>
+<db:para>Since it is always better to validate a constraint as early as possible, a content management system that is aware of the referential integrity constraints of a system (such as a DITA CMS, for example) may validate the referential integrity of content in all its potential combinations without the need to actually publish it.</db:para>
+<db:para>Needless to say, however, referential integrity constraints of this complexity still present a management and authoring headache, even with content management system support. It is worth considering if there is a way to factor them out. One example of how this can be done is found in the various approaches to the linking algorithm.</db:para>
+</db:section>
+<db:section>
 <db:title>Conformance to external sources</db:title>
-<db:para>All of the examples above focus on the structures of the document and the types or patterns of the text within those structures. These can all be assessed by looking at the document by itself. But you may have other constraints on a document that cannot be evaluated by looking at the document alone.</db:para>
-<db:para>You may want values in your document to match values in databases or in other documents. For instance, a technical writer documenting an API may produce an API reference, much of which may be extracted from the program source code, and also a programmers guide, which they will write from scratch. The programmer’s guide will obviously mention the functions in the API many times. There is the possibility that the writer may misspell one of the names, or that the API may be changed after parts of the document are written, or that a function the writer has mentioned no longer exists.</db:para>
-<db:para>It is clearly a semantic constraint on the programmer’s guide that all the API calls it mentions should actually be present in the API. Since the API reference is generated from the source code, we can express this constrain as, functions mentioned in the programmers guide must be listed in the API reference.</db:para>
+<db:para>Referential integrity constraints can span multiple documents. So can semantic constraints. For example, you may want values in your document to match values in databases or in other documents. For instance, a technical writer documenting an API may produce an API reference, much of which may be extracted from the program source code, and also a programmers guide, which they will write from scratch. The programmer’s guide will obviously mention the functions in the API many times. There is the possibility that the writer may misspell one of the names, or that the API may be changed after parts of the document are written, or that a function the writer has mentioned no longer exists.</db:para>
+<db:para>It is clearly a semantic constraint on the programmer’s guide that all the API calls it mentions should actually be present in the API. Since the API reference is generated from the source code, we can express this constrain as: functions mentioned in the programmers guide must be listed in the API reference.</db:para>
 <db:para>This is an important constraint. When we implemented this constraint on one project I worked on, it revealed a number of errors:</db:para>
 <db:itemizedlist>
 <db:listitem>
@@ -138,8 +190,31 @@
 </db:itemizedlist>
 <db:para>All these errors were present in the programmer’s guide despite several thorough reviews by multiple people over multiple software release. These are all the kinds of errors that human being have a hard time spotting in review. But they all have significant impact on users who are trying to actually use the API.</db:para>
 <db:para>As part of the conformance algorithm for the programmer’s guide, we added a check that looked up each reference to an API call, including those in code blocks, in the source files for the API reference and reported an error if they did not match. None of the errors listed above would have been detected without this check.</db:para>
-<db:para>Of course, for this check to be possible, the algorithm that did the checking had to be able to identify every time the programmer’s guide mentioned an API call, and it had to be able to find all the API call names in the API reference. For this to be possible, both documents had to be written in a specific structured format that made the function names accessible to the algorithm.</db:para>
-<!--  EXAMPLE -->
+<db:para>Of course, for this check to be possible, the algorithm that did the checking had to be able to identify every time the programmer’s guide mentioned an API call, and it had to be able to find all the API call names in the API reference. For this to be possible, both documents had to be written in a specific structured format that made the function names accessible to the algorithm. Here is a simplified example. First, a code sample from a programmer’s guide:</db:para>
+<db:programlisting language="sam">
+code-sample: Hello World
+    
+    The Hello World sample uses {print}(function) to output the text "Hello World"
+    
+    ```(python)
+        print("Hello World.")
+</db:programlisting>
+<db:para>Next a function reference listing from the API reference:</db:para>
+<db:programlisting language="sam">
+function: print
+    return-value: none
+    parameters:
+        parameter: string
+            required: yes
+            description:
+                The string to print.
+        parameter: end
+            required: no
+            default: '\n'
+            description:
+                The characters to output after the {string}(parameter).
+</db:programlisting>
+<db:para>Because the API reference labels “print” as a function name and the code-sample annotates “print” as the name of a function, we can look up “print” in the API reference to validate the annotated text in the programmer’s guide.</db:para>
 <db:para>By adding these structures and annotations to the content, we isolated the semantics of the function call names so that we could apply semantic conformance checks to them.</db:para>
 </db:section>
 <db:section>
@@ -148,8 +223,10 @@
 </db:section>
 <db:section>
 <db:title>Design for conformance</db:title>
-<db:para>But while schemas and downstream algorithms can do a great deal to check and enforce conformance, there is also a great deal that they cannot check and enforce, and if the schema and the algorithms are making the writer’s live hard with restrictions and errors that the writer does not understand or that get in the way of their creating good content, you are not going to get good conformance.</db:para>
-<db:para>The real key to achieving conformance it to create structures that are easy to conform to. For most content, conformance is not about trying to catch evil doers. The authors are on side and trying to produce good content. Authors who understand structured content may seek to impose constraints as an aid to their own work, just as a carpenter, for instance, might design a jig to guide their saw. Constraints are a tool for writers, not a defense against them. Constraints may force a lazy writer to pull up their socks and do some more research. They may force an inattentive writer to recast their first draft into a more consistent format. But they should never stand between a good and diligent writer doing good work.</db:para>
+<db:para>So much for the mechanical aspects of conformance. But conformance is fundamentally a human activity and we may need humans to conform to constraints that we cannot easily express or validate in purely mechanical terms.</db:para>
+<db:para>While schemas and downstream algorithms can do a great deal to check and enforce conformance, there is also a great deal that they cannot check and enforce, and if the schema and the algorithms are making the writer’s live hard with restrictions and errors that the writer does not understand or that get in the way of their creating good content, you are not going to get good conformance.</db:para>
+<db:para>How do you know if you are meeting constraints -- in any activity? Feedback. With any activity, we need a way to know when we are done and when we have done it correctly. In the [media domain], there is one form of feedback: how the document looks. With a true WYSIWYG display, if it looks right on the screen, it will render correctly on paper, or whatever media you are targeting as you write. That is the writer’s signal that they are done, and done correctly.</db:para>
+<db:para>The real key to achieving conformance it to create structures that are easy to conform to. For most content, conformance is not about trying to catch evil doers. The authors are on side and trying to produce good content. Authors who understand structured content may seek to impose constraints as an aid to their own work, just as a carpenter, for instance, might design a jig to guide their saw. Constraints are a tool for writers, not a defense against them. Constraints may force a lazy writer to pull up their socks and do some more research. They may force an inattentive writer to recast their first draft into a more consistent format. But they should never prevent a good and diligent writer from doing good work.</db:para>
 <db:para>The real core of compliance in structured writing, therefore, is not enforcement, but creating structures that:</db:para>
 <db:itemizedlist>
 <db:listitem>
@@ -163,20 +240,10 @@
 </db:listitem>
 <db:listitem>
 <db:para>Either remind authors of what is required or factor it out.</db:para>
+<!-- These are subject domain specific. What about doc domain? -->
 </db:listitem>
 </db:itemizedlist>
 <db:para>Writers may disagree, of course, about what goals should be addressed, what information readers need to achieve those goals, or how best to express information to that audience. Where we have many authors contributing to a common information set, it is important that these differences be addressed and resolved professionally and that all authors involved are on board with the plan going forward. It is at that point that well-thought-out content structures can capture the decisions made and make sure that everyone stays on track and is consistent.</db:para>
 <db:para>Auditing and enforcement still have a role to play, not because authors are hostile to the system, but because they a human. But auditing and enforcement are secondary to the main aim of conformance-friendly design. And in that spirit, auditing and conformance should be seen as part of a feedback loop that is constantly seeking to improve the design. If you keep finding the same mistakes over and over again, that is not a training problem or a human resources problem, it is a design problem.</db:para>
-<db:para>The first principle of conformance therefore is to design something that is easy to conform to. This means using structures and terms that make intuitive sense to writers in their own domains. One of the most common mistakes is to create structures to solve technical problems and then try to teach them to writers.</db:para>
-<db:para>Which of the structured writing domains you choose, essentially comes down to which set of constraints you wish to enforce. However, creating structures that authors can conform to is also a matter of choosing structures in the domain they are more comfortable in.</db:para>
-<db:para>Authors who are used to thinking in visual terms and doing page layouts by hand may be most at ease in the media domain. Of course, the media domain may not allow you to enforce the other constraints your are interested in. In fact, if you are content using media domain tools, chances are you are not thinking about structured writing at all.</db:para>
-<db:para>Authors who are used to thinking in terms of document structures may be more at home in the document domain. Professional technical authors are often used to working in this domain, particularly if they use professional desktop publishing tools such as FrameMaker, which expose document structures to the writer and discourage the direct application of formatting that is typical of how people work in a more media-domain tool like Microsoft Word.</db:para>
-<db:para>It can be very difficult, however, to get people who are used to working in the media domain to move to the document domain. The document domain is complex and often quite abstract. It represents a whole domain of knowledge separate from what the writer is trying to write about. It is difficult to get people who are not full time writers to use document domain tools, whether they be proprietary tools like FrameMaker or document domain structured writing languages like DITA or DocBook.</db:para>
-<db:para>Few writers are used to working in subject domain structures. For anyone used to working in a media-domain WYSIWYG tool, the experience of working in the subject domain is very far from what they are used to. On the other hand, every writer is used to working and thinking in the subject domain because it is the domain of the subject matter they are writing about. While the idea of structured writing may be new to them, the structures of the subject domain should make intuitive sense to them because they know the subject domain itself.</db:para>
-<db:para>And in fact people are used to working in the subject domain, though they may not immediately recognize it. They are used to filling in forms, and forms are nothing but subject domain structured writing instruments. You can, in fact, create a subject domain structured writing interface as a form.</db:para>
-<db:para>The difference between subject domain writing and filling in forms, though, lies in the more free-form content, such as paragraph and lists, that you may create in a more discursive document, and also in the practice of annotating phrases within a paragraph. Where there is a need for these things in the subject domain, a markup-based approach often works better than a form.</db:para>
-<db:para>So, while the subject domain may initially seem more foreign than the document domain to a writer coming from the media domain, it is actually easier for them to learn.</db:para>
-<db:para>Additionally, of course, you may want to go to the subject domain either to factor out constraints from the document domain or to express subject-related constraints that matter to your organization.</db:para>
-<db:para>Finally, very few writers are used to either writing or thinking in the management domain. The management domain is the domain of the content manager and it intrudes on the structured writing domain because of the need to manage content at a level lower than the individual file or topic. Asking writers to enter management domain information and to abide by management domain constraints is a significant imposition which often requires training as well as additional time and thought during the writing itself. The capacity of the subject domain to factor out a lot of what the management domain is used for, therefore, can have a significant impact on ease of use for writers and can also improve the accuracy and consistency of management algorithms.</db:para>
 </db:section>
 </db:chapter>
