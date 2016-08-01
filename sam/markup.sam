@@ -106,11 +106,11 @@ chapter: Markup
         None of these abstract structures describes document structures in any of the structured writing domains. Instead, specific markup languages based on XML (or its cousin, SGML) indicate subject, document, management, or media domain structures as named instances of elements and attributes. 
         
         ```(DocBook)
-        <section>
-            <title>Moby Dick</title>
-            <para>Herman Melville's <citetitle>Moby Dick</citetitle> is a long book about a big whale.</para>
-        </section>
-        ```
+            <section>
+                <title>Moby Dick</title>
+                <para>Herman Melville's <citetitle>Moby Dick</citetitle> is a long book about a big whale.</para>
+            </section>
+
         
         Thus in the example above (which is in {DocBook}(language), a language based on {XML}), the document domain structures "section", "title", and "para" are defined by XML elements named, respectively, "section", "title", and "para". The generic `<i>` tag from the HTML example has been replaced with them more semantically specific `<citetitle>` tag, which in {DocBook} means the name of a literary work. Both "i" and "citetitle" are modeled as XML elements in DocBook. 
         
@@ -256,7 +256,7 @@ chapter: Markup
        
     section: Instances of hybrid markup languages
     
-        I said above that this book is written in SAM, but that is not quite accurate. As noted above, you can't write anything in an abstract or hybrid language directly. You write in instances of abstract or hybrid languages. Thus DocBook is an instance of the abstract language XML. You can write documents in DocBook. We do say, of course, that we write documents in XML, but that statement is, is not wholly inaccurate, certainly non-specific. Saying the a document is written in DocBook tells you what constraints it meets. Saying it is written in XML merely tells you which syntax it uses, which is a whole lot less informative. 
+        I said above that this book is written in SAM, but that is not quite accurate. As noted above, you can't write anything in an abstract or hybrid language directly. You write in instances of those languages. Thus DocBook is an instance of the abstract language XML. You can write documents in DocBook. We do say, of course, that we write documents in XML, but that statement is, if not wholly inaccurate, certainly non-specific. Saying the a document is written in DocBook tells you what constraints it meets. Saying it is written in XML merely tells you which syntax it uses, which is a whole lot less informative.
         
         So, to be more specific, this book is written in a markup language written in SAM, one that I created for the specific purpose of writing this book. That markup language was then transformed by a processing application into DocBook, which is the markup language that the publisher uses for producing books. 
         

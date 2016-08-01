@@ -89,8 +89,11 @@ Herman Melville's _Moby Dick_ is a long book about a big whale.
 </footnote>
 <db:para>None of these abstract structures describes document structures in any of the structured writing domains. Instead, specific markup languages based on XML (or its cousin, SGML) indicate subject, document, management, or media domain structures as named instances of elements and attributes.</db:para>
 <db:programlisting language="DocBook">
+&lt;section&gt;
+    &lt;title&gt;Moby Dick&lt;/title&gt;
+    &lt;para&gt;Herman Melville's &lt;citetitle&gt;Moby Dick&lt;/citetitle&gt; is a long book about a big whale.&lt;/para&gt;
+&lt;/section&gt;
 </db:programlisting>
-<db:para>&lt;section&gt; &lt;title&gt;Moby Dick&lt;/title&gt; &lt;para&gt;Herman Melville’s &lt;citetitle&gt;Moby Dick&lt;/citetitle&gt; is a long book about a big whale.&lt;/para&gt; &lt;/section&gt; <db:code/>`</db:para>
 <db:para>Thus in the example above (which is in DocBook, a language based on XML), the document domain structures “section”, “title”, and “para” are defined by XML elements named, respectively, “section”, “title”, and “para”. The generic <db:code>&lt;i&gt;</db:code> tag from the HTML example has been replaced with them more semantically specific <db:code>&lt;citetitle&gt;</db:code> tag, which in DocBook means the name of a literary work. Both “i” and “citetitle” are modeled as XML elements in DocBook.</db:para>
 <db:para>XML elements are generic abstract structures. To create markup to represent  real document structures, you give names elements. Named elements can then represent any media, document, subject, or management domain structure that you want, thus allowing you to create a markup language that suits a specific purpose.</db:para>
 <db:para>Unlike a Markdown parser, an XML parser does not see paragraphs or titles. It sees elements. It passes the elements it finds, along with their names, down to a processing application which is responsible for knowing what “section”, “title”, and “para” elements mean in a particular markup language like DocBook. The parser is common to all XML-based languages, but the processing application is specific to DocBook.</db:para>
@@ -197,7 +200,7 @@ section:
 </db:section>
 <db:section>
 <db:title>Instances of hybrid markup languages</db:title>
-<db:para>I said above that this book is written in SAM, but that is not quite accurate. As noted above, you can’t write anything in an abstract or hybrid language directly. You write in instances of abstract or hybrid languages. Thus DocBook is an instance of the abstract language XML. You can write documents in DocBook. We do say, of course, that we write documents in XML, but that statement is, is not wholly inaccurate, certainly non-specific. Saying the a document is written in DocBook tells you what constraints it meets. Saying it is written in XML merely tells you which syntax it uses, which is a whole lot less informative.</db:para>
+<db:para>I said above that this book is written in SAM, but that is not quite accurate. As noted above, you can’t write anything in an abstract or hybrid language directly. You write in instances of those languages. Thus DocBook is an instance of the abstract language XML. You can write documents in DocBook. We do say, of course, that we write documents in XML, but that statement is, if not wholly inaccurate, certainly non-specific. Saying the a document is written in DocBook tells you what constraints it meets. Saying it is written in XML merely tells you which syntax it uses, which is a whole lot less informative.</db:para>
 <db:para>So, to be more specific, this book is written in a markup language written in SAM, one that I created for the specific purpose of writing this book. That markup language was then transformed by a processing application into DocBook, which is the markup language that the publisher uses for producing books.</db:para>
 </db:section>
 </db:chapter>
