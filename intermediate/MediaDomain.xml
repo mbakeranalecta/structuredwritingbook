@@ -96,14 +96,16 @@ stroke
 <title>Enabling the media domain</title>
 <p>Providing the ability for the author to work in the media domain was at the heart of the desktop publishing revolution. For centuries, scribes worked directly in the media domain, using pen and ink to inscribe words and pictures on paper or velum. With the printing press, however, authors no longer worked directly in the media domain. While authors were still directly placing ink on paper, at first by pen and then by typewriter, they were no longer preparing the final visual form of the content. That would be created later by the typesetter.</p>
 <p>To tell the typesetter how to create the final visual form, document designers had to add additional instructions (metadata) to the author’s manuscript. The designers did this using typesetter’s marks, and the process was called “marking up” the document. We still use “marking up” to describe how structured writing is done today. The M in <phrase><annotation type="tool">XML</annotation></phrase> stands for Markup. (But modern structured writing does not always have such a clear cut distinction between text and markup as this usage implies, as we shall see.)</p>
+<figure id="typesetter">
 <insert item="../graphics/printermarkup.png" type="image"/>
+</figure>
 <p>The writer preparing a manuscript for typesetting was working in the document domain, indicating basic document structures like paragraphs, lists, and titles, without any indication of how they should look in print. The designer then wrote a set of instructions for applying formatting to those structures -- a <phrase><annotation type="concept">formatting algorithm</annotation></phrase>. Then the typesetter executed that algorithm by setting the type which the printer then used to print final output. (Here is that same pattern again -- two steams of objects, merged by an algorithm to produce a new stream of objects.)</p>
 <p>This is pretty much exactly what we do today when we create an HTML page and specify a CSS stylesheet to supply the formatting instructions. Those instructions are then executed by the browser to render the content on screen or paper.</p>
 <p>Actually, we are getting ahead of ourselves here. A better analogy to old style typesetter’s marks is an HTML page with the styles specified inline.</p>
 <codeblock language="HTML">
 &lt;p style="{font-family: serif; font-weight: bold; font-size: 12pt}"&gt;
 </codeblock>
-<p>You can see that this markup is very very similar to the old typesetters marks in <insert item="typesetter" type="id"/>.</p>
+<p>You can see that this markup is very very similar to the old typesetters marks in <citation type="idref" value="typesetter"/>.</p>
 <p>Theoretically, those inline styles could be added by a document designer after the author had written the original HTML, but separating those tasks was not the intent of the desktop publishing movement. The intent was to combine the job of designer and writer into one, effectively moving the author from working in the document domain to working in the media domain.</p>
 <p>The inefficiency of applying styles to every element soon became apparent. Stylesheet mechanisms were devised to separate the media domain elements of a document from the document domain elements.</p>
 <p>Using styles rather than direct formatting does not mean that you have moved from working in the media domain to working in the document domain. It just means that you have moved from working in an unstructured way in the media domain to working in a structured way in the media domain.</p>

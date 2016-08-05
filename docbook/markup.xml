@@ -83,10 +83,10 @@ Herman Melville's _Moby Dick_ is a long book about a big whale.
 <db:section>
 <db:title>Abstract markup languages</db:title>
 <db:para>An abstract markup languages does not describe specific concrete document structures directly. It describes abstract structures which can be named to represent structures in any domain.</db:para>
-<db:para>XML is an example of an abstract markup language.<citation type="idref" value="1"/> The markup in an XML file does not directly indicates things like headings or paragraphs. Instead, it indicates a set of abstract structures called elements, attributes, entities, processing instructions, marked sections, and comments.</db:para>
-<footnote id="1">
+<db:para>XML is an example of an abstract markup language.<db:footnote>
 <db:para>The formal term for a language like XML is “meta language”, a language for describing other languages. In calling XML an “abstract” language, I am focusing on a different property, its use of structures that are not parts of a document but generic containers. A meta language needs such abstract containers. But I find that the term “meta language” is not helpful to most readers, so I have chosen instead to focus on this property of using abstract structures as opposed to the concrete structures of a language like Markdown.</db:para>
-</footnote>
+</db:footnote> The markup in an XML file does not directly indicates things like headings or paragraphs. Instead, it indicates a set of abstract structures called elements, attributes, entities, processing instructions, marked sections, and comments.</db:para>
+
 <db:para>None of these abstract structures describes document structures in any of the structured writing domains. Instead, specific markup languages based on XML (or its cousin, SGML) indicate subject, document, management, or media domain structures as named instances of elements and attributes.</db:para>
 <db:programlisting language="DocBook">
 &lt;section&gt;
@@ -100,15 +100,15 @@ Herman Melville's _Moby Dick_ is a long book about a big whale.
 </db:section>
 <db:section>
 <db:title>Instances of abstract markup languages</db:title>
-<db:para>This means that DocBook is a specific instance of the abstract language XML. Many common markup languages are instances of XML<citation type="idref" value="2"/>. XML is virtually the only abstract language used for content these days so it is the only abstract language I am going to talk about.</db:para>
-<footnote id="2">
+<db:para>This means that DocBook is a specific instance of the abstract language XML. Many common markup languages are instances of XML<db:footnote>
 <db:para>Sometimes also referred to as “applications” of XML, though this usage was far more common in the days of SGML.</db:para>
-</footnote>
-<db:para>So let’s revise my earlier statement: We can usefully divide markup languages into <annotation type="bold">four</annotation> types: concrete, abstract, instances of abstract, and hybrid. In fact (spoiler alert), lets revise it again: We can usefully divide markup languages into <annotation type="bold">five</annotation> types: concrete, abstract, instances of abstract, hybrid, and instances of hybrid.</db:para>
-<db:para>By these definitions, abstract and hybrid are not language types you can actually write content in, they are languages that you can use to define other languages that are instances of them. Despite how we often use the term, you don’t actually write in XML, you write in DocBook or DITA, which happen to be instances of XML.<citation type="idref" value="3"/> Thus in terms of actually writing content, we really do have just three types of markup languages: concrete languages, instances of abstract languages, and instances of hybrid languages.</db:para>
-<footnote id="3">
+</db:footnote>. XML is virtually the only abstract language used for content these days so it is the only abstract language I am going to talk about.</db:para>
+
+<db:para>So let’s revise my earlier statement: We can usefully divide markup languages into <db:emphasis role="bold">four</db:emphasis> types: concrete, abstract, instances of abstract, and hybrid. In fact (spoiler alert), lets revise it again: We can usefully divide markup languages into <db:emphasis role="bold">five</db:emphasis> types: concrete, abstract, instances of abstract, hybrid, and instances of hybrid.</db:para>
+<db:para>By these definitions, abstract and hybrid are not language types you can actually write content in, they are languages that you can use to define other languages that are instances of them. Despite how we often use the term, you don’t actually write in XML, you write in DocBook or DITA, which happen to be instances of XML.<db:footnote>
 <db:para>Or to put it another way, you write in DocBook semantics using XML syntax. Alternatively, since DocBook originated in the days of XML’s predecessor abstract language, SGML, you can write DocBook semantics in SGML syntax.</db:para>
-</footnote>
+</db:footnote> Thus in terms of actually writing content, we really do have just three types of markup languages: concrete languages, instances of abstract languages, and instances of hybrid languages.</db:para>
+
 </db:section>
 <db:section>
 <db:title>Concrete languages in abstract clothing</db:title>

@@ -81,10 +81,10 @@
     &lt;date-of-birth&gt;1970-12-25&lt;/date-of-birth&gt;
 &lt;/person&gt;
 </db:programlisting>
-<db:para>Some schema languages, such as XML Schema, let you specify the data type<citation type="idref" value="data-type"/> of an element. You could specify that the type of the age field must be whole number between 0 and 150 and that the date-of-birth field must be a recognizable date format. Here’s what the schema for these constraints might look like:</db:para>
-<footnote id="data-type">
+<db:para>Some schema languages, such as XML Schema, let you specify the data type<db:footnote>
 <db:para>The data types referred to in the example above are not data types are they are commonly understood in programming terms (which refers to how they are stored in memory). In XML, as in all major markup languages, the data is all strings. What a data type really is in a schema is a pattern. There is a language for describing patterns in text that is called regular expressions. Regular expressions are a bit cryptic and take some getting used to but they are incredibly powerful at describing patterns in text. XML schema lets you define types for elements using regular expressions, so there is a huge amount you can do to constrain the content of elements in your documents.</db:para>
-</footnote>
+</db:footnote> of an element. You could specify that the type of the age field must be whole number between 0 and 150 and that the date-of-birth field must be a recognizable date format. Here’s what the schema for these constraints might look like:</db:para>
+
 <db:programlisting language="xsd">
 &lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"&gt;
 

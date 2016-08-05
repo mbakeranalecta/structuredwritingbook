@@ -156,6 +156,8 @@
     <xsl:template match="phrase">
         <xsl:apply-templates/>
     </xsl:template>
+
+    <xsl:template match="annotations"/>
     
     <xsl:template match="annotation[@type='tool']">
         <xsl:apply-templates/>
@@ -176,6 +178,10 @@
     <xsl:template match="annotation[@type='algorithm']">
         <xsl:apply-templates/>
     </xsl:template>
+
+    <xsl:template match="annotation[@type='system']">
+        <xsl:apply-templates/>
+    </xsl:template>
     
     <xsl:template match="annotation[@type='code']">
         <db:code>
@@ -188,7 +194,13 @@
             <xsl:apply-templates/>
         </db:emphasis>
     </xsl:template>
-
+    
+    <xsl:template match="annotation[@type='bold']">
+        <db:emphasis role="bold">
+            <xsl:apply-templates/>
+        </db:emphasis>
+    </xsl:template>
+    
     <xsl:template match="annotation[@type='title']">
         <db:citetitle>
             <xsl:apply-templates/>
@@ -200,6 +212,32 @@
         <xsl:text>[</xsl:text>
         <xsl:value-of select="@value"/>
         <xsl:text>]</xsl:text>
+    </xsl:template>
+    
+    <xsl:template match="citation[@type='idref']">
+        <xsl:variable name="idref" select="@value"/>
+        <xsl:choose>
+            <xsl:when test="//footnote[@id=$idref]">
+                <xsl:apply-templates select="//footnote[@id=$idref]" mode="resolve-footnote"/>
+            </xsl:when>
+            <xsl:when test="//figure[@id=$idref]">
+                <db:xref linkend="{$idref}"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:message>
+                    <xsl:text>No element found with id </xsl:text>
+                    <xsl:value-of select="$idref"/>
+                </xsl:message>
+            </xsl:otherwise>
+        </xsl:choose>
+        
+    </xsl:template>
+    
+    <xsl:template match="footnote"/>
+    <xsl:template match="footnote" mode="resolve-footnote">
+        <db:footnote>
+            <xsl:apply-templates/>
+        </db:footnote>
     </xsl:template>
     
     <xsl:template match="blockquote">
@@ -248,7 +286,7 @@
     <xsl:template match="figure[insert[@type='image']]">
         <db:mediaobject>
             <xsl:if test="@id">
-                <xsl:attribute name="id">
+                <xsl:attribute name="xml:id">
                     <xsl:value-of select="@id"/>
                 </xsl:attribute>
             </xsl:if>

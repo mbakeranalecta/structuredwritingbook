@@ -109,7 +109,8 @@ chapter:(#media-domain) Writing in the Media Domain
 
 		To tell the typesetter how to create the final visual form, document designers had to add additional instructions (metadata) to the author's manuscript. The designers did this using typesetter's marks, and the process was called "marking up" the document. We still use "marking up" to describe how structured writing is done today. The M in {XML}(tool) stands for Markup. (But modern structured writing does not always have such a clear cut distinction between text and markup as this usage implies, as we shall see.)
 
-		>>>(image ../graphics/printermarkup.png *typesetter)
+        figure:(*typesetter)
+            >>>(image ../graphics/printermarkup.png)
 
 		The writer preparing a manuscript for typesetting was working in the document domain, indicating basic document structures like paragraphs, lists, and titles, without any indication of how they should look in print. The designer then wrote a set of instructions for applying formatting to those structures -- a {formatting algorithm}(concept). Then the typesetter executed that algorithm by setting the type which the printer then used to print final output. (Here is that same pattern again -- two steams of objects, merged by an algorithm to produce a new stream of objects.)
 
@@ -121,7 +122,7 @@ chapter:(#media-domain) Writing in the Media Domain
             <p style="{font-family: serif; font-weight: bold; font-size: 12pt}">
 		
 
-		You can see that this markup is very very similar to the old typesetters marks in >(*typesetter).
+		You can see that this markup is very very similar to the old typesetters marks in [*typesetter].
 
 		Theoretically, those inline styles could be added by a document designer after the author had written the original HTML, but separating those tasks was not the intent of the desktop publishing movement. The intent was to combine the job of designer and writer into one, effectively moving the author from working in the document domain to working in the media domain. 
 
