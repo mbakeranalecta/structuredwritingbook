@@ -35,7 +35,7 @@
 <insert item="../graphics/typed-bitmap.png" type="image"/>
 <p>To work more efficiently, you need to move away from dots and start working in a program that records characters as characters. You could go to a text editor, which records characters as characters, but a text editor does not keep any formatting information (unless you create markup -- but that would be getting ahead of ourselves). For most publishing purposes, plain text is inadequate. We need to maintain the ability to format the document.</p>
 <p>A vector graphic program creates graphics as a collection of  objects (“vector” meaning the mathematical representation of a shape or line). For example, it allows us to create a circle as a shape, described mathematically in computer memory, rather than as a matrix of dots. Rather than recording an actual circle, the program records an abstraction of a circle: the essential properties needed to reproduce an actual circle on a media, such as its center, diameter, and line weight. The computer then lets you manipulate that abstraction as an object, only rendering it as actual dots when the graphic is displayed on screen or paper.</p>
-<figure name="object-vs-dots">
+<figure id="objects-vs-dots">
 <insert item="../graphics/object-vs-dots.png" type="image"/>
 <caption>
 <p>A circle as an object, displayed in a vector graphics program (Inkscape), left, vs. a circle as a set of dots in a raster graphics program (Paint), right.</p>
@@ -62,7 +62,7 @@ stroke
 <p>This is a pattern we will see as we look at structured writing across the <phrase><annotation type="concept" specifically="structured writing domains">three domains</annotation></phrase>. Rather than storing the image of the document to be printed, the computer stores an abstraction of the document which consists of raw text combined with (or, in some cases, replaced by) additional pieces of information which are commonly called metadata. This metadata can then be used to manipulate the content in whatever way you need, and also to drive algorithms to convert it back into a concrete media domain representation that can be displayed to readers.</p>
 <p>Adding metadata to text creates structures that the computer can create, store, and manipulate. It is useful to think of structures as objects, just as we think of the representation of a circle in a vector graphics program as an object. And indeed, a vector graphics program will let you create a text object.</p>
 <p>A text object is a rectangular area that contains characters. It has numerous properties, such as margins, background and foreground colors, the text string, and the font face, size, and weight used to display that text, and in this example from InkScape:</p>
-<figure name="text-object">
+<figure id="text-object">
 <insert item="../graphics/text-object.png" type="image"/>
 <caption>
 <p>A text object in a vector graphics program, with object properties shown.</p>
@@ -72,7 +72,7 @@ stroke
 <title>Abstracting out font information</title>
 <p>A vector graphics program displays text in a chosen font. If your change the value of the text object’s font attribute, it will immediately redraw the text in the new font. The shapes of the individual letters in the font are required information for rendering the text object in the media domain. However, they are not stored as part of the text object. Whereas the representation of the text in the paint program included the shape of the letters, in the vector graphics program it does not. That information has been factored out.</p>
 <p>The shape of the characters (technically, “glyphs”) that make up the font are stored separately in font files. Font files consist of a set of shape objects that describe each glyph, together with metadata such as the name of the font and the name of each glyph. To actually display the text block on screen, the graphics program (or rather the graphics system API to which it delegates this task) combines information from the font file with information from the text object by matching the metadata to find the right font and character, and then drawing the appropriate glyph on the current media.</p>
-<figure name="merge_text_and_font">
+<figure id="merge_text_and_font">
 <insert item="../graphics/TextPlusFont.png" type="image"/>
 <caption>
 <p>The vector graphic text object factors out letter shapes to a separate font file.</p>

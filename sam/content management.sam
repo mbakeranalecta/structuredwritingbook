@@ -1,7 +1,48 @@
 sam:
 
 chapter:(#chapter.content-management) Content Management
-    When we create an individual piece of content for one-time publication in a single media, there is really not much of a role for management in the process. You may need to manage you sources and reasearch material, but not your product. Content management becomes a concern when you want to manage the production and publishing of many pieces of content, to manage the relationship between them, ensure consistency and quality, or to publish them many times in different ways.
+
+    To many people, structured writing exists mainly as an aid to content management. In this book, I have taken a very different view, focusing on structured writing principally as an aid to content quality. Nonetheless, any content project at any scale requires some form of content management, and so any structured writing project has to take into account how the content it creates will be managed. 
+    
+    Content management principally deals with two problems. One is orchestrating content for the publishing process. That is, making sure all the right bits get into the right documents at the right time. In many cases, there is a workflow aspect to this, making sure that every piece of content is seen, acted on, and or approved by every interested party in the organization prior to release. It may also include rights management issues, if there are different people with a financial stake in the content who may be entitled to compensation based on its use. These functions are well covered by other works, and I don't intend to discuss them in any detail here. 
+    
+    The second problem is that or orchestrating content for writers during the writing process. For instance, if you are practicing content reuse, writers need to find content to reuse, and a content management system can help. Content management system do their job largely through the collection and management of metadata. As we have seen, metadata is pervasive in structured writing. We defined structured writing as writing that not only obeys constraints, it also records the constraints that it follows. The record of those constraints is metadata. In fact, most of the metadata that a content management system manages is simply the record of the constraints that content obeys. This includes much of the metadata related to workflow, since the workflow requirements of a system are also constraints on the content.) 
+    
+    There is, therefore, a continuity between content management and structured wiring. Both collect and manage information about the constraints that a piece of content follows. And this means that the boundaries between structured writing systems and content management systems are fluid. Constraint metadata that is held in a CMS in one organization may be embedded in the content in another. 
+    
+    You might expect that the principle type of metadata contained in a CMS would be {management domain} metadata. After all, we described the management domain as an intrusion into the content world, since it does not actually describe content at all. The reason for the intrusion of the management domain into content is to allow for the management of the content below the level of whatever file or chunk size you store in the CMS.[*XMLDatabase]
+    
+    footnote:(*XMLDatabase)
+        In some CMSs, this distinction between the chunk stored in the CMS and the structures expressed inside that chunk is moot. A CMS based on a native XML database, for instance, makes no distinction between the chunk and the structure of the chunk, but treats the entire repository as a single XML resource that it can query and manage down to any level of granularity. Even with such a system, however, this distinction remain for the author, who had to deal with the structure of whatever sized chunk of content they are being asked to author. 
+    
+    But while you will rarely find much in the way of {media domain} or {document domain} metadata stored at the CMS level, CMS's often contain a great deal of {subject domain} metadata. 
+    
+    If you are managing a large volume of content, you will need some way to find content on a particular subject. If you are doing content reuse, for example, you will constantly be asking if content already exists on the subject you are preparing to write about. If your CMS is managing the delivery of content dynamically to the Web, it will need to respond to queries based on content. And if you are optimizing your content for search you will need to provide the search engine with subject metadata in the form of keywords or microformats. All of this depends on subject domain metadata. Subject domain metadata is therefore central to CMS operations. {DITA}, which is at heart a document-domain system with heavy {management domain} intrusions, also includes a specification for the external storage of subject domain metadata in the form of the {subject schema}(tool).
+    
+    
+    It is a very common pattern for a CMS to store document domain content and attach subject domain metadata to it. For instance, a CMS might store recipes written in MarkDown and attach separate metadata records to each recipe listing they key recipe metadata needed for retrieval and sorting of recipes. One of the things that writers often complain about with CMS systems is that they are not allowed to submit content to the system without filling out complicated metadata records. 
+    
+    An alternative approach would be to write recipes in a subject domain format in which all the recipe metadata is included in the content from the beginning. The CMS then requires not external metadata label, though it does obviously require a way to access and query the metadata embedded in the content. (CMSs based on XML databases often have this capability as a natural consequence of the XML database architecture.)
+    
+    Which approach is preferable? The conventional CMS approach arises because most CMS's are based on relational databases, which are good at storing metadata records and attaching them to blobs, but are not good at storing or querying the hierarchical structure of content. But this is a case of the tail wagging the dog. It has several disadvantages.
+    
+    1. It gives no support for subject-domain validation of the content. It does nothing to help improve content quality. By requiring document-domain content as the storage format, it precludes the use of the subject domain for authoring and cuts you off from all the advantages it provides. 
+    
+    2. The system has no way of telling of the content meets its constraints. It records the content constraints in a separate record without ever validating that the content meets them. 
+    
+    2. It separates the metadata from the content is describes. This allows for drift between the content and the metadata. 
+    
+    4. It can only record the characteristics of a chunk of content as a whole. It cannot look down into the content to find more fine grained metadata. One of the advantages of writing a recipe is the subject domain is that it allows you to do things like querying the collection of recipes for all those with a calorie count below 100. But unless the metadata record for the recipe includes that level of detail, the CMS cannot respond to that query. And if the CMS does store that level of detail, it is effectively asking the author to write the entire content twice, once in the document domain and once in the subject domain. 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    When we create an individual piece of content for one-time publication in a single media, there is really not much of a role for management in the process. You may need to manage you sources and research material, but not your product. Content management becomes a concern when you want to manage the production and publishing of many pieces of content, to manage the relationship between them, ensure consistency and quality, or to publish them many times in different ways.
 
 	Of course, many of the reasons we have looked at for moving content from the media domain to the document domain or the subject domain have to do with managing the production and publishing process. But manageing a body of content and the processes and tools that create and process that content, require a whole set of metadata of its own. 
 

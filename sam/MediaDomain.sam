@@ -26,7 +26,7 @@ chapter:(#media-domain) Writing in the Media Domain
 
 	A vector graphic program creates graphics as a collection of  objects (“vector” meaning the mathematical representation of a shape or line). For example, it allows us to create a circle as a shape, described mathematically in computer memory, rather than as a matrix of dots. Rather than recording an actual circle, the program records an abstraction of a circle: the essential properties needed to reproduce an actual circle on a media, such as its center, diameter, and line weight. The computer then lets you manipulate that abstraction as an object, only rendering it as actual dots when the graphic is displayed on screen or paper.
 
-	figure:(#object-vs-dots)
+	figure:(*objects-vs-dots)
 		>>>(image ../graphics/object-vs-dots.png)
 		caption: 
             A circle as an object, displayed in a vector graphics program (Inkscape), left, vs. a circle as a set of dots in a raster graphics program (Paint), right.
@@ -65,7 +65,7 @@ chapter:(#media-domain) Writing in the Media Domain
 
 	A text object is a rectangular area that contains characters. It has numerous properties, such as margins, background and foreground colors, the text string, and the font face, size, and weight used to display that text, and in this example from InkScape: 
 
-	figure:(#text-object)
+	figure:(*text-object)
 		>>>(image ../graphics/text-object.png)
 		caption: 
             A text object in a vector graphics program, with object properties shown.
@@ -76,7 +76,7 @@ chapter:(#media-domain) Writing in the Media Domain
 
 		The shape of the characters (technically, “glyphs”) that make up the font are stored separately in font files. Font files consist of a set of shape objects that describe each glyph, together with metadata such as the name of the font and the name of each glyph. To actually display the text block on screen, the graphics program (or rather the graphics system API to which it delegates this task) combines information from the font file with information from the text object by matching the metadata to find the right font and character, and then drawing the appropriate glyph on the current media. 
 
-		figure:(#merge_text_and_font) 
+		figure:(*merge_text_and_font) 
 			>>>(image ../graphics/TextPlusFont.png)
 			caption: 
                 The vector graphic text object factors out letter shapes to a separate font file. 
