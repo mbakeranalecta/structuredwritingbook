@@ -348,5 +348,26 @@
         </db:section>
     </xsl:template>
 
+    <xsl:template match="grid">
+        <db:informaltable>
+            <db:tbody>
+                <xsl:apply-templates/>
+            </db:tbody>
+        </db:informaltable>
+    </xsl:template>
+
+    <xsl:template match="row">
+        <db:tr>
+            <xsl:apply-templates/>
+        </db:tr>
+    </xsl:template>
+
+    <xsl:template match="cell">
+        <db:td>
+            <xsl:apply-templates/>
+        </db:td>
+
+    </xsl:template>
+
 </xsl:stylesheet>
 

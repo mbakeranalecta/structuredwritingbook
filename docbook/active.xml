@@ -44,49 +44,49 @@
 <db:para>Supporting active content in structured writing comes down to one thing. If you create static document structures, you will have static content. If you create structures that an algorithm can interpret in different ways, you have the foundation for active content.</db:para>
 <db:para>In the media domain this means shipping the algorithm itself along with its data set (thought the data set may reside somewhere else and be queried by that algorithm). Of course, all content arrives at the media domain as it is published, so this is always what you are going to deliver. You will always be creating (or borrowing) an algorithm to ship with your content, and setting up your content so that algorithm can read it.</db:para>
 <db:para>In the document domain, this means defining document structures to explicitly support certain kinds of manipulation. For example, a generic table does not support the action of allowing the reader to sort on any column. Sorting by column only makes sense if the content consists of identically structured rows. In other words, when you sort a table on a column, you are actually sorting the rows. Sorting this table by column would accomplish nothing meaningful:</db:para>
-<grid>
-<row>
-<cell><db:emphasis role="bold">item</db:emphasis></cell>
-<cell>table</cell>
-<cell>stool</cell>
-<cell>shooting stick</cell>
-<cell>chair</cell>
-</row>
-<row>
-<cell><db:emphasis role="bold">legs</db:emphasis></cell>
-<cell>4</cell>
-<cell>3</cell>
-<cell>1</cell>
-<cell>4</cell>
-</row>
-<row>
-<cell><db:emphasis role="bold">price</db:emphasis></cell>
-<cell>$400</cell>
-<cell>$20</cell>
-<cell>$75</cell>
-<cell>$60</cell>
-</row>
-</grid>
+<db:informaltable><db:tbody>
+<db:tr>
+<db:td><db:emphasis role="bold">item</db:emphasis></db:td>
+<db:td>table</db:td>
+<db:td>stool</db:td>
+<db:td>shooting stick</db:td>
+<db:td>chair</db:td>
+</db:tr>
+<db:tr>
+<db:td><db:emphasis role="bold">legs</db:emphasis></db:td>
+<db:td>4</db:td>
+<db:td>3</db:td>
+<db:td>1</db:td>
+<db:td>4</db:td>
+</db:tr>
+<db:tr>
+<db:td><db:emphasis role="bold">price</db:emphasis></db:td>
+<db:td>$400</db:td>
+<db:td>$20</db:td>
+<db:td>$75</db:td>
+<db:td>$60</db:td>
+</db:tr>
+</db:tbody></db:informaltable>
 <db:para>As laid out on a page, a table may group related information by row or by column. Unless you know which is which, you don’t know which sort makes sense. Still other tables provide a single value lookup based on two inputs. Sorting this kind of table makes no sense either way. The only logical sorts are on the first column and the first row, which presumable are sorted correctly to begin with.</db:para>
 <db:para>Still other tables may be lists in disguise. Imagine the consequence of sorting this table on the second column:</db:para>
-<grid>
-<row>
-<cell>1.</cell>
-<cell>Don protective clothing.</cell>
-</row>
-<row>
-<cell>2.</cell>
-<cell>Clear the area.</cell>
-</row>
-<row>
-<cell>3.</cell>
-<cell>Block all entrances.</cell>
-</row>
-<row>
-<cell>4.</cell>
-<cell>Activate the destruct sequence.</cell>
-</row>
-</grid>
+<db:informaltable><db:tbody>
+<db:tr>
+<db:td>1.</db:td>
+<db:td>Don protective clothing.</db:td>
+</db:tr>
+<db:tr>
+<db:td>2.</db:td>
+<db:td>Clear the area.</db:td>
+</db:tr>
+<db:tr>
+<db:td>3.</db:td>
+<db:td>Block all entrances.</db:td>
+</db:tr>
+<db:tr>
+<db:td>4.</db:td>
+<db:td>Activate the destruct sequence.</db:td>
+</db:tr>
+</db:tbody></db:informaltable>
 <db:para>Even with row-oriented tables sorting on every column does not always make sense. Sorting on the name column or the size columns or the price column makes sense. Sorting on the description column or the picture column does not.</db:para>
 <db:para>To implement column sorting at the document domain level, therefore, you need some sort of sortable table structure which assures that the sorting behavior is only applied to columns or rows where it makes sense in tables where it makes sense.</db:para>
 <db:para>In the subject domain, of course, you are not creating a table at all, or at least, not a table in the publishing sense of the word. You are creating a subject-based structure to capture information which can then be used to build different document domain presentations for different purposes. The fact that some of these presentation may be static and some may be active is orthogonal to how the information is represented in the subject domain. In other words, by the time we move content to the subject domain we have factored out the behavior.</db:para>
@@ -102,43 +102,43 @@ ingredients:: ingredient, quantity, unit
 <db:para>In SAM, the markup language used for most of the examples in this book, there is a specific markup structure for this kind of information. It is called a record set, and the markup above is an example of it.</db:para>
 <db:para>With this markup, you can construct a table this way:</db:para>
 <db:blockquote>
-<grid>
-<row>
-<cell>eggs</cell>
-<cell>3</cell>
-<cell>each</cell>
-</row>
-<row>
-<cell>salt</cell>
-<cell>1</cell>
-<cell>tsp</cell>
-</row>
-<row>
-<cell>butter</cell>
-<cell>.5</cell>
-<cell>cup</cell>
-</row>
-</grid>
+<db:informaltable><db:tbody>
+<db:tr>
+<db:td>eggs</db:td>
+<db:td>3</db:td>
+<db:td>each</db:td>
+</db:tr>
+<db:tr>
+<db:td>salt</db:td>
+<db:td>1</db:td>
+<db:td>tsp</db:td>
+</db:tr>
+<db:tr>
+<db:td>butter</db:td>
+<db:td>.5</db:td>
+<db:td>cup</db:td>
+</db:tr>
+</db:tbody></db:informaltable>
 </db:blockquote>
 <db:para>Or this way:</db:para>
 <db:blockquote>
-<grid>
-<row>
-<cell>eggs</cell>
-<cell>salt</cell>
-<cell>butter</cell>
-</row>
-<row>
-<cell>3</cell>
-<cell>1</cell>
-<cell>.5</cell>
-</row>
-<row>
-<cell>each</cell>
-<cell>tsp</cell>
-<cell>cup</cell>
-</row>
-</grid>
+<db:informaltable><db:tbody>
+<db:tr>
+<db:td>eggs</db:td>
+<db:td>salt</db:td>
+<db:td>butter</db:td>
+</db:tr>
+<db:tr>
+<db:td>3</db:td>
+<db:td>1</db:td>
+<db:td>.5</db:td>
+</db:tr>
+<db:tr>
+<db:td>each</db:td>
+<db:td>tsp</db:td>
+<db:td>cup</db:td>
+</db:tr>
+</db:tbody></db:informaltable>
 </db:blockquote>
 <db:para>We know, from the semantics of the record set, which rows or columns it would make sense to be sortable, and we can create a document domain sortable table accordingly.</db:para>
 <db:para>Of course, we can also construct this:</db:para>
