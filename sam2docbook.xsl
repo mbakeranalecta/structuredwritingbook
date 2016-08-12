@@ -98,12 +98,23 @@
 
     <xsl:template match="book/chapter | part/chapter">
         <db:chapter>
-            <db:title>
-                <xsl:apply-templates/>
-            </db:title>
-            <db:para>
-                Not available yet.
-            </db:para>
+            <xsl:choose>
+                <xsl:when test="title">
+                    <xsl:apply-templates select="title"/>
+                    <db:para>
+                        Not available yet.
+                    </db:para>  
+                    <xsl:apply-templates  select="title/following-sibling::*"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <db:title>
+                        <xsl:apply-templates/>
+                    </db:title>
+                   <db:para>
+                       Not available yet.
+                   </db:para>  
+                </xsl:otherwise>
+            </xsl:choose>
         </db:chapter>
     </xsl:template>
     
@@ -348,6 +359,17 @@
         </db:section>
     </xsl:template>
 
+    <!-- Section from the book file that is just text -->
+    <xsl:template match="section/text()[normalize-space() != '']">
+        <db:title>
+            <xsl:value-of select="."/>
+        </db:title>
+        <db:para>
+            Not available yet.
+        </db:para>
+    </xsl:template>
+    
+    
     <xsl:template match="grid">
         <db:informaltable>
             <db:tbody>
