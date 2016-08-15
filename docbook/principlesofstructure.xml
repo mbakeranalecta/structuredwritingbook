@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+<db:title>Principles of structure</db:title>
+
+<db:section>
+<db:title>Linear vs Hierarchical Structure</db:title>
+<db:para>All the examples of markup that we have looked at to this point have been hierarchical in nature. That is, the markup starts at a single root structure and consists of other structured nested neatly inside that root.</db:para>
+<db:para>This is not the only way to do markup. Older markup systems, in particular media domain systems intended principally for typesetting, were linear in nature. Such systems allowed users to turn on and off feature independently.</db:para>
+<db:para>For example, the word processor WordPerfect takes what it calls a “streaming approach” to document structure in which features are turned on and remain on until they are turned off. Thus in Word Perfect, your could do this, with bold starting and then italic starting, the bold stopping and finally italic stopping:</db:para>
+<db:programlisting>
+This text is [B&gt;bold, [I&gt;this is bold and italic,&lt;B] and this is just italic&lt;I].
+</db:programlisting>
+<db:para>This would print as:</db:para>
+<db:blockquote>
+<db:para>This text is <db:emphasis role="bold">bold,</db:emphasis> <db:emphasis role="bold"><db:emphasis>this is bold and italic,</db:emphasis></db:emphasis> <db:emphasis>and this is just italic</db:emphasis>.</db:para>
+</db:blockquote>
+<db:para>This overlapping of structures is illegal in XML, so in HTML, for instance, you can’t do this:</db:para>
+<db:programlisting>
+&lt;p&gt;This text is &lt;b&gt;bold, &lt;i&gt;this is bold and italic,&lt;/b&gt; and this is just italic&lt;/i&gt;.&lt;/p&gt;
+</db:programlisting>
+<db:para>You have to do this, keeping everything nested with no overlapping structures:</db:para>
+<db:programlisting>
+&lt;p&gt;This text is &lt;b&gt;bold,&lt;/b&gt; &lt;i&gt;&lt;b&gt;this is bold and italic,&lt;/b&gt;&lt;/i&gt; &lt;i&gt;and this is just italic&lt;/i&gt;.&lt;/p&gt;
+</db:programlisting>
+<db:para>There is more to this question than trivial examples like this. In the academic study of text markup, where markup is used not for the preparation of documents but to mark them up for academic study, there is an debate about whether the hierarchical structure of XML-based languages actually reflects the real structure of the text.</db:para>
+<db:para>We noted earlier that in HTML, you have six levels of heading (<db:code>h1</db:code> through <db:code>h6</db:code>) whereas in DocBook you have only <db:code>title</db:code>. In DocBook, you can divide a document up into sections and nest sections inside sections. You can then print the titles of sections inside sections in a smaller font that the titles of first level sections. You get to have differences in heading size without having six different heading tags.</db:para>
+<db:para>But the DocBook model assumes that the real structure of a document is actually a hierarchy of nested sections and that the size of titles announces the steps up and down that hierarchical tree. HTML makes no such assumption. It will let you put a <db:code>&lt;h4&gt;</db:code> immediately after an <db:code>&lt;h1&gt;</db:code> if you want to. It treats document as essentially flat structure punctuated by headings of various sizes as and where appropriate. (HTML syntax follows XML’s nested model, but it simply does not define document structures in a highly nested fashion like DocBook. Until HTML, HTLM did not even have a <db:code>section</db:code> element.)</db:para>
+<db:para>Which model of a document is correct? You can think of a document as being organized hierarchically, with major ideas expressed in sections, sub-ideas support the major ideas in subsections, etc. There are doubtless documents that fit that model. But you can also think of documents as being more like a journey in which headings function more like road signs. A city gets a big sign, a hamlet a small sign, and a town a medium sign. But the town is not inside the city, not the hamlet inside the town, and there is no guarantee that on leaving the city you will come to the town before you come to a hamlet.</db:para>
+<db:para>Today, very few markup languages take the streaming approach of WordPerfect. The problem with it is that when you want to deal with any structure that is naturally hierarchical, the ability to start and stop structures independently just gets in the way and makes things hard to handle. But even with markup languages that are syntactically hierarchical, like XML, you can still define markup languages that are largely flat (like HTML) or more hierarchical (like DocBook).</db:para>
+<db:para>This is a concern mainly in the design of document domain languages. The structure of media domain languages is largely dictated by the shape and relationship of the media-domain object they are modeling. In the subject domain, we have abstracted content out of strict document order. Hierarchy in the subject domain tend to match the hierarchy of relationship in the subject matter itself. (Though this is not universal. Addresses, for instance, which are based on hierarchal locations, are modeled are flat ordered lists. The order reflect the hierarchy, but the nesting of city inside country and of street within city is not reflected in the structure of an address record.) In the document domain, however, it is a real concern. The document domain consists of abstractions of document structures and the nature of their relationship to the structure of thought in the text is not obvious.</db:para>
+<db:para>In the document domain, however, you have to make a choice between enforcing a hierarchical model of a document or allowing a more linear one. You will almost certainly do this in the context of hierarchical syntax. You probably don’t want to go the WordPerfect route of separate on and off commands. But you do need to decide if you are going to allow arbitrary heading levels. Or, to put it another way, to model a document as a hierarchy of sections with each section having a title, or a single flow of text randomly interspersed with headings, or something in between.</db:para>
+<db:para>The something in between option can seem appealing but can you can end up with something really unconstrained, meaning that it is difficult to write reliable algorithms to process it. Here is the kind of issues you can run into:</db:para>
+<db:para>Is a list part of the paragraph in which it occurs? Some markup languages, such as MarkDown and SAM, take the view that lists are separate blocks that come after a preceding paragraph. But DITA, DocBook, and HTML will all let you place a list either inside or outside a paragraph:</db:para>
+<db:programlisting>
+&lt;p&gt; The primary colors are:
+    &lt;ul&gt;
+        &lt;li&gt;Red&lt;/li&gt;
+        &lt;li&gt;Blue&lt;/li&gt;
+        &lt;li&gt;Yellow&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/p&gt;
+
+&lt;p&gt; Their complementary colors are:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;Green&lt;/li&gt;
+    &lt;li&gt;Orange&lt;/li&gt;
+    &lt;li&gt;Purple&lt;/li&gt;
+&lt;/ul&gt;
+</db:programlisting>
+<db:para>The interesting question here is whether these two structures should be formatted differently for output. Should the list that in inside the paragraph be indented, which the one that comes afterwards be printed flush left?</db:para>
+</db:section>
+</db:chapter>
