@@ -81,6 +81,12 @@ chapter: Principles of structure
         
         Which model of a document is correct? You can think of a document as being organized hierarchically, with major ideas expressed in sections, sub-ideas support the major ideas in subsections, etc. There are doubtless documents that fit that model. But you can also think of documents as being more like a journey in which headings function more like road signs. A city gets a big sign, a hamlet a small sign, and a town a medium sign. But the town is not inside the city, not the hamlet inside the town, and there is no guarantee that on leaving the city you will come to the town before you come to a hamlet.   
         
+        """[#Flynn2009]
+            The classical theory, derived from computer science and graph theory, is that the document is a hierarchical tree (actually inverted: a root-system) and that all necessary actions can be seen in terms of navigation around the tree, and of insertion into and withdrawal from the the nodes which form the branches and leaves.
+            
+            The conventional writer, however — and we expressly exclude the markup expert, as well as the experienced technical authors who responded to the survey — is by repute probably only marginally aware of this tree; but we have been unable to measure this at present. In this view, the document is seen as a continuous linear narrative, broken into successive divisions along semantic lines, and interspersed with explanatory material in the form of figures, tables, lists, and their derivatives. 
+
+        
         Today, very few markup languages take the streaming approach of WordPerfect. The problem with it is that when you want to deal with any structure that is naturally hierarchical, the ability to start and stop structures independently just gets in the way and makes things hard to handle. But even with markup languages that are syntactically hierarchical, like XML, you can still define markup languages that are largely flat (like HTML) or more hierarchical (like DocBook). 
         
         This is a concern mainly in the design of {document domain} languages. The structure of media domain languages is largely dictated by the shape and relationship of the media-domain object they are modeling. In the subject domain, we have abstracted content out of strict document order. Hierarchy in the subject domain tend to match the hierarchy of relationship in the subject matter itself. (Though this is not universal. Addresses, for instance, which are based on hierarchal locations, are modeled are flat ordered lists. The order reflect the hierarchy, but the nesting of city inside country and of street within city is not reflected in the structure of an address record.) In the document domain, however, it is a real concern. The document domain consists of abstractions of document structures and the nature of their relationship to the structure of thought in the text is not obvious. 
@@ -115,5 +121,7 @@ chapter: Principles of structure
         
         If you are designing your own markup language, do you want to allow both these forms? Probably not. The more permutations of structure your markup language allows, the more work it will be to write the algorithms to process it. Some allowance may be made for ease of authoring, if you wish, but it may be better to wait for authors to complain about a restriction like this than to build in all the possible variations in advance. (This is also a problem that is more likely to occur in an {abstract language} like {XML} than in a concrete language like {MarkDown} or {SAM}, where the choice is baked into the syntax and the author does not have a choice to make.
         
-            
+        bibliography:
+            entry:(#Flynn2009)
+                Flynn, Peter. “Why writers don't use XML: The usability of editing software for structured documents.” Presented at Balisage: The Markup Conference 2009, Montréal, Canada, August 11 - 14, 2009. In Proceedings of Balisage: The Markup Conference 2009. Balisage Series on Markup Technologies, vol. 3 (2009). doi:10.4242/BalisageVol3.Flynn01.            
         
