@@ -5,6 +5,8 @@ book:
     title: >($title)
     subtitle: >($subtitle)
     by: >($author)
+    
+    >>>(sam foreword.sam)
 
     >>>(sam definition.sam)
     
@@ -56,19 +58,38 @@ book:
         
         chapter: Interesting problems in content structure
         
-    part:(#part.tools) Tools
-  
+    part:(#part-structures) Languages
+        
         chapter: Lightweight languages
+            section: Markdown
+            section: RestructuredText
+            section: ASCIIDoc
+            section: JavaDoc etc.
         
-        chapter: XML
+        chapter: Heavyweight languages
+            section: DocBook
+            section: DITA
+            section: S1000D
+            section: HTML
+                section: XHTML
+                section: HTML5
+                
+        chapter: Abstract and extensible languages
+            section: XML
+            section: SAM
+            section: RestructuredText
+            
+    part:(#part.tools) Tools
+    
+        chapter: Editors and development environments
+    
+        chapter: Parsers and processing tools
+  
+        chapter: Static site generators
         
-        chapter: SAM
-        
-        chapter: DocBook
+        chapter: Content management systems
         
         chapter: DITA
-        
-        chapter: Subject-specific systems
         
         chapter: SPFE
     

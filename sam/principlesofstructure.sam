@@ -43,7 +43,7 @@ chapter: Principles of structure
 
         Achieving agreement (and, what is really more important, functional lucidity) within a local domain is easier in some domains than others. The {media domain} is highly concrete, so there really is not much room for disagreement there. Styles, though, are often given names from the document domain, as they are really a step into the document domain, and this can lead to disagreements because of the more abstract nature of the document domain. 
         
-        The {document domain} is the most difficult place to achieve either agreement or functional lucidity. (By functional lucidity, I mean that the language seems easy to use and obvious when you are actually writing as opposed to when you are attempting to hammer out agreement in a committee room.) The document domain is inherently an abstract place, and there are always different ways to abstract from the concrete reality of web pages and books, particularly because of how different hypertext media domains are from paper media domains and the difficulty of truly abstracting beyond those differences. Thus you will frequently hear argument between the proponents of various document domain languages about the correctness and usability of their choices. For instance, partisans of MarkDown may praise its functional lucidity (it is very easy to write in) which partisans of ReStructuredText may praise its greater abstraction and range of application. 
+        The {document domain} is the most difficult place to achieve either agreement or functional lucidity. (By functional lucidity, I mean that the language seems easy to use and obvious when you are actually writing as opposed to when you are attempting to hammer out agreement in a committee room.) The document domain is inherently an abstract place, and there are always different ways to abstract from the concrete reality of web pages and books, particularly because of how different hypertext media domains are from paper media domains and the difficulty of truly abstracting beyond those differences. Thus you will frequently hear argument between the proponents of various document domain languages about the correctness and usability of their choices. For instance, partisans of Markdown may praise its functional lucidity (it is very easy to write in) which partisans of ReStructuredText may praise its greater abstraction and range of application. 
         
         The {management domain} is quite concrete, like the {media domain}, but more arbitrary. It consists either of commands or of management metadata, both of which are particular to a specific management system. Difficulties here are likely to be more about the management processes to be implemented rather than the correct naming of things. 
     
@@ -95,7 +95,7 @@ chapter: Principles of structure
 
         The something in between option can seem appealing but can you can end up with something really unconstrained, meaning that it is difficult to write reliable algorithms to process it. Here is the kind of issues you can run into:
         
-        Is a list part of the paragraph in which it occurs? Some markup languages, such as MarkDown and SAM, take the view that lists are separate blocks that come after a preceding paragraph. But DITA, DocBook, and HTML will all let you place a list either inside or outside a paragraph:
+        Is a list part of the paragraph in which it occurs? Some markup languages, such as Markdown and SAM, take the view that lists are separate blocks that come after a preceding paragraph. But DITA, DocBook, and HTML will all let you place a list either inside or outside a paragraph:
         
         ```
             <p> The primary colors are:
@@ -119,9 +119,22 @@ chapter: Principles of structure
         
         But would it be a good idea to make a distinction between the two? Only if authors clearly understood the difference between the two and clearly know when they were choosing one or the other. (If they are writing in a visual editing view of an XML editor, then they almost certainly won't know the difference.)
         
-        If you are designing your own markup language, do you want to allow both these forms? Probably not. The more permutations of structure your markup language allows, the more work it will be to write the algorithms to process it. Some allowance may be made for ease of authoring, if you wish, but it may be better to wait for authors to complain about a restriction like this than to build in all the possible variations in advance. (This is also a problem that is more likely to occur in an {abstract language} like {XML} than in a concrete language like {MarkDown} or {SAM}, where the choice is baked into the syntax and the author does not have a choice to make.
+        If you are designing your own markup language, do you want to allow both these forms? Probably not. The more permutations of structure your markup language allows, the more work it will be to write the algorithms to process it. Some allowance may be made for ease of authoring, if you wish, but it may be better to wait for authors to complain about a restriction like this than to build in all the possible variations in advance. (This is also a problem that is more likely to occur in an {abstract language} like {XML} than in a concrete language like {Markdown} or {SAM}, where the choice is baked into the syntax and the author does not have a choice to make.
         
-        bibliography:
-            entry:(#Flynn2009)
-                Flynn, Peter. “Why writers don't use XML: The usability of editing software for structured documents.” Presented at Balisage: The Markup Conference 2009, Montréal, Canada, August 11 - 14, 2009. In Proceedings of Balisage: The Markup Conference 2009. Balisage Series on Markup Technologies, vol. 3 (2009). doi:10.4242/BalisageVol3.Flynn01.            
+    section: Content in two dimensions
+    
+        The notion of separating content from formatting works quite well when the content is a string of words. A string of words has only one dimension: length. A printed string, of course, has two dimensions: length and height, since each letter had a height and a width. (The depth of the ink is irrelevant for this purpose.) But the height and the width of letters is a pure {media-domain} concern. When we separate content from formatting, we separate the font from the character and are left with a string of characters whose length is measured not in inches but in character count. And this works very nicely because unless we get silly with the size and shape of the viewport that we flow the characters into, and a {rendering algorithm} can flow characters onto a page with reasonable results. 
+        
+        There can, indeed, be some issues with such rendering algorithms when it comes to hyphenation, widows and orphans, and the location of titles relative to the text, but with the appropriate {document domain} markup to delineate basic document structures, algorithms can handle these issues reasonably well. (They can't edit the text itself to make a line break work better, as some human typesetters will do, but that kind of manipulation is rarely needed.)
+        
+        But when it comes to content that has two dimensions, things get more difficult. The main problem cases are:
+        
+        * tables
+        * graphics and other media
+        * preformatted text, such as program listings, that have meaningful line breaks
+        
+        
+    bibliography:
+        entry:(#Flynn2009)
+            Flynn, Peter. “Why writers don't use XML: The usability of editing software for structured documents.” Presented at Balisage: The Markup Conference 2009, Montréal, Canada, August 11 - 14, 2009. In Proceedings of Balisage: The Markup Conference 2009. Balisage Series on Markup Technologies, vol. 3 (2009). doi:10.4242/BalisageVol3.Flynn01.            
         
