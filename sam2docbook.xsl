@@ -4,6 +4,7 @@
     xmlns:db="http://docbook.org/ns/docbook" 
     xmlns:xi="http://www.w3.org/2001/XInclude" 
     xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:strings="http://exslt.org/strings"
     exclude-result-prefixes="xs"
     version="1.0">
     
@@ -43,11 +44,13 @@
         </db:part>
     </xsl:template>
     
-    <xsl:template match="index">
+    <xsl:template match="book/index">
         <db:index>
             <xsl:apply-templates/>
         </db:index>
     </xsl:template>
+    
+    <xsl:template match="chapter/index"/>
     
     <xsl:template match="appendix">
         <db:appendix>
@@ -161,9 +164,7 @@
             <xsl:apply-templates/>
         </xsl:attribute>
     </xsl:template>
-
-    <xsl:template match="index"/>
-    
+ 
     <xsl:template match="phrase">
         <xsl:apply-templates/>
     </xsl:template>
@@ -285,12 +286,14 @@
             </xsl:if>
             <xsl:choose>
                 <xsl:when test="substring(@item, string-length(@item) - 3) = '.xml'">
+                    <xsl:variable name="item-file" select="strings:tokenize(@item, '/\')[last()]"/>
+                    <xsl:variable name="item-path" select="substring(@item, 1, string-length(@item)-string-length($item-file))"/>
                     <xsl:variable name="imagedata" select="document(@item)"/>
                     <db:imageobject condition="epub">
-                        <db:imagedata fileref="{$imagedata/image/epub/href}"/>
+                        <db:imagedata fileref="{$item-path}{$imagedata/image/epub/href}"/>
                     </db:imageobject>
                     <db:imageobject condition="fo">
-                        <db:imagedata fileref="{$imagedata/image/fo/href}" contentwidth="{$imagedata/image/fo/contentwidth}" align="{$imagedata/image/fo/align}"/>
+                        <db:imagedata fileref="{$item-path}{$imagedata/image/fo/href}" contentwidth="{$imagedata/image/fo/contentwidth}" align="{$imagedata/image/fo/align}"/>
                     </db:imageobject>
                     
                 </xsl:when>
