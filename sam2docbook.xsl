@@ -270,15 +270,36 @@
     </xsl:template>
     
     <xsl:template match="insert[@type='image']">
+        <!-- This template assumes that the relative path to the image
+             is the same as that of the source file. In other words it 
+             assumes that the source directory and the XML ouput directoy
+             and the location of the image are all children of the 
+             same parent. Otherwise this would need to do path 
+             manipulation that you can't do in XSLT 1.0
+        -->
         <db:mediaobject>
             <xsl:if test="@id">
                 <xsl:attribute name="xml:id">
                     <xsl:value-of select="@id"/>
                 </xsl:attribute>
             </xsl:if>
-            <db:imageobject>
-                <db:imagedata fileref="{@item}"/>
-            </db:imageobject>
+            <xsl:choose>
+                <xsl:when test="substring(@item, string-length(@item) - 3) = '.xml'">
+                    <xsl:variable name="imagedata" select="document(@item)"/>
+                    <db:imageobject condition="epub">
+                        <db:imagedata fileref="{$imagedata/image/epub/href}"/>
+                    </db:imageobject>
+                    <db:imageobject condition="fo">
+                        <db:imagedata fileref="{$imagedata/image/fo/href}" contentwidth="{$imagedata/image/fo/contentwidth}" align="{$imagedata/image/fo/align}"/>
+                    </db:imageobject>
+                    
+                </xsl:when>
+                <xsl:otherwise>
+                    <db:imageobject>
+                       <db:imagedata fileref="{@item}"/>
+                   </db:imageobject>
+                </xsl:otherwise>
+            </xsl:choose>
         </db:mediaobject>
     </xsl:template>
     
