@@ -1,0 +1,57 @@
+chapter: Schemas
+
+    <<<(annotations.sam)
+
+    How do you establish constraints for content, and how do you validate against those constraints?
+    
+    For a {concrete markup languages}(concept) like MarkDown, the constraints are established in the code of the MarkDown processor. They are validated when the processor parses the MarkDown file. (In practice, though, MarkDown does no meaningful validation. Anything it does not recognize as markup, it simply outputs as text.)
+
+    For {extensible markup languages}(concept) like XML you define structures yourself (or use an existing definition). Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a "validator".
+    
+    A schema language is a structured language for defining structured languages. The schema for a markup languages says what structures are allowed and in what order and relationship. Those definitions are constraints. A given document either conforms to those constraints or it does not. 
+
+    Here is an example of a schema in a schema language called {RelaxNG}(tool), which is one of several schema languages available for defining {XML}(language)-based markup languages:[https://en.wikipedia.org/wiki/RELAX_NG#XML_syntax]
+
+    ```(RNG)
+        <element name="book" xmlns="http://relaxng.org/ns/structure/1.0">
+           <oneOrMore>
+              <element name="page">
+                 <text/>
+              </element>
+           </oneOrMore>
+        </element>
+    
+    This example defines two elements and three constraints. The first element is called `book` and the second is called `page`. The constraints are:
+    
+    * The `page` element must occur inside the `book` element. (Because the `page` element is defined inside the `book` element structure.)
+    * There must be at least one `page` element inside the `book` element, and there can be more. (Because the `page` element is defined inside an RNG `oneOrMore` element.)
+    * Text can occur inside the `page` element, but not directly inside the `book` element. (Because the RNG `text` element occurs inside the definition of the `page` element, but not as a direct child of the `book` element definition.)
+    
+    Thus if an author wrote:
+    
+    ```(xml)
+        <book>Moby Dick
+            <page>Call me Ishmael. Some years ago- never mind how long precisely- having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.</page>
+        </book>
+        
+    the validator would report an error because the words "Moby Dick" are directly inside the book element and text is not allowed in that position. 
+    
+    There are several different schema languages for XML each of which is capable of expressing and enforcing different sets of constraints (with considerable overlap between them). It is not unusual to combine different schema languages to more completely constrain a markup language. In particular, it is not uncommon to use a schema language called {Schematron}(tool) in concert with other schema languages like {RNG}(tool "RelaxNG"). While most schema languages work by modeling the structure of a document, as in the {RNG} example above, {Schematron} works by making assertions about the structure in a language called {XPath}(tool). A {Schematron} schema would make a lousy guide for authoring, but it can test assertions, and therefore enforce constraints, that no other schema language can. 
+    
+    Here is a simple {Schematron} example. It defines one of the constraints listed above, namely that a book element must contain at least one page element. 
+    
+    ```(schematron)
+        <schema xmlns="http://purl.oclc.org/dsdl/schematron"  queryBinding="xslt2">
+            <pattern>
+                <title>Book constraint</title>
+                <rule context="book">
+                    <assert test="page">A book must contain at least one page.</assert>
+                </rule>
+            </pattern>
+        </schema>
+    
+    The rule says that in the context of the element `book` the assertion that there is an element `page` must be true. If it is not, the message within the `assert` element will be displayed. 
+    
+    In the {RNG} schema example, the schema is essentially a template that models the hierarchy of the document. The constraints are consequences of the structure of that hierarchy. (The `book` element cannot contain text because there is no place for text in that part of the hierarchy.) Only documents that conform to the template are valid.
+    
+    In the {Schematron} example, the schema is a series of constraint statements. The hierarchy of the document is a consequence of meeting all the constraints. Any document is valid as long as it conforms to all the stated constraints. 

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0">
+<db:title>Schemas</db:title>
+
+<db:para>How do you establish constraints for content, and how do you validate against those constraints?</db:para>
+<db:para>For a concrete markup languages like MarkDown, the constraints are established in the code of the MarkDown processor. They are validated when the processor parses the MarkDown file. (In practice, though, MarkDown does no meaningful validation. Anything it does not recognize as markup, it simply outputs as text.)</db:para>
+<db:para>For extensible markup languages like XML you define structures yourself (or use an existing definition). Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a “validator”.</db:para>
+<db:para>A schema language is a structured language for defining structured languages. The schema for a markup languages says what structures are allowed and in what order and relationship. Those definitions are constraints. A given document either conforms to those constraints or it does not.</db:para>
+<db:para>Here is an example of a schema in a schema language called RelaxNG, which is one of several schema languages available for defining XML-based markup languages:[https://en.wikipedia.org/wiki/RELAX_NG#XML_syntax]</db:para>
+<db:programlisting language="RNG">
+&lt;element name="book" xmlns="http://relaxng.org/ns/structure/1.0"&gt;
+   &lt;oneOrMore&gt;
+      &lt;element name="page"&gt;
+         &lt;text/&gt;
+      &lt;/element&gt;
+   &lt;/oneOrMore&gt;
+&lt;/element&gt;
+</db:programlisting>
+<db:para>This example defines two elements and three constraints. The first element is called <db:code>book</db:code> and the second is called <db:code>page</db:code>. The constraints are:</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>The <db:code>page</db:code> element must occur inside the <db:code>book</db:code> element. (Because the <db:code>page</db:code> element is defined inside the <db:code>book</db:code> element structure.)</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>There must be at least one <db:code>page</db:code> element inside the <db:code>book</db:code> element, and there can be more. (Because the <db:code>page</db:code> element is defined inside an RNG <db:code>oneOrMore</db:code> element.)</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Text can occur inside the <db:code>page</db:code> element, but not directly inside the <db:code>book</db:code> element. (Because the RNG <db:code>text</db:code> element occurs inside the definition of the <db:code>page</db:code> element, but not as a direct child of the <db:code>book</db:code> element definition.)</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>Thus if an author wrote:</db:para>
+<db:programlisting language="xml">
+&lt;book&gt;Moby Dick
+    &lt;page&gt;Call me Ishmael. Some years ago- never mind how long precisely- having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.&lt;/page&gt;
+&lt;/book&gt;
+</db:programlisting>
+<db:para>the validator would report an error because the words “Moby Dick” are directly inside the book element and text is not allowed in that position.</db:para>
+<db:para>There are several different schema languages for XML each of which is capable of expressing and enforcing different sets of constraints (with considerable overlap between them). It is not unusual to combine different schema languages to more completely constrain a markup language. In particular, it is not uncommon to use a schema language called Schematron in concert with other schema languages like RNG. While most schema languages work by modeling the structure of a document, as in the RNG example above, Schematron works by making assertions about the structure in a language called XPath. A Schematron schema would make a lousy guide for authoring, but it can test assertions, and therefore enforce constraints, that no other schema language can.</db:para>
+<db:para>Here is a simple Schematron example. It defines one of the constraints listed above, namely that a book element must contain at least one page element.</db:para>
+<db:programlisting language="schematron">
+&lt;schema xmlns="http://purl.oclc.org/dsdl/schematron"  queryBinding="xslt2"&gt;
+    &lt;pattern&gt;
+        &lt;title&gt;Book constraint&lt;/title&gt;
+        &lt;rule context="book"&gt;
+            &lt;assert test="page"&gt;A book must contain at least one page.&lt;/assert&gt;
+        &lt;/rule&gt;
+    &lt;/pattern&gt;
+&lt;/schema&gt;
+</db:programlisting>
+<db:para>The rule says that in the context of the element <db:code>book</db:code> the assertion that there is an element <db:code>page</db:code> must be true. If it is not, the message within the <db:code>assert</db:code> element will be displayed.</db:para>
+<db:para>In the RNG schema example, the schema is essentially a template that models the hierarchy of the document. The constraints are consequences of the structure of that hierarchy. (The <db:code>book</db:code> element cannot contain text because there is no place for text in that part of the hierarchy.) Only documents that conform to the template are valid.</db:para>
+<db:para>In the Schematron example, the schema is a series of constraint statements. The hierarchy of the document is a consequence of meeting all the constraints. Any document is valid as long as it conforms to all the stated constraints.</db:para>
+</db:chapter>

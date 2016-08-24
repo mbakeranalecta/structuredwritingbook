@@ -31,16 +31,11 @@ book:
         >>>(sam relevance.sam)       
         >>>(sam active.sam)
         >>>(sam extractandmerge.sam)
-        
-        chapter: Information Architecture
-        
+        >>>(sam architecture.sam)
         >>>(sam exchange.sam)
-        
-        chapter: Change management
-        
-        chapter: Content management
-        
-        chapter: Authoring
+        >>>(sam change.sam)
+        >>>(sam content_management.sam)
+        >>>(sam authoring.sam)
 
     part:(#part.structures) Structures
 
@@ -48,18 +43,18 @@ book:
         
         chapter: Principles of structure
             section: Linear vs non-linear structures
+            section: Structure vs annotation  
+            section: metadata
+            section: Taxonomy and controlled vocabulary
+            section: Ontology
         
-        chapter: Structure vs annotation  
+        chapter: Chunks, blocks, topics, and fragments
+
+        chapter: Tables and other wide things
         
-        chapter: Schemas
+        chapter: Patterns
         
-        chapter: Metadata
-        
-        chapter: Taxonomy and controlled vocabulary
-        
-        chapter: Interesting problems in content structure
-        
-    part:(#part-structures) Languages
+    part:(#part-languages) Languages
         
         chapter: Lightweight languages
             section: Markdown
@@ -74,13 +69,21 @@ book:
             section: HTML
                 section: XHTML
                 section: HTML5
+            section: TeX and LaTeX
                 
         chapter: Abstract and extensible languages
             section: XML
             section: SAM
             section: RestructuredText
+            section: TeX
+            
+        chapter: Ad hoc languages
             
     part:(#part.tools) Tools
+    
+        chapter: Monoliths vs tool chains
+        
+        chapter: Schemas
     
         chapter: Editors and development environments
     
@@ -93,6 +96,8 @@ book:
         chapter: DITA
         
         chapter: SPFE
+        
+        chapter: Choosing tools
     
     index:
     

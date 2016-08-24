@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0">
+<db:title>Relevance algorithm</db:title>
+
+<db:para>Establishing the relevance of content is essential not only to readers, but to many of the structured writing algorithms as well.</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>Every reader who looks for content has to decide if a given document is relevant to their needs.</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>A search engine needs to determine if a document is relevant to a reader’s search.</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>The reuse algorithm needs to determine if content relevant to a certain point exists or not.</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>The composition algorithm needs to find all the pieces of content relevant to a certain purpose.</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>The linking algorithm needs to find any documents relevant to a subject mentioned in the current document.</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>The conformance algorithm needs to determine if there is information in one document that should conform to information in another document.</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>The quality algorithm needs to ensure that a document contains all the information relevant to a reader’s needs.</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>There are two fundamental parts to the relevance algorithm: being relevant, and demonstrating your relevance.</db:para>
+<db:section>
+<db:title>Being relevant</db:title>
+<db:para>All to often, making sure that content is relevant is neglected. CMS systems will attach metadata to unstructured documents asserting their relevance to certain topic or requirements without verifying that they actually meet those needs. In many cases, the CMS has a cataloging system for content that require certain metadata fields to be completed, often from a predetermined list of values. If developed correctly, this metadata may have the potential to define the relevance of content, but these requirements are not communicated to the author before they write. Instead, writers are left to compose content without any guidance as to what would make it relevant, and then asked to tag it with the CMS metadata after the fact. In many cases, this tagging is done hastily and lazily, simply picking whatever terms seem appropriate at first glance without really thinking about whether the piece fulfills the promise the metadata is making.</db:para>
+<db:para>The result is that the content returned by the CMS is often not relevant to the reader’s needs because it simply does not possess the relevance that the CMS metadata claims. In many cases, bypassing the CMS’s navigation mechanisms and doing a simple site search will produce better results, since the search engine looks at the content itself to determine what it is relevant to. But while this can rescue the reader’s quest for relevant content where it exists, it does nothing to ensure that relevant content actually will exist to serve all the needs you intend to serve.</db:para>
+<db:para>The plain fact is that if you are going to implement strict standards of relevance, and a strict vocabulary for proclaiming relevance, this needs to be communicated to the writer long before they have finished writing and are trying to submit their content to the CMS. One way to do that is through structured writing.</db:para>
+<!--  more -->
+</db:section>
+<db:section>
+<db:title>Showing relevance</db:title>
+<db:para>Being relevant is important, it is equally important to show you are relevant. Readers and algorithms can’t find you if you don’t show your relevance.</db:para>
+<db:para>Actually, that is not entirely true. Search engines can determine the relevance of content with an amazing degree of accuracy simply be reading the text itself and looking at how the content is used and linked to. This attests to the first importance of being relevant.</db:para>
+<db:para>But if the search engine decides a topic may be relevant and adds that topic to search results, but the reader then looks at it and can’t see the relevance, you still don’t reach the reader. (And the search engine will take note as well and downgrade that topic’s relevance ranking.)</db:para>
+<db:para>Showing your relevance to the reader is all about establishing your subject matter and context and doing it clearly and unambiguously in the few seconds that the reader is likely to look before dismissing you and moving on to the next item in their search results.</db:para>
+<db:para>When developing a tagging language (or other structured content container) for your content, therefore, one of the most important things to consider is how the reader will recognize what you documents are relevant to.</db:para>
+<db:para>Relevance is not established the same way for all readers of for all subjects. For a recipe, for instance, a picture may do a lot to establish relevance. For an API reference, a version number and the description of a return value may be key relevance indicators.</db:para>
+<db:para>But relevance is not just about the subject matter. It is also about the reader’s purpose. For a business page, the inclusion of a stock price chart may tell you that the page is of interest to an investor rather than a potential customer. Placing that chart at the top of the page helps establish the relevance quickly. For an article about a place, pictures of beaches or nightlife show that the page is relevant to potential tourists, not to residents trying to decide what schools to send their kids to.</db:para>
+<db:para>Creating content in the subject domain allows you to make sure that writers produce all the piece of information that make a page relevant to the intended audience. Because the subject domain also factors out the order of presentation of content, it helps you to make sure that every page is organized in a way that best shows its relevance.</db:para>
+<db:para>Better still, because subject domain content is organized by algorithms, you can experiment to see if one organization of content works better than another and adapt your presentation algorithm accordingly without having to edit any of the content.</db:para>
+<db:para>Also, because storing content in the subject domain allows us to use the extract and merge algorithm to pull in content from other source, we don’t have to include the beach pictures or the stock chart with our subject domain content. Instead, we can have the synthesis algorithm query other content sets or feed to find the best current tourist shots or to generate the stock chart in real time.</db:para>
+<db:para>But that, of course, depends on the mechanical part of the relevance algorithm, because in order for the synthesis algorithm to do this it has to be able to find relevant pictures or a relevant stock chart. This brings us to the subject of showing relevance to algorithms.</db:para>
+<db:para>Showing relevance to algorithms comes down to breaking information up into clearly labeled fields containing clearly unambiguous values. For example, to query web service the generates stock charts, you would need to provide it with a clearly unambiguous identifier for the company whose chart you wanted. The best way to do that would not be the company name, since there can be duplicate or similar names in different industries (Apple Computer vs Apple Music, for example), but the company’s stock symbol, which is guaranteed to be unique by the exchange on which it is listed (though you do have to provide the exchange code as well to be globally unique: <db:code>NASDAQ: AAPL</db:code>, not just <db:code>AAPL</db:code>).</db:para>
+<db:para>This means that the web service needs to index its information on stock prices according to stock symbols (which is exactly what it does, of course). Actually, it is more than likely that the stock chart drawing service does not hold this information at all, but requests it as needed from yet another web service. The stock ticker symbol is the unambiguous key that identifies the company in each of these transactions.</db:para>
+<db:para>While humans and algorithms assess relevance in different ways, the foundations of relevance are the same for both: clear identification of the type and subject matter of the information. This means that you need to maintain metadata that clearly identifies the type and subject, and also present the content in a way that makes its type and subject evident at a glance.</db:para>
+<db:para>It is possible to maintain metadata on type and subject of content in a content management system that hosts content written the the document or subject domains. In this scenario, ensuring that the organization of the content makes the type and subject evident at a glance is a separate problem from correctly labeling the content in the CMS. While it is certainly possible, with the right authoring discipline, to make sure that the content demonstrates what the metadata claims about it, it is also possible for the content not to match what the metadata claims, or not to demonstrate its type and subject effectively.</db:para>
+<db:para>Moving content to the subject domain allows you to unite the showing of relevance to both humans and machines, assuring that the two do not get out of sync.</db:para>
+</db:section>
+</db:chapter>

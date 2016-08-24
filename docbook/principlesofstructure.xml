@@ -2,6 +2,11 @@
 <db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0">
 <db:title>Principles of structure</db:title>
 
+<db:section><db:title>Rhetorical structure</db:title><db:para>
+            Not available yet.
+        </db:para></db:section>
+<db:para>The rhetorical structure of a piece of content is how it tells its story. For many types of stories, the optimal rhetorical structure is quite consistent and often well known. In other cases, the best rhetorical structure can be determined both by a careful consideration of what needs to be said and by experience and testing with readers. Content quality is greatly enhanced when the rhetorical structure is well defined and followed consistently. Also, a well defined rhetorical structured provide an effective baseline against which to compare and measure proposed improvements. Using an explicit predefined rhetorical structure helps enhance and maintain content quality.</db:para>
+<db:para>In the <db:olink targetptr="chapter.subject-domain">subject domain chapter</db:olink> we looked at how structured writing in the subject domain can capture the rhetorical structure of a recipe in various ways to serve various business purposes.</db:para>
 <db:section>
 <db:title>Names and objects</db:title>
 <db:para>Fundamentally, creating a structure for writing means creating boxes for words and giving names to those boxes. It may also involve putting a label on the box with additional information on it. The name and the label on the box tells us something about the words in the box. What kind of things they  tell us obviously depends on the domain we are dealing with.</db:para>
@@ -107,4 +112,240 @@ This text is [B&gt;bold, [I&gt;this is bold and italic,&lt;B] and this is just i
 <db:para>Flynn, Peter. “Why writers don’t use XML: The usability of editing software for structured documents.” Presented at Balisage: The Markup Conference 2009, Montréal, Canada, August 11 - 14, 2009. In Proceedings of Balisage: The Markup Conference 2009. Balisage Series on Markup Technologies, vol. 3 (2009). doi:10.4242/BalisageVol3.Flynn01.</db:para>
 </entry>
 </bibliography>
+<db:section>
+<db:title>Metadata</db:title>
+<db:para>We live in the age of metadata, so much so that the word metadata has almost come to replace the word data itself and has come to be applied to almost any form of data that describes a resource. For example, we hear a lot about law enforcement getting access to metadata related to phone calls, which simply means the data about which number called which number and for how long.</db:para>
+<db:para>In the <db:olink targetptr="chapter.definition">definition of structured writing</db:olink> I said that structured writing is writing that obeys constraints and that records the fact that it obeys constraints.</db:para>
+<db:para>The standard definition of metadata is data that describes data. This can make it seem like an optional extra, as something added on top of something that already exists. But actually there is no data without metadata. Data is a formalization of information. It makes a set of promises about what the information means -- that is, how it is constrained. Metadata is the record of those promises/constraints. Without it, you have no formal assurance that the information is what it seems to be.</db:para>
+<db:para>Structure is the imposition and recording of constraints. The recording of constraints is metadata. Structure, therefore, consists of metadata. Where you have structure, you have metadata. Where you have metadata, you have structure.</db:para>
+<db:para>Recipes contain lists of ingredients. If you record a recipe in the document domain, you will record that list of ingredients using a list structure. In this case the constraint you are imposing, and therefore the metadata you are recoding is: this is a list and these are list items. This metadata does not record that the items in the list are ingredients.</db:para>
+<db:para>Human being recognize the list of ingredients for what it is based on familiarity with the pattern and recognition of the names of foodstuffs. This is fine for humans, but still a little iffy for our current generation of AI algorithms. Writing an algorithm to reliably recognize ingredients in recipe, while not impossible, is a lot of work.</db:para>
+<db:para>Move that recipe into the subject domain, however, and you replace a list structure with an ingredients structure. In this case the constraint you are imposing, and therefore the metadata you are recording, is: this a a collection of ingredients, and each one of them is an ingredient. Writing a reliable algorithm to recognize ingredients based on explicit metadata that says they are ingredients is simple.</db:para>
+<db:para>This is not to say that a list structure is not metadata also. It is. It is document domain metadata. It formally identifies the list items structure as a list item. It makes it easy to write algorithms that recognize lists. This  allows you to reliably format it as a list item in whatever media you choose to publish it in.</db:para>
+<db:para>Subject domain metadata that identifies an ingredient as an ingredient provide a different promise, one that allows us to do more with the data.</db:para>
+<db:para>The purpose of attaching metadata to content is to make the content into data. The reason for making content into data is to make it accessible to algorithms. The best way to think about metadata is in terms of the algorithms it enables. Broadly, the areas in which we want to apply algorithms to content are publishing, finding, validating, and auditing.</db:para>
+<db:para>Basic publishing algorithms can be performed using document domain metadata alone. But as we have seen, publishing related algorithms such as differential single sourcing, content reuse, and content generation also require subject domain metadata. Finding requires subject domain metadata because we search for content based largely on its subject matter. Validating, which deals with whether content meets its defined constraints, depends on the metadata of the domain in which the content is recorded. Auditing, which deals with whether content meets business requirements, generally requires subject-domain metadata as most business requirements are in the subject domain.</db:para>
+<db:para>But this does not mean that all content get captured in the subject domain. There is another way to apply subject domain metadata to content besides recording the content in the subject domain. This is to apply subject domain metadata externally to the content or an an overlay to the document domain structures in which the content is recorded.</db:para>
+<db:para>For example, if you wanted to have access to the data on which ingredients were mentioned in each recipe (perhaps as an aid to finding recipes), you could record the recipe itself in the document domain and then place it in a relational database table with a many-to-many relationship to a table that listed all know ingredients</db:para>
+<!--  Example -->
+<db:para>Systems designed primarily for document domain content creation, such as DITA, can include formalized structures for attaching subject domain metadata to document domain structures. In DITA, the primary such mechanism is the subject schema.</db:para>
+<db:para>One of the primary contrasts between the document domain and the subject domain then is not that subject domain metadata is entirely missing from the document domain, but that in document domain systems, subject domain metadata is stored separately from the document domain markup, whereas in the subject domain it is integrated into the content itself.</db:para>
+<db:para>This should not lead us to think that the two approaches are equivalent. They vary substantially in capability, implementation requirements and ease of use.</db:para>
+<db:para>For example, when we talked about differential single sourcing we saw that subject domain content could be transformed into radically different document domain structures for publication in different media. (A table for paper vs. an interactive widget online, for instance.) Attaching subject domain metadata to a piece of content that contains a document domain structure (such as a table) does not give you the capability to differentially single source it to different structures for other media.</db:para>
+<db:para>One area in which external subject-domain metadata excels is finding and filtering. You can certainly find and filter on subject domain content, but because there are many different subject domain structures, it can be non-trivial to figure out how to write the query expression that does the finding and filtering you require. By contrast, external subject domain metadata can be stored in normalized data structures that are consistent and therefore easier to write queries for. This consistency also allows tools and systems to put high-level interfaces over these query mechanisms for users that don’t know how to write queries themselves. As such, the approach is widely favored in content management systems.</db:para>
+<db:para>On the other hand, there is a limit to how fine grained a find and filter operation can be with external metadata. If you want the advantage of external metadata stored in normalized structures for ease of querying, it can only discriminate down to the level of the pieces of content it is applied to. It can retrieve that whole content unit, but not pieces of it.</db:para>
+<db:para>For validation, it comes down to a matter of what constraints you want to validate against. As we have seen, moving content to the subject domain allows us to factor out many of the constraints that we want to apply to the document domain and to express and enforce the constraints we want to apply to how the content treats its subject matter. If content quality is your primary reason for adopting structured writing, these advantages are hard to ignore.</db:para>
+<db:para>For auditing, the situation is much the same. If you are looking to audit the consistency of your publishing system, document domain metadata will suffice. If you are looking to audit your coverage of subject matter, external subject domain metadata attached to document domain content will give you a high level look at your coverage, but tell you little about quality or how well subjects are being covered.</db:para>
+<db:para>When it comes to easy of use, there are things in favor of each approach. If you have standardized document structures and standardized metadata structures, then users only have to learn those structures.</db:para>
+<db:para>On the other hand, separating subject metadata from the writing of the content itself means that writers have to do two separate jobs. Rather than creating the metadata as they write in the subject domain, they have to write in the document domain and then create separate subject domain metadata to describe the document they have just written. This create more work for the writer, and has frequently prove error prone.</db:para>
+<db:para>This can significantly impact the quality of both the content and the metadata. Because the document domain does not impose any constraints on how a subject is treated, it it quite easy to apply subject domain metadata to content that simply does not merit it. If metadata is supposed to express a promise that certain constraints have been met, this creates a broken promise.</db:para>
+<db:para>The fact is, promising that a constraint has been met without validating that it has actually been met is a recipe for broken promises. Attaching subject domain metadata externally to document domain structures always runs into this problem. No factoring our of enforcing of the subject-related constraints has been enforced. There has not even been effective subject-domain guidance provided to the writer while writing the content.</db:para>
+<db:para>I noted above that external subject domain metadata excels in the area of finding because it makes it easy to write queries on standardized metadata structures. But there is a large caveat to this, which is data quality. It the promises the metadata makes are not kept by the content itself, the value and reliability of searches is severely diminished.</db:para>
+<db:para>At the end of the day, the value of any system is constrained by the quality of its data. Content management systems often fail or underperform because of poor quality data caused by a poor fit between content and its metadata. In particular, there is a tendency for data quality to decline over time. Systems based on this approach need to be aware of the problem and vigilant to prevent it.</db:para>
+<db:para>We should also note that the two approaches are not mutually exclusive. The subject metadata used in both cases is essentially the same, since it describes the same subject. There is no reason, therefore, why you cannot take subject domain content, with its integrated metadata, and extract the metadata to an external metadata store. This way you can use the same query interface to find the content without giving up the validation and auditing capability of subject domain content or the finer-grained application of metadata that the subject domain enables. This approach can significantly approve the quality of the metadata in the system because all the subject domain guidance and constraints have been applied to the content before it is stored. Thus, as long as the content itself is correct, there cannot be a mismatch between what the metadata promises and what the content delivers.</db:para>
+<db:para>There are ease of use advantages to his approach as well. Since the system metadata is extracted from the content metadata, the writer does not have to enter the metadata separately from the content after is is written.</db:para>
+<db:para>Metadata is confusing because it is recursive. If metadata is the data to describes data, it is also the data that describes the metadata. The data/metadata distinction is not one of type -- metadata is not a different kind of thing from data -- it is one of relationship. It is a father/son distinction, not a cat/dog distinction. One man can be both a father and son. What we call him depends on what relationship we are looking at at a given moment.</db:para>
+<db:para>In structured writing, we add structure to content to replace the things we have factored out. That structure is metadata to the data that is the text of the file. But if we store that file in any kind of repository, the information that identifies the file in that repository is metadata to the file as a whole. But that is not the only kind of metadata for that file. If the structure of the file is described by a schema, the schema is also metadata for the file.</db:para>
+<db:para>Metadata is not a nice to have add on to data. There is no data without metadata. If Acme corporation does a survey that finds 9 out of 10 people rank Acme number one in their industry, the fact that this survey was conducted by the CEO at the company picnic the week before promotions are announced it the metadata that tells you what the data means. But we’re not done yet because the specification of the schema language it the metadata that tells you what the schema means.  And then of course, there is the specification of the markup to consider. The XML specification is part of the metadata for every XML document in existence. And we are still not be done, because the XML specification uses a formal grammar description language, called BNF then the specification of that language is metadata for the schema language description. Check out this document which forms part of the chain of metadata supporting XML: <annotation type="link" specifically="https://www.w3.org/XML/1998/06/xmlspec-report-v21.htm#AEN56">Guide to the W3C XML Specification (“XMLspec”) DTD, Version 2.1</annotation>.</db:para>
+<db:para>So, every piece of data has a spreading tree of metadata supporting it, which, if traced to its roots, inevitably leads to plain language documents that explain things in human terms.</db:para>
+<db:para>One of the great questions about metadata is where it should live: with the data it describes or separate from it. For much metadata the answer is obvious. It lives separately because its scope is wider than one resource. An XML document does not include the XML spec. But for metadata that is unique to an individual resource, the question is an important one.</db:para>
+<db:para>Most early graphic file formats only stored the image. Most modern format also store extensive metadata. Your digital camera files store all kinds of information about the camera and the settings that were used to take the shot, and even the geographic coordinates of where the shot was taken, if the camera has a GPS receiver.</db:para>
+<db:para>In part the argument is about who is responsible for creating the metadata. In the case of the photo, the metadata is in the file because the camera is the best placed instrument to record it. Sometimes it is about whether the metadata is intrinsic or extrinsic to the content. Sometimes it is about control.</db:para>
+<db:para>For example, should the history of a file be stored in the file or in the repository. Storing it in the file lessens the file’s dependence on the repository and makes it more portable. But a repository vendor may prefer to sell you a system in which to uninstall their repository would be to loose all your file history. If file status information is only stored in a workflow system, for instance, it is very hard to move away from that system. It it is stored in the file, it is easy to move away, and also to edit when not connected to the system, which can save you on licences.</db:para>
+</db:section>
+<db:section>
+<db:title>Structure and annotation</db:title>
+<db:para>Broadly speaking, structured markup provides two things: structure and annotation. Structure governs the relationship of pieces. It is structure that says that a list consists of list items, that an API reference must begin with a function signature followed by a list of parameter values, that says that an ingredient listing consists of the ingredient name followed by a quantity followed by a unit of measure, or that a section must begin with a title. It is in structure that we create, impose, and express most of the constraints that are fundamental to structured writing.</db:para>
+<db:para>Whenever you place content in a structure, you are saying something about that content. What kind of thing you are saying about it depends on the domain of the markup.</db:para>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Media Domain</db:term>
+<db:listitem><db:para>The structure says what the content should look like.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Document Domain</db:term>
+<db:listitem><db:para>The structure says what role the content plays in the document.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Subject Domain</db:term>
+<db:listitem><db:para>The structure relates the content to its subject matter.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Management Domain</db:term>
+<db:listitem><db:para>The structure says how the content should be managed.</db:para></db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:para>But markup structures, such as XML elements, only allow you to say one thing about the content they contain. Suppose you want to say more than one thing about a piece of content? In that case, you can add annotations to express additional information.</db:para>
+<db:para>The information in annotations does not have to be in the same domain as the structure they apply to. For instance:</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>In DITA, the <annotation type="attribute" namespace="DITA">keyref</annotation> attribute is used to add management domain metadata to a number of document structure elements.</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>In HTML, the style attribute can be used to add media domain metadata to the document structure.</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>But not all annotations add additional information to structures. It is possible to have annotations that stand alone. At a certain point in defining the structure of content we get down to what is essentially free-form narrative content -- that is, paragraphs of text. But even within a paragraph, that are pieces of text that we want to add metadata to for use by downstream processes. Examples from each of the domains include:</db:para>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Media Domain</db:term>
+<db:listitem><db:para>A <db:code>bold</db:code> or <db:code>strong</db:code> annotation on a piece of text you want to emphasize.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Document Domain</db:term>
+<db:listitem><db:para>An <db:code>xref</db:code> annotation to create a reference to another part of the content.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Subject Domain</db:term>
+<db:listitem><db:para>A <db:code>function</db:code> annotation to identify that a piece of text is the name of a function.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Management Domain</db:term>
+<db:listitem><db:para>A conditional annotation to identify a piece of text that may be conditionally included or excluded from output.</db:para></db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:section>
+<db:title>Structure and annotation in SAM</db:title>
+<db:para>In SAM, there are a number of types of structure, but the main extensible structure is the block. Annotations are part of the definition of the language. Annotations can be added to blocks and call also float in text.</db:para>
+<db:programlisting language="SAM">
+section:(#annotations) Annotations
+    This is a paragraph containing an {annotation}(concept).
+</db:programlisting>
+<db:para>In the example above, <db:code>section</db:code> is a structure containing a title and a paragraph. The <db:code>section</db:code> structure has an annotation which is contained in parentheses immediately after the colon that defines the structure. In this case it is an ID annotation and assigns the ID “annotations” to the structure.</db:para>
+<db:para>The word “annotation” in the paragraph is annotated with a free-floating annotation. The curly braces delineated the text that is being annotated. The parentheses contain the annotation itself, which in this case is a type annotation, indicating that the word “annotation” is a reference to concept.</db:para>
+</db:section>
+<db:section>
+<db:title>Structure and annotation in XML</db:title>
+<db:para>In XML we have two principle types of markup, the element and the attribute. These more or less correspond to the distinction I have made here between structure and annotation. Elements are for structure. Attributes are for annotation. The only caveat is that XML does not allow for free-floating annotations. To create an annotation inside a paragraph, you have to use an element. A paragraph (or any other block of text) with elements floating in it is called “mixed content”.</db:para>
+<db:para>So the SAM example above could be expressed like this in XML:</db:para>
+<db:programlisting language="XML">
+&lt;section id="annotations"&gt;
+    &lt;title&gt;Annotations&lt;/title&gt;
+    &lt;p&gt;This is a paragraph containing an &lt;concept&gt;annotation&lt;/concept&gt;.
+</db:programlisting>
+</db:section>
+<db:section>
+<db:title>Structure in attributes</db:title>
+<db:para>While SAM draws a distinction between structure and annotation, XML, as we have seen, does not. Its distinction between element and attribute roughly corresponds to my distinction, but not entirely so. This is a reflection of the fact that while SAM is designed for documents, XML is deliberately more general and designed for data applications where the structure and annotation distinction may not apply, or may not apply in the same way as it does in documents.</db:para>
+<db:para>This means that it is possible to design XML languages that use attributes (normally an annotation mechanism) to express structure.</db:para>
+<db:para>Consider these <annotation type="link" specifically="https://en.wikipedia.org/wiki/Microformat">examples of HTML Microformats from Wikipedia</annotation>. The first example shows an address formatted as a list.</db:para>
+<db:programlisting language="HTML">
+&lt;ul&gt;
+   &lt;li&gt;Joe Doe&lt;/li&gt;
+   &lt;li&gt;The Example Company&lt;/li&gt;
+   &lt;li&gt;604-555-1234&lt;/li&gt;
+   &lt;li&gt;&lt;a href="http://example.com/"&gt;http://example.com/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</db:programlisting>
+<db:para>Here the phrase <db:code>The Example Company</db:code> is contained in <db:code>li</db:code> tags. This is part of a list structure delineated by <db:code>ul</db:code> tags, so the markup is largely structural in the document domain. The <db:code>li</db:code> does not really tell you anything useful about what the content itself is about. It does not tell you anything useful beyond what document structure it belongs to. It is not much use as an annotation.</db:para>
+<db:para>The second example adds hCard microformat markup:</db:para>
+<db:programlisting language="HTML">
+&lt;ul class="vcard"&gt;
+   &lt;li class="fn"&gt;Joe Doe&lt;/li&gt;
+   &lt;li class="org"&gt;The Example Company&lt;/li&gt;
+   &lt;li class="tel"&gt;604-555-1234&lt;/li&gt;
+   &lt;li&gt;&lt;a class="url" href="http://example.com/"&gt;http://example.com/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</db:programlisting>
+<db:para>This example adds subject domain metadata in the form of the class attribute. For example, it says that the phrase <db:code>The Example Company</db:code> is a reference to an organization (<db:code>org</db:code>). So far this is just regular annotation.</db:para>
+<db:para>However, there is not just annotation going on here. There is actually subject domain structure being expressed. Not only is the list item <db:code>The Example Company</db:code> annotated as <db:code>org</db:code>, the list that contains it is annotated as <db:code>vcard</db:code>. The meaning of <db:code>org</db:code> is actually dependent on it being part of a <db:code>vcard</db:code> structure.</db:para>
+<db:para>In other words, the annotations in the sample above are equivalent to pure subject domain markup like this:</db:para>
+<db:programlisting language="HTML">
+&lt;vcard&gt;
+   &lt;fn&gt;Joe Doe&lt;/fn&gt;
+   &lt;org&gt;The Example Company&lt;/org&gt;
+   &lt;tel&gt;604-555-1234&lt;/tel&gt;
+   &lt;url&gt;http://example.com/&lt;/url&gt;
+&lt;/vcard&gt;
+</db:programlisting>
+<db:para>In other words, the microformats are overlaying a second structure on the list structure. In the world of HTML, this makes sense. HTML needs to be a standardized document domain language so that browsers can display it for human reading. Humans don’t need the vCard annotations to recognize that the content is an address, but algorithms do. So the microformat adds a second, hidden, subject domain structure to the document for readers who are algorithms rather than people.</db:para>
+<db:para>Authoring our content this way would obviously be inefficient. But as we have seen, we can process subject domain structures to produce document domain structures with the presentation algorithm. If you write this content in the subject using markup like the above, you could transform it to the HTML with microformats example shown above with a presentation algorithm like this:</db:para>
+<db:programlisting language="pseudo">
+match vcard
+    create ul
+        attribute class = "vcard"
+        continue
+
+match fn
+    create li
+        attribute class = "fn"
+        continue
+
+match org
+    create li
+        attribute class = "org"
+        continue
+
+match tel
+    create li
+        attribute class = "tel"
+        continue
+
+match url
+    create li
+        create a
+            attribute class = "url"
+            attribute href = contents
+            continue
+</db:programlisting>
+<db:para>In other words, we can factor out the document domain structure from the HTML for authoring and storage and then factor it back in for output.</db:para>
+</db:section>
+<db:section>
+<db:title>Structure or annotation</db:title>
+<db:para>Since both structures and annotations can contain information about content, you often have to decide whether to use one of the other to capture some of the metadata you need. Here are some of the basic considerations:</db:para>
+<db:para>Annotations are more difficult to constrain than structures. It is not that you can’t constrain which annotation apply to which structures. In XML, for instance, you could require that every element <db:code>a</db:code> have an attribute <db:code>b</db:code>. But while that may work in some cases, it only applies if <db:code>b</db:code> is relevant to all instance of <db:code>a</db:code>, and with most of the things you want attributes for, that is not the case. So that means the <db:code>b</db:code> needs to be optional, which means it is less constrained. (There is a constraint on which attributes <db:emphasis role="bold">may</db:emphasis> occur, but not on which <db:emphasis role="bold">must</db:emphasis> occur.)</db:para>
+<db:para>Structures provide superior guidance. Even if all you need for downstream processing is metadata that could be provided by annotations, using structures makes it easier to guide authors to provide the metadata you need, and to audit the content to make sure the information has been provided correctly.</db:para>
+<db:para>Structures establish context. As we have seen, the ability to establish context is key to many algorithms. Annotations exist in the context established by structures, but do not create new context themselves.</db:para>
+<db:para>Similarly, if you are annotating words and phrases within a paragraph, it is difficult to constrain which words should be annotated or how. If you really need a particular piece of information to be constrained consistently, you probably need to factor out the paragraph and capture it as a set of field structures that can be properly constrained and audited. (You can turn it back into a paragraph in the presentation algorithm if you want to publish it that way.}</db:para>
+<!-- example -->
+<db:para>Secondly, annotation are generally harder for writers to create than structures. This depends in part on which markup languages you are using, and which editing tools, but in XML, for instance, where annotation are usually created using attributes, a string of attributes on an element can make the document very hard to read in plain text view, which most XML editors, which are generally optimized for document domain editing, make it much more difficult to add attributes than elements, and generally hide attributed from view (at least by default) making it harder to edit them, or to see how they impact the overall structure of the document.</db:para>
+<db:para>Of course, if you need to add more than one piece of metadata to a piece of content, you will have to use annotations to do it because one structure, by itself, can only express one piece of information. However, by moving your content to a different domain, you may be able to avoid the need to use as many annotations. When you write content in the document domain, for example, any media, subject, or management domain metadata you want to add to the information must be expressed as annotations. But if you move your content to the subject domain, you can often factor out the document domain, media, and management domain structures, meaning you can rely on the subject domain structures alone and have less need for additional annotations.</db:para>
+<db:para>(It should be noted here that it is uncommon to have a real world tagging language that is entirely in one domain. While media domain languages are often entirely in the media domain, document domain languages commonly include some subject domain structures or annotations and often extensive management domain structures and annotations. Even subject domain languages usually need at least basic document structures like paragraphs and lists, and may also need some management domain structures and annotations for management information that cannot easily be factored out into sensible subject domain structures.)</db:para>
+<db:para>Structures are more expressive than annotation. Structures break a document into pieces and label the pieces. This allows you to see the structure of the document as a whole and reflect on it as a whole. It allows you to navigate the document more easily and audit it more thoroughly. In a markup language like SAM which deliberately expresses the structure, it is easier to take in the structure of the document at a glance.</db:para>
+<!--  Note that storing document domain content in a subject domain CMS schema is another case of overlying the domains. -->
+<db:para>What happens when you need to format part of your document differently, but your document domain language does not have a document domain structure for the document element you are creating? For example, if your document domain language is HTML, it does not have any structures for common document domain objects like procedures, sidebars, of bibliographies?</db:para>
+<db:para>Of course, you can create these things in an HTML document, using regular features like lists, divs, and paragraphs. To indicate how they are to be formatted, though, you will have to either apply style information directly in the file, or else add some kind of metadata that indicates the special role that the list, div, or paragraph is playing. In HTML, the normal strategy is to use a class attribute. So, you could support special styling of a procedure list by giving it a class attribute of “procedure”:</db:para>
+<db:programlisting language="HTML">
+&lt;ol class="procedure"&gt;
+    &lt;li&gt;Lather.&lt;/li&gt;
+    &lt;li&gt;Rinse.&lt;/li&gt;
+    &lt;li&gt;Repeat.&lt;/li&gt;
+&lt;ol&gt;
+</db:programlisting>
+<db:para>This is, in some ways, like giving HTML a procedure document domain object. We can now format as a procedure. And because we are using a hierarchical system, we don’t need to add class attributes to the li elements to format them different. We can set an invariant rule that all li elements that are children of an ol element of class “procedure” will be formatted a certain way.</db:para>
+<db:programlisting language="CSS">
+ol.procedure li
+{
+}
+</db:programlisting>
+<db:para>We said that when we define a style, we are extending the media domain. In the same way, if we work in the document domain, we often need to extend the document domain we are working in. HTML is not an extensible language. To fill the need for an extensible document domain language, the W3C adopted XML (eXtensible Markup Language). XML allows you to extend your document domain (or any other domain) in two ways:</db:para>
+<db:orderedlist>
+<db:listitem>
+<db:para>by creating brand new structures in that domain.</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>by using attributes to specify additional type information for an existing structure.</db:para>
+</db:listitem>
+</db:orderedlist>
+<db:para>Another method for extending the document domain is provided by DITA through it specialization mechanism, which allows you to create a new structure by specializing an existing one. In practice, this means defining a new structure but with the difference that the system knows about the new structures relationship to the old one, so that if you specialize a numbered list, the system knows that your new list is a type of numbered list.</db:para>
+<db:para>Yet another method is provided by SPFE, which supports creating a library of structures from which you can select the ones you want to build a set of document domain (or other domain) structures for your use.</db:para>
+<db:para>We will look in detail later at ways of extending your document domain objects. For now, lets begin by looking at what the document domain looks like, and why you want to add additional kinds of document domain objects.</db:para>
+</db:section>
+</db:section>
+<db:section><db:title>Taxonomy and controlled vocabulary</db:title><db:para>
+            Not available yet.
+        </db:para></db:section>
+<db:section>
+<db:title>Ontology</db:title>
+<db:para>Finally it is worth saying a word about ontology. Ontology (in the information processing sense) is an attempt to create a formal mapping of the relationships between entities in the real world such that algorithms can draw inferences and reach conclusions about them.</db:para>
+<db:para>In many way, therefore, an ontology is an attempt to do for algorithms what content does for humans. After all, one of the main reasons that we read is so that we can understand the world better, understand what various objects and institutions are and how they relate to each other, statically and in action, so that we can decide what to do.</db:para>
+<db:para>In some sense, therefore, ontology is the ultimate in subject domain markup. And just as subject domain markup can be used to drive content management functions, so there are attempts to use ontologies to drive content management functions, especially at the enterprise level. One should also be able to generate human-readable content from an ontology, given a sufficiently sophisticated algorithm and a sufficiently sophisticated ontology.</db:para>
+<db:para>All of this is very much outside our scope in this book. Subject domain markup is an attempt to capture certain aspects of the subject matter of a work. But it is not an attempt to model the argument of a work. Given the passage:</db:para>
+<db:programlisting language="sam">
+In {Rio Bravo}(movie), {the Duke}(actor "John Wayne") plays an ex-Union colonel.
+</db:programlisting>
+<db:para>The subject domain is content to formalize the fact that Rio Bravo is a movie and that “the Duke” is a reference to the actor John Wayne. It does not model the relationship between the two. An ontology would want to model the “starred in” relationship between John Wayne and Rio Bravo, whereas the subject domain is content to leave this to the text.</db:para>
+<db:para>Similarly, this subject domain markup does not both to denote that Union is a reference to both a country and its armed forces, and the colonel is a rank in those armed forces. It does not denote these things because this particular markup language is concerned with movies and these facts are entirely incidental to the movie business. A full ontological treatment of the passage above, however, would need to model those relationships.</db:para>
+<db:para>Structured writing does make certain aspects of content clear to algorithms, but not with the intention of making it possible for the algorithms to act on the information in that content. It only does what is necessary to allow human authors to use algorithms as tools to improve the quality of the content they prepare for human readers.</db:para>
+</db:section>
 </db:chapter>

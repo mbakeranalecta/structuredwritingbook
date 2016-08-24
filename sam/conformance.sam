@@ -20,61 +20,54 @@ chapter:(#conformance) Conformance
     
     If the constraint you are introducing is not easier to conform to or easier to validate, you probably should not do it. There are certainly cases where moving content to a more formal document domain model introduces more constraints than it eliminates without making those constraints easier to comply with or validate. On the other hand, sometimes those additional constraints are required for algorithms. Inevitably, authors have to make some concessions to the needs of algorithms, but we don't want algorithms to impose such a burden on authors that we distract them from doing good research and quality writing. So if the structures you are created for the sake of algorithms prove complex for authors to conform to or difficult to validate, it is wise to ask if you could refactor those constraints again (perhaps to the {subject domain}(concept) so that you get both the precision and detail that the algorithm needs and the ease of use and validation that the writer needs. 
     
-    section: Schemas
-    
-        How do you establish constraints for content, and how do you validate against those constraints?
+	section: Completeness
+		Completeness is an obvious aspect of content quality. Unfortunately, lack of completeness is often hard for writers and reviewers to spot. The omission of information they already know is hard to see unless there is an obvious hole in a predefined and explicit document structure. Defining structures that highlight information requirements can significantly improve completeness. 
         
-        For a {concrete markup languages}(concept) like MarkDown, the constraints are established in the code of the MarkDown processor. They are validated when the processor parses the MarkDown file. (In practice, though, MarkDown does no meaningful validation. Anything it does not recognize as markup, it simply outputs as text.)
+        In the {subject domain chapter}[#chapter.subject-domain] we saw how calling out the preparation time and number of servings for a recipe help ensure that the author always remembers to include that information, whether or not we decide to present it in fields or as part of a paragraph.
+        
+        But this is not the only way that subject domain structured writing helps ensure completeness. By specifically calling out the subjects that are mentioned in every topic you write, you build a list of subjects that are important to your business. You can use this list to make sure that all the subjects you need to cover are actually covered. 
 
-        For {extensible markup languages}(concept) like XML you define structures yourself (or use an existing definition). Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a "validator".
+        For example, structured writing allows you to annotate you text to call out the types of certain phrases such as functions names, feature names, or stock symbols.
         
-        A schema language is a structured language for defining structured languages. The schema for a markup languages says what structures are allowed and in what order and relationship. Those definitions are constraints. A given document either conforms to those constraints or it does not. 
-    
-        Here is an example of a schema in a schema language called {RelaxNG}(tool), which is one of several schema languages available for defining {XML}(language)-based markup languages:[https://en.wikipedia.org/wiki/RELAX_NG#XML_syntax]
+        ```(sam)        
+        When installing widgets, use a {left-handed widget wrench}(tool) to tighten them to the recommended torque for your device.
+        ```
+        
+        This sample annotates the phrase "left-handed widget wrench" and records that these words describe a tool. If all mentions of tools are annotated this way, you can then compile a list of all the tools you mention in all your topics and make sure that you have suitable documentation for each of them. We will look at annotations, and the ways you can use them, in later articles. 
+        
+        And yes, this is the same markup that I have been using in earlier chapters, and I will explain it eventually. 
+		
+	section: Consistency
+		Similarly to completeness, consistency can make a big difference to readers, but lack of consistency is hard to spot if the structure of the content is not explicit in all the ways we want it to be consistent. Consistency can apply to many aspects of the content, such as structure and vocabulary.
+        
+        We have {described structured writing as applying constraints to writing}(link "http://techwhirl.com/what-is-structured-writing/"). Being consistent simply means abiding by constraints. As we have seen, this can take the form of either enforcing the constraint through required structure or, preferably, factoring out the constraint so that it is handled by algorithms rather than people. We have looked at how you can factor out constraints in both the {document domain}(link "http://techwhirl.com/structured-writing-in-the-document-domain/") and the {subject domain}(concept).
+        
+        If you annotate the important things in your content set, such as tools in the example above, you can use the annotations to check for consistency of names. Suppose a writer accidentally writes "spanner" rather than "wrench" in the name of the tool:
+        
+        ```(sam)        
+        When installing widgets, use a {left-handed widget spanner}(tool) to tighten them to the recommended torque for your device.
+        ```
+        
+        Since you can now generate a list of tools mentioned in the text, you can check each mention against a list of approved tool names. This can reveal both incorrect names (consistency) and tools that may be missing from the official list (completeness).
+        
+        The same would apply to values in fields, such as the wine match field in the recipe example. With the wine match in a separate field you can compile a list of wines mentioned or check each mention against an approved list. 
+		
+	section: Accuracy
+		Accuracy problems too are often hard to spot. Typos, using old names for things, or giving deprecated examples are all hard for writers and reviewers to see. But there are structured writing techniques than can catch many of these kinds of problems.
+        
+        For example, if you were documenting an API, you could annotate each mention of a function.
+        
+        ```(sam)
+        Always check the return value of the {rotateWidget()}(function) to ensure the correct orientation was achieved. 
+        ```
+        
+        API function names can be quite tricky to remember sometimes and small typos and be difficult to spot. But with this annotation, you can validate all mentions of functions against the API reference or the code base. This technique not only catches misspellings. I have seen it catch the use of deprecated functions in examples, for instance.
+		
+	section: Timeliness
+		Information tends to change quickly these days, and readers no longer have any patience with outdated content. But there are many difficulties in ensuring that content is always timely. How do you detect when content is out of date? How do you push updated content quickly? How do make sure updates in one place don't break other content? Structured writing provides ways to address all of these questions.
+        
+        By improving validate and automating publishing, structured writing can allow you to release content much more quickly. By changing the way content is organized and linked, it can allow you to add and remove individual pages from a content set without fear of breaking things. We will look at these techniques in more detail in later chapters. 
 
-        ```(RNG)
-            <element name="book" xmlns="http://relaxng.org/ns/structure/1.0">
-               <oneOrMore>
-                  <element name="page">
-                     <text/>
-                  </element>
-               </oneOrMore>
-            </element>
-        
-        This example defines two elements and three constraints. The first element is called `book` and the second is called `page`. The constraints are:
-        
-        * The `page` element must occur inside the `book` element. (Because the `page` element is defined inside the `book` element structure.)
-        * There must be at least one `page` element inside the `book` element, and there can be more. (Because the `page` element is defined inside an RNG `oneOrMore` element.)
-        * Text can occur inside the `page` element, but not directly inside the `book` element. (Because the RNG `text` element occurs inside the definition of the `page` element, but not as a direct child of the `book` element definition.)
-        
-        Thus if an author wrote:
-        
-        ```(xml)
-            <book>Moby Dick
-                <page>Call me Ishmael. Some years ago- never mind how long precisely- having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.</page>
-            </book>
-            
-        the validator would report an error because the words "Moby Dick" are directly inside the book element and text is not allowed in that position. 
-        
-        There are several different schema languages for XML each of which is capable of expressing and enforcing different sets of constraints (with considerable overlap between them). It is not unusual to combine different schema languages to more completely constrain a markup language. In particular, it is not uncommon to use a schema language called {Schematron}(tool) in concert with other schema languages like {RNG}(tool "RelaxNG"). While most schema languages work by modeling the structure of a document, as in the {RNG} example above, {Schematron} works by making assertions about the structure in a language called {XPath}(tool). A {Schematron} schema would make a lousy guide for authoring, but it can test assertions, and therefore enforce constraints, that no other schema language can. 
-        
-        Here is a simple {Schematron} example. It defines one of the constraints listed above, namely that a book element must contain at least one page element. 
-        
-        ```(schematron)
-            <schema xmlns="http://purl.oclc.org/dsdl/schematron"  queryBinding="xslt2">
-                <pattern>
-                    <title>Book constraint</title>
-                    <rule context="book">
-                        <assert test="page">A book must contain at least one page.</assert>
-                    </rule>
-                </pattern>
-            </schema>
-        
-        The rule says that in the context of the element `book` the assertion that there is an element `page` must be true. If it is not, the message within the `assert` element will be displayed. 
-        
-        In the {RNG} schema example, the schema is essentially a template that models the hierarchy of the document. The constraints are consequences of the structure of that hierarchy. (The `book` element cannot contain text because there is no place for text in that part of the hierarchy.) Only documents that conform to the template are valid.
-        
-        In the {Schematron} example, the schema is a series of constraint statements. The hierarchy of the document is a consequence of meeting all the constraints. Any document is valid as long as it conforms to all the stated constraints. 
     
     section: Semantic constraints
     
