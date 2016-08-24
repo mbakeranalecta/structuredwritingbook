@@ -271,12 +271,12 @@
     </xsl:template>
     
     <xsl:template match="insert[@type='image']">
-        <!-- This template assumes that the relative path to the image
-             is the same as that of the source file. In other words it 
-             assumes that the source directory and the XML ouput directoy
-             and the location of the image are all children of the 
-             same parent. Otherwise this would need to do path 
-             manipulation that you can't do in XSLT 1.0
+        <!-- This template assumes that the relative path to the image in the 
+             output file is the same as that of the source file. In other 
+             words it assumes that the source directory and the XML ouput directory
+             are children of the same parent. 
+             
+             It does not currently support or detect absolute paths.
         -->
         <db:mediaobject>
             <xsl:if test="@id">
@@ -295,6 +295,11 @@
                     <db:imageobject condition="fo">
                         <db:imagedata fileref="{$item-path}{$imagedata/image/fo/href}" contentwidth="{$imagedata/image/fo/contentwidth}" align="{$imagedata/image/fo/align}"/>
                     </db:imageobject>
+                    <xsl:if test="$imagedata/image/alt">
+                        <db:textobject>
+                            <xsl:apply-templates select="$imagedata/image/alt/*"/>
+                        </db:textobject>
+                    </xsl:if>
                     
                 </xsl:when>
                 <xsl:otherwise>
