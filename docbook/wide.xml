@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0">
+<db:title>Wide Structures</db:title>
+<db:section>
+<db:title>Content in two dimensions</db:title>
+<db:para>The notion of separating content from formatting works quite well when the content is a string of words. A string of words has only one dimension: length. A printed string, of course, has two dimensions: length and height, since each letter had a height and a width. (The depth of the ink is irrelevant for this purpose.) But the height and the width of letters is a pure media-domain concern. When we separate content from formatting, we separate the font from the character and are left with a string of characters whose length is measured not in inches but in character count. And this works very nicely because unless we get silly with the size and shape of the viewport that we flow the characters into, and a rendering algorithm can flow characters onto a page with reasonable results.</db:para>
+<db:para>There can, indeed, be some issues with such rendering algorithms when it comes to hyphenation, widows and orphans, and the location of titles relative to the text, but with the appropriate document domain markup to delineate basic document structures, algorithms can handle these issues reasonably well. (They can’t edit the text itself to make a line break work better, as some human typesetters will do, but that kind of manipulation is rarely needed.)</db:para>
+<db:para>But when it comes to content that has two dimensions, things get more difficult. The main problem cases are:</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>tables</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>graphics and other media</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>preformatted text, such as program listings, that have meaningful line breaks</db:para>
+</db:listitem>
+</db:itemizedlist>
+</db:section>
+</db:chapter>

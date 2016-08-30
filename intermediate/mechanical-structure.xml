@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter name="chapter.mechanical-structure">
+<annotations>
+<p>Concepts</p>
+<p><phrase><annotation type="concept">subject domain</annotation></phrase> <phrase><annotation type="concept">media domain</annotation></phrase> <phrase><annotation type="concept">document domain</annotation></phrase> <phrase><annotation type="concept">management domain</annotation></phrase> <phrase><annotation type="concept">subject-domain</annotation></phrase> <phrase><annotation type="concept">media-domain</annotation></phrase> <phrase><annotation type="concept">document-domain</annotation></phrase> <phrase><annotation type="concept">management-domain</annotation></phrase> <phrase><annotation type="concept">hybrid tagging language</annotation></phrase> <phrase><annotation type="concept">Every Page is Page One</annotation></phrase> <phrase><annotation type="concept">abstract language</annotation></phrase> <phrase><annotation type="concept">information architecture</annotation></phrase> <phrase><annotation type="concept" specifically="top-down information architecture">top-down</annotation></phrase> <phrase><annotation type="concept">metadata</annotation></phrase></p>
+<p>Languages</p>
+<p><phrase><annotation type="language">SAM</annotation></phrase> <phrase><annotation type="language">DITA</annotation></phrase> <phrase><annotation type="language">DocBook</annotation></phrase> <phrase><annotation type="language">Markdown</annotation></phrase> <phrase><annotation type="language">HTML</annotation></phrase> <phrase><annotation type="language">XML</annotation></phrase></p>
+<p>Algorithms</p>
+<p><phrase><annotation type="algorithm">publishing algorithm</annotation></phrase> <phrase><annotation type="algorithm">publishing</annotation></phrase> <phrase><annotation type="algorithm">synthesis algorithm</annotation></phrase> <phrase><annotation type="algorithm">synthesis</annotation></phrase> <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase> <phrase><annotation type="algorithm">presentation</annotation></phrase> <phrase><annotation type="algorithm">formatting algorithm</annotation></phrase> <phrase><annotation type="algorithm">formatting</annotation></phrase> <phrase><annotation type="algorithm">encoding algorithm</annotation></phrase> <phrase><annotation type="algorithm">encoding</annotation></phrase> <phrase><annotation type="algorithm">composition algorithm</annotation></phrase> <phrase><annotation type="algorithm">composition</annotation></phrase> <phrase><annotation type="algorithm" specifically="composition">composability</annotation></phrase> <phrase><annotation type="algorithm">conformance</annotation></phrase> <phrase><annotation type="algorithm" specifically="conformance">validation</annotation></phrase> <phrase><annotation type="algorithm">conformance algorithm</annotation></phrase> <phrase><annotation type="algorithm">separating content from formatting</annotation></phrase> <phrase><annotation type="algorithm">single sourcing</annotation></phrase> <phrase><annotation type="algorithm">single sourcing algorithm</annotation></phrase> <phrase><annotation type="algorithm">differential single sourcing</annotation></phrase> <phrase><annotation type="algorithm">differential single sourcing algorithm</annotation></phrase> <phrase><annotation type="algorithm">single source of truth</annotation></phrase> <phrase><annotation type="algorithm">single source of truth algorithm</annotation></phrase> <phrase><annotation type="algorithm">reuse</annotation></phrase> <phrase><annotation type="algorithm">content reuse</annotation></phrase> <phrase><annotation type="algorithm">content reuse algorithm</annotation></phrase> <phrase><annotation type="algorithm">reuse algorithm</annotation></phrase> <phrase><annotation type="algorithm">content management algorithm</annotation></phrase> <phrase><annotation type="algorithm">content management</annotation></phrase> <phrase><annotation type="algorithm">linking</annotation></phrase> <phrase><annotation type="algorithm">linking algorithm</annotation></phrase> <phrase><annotation type="algorithm">rendering algorithm</annotation></phrase> <phrase><annotation type="algorithm">authoring algorithm</annotation></phrase> <phrase><annotation type="algorithm">quality</annotation></phrase> <phrase><annotation type="algorithm">extract and merge</annotation></phrase> <phrase><annotation type="algorithm">relevance</annotation></phrase> <phrase><annotation type="algorithm">quality algorithm</annotation></phrase> <phrase><annotation type="algorithm">extract and merge algorithm</annotation></phrase> <phrase><annotation type="algorithm">relevance algorithm</annotation></phrase> <phrase><annotation type="algorithm">authoring</annotation></phrase> <phrase><annotation type="algorithm">authoring algorithm</annotation></phrase> <phrase><annotation type="algorithm">exchange algorithm</annotation></phrase> <phrase><annotation type="algorithm">exchange</annotation></phrase></p>
+<p>Tools</p>
+<p><phrase><annotation type="tool">content management system</annotation></phrase> <phrase><annotation type="tool">Content management systems</annotation></phrase></p>
+<p>Roles</p>
+<p><phrase><annotation type="role">information architect</annotation></phrase></p>
+</annotations>
+<p>The mechanical structure of structures writing is the structure it presents to machines, which is to say, to algorithms. To create mechanical structures to contain writing, we need a type of structure suitable to what we are capturing and what information we want to capture about it. Traditional computing structures like relational database tables do not work well for this because they are too regular to fit the shape of content. Creating structures that are regular enough for algorithms to deal with yet irregular enough to fit written language is an interesting problem to which more than one solution has been proposed.</p>
+<section>
+<title>Flags vs Boxes</title>
+<p>A document is fundamentally a linear and ordered data structure. One thing comes after another. The <phrase>rhetorical structure</phrase> of a document is not expressed using literary devices (possibly highlighted by formatting changes) within the flow of the text. To impose a topic type to formally constrain the topic pattern that is the rhetorical structure, we need to inject an additional and essentially artificial structure into this linear ordered data structure (one which may, as we have noted, factor out some of the text).</p>
+<p>Two commons ways to do this are flags and boxes.</p>
+<p>The boxes approach means creating boxes for words and giving names to those boxes. It may also involve putting a label on the box with additional information on it. The name and the label on the box tells us something about the words in the box. To create the boxes, we insert markup into the text to define the beginning and end of the boxes. This is how it works in XML:</p>
+<codeblock language="xml">
+&lt;box label_1="foo" lable_2="bar"&gt;text&lt;/box&gt;
+</codeblock>
+<p>But not all markup system use the boxes model. Many older systems, particularly those intended for typesetting, used the flags model. To understand the flags model, consider how road signs delineate zones on a road. As you approach a town, you may see a sign saying that you are entering the town. A little further on, you see a sign for a reduced speed limit. On the far side of the town, you pass a sign saying you are leaving the town limits. Here, however, there are still houses and businesses along the road, so the speed limit does not rise until you are past the built up area. Thus the box defined by the town limits and the box defined by the lower speed zone overlap each other. It is not a case of boxes within boxes, but of independent zones defined by begin and end signs.</p>
+<p>An example of this approach in the content world is the word processor WordPerfect which takes what it calls a “streaming approach” to document structure in which features are turned on and remain on until they are turned off. Thus in Word Perfect, your could do this, with bold starting and then italic starting, the bold stopping and finally italic stopping:</p>
+<codeblock>
+This text is [B&gt;bold, [I&gt;this is bold and italic,&lt;B] and this is just italic&lt;I].
+</codeblock>
+<p>This would print as:</p>
+<blockquote>
+<p>This text is <phrase><annotation type="bold">bold,</annotation></phrase> <phrase><annotation type="bold"><annotation type="italic">this is bold and italic,</annotation></annotation></phrase> <phrase><annotation type="italic">and this is just italic</annotation></phrase>.</p>
+</blockquote>
+<p>This overlapping of structures is illegal in XML, so in HTML, for instance, you can’t do this:</p>
+<codeblock>
+&lt;p&gt;This text is &lt;b&gt;bold, &lt;i&gt;this is bold and italic,&lt;/b&gt; and this is just italic&lt;/i&gt;.&lt;/p&gt;
+</codeblock>
+<p>You have to do this, keeping everything nested with no overlapping structures:</p>
+<codeblock>
+&lt;p&gt;This text is &lt;b&gt;bold,&lt;/b&gt; &lt;i&gt;&lt;b&gt;this is bold and italic,&lt;/b&gt;&lt;/i&gt; &lt;i&gt;and this is just italic&lt;/i&gt;.&lt;/p&gt;
+</codeblock>
+<p>There is more to this question than trivial examples like this. In the academic study of text markup, where markup is used not for the preparation of documents but to mark them up for academic study, there is an debate about whether the hierarchical structure of XML-based languages actually reflects the real structure of the text.</p>
+<p>From a structured writing perspective, we don’t have to worry so much about whether the markup is objectively true to the text. Our concern is to create structures that improve the quality of content and enable the structured writing algorithms we want to use.</p>
+<p>The use of a flags model like that of WordPerfect is rare today. A hierarchical model is almost universally prepared. Whether they truly represent the structure of text or not, hierarchical models are easier to define and process and provide an easier way to express constraints. If your really want to express overlapping structures in a hierarchical language like XML, it is possible to do so by using empty element tags as flags. Thus you can define a language that lets you do this:</p>
+<codeblock>
+&lt;p&gt;This text is &lt;b-start/&gt;bold, &lt;i-start/&gt;this is bold and italic,&lt;b-end/&gt; and this is just italic&lt;i-end/&gt;.&lt;/p&gt;
+</codeblock>
+<p>However, you would be very hard pressed to find anyone who would tell you this was a good idea. The boxes model works best for most of what you want to do with structured writing and to introduce a flags model into the mix just to express an odd structure like this introduces far more complexity than it is worth.</p>
+<p>If you really need to model the highly unlikely bit of formatting in the example above, you should do it as illustrated above:</p>
+<codeblock>
+&lt;p&gt;This text is &lt;b&gt;bold,&lt;/b&gt; &lt;i&gt;&lt;b&gt;this is bold and italic,&lt;/b&gt;&lt;/i&gt; &lt;i&gt;and this is just italic&lt;/i&gt;.&lt;/p&gt;
+</codeblock>
+<p>In short, structured writing today uses the boxes model, and so should you.</p>
+</section>
+<section>
+<title>Flat vs. nested structures</title>
+<p>But even when we choose the boxes model of markup design, we are still left with some fundamental choices about structure. The first is flat vs. nested structure.</p>
+<p>We noted earlier that in HTML, you have six levels of heading (<phrase><annotation type="code">h1</annotation></phrase> through <phrase><annotation type="code">h6</annotation></phrase>) whereas in DocBook you have only <phrase><annotation type="code">title</annotation></phrase>. In DocBook, you can divide a document up into sections and nest sections inside sections. You can then print the titles of sections inside sections in a smaller font that the titles of first level sections. You get to have differences in heading size without having six different heading tags.</p>
+<p>But the DocBook model assumes that the real structure of a document is actually a hierarchy of nested sections and that the size of titles announces the steps up and down that hierarchical tree. HTML makes no such assumption. It will let you put a <phrase><annotation type="code">&lt;h4&gt;</annotation></phrase> immediately after an <phrase><annotation type="code">&lt;h1&gt;</annotation></phrase> if you want to. It treats documents as essentially flat structures punctuated by headings of various sizes as and where appropriate. (HTML syntax follows XML’s nested model, but it simply does not define document structures in a highly nested fashion like DocBook. Until HTML5, HTLM did not even have a <phrase><annotation type="code">section</annotation></phrase> element.)</p>
+<p>Which model of a document is correct? You can think of a document as being organized hierarchically, with major ideas expressed in sections, sub-ideas support the major ideas in subsections, etc. There are doubtless documents that fit that model. But you can also think of documents as being more like a journey in which headings function more like road signs. A city gets a big sign, a hamlet a small sign, and a town a medium sign. But the town is not inside the city, not the hamlet inside the town, and there is no guarantee that on leaving the city you will come to the town before you come to a hamlet.</p>
+<p>Studies by Peter Flynn indicate that most authors think of the documents they are writing much more in terms of a punctuated linear model than a hierarchical model.</p>
+<blockquote>
+<citation type="nameref" value="Flynn2009"/><p>The classical theory, derived from computer science and graph theory, is that the document is a hierarchical tree (actually inverted: a root-system) and that all necessary actions can be seen in terms of navigation around the tree, and of insertion into and withdrawal from the the nodes which form the branches and leaves.</p>
+<p>The conventional writer, however — and we expressly exclude the markup expert, as well as the experienced technical authors who responded to the survey — is by repute probably only marginally aware of this tree; but we have been unable to measure this at present. In this view, the document is seen as a continuous linear narrative, broken into successive divisions along semantic lines, and interspersed with explanatory material in the form of figures, tables, lists, and their derivatives.</p>
+</blockquote>
+<p>Today, very few markup languages take the streaming approach of WordPerfect. The problem with it is that when you want to deal with any structure that is naturally hierarchical, the ability to start and stop structures independently just gets in the way and makes things hard to handle. But even with markup languages that are syntactically hierarchical, like XML, you can still define markup languages that are largely flat (like HTML) or more hierarchical (like DocBook).</p>
+<p>But if the <phrase>constraints</phrase> that we want to express in structured writing demand hierarchy, while <phrase>functional lucidity</phrase> demands more of a punctuated linear model, how do we reconcile these two opposing requirements in markup language design?</p>
+<p>This is of greatest concern in the design of <phrase><annotation type="concept">document domain</annotation></phrase> languages. The structure of media domain languages is largely dictated by the shape and relationship of the media-domain object they are modeling. In the subject domain, we have abstracted content out of strict document order. Hierarchy in the subject domain tend to match the hierarchy of relationship in the subject matter itself. (Though this is not universal. Addresses, for instance, which are based on hierarchal locations, are modeled as flat ordered lists. The order reflect the hierarchy, but the nesting of city inside country and of street within city is not reflected in the structure of an address record.) In the <phrase><annotation type="concept">document domain</annotation></phrase>, however, it is a real concern. The document domain consists of abstractions of document structures and the nature of their relationship to the structure of thought in the text is not obvious.</p>
+<p>The options available are:</p>
+<ul>
+<li>
+<p>Create a really flat document domain language. Examples are HTML and markdown. The problem here is that they impose few constraints, and the lack of context-setting hierarchy make it hard to model different types of document structures without creating hundred of tags -- which would negate any <phrase>functional lucidity</phrase> that you gained by keeping the language flat.</p>
+</li>
+<li>
+<p>Create a hierarchical language that has a really permissive structure, such that many different boxes are allowed inside each box in many different other. An example of this is DocBook. The problem here is that the possible permutations make writing algorithms difficult and you often need to impose additional constraints on your authors that are not expressed or enforced by the markup itself. This again diminishes <phrase>functional lucidity</phrase>, and compromises <phrase><annotation type="algorithm">conformance</annotation></phrase>. (An interesting property of this approach is that the flexibility of the language means that authors can choose to create documents that are deeply nested or very flat. This is not really a virtue, however, as it is not clear how this choice contributes to improved content quality.)</p>
+</li>
+<li>
+<p>Define a smaller, stricter document domain language that is appropriate to the particular types of documents you want to write, possibly as restricted subset of an existing language like DocBook. This is a common approach. Its main difficulty is that it involves you in having to do your own language design, which many organization try to avoid. Once you have decided to go this route, going to the <phrase><annotation type="concept">subject domain</annotation></phrase> instead may be no more expensive while providing better <phrase>functional lucidity</phrase> and <phrase><annotation type="algorithm">conformance</annotation></phrase>.</p>
+</li>
+<li>
+<p>Define a strict hierarchical document domain language that expresses the constraints you need and make people learn it. This works if you are able to recoup the expense of training your authors. It does not work if you want to include occasional authors in your pool of contributors.</p>
+</li>
+<li>
+<p>Move content creation to the <phrase><annotation type="concept">subject domain</annotation></phrase>.</p>
+</li>
+</ul>
+<p>In the <phrase><annotation type="concept">document domain</annotation></phrase>, however, you have to make a choice between enforcing a hierarchical model of a document or allowing a more linear one. You will almost certainly do this in the context of hierarchical syntax. You probably don’t want to go the WordPerfect route of separate on and off commands. But you do need to decide if you are going to allow arbitrary heading levels. Or, to put it another way, to model a document as a hierarchy of sections with each section having a title, or a single flow of text randomly interspersed with headings, or something in between.</p>
+<p>The something in between option can seem appealing but can you can end up with something really unconstrained, meaning that it is difficult to write reliable algorithms to process it. Here is the kind of issues you can run into:</p>
+<p>Is a list part of the paragraph in which it occurs? Some markup languages, such as Markdown and SAM, take the view that lists are separate blocks that come after a preceding paragraph. But DITA, DocBook, and HTML will all let you place a list either inside or outside a paragraph:</p>
+<codeblock>
+&lt;p&gt; The primary colors are:
+    &lt;ul&gt;
+        &lt;li&gt;Red&lt;/li&gt;
+        &lt;li&gt;Blue&lt;/li&gt;
+        &lt;li&gt;Yellow&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/p&gt;
+
+&lt;p&gt; Their complementary colors are:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;Green&lt;/li&gt;
+    &lt;li&gt;Orange&lt;/li&gt;
+    &lt;li&gt;Purple&lt;/li&gt;
+&lt;/ul&gt;
+</codeblock>
+<p>The interesting question here is whether these two structures should be formatted differently for output. Should the list that in inside the paragraph be indented, which the one that comes afterwards be printed flush left?</p>
+<p>The default for HTML, at least in the browsers I tried it on (Edge, Internet Explorer, and Chrome) is that both are indented by the same amount, but of course you could change this with CSS and DocBook and DITA processors can do what they like.</p>
+<p>But would it be a good idea to make a distinction between the two? Only if authors clearly understood the difference between the two and clearly know when they were choosing one or the other. (If they are writing in a visual editing view of an XML editor, then they almost certainly won’t know the difference.)</p>
+<p>If you are designing your own markup language, do you want to allow both these forms? Probably not. The more permutations of structure your markup language allows, the more work it will be to write the algorithms to process it. Some allowance may be made for ease of authoring, if you wish, but it may be better to wait for authors to complain about a restriction like this than to build in all the possible variations in advance. (This is also a problem that is more likely to occur in an <phrase><annotation type="concept">abstract language</annotation></phrase> like <phrase><annotation type="language">XML</annotation></phrase> than in a concrete language like <phrase><annotation type="language">Markdown</annotation></phrase> or <phrase><annotation type="language">SAM</annotation></phrase>, where the choice is baked into the syntax and the author does not have a choice to make.</p>
+</section>
+<bibliography>
+<entry name="Flynn2009">
+<p>Flynn, Peter. “Why writers don’t use XML: The usability of editing software for structured documents.” Presented at Balisage: The Markup Conference 2009, Montréal, Canada, August 11 - 14, 2009. In Proceedings of Balisage: The Markup Conference 2009. Balisage Series on Markup Technologies, vol. 3 (2009). doi:10.4242/BalisageVol3.Flynn01.</p>
+</entry>
+</bibliography>
+<section>
+<title>Agreeing on boxes, names, and labels</title>
+<p>The names and labels on boxes tell us what kind of thing is in the box. What kind of things they  tell us depends on the domain we are dealing with.</p>
+<p>In the <phrase><annotation type="concept">media domain</annotation></phrase> they tell us what something looks like, either directly (an actual format description) or by reference (the name of a style). In the <phrase><annotation type="concept">document domain</annotation></phrase> they tell us what part of a document the words are. In the <phrase><annotation type="concept">management domain</annotation></phrase>, they tell us what to do with the content under different circumstances. In the <phrase><annotation type="concept">subject domain</annotation></phrase> they tell us what the subject matter of the words is.</p>
+<p>The box does not only have to have information from one domain on it. It is not uncommon to have a box with a name in the document domain and a label in the management domain or the subject domain.</p>
+<p>The names and labels on the boxes tell us what constraints the words in the box obey, or, as we are writing, what constraints the words we write are expected to obey. Algorithms use the names and the labels to process the content, assuming that they accurately reflect the constraints.</p>
+<p>For structured writing to work, it is essential that everyone involved understands and agrees on what the names and labels mean. If we don’t the names and labels will not accurately reflect the constraints we expect, and the whole content quality project falls apart and the algorithms stop working.</p>
+<p>Confusion and disagreement about what the names and labels of a particular language mean are not uncommon. Large document domain languages like DocBook and DITA have large vocabularies, and many of the names they offer are quite abstract. Questions about the right way to tag certain passages are common in the communities around these languages, and opinions can vary considerably in some cases. These disagreements don’t only affect low-level structures. In DITA, for example, it is common to debate if a topic is a concept or a task, while some writers choose to use only generic topics because they don’t feel the models of the task, concept, and reference topics fit the content they are creating.</p>
+<p>Having precise definition of terms is important, therefor, in developing a structured writing language. But it is equally important that the language be <phrase>functionally lucid</phrase>. The <phrase><annotation type="algorithm">authoring algorithm</annotation></phrase> requires that creating structure should not come at the detriment of the writing itself. This requirement is not met if writers are constantly having to puzzle out or debate the right way to mark something up.</p>
+<p>In the software world, meta models and abstraction are powerful tools for modeling systems. They provide clear high-level rules for the design of specific structures and create opportunities to reuse code for objects with a shared base model. But these tools can also lead to very abstract naming schemes and even to abstract structures. In the content world, such abstract names and structures can be formally correct but lack the kind of <phrase>functional lucidity</phrase> required for effective authoring.</p>
+<p>The problem of defining a <phrase>topic type</phrase> (mechanical structure) to express a <phrase>topic pattern</phrase> (rhetorical structure) is not only one of defining a correct representation of the content. We also have to design and name structures that can be written by our intended set of authors without imposing a heavy burden on their attention. In other words, designing content structures, at least those intended for use by authors, is as much about interface design as it is about data structure design.</p>
+<p>Clear concrete and specific names, and an organization of boxes that intuitively fits the subject matter, all make for easier authoring. There is no reason that such structures cannot be derived from abstract models, or that they cannot be mapped to abstract models after the fact, but it is important not to let the abstractions intrude too munch into the world of the author.</p>
+<p>Of course, functional lucidity only matters for the formats that authors actually write in. As we have seen, the <phrase><annotation type="algorithm">publishing algorithm</annotation></phrase> typically consists of multiple steps, and each one of those steps can create a format that is closer to the media domain than the one before it. It is perfectly possible to design a document domain structure the only purpose of which is to serve as a step in the publishing chain. Separate authoring formats are created for authors to actually write in (perhaps <phrase><annotation type="concept">subject domain</annotation></phrase> formats or simplified highly constrained ad-hoc document domain formats). Content is transformed from these formats to the document domain format by the <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase> and then the document domain format is translated in to various different media domain languages by the <phrase>formatting routine</phrase>. An arrangement like this eliminates the need to compromise between different demands in designing a single language, generally making each language in the chain simpler and more constrained, which in turn makes it each one easier to <phrase>validate</phrase> and to process.</p>
+</section>
+<section>
+<title>Structure and annotation</title>
+<p>Broadly speaking, structured markup provides two things: structure and annotation. Structure governs the relationship of pieces. It is structure that says that a list consists of list items, that an API reference must begin with a function signature followed by a list of parameter values, that says that an ingredient listing consists of the ingredient name followed by a quantity followed by a unit of measure, or that a section must begin with a title. It is in structure that we create, impose, and express most of the <phrase><annotation type="concept">constraints</annotation></phrase> that are fundamental to structured writing.</p>
+<p>Whenever you place content in a structure, you are saying something about that content. What kind of thing you are saying about it depends on the domain of the markup.</p>
+<ll>
+<li>
+<label>Media Domain</label>
+<p>The structure says what the content should look like.</p>
+</li>
+<li>
+<label>Document Domain</label>
+<p>The structure says what role the content plays in the document.</p>
+</li>
+<li>
+<label>Subject Domain</label>
+<p>The structure relates the content to its subject matter.</p>
+</li>
+<li>
+<label>Management Domain</label>
+<p>The structure says how the content should be managed.</p>
+</li>
+</ll>
+<p>But markup structures, such as XML elements, only allow you to say one thing about the content they contain. Suppose you want to say more than one thing about a piece of content? In that case, you can add annotations to express additional information.</p>
+<p>The information in annotations does not have to be in the same domain as the structure they apply to. For instance:</p>
+<ul>
+<li>
+<p>In <phrase><annotation type="language">DITA</annotation></phrase>, the <phrase><annotation type="attribute" namespace="DITA">keyref</annotation></phrase> attribute is used to add <phrase><annotation type="concept">management domain</annotation></phrase> metadata to a number of document structure elements.</p>
+</li>
+<li>
+<p>In <phrase><annotation type="language">HTML</annotation></phrase>, the style attribute can be used to add <phrase><annotation type="concept">media domain</annotation></phrase> metadata to the document structure.</p>
+</li>
+</ul>
+<p>But not all annotations add additional information to structures. It is possible to have annotations that stand alone. At a certain point in defining the structure of content we get down to what is essentially free-form narrative content -- that is, paragraphs of text. But even within a paragraph, that are pieces of text that we want to add metadata to for use by downstream processes. Examples from each of the domains include:</p>
+<ll>
+<li>
+<label>Media Domain</label>
+<p>A <phrase><annotation type="code">bold</annotation></phrase> or <phrase><annotation type="code">strong</annotation></phrase> annotation on a piece of text you want to emphasize.</p>
+</li>
+<li>
+<label>Document Domain</label>
+<p>An <phrase><annotation type="code">xref</annotation></phrase> annotation to create a reference to another part of the content.</p>
+</li>
+<li>
+<label>Subject Domain</label>
+<p>A <phrase><annotation type="code">function</annotation></phrase> annotation to identify that a piece of text is the name of a function.</p>
+</li>
+<li>
+<label>Management Domain</label>
+<p>A conditional annotation to identify a piece of text that may be conditionally included or excluded from output.</p>
+</li>
+</ll>
+<p>So we are clear on this: all structure annotates. Merely placing a piece of writing in a structure provides some information about it, and therefore annotates it. We add markup annotations when we want to express additional information or when we want to add information to content that is not explicitly structured. To what extent you need additional annotations depends on how detailed your structures are. More detailed structures provide more detailed annotations (and constraints), meaning you will have less need of additional markup annotations. We should also note that this principle extends to the repository level. The metadata attached to a piece of content by a repository is an annotation, and the need for such additional annotation can be reduces with more detailed structured in the content itself.</p>
+<section>
+<title>Structure and annotation in SAM</title>
+<p>In SAM, there are a number of types of structure, but the main extensible structure is the block. Annotations are part of the definition of the language. Annotations can be added to blocks and call also float in text.</p>
+<codeblock language="SAM">
+section:(#annotations) Annotations
+    This is a paragraph containing an {annotation}(concept).
+</codeblock>
+<p>In the example above, <phrase><annotation type="code">section</annotation></phrase> is a structure containing a title and a paragraph. The <phrase><annotation type="code">section</annotation></phrase> structure has an annotation which is contained in parentheses immediately after the colon that defines the structure. In this case it is an ID annotation and assigns the ID “annotations” to the structure.</p>
+<p>The word “annotation” in the paragraph is annotated with a free-floating annotation. The curly braces delineated the text that is being annotated. The parentheses contain the annotation itself, which in this case is a type annotation, indicating that the word “annotation” is a reference to concept.</p>
+</section>
+<section>
+<title>Structure and annotation in XML</title>
+<p>In XML we have two principal types of markup, the element and the attribute. These more or less correspond to the distinction I have made here between structure and annotation. Elements are for structure. Attributes are for annotation. The only caveat is that XML does not allow for free-floating annotations. To create an annotation inside a paragraph, you have to use an element. A paragraph (or any other block of text) with elements floating in it is called “mixed content”.</p>
+<p>So the SAM example above could be expressed like this in XML:</p>
+<codeblock language="XML">
+&lt;section id="annotations"&gt;
+    &lt;title&gt;Annotations&lt;/title&gt;
+    &lt;p&gt;This is a paragraph containing an &lt;concept&gt;annotation&lt;/concept&gt;.
+</codeblock>
+<p>Concept here is behaving as an annotation. There is little in the way of structural restrictions that can be placed on it, other than that it floats in paragraphs or possibly other elements that contain text. There is therefore little you can do either to require its use or to constrain it.</p>
+</section>
+<section>
+<title>Structure in attributes</title>
+<p>While SAM draws a distinction between structure and annotation, XML, as we have seen, does not. Its distinction between element and attribute roughly corresponds to my distinction, but not entirely so. This is a reflection of the fact that while SAM is designed for documents, XML is deliberately more general and designed for data applications where the structure and annotation distinction may not apply, or may not apply in the same way as it does in documents.</p>
+<p>This means that it is possible to design XML languages that use attributes (normally an annotation mechanism) to express structure.</p>
+<p>Consider these <phrase><annotation type="link" specifically="https://en.wikipedia.org/wiki/Microformat">examples of HTML Microformats from Wikipedia</annotation></phrase>. The first example shows an address formatted as a list.</p>
+<codeblock language="HTML">
+&lt;ul&gt;
+   &lt;li&gt;Joe Doe&lt;/li&gt;
+   &lt;li&gt;The Example Company&lt;/li&gt;
+   &lt;li&gt;604-555-1234&lt;/li&gt;
+   &lt;li&gt;&lt;a href="http://example.com/"&gt;http://example.com/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</codeblock>
+<p>Here the phrase <phrase><annotation type="code">The Example Company</annotation></phrase> is contained in <phrase><annotation type="code">li</annotation></phrase> tags. This is part of a list structure delineated by <phrase><annotation type="code">ul</annotation></phrase> tags, so the markup is largely structural in the document domain. The <phrase><annotation type="code">li</annotation></phrase> does not really tell you anything useful about what the content itself is about. It does not tell you anything useful beyond what document structure it belongs to. It is not much use as an annotation.</p>
+<p>The second example adds hCard microformat markup:</p>
+<codeblock language="HTML">
+&lt;ul class="vcard"&gt;
+   &lt;li class="fn"&gt;Joe Doe&lt;/li&gt;
+   &lt;li class="org"&gt;The Example Company&lt;/li&gt;
+   &lt;li class="tel"&gt;604-555-1234&lt;/li&gt;
+   &lt;li&gt;&lt;a class="url" href="http://example.com/"&gt;http://example.com/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</codeblock>
+<p>This example adds subject domain metadata in the form of the class attribute. For example, it says that the phrase <phrase><annotation type="code">The Example Company</annotation></phrase> is a reference to an organization (<phrase><annotation type="code">org</annotation></phrase>). So far this is just regular annotation.</p>
+<p>However, there is not just annotation going on here. There is actually <phrase><annotation type="concept">subject domain</annotation></phrase> structure being expressed. Not only is the list item <phrase><annotation type="code">The Example Company</annotation></phrase> annotated as <phrase><annotation type="code">org</annotation></phrase>, the list that contains it is annotated as <phrase><annotation type="code">vcard</annotation></phrase>. The meaning of <phrase><annotation type="code">org</annotation></phrase> is actually dependent on it being part of a <phrase><annotation type="code">vcard</annotation></phrase> structure.</p>
+<p>In other words, the annotations in the sample above are equivalent to pure subject domain markup like this:</p>
+<codeblock language="HTML">
+&lt;vcard&gt;
+   &lt;fn&gt;Joe Doe&lt;/fn&gt;
+   &lt;org&gt;The Example Company&lt;/org&gt;
+   &lt;tel&gt;604-555-1234&lt;/tel&gt;
+   &lt;url&gt;http://example.com/&lt;/url&gt;
+&lt;/vcard&gt;
+</codeblock>
+<p>In other words again, the microformats are overlaying a second structure on the list structure. In the world of HTML, this makes sense. HTML needs to be a standardized <phrase><annotation type="concept">document domain</annotation></phrase> language so that browsers can display it for human reading. Humans don’t need the vCard annotations to recognize that the content is an address, but algorithms do. So the microformat adds a second, hidden, <phrase><annotation type="concept">subject domain</annotation></phrase> structure to the document for readers who are algorithms rather than people.</p>
+<p>Authoring our content this way would obviously be inefficient. But as we have seen, we can process subject domain structures to produce document domain structures with the <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase>. If you write this content in the <phrase><annotation type="concept">subject domain</annotation></phrase> using markup like the above, you could transform it to the HTML with microformats example shown above with a presentation algorithm like this:</p>
+<codeblock language="pseudo">
+match vcard
+    create ul
+        attribute class = "vcard"
+        continue
+
+match fn
+    create li
+        attribute class = "fn"
+        continue
+
+match org
+    create li
+        attribute class = "org"
+        continue
+
+match tel
+    create li
+        attribute class = "tel"
+        continue
+
+match url
+    create li
+        create a
+            attribute class = "url"
+            attribute href = contents
+            continue
+</codeblock>
+<p>In other words, we can factor out the <phrase><annotation type="concept">document domain</annotation></phrase> structure from the <phrase><annotation type="language">HTML</annotation></phrase> for <phrase><annotation type="algorithm">authoring</annotation></phrase> and storage and then factor it back in for output.</p>
+</section>
+<section>
+<title>Structure or annotation</title>
+<p>Since both structures and annotations can contain information about content, you often have to decide whether to use one of the other to capture some of the metadata you need. Here are some of the basic considerations:</p>
+<p>Annotations are more difficult to constrain than structures. It is not that you can’t constrain which annotation apply to which structures. In XML, for instance, you could require that every element <phrase><annotation type="code">a</annotation></phrase> have an attribute <phrase><annotation type="code">b</annotation></phrase>. But while that may work in some cases, it only applies if <phrase><annotation type="code">b</annotation></phrase> is relevant to all instance of <phrase><annotation type="code">a</annotation></phrase>, and with most of the things you want attributes for, that is not the case. So that means the <phrase><annotation type="code">b</annotation></phrase> needs to be optional, which means it is less constrained. (There is a constraint on which attributes <phrase><annotation type="bold">may</annotation></phrase> occur, but not on which <phrase><annotation type="bold">must</annotation></phrase> occur.)</p>
+<p>Structures provide superior guidance. Even if all you need for downstream processing is metadata that could be provided by annotations, using structures makes it easier to guide authors to provide the metadata you need, and to audit the content to make sure the information has been provided correctly.</p>
+<p>Structures establish context. As we have seen, the ability to establish context is key to many algorithms. Annotations exist in the context established by structures, but do not create new context themselves.</p>
+<p>Similarly, if you are annotating words and phrases within a paragraph, it is difficult to constrain which words should be annotated or how. If you really need a particular piece of information to be constrained consistently, you probably need to factor out the paragraph and capture it as a set of field structures that can be properly constrained and audited. (You can turn it back into a paragraph in the <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase> if you want to publish it that way.}</p>
+<!-- example -->
+<p>Secondly, annotation are generally harder for writers to create than structures. This depends in part on which markup languages you are using, and which editing tools, but in XML, for instance, where annotation are usually created using attributes, a string of attributes on an element can make the document very hard to read in plain text view, which most XML editors, which are generally optimized for document domain editing, make it much more difficult to add attributes than elements, and generally hide attributed from view (at least by default) making it harder to edit them, or to see how they impact the overall structure of the document.</p>
+<p>Of course, if you need to add more than one piece of <phrase><annotation type="concept">metadata</annotation></phrase> to a piece of content, you will have to use annotations to do it because one structure, by itself, can only express one piece of information. However, by moving your content to a different domain, you may be able to avoid the need to use as many annotations. When you write content in the document domain, for example, any media, subject, or management domain metadata you want to add to the information must be expressed as annotations. But if you move your content to the subject domain, you can often factor out the document domain, media, and management domain structures, meaning you can rely on the subject domain structures alone and have less need for additional annotations.</p>
+<p>(It should be noted here that it is uncommon to have a real world tagging language that is entirely in one domain. While media domain languages are often entirely in the media domain, document domain languages commonly include some subject domain structures or annotations and often extensive management domain structures and annotations. Even subject domain languages usually need at least basic document structures like paragraphs and lists, and may also need some management domain structures and annotations for management information that cannot easily be factored out into sensible subject domain structures.)</p>
+<p>Structures are more expressive than annotation. Structures break a document into pieces and label the pieces. This allows you to see the structure of the document as a whole and reflect on it as a whole. It allows you to navigate the document more easily and audit it more thoroughly. In a markup language like SAM which deliberately expresses the structure, it is easier to take in the structure of the document at a glance.</p>
+<!--  Note that storing document domain content in a subject domain CMS schema is another case of overlying the domains. -->
+<p>What happens when you need to format part of your document differently, but your document domain language does not have a document domain structure for the document element you are creating? For example, if your document domain language is HTML, it does not have any structures for common document domain objects like procedures, sidebars, of bibliographies?</p>
+<p>Of course, you can create these things in an HTML document, using regular features like lists, divs, and paragraphs. To indicate how they are to be formatted, though, you will have to either apply style information directly in the file, or else add some kind of metadata that indicates the special role that the list, div, or paragraph is playing. In HTML, the normal strategy is to use a class attribute. So, you could support special styling of a procedure list by giving it a class attribute of “procedure”:</p>
+<codeblock language="HTML">
+&lt;ol class="procedure"&gt;
+    &lt;li&gt;Lather.&lt;/li&gt;
+    &lt;li&gt;Rinse.&lt;/li&gt;
+    &lt;li&gt;Repeat.&lt;/li&gt;
+&lt;ol&gt;
+</codeblock>
+<p>This is, in some ways, like giving HTML a procedure document domain object. We can now format it as a procedure. And because we are using a hierarchical system, we don’t need to add class attributes to the li elements to format them differently. We can set an invariant rule that all li elements that are children of an ol element of class “procedure” will be formatted a certain way.</p>
+<codeblock language="CSS">
+ol.procedure li
+{
+}
+</codeblock>
+<p>We said that when we define a style, we are extending the media domain. In the same way, if we work in the document domain, we often need to extend the document domain we are working in. HTML is not an extensible language. To fill the need for an extensible document domain language, the W3C adopted XML (eXtensible Markup Language). XML allows you to extend your document domain (or any other domain) in two ways:</p>
+<ol>
+<li>
+<p>by creating brand new structures in that domain.</p>
+</li>
+<li>
+<p>by using attributes to specify additional type information for an existing structure.</p>
+</li>
+</ol>
+<p>Another method for extending the document domain is provided by <phrase><annotation type="language">DITA</annotation></phrase> through it specialization mechanism, which allows you to create a new structure by specializing an existing one. In practice, this means defining a new structure but with the difference that the system knows about the new structures relationship to the old one, so that if you specialize a numbered list, the system knows that your new list is a type of numbered list.</p>
+<p>Yet another method is provided by <phrase><annotation type="tool">SPFE</annotation></phrase>, which supports creating a library of structures from which you can select the ones you want to build a set of document domain (or other domain) structures for your use.</p>
+</section>
+</section>
+</chapter>

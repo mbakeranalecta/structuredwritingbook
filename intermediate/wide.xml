@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter name="chapter.wide">
+<title>Wide Structures</title>
+<section>
+<title>Content in two dimensions</title>
+<p>The notion of separating content from formatting works quite well when the content is a string of words. A string of words has only one dimension: length. A printed string, of course, has two dimensions: length and height, since each letter had a height and a width. (The depth of the ink is irrelevant for this purpose.) But the height and the width of letters is a pure <phrase>media-domain</phrase> concern. When we separate content from formatting, we separate the font from the character and are left with a string of characters whose length is measured not in inches but in character count. And this works very nicely because unless we get silly with the size and shape of the viewport that we flow the characters into, and a <phrase>rendering algorithm</phrase> can flow characters onto a page with reasonable results.</p>
+<p>There can, indeed, be some issues with such rendering algorithms when it comes to hyphenation, widows and orphans, and the location of titles relative to the text, but with the appropriate <phrase>document domain</phrase> markup to delineate basic document structures, algorithms can handle these issues reasonably well. (They can’t edit the text itself to make a line break work better, as some human typesetters will do, but that kind of manipulation is rarely needed.)</p>
+<p>But when it comes to content that has two dimensions, things get more difficult. The main problem cases are:</p>
+<ul>
+<li>
+<p>tables</p>
+</li>
+<li>
+<p>graphics and other media</p>
+</li>
+<li>
+<p>preformatted text, such as program listings, that have meaningful line breaks</p>
+</li>
+</ul>
+</section>
+</chapter>

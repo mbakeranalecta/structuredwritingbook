@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0">
+<db:title>Patterns</db:title>
+
+<db:para>We noted that lightweight markup languages like Markdown rely on patterns in the text rather than explicit markup characters to delineate basic structures like paragraphs and lists. XML, on the other hand, makes a strict distinction between what is markup and what is text. Markup is always recognized explicitly by markup sequences that cannot occur as normal text in any part of the document. (If you want to enter those sequences as text, you either have to escape the markup characters with character entities or use CDATA marked sections.)</db:para>
+<db:para>All the same, even XML markup is defined by patterns. If you look at the XML spec you will see that XML is defined by a series of patterns which are described using a pattern notation called EBNF. The difference between XML syntax and Markdown syntax is that in XML, patters are defined absolutely, so that a markup start character is a markup start character no matter where is occurs, whereas in Markdown, the patterns are defined in context, so that a <db:code>*</db:code> character starts a list item only at the beginning of a line, not the end.</db:para>
+<db:para>Since markup is all about patterns, we are not confined only to the patterns defined by the markup language itself. There are lots of patterns that occur naturally in content and we can recognize those patterns in our content and act on them even if they are not formally marked up in our markup language.</db:para>
+<db:para>A common example of this is the pattern of a URL. In most Web-based editors, if you enter a URL as plain text (no markup identifying it as a URL), the editor will recognize the pattern and will turn the URL into a clickable link in the HTML output.</db:para>
+<db:para>Recognizing patterns rather than forcing the author to mark them up explicitly can make authoring a lot easier. Consider something as simple as a date. A date is a complex piece of data consisting of at least three elements, the year, month, and day. (It gets more complex if you include the day of the week or the time.) If you need those individual components of a date for processing purposes, you might be tempted to require dates to be marked up like this.</db:para>
+<db:programlisting language="sam">
+date: {2016}(year)-{08}(month)-{25}(day)
+</db:programlisting>
+<db:para>or</db:para>
+<db:programlisting language="sam">
+date:
+    year: 2016
+    month: 08
+    day: 25
+</db:programlisting>
+<db:para>This is an example of what we might call fully explicit markup. Whether markup should be fully explicit in this way is a debate in data representation circles. For structured writing, however, it is a practical matter question of whether such markup has functional lucidity, which clearly it does not.</db:para>
+<db:para>The fact is, a data in the format <db:code>2016-08-25</db:code> is already a piece of structured markup. In fact, it is a standardized piece of structured markup defined by <annotation type="standard">ISO 8601</annotation>. The only problem in identifying it as such is that in another context <db:code>2016-08-25</db:code> could be a mathematical expression. What we need to do then is use our markup language to isolate the context so that we can recognize when an <annotation type="standard">ISO 8601</annotation> date is being used, and then use the <annotation type="standard">ISO 8601</annotation> format specification to isolate the year month and day components of that data. In other words, all we need to do is this:</db:para>
+<db:programlisting language="sam">
+{1941-12-07}(date) is a day that will live in infamy. 
+</db:programlisting>
+<db:para>It also means that if the author wants to enter the date in another format, we can annotate it with the <annotation type="standard">ISO 8601</annotation> format to make the meaning clear to algorithms.</db:para>
+<db:programlisting language="sam">
+{December 7, 1941}(date "1941-12-07") is a day that will live in infamy. 
+</db:programlisting>
+<db:para>Of course, a sufficiently clever algorithm could recognize <db:code> December 7, 1941</db:code> as a date as well, because that too is a fully predictable pattern. That is the thing about patterns: one can recognize the semantic equivalence between patterns. You can increase the functional lucidity of your markup by recognizing a wider variety of semantically equivalent patterns in content without having to impose uniform syntax on authors.</db:para>
+<db:para>XML recognizes the value of patterns. The XML data types standard define a number of common patterns, and XSD schemas allow you to define patterns for use in your own markup. Thus you can specify in XSD that a date field is of type <db:code>xs:date</db:code>. The <db:code>xs:date</db:code> data type is pattern that is based on <annotation type="standard">ISO 8601</annotation>, so you can do this in XML (as long as the schema define the type of the <db:code>date</db:code> element as <db:code>xs:date</db:code>:</db:para>
+<db:programlisting language="xml">
+&lt;date&gt;1941-12-07&lt;/date&gt; is a day that will live in infamy. 
+</db:programlisting>
+<db:para>It is important to understand what this does. If the type of element <db:code>date</db:code> in your XML tagging language is defined as <db:code>xs:date</db:code> then an XSD schema validator will validate <db:code>1941-12-07</db:code> as a valid date but will reject `&lt;date&gt;last Thursday&lt;/date&gt; as invalid. It will not break the date down into its separate year, month, and day formats. If you need that, you will have to get your algorithm to do that for itself. But you algorithm can do that reliably is you know for certain that you are dealing with date in <annotation type="standard">ISO 8601</annotation> format.</db:para>
+<db:para>Most programming languages will have library functions that know how to manipulate <annotation type="standard">ISO 8601</annotation> dates, so you probably don’t have to do any work yourself to get the year, month, and day components of a date. For other patterns, most programming languages have a library call regular expressions which you can use to rip a pattern apart and get at the pieces. (XSD actually lets you define new patterns by specifying a regular expression for the pattern you want to match.) Regular expressions will let your algorithms decode any sufficiently well defined and contextualized pattern in your content, removing the need to ask authors to explicitly break down many types of information into separate fields.</db:para>
+<db:para>Essentially, any expression that we commonly use in text which follows a well defined patterns is already structured text, and we don’t need to structured it again to treat it as structured. All we need to do is to use structure to place it into context so that we can recognize it reliably. Avoiding unnecessary markup of already recognizable patterns both simplifies our markup design and increase the functional lucidity of our markup languages.</db:para>
+<!--  Need other pattern examples -->
+</db:chapter>
