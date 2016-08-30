@@ -155,4 +155,58 @@ chapter:(#chapter.wide) Wide Structures
             
             But when it comes to devising topic types based on those topic patterns, the specifics of page layout need to be factored out. This is essential to moving the content to he document or subject domains and to realizing all the benefits that come from that. As long as the semantics of each of the content elements is maintained, so that the presentation algorithm can tell which is which, the page layout can be recreated successfully and consistently, and, if needed, different layouts can be created in different media. The trick is to learn to look at your page and not see tables, but objects with clearly defined types and names. Learn to see data as data, lists as lists, procedures as procedure, and prose as prose. 
             
-            When you have done all of that, you will probably be left with two kinds of tables that you still have to deal with: Small ad-hoc grid layouts, and table which are database tables, but which are one of a kind, rather than something like ingredients, where the same table structure occurs in every recipe. For these, you will need some form of document-domain table markup. Which you choose will come down to how much fancy formatting of tables you want to be able to do, and how willing you are to let the rendering algorithm format your tables without extensive hinting from you. 
+            When you have done all of that, you will probably be left with two kinds of tables that you still have to deal with: Small ad-hoc grid layouts, and table which are database tables, but which are one of a kind, rather than something like ingredients, where the same table structure occurs in every recipe. For these, you will need some form of document-domain table markup. Which you choose will come down to how much fancy formatting of tables you want to be able to do, and how willing you are to let the rendering algorithm format your tables without extensive hinting from you.
+
+    section: Code
+        There are some texts, particularly computer code and data, in which line endings are meaningful. Code is a form of structured writing, and in many languages whitespace -- meaning line breaks, spaces, and indentation -- are part of the markup that defines the structure of the program. When you present code in a document, therefore, you have to respect line endings. 
+        
+        Furthermore, programmers usually work in a fixed-width font, meaning that all the letters are the same width. They tend to line up similar structures with whitespace to make them easier to read, so using a proportional width font for code in documentation will not only look weird to programmers, it will mess up that formatting. It will also make the code less recognizable as code, making the topic pattern harder to recognize, which would reduce findability.
+
+        All of which is to say that computer code, data, and other similar formats where line ends are meaningful have to be presented in a fixed width font and with line breaks where they are supposed to be. That makes code samples wide objects, just like tables, with many of the same issues when it comes to rendering them on small devices. One saving grace is that there are not usually any height issues with code samples. 
+
+        Fortunately, or unfortunately, there is not much you can do to help the {rendering} algorithm when it comes to code. The options for fitting wide code on a narrow display are to shrink to fit, scroll to view, or truncate. It is not particularly likely that you are going to want you {rendering} algorithm to make a different choice for different kinds of code.
+
+        What is essential is that your document domain or subject domain markup clearly indicates when a piece of text is code. Preferably is should also indicate what kind of code it is, since knowing this can allow the formatting algorithm to do syntax highlighting for code in a known language, and can allow the linking algorithm to detect and link API calls to the API reference. In some cases it might even allow the {conformance algorithm} to validate the code to make sure it runs or uses the current version of the API.
+
+    section: Pictures and graphics
+    
+        Pictures and graphics are naturally wide objects. Like tables, there are issues with 
+        
+        section: Inline graphics
+        
+            One further wrinkle with graphics is that authors sometimes want to place small graphics in the flow of a sentence, rather that as a separate block object. For instance, if giving instructions that involve the use of a keypad or keyboard, some authors may want to use graphics of the keys rather than simply print the character names. Under certain circumstances, this may make the content easier for a reader to follow. 
+            
+            Inline graphics can cause {rendering problems}. For instance, they may cause line spacing to be thrown off if the height of the graphics is greater than that of the font used. 
+            
+            Inline graphics are something a writer can control and make judgments about when writing in the {media domain} but which may have unexpected and unwelcome consequences when formatted by algorithms from content created in the document or subject domains. 
+            
+            There are two techniques you can use to minimize problems with inline graphics. The first is to avoid their use altogether, where that is practical. If there is another way to present the same material just as effectively, it is better to choose that option. 
+            
+            The other is to factor out the graphic using by structure to record its semantics. For instance, instead of including an enter key graphic like this:
+            
+            ```(sam)
+                3. Press >(image enter_key.png) to confirm the selection. 
+                
+            Do this:
+            
+            ```(sam)
+                3. Press {Enter}(key) to confirm the selection. 
+                
+            This leaves open the choice of how to represent the key in the output, and allows for {differential single sourcing}. For example, on a display that did not support graphics, or where graphics would be too fussy, the {presentation algorithm} could render this as:
+            
+            """
+                3. Press \[Enter] to confirm the selection.
+                
+            But in for media where the use of a graphic is appropriate, the presentation routine could use a lookup table of key names and graphics to select the graphic file to represent they *Enter* key. 
+            
+            """
+                3. Press >(image enter_key.png) to confirm the selection. 
+                
+            This approach allows the document designer to switch out the graphics used for keys to find ones that work best on different displays or at different scales. It is also much easier for the author who does not have to stop to think about which graphic to use. The same approach could be used in another common case, which is describing tool bar icons in a GUI application. 
+            
+            ```(sam)
+                4. Press {Save}(button) to save your changes.
+                
+            This has all the same advantages as mentioned for keys, with the additional benefit that if the interface designer decides to change an icon or to redefine the whole set, you only have to update the lookup table used by the {presentation} algorithm. This could also be used to sub in different icons for different platforms if you application is run on more than one operating system. This is much more efficient than using conditional text to import different graphics for different configurations. 
+            
+            As always a common principle is at work here: better to capture the subject than a resource that represents the subject. Resources may change more often than subjects, and you may want different resources to represent a subject under different circumstance. But as long as the content remains current with it subject matter, the identification of the subject will not change. 
