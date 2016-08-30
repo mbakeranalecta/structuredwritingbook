@@ -13,8 +13,146 @@ chapter:(#chapter.wide) Wide Structures
     
     section: Tables
     
-        Tables are one of the more complex problems in structured writing, particularly in the document domain. A table laid out for presentation in one publication can easily get messed up when an algorithm tries to fit it into another, as this example from a commercially published book on my Kindle:
+        Tables are one of the more complex problems in structured writing, particularly in the document domain. A table laid out for presentation in one publication can easily get messed up when an algorithm tries to fit it into another, as in this example from a commercially published book on my Kindle:
         
         >>>(image graphics/tableformatting.jpg)
         
+        This particular table is a particularly difficult case as it is not only one wide thing (a table), but it contains another wide thing (preformatted program code). It is impossible to know exactly how this table was marked up, or which domain the content was written in, or how the algorithm failed resulting in the mess above, but including preformatted text in a table cell creates a no win situation for a rendering algorithm when it tries to shrink a table to a narrower view port. Does it:
+
+        * violate the formatting of the program code by introducing extra line breaks
         
+        * give the code the space it needs by squeezing all the other columns into the accompanying text
+        
+        * resize the columns proportionally and let the preformatted text overlap the next column, but truncate it at the edge of the table
+        
+        * resize the columns proportionally and truncate the preformatted text at the column boundary
+        
+        * shrink the entire table so everything still formats correctly, even if it is shown in three point type.
+        
+        * let the table expand outside the viewport so that it is either cut off or the reader has to scroll horizontally to read (Web Browsers tend to take this approach, but will it work on an e-reader? It certainly won't work on paper.)
+        
+        * make the table into a graphic so that the reader can pan and zoom on it like they do with a large picture. (Some e-books seem to take this approach.)
+        
+        If you are thinking that there is really not one good option in the bunch, you are appreciating the extent of the problem. For books being transferred to e-readers, of course, there is not much that can be done to salvage the situation. Those books were probably prepared in a word processor on the more abstract edge of the media domain and the tables were prepared for a known page width in the printed book. 
+        
+        The tendency of reader to user small devices, such as tablets, e-readers, and phones for reading means the wide tables are problematic for new content. On a phone, the amount of such a table that is visible on screen at any one time may be so small as to make the table essentially unnavigable, and to make it useless of such common table tasks as looking up values or presenting an overview of a subject at a glance.
+
+        Tables can cause problems with height as well as width. While most authors would instinctively know not to import a graphic that was six feet tall, we sometimes create tables that are that long or longer. On a web browser, the reader could simply scroll the table. But as soon as you start scrolling, you loose sight of the column headers and it becomes harder to read data across the table. On paper, it is common to repeat the headings at the top of each page when the table flows over several pages. This works, and it is possible to imitate the effect in a web browser by placing the body of the table in a scrollable frame under a fixed set of headings. But what happens on the page if the height of a table row is larger than the height of the page? Then a single row has to be broken over the page break, leading to questions about how you treat the break in the text of each cell in the row. In traditional typesetting, these things can be massaged by hand on case by case basis. Getting a rendering algorithm to do it gracefully in every case is a very challenging task. 
+        
+        Creating tables in the document domain creates problems even when the intended output is paper and a sufficiently wide viewport is assumed. Since a table divides content up into multiple columns, there is always a question of how wide each column should be relative to the others, and whether or not the table should occupy the full width of the viewport or not. A table with just a few numeric value, for instance, probably should not be full page width because that would spread the numbers out too far and make comparisons difficult. One the other hand, a table with a lot of text in each cell needs to be full width, and needs to have column widths roughly proportional to the among of text in the each column. But this is tricky because some columns have side heads which means far fewer words in the first column than in the others, but you don't want to compress that column proportional to its word count because then the headings will be unreadable. 
+
+        In a media domain editor, which shows the formatting of the content as it will appear on paper, writers can create the table at a fixed width of their choice and then drag the column boundaries around to get the aesthetics of column boundaries right by eye. But tables created like this are not likely to format correctly on other devices, as the illustration above shows. And if you move the content creation out of the media domain and into the document domain, it is no longer possible to present the reader with a WYSIWYG page width for them to adjust column widths by eye. At this point you have to leave column width calculation to the rendering algorithm. The best you can do it to give it some hints about how to do its job. 
+        
+        This need to give the rendering algorithm hints about how to fit tables to pages has resulted in the creation of some very complicated table markup languages. Here is a simple example, courtesy of Wikipedia:
+        
+        ```(xml)
+            <table>
+              <title>Table title</title>
+
+              <tgroup cols="3">
+                <colspec colname="_1" colwidth="1*"/>
+                <colspec colname="_2" colwidth="3*"/>
+                <colspec colname="_3" colwidth="2*"/>
+                
+                <thead>
+                  <row>
+                    <entry>1st cell in table heading</entry>
+                    <entry>2nd cell in table heading</entry>
+                    <entry>3rd cell in table heading</entry>
+                  </row>
+                  <row>
+                    <entry>1st cell in table heading</entry>
+                    <entry>2nd cell in table heading</entry>
+                    <entry>3rd cell in table heading</entry>
+                  </row>
+                </thead>
+
+                <tbody>
+                  <row>
+                    <entry>1st cell in row 1 of table body</entry>
+                    <entry>2nd cell in row 1 of table body</entry>
+                    <entry>3rd cell in row 1 of table body</entry>
+                  </row>
+
+                  <row>
+                    <entry nameend="_2" namest="_1">cell spanning two columns</entry>
+                    <entry morerows="1">cell spanning two rows</entry>
+                  </row>
+
+                  <row>
+                    <entry>1st cell in row 3 of table body</entry>
+                    <entry>2nd cell in row 3 of table body</entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </table>
+        
+        This sample is for a table with one case of a cell spanning two columns and one of a cell spanning two rows. As you can tell, this is not exactly obvious from the markup. In practice, no one is going to create an CALS table by writing the markup by hand. They are going to use the table drawing tools in a graphical XML editor. 
+        
+        # >>> screen shot
+
+        The problem with this is that while the view of the table in the editor looks just like the view of a table in a world processor like {Microsoft Word}, Word's graphical display is based on the actual page currently set up in printer settings and on the actual font that the document will be printed in. It can therefore show how things will fit in the table on an actual page (allowing the author to make {media domain} adjustments to the table). An XML editor cannot know what page size will be chosen or what font will be used when a {DocBook} document is printed. So while the display looks like it allows the same {media domain} adjustments to be made, this is an illusion and the table will not print as shown on screen.
+        
+        Other markup languages take a different approach to tables. For instance, {reStructuredText} allows you to create a table like this:
+        
+        ```(reST)
+            +------------+------------+-----------+ 
+            | Header 1   | Header 2   | Header 3  | 
+            +============+============+===========+ 
+            | body row 1 | column 2   | column 3  | 
+            +------------+------------+-----------+ 
+            | body row 2 | Cells may span columns.| 
+            +------------+------------+-----------+ 
+            | body row 3 | Cells may  | - Cells   | 
+            +------------+ span rows. | - contain | 
+            | body row 4 |            | - blocks. | 
+            +------------+------------+-----------+
+        
+        Like the {DocBook} CALS example, it allow you to span rows and columns, and 
+        in this case the effect is obvious from the markup. Equally obvious is that editing the content of this table, or creating a table in this style with any significant amount of text in the cells is going to be very difficult. Nor does this form provide a solution to any of the table rendering challenges described above. 
+        
+    section: Alternatives to tables
+    
+        One of the fundamental principles of structured writing is to factor out constraints wherever possible. Also, as I mentioned in the foreword, structured writing is not about creating markup that has fidelity to existing texts, it is about improving content quality and enabling effective content processing algorithms. 
+        
+        One of the most fundamental of those algorithms is {single sourcing}, and as the above shows, tables are a media domain construct that are hard to create in the document domain and do not single source well to different media. 
+        
+        Another fundamental algorithms is {authoring}, where the goal it to achieve functional lucidity by ridding the author of distractions. One of the basic ways of doing this is by moving the content to the document or subject domains to remove formatting distractions. Yet tables force the writer either to work in the media domain or to create complex and convoluted markup in the document domain to try and hint appropriate table rendering to the {rendering algorithm}.
+        
+        Tables, in other words, as something we should be actively trying to factor out of the authored version of our content. If we are going to factor out tables, though, we need to figure out what to factor the content into. There are a number of alternatives, depending on what the content was being used for. 
+        
+        section: Alternate presentation
+        
+            In many cases the use of a table simply isn't necessary. There are other way to present the content with no loss of comprehensibility or quality. In a structured writing environment, prefer the non-tabular version when available. 
+
+            Some tables are just ways of formatting lists, particularly lists with two levels of nesting. If lists are an equally effective way of presenting content, choose lists rather than tables when writing in the document domain. 
+        
+        section: Semantic structure
+
+            One way to present the list of ingredients in a recipe is to create a table with the ingredient name aligned left and the quantity aligned right. But as we have seen in our recipe examples, you can create a specific ingredient list structure to capture your ingredient information, which you can then format any way you like for output.
+            
+            ```(sam)
+                ingredients:: ingredient, quantity, unit
+                    eggs, 3, each
+                    salt, 1, tsp
+                    butter, .5, cup
+
+            A structure like this is a table in a different sense of the word: it is a database table and the `ingredients` structure creates a mini database table inside the body of the content. The difference between this table and a media domain table is that we know exactly what type of information each of the columns contains. This allows the formatting algorithm to make intelligent choices about column widths and all the other rendering issues that arise with tables and pass on appropriate hits to the {rendering algorithm} for rendering ingredient list tables in particular. 
+            
+            Another example where tables are frequently used in the {media domain} is procedures. Tables are sometimes used to create side heads for step numbers or high level descriptions of a step, which is then detailed in the right column. Instead of this, use explicit procedure markup which can then be formatted different ways for output. Again, if a table is chosen as the output format, knowing that the contents are a procedure allows the {formatting algorithm} to provide appropriate layout hinting to the {rendering algorithm}.
+        
+        section: Record data as data
+        
+            Many reference works have traditionally been presented as tables on paper. But most such works are really databases. They are not designed to be read but to be queried. That is, they are used to look up individual pieces of data in a very large set. For a database of this sort, {differential single sourcing} requires that you provide the best method of querying the data that is available on each media (which included the method whose interface fits best in the available viewport). In these cases, the data should not be recorded in tables, at least, not in {media domain} tables. It should be recorded in whatever database format is must suited to the data and to the kinds of queries that the reader wants to make. 
+            
+            If one of the query mechanisms you want to support for this is printed tables on paper, then the content for those tables should be {extracted}(algorithm "extract and merge") from the database to create the printed table. Again, the additional semantic information available from the database structure allows the {formatting algorithm} to supply the appropriate rendering hints to the {rendering algorithm}.
+            
+        section: Don't use tables for layout
+        
+            In the early days of the web it was common to use HTML tables as a way to lay out elements on a page. This practice is how heavily discouraged. CSS positioning is the preferred way to position elements on a page (in particularly because it supports the use of {responsive design}(concept) to make pages display well on different sized display ports. This is old news. However, thinking about information in terms of page layouts is still an easy habit to get into. 
+            
+            We have talked about {topic patterns} -- the {rhetorical structure} of content -- as the basis for the development of {topic types} -- the {mechanical structure} of content. But topic patterns are often associated in our minds with a particular layout of page elements. When we imagine or device a topic pattern, we often do it by organizing page elements in certain ways. This is all perfectly legitimate. All content is formatted and displayed for consumption. The point of structured content is not to divorce content from presentation but facilitate a happier marriage, especially when the same content must be married to different media. Thinking about your topic patterns in layout terms, therefore, is perfectly reasonable. 
+            
+            But when it comes to devising topic types based on those topic patterns, the specifics of page layout need to be factored out. This is essential to moving the content to he document or subject domains and to realizing all the benefits that come from that. As long as the semantics of each of the content elements is maintained, so that the presentation algorithm can tell which is which, the page layout can be recreated successfully and consistently, and, if needed, different layouts can be created in different media. The trick is to learn to look at your page and not see tables, but objects with clearly defined types and names. Learn to see data as data, lists as lists, procedures as procedure, and prose as prose. 
+            
+            When you have done all of that, you will probably be left with two kinds of tables that you still have to deal with: Small ad-hoc grid layouts, and table which are database tables, but which are one of a kind, rather than something like ingredients, where the same table structure occurs in every recipe. For these, you will need some form of document-domain table markup. Which you choose will come down to how much fancy formatting of tables you want to be able to do, and how willing you are to let the rendering algorithm format your tables without extensive hinting from you. 
