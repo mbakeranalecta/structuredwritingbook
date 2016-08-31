@@ -170,7 +170,139 @@ chapter:(#chapter.wide) Wide Structures
 
     section: Pictures and graphics
     
-        Pictures and graphics are naturally wide objects. Like tables, there are issues with 
+        Pictures and graphics are naturally wide objects. The are two basic formats for graphics, {vector}(concept "vector graphics") and {raster}(concept "raster graphics"}. Raster graphics are made up of pixels, like a photograph, and have a fixed resolution. Vector graphics are stored as a set of lines and curves and can be scaled to meet any output requirement. 
+                
+        Sometimes the publishing algorithm needs to know how big the graphic is and as how large it is supposed to be on the page. With raster files, the resolution of the file is set. However, its size may be in question. Is a graphic that is 600 pixels by 600 pixels a 1x1 inch picture at 600 dpi, a 2x2 inch picture at 300 dpi, or a 6x6 picture at 100 dpi? This is important if you are inserting a headshot into a document which will be published on both paper and the Web. You want a 1x1 photo at 600dpi for print, but you don't want that blowing up to a 6x6 photo when you add it to a web page which will display it at a typical 96dpi unless something intervenes to scale it appropriately.
+
+        Some raster file formats include metadata which may include the resolution (from which you can calculate the intended size). But there is no guarantee that that information is present in all files, or that the tools typically used to implement {publishing} tool chains can read that information. 
+        
+        Then there is the question of the intended size of the image, which is a design consideration independent of the resolution of the raster file. The intention of the person who created the picture and the intention of the person using it both play a role here. Photographs of small objects probably should not be blown up to 10 times life size (unless that is a specific intention, to show detail not visible to the eye). Diagrams showing complex relationships should not be shrunk down to where the relationships are unreadable. Simple diagrams should not be blown up to the size of a full page. Diagrams containing text should not be reduced or expanded so that the text becomes invisible or disproportionate. The person using the graphic may have some discretion, based on the role they wish the graphic to play, but their choices should stay within the range prescribed by the artist's intention.
+        
+        If the {rendering algorithm} does not know how big a graphic is supposed to be, it has limited choices:
+        
+        * Show a raster graphic at 100% of its resolution, regardless of whether it fits in the viewport or not (which means either cropping it or forcing a the reader to scroll if it goes outside the viewport). 
+        
+        * Scale the graphic to the viewport (which may be stretching it as well as shrinking it). 
+        
+        Since neither of these options will produce consistently good results, we generally need to provide the rendering engine with some information to help it render the graphic appropriately.[*1]
+        
+        footnote:(*1)
+            Many web designers take an opposite approach, preparing a graphic to the exact size they intend it to be displayed at on a specific web page layout. This is a completely {media domain} approach, of course. In structured writing, we generally want a more flexible solution. We have all seen what happens to meticulously designed desktop website when they are displayed on a phone screen. 
+            
+        The simplest way to supply this information is to include it in the markup that inserts the graphic. Thus HTML lets you specify the height and width of a graphic.
+        
+        ```(html)
+            <img 
+                src="http://www.example.com/images/example.png" 
+                height="150" 
+                width="140" />
+                
+        But do these values represent the size of the graphic or the size at which is it to be displayed in a particular media. In other words, do they define the size of the content (how big the image itself is) or do they define the size of the box that the image should fit in (the viewport for displaying the image)?
+        
+        {DocBook} allows you to make this distinction. Its `imagedata` tag supports attributes for specifying the size of the viewport (`height` and `width`) and for specifying the size of the image (`contentheight` and `contentwidth`). The specification also contains additional attributes related to scaling and alignment and complex rules about how the {rendering algorithm} is supposed to behave based on which combination of these attributes.[http://www.docbook.org/tdg/en/html/imagedata.html] In other words, it contains a sophisticated language to describe the sizing and scaling of graphics. It not only deals with {media domain} properties, it actually gives {media domain} instructions. 
+        
+        Working in the media domain is a problem, of course. It interferes with {functional lucidity} and it is problematic for {differential single sourcing}. But there is another issue to consider as well. Sometimes the best approach to {differential single sourcing} is to use the vector version of a graphic for one media and the raster format for another. For instance, you may want to use the vector version of a graphic for print and a raster version for online media. (Many online media cannot render common vector graphics formats.) 
+
+        You may also want to use different resolutions of the same raster graphic for different media or for different purposes. This may include redrawing a graphic to reduce fine detail, rather than simply scaling it mechanically.
+
+        For all these reasons, we ought to make a distinction between the source of an image and the rendering of that image. For raster images, the source is the original high-resolution file recorded by the camera, the original screen shot, or the original raster file produced by an image editing program. For vector graphics, it is the original vector drawing file. From these source images, various image renderings may be made. 
+        
+        In some cases we may go event further back and talk about the idea of the image in the artist's head. Rather than creating a single source file and generating various rendering from that, that artist may create several original renderings of the same image idea, optimizing each for different uses. For instance, the black and white and color versions of a company logo will often be created separately, because the automatic gray-scale rendering of a color logo may not look good at all. 
+        
+        Thus we could have a single ideal image with multiple source renderings and multiple derived rendering from each source. We want to use the correct version in each different rendering of our content. How do we go about it?
+        
+        In {DocBook} we can use conditional processing to include a different image file under different conditions:
+        
+        ```(DocBook)
+            <mediaobject>
+              <imageobject condition="epub">
+                <imagedata fileref="../graphics/assemble.png"/>
+              </imageobject>
+              <imageobject condition="fo">
+                <imagedata fileref="../graphics/assemble.svg" contentwidth="4in" align="left"/>
+              </imageobject>
+            </mediaobject>
+
+        Here the `condition` attribute on the `imageobject` element specifies a different file to be used for two version of a book (this book, actually). The `epub` version is for eReaders, most of which cannot render {SVG}(language) drawings, and so require a raster format ({PNG}(format) in this case), while the `fo` version is for print publication using a system called XSL-FO and uses the vector format {SVG} for high resolution rendering in print. 
+        
+        But this approach not only involves the use of {media domain} markup, it combines it with {management domain} markup. Is it possible to factor all of this out of the authored format? 
+        
+        To do so we have to go back to the distinction between the idea of a graphic and the rendering of a graphic. All of the approaches above have the author include a specific rendering of a graphic. To factor it out, we instead have the author include the idea of the graphic. 
+        
+        There are several ways to do this. In fact, this is really the same idea as we saw in the {reuse algorithm} were we factored out the filename of the content to be included and replace it with a semantic representation of the file. There we refactored an explicit filename in this example
+        
+        ```(sam)
+            procedure: Blow stuff up
+                >>>(files/shared/admonitions/danger)
+                step: Plant dynamite.
+                step: Insert detonator.
+                step: Run away.
+                step: Press the big red button.
+                
+        into a management domain {key}(concept) in this example
+        
+        ```(sam)
+            procedure: Blow stuff up
+                >>>(%warn_danger)
+                step: Plant dynamite.
+                step: Insert detonator.
+                step: Run away.
+                step: Press the big red button.
+        
+        and into a {subject-domain} assertion of fact in this example
+        
+        ```(sam)
+            procedure: Blow stuff up
+                is-it-dangerous: yes
+                step: Plant dynamite.
+                step: Insert detonator.
+                step: Run away.
+                step: Press the big red button.
+
+        Any of these techniques can be applied to the insertion of graphics just as well as the insertion of text. However, there is the added issue of the metadata that describes the various properties of the image and it renderings. One way to handle this is to create a metadata file for each image which provides the needed data for multiple renderings of the image and provides the path to each of the renderings. 
+        
+        The simplest way to implement this is to use an image include instruction that points to the metadata file instead of to an image file. This is what I did in writing this book. I noted above that the DocBook example which conditionally includes two different versions of the graphics for epub and print was from this book. But this book is not written in {DocBook}, it is written in SAM. In the SAM source file, the image insertion looks like this:
+        
+        ```(sam)
+            >>>(image ../graphics/assemble.xml)
+        
+        The file `assemble.xml` looks like this:
+        
+        ```(xml)
+            <?xml version="1.0" encoding="UTF-8"?>
+            <image>
+                <source>assemble.svg</source>
+                <fo>
+                    <href>assemble.svg</href>
+                    <contentwidth>4in</contentwidth>
+                    <align>left</align>
+                </fo>
+                <epub>
+                    <href>assemble.png</href>
+                </epub>
+                <alt>
+                    <p>A diagram showing multiple pieces being combined in different ways to produce different outputs.</p>
+                </alt>
+            </image>
+
+        This XML file describes the idea of the image, listing not only its source file and both of its renderings, but even a text description for use when the graphic cannot be displayed. By including this file instead of an image file, I was able to include the idea of the graphic in my content. 
+        
+        When the content was processed, the {presentation algorithm} loaded and read the `assemble.xml` file and used the information in it to generate the conditionalized {DocBook} file which became the source file for the {formatting algorithm} (which is implemented by the publishers existing tool chain). Using {DocBook} and a presentation layer language in your tool chain is a useful technique, since it enables you to take advantage of all the existing algorithms for processing {DocBook} files, without requiring your authors to learn, or write in, {DocBook}.
+        
+        Could I have factored out the filename `assemble.xml` as well? Certainly. There are a number of other ways that I could have chosen to represent the idea of the graphic in the content. There are times when it makes a lot of sense to do that. If you are including screen shots in a procedure, for instance, the name of a dialog box is a good way of representing the idea of a graphic that is semantically relevant to the procedure itself. 
+        
+        You could write:
+        
+        ```(sam) 
+            procedure: Save a file
+                1. Choose {Save}(menuitem) from the {File}(menuitem) menu. The {Save As}(dialog-box) is shown. 
+                
+        Given this markup, we can make a rule that says when the name of a dialog box is mentioned in a step in a procedure, insert a graphic of that dialog box. To implement this, you might maintain a catalog of images that points to the file that describes the idea of the image of that dialog box. That file might then list various versions of the screen shot, perhaps different ones for different platforms. Thus the author does not have to think about graphics at all when writing, but the right screen shot gets inserted in the docs for each platform (and maybe no screen shot when the procedure is viewed on a phone). 
+        
+        But in the case of the images in this book, their relationship to the text is a little more arbitrary than the relationship of a screen shot to a step in a procedure, so factoring out the filename would have created an abstraction that was actually more difficult to remember as an author. The point is not to be as abstract as possible, but to combine the highest degree of functional lucidity with the constraints that improve content quality, and that will different for different kinds of material and for different circumstances. 
+                
+            
+            
         
         section: Inline graphics
         
