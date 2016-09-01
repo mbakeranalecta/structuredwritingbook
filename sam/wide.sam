@@ -1,8 +1,8 @@
 chapter:(#chapter.wide) Wide Structures
 
-    The notion of separating content from formatting works quite well when the content is a string of words. A string of words has only one dimension: length. A printed string, of course, has two dimensions: length and height, since each letter had a height and a width. (Yes, in print the ink also had depth, but that is irrelevant for this purpose.) But the height and the width of letters is a pure {media-domain} concern. Fitting a one-dimensional string of characters into a two dimensional font on a two dimensional page is the job of the {rendering algorithm}. It is one of the first things that gets factored out as we begin to structure content.[*1] When we separate content from formatting, we separate the font from the character and are left with a string of characters whose length is measured not in inches but in character count.  
+    The notion of separating content from formatting works quite well when the content is a string of words. A string of words has only one dimension: length. A printed string, of course, has two dimensions: length and height, since each letter had a height and a width. (Yes, in print the ink also had depth, but that is irrelevant for this purpose.) But the height and the width of letters is a pure {media-domain} concern. Fitting a one-dimensional string of characters into a two dimensional font on a two dimensional page is the job of the {rendering algorithm}. It is one of the first things that gets factored out as we begin to structure content.[*A] When we separate content from formatting, we separate the font from the character and are left with a string of characters whose length is measured not in inches but in character count.  
         
-    footnote:(*1)
+    footnote:(*A)
         There can, indeed, be some issues with rendering algorithms when it comes to hyphenation, widows and orphans, and the location of titles relative to the text, but with the appropriate {document domain} markup to delineate basic document structures, algorithms can handle these issues reasonably well. There are some fine points of typesetting aesthetics that may be difficult to automate, and algorithms can't edit the text itself to make a line break work better, as some human book designers will do, but that kind of manipulation is rarely needed. And if it is, you have the options of translating the content into the {media domain} and manipulating it by hand at that point. Of course, you won't do this for high-volume content that is delivered on a frequent schedule, but then you would not be able to do that kind of hand typesetting manipulation on that class of content anyway. Daily newspapers are not typeset with the same level of attention to aesthetic detail as hardcover books. 
     
     But when it comes to content that has two dimensions, things get more difficult. The main problem cases are:
@@ -184,9 +184,9 @@ chapter:(#chapter.wide) Wide Structures
         
         * Scale the graphic to the viewport (which may be stretching it as well as shrinking it). 
         
-        Since neither of these options will produce consistently good results, we generally need to provide the rendering engine with some information to help it render the graphic appropriately.[*1]
+        Since neither of these options will produce consistently good results, we generally need to provide the rendering engine with some information to help it render the graphic appropriately.[*2]
         
-        footnote:(*1)
+        footnote:(*2)
             Many web designers take an opposite approach, preparing a graphic to the exact size they intend it to be displayed at on a specific web page layout. This is a completely {media domain} approach, of course. In structured writing, we generally want a more flexible solution. We have all seen what happens to meticulously designed desktop website when they are displayed on a phone screen. 
             
         The simplest way to supply this information is to include it in the markup that inserts the graphic. Thus HTML lets you specify the height and width of a graphic.
