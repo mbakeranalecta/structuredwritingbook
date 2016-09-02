@@ -30,8 +30,8 @@ chapter:(#conformance) Conformance
         For example, structured writing allows you to annotate you text to call out the types of certain phrases such as functions names, feature names, or stock symbols.
         
         ```(sam)        
-        When installing widgets, use a {left-handed widget wrench}(tool) to tighten them to the recommended torque for your device.
-        ```
+            When installing widgets, use a {left-handed widget wrench}(tool) to tighten them to the recommended torque for your device.
+        
         
         This sample annotates the phrase "left-handed widget wrench" and records that these words describe a tool. If all mentions of tools are annotated this way, you can then compile a list of all the tools you mention in all your topics and make sure that you have suitable documentation for each of them. We will look at annotations, and the ways you can use them, in later articles. 
         
@@ -45,8 +45,8 @@ chapter:(#conformance) Conformance
         If you annotate the important things in your content set, such as tools in the example above, you can use the annotations to check for consistency of names. Suppose a writer accidentally writes "spanner" rather than "wrench" in the name of the tool:
         
         ```(sam)        
-        When installing widgets, use a {left-handed widget spanner}(tool) to tighten them to the recommended torque for your device.
-        ```
+            When installing widgets, use a {left-handed widget spanner}(tool) to tighten them to the recommended torque for your device.
+        
         
         Since you can now generate a list of tools mentioned in the text, you can check each mention against a list of approved tool names. This can reveal both incorrect names (consistency) and tools that may be missing from the official list (completeness).
         
@@ -58,8 +58,8 @@ chapter:(#conformance) Conformance
         For example, if you were documenting an API, you could annotate each mention of a function.
         
         ```(sam)
-        Always check the return value of the {rotateWidget()}(function) to ensure the correct orientation was achieved. 
-        ```
+            Always check the return value of the {rotateWidget()}(function) to ensure the correct orientation was achieved. 
+        
         
         API function names can be quite tricky to remember sometimes and small typos and be difficult to spot. But with this annotation, you can validate all mentions of functions against the API reference or the code base. This technique not only catches misspellings. I have seen it catch the use of deprecated functions in examples, for instance.
 		
@@ -75,7 +75,7 @@ chapter:(#conformance) Conformance
      
         For instance, consider this structure:
         
-        ```(sam)
+        ```(xml)
             <person>
                 <name>John Smith</name>
                 <age>middle</age>
@@ -84,7 +84,7 @@ chapter:(#conformance) Conformance
                 
         Some people certainly describe themselves as middle aged, and Christmas Day is certainly a date of birth, if an incomplete one. The author has complied with the structure of the document. But the creator of this markup language was probably looking for more precise information, probably in a format that an algorithm could read. What they wanted was:
 
-        ```(sam)
+        ```(xml)
             <person>
                 <name>John Smith</name>
                 <age>46</age>

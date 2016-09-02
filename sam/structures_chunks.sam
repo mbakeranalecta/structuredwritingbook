@@ -1,55 +1,118 @@
-chapter: Chunks, blocks, topics, and fragments
+chapter: Blocks, topics, fragments, and paragraphs
 
     
     
     A common theme is many structured writing systems is the idea that documents are made up of various types of blocks. This idea affects both how you look at information design and how you look at the creation of data structures and algorithms. 
     
-    Every hierarchical markup system, of course, is made up of blocks, and of blocks within blocks. XML, for example, is simply a set of elements inside elements. But when we design markup languages and structured writing systems, we use these basic building block to create more complex blocks that have a wholeness of their own. We recognize them not simply as on step in the hierarch of a document, but as a distinct type of object that we can give a name to and assign processing logic to. Higher level markup design is essentially a matter of defining such blocks and the ways they go together. 
+    Every hierarchical markup system, of course, is made up of blocks, and of blocks within blocks. XML, for example, is simply a set of elements inside elements. But when we design markup languages and structured writing systems, we use these basic building block to create more complex blocks that have a wholeness of their own. We recognize them not simply as on step in the hierarchy of a document, but as a distinct type of object that we can give a name to and assign processing logic to. 
     
-    An easy example is a list. A basic list structure is made up of boxes inside boxes inside boxes, blocks inside blocks inside blocks. I'll illustrate this with XML since it make the blocks explicit:
+    section: Semantic blocks
     
-    ```(xml)
-        <ol>
-            <li>
-                <p>This is the first item.</p>
-            </li>
-            <li>
-                <pi>This is the second item.</p>
-            </li>
-        </ol>
+        At the risk of adding further burden to an already overloaded term, I am going to call them {semantic blocks}(concept) because they are blocks that mean something in whichever domain they belong to. 
         
+        Higher level markup design is essentially a matter of defining semantic blocks and the ways they go together. 
         
+        An easy example is a list. A list is a semantic block because "list" is an idea with meaning in the document domain independent of its exact internal structure. A writer can say to themselves, "I want a list here", independent of any specifics of markup. It a structure has a name like this in the real world, the block that implements it (in the terminology I am coining for the purpose) is a semantic block. 
         
+        Semantic blocks generally contain other blocks that we might not talk about independently if we did not need to describe the detailed construction of a semantic block. This is not to say that the building blocks of a semantic block may not also be semantic blocks. In fact, this happens frequently. Nor is it to say that the the distinction between a semantic and non-semantic blocks is fixed or inflexible. A semantic block is a block that implements a structure that has meaning to you independent of its function as markup, and what you regard as meaningful, I may regard as an implementation detail. 
+
+        The point is not that we must agree on exactly what is a semantic block and what is not, but that you should think of markup design in terms of semantic blocks. Blocks, with whatever internal structure you require, that will capture the structure of something that is real and meaningful to you.     
         
+        An example of a semantic block in the {document domain} is a list. {DITA}, {DocBook}, and {HTML} all define lists, and each of them defines the internals of a list different. Nonetheless we recognize that each of them is an implementation of the idea of a list. 
+
+        However each of them define it, a list is made up of structural blocks that build the shape of a list. I'll illustrate this with XML since it make the blocks explicit:
         
-    Designing in terms of discrete blocks like this not only helps keep markup design and processing simpler, it also improves {functional lucidity}. Present the markup language to the writer as a set of familiar object like lists or {XXXXX}(FIXME) rather than a sea of tags and the task becomes easier to understand (and the tags easier to remember).    
+        ```(xml)
+            <ol>
+                <li>
+                    <p>This is the first item.</p>
+                </li>
+                <li>
+                    <pi>This is the second item.</p>
+                </li>
+            </ol>
+            
+        Other {document domain} examples include {tables}(structure) and {procedures}(structure). (Again you will find that DocBook, DITA, and HTML, not to mention S1000D, and {reStructuredtext}, all have tables, all with different internal structures, and that both DocBook and DITA have procedures, again internally different. It is possible to disagree greatly about how to construct a semantic block while still recognizing different implementations for what they are. 
 
+        In the subject domain examples would include the ingredients list from the recipe example we have been using:
+        
+        ```(sam)
+            ingredients:: ingredient, quantity, unit
+                eggs, 3, each
+                salt, 1, tsp
+                butter, .5, cup
 
-    
-    Not all languages are constructed this way. {DocBook} has a extremely loose content model. It is not that there are no higher level blocks (DocBook has things like lists and tables), but that so many tags are allowed in so many places that none of these objects are simple and easy to understand. This supports DocBook's goal of being able to describe almost any document structure you might want to create, but at the expense of simplicity and constraint. The writer always has a world of choices. If they are going to be constrained, they are going to have to constrain themselves (or work in a constrained version of DocBook). 
-    
-    
-    {Information Mapping}(tool) is a structured writing system which views all content as being made up of just six types of information block: Procedure, Process, Principle, Concept, Structure, and Fact. Every document, according to Information Mapping theory, is made of of blocks of these six types united by a map. Thus in the recipe example we have used frequently in this book, the introduction to the recipe is a concept, the list of ingredients is a structure, and the preparation steps are a procedure. The recipe as a whole is an information map made up of these blocks. 
-    
-    Information Mapping is a theory about how documents are constructed to convey information, so these block types would count as document domain structures. However they are much more abstract structures than any we have looked at so far, which have mostly been abstract versions of formatting structures like lists and tables. 
-    
-    {DITA}(language) also adopts this idea of documents being made up of blocks. In DITA's case, these blocks are named topics, which leads to some confusion since the word topic can be used to refer to both a block in the Information Mapping sense, which is not a complete document and topic in the sense of a help topic, which is a whole document.
-    
-    
-    DITA is commonly associated with the idea that all content is either concept, task, or reference, though DITA actually defines more topic types than this today.
-    
-    
-    DITA's topic types are a little more functionally oriented than Information Mapping's block types. DITA's types are based on what the reader is doing -- performing a task, understanding an idea, or looking up information. Information Mapping's types are more epistemological in nature -- trying to delineate what type of knowledge is being transferred. 
+        and the parameter description from an API reference:
+        
+        ```(sam)
+            parameter: string
+                required: yes
+                description:
+                    The string to print.
 
-    All of this is quite distinct from the subject-based information typing of the subject domain. The instructions in a recipe and a knitting pattern are both tasks in DITA terms and procedures in IM's terms. But in the subject domain they are distinct types because there is a distinct way in you which write knitting instructions. 
-    
-    #EXAMPLE
+        One characteristic of such semantic blocks is that they often tend to repeat as a unit, as this example does in an API reference entry:
 
-    {DITA} and {Information Mapping}’s approaches are broad and analytical, trying to find commonalities across many different kinds of information. The subject domain is very much specific and synthetic, concerned which how specific pieces go together to successfully describe a particular subject. All three approaches break content up into blocks, and the subject-specific blocks of the subject domain can probably be categorized according to the information typology of either {DITA} or {Information Mapping}. However, the specific structured writing structures that you would create in each case are different. Both the Information Mapping and DITA approaches, when reduced to specific markup structures, create abstract document domain structures. The subject domain, of course, creates subject domain structures. 
+        ```(sam)
+            function: print
+                return-value: none
+                parameters:
+                    parameter: string
+                        required: yes
+                        description:
+                            The string to print.
+                    parameter: end
+                        required: no
+                        default: '\n'
+                        description:
+                            The characters to output after the {string}(parameter).
+        
+        They may also be used as a unit in different places in a markup language, or in different markup languages.    
+            
+        Designing in terms of semantic blocks not only helps keep markup design and processing simpler, it also improves {functional lucidity}. Present the markup language to the writer as a set of familiar object like lists or {XXXXX}(FIXME) rather than a sea of tags and the task becomes easier to understand (and the tags easier to remember).  
 
-    At the same time, the subject domain is not attempting to define an ontology. It is not trying to capture knowledge in a formal way. It is trying to capture and to shape content in a way that is specific to its subject matter.    
+        The structure of a semantic block can be strict of loose. A strict semantic block has one basic structure with few options. A loose one allows a much wider variety of structure inside, sometimes to the point that it acts more as a semantic wrapper than a defined semantic block. 
 
-    We should be clear that this is not the only view of the structure of a document. We might also see a document as a punctuated flow.
-    
-    
-    
+        {DocBook} is an example of a language with very loose semantic blocks. DocBook has the same high-level semantic blocks as any other generalized document domain tagging language, but so many tags are allowed in so many places that none of these objects are simple and easy to understand. This supports DocBook's goal of being able to describe almost any document structure you might want to create, but at the expense of simplicity and constraint.
+
+        How do you balance flexibility with functional lucidity and constraint in creating semantic blocks? Sometimes it is best to have more than one implementation of a particular semantic block. For instance, both DITA and DocBook have two tables model, as simple model and a more complex one based on the CALS table model. 
+        
+    section: Functional blocks
+
+        We have looked at examples of {semantic blocks} whose semantics are in the {document domain} (lists and tables) and in the {subject domain} (ingredients list and parameter description). There is another way in which some structured writing systems divide content into blocks, which is according to the function they perform for the reader. I'm going to call these {functional blocks}. (To be clear, a functional block is a type of semantic block.) 
+        
+        {Information Mapping}(tool) is a structured writing system which views all content as being made up of just six types of information block: Procedure, Process, Principle, Concept, Structure, and Fact. These are functional blocks. They don't directly describe a physical or logical element of document structure (except for procedure), nor are they specific to any one subject. They describe the kind of idea that the content conveys -- they are actually based on a theory about how humans receive information. 
+
+        What domain do functional blocks belong to? Clearly they are not {media}, {subject}, or {management domain} structures. Are they a kind of {document domain} structure or something else again? I believe it is more useful to regard them as document domain structures than to invent another domain. Information mapping is a theory about the construction of documents to make them more effective. It regards a document as a mapping of information blocks, so IM's blocks are components of document, and therefore in the document domain. They simply look at the components of document more from a functional standpoint than the morphological standpoint of a structure like a list or a table. 
+        
+        Functional blocks will typically be made up of morphological blocks. In some cases, a block may fit both categories. For example, a procedure probably counts as both a functional and a morphological unit, since it has both a distinct morphology and a distinct purpose. Alternately, in an Information Mapping context at least, we might regard it as a functional block that consists of exactly one morphological block.      
+        
+        {DITA}(language) also adopts this idea of documents being made up of functional blocks. In DITA's case, these blocks are named topics, which leads to some confusion since the word topic can be used to refer to both functional block, and also to a complete document (as in a "help topic" for instance). 
+        
+        DITA has popularized the idea that all content (or all technical content, at least) is made up of just three functional blocks: concept, task, and reference. (DITA actually defines more topic types than this today.) This idea is appealing because it is easy to see a correspondence between these three types and the reader activities of learning (concept), doing (task), and looking stuff up (reference). 
+        
+        This very simple triptych is very appealing because it promises (though it does not necessarily deliver) easy {composability} for {content reuse}. Some people also maintain that it makes content easier to access for readers, though other (myself included) criticizes it on the ground that it tends to break content down too fine for be useful and robs content of its narrative thread. 
+
+        It can fairly be said that this depends very much on how you use it. But from a structured writing point of view, the purpose of structured writing is to use constraints to improve content quality and this approach, by itself, lacks some of those necessary constraints. As we have noted, some approaches to content reuse reject significant constraints in favor or easy composability. DITA does, however, provide mechanisms for creating more constrained functional blocks, though not a means to constrain how blocks are combined.         
+
+        All of this is quite distinct from the subject-based information typing of the subject domain. The instructions in a recipe and a knitting pattern are both tasks in DITA terms and procedures in IM's terms. But in the subject domain they are distinct types because there is a distinct way in you which write knitting instructions. 
+        
+        #EXAMPLE
+
+        {DITA} and {Information Mapping}’s approaches are broad and analytical, trying to find commonalities across many different kinds of information. The subject domain is very much specific and synthetic, concerned which how specific pieces go together to successfully describe a particular subject. All three approaches break content up into blocks, and the subject-specific blocks of the subject domain can probably be categorized according to the information typology of either {DITA} or {Information Mapping}. However, the specific structured writing structures that you would create in each case are different. Both the Information Mapping and DITA approaches, when reduced to specific markup structures, create abstract document domain structures. The subject domain, of course, creates subject domain structures. 
+
+        At the same time, the subject domain is not attempting to define an {ontology}. It is not trying to capture knowledge in a formal way. It is trying to capture and to shape content in a way that is specific to its subject matter.    
+
+        We should be clear that this is not the only view of the structure of a document. We might also see a document as a punctuated flow.
+        
+    section: Topics
+
+        What is the next unit up from the semantic block? It is the unit that combine semantic blocks to form a complete coherent content item. We might perhaps call it the narrative block. What is the name of the narrative block? 
+        
+        The narrative block obviously comes in different sizes.  It could be a help topic, a web page, or an entire book. Or a book might be made up of multiple narrative units, such as a chapter, an article in an encyclopedia, or a recipe in a cook book. 
+        
+        It is probably fair to say that the narrative block is the largest unit of content to which we can usefully assign significant constraints. Or rather, the constraints that we impose on larger collections of content are of a different type an implemented in different ways from the constraints we impose on writing and through structured writing techniques. (As we have noted, {DocBook} a format primarily designed for whole books, is largely unconstrained, opting almost always to give the author multiple choices as opposed to strict guidance.)
+
+        The narrative block differs also between the paper world and the hypertext world of the Web. On paper a book consists of a basically linear series of chapters. On the Web, a site consists of a linked set of pages. But on the Web, pages are not restricted to linking to other pages on the same site, and search engines, which generate dynamic ad hoc links to pages rather than sites so that it is fair to say that the Web consists directly of linked pages, meaning that a narrative unit of hypertext relates itself to other content in a very different way from a narrative unit on paper.
+
+        Increasingly, though by no means universally, the term "topic" is used for the narrative block in structured writing terms. There is some confusion caused by DITA's use of the word topic for its functional blocks, and some confusion in the DITA world too about whether Concept, Task, and Reference units should be presented as narrative blocks or not.          
+        
