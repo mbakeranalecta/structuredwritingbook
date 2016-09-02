@@ -4,6 +4,31 @@ chapter: Chunks, blocks, topics, and fragments
     
     A common theme is many structured writing systems is the idea that documents are made up of various types of blocks. This idea affects both how you look at information design and how you look at the creation of data structures and algorithms. 
     
+    Every hierarchical markup system, of course, is made up of blocks, and of blocks within blocks. XML, for example, is simply a set of elements inside elements. But when we design markup languages and structured writing systems, we use these basic building block to create more complex blocks that have a wholeness of their own. We recognize them not simply as on step in the hierarch of a document, but as a distinct type of object that we can give a name to and assign processing logic to. Higher level markup design is essentially a matter of defining such blocks and the ways they go together. 
+    
+    An easy example is a list. A basic list structure is made up of boxes inside boxes inside boxes, blocks inside blocks inside blocks. I'll illustrate this with XML since it make the blocks explicit:
+    
+    ```(xml)
+        <ol>
+            <li>
+                <p>This is the first item.</p>
+            </li>
+            <li>
+                <pi>This is the second item.</p>
+            </li>
+        </ol>
+        
+        
+        
+        
+        
+    Designing in terms of discrete blocks like this not only helps keep markup design and processing simpler, it also improves {functional lucidity}. Present the markup language to the writer as a set of familiar object like lists or {XXXXX}(FIXME) rather than a sea of tags and the task becomes easier to understand (and the tags easier to remember).    
+
+
+    
+    Not all languages are constructed this way. {DocBook} has a extremely loose content model. It is not that there are no higher level blocks (DocBook has things like lists and tables), but that so many tags are allowed in so many places that none of these objects are simple and easy to understand. This supports DocBook's goal of being able to describe almost any document structure you might want to create, but at the expense of simplicity and constraint. The writer always has a world of choices. If they are going to be constrained, they are going to have to constrain themselves (or work in a constrained version of DocBook). 
+    
+    
     {Information Mapping}(tool) is a structured writing system which views all content as being made up of just six types of information block: Procedure, Process, Principle, Concept, Structure, and Fact. Every document, according to Information Mapping theory, is made of of blocks of these six types united by a map. Thus in the recipe example we have used frequently in this book, the introduction to the recipe is a concept, the list of ingredients is a structure, and the preparation steps are a procedure. The recipe as a whole is an information map made up of these blocks. 
     
     Information Mapping is a theory about how documents are constructed to convey information, so these block types would count as document domain structures. However they are much more abstract structures than any we have looked at so far, which have mostly been abstract versions of formatting structures like lists and tables. 
