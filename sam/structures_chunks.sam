@@ -114,5 +114,76 @@ chapter: Blocks, topics, fragments, and paragraphs
 
         The narrative block differs also between the paper world and the hypertext world of the Web. On paper a book consists of a basically linear series of chapters. On the Web, a site consists of a linked set of pages. But on the Web, pages are not restricted to linking to other pages on the same site, and search engines, which generate dynamic ad hoc links to pages rather than sites so that it is fair to say that the Web consists directly of linked pages, meaning that a narrative unit of hypertext relates itself to other content in a very different way from a narrative unit on paper.
 
-        Increasingly, though by no means universally, the term "topic" is used for the narrative block in structured writing terms. There is some confusion caused by DITA's use of the word topic for its functional blocks, and some confusion in the DITA world too about whether Concept, Task, and Reference units should be presented as narrative blocks or not.          
+        Increasingly, though by no means universally, the term "topic" is used for the narrative block in structured writing terms. There is some confusion caused by DITA's use of the word topic for its functional blocks, and some confusion in the DITA world too about whether Concept, Task, and Reference units should be presented as narrative blocks or not. 
+
+    section: Fragments
+    
+        Another division of content that can occur, mostly in relationship to the management domain, is the fragment. By fragment I mean a chunk of text that is not either a semantic block, a functional block, or a narrative block, but is a block that you want to manage independently of the surrounding text. 
+        
+        For example, in a {content reuse} scenario, you might want to make a items in a list conditional based on which of the list items applies to different versions of a product. 
+        
+        Individual list items are not really semantic blocks. They are just structural blocks of a list. When you make list items conditional, what you are actually doing is creating multiple separate lists with some items in common, and recording them as a single list. You might be able to attach reasonably informative metadata to any one of those lists as a whole, but there is not a lot you can say about list items individually. They are fragments of a list. When you apply conditions to them, then, you are applying those conditions to fragments. 
+        
+        In some {reuse} systems, including DITA and DocBook, it is possible to apply conditions to arbitrary bits of text -- three words in sentence for instance. The block that sets off those three words in a fragment. 
+        
+        Some reuse systems also allow you to reuse arbitrary bits of text from other parts of the content set, simply because the text is the same in each case. Those bits of text would be fragments. 
+        
+        In some cases, you turn an existing structural block into a fragment by attaching {management domain} metadata to it. In other cases, you have to introduce additional markup into the document to delineate the fragment. 
+        
+        Fragments definitely solve some problems. They are also inherently unstructured and unconstrained. It is very easy to get into trouble with fragments, to create relationships and dependencies that hard to manage, because they don't follow any structural logic. You should approach their use with great caution and restraint. 
+    
+        
+    section: Paragraphs
+    
+        Paragraphs are the thing that make structured writing different from most other computable data sets. It is rare in any other data set to see a structure floating withing the value of another structure. But that is exactly what happens in a paragraph. 
+        
+        ```(sam)
+            In {Rio Bravo}(movie), {the Duke}(actor "John Wayne") plays an ex-Union colonel.
+
+        In this examples, he annotations on "Rio Bravo" and "the Duke" float in the middle of the paragraph block. Here is the same thing in XML:
+        
+        ```(xml)
+            <p>In <movie>Rio Bravo</movie>, <actor name="John Wayne">the Duke</actor> plays an ex-Union colonel.</p>
+
+        Here the `movie` and `actor` elements float in the content of the `p` element. In XML parlance, this is called mixed content. If fact, XML breaks elements down into three kinds:
+        
+        |element content| Elements that contain only other elements. 
+        
+        |data content| Elements that contain only text data.
+        
+        |Mixed content| Elements that contain both text data and elements. 
+        
+        Mixed content is the reason that most traditional data format are not a good fit for content. They may be able to model element content and data content, but they lack and elegant way to model mixed content. 
+        
+        Even conventional programming languages have trouble with mixed content. In fact most libraries for XML processing invent an additional wrapper around each string of characters in a mixed content element, effectively representing it as if it were written like this (without mixed content):
+        
+        ```(xml)
+            <p><text>In </text><movie>Rio Bravo</movie><text>, </text><actor name="John Wayne">the Duke</actor><text> plays an ex-Union colonel.</text></p>
+        
+        But while this makes the content palatable to conventional languages, it is clearly false to the actual structure of the document. Structured writing is essentially about reflecting the structure of thought or presentation in a narrative, and narrative have a structure that is not shared with other data. Indeed, we might say that all other data formats exist as an attempt to extract information from the narrative format to make it easier to process. 
+        
+        Thus we are taught in school that if we are presented a problem in this format:
+            
+        """
+            John had 4 apples and Mary had 5 apples. They place their apples in a basket. Bill eats 2 apples. How many apples are left in the basket?
+            
+        You solve it by first extracting the data from the narrative:
+        
+        ```
+            4 + 5 - 2 =
+            
+        But in content processing, we cannot extract the data from the narrative because narrative is the output we are creating. Thus we have to call out the data (to make it processable by any and all of the structured writing algorithms) while leaving the narrative intact. 
+        
+        When you move content to the subject domain, you will in some cases break down paragraphs and isolate the data. This may be done with the intention of recreating paragraphs algorithmically on output, or of switching from a narrative to a data oriented reporting of the subject matter. Either way, it makes the data easier for algorithms to handle, and thus makes most of the structure writing algorithms work better. (You may have noticed that the subject domain provides the most constrained and elegant solution to most structured writing algorithms.)
+        
+        Even so, it is rarely possible to do a complete breakdown of all paragraphs in refactoring content to the subject domain. Most subject domain markup languages still make considerable use of paragraphs and other basic text structures. Only narrative is capable of expressing the full variety and subtlety of the real world relationships between things, and only narrative is capable of conveying these things effectively to most human readers. Even things that can be fully described to algorithms with fielded data must be described to most audiences with narrative, and even though companies like {Narrative Science} are working on how to turn data into narrative, they are far from producing a general solution. 
+
+        {Subject-domain} structure writing extends the reach of more conventional algorithms into the world of narrative to enable specific structured writing algorithms and to provide constraints to improve the quality of the writing. Unlike {ontologies}(concept), subject domain structured writing does not attempt to capture the whole semantics of a narrative, just to discipline and structure narrative to achieve specific content creation objectives.
+        
+        And therefore, just as {media domain} structured writing needs to float elements in the middle of paragraphs to describe formatting, the {document domain} to describe the role of a passage, the {management domain} to assign conditions or extract content for reuse, the subject domain needs to do so to describe the subject referred to in phrases within a paragraph. 
+        
+        In planning you markup structures, therefore, it is important to think about which structures in your language need to be mixed content and which do not. Finding ways to avoid mixed content without violating the spirit of the essentially narrative nature of writing can pay dividends in an improved ability to express constraints and to execute virtually all the structured writing algorithms.
+        
+        On the other hand, some of the most important subject matter that you need to model and make available to algorithms cannot effectively be factored out of paragraphs, particularly while maintaining {functional lucidity}. Be prepared, therefore, to think seriously about the content strucures to be modeled below the paragraph level. 
+        
         
