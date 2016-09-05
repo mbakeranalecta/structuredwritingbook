@@ -102,6 +102,33 @@ This text is [B&gt;bold, [I&gt;this is bold and italic,&lt;B] and this is just i
 </entry>
 </bibliography>
 <db:section>
+<db:title>The role of syntax</db:title>
+<db:para>The syntax of your markup language also plays a role in striking the right balance between hierarchy and functional lucidity. Fully explicit markup syntax like that of XML forces every element of the hierarchical structure of the document to the fore in the syntax. The syntax has explicit hierarchical constraints of its own (what XML calls the well-formedness constraint). This pushes the hierarchical structure in the author’s face, which detract from functional lucidity.</db:para>
+<db:para>Languages like Markdown with implicit syntax are just as hierarchical as their equivalents with fully explicit syntax but they feel flatter. Thus where HTML make you write:</db:para>
+<db:programlisting language="html">
+&lt;html&gt;
+    &lt;ol&gt;
+        &lt;li&gt;
+            &lt;p&gt;The first item.&lt;/p&gt;
+            &lt;p&gt;A second paragraph in the first item.&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;p&gt;The second item.&lt;/p&gt;
+    &lt;ol&gt;
+&lt;/html&gt;
+</db:programlisting>
+<db:para>In MarkDown you write:</db:para>
+<db:programlisting language="markdown">
+* The first item.
+  
+  A second paragraph in the first item.
+  
+* The second item.
+</db:programlisting>
+<db:para>The latter has just as much structural hierarchy as the first, but feels much flatter. It uses indentation to indicate that the second paragraph belongs to the first list item, but that feels natural and obvious rather than contrived of imposed.</db:para>
+<db:para>One of my motivations for creating SAM, which is designed for structured writing, and therefore, unavoidably, for hierarchical structures, was to express hierarchy implicit where possible and as naturally as possible where it cannot be implicit, for the sake of improve functional lucidity for strictly constrained structured writing languages. (First and foremost, I created it for myself, to improve functional lucidity for me in the structured writing I do, such as the writing of this book.)</db:para>
+</db:section>
+<db:section>
 <db:title>Agreeing on boxes, names, and labels</db:title>
 <db:para>The names and labels on boxes tell us what kind of thing is in the box. What kind of things they  tell us depends on the domain we are dealing with.</db:para>
 <db:para>In the media domain they tell us what something looks like, either directly (an actual format description) or by reference (the name of a style). In the document domain they tell us what part of a document the words are. In the management domain, they tell us what to do with the content under different circumstances. In the subject domain they tell us what the subject matter of the words is.</db:para>
@@ -255,7 +282,7 @@ match url
 <db:para>In other words, we can factor out the document domain structure from the HTML for authoring and storage and then factor it back in for output.</db:para>
 </db:section>
 <db:section>
-<db:title>Structure or annotation</db:title>
+<db:title>Structure vs. annotation</db:title>
 <db:para>Since both structures and annotations can contain information about content, you often have to decide whether to use one of the other to capture some of the metadata you need. Here are some of the basic considerations:</db:para>
 <db:para>Annotations are more difficult to constrain than structures. It is not that you can’t constrain which annotation apply to which structures. In XML, for instance, you could require that every element <db:code>a</db:code> have an attribute <db:code>b</db:code>. But while that may work in some cases, it only applies if <db:code>b</db:code> is relevant to all instance of <db:code>a</db:code>, and with most of the things you want attributes for, that is not the case. So that means the <db:code>b</db:code> needs to be optional, which means it is less constrained. (There is a constraint on which attributes <db:emphasis role="bold">may</db:emphasis> occur, but not on which <db:emphasis role="bold">must</db:emphasis> occur.)</db:para>
 <db:para>Structures provide superior guidance. Even if all you need for downstream processing is metadata that could be provided by annotations, using structures makes it easier to guide authors to provide the metadata you need, and to audit the content to make sure the information has been provided correctly.</db:para>

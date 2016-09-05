@@ -77,7 +77,7 @@ chapter:(#chapter.mechanical-structure)
         
         But if the {constraints} that we want to express in structured writing demand hierarchy, while {functional lucidity} demands more of a punctuated linear model, how do we reconcile these two opposing requirements in markup language design? 
         
-        This is of greatest concern in the design of {document domain} languages. The structure of media domain languages is largely dictated by the shape and relationship of the media-domain object they are modeling. In the subject domain, we have abstracted content out of strict document order. Hierarchy in the subject domain tend to match the hierarchy of relationship in the subject matter itself. (Though this is not universal. Addresses, for instance, which are based on hierarchal locations, are modeled as flat ordered lists. The order reflect the hierarchy, but the nesting of city inside country and of street within city is not reflected in the structure of an address record.) In the {document domain}, however, it is a real concern. The document domain consists of abstractions of document structures and the nature of their relationship to the structure of thought in the text is not obvious. 
+        This is of greatest concern in the design of {document domain} languages. The structure of {media domain} languages is largely dictated by the shape and relationship of the media-domain object they are modeling. In the {subject domain}, we have abstracted content out of strict document order. Hierarchy in the {subject domain} tend to match the hierarchy of relationship in the subject matter itself. (Though this is not universal. Addresses, for instance, which are based on hierarchal locations, are modeled as flat ordered lists. The order reflect the hierarchy, but the nesting of city inside country and of street within city is not reflected in the structure of an address record.) In the {document domain}, however, it is a real concern. The document domain consists of abstractions of document structures and the nature of their relationship to the structure of thought in the text is not obvious. 
         
         The options available are:
         
@@ -126,8 +126,38 @@ chapter:(#chapter.mechanical-structure)
             Flynn, Peter. “Why writers don't use XML: The usability of editing software for structured documents.” Presented at Balisage: The Markup Conference 2009, Montréal, Canada, August 11 - 14, 2009. In Proceedings of Balisage: The Markup Conference 2009. Balisage Series on Markup Technologies, vol. 3 (2009). doi:10.4242/BalisageVol3.Flynn01.        
         
         
+    section: The role of syntax
+    
+        The syntax of your markup language also plays a role in striking the right balance between hierarchy and {functional lucidity}. Fully explicit markup syntax like that of XML forces every element of the hierarchical structure of the document to the fore in the syntax. The syntax has explicit hierarchical constraints of its own (what XML calls the well-formedness constraint). This pushes the hierarchical structure in the author's face, which detract from {functional lucidity}. 
         
+        Languages like Markdown with implicit syntax are just as hierarchical as their equivalents with fully explicit syntax but they feel flatter. Thus where HTML make you write:
         
+        ```(html)
+            <html>
+                <ol>
+                    <li>
+                        <p>The first item.</p>
+                        <p>A second paragraph in the first item.</p>
+                    </li>
+                    <li>
+                        <p>The second item.</p>
+                <ol>
+            </html>
+            
+        In {MarkDown} you write:
+        
+        ```(markdown)
+            * The first item.
+              
+              A second paragraph in the first item.
+              
+            * The second item.
+            
+        The latter has just as much structural hierarchy as the first, but feels much flatter. It uses indentation to indicate that the second paragraph belongs to the first list item, but that feels natural and obvious rather than contrived of imposed. 
+        
+        One of my motivations for creating SAM, which is designed for structured writing, and therefore, unavoidably, for hierarchical structures, was to express hierarchy implicit where possible and as naturally as possible where it cannot be implicit, for the sake of improve functional lucidity for strictly constrained structured writing languages. (First and foremost, I created it for myself, to improve functional lucidity for me in the structured writing I do, such as the writing of this book.) 
+        
+
     section: Agreeing on boxes, names, and labels
         
         The names and labels on boxes tell us what kind of thing is in the box. What kind of things they  tell us depends on the domain we are dealing with. 
@@ -292,7 +322,7 @@ chapter:(#chapter.mechanical-structure)
             
             In other words, we can factor out the {document domain} structure from the {HTML} for {authoring} and storage and then factor it back in for output. 
             
-        section: Structure or annotation
+        section: Structure vs. annotation
         
             Since both structures and annotations can contain information about content, you often have to decide whether to use one of the other to capture some of the metadata you need. Here are some of the basic considerations:
             

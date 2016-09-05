@@ -1,15 +1,142 @@
 <?xml version="1.0"?>
 <db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0">
-<db:title>Chunks, blocks, topics, and fragments</db:title>
+<db:title>Blocks, topics, fragments, and paragraphs</db:title>
 <db:para>A common theme is many structured writing systems is the idea that documents are made up of various types of blocks. This idea affects both how you look at information design and how you look at the creation of data structures and algorithms.</db:para>
-<db:para>Information Mapping is a structured writing system which views all content as being made up of just six types of information block: Procedure, Process, Principle, Concept, Structure, and Fact. Every document, according to Information Mapping theory, is made of of blocks of these six types united by a map. Thus in the recipe example we have used frequently in this book, the introduction to the recipe is a concept, the list of ingredients is a structure, and the preparation steps are a procedure. The recipe as a whole is an information map made up of these blocks.</db:para>
-<db:para>Information Mapping is a theory about how documents are constructed to convey information, so these block types would count as document domain structures. However they are much more abstract structures than any we have looked at so far, which have mostly been abstract versions of formatting structures like lists and tables.</db:para>
-<db:para>DITA also adopts this idea of documents being made up of blocks. In DITA’s case, these blocks are named topics, which leads to some confusion since the word topic can be used to refer to both a block in the Information Mapping sense, which is not a complete document and topic in the sense of a help topic, which is a whole document.</db:para>
-<db:para>DITA is commonly associated with the idea that all content is either concept, task, or reference, though DITA actually defines more topic types than this today.</db:para>
-<db:para>DITA’s topic types are a little more functionally oriented than Information Mapping’s block types. DITA’s types are based on what the reader is doing -- performing a task, understanding an idea, or looking up information. Information Mapping’s types are more epistemological in nature -- trying to delineate what type of knowledge is being transferred.</db:para>
+<db:para>Every hierarchical markup system, of course, is made up of blocks, and of blocks within blocks. XML, for example, is simply a set of elements inside elements. But when we design markup languages and structured writing systems, we use these basic building block to create more complex blocks that have a wholeness of their own. We recognize them not simply as on step in the hierarchy of a document, but as a distinct type of object that we can give a name to and assign processing logic to.</db:para>
+<db:section>
+<db:title>Semantic blocks</db:title>
+<db:para>At the risk of adding further burden to an already overloaded term, I am going to call them semantic blocks because they are blocks that mean something in whichever domain they belong to.</db:para>
+<db:para>Higher level markup design is essentially a matter of defining semantic blocks and the ways they go together.</db:para>
+<db:para>An easy example is a list. A list is a semantic block because “list” is an idea with meaning in the document domain independent of its exact internal structure. A writer can say to themselves, “I want a list here”, independent of any specifics of markup. It a structure has a name like this in the real world, the block that implements it (in the terminology I am coining for the purpose) is a semantic block.</db:para>
+<db:para>Semantic blocks generally contain other blocks that we might not talk about independently if we did not need to describe the detailed construction of a semantic block. This is not to say that the building blocks of a semantic block may not also be semantic blocks. In fact, this happens frequently. Nor is it to say that the the distinction between a semantic and non-semantic blocks is fixed or inflexible. A semantic block is a block that implements a structure that has meaning to you independent of its function as markup, and what you regard as meaningful, I may regard as an implementation detail.</db:para>
+<db:para>The point is not that we must agree on exactly what is a semantic block and what is not, but that you should think of markup design in terms of semantic blocks. Blocks, with whatever internal structure you require, that will capture the structure of something that is real and meaningful to you.</db:para>
+<db:para>An example of a semantic block in the document domain is a list. DITA, DocBook, and HTML all define lists, and each of them defines the internals of a list different. Nonetheless we recognize that each of them is an implementation of the idea of a list.</db:para>
+<db:para>However each of them define it, a list is made up of structural blocks that build the shape of a list. I’ll illustrate this with XML since it make the blocks explicit:</db:para>
+<db:programlisting language="xml">
+&lt;ol&gt;
+    &lt;li&gt;
+        &lt;p&gt;This is the first item.&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;pi&gt;This is the second item.&lt;/p&gt;
+    &lt;/li&gt;
+&lt;/ol&gt;
+</db:programlisting>
+<db:para>Other document domain examples include tables and procedures. (Again you will find that DocBook, DITA, and HTML, not to mention S1000D, and reStructuredtext, all have tables, all with different internal structures, and that both DocBook and DITA have procedures, again internally different. It is possible to disagree greatly about how to construct a semantic block while still recognizing different implementations for what they are.</db:para>
+<db:para>In the subject domain examples would include the ingredients list from the recipe example we have been using:</db:para>
+<db:programlisting language="sam">
+ingredients:: ingredient, quantity, unit
+    eggs, 3, each
+    salt, 1, tsp
+    butter, .5, cup
+</db:programlisting>
+<db:para>and the parameter description from an API reference:</db:para>
+<db:programlisting language="sam">
+parameter: string
+    required: yes
+    description:
+        The string to print.
+</db:programlisting>
+<db:para>One characteristic of such semantic blocks is that they often tend to repeat as a unit, as this example does in an API reference entry:</db:para>
+<db:programlisting language="sam">
+function: print
+    return-value: none
+    parameters:
+        parameter: string
+            required: yes
+            description:
+                The string to print.
+        parameter: end
+            required: no
+            default: '\n'
+            description:
+                The characters to output after the {string}(parameter).
+</db:programlisting>
+<db:para>They may also be used as a unit in different places in a markup language, or in different markup languages.</db:para>
+<db:para>Designing in terms of semantic blocks not only helps keep markup design and processing simpler, it also improves functional lucidity. Present the markup language to the writer as a set of familiar object like lists or <annotation type="FIXME">XXXXX</annotation> rather than a sea of tags and the task becomes easier to understand (and the tags easier to remember).</db:para>
+<db:para>The structure of a semantic block can be strict of loose. A strict semantic block has one basic structure with few options. A loose one allows a much wider variety of structure inside, sometimes to the point that it acts more as a semantic wrapper than a defined semantic block.</db:para>
+<db:para>DocBook is an example of a language with very loose semantic blocks. DocBook has the same high-level semantic blocks as any other generalized document domain tagging language, but so many tags are allowed in so many places that none of these objects are simple and easy to understand. This supports DocBook’s goal of being able to describe almost any document structure you might want to create, but at the expense of simplicity and constraint.</db:para>
+<db:para>How do you balance flexibility with functional lucidity and constraint in creating semantic blocks? Sometimes it is best to have more than one implementation of a particular semantic block. For instance, both DITA and DocBook have two tables model, as simple model and a more complex one based on the CALS table model.</db:para>
+</db:section>
+<db:section>
+<db:title>Functional blocks</db:title>
+<db:para>We have looked at examples of semantic blocks whose semantics are in the document domain (lists and tables) and in the subject domain (ingredients list and parameter description). There is another way in which some structured writing systems divide content into blocks, which is according to the function they perform for the reader. I’m going to call these functional blocks. (To be clear, a functional block is a type of semantic block.)</db:para>
+<db:para>Information Mapping is a structured writing system which views all content as being made up of just six types of information block: Procedure, Process, Principle, Concept, Structure, and Fact. These are functional blocks. They don’t directly describe a physical or logical element of document structure (except for procedure), nor are they specific to any one subject. They describe the kind of idea that the content conveys -- they are actually based on a theory about how humans receive information.</db:para>
+<db:para>What domain do functional blocks belong to? Clearly they are not media, subject, or management domain structures. Are they a kind of document domain structure or something else again? I believe it is more useful to regard them as document domain structures than to invent another domain. Information mapping is a theory about the construction of documents to make them more effective. It regards a document as a mapping of information blocks, so IM’s blocks are components of document, and therefore in the document domain. They simply look at the components of document more from a functional standpoint than the morphological standpoint of a structure like a list or a table.</db:para>
+<db:para>Functional blocks will typically be made up of morphological blocks. In some cases, a block may fit both categories. For example, a procedure probably counts as both a functional and a morphological unit, since it has both a distinct morphology and a distinct purpose. Alternately, in an Information Mapping context at least, we might regard it as a functional block that consists of exactly one morphological block.</db:para>
+<db:para>DITA also adopts this idea of documents being made up of functional blocks. In DITA’s case, these blocks are named topics, which leads to some confusion since the word topic can be used to refer to both functional block, and also to a complete document (as in a “help topic” for instance).</db:para>
+<db:para>DITA has popularized the idea that all content (or all technical content, at least) is made up of just three functional blocks: concept, task, and reference. (DITA actually defines more topic types than this today.) This idea is appealing because it is easy to see a correspondence between these three types and the reader activities of learning (concept), doing (task), and looking stuff up (reference).</db:para>
+<db:para>This very simple triptych is very appealing because it promises (though it does not necessarily deliver) easy composability for content reuse. Some people also maintain that it makes content easier to access for readers, though other (myself included) criticizes it on the ground that it tends to break content down too fine for be useful and robs content of its narrative thread.</db:para>
+<db:para>It can fairly be said that this depends very much on how you use it. But from a structured writing point of view, the purpose of structured writing is to use constraints to improve content quality and this approach, by itself, lacks some of those necessary constraints. As we have noted, some approaches to content reuse reject significant constraints in favor or easy composability. DITA does, however, provide mechanisms for creating more constrained functional blocks, though not a means to constrain how blocks are combined.</db:para>
 <db:para>All of this is quite distinct from the subject-based information typing of the subject domain. The instructions in a recipe and a knitting pattern are both tasks in DITA terms and procedures in IM’s terms. But in the subject domain they are distinct types because there is a distinct way in you which write knitting instructions.</db:para>
 <!-- EXAMPLE -->
 <db:para>DITA and Information Mapping’s approaches are broad and analytical, trying to find commonalities across many different kinds of information. The subject domain is very much specific and synthetic, concerned which how specific pieces go together to successfully describe a particular subject. All three approaches break content up into blocks, and the subject-specific blocks of the subject domain can probably be categorized according to the information typology of either DITA or Information Mapping. However, the specific structured writing structures that you would create in each case are different. Both the Information Mapping and DITA approaches, when reduced to specific markup structures, create abstract document domain structures. The subject domain, of course, creates subject domain structures.</db:para>
 <db:para>At the same time, the subject domain is not attempting to define an ontology. It is not trying to capture knowledge in a formal way. It is trying to capture and to shape content in a way that is specific to its subject matter.</db:para>
 <db:para>We should be clear that this is not the only view of the structure of a document. We might also see a document as a punctuated flow.</db:para>
+</db:section>
+<db:section>
+<db:title>Topics</db:title>
+<db:para>What is the next unit up from the semantic block? It is the unit that combine semantic blocks to form a complete coherent content item. We might perhaps call it the narrative block. What is the name of the narrative block?</db:para>
+<db:para>The narrative block obviously comes in different sizes.  It could be a help topic, a web page, or an entire book. Or a book might be made up of multiple narrative units, such as a chapter, an article in an encyclopedia, or a recipe in a cook book.</db:para>
+<db:para>It is probably fair to say that the narrative block is the largest unit of content to which we can usefully assign significant constraints. Or rather, the constraints that we impose on larger collections of content are of a different type an implemented in different ways from the constraints we impose on writing and through structured writing techniques. (As we have noted, DocBook a format primarily designed for whole books, is largely unconstrained, opting almost always to give the author multiple choices as opposed to strict guidance.)</db:para>
+<db:para>The narrative block differs also between the paper world and the hypertext world of the Web. On paper a book consists of a basically linear series of chapters. On the Web, a site consists of a linked set of pages. But on the Web, pages are not restricted to linking to other pages on the same site, and search engines, which generate dynamic ad hoc links to pages rather than sites so that it is fair to say that the Web consists directly of linked pages, meaning that a narrative unit of hypertext relates itself to other content in a very different way from a narrative unit on paper.</db:para>
+<db:para>Increasingly, though by no means universally, the term “topic” is used for the narrative block in structured writing terms. There is some confusion caused by DITA’s use of the word topic for its functional blocks, and some confusion in the DITA world too about whether Concept, Task, and Reference units should be presented as narrative blocks or not.</db:para>
+</db:section>
+<db:section>
+<db:title>Fragments</db:title>
+<db:para>Another division of content that can occur, mostly in relationship to the management domain, is the fragment. By fragment I mean a chunk of text that is not either a semantic block, a functional block, or a narrative block, but is a block that you want to manage independently of the surrounding text.</db:para>
+<db:para>For example, in a content reuse scenario, you might want to make a items in a list conditional based on which of the list items applies to different versions of a product.</db:para>
+<db:para>Individual list items are not really semantic blocks. They are just structural blocks of a list. When you make list items conditional, what you are actually doing is creating multiple separate lists with some items in common, and recording them as a single list. You might be able to attach reasonably informative metadata to any one of those lists as a whole, but there is not a lot you can say about list items individually. They are fragments of a list. When you apply conditions to them, then, you are applying those conditions to fragments.</db:para>
+<db:para>In some reuse systems, including DITA and DocBook, it is possible to apply conditions to arbitrary bits of text -- three words in sentence for instance. The block that sets off those three words in a fragment.</db:para>
+<db:para>Some reuse systems also allow you to reuse arbitrary bits of text from other parts of the content set, simply because the text is the same in each case. Those bits of text would be fragments.</db:para>
+<db:para>In some cases, you turn an existing structural block into a fragment by attaching management domain metadata to it. In other cases, you have to introduce additional markup into the document to delineate the fragment.</db:para>
+<db:para>Fragments definitely solve some problems. They are also inherently unstructured and unconstrained. It is very easy to get into trouble with fragments, to create relationships and dependencies that hard to manage, because they don’t follow any structural logic. You should approach their use with great caution and restraint.</db:para>
+</db:section>
+<db:section>
+<db:title>Paragraphs</db:title>
+<db:para>Paragraphs are the thing that make structured writing different from most other computable data sets. It is rare in any other data set to see a structure floating withing the value of another structure. But that is exactly what happens in a paragraph.</db:para>
+<db:programlisting language="sam">
+In {Rio Bravo}(movie), {the Duke}(actor "John Wayne") plays an ex-Union colonel.
+</db:programlisting>
+<db:para>In this examples, he annotations on “Rio Bravo” and “the Duke” float in the middle of the paragraph block. Here is the same thing in XML:</db:para>
+<db:programlisting language="xml">
+&lt;p&gt;In &lt;movie&gt;Rio Bravo&lt;/movie&gt;, &lt;actor name="John Wayne"&gt;the Duke&lt;/actor&gt; plays an ex-Union colonel.&lt;/p&gt;
+</db:programlisting>
+<db:para>Here the <db:code>movie</db:code> and <db:code>actor</db:code> elements float in the content of the <db:code>p</db:code> element. In XML parlance, this is called mixed content. If fact, XML breaks elements down into three kinds:</db:para>
+<db:variablelist>
+<db:varlistentry>
+<db:term>element content</db:term>
+<db:listitem><db:para>Elements that contain only other elements.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>data content</db:term>
+<db:listitem><db:para>Elements that contain only text data.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Mixed content</db:term>
+<db:listitem><db:para>Elements that contain both text data and elements.</db:para></db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:para>Mixed content is the reason that most traditional data format are not a good fit for content. They may be able to model element content and data content, but they lack and elegant way to model mixed content.</db:para>
+<db:para>Even conventional programming languages have trouble with mixed content. In fact most libraries for XML processing invent an additional wrapper around each string of characters in a mixed content element, effectively representing it as if it were written like this (without mixed content):</db:para>
+<db:programlisting language="xml">
+&lt;p&gt;&lt;text&gt;In &lt;/text&gt;&lt;movie&gt;Rio Bravo&lt;/movie&gt;&lt;text&gt;, &lt;/text&gt;&lt;actor name="John Wayne"&gt;the Duke&lt;/actor&gt;&lt;text&gt; plays an ex-Union colonel.&lt;/text&gt;&lt;/p&gt;
+</db:programlisting>
+<db:para>But while this makes the content palatable to conventional languages, it is clearly false to the actual structure of the document. Structured writing is essentially about reflecting the structure of thought or presentation in a narrative, and narrative have a structure that is not shared with other data. Indeed, we might say that all other data formats exist as an attempt to extract information from the narrative format to make it easier to process.</db:para>
+<db:para>Thus we are taught in school that if we are presented a problem in this format:</db:para>
+<db:blockquote>
+<db:para>John had 4 apples and Mary had 5 apples. They place their apples in a basket. Bill eats 2 apples. How many apples are left in the basket?</db:para>
+</db:blockquote>
+<db:para>You solve it by first extracting the data from the narrative:</db:para>
+<db:programlisting>
+4 + 5 - 2 =
+</db:programlisting>
+<db:para>But in content processing, we cannot extract the data from the narrative because narrative is the output we are creating. Thus we have to call out the data (to make it processable by any and all of the structured writing algorithms) while leaving the narrative intact.</db:para>
+<db:para>When you move content to the subject domain, you will in some cases break down paragraphs and isolate the data. This may be done with the intention of recreating paragraphs algorithmically on output, or of switching from a narrative to a data oriented reporting of the subject matter. Either way, it makes the data easier for algorithms to handle, and thus makes most of the structure writing algorithms work better. (You may have noticed that the subject domain provides the most constrained and elegant solution to most structured writing algorithms.)</db:para>
+<db:para>Even so, it is rarely possible to do a complete breakdown of all paragraphs in refactoring content to the subject domain. Most subject domain markup languages still make considerable use of paragraphs and other basic text structures. Only narrative is capable of expressing the full variety and subtlety of the real world relationships between things, and only narrative is capable of conveying these things effectively to most human readers. Even things that can be fully described to algorithms with fielded data must be described to most audiences with narrative, and even though companies like Narrative Science are working on how to turn data into narrative, they are far from producing a general solution.</db:para>
+<db:para>Subject-domain structure writing extends the reach of more conventional algorithms into the world of narrative to enable specific structured writing algorithms and to provide constraints to improve the quality of the writing. Unlike ontologies, subject domain structured writing does not attempt to capture the whole semantics of a narrative, just to discipline and structure narrative to achieve specific content creation objectives.</db:para>
+<db:para>And therefore, just as media domain structured writing needs to float elements in the middle of paragraphs to describe formatting, the document domain to describe the role of a passage, the management domain to assign conditions or extract content for reuse, the subject domain needs to do so to describe the subject referred to in phrases within a paragraph.</db:para>
+<db:para>In planning you markup structures, therefore, it is important to think about which structures in your language need to be mixed content and which do not. Finding ways to avoid mixed content without violating the spirit of the essentially narrative nature of writing can pay dividends in an improved ability to express constraints and to execute virtually all the structured writing algorithms.</db:para>
+<db:para>On the other hand, some of the most important subject matter that you need to model and make available to algorithms cannot effectively be factored out of paragraphs, particularly while maintaining functional lucidity. Be prepared, therefore, to think seriously about the content strucures to be modeled below the paragraph level.</db:para>
+</db:section>
 </db:chapter>

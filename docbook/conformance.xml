@@ -18,8 +18,8 @@
 <db:para>But this is not the only way that subject domain structured writing helps ensure completeness. By specifically calling out the subjects that are mentioned in every topic you write, you build a list of subjects that are important to your business. You can use this list to make sure that all the subjects you need to cover are actually covered.</db:para>
 <db:para>For example, structured writing allows you to annotate you text to call out the types of certain phrases such as functions names, feature names, or stock symbols.</db:para>
 <db:programlisting language="sam">
+When installing widgets, use a {left-handed widget wrench}(tool) to tighten them to the recommended torque for your device.
 </db:programlisting>
-<db:para>When installing widgets, use a left-handed widget wrench to tighten them to the recommended torque for your device. <db:code/>`</db:para>
 <db:para>This sample annotates the phrase “left-handed widget wrench” and records that these words describe a tool. If all mentions of tools are annotated this way, you can then compile a list of all the tools you mention in all your topics and make sure that you have suitable documentation for each of them. We will look at annotations, and the ways you can use them, in later articles.</db:para>
 <db:para>And yes, this is the same markup that I have been using in earlier chapters, and I will explain it eventually.</db:para>
 </db:section>
@@ -29,8 +29,8 @@
 <db:para>We have <annotation type="link" specifically="http://techwhirl.com/what-is-structured-writing/">described structured writing as applying constraints to writing</annotation>. Being consistent simply means abiding by constraints. As we have seen, this can take the form of either enforcing the constraint through required structure or, preferably, factoring out the constraint so that it is handled by algorithms rather than people. We have looked at how you can factor out constraints in both the <annotation type="link" specifically="http://techwhirl.com/structured-writing-in-the-document-domain/">document domain</annotation> and the subject domain.</db:para>
 <db:para>If you annotate the important things in your content set, such as tools in the example above, you can use the annotations to check for consistency of names. Suppose a writer accidentally writes “spanner” rather than “wrench” in the name of the tool:</db:para>
 <db:programlisting language="sam">
+When installing widgets, use a {left-handed widget spanner}(tool) to tighten them to the recommended torque for your device.
 </db:programlisting>
-<db:para>When installing widgets, use a left-handed widget spanner to tighten them to the recommended torque for your device. <db:code/>`</db:para>
 <db:para>Since you can now generate a list of tools mentioned in the text, you can check each mention against a list of approved tool names. This can reveal both incorrect names (consistency) and tools that may be missing from the official list (completeness).</db:para>
 <db:para>The same would apply to values in fields, such as the wine match field in the recipe example. With the wine match in a separate field you can compile a list of wines mentioned or check each mention against an approved list.</db:para>
 </db:section>
@@ -39,8 +39,8 @@
 <db:para>Accuracy problems too are often hard to spot. Typos, using old names for things, or giving deprecated examples are all hard for writers and reviewers to see. But there are structured writing techniques than can catch many of these kinds of problems.</db:para>
 <db:para>For example, if you were documenting an API, you could annotate each mention of a function.</db:para>
 <db:programlisting language="sam">
+Always check the return value of the {rotateWidget()}(function) to ensure the correct orientation was achieved. 
 </db:programlisting>
-<db:para>Always check the return value of the <annotation type="function">rotateWidget()</annotation> to ensure the correct orientation was achieved. <db:code/>`</db:para>
 <db:para>API function names can be quite tricky to remember sometimes and small typos and be difficult to spot. But with this annotation, you can validate all mentions of functions against the API reference or the code base. This technique not only catches misspellings. I have seen it catch the use of deprecated functions in examples, for instance.</db:para>
 </db:section>
 <db:section>
@@ -51,7 +51,7 @@
 <db:title>Semantic constraints</db:title>
 <db:para>We can usefully divide constraints into two types: structural constraints and semantic constraints. Structural constraints deal with the the relationship of various text structures. Semantic constraints deal with the meaning of the content.</db:para>
 <db:para>For instance, consider this structure:</db:para>
-<db:programlisting language="sam">
+<db:programlisting language="xml">
 &lt;person&gt;
     &lt;name&gt;John Smith&lt;/name&gt;
     &lt;age&gt;middle&lt;/age&gt;
@@ -59,7 +59,7 @@
 &lt;/person&gt;
 </db:programlisting>
 <db:para>Some people certainly describe themselves as middle aged, and Christmas Day is certainly a date of birth, if an incomplete one. The author has complied with the structure of the document. But the creator of this markup language was probably looking for more precise information, probably in a format that an algorithm could read. What they wanted was:</db:para>
-<db:programlisting language="sam">
+<db:programlisting language="xml">
 &lt;person&gt;
     &lt;name&gt;John Smith&lt;/name&gt;
     &lt;age&gt;46&lt;/age&gt;

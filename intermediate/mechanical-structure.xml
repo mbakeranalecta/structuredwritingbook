@@ -64,7 +64,7 @@ This text is [B&gt;bold, [I&gt;this is bold and italic,&lt;B] and this is just i
 </blockquote>
 <p>Today, very few markup languages take the streaming approach of WordPerfect. The problem with it is that when you want to deal with any structure that is naturally hierarchical, the ability to start and stop structures independently just gets in the way and makes things hard to handle. But even with markup languages that are syntactically hierarchical, like XML, you can still define markup languages that are largely flat (like HTML) or more hierarchical (like DocBook).</p>
 <p>But if the <phrase>constraints</phrase> that we want to express in structured writing demand hierarchy, while <phrase>functional lucidity</phrase> demands more of a punctuated linear model, how do we reconcile these two opposing requirements in markup language design?</p>
-<p>This is of greatest concern in the design of <phrase><annotation type="concept">document domain</annotation></phrase> languages. The structure of media domain languages is largely dictated by the shape and relationship of the media-domain object they are modeling. In the subject domain, we have abstracted content out of strict document order. Hierarchy in the subject domain tend to match the hierarchy of relationship in the subject matter itself. (Though this is not universal. Addresses, for instance, which are based on hierarchal locations, are modeled as flat ordered lists. The order reflect the hierarchy, but the nesting of city inside country and of street within city is not reflected in the structure of an address record.) In the <phrase><annotation type="concept">document domain</annotation></phrase>, however, it is a real concern. The document domain consists of abstractions of document structures and the nature of their relationship to the structure of thought in the text is not obvious.</p>
+<p>This is of greatest concern in the design of <phrase><annotation type="concept">document domain</annotation></phrase> languages. The structure of <phrase><annotation type="concept">media domain</annotation></phrase> languages is largely dictated by the shape and relationship of the media-domain object they are modeling. In the <phrase><annotation type="concept">subject domain</annotation></phrase>, we have abstracted content out of strict document order. Hierarchy in the <phrase><annotation type="concept">subject domain</annotation></phrase> tend to match the hierarchy of relationship in the subject matter itself. (Though this is not universal. Addresses, for instance, which are based on hierarchal locations, are modeled as flat ordered lists. The order reflect the hierarchy, but the nesting of city inside country and of street within city is not reflected in the structure of an address record.) In the <phrase><annotation type="concept">document domain</annotation></phrase>, however, it is a real concern. The document domain consists of abstractions of document structures and the nature of their relationship to the structure of thought in the text is not obvious.</p>
 <p>The options available are:</p>
 <ul>
 <li>
@@ -112,6 +112,33 @@ This text is [B&gt;bold, [I&gt;this is bold and italic,&lt;B] and this is just i
 <p>Flynn, Peter. “Why writers don’t use XML: The usability of editing software for structured documents.” Presented at Balisage: The Markup Conference 2009, Montréal, Canada, August 11 - 14, 2009. In Proceedings of Balisage: The Markup Conference 2009. Balisage Series on Markup Technologies, vol. 3 (2009). doi:10.4242/BalisageVol3.Flynn01.</p>
 </entry>
 </bibliography>
+<section>
+<title>The role of syntax</title>
+<p>The syntax of your markup language also plays a role in striking the right balance between hierarchy and <phrase>functional lucidity</phrase>. Fully explicit markup syntax like that of XML forces every element of the hierarchical structure of the document to the fore in the syntax. The syntax has explicit hierarchical constraints of its own (what XML calls the well-formedness constraint). This pushes the hierarchical structure in the author’s face, which detract from <phrase>functional lucidity</phrase>.</p>
+<p>Languages like Markdown with implicit syntax are just as hierarchical as their equivalents with fully explicit syntax but they feel flatter. Thus where HTML make you write:</p>
+<codeblock language="html">
+&lt;html&gt;
+    &lt;ol&gt;
+        &lt;li&gt;
+            &lt;p&gt;The first item.&lt;/p&gt;
+            &lt;p&gt;A second paragraph in the first item.&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;p&gt;The second item.&lt;/p&gt;
+    &lt;ol&gt;
+&lt;/html&gt;
+</codeblock>
+<p>In <phrase>MarkDown</phrase> you write:</p>
+<codeblock language="markdown">
+* The first item.
+  
+  A second paragraph in the first item.
+  
+* The second item.
+</codeblock>
+<p>The latter has just as much structural hierarchy as the first, but feels much flatter. It uses indentation to indicate that the second paragraph belongs to the first list item, but that feels natural and obvious rather than contrived of imposed.</p>
+<p>One of my motivations for creating SAM, which is designed for structured writing, and therefore, unavoidably, for hierarchical structures, was to express hierarchy implicit where possible and as naturally as possible where it cannot be implicit, for the sake of improve functional lucidity for strictly constrained structured writing languages. (First and foremost, I created it for myself, to improve functional lucidity for me in the structured writing I do, such as the writing of this book.)</p>
+</section>
 <section>
 <title>Agreeing on boxes, names, and labels</title>
 <p>The names and labels on boxes tell us what kind of thing is in the box. What kind of things they  tell us depends on the domain we are dealing with.</p>
@@ -266,7 +293,7 @@ match url
 <p>In other words, we can factor out the <phrase><annotation type="concept">document domain</annotation></phrase> structure from the <phrase><annotation type="language">HTML</annotation></phrase> for <phrase><annotation type="algorithm">authoring</annotation></phrase> and storage and then factor it back in for output.</p>
 </section>
 <section>
-<title>Structure or annotation</title>
+<title>Structure vs. annotation</title>
 <p>Since both structures and annotations can contain information about content, you often have to decide whether to use one of the other to capture some of the metadata you need. Here are some of the basic considerations:</p>
 <p>Annotations are more difficult to constrain than structures. It is not that you can’t constrain which annotation apply to which structures. In XML, for instance, you could require that every element <phrase><annotation type="code">a</annotation></phrase> have an attribute <phrase><annotation type="code">b</annotation></phrase>. But while that may work in some cases, it only applies if <phrase><annotation type="code">b</annotation></phrase> is relevant to all instance of <phrase><annotation type="code">a</annotation></phrase>, and with most of the things you want attributes for, that is not the case. So that means the <phrase><annotation type="code">b</annotation></phrase> needs to be optional, which means it is less constrained. (There is a constraint on which attributes <phrase><annotation type="bold">may</annotation></phrase> occur, but not on which <phrase><annotation type="bold">must</annotation></phrase> occur.)</p>
 <p>Structures provide superior guidance. Even if all you need for downstream processing is metadata that could be provided by annotations, using structures makes it easier to guide authors to provide the metadata you need, and to audit the content to make sure the information has been provided correctly.</p>

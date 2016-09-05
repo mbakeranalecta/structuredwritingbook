@@ -73,7 +73,7 @@ create-filmographies
 </db:programlisting>
 <db:para>Tables of contents are a top-down information architecture device. You expect to find them at the top of the information set. List are a bottom-up device. You expect to find them as independent pages or as features on a page. In some cases you may want to add a list to page. (Or, to put it another way, if you want the page to have a list in the document domain you may factor out that list in the subject domain and add it back in the publishing algorithm.</db:para>
 <db:para>Thus if our collection includes the biographies of actors, and we want each biography to include the filmography, we can omit the filmography from the subject domain version of the biography and add it in the presentation algorithm.</db:para>
-<db:programlisting language="sam">
+<db:programlisting language="pseudo">
 match actor-bio
     create html
         create h1 "Biography: " + actor-name
