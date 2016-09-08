@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0">
+<db:title>Extensible and Constrainable Languages</db:title>
+<db:para>The languages we have look at to this point are publicly specified and have existing tool chains. Some of them are more constrained than others, and some of them support different structured writing algorithms. Choosing one of them makes sense if the constraints they express and the algorithms they support are the ones that matter most to your organization, and they support them sufficiently well to meet your needs. If not, you will need to create your own structures. Rather than starting from scratch, you should consider using and abstract and/or extensible markup language as you starting point.</db:para>
+<db:para>If no existing language meets your needs, you can create your own. You can either start from scratch or you can extend or constrain an existing language.</db:para>
+<db:para>A word on the distinction between extension and constraint. Extension is the ability to add new tags to a language. Constraint is the ability to set limits on where and in what relationships those tags may occur.</db:para>
+<db:para>The tools you use for developing your language may separate these functions or unite them in one operation. For example, the XML schema language RelaxNG will allow you to specify a set of element names and the order and relationship in which they can occur. This does constraint and extension in one operation.</db:para>
+<db:para>The schema language Schematron, on the other hand, is purely a constraint mechanism. With a Schematron schema, everything is allowed unless it violates a specified constraint.</db:para>
+<db:para>If you start with an existing concrete language, it has its inherent constraints: the tags and the order and location in which you are allowed to use them. If you want to add additional tags, that is extension. If you want to limit or remove the use of existing tags, or if you want to limit the placement of new tags, that is constraint. Existing concrete languages may have mechanism for extension and for constraint, or for one but not the other.</db:para>
+<db:section>
+<db:title>XML</db:title>
+<db:para>The X in XML stands for eXtensible, but, as we noted in <db:olink targetptr="chapter.markup"/> XML is an abstract language that does not define any document structures itself. Extension in XML, therefore, is extension from zero. Starting from scratch. You define a new XML tagging language using one of the several available schema languages.</db:para>
+</db:section>
+<db:section>
+<db:title>DITA</db:title>
+<db:para>DITA is somewhat unique among markup languages in that it was designed for extension from the beginning. In fact, it is something of a misnomer to call DITA a markup language. DITA is actually an information typing architecture. What is an information typing architecture? DITA is really the only thing that calls itself by this name, so to a certain extent we have to derive the definition from the properties of this one example.</db:para>
+<db:para>XML schema languages are information typing languages. Their sole function is to define information types. So what does an information typing architecture provide over and above what an information typing language provides.</db:para>
+<db:para>There are plenty of precedents for this distinction. The programming world makes use of architectures and frameworks to abstract certain types of operation to a higher level. You could program these functions from scratch, but the architecture or framework is designed to save time and possibly avoid errors.</db:para>
+<db:para>In DITA’s case, the architecture consists of a set of predefined tagging languages that are intended as a basis for extension through a mechanism known as specialization. It also includes an extensive set of management domain markup and the specification of the behavior it should produce, as well as a facility (maps) for assembling information products, and a facility (subject schema) for managing metadata.</db:para>
+<db:para>In other words, it predefines a range of structures, semantics, and operations that you might need in establishing an information architecture and then provides a way for you to build from there.</db:para>
+<db:para>As with any other architecture, its usefulness depend on how well the predefined structures, semantics, and operations suit your needs, how easy the extension mechanism is to use, and how reliable the available implementations are.</db:para>
+<db:para>It is common in the software world for there to be many competing architectures with different sweet spots. Because an architecture is essentially a series of guesses about what a variety of systems may have in common, different architectures may be constructed very differently to cover different sets of commonalities among diverse projects and you may not see equivalent architectural features from one architecture to another.</db:para>
+<db:para>There are not a lot of information typing architectures. The only other one I am aware of is the one I am developing myself, which is called SPFE. SPFE, however, is a very different kind of architecture from DITA.</db:para>
+<db:para>Inherent in the process of constructing an architecture is that you constrain the field in certain ways. Architectures move functionality to a higher level by choosing some options and rejecting other. I said that an XML schema is an information typing language. But a schema can define a markup language for any purpose at all, such as recording transfers between banks. Describing banking transactions is not within the scope of the information typing that the DITA architecture was designed for. DITA therefore has a more restricted definition of “information typing”. The DITA specification defines “information typing” this way: """[http://docs.oasis-open.org/dita/dita/v1.3/csd01/part3-all-inclusive/archSpec/base/information-typing.html] Information typing is the practice of identifying types of topics, such as concept, reference, and task, to clearly distinguish between different types of information.</db:para>
+<db:para>Unfortunately this definition is largely circular. But it does help establish a scale. Information typing is about defining topic types. The spec goes on to define the purpose of information typing:</db:para>
+<db:blockquote>
+<db:para>Information typing is a practice designed to keep documentation focused and modular, thus making it clearer to readers, easier to search and navigate, and more suitable for reuse.</db:para>
+</db:blockquote>
+<db:para>DITA information typing then, is not as general as structured writing. It is focused on information at a particular scale and on a subset of the structured writing algorithms. (That does not mean that it makes it impossible to work at other scales or implement other algorithms, it just means that these are the areas that the architecture supports at a higher level.)</db:para>
+<db:para>Out-of-the-box DITA is commonly associated with the idea that there are just three information types, task, concept, and reference. The DITA spec makes it clear that this is not the intention of DITA as an information typing architecture.</db:para>
+<db:blockquote>
+<db:para>DITA currently defines a small set of well-established information types that reflects common practices in certain business domains, for example, technical communication and instruction and assessment. However, the set of possible information types is unbounded. Through the mechanism of specialization, new information types can be defined as specializations of the base topic type (&lt;topic&gt;) or as refinements of existing topics types, for example, &lt;concept&gt;, &lt;task&gt;, &lt;reference&gt;, or &lt;learningContent&gt;.</db:para>
+</db:blockquote>
+<db:para>As we have noted many times, many of the structured writing algorithms work best with more specific markup, particularly markup in the subject domain. The ability to create an unbounded set of information types is therefore very relevant to getting the most out of structured writing.</db:para>
+<db:para>Clearly, though, one does not need an information typing architecture to define an information type. You can, as John Gruber did with MarkDown, sit down and sketch out a set of structures and a syntax to represent them, and then write a program to process them. With an abstract language like XML, you can create a new information type by defining a set of named elements and attributes using a schema language. How does using a higher level “information typing architecture” like DITA change this process?</db:para>
+<db:para>First and foremost, it means that you don’t start from scratch. All topic types in DITA are derived from a base topic type called <db:code>topic</db:code> by a process called specialization.</db:para>
+<db:para>What is specialization? We noted that XML is an abstract language, meaning that its syntax defines abstract structures that do not occur in documents: elements, attributes, etc. To create a markup language in XML, you define types of elements and attributes for the structures you are creating. Thus in DocBook <db:code>para</db:code> is a type of element. <db:code>para</db:code> has what is called an “is-a” relationship to elements. This is a type of specialization. <db:code>para</db:code> “is-an” element, but it is a special type of element. An XML parser will process it generically as an element, reporting its name to the application layer. The application layer will have a rule that processes just this specialized <db:code>para</db:code> element (and not the also specialized but different <db:code>title</db:code> element).</db:para>
+<db:para>DITA specialization follows the same principle, but moves it up a level. The base <db:code>topic</db:code> topic type is the abstract structure. More specific types like <db:code>knitting-pattern</db:code> or <db:code>ingredients-list</db:code> are specializations of <db:code>topic</db:code> (or of other topics that are specializations of topic). A generic DITA processor can process them as a instance of <db:code>topic</db:code>, but it would require additional code to process them specifically as <db:code>knitting-pattern</db:code> or <db:code>ingredient-list</db:code>. Each of these specialized types has an “is-a” relationship with the type is was specialized from. So <db:code>knitting-pattern</db:code> “is-a” topic.</db:para>
+<db:para>But DITA specialization is different from naming elements in XML in a number of ways.</db:para>
+<db:para>First, the base DITA topic type is not an abstraction like and XML element. You cannot instantiate an element without giving it a name. The base DITA topic type, on the other hand, is a fully implemented topic type that you can instantiate directly. You can, and people do, write directly in the base topic type. We noted in the discussion of rhetorical structure<db:olink targetptr="chapter.rhetorical_structure"/> that it is sometimes easy to treat what is intended as a meta model as a generic model. This is the case here. All topic types in DITA are derived by specialization for the generic <db:code>topic</db:code> type. They all have an ‘is a’ relationship to this generic type.</db:para>
+<db:para>One consequence of this is that while the set of topic types you can create with DITA may be unbounded, it is not necessarily universal. The generic topic type has specific characteristics and if a specialized topic has an is-a relationship to the generic topic, the structures in the specialized topics have a corresponding is-a relationship to structures in the generic type. Thus there can be information types that cannot reasonably be said to have an is-a relationship to a DITA generic topic. That is, there can be information types such that processing them using the code of the type they are specialized from would produce no meaningful result. For example, an information type that factored out most of the text that would appear in the published version would not process meaningfully as a generic topic because the factored-out text would not be restored.</db:para>
+<db:para>To specialize a topic type, you specialize the root element and any child elements or attributes that you need to define your new topic type. Each specialized element or attribute should have and is-a relationship to the element it specializes. Thus a procedure element might be a specialization of an ordered list elements and its step elements might be specializations of list items. (You can see that in this case, processing a procedure as an ordered list would produce meaningful output, but that you might also want to specialize the output of steps in a procedure, perhaps by prefixing each step with “Step 1:" rather than as “1.” in a plain list.)</db:para>
+<db:para>The second way in which specialization differs from giving names to abstract elements is that specialization is recursive. That is, suppose you have a topic type <db:code>animal-description</db:code>, which is a specialization of <db:code>topic</db:code>. You want to impose additional constraints on the description of different type of animal, so you create more specialized types <db:code>fish-description</db:code> and <db:code>mammal-description</db:code> which are specializations of <db:code>animal-description</db:code> (and would be processed like an <db:code>animal-description</db:code> if not other processing were specified for them). Then you might decide that you wanted to impose still more constraints on the description of different kinds of mammals, so you create a type, <db:code>horse-description</db:code> that is a specialization of <db:code>mammal-description</db:code>. This type will be processed as a <db:code>mammal-description</db:code> if no specific processing is provided for <db:code>horse-description</db:code>, as <db:code>animal-description</db:code> if no specific <db:code>mammal-description</db:code> processing is provided, and as <db:code>topic</db:code> if no specific <db:code>animal-description</db:code> is provided.</db:para>
+<db:para>The value of the specialization model for creating new topic types is a matter of disagreement, some holding that it is an important breakthrough and other not seeing any practical advantage over other approaches.<db:footnote>
+<db:para>I am in the camp that doubts the value of specialization (or else I would probably not have brought it up). I prefer an approach that builds models up out of smaller models: building narrative blocks out of a collection of reusable semantic blocks. In other words, I prefer to create models the way DITA creates documents, not the way it create models.</db:para>
+</db:footnote></db:para>
+
+<db:para>The value of the fall back processing is also disputed. Usually when you impose a constraint in structured writing, it is to support one or more structured writing algorithms. What then is the point of creating the structures and not the corresponding algorithms. Two potential reasons are to impose constraints on authors, or to improve functional lucidity by more appropriate labeling of elements, without needing any changes in processing, and to facilitate exchange of content between organization who use different specializations.</db:para>
+<db:para>The second way in which information typing in DITA differs from doing it from scratch is that DITA information types share a common approach to processing and to information architecture. In particular, they inherit a common set of management domain structures and their associated management semantics. It is possible to ignore all of these things, but if you do so, the value of using DITA for information typing is reduced because you then have to invent your own ways of doing these things.</db:para>
+<db:para>As a generality, the less of an architecture you use, the less value there is to basing your work on that architecture, both because you have more work to do, and because you take less advantage of the infrastructure or tools and expertise surrounding that architecture, and create a system that is less understandable to people versed in the architecture. All architectures come with overheads and if you don’t use their features, you still have to live with their overheads, which adds cost and complexity to your system. Thus while you can use DITA and depart from the default DITA way of doing things, the value of using DITA diminishes the further you depart from the DITA way. The same would be true of any other information typing architecture of course.</db:para>
+<db:para>Can you specialize from the document domain to he subject domain? In formal terms the answer is no. Subject domain information does not have an is-a relationship to document domain information precisely because it is the document domain structures that you factor out when you move to the subject domain.</db:para>
+<db:para>Take the list of ingredients in a recipe. In the document domain, they could be presented as a list or as a table. In subject domain terms they are actually more of a table (database sense) than a list. That is, a set of records with a defined semantic structure:</db:para>
+<db:programlisting language="sam">
+ingredients:: ingredient, quantity, unit
+    eggs, 3, each
+    salt, 1, tsp
+    butter, .5, cup 
+</db:programlisting>
+<db:para>How do you create this record structure by specializing document domain elements? What is the best starting point? A table is the most obvious candidate because it is structured like a set of records. However, the more common presentation of an ingredient list is as a list.</db:para>
+<db:para>How big a deal it is if your specialization lacks a true is-a relationship to the thing is it specialized from? If you ignore the fallback mechanism and supply a full set of processing code for your specialization, it may not be a big deal at all, though in these circumstances, you will have done exactly the same work -- writing a schema and one or more processing algorithms -- as if you had created the type from scratch, only with the additional overhead of describing the specialization relationships of each element in your new schema.</db:para>
+<db:para>Where specialization could save you work over writing from scratch is if you do a light specialization, that is, on that only modifies a few elements. Then you don’t have to worry about designing the rest of the topic type and you only have to write new code for he elements you specialize. The rest you can inherit from the base type. Similar savings can also be achieved in other systems by building new models from predefined modules of structure and code.</db:para>
+</db:section>
+<db:section>
+<db:title>DocBook</db:title>
+<db:para>DocBook is not really extensible in the same sense as the other languages mentioned here, but it still deserves a mention. DocBook does not provide an extension mechanism like DITA’a specialization. What it does provide is a deliberately modular construction that makes it easy to create new schemas that include elements from DocBook. In short, DocBook takes full advantage of the extensibility features built into XML schema languages.</db:para>
+<db:para>Does the fact that does not invent its own schema language mean that it is not as extensible as DITA? No. By relying on XML’s own extensibility features, which are both more comprehensive and lower level than DITA’s specialization and constraint mechanism, DocBook is as extensible as it is possible for any XML vocabulary to be.</db:para>
+<db:para>Where it differs from DITA is that DocBook extensions are not DocBook and cannot be processed by standard DocBook tool chains. DITA’s specialization mechanism means that a specialized topic will always pass through the DITA publication process, though whether it will be presented in a useful or comprehensible way very much depends on how well the is-a relationship between specialization and base was maintained.</db:para>
+<db:para>If you would rather ensure that topics always pass through the publication process, even if the results are gibberish, DITA will support that. If you want to ensure that errors are raised if any structure is not recognized by the publishing tool chain (thus avoiding accidental gibberish, but potentially holding up the entire production process) then DocBooks extension mechanism will give you that.</db:para>
+<db:para>It is fair to say though, that the DITA approach can make the writing of algorithms easier in one way. It is easier to modify code that works than to fix code that is broken. With DITA’s fallback mechanism you can develop the algorithm for processing the specialization by running the default code, observing the result, and then adding your own processing rules one at a time, running the process again after each change to validate the effect. You can repeat this process until the output formats correctly.</db:para>
+<db:para>Another aspect of DocBook customization deserves to be mentioned here even though it is not strictly speaking extension. DocBook has a huge tag set and it is quite conceivable that if you want a small constrained document domain markup languages that you can create one by sub-setting DocBook. DocBook provided for just about every document structure out there, so if you are building a document domain language, chances re the pieces you need are in there.</db:para>
+<db:para>The great advantage of creating a new language as a subset of DocBook is that the result is also a valid DocBook document and can therefor be published by the DocBook tool chain. You will not have to write any algorithms at all if you take this approach. Creating a subject of DocBook can therefore allow you to impose more constraints and improve functional lucidity significantly compared to standard DocBook without having to write any processing code at all.</db:para>
+<db:para>Technically speaking, any XML-based markup language is extensible in the same way that DocBook is. However, DocBook’s structure, and the implementation of its schemas, was designed deliberately to support both extension and sub-setting of DocBook, something which is not true for many markup languages.</db:para>
+</db:section>
+<db:section>
+<db:title>RestructuredText</db:title>
+<db:para>Restructured text defines blocks using directives.</db:para>
+<db:programlisting language="reStructuredText">
+.. image:: images/biohazard.png
+   :height: 100
+   :width: 200
+   :scale: 50
+   :alt: alternate text
+</db:programlisting>
+<db:para>It is extensible by adding new directives to the language. However, there is no schema language for RestrucuredText. To create a new directive, you have to create the code that processes it.</db:para>
+<db:para>There is an important distinction to be made between languages that are extensible by schema and those that are extensible by writing code to process the extension. If a language is extended by writing processing code for the extension, the only way to know if the input is valid is by processing it. If it raises a processing error, it is invalid.</db:para>
+<db:para>This is not so bad for a language which is only processed in one way. Since any validation of markup requires running code, running the processor is no more work than running a validator.</db:para>
+<db:para>But what if you want your language to be processed by more than one processing algorithm. This can easily be the case if you are implementing multiple structured writing algorithms, since each requires their own implementation code. In this case you need an independent standard for determining the validity of the input.</db:para>
+<db:para>If you have only one processor for a language, you can treat that processor as normative. That is, the definition of a correct file is any file that can be successfully be processed by the normative processor. The language, in other words, is defined by the processor. But if you have multiple processors, how do you determine who is at fault when a processor fails to process a given input file? Is the processor incorrect or the source file.</db:para>
+<db:para>A schema create a language definition that is independent of any processor. It is the schema that is normative, not any of the processors. If the source file is valid per the schema, the processor is at fault if it does not process that file correctly. If the source file is not valid per the schema, the blame lies with the source file.</db:para>
+<db:para>In the case of RestructuredText, the capacity of the processor to be extended in this way is built into the processor architecture. It is not like you have to hack around in the code to add your extensions. There is a specific and well documented way to do it.</db:para>
+<db:para>But while RestructuredText allows you to extend it by adding new directives, it does not have a constraint mechanism. There is no mechanism (other than by hacking into the code) to restrict the use either of new directives or the existing directives and structures.</db:para>
+</db:section>
+<db:section>
+<db:title>TeX</db:title>
+<db:para>TeX is a typesetting system invented by Donald Knuth in 1978. As a typesetting language it is a concrete media domain language. But Knuth also included a macro language in TeX which allows users to define new commands in terms of existing commands. (I say commands because that is the term used in TeX. Markup in the media domain tends to be much more imperative than markup in the subject domain, which is entirely descriptive.) This macro language has been used to extend TeX, most notably in the form of LaTex, a document-domain language that we looked at in <db:olink targetptr="chapter.heavyweight"/>.</db:para>
+<db:para>As we noted with RestructuredText, extension of a language is not the same thing as constraint. Introducing new commands does not create a constraint mechanism.</db:para>
+</db:section>
+<db:section>
+<db:title>Sam</db:title>
+<db:para>As you can see, while lightweight languages provide great functional lucidity, they suffer from limited extensibility, which generally requires writing code, and a general lack of constraint mechanisms. I believe that a fully extensible, fully constrainable lightweight markup language would be a valuable addition to the structured writing toolkit. This is why I have been developing SAM, the markup language used for most of the examples in this book. (The book was also written in SAM.)</db:para>
+<db:para>As described in <db:olink targetptr="chapter.markup"/>, SAM is a hybrid markup language which combines implicit syntax similar to MarkDown with an explicit syntax for defining abstract structures called blocks, recordsets, and annotations, and with specific concrete for common features such as insertions, citations, and variable definitions.</db:para>
+<db:para>And as I mentioned in <db:olink targetptr="chapter.lightweight"/>, SAM is not a standalone concrete language. It is designed, like XML, for defining specific tagging languages. However, all languages defined in SAM share a small common base set of document related structure for which SAM provide concrete syntax. This allows sam to combine lightweight syntax of the most common document structures with the ability to define specific constrained markup languages for particular purposes, particularly subject domain languages.</db:para>
+<db:para>So when I say that this book was written in SAM, what I mean was that it was written in a specific tagging language based on SAM that I created for the purpose of writing this book. It is a mostly document-domain language, because discursive texts like this one don’t offer a lot of scope for useful subject domain constraints, but it make significant use of subject domain annotation, which was used for auditing, linking, cross referencing, formatting, and indexing purposes.</db:para>
+<db:para>SAM is designed to be extensible and constrainable through a schema language (this is not complete at time of writing, but hopefully will be available by the time you read this). The intent is that the schema language should be able not only to define and constrain new block structures, but to constrain the use of the concrete elements as well, and to constrain the values of fields using patterns.</db:para>
+<db:para>SAM is not designed to be nearly as general as XML in its applications. As a result, its syntax is simple and more functionally lucid and it schema language should also be simpler and make it much easier for writers to develop their own SAM-based markup languages.</db:para>
+<db:para>SAM (Semantics Authoring Markdown) is a hybrid markup language that I created because I got frustrated writing in XML and because I want to write in the subject domain and all the other concrete markup languages and hybrid markup languages I can find are principally or wholly document domain languages. Also, I don’t know of any hybrid languages that are constrainable, and I wanted a hybrid language that is constrainable. (Again, because I want to work in the subject domain where constraints are particularly important.) This book is written in SAM.</db:para>
+<db:para>SAM is the language used for the majority of the examples in this book. I have not explained it fully until now because SAM is designed to make structure clear and that is all I have needed to do in most examples. Naturally, to write in SAM you would need to know more about the rules, but you should be able to read a typical SAM document and understand its structure with little or no instruction.</db:para>
+<db:para>This is similar, but not identical, to the aim of mainstream concrete and hybrid languages such as Markdown and Restructured Text, which is to have the source file be readable as a document. In other words, they strive to make the document structure clear from the markup. They are document domain languages, and they strive to make sure the the markup expresses the document structure they create in a way that is readable.</db:para>
+<db:para>SAM has the same goal, except that SAM was designed for creating subject domain languages. As such, it is designed to make the subject domain structure of the document clear to the reader. A SAM document may not look as much like a finished document as a Markdown or reST document. For example, it does not use underlines to visually denote different levels of header. Instead, it focuses on creating a hierarchy of named blocks and fields. In many ways it is similar to a markup language called YAML, which is designed for data rather than documents.</db:para>
+<db:para>Here is an example of YAML courtesy of Wikipedia:[https://en.wikipedia.org/wiki/YAML#Sample_document]</db:para>
+<db:programlisting language="YAML">
+receipt:     Oz-Ware Purchase Invoice
+date:        2012-08-06
+customer:
+    first_name:   Dorothy
+    family_name:  Gale
+
+items:
+    - part_no:   A4786
+      descrip:   Water Bucket (Filled)
+      price:     1.47
+      quantity:  4
+
+    - part_no:   E1628
+      descrip:   High Heeled "Ruby" Slippers
+      size:      8
+      price:     133.7
+      quantity:  1
+
+bill-to:  &amp;id001
+    street: |
+            123 Tornado Alley
+            Suite 16
+    city:   East Centerville
+    state:  KS
+
+ship-to:  *id001
+
+specialDelivery:  &gt;
+    Follow the Yellow Brick
+    Road to the Emerald City.
+    Pay no attention to the
+    man behind the curtain.
+</db:programlisting>
+<db:para>Key features of YAML are the use of names ending in colons to introduce blocks, and the use of indentation to indicate the hierarchy of the document. SAM uses the same principles.</db:para>
+<db:programlisting language="SAM">
+examples: Basic SAM structures
+
+    example: Paragraphs
+        The is a sample paragraph. It is inside
+        the {block}(structure) called `example`.
+        It contains two {annotations}(structure),
+        including this one. It ends with a blank
+        line.
+
+        This is another paragraph.
+
+    example: Lists
+
+        Then there is a list:
+
+        1. First item.
+        2. Second item.
+        3. Third item.
+
+    example: Block quote
+
+        Next is a block quote with a {citation}(structure).
+
+        """[Mother Goose]
+            Humpty Dumpty sat on a wall.
+</db:programlisting>
+</db:section>
+</db:chapter>

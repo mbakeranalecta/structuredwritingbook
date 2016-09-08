@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter>
+<title>Lightweight Languages</title>
+<annotations>
+<p>Concepts</p>
+<p><phrase><annotation type="concept">subject domain</annotation></phrase> <phrase><annotation type="concept">media domain</annotation></phrase> <phrase><annotation type="concept">document domain</annotation></phrase> <phrase><annotation type="concept">management domain</annotation></phrase> <phrase><annotation type="concept">subject-domain</annotation></phrase> <phrase><annotation type="concept">media-domain</annotation></phrase> <phrase><annotation type="concept">document-domain</annotation></phrase> <phrase><annotation type="concept">management-domain</annotation></phrase> <phrase><annotation type="concept">hybrid tagging language</annotation></phrase> <phrase><annotation type="concept">Every Page is Page One</annotation></phrase> <phrase><annotation type="concept">abstract language</annotation></phrase> <phrase><annotation type="concept">information architecture</annotation></phrase> <phrase><annotation type="concept" specifically="top-down information architecture">top-down</annotation></phrase> <phrase><annotation type="concept">metadata</annotation></phrase></p>
+<p>Languages</p>
+<p><phrase><annotation type="language">SAM</annotation></phrase> <phrase><annotation type="language">DITA</annotation></phrase> <phrase><annotation type="language">DocBook</annotation></phrase> <phrase><annotation type="language">Markdown</annotation></phrase> <phrase><annotation type="language">HTML</annotation></phrase> <phrase><annotation type="language">XML</annotation></phrase></p>
+<p>Algorithms</p>
+<p><phrase><annotation type="algorithm">authoring algorithm</annotation></phrase> <phrase><annotation type="algorithm">authoring</annotation></phrase> <phrase><annotation type="algorithm" specifically="composition">composability</annotation></phrase> <phrase><annotation type="algorithm">composition algorithm</annotation></phrase> <phrase><annotation type="algorithm">composition</annotation></phrase> <phrase><annotation type="algorithm">conformance algorithm</annotation></phrase> <phrase><annotation type="algorithm">conformance</annotation></phrase> <phrase><annotation type="algorithm">content management algorithm</annotation></phrase> <phrase><annotation type="algorithm">content management</annotation></phrase> <phrase><annotation type="algorithm">content reuse algorithm</annotation></phrase> <phrase><annotation type="algorithm">content reuse</annotation></phrase> <phrase><annotation type="algorithm">differential single sourcing algorithm</annotation></phrase> <phrase><annotation type="algorithm">differential single sourcing</annotation></phrase> <phrase><annotation type="algorithm">encoding algorithm</annotation></phrase> <phrase><annotation type="algorithm">encoding</annotation></phrase> <phrase><annotation type="algorithm">exchange algorithm</annotation></phrase> <phrase><annotation type="algorithm">exchange</annotation></phrase> <phrase><annotation type="algorithm">extract and merge algorithm</annotation></phrase> <phrase><annotation type="algorithm">extract and merge</annotation></phrase> <phrase><annotation type="algorithm">formatting algorithm</annotation></phrase> <phrase><annotation type="algorithm">formatting</annotation></phrase> <phrase><annotation type="algorithm">linking algorithm</annotation></phrase> <phrase><annotation type="algorithm">linking</annotation></phrase> <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase> <phrase><annotation type="algorithm">presentation</annotation></phrase> <phrase><annotation type="algorithm">publishing algorithm</annotation></phrase> <phrase><annotation type="algorithm">publishing</annotation></phrase> <phrase><annotation type="algorithm">quality algorithm</annotation></phrase> <phrase><annotation type="algorithm">quality</annotation></phrase> <phrase><annotation type="algorithm">relevance algorithm</annotation></phrase> <phrase><annotation type="algorithm">relevance</annotation></phrase> <phrase><annotation type="algorithm">rendering algorithm</annotation></phrase> <phrase><annotation type="algorithm">rendering</annotation></phrase> <phrase><annotation type="algorithm">reuse algorithm</annotation></phrase> <phrase><annotation type="algorithm">reuse</annotation></phrase> <phrase><annotation type="algorithm">separating content from formatting</annotation></phrase> <phrase><annotation type="algorithm">single source of truth algorithm</annotation></phrase> <phrase><annotation type="algorithm">single source of truth</annotation></phrase> <phrase><annotation type="algorithm">single sourcing algorithm</annotation></phrase> <phrase><annotation type="algorithm">single sourcing</annotation></phrase> <phrase><annotation type="algorithm">synthesis algorithm</annotation></phrase> <phrase><annotation type="algorithm">synthesis</annotation></phrase> <phrase><annotation type="algorithm" specifically="conformance">validation</annotation></phrase></p>
+<p>Tools</p>
+<p><phrase><annotation type="tool">content management system</annotation></phrase> <phrase><annotation type="tool">Content management systems</annotation></phrase></p>
+<p>Roles</p>
+<p><phrase><annotation type="role">information architect</annotation></phrase></p>
+</annotations>
+<p>The term “lightweight markup language” has arisen in recent years and seems to describe that set of markup languages which are designed to use a lightweight syntax, that is, one that imposes a minimal burden on the readability of the raw text of the document. The primary appeal of lightweight markup languages rests on two related phenomena.</p>
+<ul>
+<li>
+<p>They have a high degree of <phrase>functional lucidity</phrase> at the syntactic level and often at the semantic level as well. It is usually possible to read the raw markup of a lightweight language more or less as if it were a conventional text document.</p>
+</li>
+<li>
+<p>They can be written effectively using a plain text editor (as opposed to an elaborate structured editor with a graphical editing view). This means that the editing requirements are lightweight as well.</p>
+</li>
+</ul>
+<p>Most examples also come with a simple processing applications that creates output directly in one or more output formats. This means that they have a lightweight tool chain that is easy and inexpensive to implement.</p>
+<p>There are a number of lightweight markup languages. Some of the more prominent include:</p>
+<section>
+<title>MarkDown</title>
+<p>The most prominent of the lightweight languages, and arguably the lightest-weight, is Markdown. Invented in 2004 by John Gruber as a way to quickly write simple web pages using syntax similar to that of an text-format email, it has spread to all kind of systems and now existing is multiple variants that have been adapted for different purposes.</p>
+<p>Adapted for different purposes mostly means that people have created version with specific additional semantics in addition to those of Gruber’s first version. For instance, the code sharing site GitHub has adopted “Git Hub flavored markdown” as the standard format for user-supplied information on the site, such as project descriptions and issues, and has added syntax specific to tracking issue numbers and code commits for projects, allowing the automatic generation of links between commits and the issues that relate to them.</p>
+<p>Markdown is a simple <phrase><annotation type="concept">document domain</annotation></phrase> language. While it semantics are essentially a subset of HTML, it is more squarely in the document domain than HTML since it lacks any ability to specify formatting or even to create tables (though various MarkDown flavors have added support for tables).</p>
+<p>One of the recurring patterns of technology development, and certainly markup language development, is that when some simple format becomes popular because of its simplicity, people start to add “just one more thing” to it, with the result that it either becomes more complex (and thus less attractive) or more fragmented (and thus harder to build a tool chain for). Markdown is definitely going the route of fragmentation at the moment (though a standardization effort, in the form of CommonMark is also under way). There is even a project to add semantic annotation to MarkDown as part of the <phrase><annotation type="system">Lightweight DITA</annotation></phrase> project.</p>
+<p>None of this is a reason not to use MarkDown where its structures and syntax make it an appropriate source. MarkDown provides useful constraints on the basic formatting of a web page both by factoring out direct formatting features and by providing a very limited set of document domain features. This makes it difficult for different authors to produce document that look radically different once published, or to create overly elaborate document structures that might not translate well to different media.</p>
+<p>It does not provide any kind of subject domain constraints at all. This may be a welcome feature when comparing it with more complex document domain languages, many of which do include some subject domain structures which can be confusing to some writers, or which writers may abuse to achieve formatting effects.</p>
+<p>The inspiration for its syntax, text-format emails, has faded to obscurity, so it is not clear that everyone automatically knows how to write markdown, as was the original design intent, but a lot of it remain obvious and intuitive, meaning that, within it limits, MarkDown has good functional lucidity.</p>
+</section>
+<section>
+<title>Wiki markup</title>
+<p>Another popular lightweight format is Wiki markup, introduced by Ward Cunningham in 1995 as the writing format for WikiWikiWeb, the first Wiki. Wiki markup is similar to Markdown in many respects (most lightweight languages share the same basic syntax conventions, based on the imitation of formatted document features in plain text documents). What makes Wiki markup distinct is how it is tied into the operation of a Wiki. One of its most notable feature is how linking is handled. In the original WikiWikiWeb markup, and word with internal capitals was considered a “Wiki word” and instantly became a link to a page with that Wiki Word as the title. Such a page was created automatically if it did not already exist. This was an extremely simple implementation of a <phrase><annotation type="algorithm">linking algorithm</annotation></phrase> based on annotation rather than the naming of resources.</p>
+<p>A wiki is a type of simple <phrase><annotation type="tool">content management system</annotation></phrase> which allows people to create and edit pages directly from a web browser. Wikipedia is by far the largest and most well known Wiki. Wiki’s are a preeminent example of a <phrase>bottom-up information architecture</phrase>. Anyone can add a page and that page is integrated into the overall collection by Wiki word style linking and by including itself in categories (conventionally by naming them on the page).</p>
+<p>Cunningham described WikiWikiWeb as “The simplest online database that could possibly work.”<citation type="citation" value="http://www.wiki.org/wiki.cgi?WhatIsWiki"/> Like Markup, its success has led to additional features, fragmentation, and growing complexity. Some commercial wikis are now complex content management systems. Indeed, it is somewhat difficult today to define the boundaries between Wikis, Blog platforms, and conventional CMSs.</p>
+<p>If they have a defining characteristic today it is probably the bottom-up architecture rather in to original novelty of in-browser editing which is now found across many different kinds of CMS. Cunningham designed Wikis to be collaborative platforms -- places where people could collaborate with people they did not even know to create something new without the requirement for central direction or control. The idea was not only architecturally bottom-up but editorially bottom-up. Most Wiki products today, however, include considerable features for exercising a degree of central control. Question and Answer sites like Stack Exchange with their distributed and democratic control systems may be closer today to Cunningham’s idea of a democratic creation space.</p>
+<p>What Wikis illustrate for structured writing is that very simple markup innovations like the Wiki word can have revolutionary effects on how content is created and organized. Most Wikis today use ordinary words between double square brackets for Wiki words, rather than internal capitals, but the principle is the same. You can link to a thing merely by naming it.</p>
+<p>Wiki words are also a case of <phrase><annotation type="concept">subject domain</annotation></phrase> annotation. Marking a phrase as a WikiWord says, “this is a significant subject”. It does not provide type information like most of the subject domain annotation examples shown in this book, but merely denoting a phrase as significant says that it names some subject of importance that deserves a page of its own. This illustrates the point about bottom-up information architectures, that structured writing, even in very simple form, can crate texts that are capable of self-organization, that can be assembled into meaningful collections without the imposition of any external structures.</p>
+</section>
+<section>
+<title>reStructuredText</title>
+<p>reSturcuteredText is a lightweight concrete markup language most often associated with the <phrase>Sphinx</phrase> documentation framework which was developed for documenting the Python programming language. We looked at reStructuredText briefly as an example of a hybrid markup language in <citation type="nameref" value="chapter.markup"/>.</p>
+<codeblock language="reStructuredText">
+.. image:: images/biohazard.png
+   :height: 100
+   :width: 200
+   :scale: 50
+   :alt: alternate text
+</codeblock>
+</section>
+<section>
+<title>ASCIIDoc</title>
+<p>ASCIIDoc is a lightweight markup language based on the structure of <phrase><annotation type="language">DocBook</annotation></phrase>. It is intended for the same sort of document types for which you might choose DocBook, but allows you to use a lightweight syntax. In appearance it is very similar to MarkDown, as show in this example from Wikipedia:</p>
+<codeblock language="ASCIIDoc">
+= My Article
+J. Smith
+
+http://wikipedia.org[Wikipedia] is an
+on-line encyclopaedia, available in
+English and many other languages.
+
+== Software
+
+You can install 'package-name' using
+the +gem+ command:
+
+ gem install package-name
+
+== Hardware
+
+Metals commonly used include:
+
+* copper
+* tin
+* lead
+</codeblock>
+<p>However, while <phrase>MarkDown</phrase> was designed for simple Web pages, ASCIIDoc was designed for complex publishing projects with support for a much wider array of document domain structures such as tables, definition lists, and tables of contents.</p>
+</section>
+<section>
+<title>LaTex</title>
+<p>LaTeX is a <phrase><annotation type="concept">document domain</annotation></phrase> markup language used extensively in academia and scientific publishing. It is not based on XML syntax but on the syntax of <phrase>TeX</phrase>, a typesetting system developed by Donald Knuth in 1978. Here is an example of LaTex, from Wikipedia:</p>
+<codeblock language="LaTex">
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\title{\LaTeX}
+\date{}
+\begin{document}
+  \maketitle
+  \LaTeX{} is a document preparation system for
+  the \TeX{} typesetting program. It offers
+  programmable desktop publishing features and
+  extensive facilities for automating most
+  aspects of typesetting and desktop publishing,
+  including numbering and  cross-referencing,
+  tables and figures, page layout,
+  bibliographies, and much more. \LaTeX{} was
+  originally written in 1984 by Leslie Lamport
+  and has become the  dominant method for using
+  \TeX; few people write in plain \TeX{} anymore.
+  The current version is \LaTeXe.
+
+  % This is a comment, not shown in final output.
+  % The following shows typesetting  power of LaTeX:
+  \begin{align}
+    E_0 &amp;= mc^2                              \\
+    E &amp;= \frac{mc^2}{\sqrt{1-\frac{v^2}{c^2}}}
+  \end{align}
+\end{document}
+</codeblock>
+<p>Here is how that markup is rendered:<citation type="citation" value="By The original uploader was Bakkedal at English Wikipedia - Own work, CC BY-SA 2.5, https://commons.wikimedia.org/w/index.php?curid=30044147"/></p>
+<insert item="graphics/Latex_example.png" type="image"/>
+<p>It is the markup for the equation that shows why LaTeX is popular for academic and scientific publishing. While not exactly transparent, the markup is compact and functionally lucid for anyone with a little experience with it.</p>
+<p>Wikipedia offers a comparison of various math markup formats which shows how big a difference syntax can make to the lucidity of markup language in some cases.</p>
+<p>For the equation:</p>
+<insert item="graphics/quadratic_formula.svg" type="image"/>
+<p>The LaTeX markup is:</p>
+<codeblock language="sam">
+x=\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+</codeblock>
+<p>Whereas the XML-based <phrase>MathML</phrase> version looks like this:</p>
+<codeblock language="xml">
+&lt;math mode="display" xmlns="http://www.w3.org/1998/Math/MathML"&gt;
+ &lt;semantics&gt;
+  &lt;mrow&gt;
+    &lt;mi&gt;x&lt;/mi&gt;
+    &lt;mo&gt;=&lt;/mo&gt;
+    &lt;mfrac&gt;
+      &lt;mrow&gt;
+        &lt;mo form="prefix"&gt;&amp;#x2212;&lt;!-- − --&gt;&lt;/mo&gt;
+        &lt;mi&gt;b&lt;/mi&gt;
+        &lt;mo&gt;&amp;#x00B1;&lt;!-- &amp;PlusMinus; --&gt;&lt;/mo&gt;
+        &lt;msqrt&gt;
+          &lt;msup&gt;
+            &lt;mi&gt;b&lt;/mi&gt;
+            &lt;mn&gt;2&lt;/mn&gt;
+          &lt;/msup&gt;
+          &lt;mo&gt;&amp;#x2212;&lt;!-- − --&gt;&lt;/mo&gt;
+          &lt;mn&gt;4&lt;/mn&gt;
+          &lt;mo&gt;&amp;#x2062;&lt;!-- &amp;InvisibleTimes; --&gt;&lt;/mo&gt;
+          &lt;mi&gt;a&lt;/mi&gt;
+          &lt;mo&gt;&amp;#x2062;&lt;!-- &amp;InvisibleTimes; --&gt;&lt;/mo&gt;
+          &lt;mi&gt;c&lt;/mi&gt;
+        &lt;/msqrt&gt;
+      &lt;/mrow&gt;
+      &lt;mrow&gt;
+        &lt;mn&gt;2&lt;/mn&gt;
+        &lt;mo&gt;&amp;#x2062;&lt;!-- &amp;InvisibleTimes; --&gt;&lt;/mo&gt;
+        &lt;mi&gt;a&lt;/mi&gt;
+      &lt;/mrow&gt;
+    &lt;/mfrac&gt;
+  &lt;/mrow&gt;
+ &lt;/semantics&gt;
+&lt;/math&gt;
+</codeblock>
+<p>Clearly MathML was not designed with the idea that anyone would ever try to write it raw. It is intended to be the output of a graphical equation editor. (Interestingly, MathML comes in two different flavors. Presentation MathML is a <phrase><annotation type="concept">media domain</annotation></phrase> language describing how an equation is presented. Content MathML is a <phrase><annotation type="concept">subject domain</annotation></phrase> language describing what it means.)</p>
+<p>You might will choose to use a graphical equation editor to create LaTeX math markup as well, but it is certainly possible to write it and read it in raw LaTeX as well.</p>
+<p>LaTeX is not as lightweight a langauge as <phrase><annotation type="language">Markdown</annotation></phrase> for example. It’s markup is almost entirely explicit (except for paragaphs, which are delineated by blank lines just in Markdown. But it is certainly lighter weight in its syntax compared to XML-based languages and has much greater <phrase>functional lucidity</phrase>. There are a number of LaTeX editors, but they tend to be the same style of side-by-side style of editors also popular for <phrase>MarkDown</phrase>. That is, the author writes in LaTeX syntax and a preview is generated continuously in a separate panel. Sufficient functional lucidity to be able to write in raw markup rather than needing a graphical editor is the hallmark of a lightweight markup language.</p>
+</section>
+<section>
+<title>Subject Domain Languages</title>
+<p>So far we have looked at languages that are primarily <phrase><annotation type="concept">document domain</annotation></phrase> oriented. The <phrase><annotation type="concept">document domain</annotation></phrase> is an obvious choice for a public language since the use of common document types like books and articles is widespread. But there are a number of public <phrase><annotation type="concept">subject domain</annotation></phrase> languages as well. One example that we have looked at before (<citation type="nameref" value="chapter.extract"/>) is JavaDoc. Here is the example we looked at there:</p>
+<codeblock language="Java">
+/**
+ * Validates a chess move.
+ *
+ * Use {@link #doMove(int theFromFile, int theFromRank, int theToFile, int theToRank)} to move a piece.
+ *
+ * @param theFromFile file from which a piece is being moved
+ * @param theFromRank rank from which a piece is being moved
+ * @param theToFile   file to which a piece is being moved
+ * @param theToRank   rank to which a piece is being moved
+ * @return            true if the move is valid, otherwise false
+ */
+boolean isValidMove(int theFromFile, int theFromRank, int theToFile, int theToRank) {
+    // ...body
+}
+</codeblock>
+<p>Not only does JavaDoc have <phrase><annotation type="concept">subject domain</annotation></phrase> tags for parameters and return values, it effectively incorporates the Java code itself (all computer programs are structured text). Thus the JavaDoc processor will pull information from the function header itself to incorporate into the output.</p>
+<p>There are a number of similar languages for documenting different programming languages, such a <phrase><annotation type="tool">Doxygen</annotation></phrase> which is used for multiple languages and <phrase><annotation type="tool">Sphinx</annotation></phrase> which is used for Python and others. Wikipedia maintains an extensive list: <phrase><annotation type="url">https://en.wikipedia.org/wiki/Comparison_of_documentation_generators</annotation></phrase>.</p>
+<p>It is difficult to find public <phrase><annotation type="concept">subject domain</annotation></phrase> lightweight markup languages outside the realm of programming language and API documentation. This is probably because only programmers are likely to write their own parser in order to create a markup language. Most other people are going to choose an extensible language as a base, which today usually means <phrase><annotation type="language">XML</annotation></phrase>. Part of my motivation for creating <phrase><annotation type="language">SAM</annotation></phrase> is to provide a way to create <phrase><annotation type="concept">subject domain</annotation></phrase> languages with lightweight syntax.</p>
+</section>
+<section>
+<title>SAM</title>
+<p>I’ve talked about <phrase><annotation type="language">SAM</annotation></phrase> a couple of times now, and said that many of the examples in this book are written in SAM. That is true, in the same sense that some of the examples are written in XML. But this is not the same thing as saying that an example is written in <phrase>reStructuredText</phrase>. reStructuredText is a complex <phrase><annotation type="concept">document domain</annotation></phrase> markup language which also happens to have an extension facility. You can write a complete document in <phrase>reStructuredText</phrase> without defining any new structures.</p>
+<p>SAM, on the other hand, while it has concrete lightweight syntax features, is not a concrete markup language out of the box. The most complex SAM document you can write without defining any structures is a single paragraph or list. (A SAM document must have a single root element, so two paragraphs in a row at the root level is an error. You need a block structure such as <phrase><annotation type="code">topic</annotation></phrase> or <phrase><annotation type="code">chapter</annotation></phrase> or <phrase><annotation type="code">recipe</annotation></phrase> to contain everything and SAM does not predefine any blocks.)</p>
+<p>SAM is designed for the same purpose as XML: for defining new markup languages. I’ll get back to it in <citation type="nameref" value="chapter.extensible"/>.</p>
+</section>
+</chapter>

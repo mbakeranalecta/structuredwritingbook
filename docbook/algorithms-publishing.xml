@@ -9,7 +9,7 @@
 <db:title>The Rendering Algorithm</db:title>
 <db:para>There is actually a fifth algorithm in the publishing chain, which we can call the rendering algorithm. The rendering algorithm is the one responsible for actually placing the right dots on the right surface, be that paper, screen, or a printing plate. But this is a low-level device-specific algorithm and no one in the structured writing business is likely to be involved in writing rendering algorithms. The closest we ever get is the next step up, the encoding algorithm.</db:para>
 <db:para>The rendering algorithm requires some form of input to tell it where to place the dots. In writing, this usually comes in the form of something called a page description language. Like it sounds, this is a language for describing what goes where on a page, but in higher level terms that describing where each dot of ink or pixel of light is placed. A page description language deals in things like lines, circles, gradients, margins, and fonts.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/rendering.png"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/rendering.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
 <db:para>One example of a page description language is PostScript. We looked at a small example of PostScript in <db:olink targetptr="chapter.media-domain">the chapter on the media domain</db:olink>:</db:para>
 <db:programlisting language="PostScript">
 100 100 50 0 360 arc closepath
@@ -23,7 +23,7 @@ stroke
 <db:para>Since most writers are not going to write directly in a page description language, the page descriptions for your publication are almost certainly going to be created by an algorithm. I call this the encoding algorithm.</db:para>
 <db:para>While it is possible that someone responsible for a highly specialized publishing tool chain may end up writing a specialized encoding algorithm, most encoding algorithms are going to be implemented by existing tools that translate formatting languages into page descriptions languages.</db:para>
 <db:para>There are several formatting languages that are used in content processing. They are often called typesetting languages as well. XSL-FO (XSL - Formatting Objects) is one of the more commonly used in structured writing projects. TeX is another.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/encoding.png"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/encoding.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
 <db:para>Here is an example of XSL-FO that we looked at in <db:olink targetptr="single-sourcing">the chapter on the single-sourcing algorithm</db:olink>:</db:para>
 <db:programlisting language="XSL-FO">
 &lt;fo:block space-after="4pt"&gt;
@@ -46,14 +46,14 @@ stroke
 <db:section>
 <db:title>The Formatting Algorithm</db:title>
 <db:para>The job of the formatting algorithm it to generate the formatting language that drives the encoding and pagination process. The formatting algorithm produces the media domain representation of the content from content in the document domain.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/formatting.png"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/formatting.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
 <db:para>In the case of HTML output, the formatting algorithm generates HTML (with connections to the relevant CSS, JavaScript, and other formatting resources). This is the end of the publishing process for the Web, since the browser will perform the encoding and rendering algorithms internally.</db:para>
 <db:para>In the case of paper output, the formatting algorithm generates a formatting language such as TeX or XSL-FO which is then fed to the encoding algorithm as implemented by a TeX or XSL-FO processor. In some cases, organizations use word processing or desktop publishing applications to tweak the formatting of the output by having the formatting algorithm generate the input format of those applications (typically RTF for Word and MIF for FrameMaker). This allows them to exercise manual control over pagination, but with an obvious loss in process efficiency. In particular, any tweaks made in these applications are not routed back to the source content, so they will have to be done again by hand the next time the content is published.</db:para>
 </db:section>
 <db:section>
 <db:title>The Presentation Algorithm</db:title>
 <db:para>The job of the presentation algorithm is to determine exactly how the content is going to be organized as a document. The presentation algorithm produces a pure document domain version of the content.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/presentation.png"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/presentation.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
 <db:para>The organization of content involves several things:</db:para>
 <db:variablelist>
 <db:varlistentry>
@@ -81,7 +81,7 @@ stroke
 <db:section>
 <db:title>Differential presentation algorithms</db:title>
 <db:para>The organization of content is an area where the document domain cannot ignore the differences between different media. Although the fact that a relationship exists is a pure document domain issue, how that relationship is expressed, and even whether it is expressed or not, is affected by the media and its capabilities. Following links in online media is very cheap. Following references to other works in the paper world is expensive, so document design for paper tends to favor linear relationships where document design for the web favors hypertext relationships. This is an area, therefore, in which you should expect to implement differential single sourcing and use different presentation algorithms for different media.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/differential.png"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/differential.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
 </db:section>
 <db:section>
 <db:title>Presentation sub-algorithms</db:title>
@@ -110,12 +110,12 @@ stroke
 <db:para>The job of the synthesis algorithm is to determine exactly what content will be part of a content set. It passes a complete set of content on to the presentation algorithm to be turned into one or more document presentations.</db:para>
 <db:para>The synthesis algorithm transforms content and data into a fully realized set of subject domain content. Sources for the synthesis algorithm include  content written in the subject domain, document domain  or subject domain content with embedded management domain structures, and externally available subject data which you are using to generate content.</db:para>
 <db:para>Content that contains management domain metadata, generally used for some form of single sourcing or reuse does not represent a final set of content until the management domain structures have been resolved. In the case of document domain content, processing the management domain structures yields a document domain structure which may then be a pass-through for the presentation algorithm. In the case of the subject domain content, processing management domain structures yields a definitive set of subject domain structures which can be passed to the presentation algorithm for processing to the document domain.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/synthesis.png"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/synthesis.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
 </db:section>
 <db:section>
 <db:title>Differential synthesis</db:title>
 <db:para>We noted above that you can use differential presentation to do differential single sourcing were two publications contain the same content but organized differently. If you want two publications in different media to have differences in their content, you can do this by doing differential synthesis and including different content in each publication.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/differential-synthesis.png"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/differential-synthesis.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
 </db:section>
 <db:section>
 <db:title>Synthesis sub-algorithms</db:title>

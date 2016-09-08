@@ -37,7 +37,7 @@
 <db:section>
 <db:title>Common into variable</db:title>
 <db:para>In the common into variable case, you have a common piece of content that occurs in many places. This could mean it occurs in many documents or in many places in the same document, or both.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/common2variable.png"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/common2variable.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
 <db:para>For instance, if you are writing procedures and there is a common safety warning that must appear on all dangerous procedures, each individual procedure is the variable part and the standard warning is the common part.</db:para>
 <db:para>We looked at an example of this in the chapter on the management domain.</db:para>
 <db:programlisting language="sam">
@@ -53,7 +53,7 @@ procedure: Blow stuff up
 <db:section>
 <db:title>Variable into common</db:title>
 <db:para>In the variable into common case, you have a single document that will be output in many different ways by inserting variable content at certain locations.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/variable2common.png"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/variable2common.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
 <db:para>For instance, if you are writing a manual to cover a number of car models you can factor out the number of seats each model has.</db:para>
 <db:programlisting language="sam">
 The vehicle seats &gt;($seats) people.
@@ -89,7 +89,7 @@ match insert with variable where variable = $doors
 <db:title>Variable into variable</db:title>
 <db:para>Variable into variable is a variation on common into variable in which you can make a wholesale change of the common elements that you are pulling into a set of variable documents.</db:para>
 <db:para>For example, suppose you decide to market your product line to a new market. The new market has different safety regulation which means you need to insert a different standard warning into all your manuals. In this case, you want to swap out the common elements used in your home market and substitute the common elements for the foreign market.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/variable2variable.png"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/variable2variable.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
 <db:para>Here we need to talk about how we identify the content to be inserted. In the common into variable example, we inserted the content of a file that contains a standard warning. But this approach is fragile. You can’t reorganize your files without breaking reuse, and you almost always need to reorganize your files eventually. Plus, it forces you to have every piece of reusable content in a separate file, which may not be efficient.</db:para>
 <db:para>But for variable into variable this approach simply does not work. Variable into variable requires loading a different file, which is difficult when the content specifies a particular file name to import.</db:para>
 <db:para>As always in structured writing, we look for a way to factor out the problematic content. So here we look for a way to factor out the file name and replace it with something else.</db:para>
@@ -198,7 +198,7 @@ keys:
 <db:section>
 <db:title>Common with conditions</db:title>
 <db:para>In some cases of variable into common, the variant pieces will not actually be factored out into a separate file. Rather, each of the possible alternatives is included in the file conditionally.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/commonconditions.png"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/commonconditions.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
 <db:para>For instance in content for a car manual you might have conditional text for the number of people the car seats.</db:para>
 <db:programlisting language="sam">
 The vehicle seats {four}(?compact){five}(?midsize){seven}(?van).
@@ -321,7 +321,7 @@ keys:
 <db:mediaobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/assemble.png"/></db:imageobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/assemble.svg" contentwidth="4in" align="left"/></db:imageobject><db:textobject><db:para>A diagram showing multiple pieces being combined in different ways to produce different outputs.</db:para></db:textobject></db:mediaobject>
 <db:para>For example, if you have a range of products with common features, you might assemble the documentation for those products using a common introduction with a piece representing each feature of each model.</db:para>
 <db:para>This could be a flat list, or it could be a tree structure. For instance, you might assemble a chapter of a manual with a introductory piece and then several sections below it in the tree.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/tree.png"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/tree.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
 <db:para>The assembly approach requires a structure to describe how the units are assembled. This structure is often called a map. (It is called a map in DITA, for instance.) Some applications may also refer to it as a table of contents.</db:para>
 <db:programlisting language="sam">
 map: Widget Wrangler Deluxe User Manual

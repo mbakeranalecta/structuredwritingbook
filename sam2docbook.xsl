@@ -304,7 +304,7 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <db:imageobject>
-                       <db:imagedata fileref="{@item}"/>
+                       <db:imagedata fileref="{@item}" contentwidth="4in" align="left"/>
                    </db:imageobject>
                 </xsl:otherwise>
             </xsl:choose>
