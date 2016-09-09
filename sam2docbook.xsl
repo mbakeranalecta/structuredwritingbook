@@ -75,6 +75,11 @@
         <xsl:value-of select="//string[@name=$item]"/>
     </xsl:template>
     
+    <xsl:template match="inline-insert[@type='string']">
+        <xsl:variable name="item" select="@item"/>
+        <xsl:value-of select="//string[@name=$item]"/>
+    </xsl:template>
+    
     <xsl:template match="insert[@type='sam']">
         <xsl:element name="xi:include">
             <xsl:attribute name="href">
@@ -195,6 +200,35 @@
         <xsl:apply-templates/>
     </xsl:template>
     
+    <xsl:template match="annotation[@type='role']">
+        <xsl:apply-templates/>
+    </xsl:template>
+
+    <xsl:template match="annotation[@type='method']">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
+    <xsl:template match="annotation[@type='attribute']">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
+    <xsl:template match="annotation[@type='FIXME']">
+        <db:emphasis role="bold">FIXME!</db:emphasis><xsl:apply-templates/>
+    </xsl:template>
+    
+    <xsl:template match="annotation[@type='format']">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
+    <xsl:template match="annotation[@type='url']">
+        <db:olink targetptr="{.}">
+            <xsl:apply-templates/>
+        </db:olink>        
+    </xsl:template>
+    
+    <xsl:template match="bibliography"></xsl:template>
+    
+    
     <xsl:template match="annotation[@type='code']">
         <db:code>
             <xsl:apply-templates/>
@@ -244,6 +278,7 @@
         </xsl:choose>
         
     </xsl:template>
+
     
     <xsl:template match="footnote"/>
     <xsl:template match="footnote" mode="resolve-footnote">
@@ -264,7 +299,14 @@
         </db:attribution>
     </xsl:template>
     
-    <xsl:template match="citation[@type='nameref']">
+    <xsl:template match="blockquote/citation[@type='nameref']">
+        <xsl:variable name="nameref" select="@value"/>
+        <db:attribution>
+            <xsl:value-of select="$nameref"/>
+        </db:attribution>
+    </xsl:template>
+    
+    <xsl:template match="citation[@type='nameref']" priority="-.1">
         <db:olink targetptr="{@value}">
             <xsl:apply-templates/>
         </db:olink>
@@ -290,10 +332,26 @@
                     <xsl:variable name="item-path" select="substring(@item, 1, string-length(@item)-string-length($item-file))"/>
                     <xsl:variable name="imagedata" select="document(@item)"/>
                     <db:imageobject condition="epub">
-                        <db:imagedata fileref="{$item-path}{$imagedata/image/epub/href}"/>
+                        <db:imagedata>
+                            <xsl:attribute name="fileref"><xsl:value-of select="concat($item-path,$imagedata/image/epub/href)"/></xsl:attribute>
+                            <xsl:if test="$imagedata/image/epub/contentwidth != ''">
+                                <xsl:attribute name="contentwidth"><xsl:value-of select="$imagedata/image/epub/contentwidth"/></xsl:attribute>      
+                            </xsl:if>
+                            <xsl:if test="$imagedata/image/epub/align != ''">
+                                <xsl:attribute name="align"><xsl:value-of select="$imagedata/image/epub/align"/></xsl:attribute>     
+                            </xsl:if>
+                        </db:imagedata> 
                     </db:imageobject>
                     <db:imageobject condition="fo">
-                        <db:imagedata fileref="{$item-path}{$imagedata/image/fo/href}" contentwidth="{$imagedata/image/fo/contentwidth}" align="{$imagedata/image/fo/align}"/>
+                        <db:imagedata>
+                            <xsl:attribute name="fileref"><xsl:value-of select="concat($item-path,$imagedata/image/fo/href)"/></xsl:attribute>
+                            <xsl:if test="$imagedata/image/fo/contentwidth != ''">
+                                <xsl:attribute name="contentwidth"><xsl:value-of select="$imagedata/image/fo/contentwidth"/></xsl:attribute>      
+                            </xsl:if>
+                            <xsl:if test="$imagedata/image/fo/align != ''">
+                                <xsl:attribute name="align"><xsl:value-of select="$imagedata/image/fo/align"/></xsl:attribute>     
+                            </xsl:if>
+                        </db:imagedata> 
                     </db:imageobject>
                     <xsl:if test="$imagedata/image/alt">
                         <db:textobject>
@@ -304,14 +362,75 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <db:imageobject>
-                       <db:imagedata fileref="{@item}" contentwidth="4in" align="left"/>
-                   </db:imageobject>
+                        <db:imagedata fileref="{@item}" contentwidth="4in" align="left"/>
+                    </db:imageobject>
                 </xsl:otherwise>
             </xsl:choose>
         </db:mediaobject>
     </xsl:template>
+
+    <xsl:template match="inline-insert[@type='image']">
+        <!-- This template assumes that the relative path to the image in the 
+             output file is the same as that of the source file. In other 
+             words it assumes that the source directory and the XML ouput directory
+             are children of the same parent. 
+             
+             It does not currently support or detect absolute paths.
+        -->
+        <db:inlinemediaobject>
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="substring(@item, string-length(@item) - 3) = '.xml'">
+                    <xsl:variable name="item-file" select="strings:tokenize(@item, '/\')[last()]"/>
+                    <xsl:variable name="item-path" select="substring(@item, 1, string-length(@item)-string-length($item-file))"/>
+                    <xsl:variable name="imagedata" select="document(@item)"/>
+                    <db:imageobject condition="epub">
+                        <db:imagedata>
+                            <xsl:attribute name="fileref"><xsl:value-of select="concat($item-path,$imagedata/image/epub/href)"/></xsl:attribute>
+                            <xsl:if test="$imagedata/image/epub/contentwidth != ''">
+                                <xsl:attribute name="contentwidth"><xsl:value-of select="$imagedata/image/epub/contentwidth"/></xsl:attribute>      
+                            </xsl:if>
+                            <xsl:if test="$imagedata/image/epub/align != ''">
+                                <xsl:attribute name="align"><xsl:value-of select="$imagedata/image/epub/align"/></xsl:attribute>     
+                            </xsl:if>
+                        </db:imagedata> 
+                    </db:imageobject>
+                    <db:imageobject condition="fo">
+                        <db:imagedata>
+                            <xsl:attribute name="fileref"><xsl:value-of select="concat($item-path,$imagedata/image/fo/href)"/></xsl:attribute>
+                            <xsl:if test="$imagedata/image/fo/contentwidth != ''">
+                                <xsl:attribute name="contentwidth"><xsl:value-of select="$imagedata/image/fo/contentwidth"/></xsl:attribute>      
+                            </xsl:if>
+                            <xsl:if test="$imagedata/image/fo/align != ''">
+                                <xsl:attribute name="align"><xsl:value-of select="$imagedata/image/fo/align"/></xsl:attribute>     
+                            </xsl:if>
+                        </db:imagedata> 
+                    </db:imageobject>
+                    <xsl:if test="$imagedata/image/alt">
+                        <db:textobject>
+                            <xsl:apply-templates select="$imagedata/image/alt/*"/>
+                        </db:textobject>
+                    </xsl:if>
+                    
+                </xsl:when>
+                <xsl:otherwise>
+                    <db:imageobject>
+                        <db:imagedata fileref="{@item}" contentwidth="4in" align="left"/>
+                    </db:imageobject>
+                </xsl:otherwise>
+            </xsl:choose>
+        </db:inlinemediaobject>
+    </xsl:template>
     
     <xsl:template match="insert[@type='id']">
+        <db:xref linkend="{@item}"/>
+    </xsl:template>
+    
+    <xsl:template match="inline-insert[@type='id']">
         <db:xref linkend="{@item}"/>
     </xsl:template>
     
@@ -389,7 +508,7 @@
     </xsl:template>
 
     <!-- Section from the book file that is just text -->
-    <xsl:template match="section/text()[normalize-space() != '']">
+    <xsl:template match="book/chapter/section/text()[normalize-space() != '']">
         <db:title>
             <xsl:value-of select="."/>
         </db:title>

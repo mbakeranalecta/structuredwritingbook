@@ -1,5 +1,7 @@
 chapter: Separating Content From Behavior
 
+    <<<(annotations.sam)
+
     We have seen how you can use structure writing to separate content from formatting, but electronic media have behavior as well as formatting. In order to be able to publish our content to different media it is often necessary to separate content from behavior. And, just as we may sometimes want to format content different for the same media on different occasions, we may also want to publish content to the same electronic media with different behavior on different occasions or as part of different collections. 
     
     One of the simplest behavioral differences between paper and a Web browser is that the browser allows the reader to change the size of the window through which they view the content. The question is, does the text re-wrap to fit in the resized window. In many cases, it does, because that is HTML's default behavior. But sometimes it does not, and in some cases you want some content to re-wrap, but have other content maintain its line endings, even if that means not all of the text stays in the main window. Computer code and poetry are both examples of content you might not want to have wrap to fit the window, because the placement of the line endings is crucial. 
@@ -16,7 +18,7 @@ chapter: Separating Content From Behavior
         margin: 1em 0; }
 
     
-    In other words, the content of a {pre} element will be displayed in a monospace font and will keep its original line endings, even if the text runs off the page.  This is pure {media domain}(http://techwhirl.com/structured-writing-writing-in-the-media-domain/) structure, of course. It tells you nothing about what sort of content is in the {pre} element or why it is to be presented with its line endings intact.
+    In other words, the content of a `pre` element will be displayed in a monospace font and will keep its original line endings, even if the text runs off the page.  This is pure {media domain} structure, of course. It tells you nothing about what sort of content is in the `pre` element or why it is to be presented with its line endings intact.
     
     {pre} clearly has a prejudice towards preformatted text being some form or computer code, or possible output, as it defaults to a monospaced font. But what if your content is poetry? You probably don't want:
     

@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0">
 <db:title>Separating Content From Behavior</db:title>
+
 <db:para>We have seen how you can use structure writing to separate content from formatting, but electronic media have behavior as well as formatting. In order to be able to publish our content to different media it is often necessary to separate content from behavior. And, just as we may sometimes want to format content different for the same media on different occasions, we may also want to publish content to the same electronic media with different behavior on different occasions or as part of different collections.</db:para>
 <db:para>One of the simplest behavioral differences between paper and a Web browser is that the browser allows the reader to change the size of the window through which they view the content. The question is, does the text re-wrap to fit in the resized window. In many cases, it does, because that is HTML’s default behavior. But sometimes it does not, and in some cases you want some content to re-wrap, but have other content maintain its line endings, even if that means not all of the text stays in the main window. Computer code and poetry are both examples of content you might not want to have wrap to fit the window, because the placement of the line endings is crucial.</db:para>
 <db:para>How do you indicate that parts of your content should not be re-wrapped?</db:para>
@@ -12,8 +13,8 @@ font-family: monospace;
 white-space: pre;
 margin: 1em 0; }
 </db:programlisting>
-<db:para>In other words, the content of a <annotation type="element" namespace="HTML">pre</annotation> element will be displayed in a monospace font and will keep its original line endings, even if the text runs off the page.  This is pure <annotation type="link" specifically="http://techwhirl.com/structured-writing-writing-in-the-media-domain/">media domain</annotation> structure, of course. It tells you nothing about what sort of content is in the <annotation type="element" namespace="HTML">pre</annotation> element or why it is to be presented with its line endings intact.</db:para>
-<db:para><annotation type="element" namespace="HTML">pre</annotation> clearly has a prejudice towards preformatted text being some form or computer code, or possible output, as it defaults to a monospaced font. But what if your content is poetry? You probably don’t want:</db:para>
+<db:para>In other words, the content of a <db:code>pre</db:code> element will be displayed in a monospace font and will keep its original line endings, even if the text runs off the page.  This is pure media domain structure, of course. It tells you nothing about what sort of content is in the <db:code>pre</db:code> element or why it is to be presented with its line endings intact.</db:para>
+<db:para><db:code>pre</db:code> clearly has a prejudice towards preformatted text being some form or computer code, or possible output, as it defaults to a monospaced font. But what if your content is poetry? You probably don’t want:</db:para>
 <db:programlisting>
 Mary had a little lamb.
 Its fleece was white as snow.
@@ -30,7 +31,7 @@ The lamb was sure to go.
 pre {
 font-family: serif;}
 </db:programlisting>
-<db:para>And if have both computer code and poetry in the same page (and really, who doesn’t?) then you will need to go back into your source and add different class attributes to your different uses of <annotation type="element" namespace="HTML">pre</annotation>:</db:para>
+<db:para>And if have both computer code and poetry in the same page (and really, who doesn’t?) then you will need to go back into your source and add different class attributes to your different uses of <db:code>pre</db:code>:</db:para>
 <db:programlisting language="html">
    &lt;pre class="code"&gt;
    main( ) {
@@ -57,8 +58,8 @@ font-family: monospace;}
 pre.poetry {
 font-family: serif;}
 </db:programlisting>
-<db:para>There are other ways to do this in HTML. You could style a regular <annotation type="element" namespace="HTML">p</annotation> with <db:code>white-space: pre;</db:code>. The fact that we have these options only serves to point out that we are still in the <annotation type="link" specifically="http://techwhirl.com/structured-writing-writing-in-the-media-domain/">media domain</annotation>. The behavior of maintaining line endings when resizing the window is not being separated from the content.</db:para>
-<db:para>To separate the behavior from the content, we need to move out of the <annotation type="link" specifically="http://techwhirl.com/structured-writing-writing-in-the-media-domain/">media domain</annotation>. In this case, however, a move into the document domain is not as straight forward as when we were separating content from formatting. The difference between how code is formatted and how poetry is formatted is really based on the subject matter. Any document structures we create to separate content from behavior here are going to touch into the subject domain.</db:para>
+<db:para>There are other ways to do this in HTML. You could style a regular <annotation type="element" namespace="HTML">p</annotation> with <db:code>white-space: pre;</db:code>. The fact that we have these options only serves to point out that we are still in the media domain. The behavior of maintaining line endings when resizing the window is not being separated from the content.</db:para>
+<db:para>To separate the behavior from the content, we need to move out of the media domain. In this case, however, a move into the document domain is not as straight forward as when we were separating content from formatting. The difference between how code is formatted and how poetry is formatted is really based on the subject matter. Any document structures we create to separate content from behavior here are going to touch into the subject domain.</db:para>
 <db:para>The simplest way to do this would be to create elements for codeblocks and poetry:</db:para>
 <db:programlisting language="xml">
    &lt;codeblock&gt;
@@ -79,9 +80,9 @@ The lamb was sure to go.
 &lt;/poetry&gt;
 </db:programlisting>
 <db:para>This markup simply states what type of content is found in each block. It separates the content from both its formatting and its behavior. Both formatting and behavior for different media will be handled by the formatting algorithm. This also means that the author does not have to think about the formatting of behavior of the content as they are writing.</db:para>
-<db:para>The re-flowing of text to a window is a trivial bit of what is now called <annotation type="link" specifically="https://en.wikipedia.org/wiki/Responsive_web_design">responsive web design</annotation>. Responsive design employs a combination of layout strategies and JavaScript code to change the whole structure of a website based on the size of the display window. This is all <annotation type="link" specifically="http://techwhirl.com/structured-writing-writing-in-the-media-domain/">media domain</annotation> stuff, of course, and it should be very clear that you do not want to be writing in the media domain yourself if you want to create responsive web pages.</db:para>
+<db:para>The re-flowing of text to a window is a trivial bit of what is now called <annotation type="link" specifically="https://en.wikipedia.org/wiki/Responsive_web_design">responsive web design</annotation>. Responsive design employs a combination of layout strategies and JavaScript code to change the whole structure of a website based on the size of the display window. This is all media domain stuff, of course, and it should be very clear that you do not want to be writing in the media domain yourself if you want to create responsive web pages.</db:para>
 <db:para>Responsive web design involves handing a package of HTML, CSS, and JavaScript to the web browser, which then executes the responsive behavior. An alternative approach is <annotation type="link" specifically="https://en.wikipedia.org/wiki/Content_adaptation">content adaptation</annotation> which actually delivers a different page to the browser based on the device the browser is running on. This allows for more complex adaptations of content to the device.</db:para>
 <db:para>One possible example of this is a table. On a large screen, a table can be an effective way to all the reader to quickly look up information on a particular item. But tables assume a certain amount of height and width is available to view the content. Put them on a small screen and either they are too small to read, or you see too small a portion of the table to view properly. In many cases, the small screen simply can’t render the table correctly at all.</db:para>
-<db:para>&gt;<db:mediaobject><db:imageobject><db:imagedata fileref="kindle-table.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject></db:para>
+<db:para>&gt;<db:inlinemediaobject><db:imageobject><db:imagedata fileref="kindle-table.png" contentwidth="4in" align="left"/></db:imageobject></db:inlinemediaobject></db:para>
 <db:para>A content adaptation response to this problem would be to present the material as a table on paper and on screens large enough to show a table effectively, but in another format altogether.</db:para>
 </db:chapter>

@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0">
+<db:title>Mechanical Structure</db:title>
 
 <db:para>The mechanical structure of structures writing is the structure it presents to machines, which is to say, to algorithms. To create mechanical structures to contain writing, we need a type of structure suitable to what we are capturing and what information we want to capture about it. Traditional computing structures like relational database tables do not work well for this because they are too regular to fit the shape of content. Creating structures that are regular enough for algorithms to deal with yet irregular enough to fit written language is an interesting problem to which more than one solution has been proposed.</db:para>
 <db:section>
@@ -48,7 +49,7 @@ This text is [B&gt;bold, [I&gt;this is bold and italic,&lt;B] and this is just i
 <db:para>Which model of a document is correct? You can think of a document as being organized hierarchically, with major ideas expressed in sections, sub-ideas support the major ideas in subsections, etc. There are doubtless documents that fit that model. But you can also think of documents as being more like a journey in which headings function more like road signs. A city gets a big sign, a hamlet a small sign, and a town a medium sign. But the town is not inside the city, not the hamlet inside the town, and there is no guarantee that on leaving the city you will come to the town before you come to a hamlet.</db:para>
 <db:para>Studies by Peter Flynn indicate that most authors think of the documents they are writing much more in terms of a punctuated linear model than a hierarchical model.</db:para>
 <db:blockquote>
-<db:olink targetptr="Flynn2009"/><db:para>The classical theory, derived from computer science and graph theory, is that the document is a hierarchical tree (actually inverted: a root-system) and that all necessary actions can be seen in terms of navigation around the tree, and of insertion into and withdrawal from the the nodes which form the branches and leaves.</db:para>
+<db:attribution>Flynn2009</db:attribution><db:para>The classical theory, derived from computer science and graph theory, is that the document is a hierarchical tree (actually inverted: a root-system) and that all necessary actions can be seen in terms of navigation around the tree, and of insertion into and withdrawal from the the nodes which form the branches and leaves.</db:para>
 <db:para>The conventional writer, however — and we expressly exclude the markup expert, as well as the experienced technical authors who responded to the survey — is by repute probably only marginally aware of this tree; but we have been unable to measure this at present. In this view, the document is seen as a continuous linear narrative, broken into successive divisions along semantic lines, and interspersed with explanatory material in the form of figures, tables, lists, and their derivatives.</db:para>
 </db:blockquote>
 <db:para>Today, very few markup languages take the streaming approach of WordPerfect. The problem with it is that when you want to deal with any structure that is naturally hierarchical, the ability to start and stop structures independently just gets in the way and makes things hard to handle. But even with markup languages that are syntactically hierarchical, like XML, you can still define markup languages that are largely flat (like HTML) or more hierarchical (like DocBook).</db:para>
@@ -96,11 +97,7 @@ This text is [B&gt;bold, [I&gt;this is bold and italic,&lt;B] and this is just i
 <db:para>But would it be a good idea to make a distinction between the two? Only if authors clearly understood the difference between the two and clearly know when they were choosing one or the other. (If they are writing in a visual editing view of an XML editor, then they almost certainly won’t know the difference.)</db:para>
 <db:para>If you are designing your own markup language, do you want to allow both these forms? Probably not. The more permutations of structure your markup language allows, the more work it will be to write the algorithms to process it. Some allowance may be made for ease of authoring, if you wish, but it may be better to wait for authors to complain about a restriction like this than to build in all the possible variations in advance. (This is also a problem that is more likely to occur in an abstract language like XML than in a concrete language like Markdown or SAM, where the choice is baked into the syntax and the author does not have a choice to make.</db:para>
 </db:section>
-<bibliography>
-<entry xml:id="Flynn2009">
-<db:para>Flynn, Peter. “Why writers don’t use XML: The usability of editing software for structured documents.” Presented at Balisage: The Markup Conference 2009, Montréal, Canada, August 11 - 14, 2009. In Proceedings of Balisage: The Markup Conference 2009. Balisage Series on Markup Technologies, vol. 3 (2009). doi:10.4242/BalisageVol3.Flynn01.</db:para>
-</entry>
-</bibliography>
+
 <db:section>
 <db:title>The role of syntax</db:title>
 <db:para>The syntax of your markup language also plays a role in striking the right balance between hierarchy and functional lucidity. Fully explicit markup syntax like that of XML forces every element of the hierarchical structure of the document to the fore in the syntax. The syntax has explicit hierarchical constraints of its own (what XML calls the well-formedness constraint). This pushes the hierarchical structure in the author’s face, which detract from functional lucidity.</db:para>
@@ -168,7 +165,7 @@ This text is [B&gt;bold, [I&gt;this is bold and italic,&lt;B] and this is just i
 <db:para>The information in annotations does not have to be in the same domain as the structure they apply to. For instance:</db:para>
 <db:itemizedlist>
 <db:listitem>
-<db:para>In DITA, the <annotation type="attribute" namespace="DITA">keyref</annotation> attribute is used to add management domain metadata to a number of document structure elements.</db:para>
+<db:para>In DITA, the keyref attribute is used to add management domain metadata to a number of document structure elements.</db:para>
 </db:listitem>
 <db:listitem>
 <db:para>In HTML, the style attribute can be used to add media domain metadata to the document structure.</db:para>
@@ -219,7 +216,7 @@ section:(#annotations) Annotations
 <db:title>Structure in attributes</db:title>
 <db:para>While SAM draws a distinction between structure and annotation, XML, as we have seen, does not. Its distinction between element and attribute roughly corresponds to my distinction, but not entirely so. This is a reflection of the fact that while SAM is designed for documents, XML is deliberately more general and designed for data applications where the structure and annotation distinction may not apply, or may not apply in the same way as it does in documents.</db:para>
 <db:para>This means that it is possible to design XML languages that use attributes (normally an annotation mechanism) to express structure.</db:para>
-<db:para>Consider these <annotation type="link" specifically="https://en.wikipedia.org/wiki/Microformat">examples of HTML Microformats from Wikipedia</annotation>. The first example shows an address formatted as a list.</db:para>
+<db:para>Consider these examples of HTML Microformats from Wikipedia[https://en.wikipedia.org/wiki/Microformat]. The first example shows an address formatted as a list.</db:para>
 <db:programlisting language="HTML">
 &lt;ul&gt;
    &lt;li&gt;Joe Doe&lt;/li&gt;

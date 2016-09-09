@@ -205,7 +205,7 @@ ingredients:: ingredient, quantity, unit
   &lt;/imageobject&gt;
 &lt;/mediaobject&gt;
 </db:programlisting>
-<db:para>Here the <db:code>condition</db:code> attribute on the <db:code>imageobject</db:code> element specifies a different file to be used for two version of a book (this book, actually). The <db:code>epub</db:code> version is for eReaders, most of which cannot render SVG drawings, and so require a raster format (<annotation type="format">PNG</annotation> in this case), while the <db:code>fo</db:code> version is for print publication using a system called XSL-FO and uses the vector format SVG for high resolution rendering in print.</db:para>
+<db:para>Here the <db:code>condition</db:code> attribute on the <db:code>imageobject</db:code> element specifies a different file to be used for two version of a book (this book, actually). The <db:code>epub</db:code> version is for eReaders, most of which cannot render SVG drawings, and so require a raster format (PNG in this case), while the <db:code>fo</db:code> version is for print publication using a system called XSL-FO and uses the vector format SVG for high resolution rendering in print.</db:para>
 <db:para>But this approach not only involves the use of media domain markup, it combines it with management domain markup. Is it possible to factor all of this out of the authored format?</db:para>
 <db:para>To do so we have to go back to the distinction between the idea of a graphic and the rendering of a graphic. All of the approaches above have the author include a specific rendering of a graphic. To factor it out, we instead have the author include the idea of the graphic.</db:para>
 <db:para>There are several ways to do this. In fact, this is really the same idea as we saw in the reuse algorithm were we factored out the filename of the content to be included and replace it with a semantic representation of the file. There we refactored an explicit filename in this example</db:para>
@@ -274,7 +274,7 @@ procedure: Save a file
 <db:para>Inline graphics can cause rendering problems. For instance, they may cause line spacing to be thrown off if the height of the graphics is greater than that of the font used.</db:para>
 <db:para>Inline graphics are something a writer can control and make judgments about when writing in the media domain but which may have unexpected and unwelcome consequences when formatted by algorithms from content created in the document or subject domains.</db:para>
 <db:para>There are two techniques you can use to minimize problems with inline graphics. The first is to avoid their use altogether, where that is practical. If there is another way to present the same material just as effectively, it is better to choose that option.</db:para>
-<db:para>The other is to factor out the graphic using by structure to record its semantics. For instance, instead of including an enter key graphic like this:</db:para>
+<db:para>The other is to factor out the graphic by using a structure to record its semantics. For instance, instead of including an enter key graphic like this:</db:para>
 <db:programlisting language="sam">
 3. Press &gt;(image enter_key.png) to confirm the selection. 
 </db:programlisting>
@@ -284,19 +284,11 @@ procedure: Save a file
 </db:programlisting>
 <db:para>This leaves open the choice of how to represent the key in the output, and allows for differential single sourcing. For example, on a display that did not support graphics, or where graphics would be too fussy, the presentation algorithm could render this as:</db:para>
 <db:blockquote>
-<db:orderedlist>
-<db:listitem>
-<db:para>Press [Enter] to confirm the selection.</db:para>
-</db:listitem>
-</db:orderedlist>
+<db:para>3. Press [Enter] to confirm the selection.</db:para>
 </db:blockquote>
 <db:para>But in for media where the use of a graphic is appropriate, the presentation routine could use a lookup table of key names and graphics to select the graphic file to represent they <db:emphasis role="bold">Enter</db:emphasis> key.</db:para>
 <db:blockquote>
-<db:orderedlist>
-<db:listitem>
-<db:para>Press <db:mediaobject><db:imageobject><db:imagedata fileref="enter_key.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject> to confirm the selection.</db:para>
-</db:listitem>
-</db:orderedlist>
+<db:para>3. Press <db:inlinemediaobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/computer_key_Enter.png" contentwidth=".5in" align="left"/></db:imageobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/computer_key_Enter.png" contentwidth=".5in" align="left"/></db:imageobject><db:textobject><db:para>A computer keyboard Enter key.</db:para></db:textobject></db:inlinemediaobject> to confirm the selection.</db:para>
 </db:blockquote>
 <db:para>This approach allows the document designer to switch out the graphics used for keys to find ones that work best on different displays or at different scales. It is also much easier for the author who does not have to stop to think about which graphic to use. The same approach could be used in another common case, which is describing tool bar icons in a GUI application.</db:para>
 <db:programlisting language="sam">

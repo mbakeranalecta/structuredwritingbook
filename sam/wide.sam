@@ -317,7 +317,7 @@ chapter:(#chapter.wide) Wide Structures
             
             There are two techniques you can use to minimize problems with inline graphics. The first is to avoid their use altogether, where that is practical. If there is another way to present the same material just as effectively, it is better to choose that option. 
             
-            The other is to factor out the graphic using by structure to record its semantics. For instance, instead of including an enter key graphic like this:
+            The other is to factor out the graphic by using a structure to record its semantics. For instance, instead of including an enter key graphic like this:
             
             ```(sam)
                 3. Press >(image enter_key.png) to confirm the selection. 
@@ -330,12 +330,12 @@ chapter:(#chapter.wide) Wide Structures
             This leaves open the choice of how to represent the key in the output, and allows for {differential single sourcing}. For example, on a display that did not support graphics, or where graphics would be too fussy, the {presentation algorithm} could render this as:
             
             """
-                3. Press \[Enter] to confirm the selection.
+                3\. Press \[Enter] to confirm the selection.
                 
             But in for media where the use of a graphic is appropriate, the presentation routine could use a lookup table of key names and graphics to select the graphic file to represent they *Enter* key. 
             
             """
-                3. Press >(image enter_key.png) to confirm the selection. 
+                3\. Press >(image ../graphics/computer_key_Enter.xml) to confirm the selection. 
                 
             This approach allows the document designer to switch out the graphics used for keys to find ones that work best on different displays or at different scales. It is also much easier for the author who does not have to stop to think about which graphic to use. The same approach could be used in another common case, which is describing tool bar icons in a GUI application. 
             
