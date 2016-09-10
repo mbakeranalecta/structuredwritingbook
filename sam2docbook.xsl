@@ -176,6 +176,10 @@
 
     <xsl:template match="annotations"/>
     
+    <xsl:template match="annotation[@type='standard']">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
     <xsl:template match="annotation[@type='tool']">
         <xsl:apply-templates/>
     </xsl:template>
