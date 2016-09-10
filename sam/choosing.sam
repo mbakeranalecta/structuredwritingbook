@@ -1,13 +1,37 @@
-chapter:(#chapter.choosing) Choosing 
+chapter:(#chapter.choosing) Choosing languages
 
     <<<(annotations.sam)
+    
+    So, which domain should you choose for your structured writing process, and how do you select the right language in that domain? You will have noticed that this book has put a lot of emphasis on the {subject domain}, but you should not take this as a general recommendation to always use the {subject domain}. While there are some public subject domain languages available, chances are that if you choose to use the subject domain you will be creating your own markup languages (plural) and coding the algorithms required to process them. The subject domain is the place where you will find the greatest benefits from structured writing, where you can find the greatest quality improvements, and the greatest reduction of costs. But setting up a {subject-domain} structured writing system requires time, money, and an appropriate set of skills. 
+
+    There are therefore two main consideration to keep in mind when making a decision:
+
+    * Benefits: What are my goals in terms of content quality and process efficiency? Which structured writing algorithms do I want to use, and at what level of capability and efficiency? What are the business benefits of doing these things.
+    
+    * Costs: What will it cost to do this? Do I have the understanding and the skill set to set this up. If not, can I hire someone. Do I have the capacity to maintain the system in the long run? Do I understand the true costs not only of setting this up but maintaining my content and algorithms in a reliable state for the duration of the content set? (Underestimating the difficulties and cost associated with maintaining the integrity and reliability of a content set is a common source of failure.)
+    
+    It is not my purpose in this book to advocate for any system (including the ones I have built myself) or to encourage you to work in one domain rather than another. Rather, my purpose it to advocate for a broader understanding of the range and the possibilities of structured writing. The right place for your organization or your content may be anywhere on the structured writing spectrum. Some parts of that spectrum are more well known and more widely practiced than others, and that can influence organizations towards choices that may not be ideal for them. Those inappropriate choices don't just affect their own organizations. They can shift the emphasis of the whole market over time. As an anonymous poster commented on a blog post comparing {reStructureText} to {Markdown}
+    
+    """[Kansas in comment on http://zverovich.net/2016/06/16/rst-vs-markdown.html]
+        The history of computer science is littered with somebody inventing something technically correct but too complex, and then somebody else inventing something simpler that throws half the assumptions out the window (and everybody mocks it for being "worse"), and then the latter wins because it's simpler, and we realize in hindsight that all those assumptions weren't worth the cost of the complexity.
+    
+    The tendency of everyone to follow the hot trend leads to people adopting systems that are more complex than they need. They then complain about it, which bring that system into disrepute and leads the market to sway toward something simpler. 
+    
+    But then you end up with people finding the simple system not capable enough for their needs and starting to add stuff too it until it becomes as complex as the old system that people abandoned for it, at which point the cycle starts again. 
+    
+    The best way to break this vicious cycle is for people to choose the systems that best meet their particular needs rather than following the latest trends. For that to happen, though, people have to be aware of the full scope of the field and have a language for talking about the various options and their benefits and costs. That is what I have sought to provide in this book. 
+    
+    
+    The systems I have developed, SPFE and SAM, are not intended to conquer the world or put other structured writing systems out of business. I built them to fill in what I see as gaps in the structured writing spectrum. (Gaps which happen to coincide with the areas where I do a lot of my work.)
+    
+    My hope is that if this book contributes to a better understanding of the scope and capability of structured writing it will take the pressure of tools across the spectrum to extend their capability into every niche, and thus avoid the next revolution against excess complexity. 
+    
 
     One of the things you will notice about most concrete languages it that they tend to have a niche in which that are popular. DITA in technical publications, ReStructuredText in the Python community, LaTeX in academic and scientific publishing, etc. This is true despite the fact that they are all rich document domain languages. 
     
     Partly the difference lies in adaptation each of them has to the field in which they are used. No language lies entirely in one structured writing domain. The big public languages are all centered in the document domain, but they all have some {media-domain} structures (tables, graphics, etc.) and {management-domain} structures (condition, ids, etc.) and most have some {subject domain} structures as well. DITA and DocBook both have subject domain structures for describing computer interfaces. LaTeX had extensive (and {functionally lucid}) math support. 
     
     Partly it lies in familiarity within the community. Partisans of each language try to push their favorite out into other communities. They often have individual successes, but to really move into another community is rare. 
-    
     
 
     
@@ -55,9 +79,9 @@ chapter:(#chapter.choosing) Choosing
 
         Some of these languages do allow you to extend or constrain the languages, essentially creating your own language as a variant on the public language. This necessarily involves you writing or modifying the corresponding algorithms, but it can still be less work than doing it from scratch, and you may be assisted by a richer set of tools. 
         
-        However, there are limits to how far you can take this. Taking a very large very loose public language and modifying, extending, or constraining it down to a small easy to use language that is specifically constrained for your business will likely end up being more difficult and more expensive than designing the small simple task-specific language yourself. 
+        However, there are limits to how far you can take this. Taking a very large very loose public language and modifying, extending, or constraining it down to a small easy to use language that is specifically constrained for your business can easily end up being more difficult and more expensive than designing the small simple task-specific language yourself. 
         
-        Simply navigating these complexities, let alone implementing the path you choose, and seem like a good reason to sticking with the media domain and putting up with the duplication of effort and inconsistent outputs that it involves, simply so that you can keep doing the work you understand with tools you understand. The tools and the concepts are just simpler and more direct than those of the document domain.
+        Simply navigating these complexities, let alone implementing the path you choose, can seem like a good reason to sticking with the media domain and putting up with the duplication of effort and inconsistent outputs that it involves, simply so that you can keep doing the work you understand with tools you understand. The tools and the concepts are just simpler and more direct than those of the document domain.
         
         What we see here is that the complexities of the move to the document domain tend towards the development of large public document domain languages and the tendency of organization to prefer adopting a single document domain language for all of their structured writing work.
         
@@ -81,7 +105,7 @@ chapter:(#chapter.choosing) Choosing
         * Different media have different media domain objects
         * Only rendering algorithms are explicitly supported
 
-        Taking a structured approach to the media domain can greatly increase your flexibility. It your document consists of basic document domain objects attached to named styles, you can swap in a new stylesheet with the same style names and totally change how your document looks. But that is the limit of the changes you can make. 
+        Taking a structured approach to the media domain can greatly increase your flexibility. If your document consists of basic document domain objects attached to named styles, you can swap in a new stylesheet with the same style names and totally change how your document looks. But that is the limit of the changes you can make. 
 
         #Actually, it is a good question whether working in the document domain gives you any real advance in flexibility or options over working in a structured way in the media domain. The answer is probably that working in the document domain is not more flexible, but it is more verifiable and controllable. Incorrect style use in the media domain is undetectable by algorithms. The document domain can impose restrictions and perform checks to eliminate a lot of the cases in which the incorrect document structure is used. 
 
@@ -125,21 +149,17 @@ chapter:(#chapter.choosing) Choosing
 
 		Because many management decisions are based on factors in the real world, there are often subject domain and management domain alternatives for handling situations where decisions have to be made below the file level. The advantage and disadvantages of using each domain are similar to those for choosing between the document domain and the subject domain. 
 
-			* There is an additional step required to publish subject domain content. 
-			
-			* You have to write an algorithm to implement your invariant rule. This takes the burden of implementing it off the authors, but someone has to write the code.  
+        * There is an additional step required to publish subject domain content. 
+        
+        * You have to write an algorithm to implement your invariant rule. This takes the burden of implementing it off the authors, but someone has to write the code.  
 
-			* The author does not have to know anything about the rule for inserting warnings on dangerous procedures. They are simply asked if the procedure is dangerous or not. This is a question about the subject matter that they should be able to answer correctly without knowing anything about the publishing requirement. 
+        * The author does not have to know anything about the rule for inserting warnings on dangerous procedures. They are simply asked if the procedure is dangerous or not. This is a question about the subject matter that they should be able to answer correctly without knowing anything about the publishing requirement. 
 
-			* If the requirement for documenting dangerous procedures changes, the instruction to insert a partiualr file may no longer be appropriate. If you used the management domain, you may have to edit every file that contains the include instruction. But if you used the subject domain, you just rewrite the algorithm that handles dangerous procedures. The content itself remains untouched. 
-			
-			* This can be particulary important if there are multiple factors that affect how dangerous procedures should be handled. Suppose that there is a new requirement that you use a different warning for procedures that are performed by robots. If your subject domain markup contains a field `performed-by-robots` then you simply adjust the algorithm to make the right choice in each case. If you have use the management domain approach, you will have to visit every file and make the appropriate determination, and update each include statement appropriately. 
-			
-			* The subject domain markup is always specific to its subject matter. Whether a procedure is dangerous or performed by robots is specific to procedures, and only organizations who have potentially dangerous procedures that might be performed by robots are likely to include those fields in their markup. By contrast, the management domain include markup is much more general. It can be used to insert a hundred different pieces of a invariant text in a hundred different contexts. This reduces the cost of developing the markup and the algorithms to process it. But it also ties the content to a specific management system, and it means that authors have to know a lot more about how the publishing system works. This reduces you pool of authors and makes authoring more difficult and therefore more expensive. Finally, it means that it is much more expensive to maintain the content if you change publications. 
-
-
-		
-
+        * If the requirement for documenting dangerous procedures changes, the instruction to insert a particular file may no longer be appropriate. If you used the management domain, you may have to edit every file that contains the include instruction. But if you used the subject domain, you just rewrite the algorithm that handles dangerous procedures. The content itself remains untouched. 
+        
+        * This can be particularly important if there are multiple factors that affect how dangerous procedures should be handled. Suppose that there is a new requirement that you use a different warning for procedures that are performed by robots. If your subject domain markup contains a field `performed-by-robots` then you simply adjust the algorithm to make the right choice in each case. If you have use the management domain approach, you will have to visit every file and make the appropriate determination, and update each include statement appropriately. 
+        
+        * The subject domain markup is always specific to its subject matter. Whether a procedure is dangerous or performed by robots is specific to procedures, and only organizations who have potentially dangerous procedures that might be performed by robots are likely to include those fields in their markup. By contrast, the management domain include markup is much more general. It can be used to insert a hundred different pieces of a invariant text in a hundred different contexts. This reduces the cost of developing the markup and the algorithms to process it. But it also ties the content to a specific management system, and it means that authors have to know a lot more about how the publishing system works. This reduces you pool of authors and makes authoring more difficult and therefore more expensive. Finally, it means that it is much more expensive to maintain the content if you change publications. 
 
 		Given all these difficulties with management domain intrusions, you may wonder why they occur at all. Part of the answer may be that markup language design is complex, and if the designers are not fully aware of the problems that management domain intrusions cause, they may see them as an easy way to solve markup design problems. 
 
@@ -220,46 +240,5 @@ chapter:(#chapter.choosing) Choosing
         Finally, very few writers are used to either writing or thinking in the management domain. The management domain is the domain of the content manager and it intrudes on the structured writing domain because of the need to manage content at a level lower than the individual file or topic. Asking writers to enter management domain information and to abide by management domain constraints is a significant imposition which often requires training as well as additional time and thought during the writing itself. The capacity of the subject domain to factor out a lot of what the management domain is used for, therefore, can have a significant impact on ease of use for writers and can also improve the accuracy and consistency of management algorithms. 
 
     
-    section: Buy vs Build
-    
 
-        The buy vs build decision is one of the most important you can make in implementing a system for any purpose. 
-        
-        But today it is seldom a straight dichotomy. Most of the things we buy, we customize to meet our needs. So it is really more a matter of buy and use the defaults vs buy and customize vs build. 
-        
-        But it is not as simple as that either. Today we are increasingly recognizing the virtue of using loosely coupled systems. That is, rather than using a single integrated tool to do the whole job, we use a tool chain: many small tools working in serial or in parallel with well defined interfaces between them. So the real choices are default vs customize vs integrate vs build. 
-        
-        When we integrate, we have the same choice with each of the tools we use to build our system: default vs customize vs integrate vs build. 
-        
-        Some of the tools we have discussed recognize this pattern and are themselves constructed of loosely coupled pieces so that you can make the default vs customize vs integrate vs build decision within that framework. This does not mean that all systems designed like this are equivalent, though. I matters very much how the divide their functionality into pieces, how cohesive each of the pieces is, how loose the coupling, and how adaptable the integration framework (the thing that allows you to string the pieces together) is. 
-        
-        When it comes to the cost of the tool itself, the order of preference is usually:
-        
-        default > customize > integrate > build
-        
-        In other words, unless a tool is outrageously expensive off the shelf, it is usually cheaper to buy and use the defaults and progressively more expensive to customize, integrate, and build. 
-        
-        But this if far from telling the whole story. While you should obviously try to find a tools whose defaults are closest to what your organization needs, off the shelf tools obviously have very generic defaults. In terms of the ability to meet your needs precisely, the order of preference is:
-        
-        build > integrate > customize > default 
-        
-        In other words, in order to meet your needs precisely, unless you are very lucky, the defaults of an off the shelf system will not suit your organization particularly well, and you will be able to meet them progressively better if you customize, integrate, and build. 
-        
-        Working around the limitations of generic system defaults creates costs in terms of inefficiency and lost quality. A system that meets you needs better will generally cost less to run and will help you make more money. Of course, many people and many organizations do choose to work with the defaults or to mildly customize off the shelf tools because while they may be inefficient compared to a custom solution, creating a custom solution not only involves greater costs, it is also outside their range of expertise. Indeed, not knowing how to create and maintain a custom tools set is probably a more compelling reason to stick to off the shelf tools than the costs of building. 
-        
-        On the other hand, as we said from the beginning, all writing you do with digital looks is structured writing. When we talk about moving to structured writing, what we mean is adding more structure to our writing in order to better serve a business need. At a certain point in this progression, you pass the point at which the added structure you need can be found off the shelf. At this point, adding more structure, particularly structure which is specific to your business needs, structure which enforces or factors out constraints that are important to your process efficiency and content quality, means moving in the direction of customization, integration, and building.
-        
-        Indeed, whether intended or not, many organizations find themselves going down this road. There is a pattern in many organizations where the initial decision is to buy off the shelf and use defaults but over time the need to better meet organizational needs leads to customization, then to integration with other tools, and finally to building some pieces themselves. Whether or not the original plan was to stick with defaults, needs and circumstances push people down the customize, integrate, build path. 
-        
-        The upside of this approach is that is is gradual and so is based on what the organization has learned about their needs over time. The downside is, the original tools were not chosen with ease of integration in mind. The integrations that get done are often ad hoc and brittle. Over time, the system can become fragile and it can be difficult to do further customization, integration, or building without breaking something. 
-        
-        No tooling lasts forever. One of the lessons we should learn from this is that content that is tied to a tool is going to create large problems for us when we are inevitably forces to change tools. Tool independence is often touted as the benefit of moving to structured writing, or more specifically of moving to XML. However, it is not the markup format that makes content independent of tools. If you use a format that has a lot of management domain markup, for instance, that ties your content that to tools that support those management semantics. DITA content, for instance, is portable between different DITA tools, but not to non-DITA tool chains. Pure document domain and pure subject domain formats have a much greater degree of independence. 
-        
-        Then again, we should not raise tool independence above all other considerations. Migrating content between tools is a cost, and a particularly thorny one because you often need to do it in a hurry in order to maintain production while executing a tool change. But maintaining tool independence above all other considerations may not be the most cost effective approach if you give up the specific business benefits of all other tools. 
-        
-        The default, customize, integrate, build decision is one that is filled with bogeymen. People will tell you never to do this or never to do that. But in the end it all comes down to cost benefit analysis. You can get any approach right and any approach wrong. Implementing any strategy badly can lead to disaster, but so can choosing the wrong strategy and implementing it well. 
-        
-    
 
-    """[Kansas in comment on http://zverovich.net/2016/06/16/rst-vs-markdown.html]
-        The history of computer science is littered with somebody inventing something technically correct but too complex, and then somebody else inventing something simpler that throws half the assumptions out the window (and everybody mocks it for being "worse"), and then the latter wins because it's simpler, and we realize in hindsight that all those assumptions weren't worth the cost of the complexity.
