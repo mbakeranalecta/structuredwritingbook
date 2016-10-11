@@ -193,7 +193,9 @@
     </xsl:template>
     
     <xsl:template match="annotation[@type='structure']">
-        <xsl:apply-templates/>
+        <db:code>
+            <xsl:apply-templates/>
+        </db:code>
     </xsl:template>
     
     <xsl:template match="annotation[@type='algorithm']">
@@ -330,47 +332,51 @@
                     <xsl:value-of select="@id"/>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:choose>
-                <xsl:when test="substring(@item, string-length(@item) - 3) = '.xml'">
-                    <xsl:variable name="item-file" select="strings:tokenize(@item, '/\')[last()]"/>
-                    <xsl:variable name="item-path" select="substring(@item, 1, string-length(@item)-string-length($item-file))"/>
-                    <xsl:variable name="imagedata" select="document(@item)"/>
-                    <db:imageobject condition="epub">
-                        <db:imagedata>
-                            <xsl:attribute name="fileref"><xsl:value-of select="concat($item-path,$imagedata/image/epub/href)"/></xsl:attribute>
-                            <xsl:if test="$imagedata/image/epub/contentwidth != ''">
-                                <xsl:attribute name="contentwidth"><xsl:value-of select="$imagedata/image/epub/contentwidth"/></xsl:attribute>      
-                            </xsl:if>
-                            <xsl:if test="$imagedata/image/epub/align != ''">
-                                <xsl:attribute name="align"><xsl:value-of select="$imagedata/image/epub/align"/></xsl:attribute>     
-                            </xsl:if>
-                        </db:imagedata> 
-                    </db:imageobject>
-                    <db:imageobject condition="fo">
-                        <db:imagedata>
-                            <xsl:attribute name="fileref"><xsl:value-of select="concat($item-path,$imagedata/image/fo/href)"/></xsl:attribute>
-                            <xsl:if test="$imagedata/image/fo/contentwidth != ''">
-                                <xsl:attribute name="contentwidth"><xsl:value-of select="$imagedata/image/fo/contentwidth"/></xsl:attribute>      
-                            </xsl:if>
-                            <xsl:if test="$imagedata/image/fo/align != ''">
-                                <xsl:attribute name="align"><xsl:value-of select="$imagedata/image/fo/align"/></xsl:attribute>     
-                            </xsl:if>
-                        </db:imagedata> 
-                    </db:imageobject>
-                    <xsl:if test="$imagedata/image/alt">
-                        <db:textobject>
-                            <xsl:apply-templates select="$imagedata/image/alt/*"/>
-                        </db:textobject>
-                    </xsl:if>
-                    
-                </xsl:when>
-                <xsl:otherwise>
-                    <db:imageobject>
-                        <db:imagedata fileref="{@item}" contentwidth="4in" align="left"/>
-                    </db:imageobject>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:call-template name="create-imageobject"/>
         </db:mediaobject>
+    </xsl:template>
+    
+    <xsl:template name="create-imageobject">
+        <xsl:choose>
+            <xsl:when test="substring(@item, string-length(@item) - 3) = '.xml'">
+                <xsl:variable name="item-file" select="strings:tokenize(@item, '/\')[last()]"/>
+                <xsl:variable name="item-path" select="substring(@item, 1, string-length(@item)-string-length($item-file))"/>
+                <xsl:variable name="imagedata" select="document(@item)"/>
+                <db:imageobject condition="epub">
+                    <db:imagedata>
+                        <xsl:attribute name="fileref"><xsl:value-of select="concat($item-path,$imagedata/image/epub/href)"/></xsl:attribute>
+                        <xsl:if test="$imagedata/image/epub/contentwidth != ''">
+                            <xsl:attribute name="contentwidth"><xsl:value-of select="$imagedata/image/epub/contentwidth"/></xsl:attribute>      
+                        </xsl:if>
+                        <xsl:if test="$imagedata/image/epub/align != ''">
+                            <xsl:attribute name="align"><xsl:value-of select="$imagedata/image/epub/align"/></xsl:attribute>     
+                        </xsl:if>
+                    </db:imagedata> 
+                </db:imageobject>
+                <db:imageobject condition="fo">
+                    <db:imagedata>
+                        <xsl:attribute name="fileref"><xsl:value-of select="concat($item-path,$imagedata/image/fo/href)"/></xsl:attribute>
+                        <xsl:if test="$imagedata/image/fo/contentwidth != ''">
+                            <xsl:attribute name="contentwidth"><xsl:value-of select="$imagedata/image/fo/contentwidth"/></xsl:attribute>      
+                        </xsl:if>
+                        <xsl:if test="$imagedata/image/fo/align != ''">
+                            <xsl:attribute name="align"><xsl:value-of select="$imagedata/image/fo/align"/></xsl:attribute>     
+                        </xsl:if>
+                    </db:imagedata> 
+                </db:imageobject>
+                <xsl:if test="$imagedata/image/alt">
+                    <db:textobject>
+                        <xsl:apply-templates select="$imagedata/image/alt/*"/>
+                    </db:textobject>
+                </xsl:if>
+                
+            </xsl:when>
+            <xsl:otherwise>
+                <db:imageobject>
+                    <db:imagedata fileref="{@item}" contentwidth="4in" align="left"/>
+                </db:imageobject>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="inline-insert[@type='image']">
@@ -440,13 +446,12 @@
     
     
     
+
     <xsl:template match="figure/insert[@type='image']">
-        <db:imageobject>
-            <db:imagedata fileref="{@item}"/>
-            </db:imageobject>
+        <xsl:call-template name="create-imageobject"/>
     </xsl:template>
-    
-    <xsl:template match="figure[insert[@type='image']]">
+
+<!--    <xsl:template match="figure[insert[@type='image']]">
         <db:mediaobject>
             <xsl:if test="@id">
                 <xsl:attribute name="xml:id">
@@ -457,16 +462,16 @@
         </db:mediaobject>
     </xsl:template>
     
-    
-    <xsl:template match="figure[title]">
+-->    
+    <xsl:template match="figure">
         <db:figure>
-                <xsl:apply-templates select="title"/>
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates select="title"/>
             <db:mediaobject>
-                <xsl:if test="@id">
-                    <xsl:attribute name="id">
-                        <xsl:value-of select="@id"/>
-                    </xsl:attribute>
-                </xsl:if>
                 <xsl:apply-templates select="*[not(self::title)]"/> 
             </db:mediaobject>
         </db:figure>

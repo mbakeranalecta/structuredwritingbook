@@ -82,7 +82,7 @@ li:first-child
 &lt;/ol&gt;
 </db:programlisting>
 <db:para>In the document domain they are both ordered lists. In the media domain, one will be formatted with Arabic numerals and the other with letters.</db:para>
-<db:figure><db:title>One document domain object, two media domain styles</db:title><db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/nested-list.png"/></db:imageobject><db:caption>
+<db:figure><db:title>One document domain object, two media domain styles</db:title><db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/nested-list.png" contentwidth="4in" align="left"/></db:imageobject><db:caption>
 <db:para>Both the inner and outer lists are ordered list items in the document domain, but in the media domain they are formatted differently based on context.</db:para>
 </db:caption></db:mediaobject></db:figure>
 <db:para>In this case, the algorithm that formats the page distinguishes the inner and outer lists by looking at their parentage. For instance in CSS:</db:para>
@@ -206,7 +206,7 @@ reign&amp;mdash;in Spain.&lt;/p&gt;
 </db:programlisting>
 <db:para>Markdown was not designed to be a pure document domain language. It was simply designed to let you write HTML quickly in a text editor. But the effect of using Markdown is that it gets you out of working in a WYSIWYG view and lets you see the structure of the document you are creating.</db:para>
 <db:para>Many markdown editors use a split screen view that shows the formatted version in one pane as the writer writes markdown syntax in the other. But even here, the writer is still working in the document domain because they still see the structure in the view they are working on. A Markdown editor is never going to produce the kind of messy HTML that a pure WYSIWYG HTML editor can produce.</db:para>
-<db:figure><db:title>Markdown Editor</db:title><db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/markdownedit.png"/></db:imageobject><db:caption>
+<db:figure><db:title>Markdown Editor</db:title><db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/markdownedit.png" contentwidth="4in" align="left"/></db:imageobject><db:caption>
 <db:para>A detail of the Dillinger Markdown editor showing the Markdown and browser views side by side.</db:para>
 </db:caption></db:mediaobject></db:figure>
 <db:para>Something else interesting is at work here. A list in markdown is just a sequence of paragraphs that start with asterisk characters. On the face of it, this is just like a document domain editor creating lists by styling paragraphs. But if you look at the resulting HTML, you will see that it creates a proper list wrapper element around the list. The markdown interpreter is inferring the hierarchical structure of the document domain from the essentially flat Markdown syntax.</db:para>
