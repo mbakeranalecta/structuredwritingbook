@@ -55,4 +55,42 @@
 <p>The <phrase><annotation type="concept">document domain</annotation></phrase> is the most difficult place to achieve either agreement or functional lucidity. (By functional lucidity, I mean that the language seems easy to use and obvious when you are actually writing as opposed to when you are attempting to hammer out agreement in a committee room.) The document domain is inherently an abstract place, and there are always different ways to abstract from the concrete reality of web pages and books, particularly because of how different hypertext media domains are from paper media domains and the difficulty of truly abstracting beyond those differences. Thus you will frequently hear argument between the proponents of various document domain languages about the correctness and usability of their choices. For instance, partisans of Markdown may praise its functional lucidity (it is very easy to write in) which partisans of ReStructuredText may praise its greater abstraction and range of application.</p>
 <p>The <phrase><annotation type="concept">management domain</annotation></phrase> is quite concrete, like the <phrase><annotation type="concept">media domain</annotation></phrase>, but more arbitrary. It consists either of commands or of management metadata, both of which are particular to a specific management system. Difficulties here are likely to be more about the management processes to be implemented rather than the correct naming of things.</p>
 </section>
+<section>Simplicity and Clarity</section>
+<p>One of the biggest benefits of subject domain markup for authors is a much higher degree of functional lucidity compared with a typical document domain language.</p>
+<p>While a general document domain language like <phrase><annotation type="language">DocBook</annotation></phrase> needs to have structures for a wide range of document structures, a recipe markup language such as we have developed in this chapter, has only a few simple elements. Better still, there are very few permutations of those elements. Because subject domain languages do not specify document order, we don’t need to allow for many possible document orderings in the language, thus reducing the permutations we have to allow for and deal with. The synthesis algorithm can take the named structures of the subject domain markup and order them in any way you like.</p>
+<p>Because subject domain structure describe the subject matter they contain, they are also much clearer to authors, who may not understand complex document structures (or, more often, the subtle distinctions between several similar document structures), but who do (we hope) understand their subject matter.</p>
+<p>The combination of simplicity and clarity mean that in many cases you can get authors to create subject-domain structured content with little or no training. For instance, even if we add some additional fields to our recipe markup, you could still hand a sample like the one below to an author and ask them to follow it as a template, without giving them any training or any special tools.</p>
+<codeblock language="sam">
+recipe: Hard Boiled Egg
+    introduction:
+        A hard boiled egg is simple and nutritious.
+    ingredients:: ingredient, quantity
+        eggs, 12
+        water, 2qt
+    preparation:
+        1. Place eggs in pan and cover with water.
+        2. Bring water to a boil.
+        3. Remove from heat and cover for 12 minutes.
+        4. Place eggs in cold water to stop cooking.
+        5. Peel and serve.
+    prep-time: 15 minutes
+    serves: 6
+    wine-match: champagne and orange juice
+    beverage-match: orange juice
+    nutrition:
+        serving: 1 large (50 g)
+        calories: 78
+        total-fat: 5 g
+        saturated-fat: 0.7 g
+        polyunsaturated-fat: 0.7 g	
+        monounsaturated-fat: 2 g	
+        cholesterol: 186.5 mg	
+        sodium: 62 mg	
+        potassium: 63 mg	
+        total-carbohydrate: 0.6 g	
+        dietary-fiber: 0 g	
+        sugar: 0.6 g	
+        protein: 6 g	
+</codeblock>
+<p>Of course, the downside is that recipe markup is only good for one thing: recipes. A general document domain language can be used to write all kinds of documents. It will not enforce or record nearly as many constraints, or enable nearly as many options for validation or publishing, and it won’t be nearly as clear and simple for authors to use. But neither will it require you to create subject domain languages for each of the subjects you write about. At first glance, that may seem like a slam dunk case for sticking with the document domain, as the idea of inventing subject domain languages and the synthesis and presentation algorithms to go with them may seem daunting. But as we will see, the decision is not so clear cut, as sticking with he document domain comes with a lot of complexity, and sometimes custom development, that may not be apparent at first.</p>
 </chapter>
