@@ -24,15 +24,13 @@ p{following-item-of-list}: Onions
 </db:programlisting>
 <db:para>An explicit list structure looks like this:</db:para>
 <db:programlisting language="SAM">
-    list:
-        list-item: Carrots
-        list-item: Celery
-        list-item: Onions
-
-List structures like this belong to the {document domain} because they are a common rhetorical tool that is not specific to any one subject area ({subject domain}) and can be formatted in a wide variety of ways ({media domain}). 
-
-Once we have a list object, we can create rules -- in a separate file -- about how lists are formatted. We are familiar with this from {HTML}. Here's that same structure in {HTML} (actually, this is a slightly more specific structure, but we'll get to that):
+list:
+    list-item: Carrots
+    list-item: Celery
+    list-item: Onions
 </db:programlisting>
+<db:para>List structures like this belong to the document domain because they are a common rhetorical tool that is not specific to any one subject area (subject domain) and can be formatted in a wide variety of ways (media domain).</db:para>
+<db:para>Once we have a list object, we can create rules -- in a separate file -- about how lists are formatted. We are familiar with this from HTML. Here’s that same structure in HTML (actually, this is a slightly more specific structure, but we’ll get to that):</db:para>
 <db:programlisting language="HTML">
 &lt;ol&gt;
     &lt;li&gt;Carrots&lt;/li&gt;
@@ -58,7 +56,9 @@ li:first-child
 <db:para>One obvious formatting difference between lists is that some are numbered and some are bulleted. How does a formatting algorithm tell whether to use bullets or numbers to format a given list? One way would be to add a style attribute to specify bullets or numbers, but then the author would be working in the media domain again. To keep the author in the document domain, we need to create document domain structures that contain the metadata we need to make those decisions at the formatting stage.</db:para>
 <db:para>The common way to handle bullets vs numbers is to create two different list structures, the ordered list and the unordered list. Different markup languages call them by different names -- <db:code>ol</db:code> and <db:code>ul</db:code> in HTML, <db:code>orderedlist</db:code> and <db:code>itemized-list</db:code> in DocBook, for example -- but they are conceptually the same thing. Thus the HTML example above is a little more specific than just being a list structure. It is an ordered list structure.</db:para>
 <db:para>The choice of the terms “unordered” and “ordered” is important, because it focuses on the document-domain properties of a list -- whether its order matters -- rather than on its media domain properties -- bullets or numbers. Whether an ordered list should be formatted with numbers or letters or Roman numerals, belongs entirely to the media domain. It has been factored out of the document domain structures.</db:para>
-<db:section>Context and Structure</db:section>
+</db:section>
+<db:section>
+<db:title>Context and Structure</db:title>
 <db:para>Does the need for separate ordered and unordered list objects imply that we will need a separate document domain list structure for every possible way a list could be formatted in the media domain? No. In fact, that would really just be working in the media domain by proxy. When we work in the document domain we are specifically thinking in terms of document structures, not formatting, and so each document domain object we create needs to make sense in document domain terms, not media domain terms.</db:para>
 <db:para>For example, consider nested lists. Items in a nested list are formatted differently, from the list that contains them. At minimum they are indented more and usually they have different number and bullet styles as well. In the media domain, we would need a different style for each level. However, we don’t need a separate nested list structure in the document domain. Instead, we express the fact that a list is nested by actually nesting it inside its parent list. For instance, we can nest one ordered list inside another ordered list:</db:para>
 <db:programlisting language="HTML">

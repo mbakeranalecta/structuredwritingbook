@@ -32,10 +32,9 @@
 <insert item="../graphics/handwritten-bitmap.png" type="image"/>
 <p>There is very little structure here. We are recording a pattern of dots. Those patterns of dots are text characters only in the sense that the patterns are recognizable as characters to the human eye. The computer has no idea they are characters.</p>
 <p>This is a pretty inefficient way to write. You can work faster if you use the paint program’s text tool.</p>
-<insert item="../graphics/typed-bitmap.png" type="image">
+<insert item="../graphics/typed-bitmap.png" type="image"/>
 <p>This allows you to type letters on the keyboard. However, those letters are still recorded as a set of dots, not as characters, so you can’t go back and edit your text as text, only as dots. The computer is providing a slightly more structured way to enter the text, but is not maintaining any more structure in recording the text. (This is an important lesson: Some tools record less structure than you may think. For instance, some template-based authoring solutions don’t record which template was used, so the template does not guide subsequent editing or use. Structure that is used but not recorded has no downstream value.)</p>
 <p>To work more efficiently, you need to move away from dots and start working in a program that records characters as characters. You could go to a text editor, but a text editor does not keep any formatting information (unless you create markup -- but that would be getting ahead of ourselves). For most publishing purposes, plain text is inadequate. We need to maintain the ability to format the document.</p>
-</insert>
 <p>One type of program that lets us record text as text and also lets us attach formatting to the text is a vector graphic program. A vector graphics (or “draw”) program creates graphics as a collection of  objects (“vector” meaning the mathematical representation of a shape or line). For example, it allows you to create a circle as a shape, described mathematically in computer memory, rather than as a set of dots. Rather than recording an actual circle, the program records an abstraction of a circle: the essential properties needed to reproduce an actual circle on a media, such as its center, diameter, and line weight. The computer then lets you manipulate that abstraction as an object, only rendering it as actual dots when the graphic is displayed on screen or paper.</p>
 <figure id="objects-vs-dots">
 <title>Objects vs. dots</title>
@@ -56,7 +55,7 @@ circle.setRadius(50.0f);
 <p>One way that for an algorithm to turn the mathematical description of a shape into dots is with <phrase><annotation type="tool">PostScript</annotation></phrase>. PostScript is a programming language that lets you describe how to move a virtual pen over a virtual surface, recording dots as it goes. In PostScript the description of a circle object in terms of location and radius is turned into a set of instructions for moving that virtual pen:</p>
 <codeblock language="PostScript">
 100 100 50 0 360 arc closepath
-stroke	
+stroke    
 </codeblock>
 <p>This says, “draw an arc whose center is at coordinates 100, 100, and whose radius is 50, starting at degree 0 and proceeding to degree 360”. This is the algorithm guiding a virtual pen over virtual paper, just as the author we first described moved a real pen over real paper.</p>
 <p>If representing the circle as an object creates an abstraction of “circle” in the media domain, this bit of PostScript code takes that abstraction (a circle as a set of coordinates) and (in concert with the underlying graphics driver) makes it concrete again (dots on a media).</p>

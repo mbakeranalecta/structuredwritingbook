@@ -22,8 +22,8 @@ chapter:(#conformance) Conformance
     
     If the constraint you are introducing is not easier to conform to or easier to validate, you probably should not do it. There are certainly cases where moving content to a more formal document domain model introduces more constraints than it eliminates without making those constraints easier to comply with or validate. On the other hand, sometimes those additional constraints are required for algorithms. Inevitably, authors have to make some concessions to the needs of algorithms, but we don't want algorithms to impose such a burden on authors that we distract them from doing good research and quality writing. So if the structures you are created for the sake of algorithms prove complex for authors to conform to or difficult to validate, it is wise to ask if you could refactor those constraints again (perhaps to the {subject domain}(concept) so that you get both the precision and detail that the algorithm needs and the ease of use and validation that the writer needs. 
     
-	section: Completeness
-		Completeness is an obvious aspect of content quality. Unfortunately, lack of completeness is often hard for writers and reviewers to spot. The omission of information they already know is hard to see unless there is an obvious hole in a predefined and explicit document structure. Defining structures that highlight information requirements can significantly improve completeness. 
+    section: Completeness
+        Completeness is an obvious aspect of content quality. Unfortunately, lack of completeness is often hard for writers and reviewers to spot. The omission of information they already know is hard to see unless there is an obvious hole in a predefined and explicit document structure. Defining structures that highlight information requirements can significantly improve completeness. 
         
         In the {subject domain chapter}[#chapter.subject-domain] we saw how calling out the preparation time and number of servings for a recipe help ensure that the author always remembers to include that information, whether or not we decide to present it in fields or as part of a paragraph.
         
@@ -38,9 +38,9 @@ chapter:(#conformance) Conformance
         This sample annotates the phrase "left-handed widget wrench" and records that these words describe a tool. If all mentions of tools are annotated this way, you can then compile a list of all the tools you mention in all your topics and make sure that you have suitable documentation for each of them. We will look at annotations, and the ways you can use them, in later articles. 
         
         And yes, this is the same markup that I have been using in earlier chapters, and I will explain it eventually. 
-		
-	section: Consistency
-		Similarly to completeness, consistency can make a big difference to readers, but lack of consistency is hard to spot if the structure of the content is not explicit in all the ways we want it to be consistent. Consistency can apply to many aspects of the content, such as structure and vocabulary.
+        
+    section: Consistency
+        Similarly to completeness, consistency can make a big difference to readers, but lack of consistency is hard to spot if the structure of the content is not explicit in all the ways we want it to be consistent. Consistency can apply to many aspects of the content, such as structure and vocabulary.
         
         We have {described structured writing as applying constraints to writing}[#chapter.introduction]. Being consistent simply means abiding by constraints. As we have seen, this can take the form of either enforcing the constraint through required structure or, preferably, factoring out the constraint so that it is handled by algorithms rather than people. We have looked at how you can factor out constraints in both the {document domain} and the {subject domain}(concept).
         
@@ -53,9 +53,9 @@ chapter:(#conformance) Conformance
         Since you can now generate a list of tools mentioned in the text, you can check each mention against a list of approved tool names. This can reveal both incorrect names (consistency) and tools that may be missing from the official list (completeness).
         
         The same would apply to values in fields, such as the wine match field in the recipe example. With the wine match in a separate field you can compile a list of wines mentioned or check each mention against an approved list. 
-		
-	section: Accuracy
-		Accuracy problems too are often hard to spot. Typos, using old names for things, or giving deprecated examples are all hard for writers and reviewers to see. But there are structured writing techniques than can catch many of these kinds of problems.
+        
+    section: Accuracy
+        Accuracy problems too are often hard to spot. Typos, using old names for things, or giving deprecated examples are all hard for writers and reviewers to see. But there are structured writing techniques than can catch many of these kinds of problems.
         
         For example, if you were documenting an API, you could annotate each mention of a function.
         
@@ -64,9 +64,9 @@ chapter:(#conformance) Conformance
         
         
         API function names can be quite tricky to remember sometimes and small typos and be difficult to spot. But with this annotation, you can validate all mentions of functions against the API reference or the code base. This technique not only catches misspellings. I have seen it catch the use of deprecated functions in examples, for instance.
-		
-	section: Timeliness
-		Information tends to change quickly these days, and readers no longer have any patience with outdated content. But there are many difficulties in ensuring that content is always timely. How do you detect when content is out of date? How do you push updated content quickly? How do make sure updates in one place don't break other content? Structured writing provides ways to address all of these questions.
+        
+    section: Timeliness
+        Information tends to change quickly these days, and readers no longer have any patience with outdated content. But there are many difficulties in ensuring that content is always timely. How do you detect when content is out of date? How do you push updated content quickly? How do make sure updates in one place don't break other content? Structured writing provides ways to address all of these questions.
         
         By improving validate and automating publishing, structured writing can allow you to release content much more quickly. By changing the way content is organized and linked, it can allow you to add and remove individual pages from a content set without fear of breaking things. We will look at these techniques in more detail in later chapters. 
 
@@ -152,15 +152,15 @@ chapter:(#conformance) Conformance
                     calories: 78
                     total-fat: 5 g
                     saturated-fat: 0.7 g
-                    polyunsaturated-fat: 0.7 g	
-                    monounsaturated-fat: 2 g	
-                    cholesterol: 186.5 mg	
-                    sodium: 62 mg	
-                    potassium: 63 mg	
-                    total-carbohydrate: 0.6 g	
-                    dietary-fiber: 0 g	
-                    sugar: 0.6 g	
-                    protein: 6 g	
+                    polyunsaturated-fat: 0.7 g    
+                    monounsaturated-fat: 2 g    
+                    cholesterol: 186.5 mg    
+                    sodium: 62 mg    
+                    potassium: 63 mg    
+                    total-carbohydrate: 0.6 g    
+                    dietary-fiber: 0 g    
+                    sugar: 0.6 g    
+                    protein: 6 g    
         
         This entire recipe could be presented free form. But when structured like this we can enforce detailed constraints like ensuring that there is always a wine match listed or calories are always given as a whole number. The publishing algorithms could actually stitch all this content into paragraphs again if that was how you wanted to publish it. But when it is created in this format the author is provided with a huge amount of guidance about the information you want, and you are able to manipulate and publish the content in many different ways. Reader's will benefit because all the recipes will conform to what you know reader's need and want in a recipe.  
         

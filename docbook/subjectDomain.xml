@@ -30,58 +30,56 @@ Preparation
 </db:programlisting></db:mediaobject></db:figure>
 <db:para>In reStructuredText, a line underlined with equals signs is a major heading and one underlined with dashes is a minor heading. A table is created by using equals signs to mark the beginning and end of the table and the boundary between the table head and the table body. Rows are separated by new lines and columns by spaces in the rows of equals signs. Numbered lists are created by putting numbers in front of lines of text. The equivalent HTML document would look like this:</db:para>
 <db:programlisting language="HTML">
-    &lt;html&gt;
-        &lt;h1&gt;Hard Boiled Eggs&lt;/h1&gt;
-        
-        &lt;p&gt;A hard boiled egg is simple and nutritious. Prep time, 15 minutes. Serves 6.&lt;/p&gt;
-        
-        &lt;h2&gt;Ingredients&lt;/h2&gt;
-        &lt;table&gt;
-            &lt;thead&gt;
-                &lt;tr&gt;
-                    &lt;th&gt;Item&lt;/th&gt;
-                    &lt;th&gt;Quantity&lt;/th&gt;
-                &lt;/tr&gt;
-            &lt;/thead&gt;
-            &lt;tbody&gt;
-                &lt;tr&gt;
-                    &lt;td&gt;eggs&lt;/td&gt;
-                    &lt;td&gt;12&lt;/td&gt;
-                &lt;/tr&gt;
-                &lt;tr&gt;
-                    &lt;td&gt;water&lt;/td&gt;
-                    &lt;td&gt;2qt&lt;/td&gt;
-                &lt;/tr&gt;
-            &lt;/tbody&gt;
-        &lt;/table&gt;
-        &lt;h2&gt;Preparation&lt;/h2&gt;
-        &lt;ol&gt;
-            &lt;li&gt;Place eggs in pan and cover with water.&lt;/li&gt;
-            &lt;li&gt;Bring water to a boil.&lt;/li&gt;
-            &lt;li&gt;Remove from heat and cover for 12 minutes.&lt;/li&gt;
-            &lt;li&gt;Place eggs in cold water to stop cooking.&lt;/li&gt;
-            &lt;li&gt;Peel and serve.&lt;/li&gt;
-        &lt;/ol&gt;
-    &lt;/html&gt;
-
-This document follows the normal constraints of a recipe. That is, it has the things a recipe normally has, in the order they normally occur in a recipe: introduction, list of ingredients, preparation steps. However, it does not record the fact that it follows any of these constraints. Nor would any of these constraints be present to guide the authors while writing. Moving this document to the subject domain means imposing and recording those constraints. Neither {reStructuredText} nor {HTML} give us a way to do that, so we will need a different markup language. Here's what that might look like:    
+&lt;html&gt;
+    &lt;h1&gt;Hard Boiled Eggs&lt;/h1&gt;
+    
+    &lt;p&gt;A hard boiled egg is simple and nutritious. Prep time, 15 minutes. Serves 6.&lt;/p&gt;
+    
+    &lt;h2&gt;Ingredients&lt;/h2&gt;
+    &lt;table&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;Item&lt;/th&gt;
+                &lt;th&gt;Quantity&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody&gt;
+            &lt;tr&gt;
+                &lt;td&gt;eggs&lt;/td&gt;
+                &lt;td&gt;12&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+                &lt;td&gt;water&lt;/td&gt;
+                &lt;td&gt;2qt&lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/tbody&gt;
+    &lt;/table&gt;
+    &lt;h2&gt;Preparation&lt;/h2&gt;
+    &lt;ol&gt;
+        &lt;li&gt;Place eggs in pan and cover with water.&lt;/li&gt;
+        &lt;li&gt;Bring water to a boil.&lt;/li&gt;
+        &lt;li&gt;Remove from heat and cover for 12 minutes.&lt;/li&gt;
+        &lt;li&gt;Place eggs in cold water to stop cooking.&lt;/li&gt;
+        &lt;li&gt;Peel and serve.&lt;/li&gt;
+    &lt;/ol&gt;
+&lt;/html&gt;
 </db:programlisting>
+<db:para>This document follows the normal constraints of a recipe. That is, it has the things a recipe normally has, in the order they normally occur in a recipe: introduction, list of ingredients, preparation steps. However, it does not record the fact that it follows any of these constraints. Nor would any of these constraints be present to guide the authors while writing. Moving this document to the subject domain means imposing and recording those constraints. Neither reStructuredText nor HTML give us a way to do that, so we will need a different markup language. Here’s what that might look like:</db:para>
 <db:programlisting language="sam">
-    recipe: Hard Boiled Egg
-        introduction:
-            A hard boiled egg is simple and nutritious. Prep time, 15 minutes. Serves 6.
-        ingredients:
-            * 12 eggs
-            * 2qt water
-        preparation:
-            1. Place eggs in pan and cover with water.
-            2. Bring water to a boil.
-            3. Remove from heat and cover for 12 minutes.
-            4. Place eggs in cold water to stop cooking.
-            5. Peel and serve.
-
-This structure breaks the document up into a collection of named structures. Those structures are "introduction", "ingredients", and "preparation" and they are contained in an overall structures called "recipe". Some of these structures are more subject oriented than others. "recipe" and "ingredients" are particularly focused on the subject of food preparation. "introduction" is a pretty generic {document domain} structure, and "preparation" is somewhere in the middle. 
+recipe: Hard Boiled Egg
+    introduction:
+        A hard boiled egg is simple and nutritious. Prep time, 15 minutes. Serves 6.
+    ingredients:
+        * 12 eggs
+        * 2qt water
+    preparation:
+        1. Place eggs in pan and cover with water.
+        2. Bring water to a boil.
+        3. Remove from heat and cover for 12 minutes.
+        4. Place eggs in cold water to stop cooking.
+        5. Peel and serve.
 </db:programlisting>
+<db:para>This structure breaks the document up into a collection of named structures. Those structures are “introduction”, “ingredients”, and “preparation” and they are contained in an overall structures called “recipe”. Some of these structures are more subject oriented than others. “recipe” and “ingredients” are particularly focused on the subject of food preparation. “introduction” is a pretty generic document domain structure, and “preparation” is somewhere in the middle.</db:para>
 <db:para>This simple structure expresses the basic constraint of the well known recipe pattern and records that the author has followed it. One of the common patterns of structured writing is the factoring out of invariants. One of the invariants of the recipe pattern is that it has sections titled “Ingredients” and “Preparation” (or words to that effect). Notice that these titles been factored out here. Since we have structures specifically for <db:code>ingredients</db:code> and <db:code>preparation</db:code> we can factor out the actual titles and have the presentation algorithm add them in the transformation to the document domain.</db:para>
 <db:para>If your organization publishes a lot of recipes, you probably have a lot more constraints on the content of your recipes. For instance, you might have a constraint that every recipe must state its preparation time and the number of people it serves. In our subject domain markup, we can enforce and record that constraint by moving the information from the introduction section to separate fields:</db:para>
 <db:programlisting language="sam">
@@ -117,12 +115,11 @@ ingredients:
 </db:programlisting>
 <db:para>There are some shortcuts we can take to make this markup less verbose. (This is a markup language named SAM that I will talk about later):</db:para>
 <db:programlisting language="sam">
-    ingredients:: ingredient, quantity, unit
-        eggs, 12, each
-        water, 2, qt
-
-By adding and recording these constraints, we get similar benefits as before. We can better enforce any constraints we have about how ingredient lists are structured and formatted, and we gain access to the specific data involved, meaning, for example, that we could write an algorithm to convert our units from imperial to metric for publication in markets where metric units are preferred.
+ingredients:: ingredient, quantity, unit
+    eggs, 12, each
+    water, 2, qt
 </db:programlisting>
+<db:para>By adding and recording these constraints, we get similar benefits as before. We can better enforce any constraints we have about how ingredient lists are structured and formatted, and we gain access to the specific data involved, meaning, for example, that we could write an algorithm to convert our units from imperial to metric for publication in markets where metric units are preferred.</db:para>
 <db:section>
 <db:title>A key difference between subject and document domains</db:title>
 <db:para>At this point we can see that with subject domain markup, we have a lot of choices about how documents are constructed. This highlights an important difference between document domain and subject domain markup. A document domain markup language specifies the content and order of a document. We expect that the document domain markup will specify exactly what content is to appear on the page and in what order. This is necessary in the document domain because the document domain does not record any information about the specific subject matter of individual pieces of text. We can’t write an algorithm to publish certain pieces of a document domain file, because the markup does not record which are which. (More on this in the next chapter.)</db:para>
@@ -152,25 +149,23 @@ By adding and recording these constraints, we get similar benefits as before. We
 <db:para>In the discussion of the document domain (see <db:olink targetptr="chapter.document-domain"/>), we noted that we can use context to identify the role that certain structures play in a document, which allows us to get away with fewer structures. For instance, we can use a single title tag for all titles because we can tell what kind of title each one is from the context in which it occurs. The same is true with subject domain structures. They can provide context that allows us to treat basic text structures differently.</db:para>
 <db:para>Suppose we have a markup language for recipes:</db:para>
 <db:programlisting language="sam">
-    recipe: Hard Boiled Egg
-        introduction:
-            A hard boiled egg is simple and nutritious.
-        ingredients:: ingredient, quantity, unit
-            eggs, 12, each
-            water, 2, qt
-        preparation:
-            1. Place eggs in pan and cover with water.
-            2. Bring water to a boil.
-            3. Remove from heat and cover for 12 minutes.
-            4. Place eggs in cold water to stop cooking.
-            5. Peel and serve.
-        prep-time: 15 minutes
-        serves: 6
-		
-With the ingredients, we saw that we needed to add additional structure to factor out whether the ingredients would be presented as a list or a table. For the preparation, the steps are currently marked up as a numbered list. 
-
-Suppose we want to present the steps as steps, rather than just as a generic numbered list (for instance, by labeling them as *Step 1.*, etc, rather than just *1.*). Do we need to create an additional `step` structure to do this? Not necessarily. In this case we can can tell the difference between an ordinary ordered list and a set of preparation steps based on context. 
+recipe: Hard Boiled Egg
+    introduction:
+        A hard boiled egg is simple and nutritious.
+    ingredients:: ingredient, quantity, unit
+        eggs, 12, each
+        water, 2, qt
+    preparation:
+        1. Place eggs in pan and cover with water.
+        2. Bring water to a boil.
+        3. Remove from heat and cover for 12 minutes.
+        4. Place eggs in cold water to stop cooking.
+        5. Peel and serve.
+    prep-time: 15 minutes
+    serves: 6
 </db:programlisting>
+<db:para>With the ingredients, we saw that we needed to add additional structure to factor out whether the ingredients would be presented as a list or a table. For the preparation, the steps are currently marked up as a numbered list.</db:para>
+<db:para>Suppose we want to present the steps as steps, rather than just as a generic numbered list (for instance, by labeling them as <db:emphasis role="bold">Step 1.</db:emphasis>, etc, rather than just <db:emphasis role="bold">1.</db:emphasis>). Do we need to create an additional <db:code>step</db:code> structure to do this? Not necessarily. In this case we can can tell the difference between an ordinary ordered list and a set of preparation steps based on context.</db:para>
 <db:para>We can write a rule in the presentation algorithm that creates special formatting just for ordered lists that are the children of <db:code>preparation</db:code> elements that are children of <db:code>recipe</db:code> elements.</db:para>
 </db:section>
 <db:section>

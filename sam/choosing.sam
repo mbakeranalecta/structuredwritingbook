@@ -131,23 +131,23 @@ chapter:(#chapter.choosing) Choosing languages
 
 
 
-	section: Pros and cons of the management domain
+    section: Pros and cons of the management domain
 
-		The management domain does not exist by itself, because it does not express actual content. It is always an intrusion into other markup domains, most prominently the document domain. 
+        The management domain does not exist by itself, because it does not express actual content. It is always an intrusion into other markup domains, most prominently the document domain. 
 
-		* It ties your content to your management system. 
+        * It ties your content to your management system. 
 
-		* It requires your authors to make management decisions while writing. Professional writers may be able to handle this -- and may even balk at a system that does not let them do it -- but other writers may have no interest in them and no clue how to make them correctly.
+        * It requires your authors to make management decisions while writing. Professional writers may be able to handle this -- and may even balk at a system that does not let them do it -- but other writers may have no interest in them and no clue how to make them correctly.
 
-		* They record only current management decisions about your content. There is no guarantee that either the structures or the data recorded in them will be sufficient for future management purposes.
+        * They record only current management decisions about your content. There is no guarantee that either the structures or the data recorded in them will be sufficient for future management purposes.
 
-		* It is hard to constrain their effects. Writers can use them as a substitute for, or as a way to circumvent, other constraints.
+        * It is hard to constrain their effects. Writers can use them as a substitute for, or as a way to circumvent, other constraints.
 
-		* It distributes management information across the content set. If you record management domain information in your content, and then change how you want things managed, you will potentially have to go to thousands of places in the content and change the management domain content. One of the key things we try to do in structured writing is to avoid having content that may need to be changed at the same time scattered widely across the content set. Ironically, one of the techniques we use to do this can end up scattering management information just a widely. 
+        * It distributes management information across the content set. If you record management domain information in your content, and then change how you want things managed, you will potentially have to go to thousands of places in the content and change the management domain content. One of the key things we try to do in structured writing is to avoid having content that may need to be changed at the same time scattered widely across the content set. Ironically, one of the techniques we use to do this can end up scattering management information just a widely. 
 
 
 
-		Because many management decisions are based on factors in the real world, there are often subject domain and management domain alternatives for handling situations where decisions have to be made below the file level. The advantage and disadvantages of using each domain are similar to those for choosing between the document domain and the subject domain. 
+        Because many management decisions are based on factors in the real world, there are often subject domain and management domain alternatives for handling situations where decisions have to be made below the file level. The advantage and disadvantages of using each domain are similar to those for choosing between the document domain and the subject domain. 
 
         * There is an additional step required to publish subject domain content. 
         
@@ -161,45 +161,45 @@ chapter:(#chapter.choosing) Choosing languages
         
         * The subject domain markup is always specific to its subject matter. Whether a procedure is dangerous or performed by robots is specific to procedures, and only organizations who have potentially dangerous procedures that might be performed by robots are likely to include those fields in their markup. By contrast, the management domain include markup is much more general. It can be used to insert a hundred different pieces of a invariant text in a hundred different contexts. This reduces the cost of developing the markup and the algorithms to process it. But it also ties the content to a specific management system, and it means that authors have to know a lot more about how the publishing system works. This reduces you pool of authors and makes authoring more difficult and therefore more expensive. Finally, it means that it is much more expensive to maintain the content if you change publications. 
 
-		Given all these difficulties with management domain intrusions, you may wonder why they occur at all. Part of the answer may be that markup language design is complex, and if the designers are not fully aware of the problems that management domain intrusions cause, they may see them as an easy way to solve markup design problems. 
+        Given all these difficulties with management domain intrusions, you may wonder why they occur at all. Part of the answer may be that markup language design is complex, and if the designers are not fully aware of the problems that management domain intrusions cause, they may see them as an easy way to solve markup design problems. 
 
-		But a more significant reason is the flexibility that management domain intrusions can provide. By giving authors access to conditional content, for instance, you can avoid creating more complex declarative structures, and thus have a smaller markup language with less processing required. You can also provide ways for authors to work around deficiencies in the current structures, especially when new needs arise. If a company decides that it wants a single markup language to meet all its structured content needs, it is pretty difficult to meet that requirement without adding some management domain intrusions.  
+        But a more significant reason is the flexibility that management domain intrusions can provide. By giving authors access to conditional content, for instance, you can avoid creating more complex declarative structures, and thus have a smaller markup language with less processing required. You can also provide ways for authors to work around deficiencies in the current structures, especially when new needs arise. If a company decides that it wants a single markup language to meet all its structured content needs, it is pretty difficult to meet that requirement without adding some management domain intrusions.  
 
-		But note what this is saying: management domain intrusions can often be used to work around constraints of the current model. And if the purpose of structured writing is to impose constraints, there is  a contradiction, or at least a trade off, here. 
-
-
-		
+        But note what this is saying: management domain intrusions can often be used to work around constraints of the current model. And if the purpose of structured writing is to impose constraints, there is  a contradiction, or at least a trade off, here. 
 
 
-
-	section: The use of the subject domain for managing content
-
-		While management domain structures often intrude into the structure of a document, much of the actual management of content is done using metadata from the document and subject domains.
-
-		In many content management systems, content is written and stored in the document domain (with management domain intrusions), but the content management system captures, stores, and uses, a great deal of subject domain metadata. 
-
-		Some of the reasons for capturing content in the subject domain can also be fulfilled by capturing the content in the document domain and managing it with subject domain metadata stored in a content management system. (Think of this like a label on a can of soup. The can is just a can. The only way you know there is soup inside is that the label says so.) Other benefits of capturing content in the subject domain cannot be fulfilled this way. In particular, the use of subject domain structures to factor out document domain constraints cannot be done with subject domain metadata in a CMS.
-		
-	section: Role of management domain structures in the document domain
-			
-		In the chapter on the {subject domain}[#chapter.subject-domain] we noted that a key characteristic of the document domain is that a document domain document describes a document as it is meant to be published. There is no option to reorganize, add, or subtract content from the document. This is in contrast to the subject domain where you can pick and choose the pieces you want to publish and the order you want to publish them in. 
-
-		Including management domain structures in a document domain language is essentially a way of getting around this feature/limitation of the document domain. It gives you a way to manipulate the final display of the document by specifying conditions and inclusions in the file itself.
-		
-		
-		
-		When you attempt to set up a comprehensive document domain markup language, you quickly run into complex issues about how content will be handled in different situations. One way to handle those issues, and to avoid dipping back into the media domain, is to add management domain structures to the language. 
+        
 
 
 
-	section: Management domain as programming language
+    section: The use of the subject domain for managing content
 
-		I suggested above that management domain markup could be thought of as a kind of simple programming language embedded
-		in a text. The best example of this is HTML, particularity HTML5, which included a full embedded programming language: JavaScript. 
-		
-		JavaScript is used for far more things on the Web than embedding management domain information in the text of a Web page, but that is certainly one of the things it is used for. 
-		
-		When you are designing or using a language that has embedded management domain structures, it is often helpful to remember that they do actually form a programming language, if not one as complex or powerful as JavaScript. Each management domain element in a document is an instruction, and if you have multiple instructions in a document, you have issues about which ones are performed first and how the different instructions interact with each other. And it is not simply a matter of your architects having to wrestle with these issues, your authors have to understand the consequences of the combinations of management domain structures they use. 
+        While management domain structures often intrude into the structure of a document, much of the actual management of content is done using metadata from the document and subject domains.
+
+        In many content management systems, content is written and stored in the document domain (with management domain intrusions), but the content management system captures, stores, and uses, a great deal of subject domain metadata. 
+
+        Some of the reasons for capturing content in the subject domain can also be fulfilled by capturing the content in the document domain and managing it with subject domain metadata stored in a content management system. (Think of this like a label on a can of soup. The can is just a can. The only way you know there is soup inside is that the label says so.) Other benefits of capturing content in the subject domain cannot be fulfilled this way. In particular, the use of subject domain structures to factor out document domain constraints cannot be done with subject domain metadata in a CMS.
+        
+    section: Role of management domain structures in the document domain
+            
+        In the chapter on the {subject domain}[#chapter.subject-domain] we noted that a key characteristic of the document domain is that a document domain document describes a document as it is meant to be published. There is no option to reorganize, add, or subtract content from the document. This is in contrast to the subject domain where you can pick and choose the pieces you want to publish and the order you want to publish them in. 
+
+        Including management domain structures in a document domain language is essentially a way of getting around this feature/limitation of the document domain. It gives you a way to manipulate the final display of the document by specifying conditions and inclusions in the file itself.
+        
+        
+        
+        When you attempt to set up a comprehensive document domain markup language, you quickly run into complex issues about how content will be handled in different situations. One way to handle those issues, and to avoid dipping back into the media domain, is to add management domain structures to the language. 
+
+
+
+    section: Management domain as programming language
+
+        I suggested above that management domain markup could be thought of as a kind of simple programming language embedded
+        in a text. The best example of this is HTML, particularity HTML5, which included a full embedded programming language: JavaScript. 
+        
+        JavaScript is used for far more things on the Web than embedding management domain information in the text of a Web page, but that is certainly one of the things it is used for. 
+        
+        When you are designing or using a language that has embedded management domain structures, it is often helpful to remember that they do actually form a programming language, if not one as complex or powerful as JavaScript. Each management domain element in a document is an instruction, and if you have multiple instructions in a document, you have issues about which ones are performed first and how the different instructions interact with each other. And it is not simply a matter of your architects having to wrestle with these issues, your authors have to understand the consequences of the combinations of management domain structures they use. 
         
         
         
@@ -217,7 +217,7 @@ chapter:(#chapter.choosing) Choosing languages
         
     
         
-		
+        
 
         Which of the structured writing domains you choose, essentially comes down to which set of constraints you wish to enforce. However, creating structures that authors can conform to is also a matter of choosing structures in the domain they are more comfortable in. 
         
@@ -241,21 +241,21 @@ chapter:(#chapter.choosing) Choosing languages
 
     
 
-				
-		
-		
-		
-	section: Using available subject domain languages
-	
-		However, moving to the subject domain does not necessarily mean having to develop all your subject domain structures and their accompanying synthesis and presentation algorithms yourself. There are existing subject domain languages already in existence in many fields. For instance, there are at least three recipe markup languages out there, {REML}(language), {RecipeML}(language), and {CookML}(language).
-		
-		Some of the most commonly used subject domain languages are those for documenting software APIs. These include Sphinx (Python), JavaDoc (Java), and Doxygen (multiple languages). We will look at some of these in more detail later. 
-		
-		Wikipedia contains a {long list of XML markup languages}[https://en.wikipedia.org/wiki/List_of_XML_markup_languages] (though note that not all subject domain languages use XML). Many of these are subject domain languages. Does this mean that if a subject domain language already exists for your subject matter that you should use it rather than developing your own? Not necessarily. It is pretty much a universal rule of markup languages (and a lot of other things) that the more needs they try to serve, the more complex they become. If you take a look at {REML}(language) and {CookML}(language) you will see that both are more complex than the recipe markup language we developed here. 
-		
-		The upside of these existing languages is that they may have algorithms and systems associated with them that you can take advantage of. However, they are often more complex that you need, sometimes less clear, and often don't enforce or record all the constraints you want for your business. 
-		
-		You don't have to adopt these languages directly, however, to take advantage of the systems that use them. Since all recipe languages describe the same subject matter, it is easy to transform content from one to another where they have equivalent structures. This allows you to create your own language to maximize simplicity and clarity for your authors, and to enforce and record all the constraints that are important to you, and still take advantage of existing functionality with a simple transformation. 
-		
-		The same is true of existing document domain languages. If you have your own subject domain language, you do not have to create an entire publishing chain for it. You only need to create an algorithm to transform it to an existing document domain language that has the publishing features you need. 
+                
+        
+        
+        
+    section: Using available subject domain languages
+    
+        However, moving to the subject domain does not necessarily mean having to develop all your subject domain structures and their accompanying synthesis and presentation algorithms yourself. There are existing subject domain languages already in existence in many fields. For instance, there are at least three recipe markup languages out there, {REML}(language), {RecipeML}(language), and {CookML}(language).
+        
+        Some of the most commonly used subject domain languages are those for documenting software APIs. These include Sphinx (Python), JavaDoc (Java), and Doxygen (multiple languages). We will look at some of these in more detail later. 
+        
+        Wikipedia contains a {long list of XML markup languages}[https://en.wikipedia.org/wiki/List_of_XML_markup_languages] (though note that not all subject domain languages use XML). Many of these are subject domain languages. Does this mean that if a subject domain language already exists for your subject matter that you should use it rather than developing your own? Not necessarily. It is pretty much a universal rule of markup languages (and a lot of other things) that the more needs they try to serve, the more complex they become. If you take a look at {REML}(language) and {CookML}(language) you will see that both are more complex than the recipe markup language we developed here. 
+        
+        The upside of these existing languages is that they may have algorithms and systems associated with them that you can take advantage of. However, they are often more complex that you need, sometimes less clear, and often don't enforce or record all the constraints you want for your business. 
+        
+        You don't have to adopt these languages directly, however, to take advantage of the systems that use them. Since all recipe languages describe the same subject matter, it is easy to transform content from one to another where they have equivalent structures. This allows you to create your own language to maximize simplicity and clarity for your authors, and to enforce and record all the constraints that are important to you, and still take advantage of existing functionality with a simple transformation. 
+        
+        The same is true of existing document domain languages. If you have your own subject domain language, you do not have to create an entire publishing chain for it. You only need to create an algorithm to transform it to an existing document domain language that has the publishing features you need. 
 
