@@ -7,15 +7,28 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
 
 	So far I have talked about three domains that content passes through and in which it can be recorded: the {media domain}(concept), the {document domain}(concept), and the {subject domain}(concept). But there is a forth domain that intrudes into this picture: the management domain.
 
-	Why do I call the management domain an intrusion? Because while the subject, document, and media domains are all about recording the content itself, the management domain is not about the content, but about the process of managing it. 
+	Why do I call the management domain an intrusion? Because while the subject, document, and media domains are all about recording the content itself, the management domain is not about the content, but about the process of managing it. Here is the example we looked at in [#chapter.subject-domain]:
+    
+    ```(xml)
+        <section publication="Wine Weenie">
+            <title>Wine match</title>
+            <p>Pinot Noir</p>
+        </section>
+        <section publication="The Teetotaler's Trumpet">
+            <title>Suggested beverage</title>
+            <p>Lemonade</p>
+        </section>
 
-	When you manage unstructured content, the content file contains just the content. Any management {metadata}(concept) related to the content is contained in the repository, whether that be a simple file systems or a more complex asset management system. (People may also keep separate logs of management metadata, in spreadsheets, for example.)
+    Here the `publication` attribute on the `section` element is management domain metadata. It does not specify the formatting or organization of the document or the subject matter of the content. It specifies which publication the content should appear in, which is a management matter.   
 
-	With structured content, this separation of the content from the management metadata is not always maintained. Sometimes management metadata finds its way into the content file itself. Why? Because structured writing makes it possible to address, and therefore manage, individual content structures within a file. Sometimes you can do that management based on media, document, or subject domain metadata. Sometimes you need (or choose) to insert management metadata into the content file. 
+    This idea of placing management metadata in the content itself is something that is unique to structured writing. When you manage unstructured content, the content file contains just the content.[*1] Any management {metadata}(concept) related to the content is contained in a separate file or a so kind of {content management system}. But this approach limits how fine-grained your management of the content can be. You can only manage content at the file level. Because structured writing makes it possible to address, and therefore manage, individual content structures within a file, you can extend management structures and management metadata into the content itself. 
+    
+    footnote:(*1)
+        As we noted in [#chapter.definition], all content is structured. What matters is, what purpose is it structured for. So "unstructured" here means unstructured relative to your requirements. If you don't create or choose a format that supports the management metadata you need at the content level, you can only manage that content at the file level. 
 	
 	section: Example: Including boilerplate content
 
-		For example, lets say you have a standard warning statement that you are required to include in a document wherever you have a dangerous procedure. Structured writing is all about factoring out invariants, and the invariant here is that this warning statement must appear whenever you describe a dangerous procedure. 
+		For example, let's say you have a standard warning statement that you are required to include in a document wherever you have a dangerous procedure. Structured writing is all about factoring out invariants, and the invariant here is that this warning statement must appear whenever you describe a dangerous procedure. 
 		
 		Just as we extracted formatting information into a separate file when we moved content from the media domain to the document domain, we now extract the invariant warning from the document and place it in a separate file. Any place we want this warning to occur, we insert an instruction to include the contents of the file at that location.   
 
@@ -27,14 +40,14 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
                 step: Run away.
                 step: Press the big red button.
 		
-		In the markup above (yes, I will explain it eventually) the `>>>` is an insert command. It inserts the content of the file located at `files/shared/admonitions/danger`.
+		In the SAM markup above the `>>>` is an insert command. It inserts the content of the file located at `files/shared/admonitions/danger`.
         
         #The sample above is not valid SAM because the type of the insert is not given
         #Using SAM would be confusing. Could use 'file' but that is not standard.
 		
-		Why is this operation part of the management domain, rather than the document domain? Because it deals with a system operation: Locating a file in the system and loading its contents. If we were purely in the document domain, the author would be the one performing this operation: finding the file with the warning in it, opening it, and copying the contents into the document. The insertion instruction is just that: an instruction. It is not a declaration about the subject matter or structure of a document, such as we find in subject domain or document domain markup. It is an instruction to a machine to perform an operation. This is one of the hallmarks of management domain markup. It is imperative and it is addressed to a particular software system.	
+		Why is this operation part of the management domain, rather than the document domain? Because it deals with a system operation: Locating a file in the system and loading its contents. If we were purely in the document domain, the author would be the one performing this operation: finding the file with the warning in it, opening it, and copying the contents into the document. The insertion instruction is just that: an instruction. It is not a declaration about the subject matter or structure of a document, such as we find in subject domain or document domain markup. It is either an instruction to a machine to perform an operation. The management domain consists of instructions or the declaration of data required to perform a management function. 
 		
-		Different structured writing systems have different instruction sets for handling the situation described above. In {DITA}(tool), for instance, this use case is handled using something called a {conref}(structure (DITA)) or a {conkeyref}(structure (DITA)). In Docbook it can be handled using a generic XML facility called {XInclude}(tool).
+		Different structured writing systems have different instruction sets for handling the situation described above. In {DITA}(tool), for instance, this use case is handled using something called a {conref}(structure (DITA)) or a {conkeyref}(structure (DITA)). In Docbook it can be handled using a generic XML facility called {XInclude}(tool). We will examine this case in greater detail in [#chapter.reuse].
 		
 	section: An alternative approach in the subject domain
 
@@ -42,7 +55,7 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
 
 		The management domain approach to this is to allow authors to insert the standard warning so that it is only stored once instead of being repeated in every procedure (something that is often called {content reuse}(concept)). Notice that the management domain markup does not encapsulate our invariant rule that dangerous procedures must have a standard warning. It just provides a generic mechanism for inserting content as a reference to a file rather than copying and pasting. It leaves it entirely up to the author to remember and enforce the rule about dangerous procedures.  
 
-		The subject domain approach, on the other hand, is all about the invariant rule itself. Specifically, it expresses the aspect of the subject domain that triggers the rule: whether or not a procedure is dangerous:
+		The subject domain approach, on the other hand, is all about the invariant rule itself. Specifically, it expresses the aspect of the subject domain that triggers the rule: whether a procedure is dangerous or not:
 
 		```(sam)
             procedure: Blow stuff up
@@ -53,9 +66,9 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
                 step: Press the big red button.
 		
 		
-		This markup simply records that this procedure is dangerous. This retains the information on which our invariant rule is based, but factors out the action to be taken. Rather than asking authors to remember to include the file (and how to included it, and how to find it) we delegate that responsibility to the {presentation algorithm}(concept). It is now the algorithm, not the writer, that needs to remember to include the material in `files/shared/admonitions/danger` whenever a procedure has `is-it-dangerous` set to "yes". This is the sort of task that algorithms are much better at than humans. 
+		This markup simply records that this procedure is dangerous. This retains the information on which our invariant rule is based, but factors out the action to be taken. Rather than asking authors to remember to include the file (and how to included it, and how to find it) we delegate that responsibility to the {presentation algorithm}(concept). It is now the algorithm, not the writer, that needs to remember to include the material in `files/shared/admonitions/danger` whenever the `is-it-dangerous` field of a `procedure` structure is set to "yes". This is the sort of task that algorithms are much better at than humans. 
 
-		Of course, the human writer does still have a job to do here. They have to remember set `is-it-dangerous` to "yes". But we can make remembering to do this much easier if we make `is-it-dangerous` a required field in our tagging language for procedures. Now the writer is forced to answer the question "yes" or "no" for every procedure they write. 
+		Of course, the human writer does still have a job to do here. They have to remember set `is-it-dangerous` to "yes". But we can make remembering to do this much easier if we make `is-it-dangerous` a required field in the procedure structure. In other words, we set up our structured writing language in such a way that an error will occur if `is-it-dangerous` is not specified. Now the writer is forced to answer the question "yes" or "no" for every procedure they write. 
 		
 		This approach makes the writer's job much easier because they not only get reminded of the need to address the question of danger with every procedure, they are also asked it in a way that does not require them to know anything about how the content management system works, what warning text is required, or were it is located. They are recording a fact, not giving an instruction. 
 		
