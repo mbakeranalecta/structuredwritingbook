@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0">
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.publishing">
 <db:title>Algorithms: Publishing</db:title>
 
 <db:para>All structured writing must eventually be published. Publishing structured content mean transforming it from the domain in which it was created (subject domain, document domain, or the abstract end of the media domain) to the most concrete end of the media domain spectrum: dots on paper or screen.</db:para>
@@ -10,7 +10,7 @@
 <db:para>There is actually a fifth algorithm in the publishing chain, which we can call the rendering algorithm. The rendering algorithm is the one responsible for actually placing the right dots on the right surface, be that paper, screen, or a printing plate. But this is a low-level device-specific algorithm and no one in the structured writing business is likely to be involved in writing rendering algorithms. The closest we ever get is the next step up, the encoding algorithm.</db:para>
 <db:para>The rendering algorithm requires some form of input to tell it where to place the dots. In writing, this usually comes in the form of something called a page description language. Like it sounds, this is a language for describing what goes where on a page, but in higher level terms that describing where each dot of ink or pixel of light is placed. A page description language deals in things like lines, circles, gradients, margins, and fonts.</db:para>
 <db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/rendering.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
-<db:para>One example of a page description language is PostScript. We looked at a small example of PostScript in <db:olink targetptr="chapter.media-domain">the chapter on the media domain</db:olink>:</db:para>
+<db:para>One example of a page description language is PostScript. We looked at a small example of PostScript in <db:xref linkend="chapter.media-domain"/>:</db:para>
 <db:programlisting language="PostScript">
 100 100 50 0 360 arc closepath
 stroke
@@ -24,7 +24,7 @@ stroke
 <db:para>While it is possible that someone responsible for a highly specialized publishing tool chain may end up writing a specialized encoding algorithm, most encoding algorithms are going to be implemented by existing tools that translate formatting languages into page descriptions languages.</db:para>
 <db:para>There are several formatting languages that are used in content processing. They are often called typesetting languages as well. XSL-FO (XSL - Formatting Objects) is one of the more commonly used in structured writing projects. TeX is another.</db:para>
 <db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/encoding.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
-<db:para>Here is an example of XSL-FO that we looked at in <db:olink targetptr="single-sourcing">the chapter on the single-sourcing algorithm</db:olink>:</db:para>
+<db:para>Here is an example of XSL-FO that we looked at in <db:xref linkend="chapter.single-sourcing"/>:</db:para>
 <db:programlisting language="XSL-FO">
 &lt;fo:block space-after="4pt"&gt;
    &lt;fo:wrapper font-size="14pt" font-weight="bold"&gt;

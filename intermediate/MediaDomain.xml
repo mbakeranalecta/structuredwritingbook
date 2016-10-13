@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter name="media-domain">
+<chapter name="chapter.media-domain">
 <title>Writing in the Media Domain</title>
 <index>
 <row>
@@ -29,18 +29,18 @@
 </index>
 <p>The media domain is the <phrase><annotation type="concept" specifically="structured writing domains">structured writing domain</annotation></phrase> in which the structures relate to the media in which the content is displayed. Such content is often considered “unstructured”, but all content has structure, and we can actually find all the patterns and techniques of all forms of structured writing in the media domain. This makes it a good place to study the fundamentals of <phrase><annotation type="concept">structured writing</annotation></phrase>.</p>
 <p>At its most basic, a hand guiding the pen over paper or chisel into stone is working in the media domain through direct physical interaction with the media. The closest you can get to pen and paper in the computer world is to use a paint program to directly place dots on the screen. You can select the pen tool and use your mouse or a stylus to write your text. This will record the text as a matrix of dots.</p>
-<insert item="../graphics/handwritten-bitmap.png" type="image"/>
+<insert item="../graphics/handwritten-bitmap.xml" type="image"/>
 <p>There is very little structure here. We are recording a pattern of dots. Those patterns of dots are text characters only in the sense that the patterns are recognizable as characters to the human eye. The computer has no idea they are characters.</p>
 <p>This is a pretty inefficient way to write. You can work faster if you use the paint program’s text tool.</p>
-<insert item="../graphics/typed-bitmap.png" type="image"/>
-<p>This allows you to type letters on the keyboard. However, those letters are still recorded as a set of dots, not as characters, so you can’t go back and edit your text as text, only as dots. The computer is providing a slightly more structured way to enter the text, but is not maintaining any more structure in recording the text. (This is an important lesson: Some tools record less structure than you may think. For instance, some template-based authoring solutions don’t record which template was used, so the template does not guide subsequent editing or use. Structure that is used but not recorded has no downstream value.)</p>
+<insert item="../graphics/typed-bitmap.xml" type="image"/>
+<p>This allows you to type letters on the keyboard. However, those letters are still recorded as a set of dots, not as characters, so you can’t go back and edit your text as text, only as dots. The computer is providing a slightly more structured way to enter the text, but is not maintaining any more structure in recording the text. (This is an important lesson: Some tools record less structure than you may think. For instance, some template-based authoring solutions don’t record which template was used, so the template does not guide subsequent editing or use of the content. Structure that is used but not recorded has no downstream value.)</p>
 <p>To work more efficiently, you need to move away from dots and start working in a program that records characters as characters. You could go to a text editor, but a text editor does not keep any formatting information (unless you create markup -- but that would be getting ahead of ourselves). For most publishing purposes, plain text is inadequate. We need to maintain the ability to format the document.</p>
 <p>One type of program that lets us record text as text and also lets us attach formatting to the text is a vector graphic program. A vector graphics (or “draw”) program creates graphics as a collection of  objects (“vector” meaning the mathematical representation of a shape or line). For example, it allows you to create a circle as a shape, described mathematically in computer memory, rather than as a set of dots. Rather than recording an actual circle, the program records an abstraction of a circle: the essential properties needed to reproduce an actual circle on a media, such as its center, diameter, and line weight. The computer then lets you manipulate that abstraction as an object, only rendering it as actual dots when the graphic is displayed on screen or paper.</p>
 <figure id="objects-vs-dots">
 <title>Objects vs. dots</title>
 <insert item="../graphics/object-vs-dots.png" type="image"/>
 <caption>
-<p>A circle as an object, displayed in a vector graphics program (Inkscape), left, vs. a circle as a set of dots in a raster graphics program (Paint), right.</p>
+<p>A circle as an object, displayed in a vector graphics program (Inkscape), left, vs. a circle as a set of dots in a raster graphics program (Microsoft Paint), right.</p>
 </caption>
 </figure>
 <p>In a typical graphics program, a shape is rendered into dots on screen instantly as you draw or edit the shape. Nonetheless, the computer is storing data describing the shape, not a circular pattern of dots, as it would in a paint or photo editing program. This is an instance of what in structured writing circles is called “separating content from formatting”. The mathematical abstraction of a circle is the content; the dots that represent it on screen are the formatting, or rather, the result of applying formatting to the object.</p>
@@ -51,17 +51,11 @@ circle.setCenterX(100.0f);
 circle.setCenterY(100.0f);
 circle.setRadius(50.0f);
 </codeblock>
-<p>This code creates a new circle object and specifies three values that you would need to draw a basic circle, an X and Y coordinate for the center of the circle, and the radius. When a vector graphics file is displayed or printed, a <phrase><annotation type="concept">rendering algorithm</annotation></phrase> turns those objects into a matrix of dots on the current media, using more dots for higher resolution media.</p>
-<p>One way that for an algorithm to turn the mathematical description of a shape into dots is with <phrase><annotation type="tool">PostScript</annotation></phrase>. PostScript is a programming language that lets you describe how to move a virtual pen over a virtual surface, recording dots as it goes. In PostScript the description of a circle object in terms of location and radius is turned into a set of instructions for moving that virtual pen:</p>
-<codeblock language="PostScript">
-100 100 50 0 360 arc closepath
-stroke    
-</codeblock>
-<p>This says, “draw an arc whose center is at coordinates 100, 100, and whose radius is 50, starting at degree 0 and proceeding to degree 360”. This is the algorithm guiding a virtual pen over virtual paper, just as the author we first described moved a real pen over real paper.</p>
+<p>This code creates a new circle object and specifies three values that you would need to draw a basic circle, an X and Y coordinate for the center of the circle, and the radius. When a vector graphics file is displayed or printed, a <phrase><annotation type="concept">rendering algorithm</annotation></phrase> turns those objects into a matrix of dots on the current media, using more dots for higher resolution media and fewer dots for low resoulution media.</p>
 <p>If representing the circle as an object creates an abstraction of “circle” in the media domain, this bit of PostScript code takes that abstraction (a circle as a set of coordinates) and (in concert with the underlying graphics driver) makes it concrete again (dots on a media).</p>
 <p>The point here is not to understand the code, but to see that by creating a more abstract form of the content, we can make it easier to work with, and that we can use algorithms to render it back into concrete form. All of structured writing comes down to finding better ways to represent content for a particular purpose (more efficient, more versatile, more verifiable, more precisely constrained) and ways to transform those representations, into dots on a screen or paper so that the content can be read.</p>
 <p>This is a pattern we will see as we look at structured writing across the <phrase><annotation type="concept" specifically="structured writing domains">three domains</annotation></phrase>. Rather than storing the image of the document to be printed, the computer stores an abstraction of the document which consists of raw text combined with (or, in some cases, replaced by) additional pieces of information which are commonly called metadata. This metadata can then be used to drive algorithms to convert it back into a concrete media domain representation that can be displayed to readers (and also to do a number of other useful thing that we will look at later).</p>
-<p>Just as a vector graphics program represents a circle as a circle object, it represents text as a text object. A text object is a rectangular area that contains characters. It has numerous properties, such as margins, background and foreground colors, the text string, and the font face, size, and weight used to display that text, as in this example from InkScape:</p>
+<p>Just as a vector graphics program represents a circle as a circle object, it represents text as a text object. A text object is a rectangular area that contains characters. It has numerous <phrase>media domain</phrase> properties, such as margins, background and foreground colors, the text string, and the font face, size, and weight used to display that text, as in this example from InkScape:</p>
 <figure id="text-object">
 <title>A vector graphics text object</title>
 <insert item="../graphics/text-object.png" type="image"/>
@@ -71,7 +65,7 @@ stroke
 </figure>
 <section>
 <title>Abstracting out font information</title>
-<p>A vector graphics program displays text in a chosen font. If you change the value of the text object’s font attribute, it will immediately redraw the text in the new font. The shapes of the individual letters in the font are required information for rendering the text object in the media domain. However, they are not stored as part of the text object. Whereas the representation of the text in the paint program included the shape of the letters, in the vector graphics program it does not. That information has been factored out.</p>
+<p>A vector graphics program displays text in a chosen font. If you change the value of the text object’s font attribute, it will immediately redraw the text in the new font. The shapes of the individual letters in the font are required information for rendering the text object in the media domain. However, they are not stored as part of the text object. Whereas the representation of the text in the paint program includes the shape of the letters, in the vector graphics program it does not. That information has been factored out.</p>
 <p>The shape of the characters (technically, “glyphs”) that make up the font are stored separately in font files. Font files consist of a set of shape objects that describe each glyph, together with metadata such as the name of the font and the name of each glyph. To actually display the text block on screen, the graphics program (or rather the graphics system API to which it delegates this task) combines information from the font file with information from the text object by matching the metadata to find the right font and character, and then drawing the appropriate glyph on the current media.</p>
 <figure id="merge_text_and_font">
 <title>Merging text and font information</title>
@@ -102,7 +96,7 @@ stroke
 <title>Printer’s markup</title>
 <insert item="../graphics/printermarkup.png" type="image"/>
 </figure>
-<p>The writer preparing a manuscript for typesetting was working in the document domain, indicating basic document structures like paragraphs, lists, and titles, without any indication of how they should look in print. The designer then wrote a set of instructions for applying formatting to those structures -- a <phrase><annotation type="concept">formatting algorithm</annotation></phrase>. Then the typesetter executed that algorithm by setting the type which the printer then used to print final output. (Here is that same pattern again -- two steams of objects, merged by an algorithm to produce a new stream of objects.)</p>
+<p>The writer preparing a manuscript for typesetting was working in the document domain, indicating basic document structures like paragraphs, lists, and titles, without any indication of how they should look in print. The designer then wrote a set of instructions for applying formatting to those structures -- a <phrase><annotation type="concept">formatting algorithm</annotation></phrase>. Then the typesetter executed that algorithm by setting the type which the printer then used to print final output.</p>
 <p>This is pretty much exactly what we do today when we create an HTML page and specify a CSS stylesheet to supply the formatting instructions. Those instructions are then executed by the browser to render the content on screen or paper.</p>
 <p>Actually, we are getting ahead of ourselves here. A better analogy to old style typesetter’s marks is an HTML page with the styles specified inline.</p>
 <codeblock language="HTML">
@@ -110,7 +104,7 @@ stroke
 </codeblock>
 <p>You can see that this markup is very very similar to the old typesetters marks in <citation type="idref" value="typesetter"/>.</p>
 <p>The intent of the desktop publishing movement was to combine the job of designer and writer into one, effectively moving the author from working in the document domain to working in the media domain, styling content as it was written.</p>
-<p>The inefficiency of applying styles to every element soon became apparent, however. Stylesheet mechanisms were devised to separate the media domain elements of a document from the document domain elements.</p>
+<p>The inefficiency of applying formatting directly to every part of the document soon became apparent, however. Stylesheet mechanisms were devised to separate the media domain elements of a document from the document domain elements.</p>
 <p>Using styles rather than direct formatting does not mean that you have moved from working in the media domain to working in the document domain. It just means that you have moved from working in an unstructured way in the media domain to working in a structured way in the media domain.</p>
 <p>The set of document domain objects in a typical word processor is so small that it does not even distinguish between a heading and a list item. Both are just paragraphs with different styles applied. What distinguishes them is not what type of structure they are, but what styles are applied to them.</p>
 <p>Relying on just a few document domain structures and distinguishing them with styles makes word processing simple, but it an lead to problems. Microsoft Word’s difficulties with maintaining list numbering are well documented, for instance. Because Word does not formally record lists as distinct structures, it can easily lose track of where they begin and end.</p>

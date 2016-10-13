@@ -7,7 +7,7 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
         concept, document domain
         concept, subject domain
         
-    As we saw in {our examination of the media domain}(concept "media domain"), word processors and desktop publishing applications tend to straddle the divide between the media domain and the document domain. While they are built on a basic set of document domain objects -- pages, paragraphs, tables, etc. -- they use a WYSIWYG display to keep the author working and thinking mostly in terms of styles and formatting -- the concerns of the media domain. This makes it difficult to apply meaningful document domain constraints to the author's work, or to record which constraints the author has followed. For that we need to move to the document domain. 
+    Word processors and desktop publishing applications tend to straddle the divide between the media domain and the document domain. While they are built on a basic set of document domain objects -- pages, paragraphs, tables, etc. -- they use a WYSIWYG display to keep the author working and thinking mostly in terms of styles and formatting -- the concerns of the media domain. This makes it difficult to apply meaningful document domain constraints to the author's work, or to record which constraints the author has followed. For that we need to move to the document domain. 
     
     The simplest reason for moving to the document domain is actually to enforce media domain constraints that are hard to enforce in the media domain itself. (In fact, the reason for moving to the next domain is often to enforce -- or factor out -- constraints in the previous domain. This is one of the consistent patterns we find in structured writing.)
     
@@ -47,7 +47,7 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
         </ol>
 
 
-    Now we have a distinct list object, we can factor out our invariant list formatting rule into a separate file that contains list formatting rules. For HTML, this is usually done with a CSS stylesheet:
+    Now we have a distinct list object, we can factor out our invariant list formatting rule into a separate file. For HTML, this is usually done with a CSS stylesheet:
 
     ```(CSS)
         li:first-child 
@@ -125,17 +125,17 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
 
         In the document domain, document structures are usually implemented hierarchically. List items are _inside_ lists. Nested lists are _inside_ list items. Sections are _inside_ chapters. Subsections are _inside_ sections. Where the media domain typically only has before and after relationships (except in tables), the document domain typically adds inside/outside relationships to the mix. This use of nested, rather than flat, structures helps to create context, which helps to reduce the number of different structures you need.
         
-        Some {document domain} languages are more hierarchical than others. {HTML} is relatively flat in structure. It has six different heading styles {H1}(structure (HTML)) through {H6}(structure (HTML)). {Docbook}, a widely used {document domain} structured writing language, is much more hierarchical in structure and has only one element for the same purpose: {title}(structure (DocBook)). But DocBook's {title} element can occur inside 84 different elements, and therefore can potentially be formatted in 84 different ways based on context. In fact, it can potentially be formatted in more ways than that, since some of the elements that contain it can also be nested in other elements, creating even more contexts. 
+        Some {document domain} languages are more hierarchical than others. {HTML} is relatively flat in structure. For example, it has six different heading styles {H1}(structure (HTML)) through {H6}(structure (HTML)). {Docbook}, a widely used {document domain} structured writing language, is much more hierarchical in structure and has only one element for the same purpose: {title}(structure (DocBook)). But DocBook's {title} element can occur inside 84 different elements, and therefore can potentially be formatted in 84 different ways based on context. In fact, it can potentially be formatted in more ways than that, since some of the elements that contain it can also be nested in other elements, creating even more contexts. 
         
         There is a balance to be struck here, however. Nested structures are harder to create and can be harder to understand. Often they require the writer to find just the right place in a hierarchical structure to insert a new piece of content, which is more difficult that simply starting a new paragraph in a word processor. 
         
-        These considerations one another reason why there is more than one document domain language available in the world, and why extensibility is important. A single document domain language that captured all the document domain structures that anyone might want would be very large and very complex.  
+        These considerations one reason why there is more than one document domain language available in the world, and why extensibility is important. A single document domain language that captured all the document domain structures that anyone might want would be very large and very complex and therefore hard to write in.  
         
         Writing an algorithm to transform a large unconstrained document domain language into the media domain would also be a daunting task, since it would need to have a rule to format every single combination of document domain structures that could occur in that language. With a large number of elements and few constraints on how they can be nested, the number of combinations would grow exponentially, making it impossible to handle them all correctly. 
         
         Worse, a universal document domain language would not express the individual and specialized document domain constraints that individual organizations need to manage the critical parts of their content creation and management processes. Much of the virtue of going to the document domain lies in the ability to impose such constraints, which means that the world needs many document domain languages. 
         
-    section: Constraining structure
+    section: Constraining document structure
 
         There are other reasons for working in the document domain beside abstracting out formatting rules. One of the main ones is to constrain how documents are structured. For example, lets say that you want to make sure that all graphics inserted into your documents have a figure number, a title, and a caption. This is a document domain constraint rather than a media domain constraint. The requirement for a graphic to have a figure number, title, and caption is one of document structure and organization and does not say anything about how the title or caption should be formatted, (which is a {media domain} concern). 
 
@@ -148,15 +148,13 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
                 image: images/cute.jpg
         
 
-        If the only way to include an image is to use the image element, and the only place where the image element is allowed is inside the figure element, and if the title and the caption elements are required and must have content, then there is no way for an author to add a graphic without a figure, title, and caption. A document that lacked these elements would be rejected by the {conformance algorithm} (see [#chapter.conformance).
+        If the only way to include an image is to use the image element, and the only place where the image element is allowed is inside the figure element, and if the title and the caption elements are required and must have content, then there is no way for an author to add a graphic without a figure, title, and caption. A document that lacked these elements would be rejected by the {conformance algorithm} (see [#chapter.conformance]).
         
         This is an example of a constraint being enforced rather than factored out. With the list formatting we could factor out the formatting constraint completely by separating the formatting information from the list structure. Here we enforce the image constraint by providing a specific structure that must be followed to insert images. 
 
         (The figure number would be generated automatically, of course, just like the numbers in an ordered list. That constraint has been factored out rather than enforced.)
         
-        This raises an important aspect of document domain languages, and one of the reasons that they tend to have hierarchical rather than flat structures: constraining document structures. 
-        
-        In a typical {media domain} application, there is no restrictions on the order in which paragraph styles can be applied. If you want to put a level two heading between two steps in a procedure, nothing other than common sense will stand in the way of your doing so. In a document domain language, however, that kind of thing will usually not be allowed. 
+        There are many ways in which you might want to constrain the structure of a document. In a typical {media domain} application, there is no restrictions on the order in which paragraph styles can be applied. If you want to put a level two heading between two steps in a procedure, nothing other than common sense will stand in the way of your doing so. In a document domain language, however, that kind of thing will usually not be allowed. 
         
         Instead, the {document domain} language will have a set of constraints on how procedures are structured. Procedure structures will have step structures nested within them. Step structures will only be allowed to appear inside procedure structures. Only certain text elements -- such as paragraphs, lists, or code blocks -- will be allowed to occur inside a step. There will be no way to place a second level heading inside a procedure.
             
@@ -267,7 +265,7 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
 
         Something else interesting is at work here. A list in markdown is just a sequence of paragraphs that start with asterisk characters. On the face of it, this is just like a word processor creating lists by styling paragraphs. But if you look at the resulting HTML, you will see that it creates a proper list wrapper element around the list. The markdown interpreter is inferring the hierarchical structure of the document domain from the essentially flat Markdown syntax. 
 
-        The author is working in something that looks and feels quite like the media domain, thought they have no actual styles and cannot change the formatting at all. But they use abstract formatting notation (underlines for headings, asterisks for unordered lists) to create document domain objects. The beauty of this is that the document domain constraints are preserved, while the author can work in a simple format that is easy to type, and reasonably easy to read.
+        The author is working in something that looks and feels quite like the media domain, thought they have no actual styles and cannot change the formatting at all. But they use abstract formatting notation (underlines for headings, asterisks for unordered lists) to create document domain objects. The beauty of this is that the document domain constraints are preserved, while the author can work in a simple format that is easy to type, and reasonably easy to read. This is an example of {functional lucidity}, which we will look at in depth in [#chapter.authoring].
         
         This is an important reminder that {XML}(language) and languages based on it are not the only route to structured writing. In fact, there are many other ways to create structured texts that obey the appropriate constraints for a particular use case. We will look at some of them in later chapters. 
 
@@ -285,15 +283,21 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
 
         ```(docbook)
             <biblioentry id="bib.xsltrec">
-              <abbrev id="bib.xsltrec.abbrev">REC-XSLT</abbrev>   <editor><firstname>James</firstname><surname>Clark</surname></editor>
-              <title><ulink url="http://www.w3.org/TR/xslt">XSL Transformations
-                (XSLT) Version 1.0</ulink></title>
+              <abbrev id="bib.xsltrec.abbrev">REC-XSLT</abbrev>   
+              <editor>
+                 <firstname>James</firstname>
+                 <surname>Clark</surname>
+              </editor>
+              <title>
+                <ulink url="http://www.w3.org/TR/xslt">XSL Transformations
+                (XSLT) Version 1.0</ulink>
+              </title>
               <publishername>W3C Recommendation</publishername>
               <pubdate>16 November 1999</pubdate>
             </biblioentry>
         
         
-        The example is in XML, which can be hard to read, so here is the same structure in a simpler notation that it easier for humans to read. (I've used this notation for earlier examples, and I'll talk more about it later.):
+        The example is in XML, which can be hard to read, so here is the same structure the SAM markup notation that I have used in earlier examples:
 
         ```(SAM)
             biblioentry:(#bib.xslttrec)

@@ -40,6 +40,11 @@
     
     <xsl:template match="part">
         <db:part>
+            <xsl:if test="@name">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@name"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
         </db:part>
     </xsl:template>
@@ -100,6 +105,11 @@
     <xsl:template match="/chapter">
         <db:chapter 
            version="5.0"> 
+            <xsl:if test="@name">
+              <xsl:attribute name="xml:id">
+                  <xsl:value-of select="@name"/>
+              </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
         </db:chapter>
     </xsl:template>
@@ -253,6 +263,12 @@
         </db:emphasis>
     </xsl:template>
     
+    <xsl:template match="annotation[@type='guibutton']">
+        <db:guibutton>
+            <xsl:apply-templates/>
+        </db:guibutton>
+    </xsl:template>
+    
     <xsl:template match="annotation[@type='title']">
         <db:citetitle>
             <xsl:apply-templates/>
@@ -260,10 +276,21 @@
     </xsl:template>
     
     <xsl:template match="citation[@type='citation']">
-        <xsl:apply-templates/>        
-        <xsl:text>[</xsl:text>
-        <xsl:value-of select="@value"/>
-        <xsl:text>]</xsl:text>
+        <xsl:apply-templates/>    
+        <xsl:choose>
+            <xsl:when test="ancestor::footnote">
+                <xsl:text>[</xsl:text>
+                <xsl:value-of select="@value"/>
+                <xsl:text>]</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+                <db:footnote>
+                    <db:para>
+                        <xsl:value-of select="@value"/>
+                    </db:para>
+                </db:footnote>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xsl:template match="citation[@type='idref']">
@@ -313,9 +340,10 @@
     </xsl:template>
     
     <xsl:template match="citation[@type='nameref']" priority="-.1">
-        <db:olink targetptr="{@value}">
+        <db:xref linkend="{@value}"/>
+<!--        <db:olink targetptr="{@value}">
             <xsl:apply-templates/>
-        </db:olink>
+        </db:olink>-->
     </xsl:template>
     
     <xsl:template match="insert[@type='image']">
@@ -463,7 +491,7 @@
     </xsl:template>
     
 -->    
-    <xsl:template match="figure">
+    <xsl:template match="figure[title]">
         <db:figure>
             <xsl:if test="@id">
                 <xsl:attribute name="xml:id">
@@ -471,11 +499,44 @@
                 </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates select="title"/>
-            <db:mediaobject>
-                <xsl:apply-templates select="*[not(self::title)]"/> 
-            </db:mediaobject>
+            <xsl:choose>
+                <xsl:when test="insert[@type='image']">
+                    <db:mediaobject>
+                        <xsl:apply-templates select="*[not(self::title)]"/> 
+                    </db:mediaobject>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="*[not(self::title)]"/>                   
+                </xsl:otherwise>
+            </xsl:choose>
         </db:figure>
     </xsl:template>
+ 
+    <xsl:template match="figure[not(title)]">
+        <db:informalfigure>
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@name">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@name"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="insert[@type='image']">
+                    <db:mediaobject>
+                        <xsl:apply-templates/> 
+                    </db:mediaobject>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates/>                   
+                </xsl:otherwise>
+            </xsl:choose>
+        </db:informalfigure>
+    </xsl:template>
+    
     
     <xsl:template match="ll">
         <db:variablelist>

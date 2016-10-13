@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0">
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.lightweight">
 <db:title>Lightweight Languages</db:title>
 
 <db:para>The term “lightweight markup language” has arisen in recent years and seems to describe that set of markup languages which are designed to use a lightweight syntax, that is, one that imposes a minimal burden on the readability of the raw text of the document. The primary appeal of lightweight markup languages rests on two related phenomena.</db:para>
@@ -27,14 +27,14 @@
 <db:title>Wiki markup</db:title>
 <db:para>Another popular lightweight format is Wiki markup, introduced by Ward Cunningham in 1995 as the writing format for WikiWikiWeb, the first Wiki. Wiki markup is similar to Markdown in many respects (most lightweight languages share the same basic syntax conventions, based on the imitation of formatted document features in plain text documents). What makes Wiki markup distinct is how it is tied into the operation of a Wiki. One of its most notable feature is how linking is handled. In the original WikiWikiWeb markup, and word with internal capitals was considered a “Wiki word” and instantly became a link to a page with that Wiki Word as the title. Such a page was created automatically if it did not already exist. This was an extremely simple implementation of a linking algorithm based on annotation rather than the naming of resources.</db:para>
 <db:para>A wiki is a type of simple content management system which allows people to create and edit pages directly from a web browser. Wikipedia is by far the largest and most well known Wiki. Wiki’s are a preeminent example of a bottom-up information architecture. Anyone can add a page and that page is integrated into the overall collection by Wiki word style linking and by including itself in categories (conventionally by naming them on the page).</db:para>
-<db:para>Cunningham described WikiWikiWeb as “The simplest online database that could possibly work.”[http://www.wiki.org/wiki.cgi?WhatIsWiki] Like Markup, its success has led to additional features, fragmentation, and growing complexity. Some commercial wikis are now complex content management systems. Indeed, it is somewhat difficult today to define the boundaries between Wikis, Blog platforms, and conventional CMSs.</db:para>
+<db:para>Cunningham described WikiWikiWeb as “The simplest online database that could possibly work.”<db:footnote><db:para>http://www.wiki.org/wiki.cgi?WhatIsWiki</db:para></db:footnote> Like Markup, its success has led to additional features, fragmentation, and growing complexity. Some commercial wikis are now complex content management systems. Indeed, it is somewhat difficult today to define the boundaries between Wikis, Blog platforms, and conventional CMSs.</db:para>
 <db:para>If they have a defining characteristic today it is probably the bottom-up architecture rather in to original novelty of in-browser editing which is now found across many different kinds of CMS. Cunningham designed Wikis to be collaborative platforms -- places where people could collaborate with people they did not even know to create something new without the requirement for central direction or control. The idea was not only architecturally bottom-up but editorially bottom-up. Most Wiki products today, however, include considerable features for exercising a degree of central control. Question and Answer sites like Stack Exchange with their distributed and democratic control systems may be closer today to Cunningham’s idea of a democratic creation space.</db:para>
 <db:para>What Wikis illustrate for structured writing is that very simple markup innovations like the Wiki word can have revolutionary effects on how content is created and organized. Most Wikis today use ordinary words between double square brackets for Wiki words, rather than internal capitals, but the principle is the same. You can link to a thing merely by naming it.</db:para>
 <db:para>Wiki words are also a case of subject domain annotation. Marking a phrase as a WikiWord says, “this is a significant subject”. It does not provide type information like most of the subject domain annotation examples shown in this book, but merely denoting a phrase as significant says that it names some subject of importance that deserves a page of its own. This illustrates the point about bottom-up information architectures, that structured writing, even in very simple form, can crate texts that are capable of self-organization, that can be assembled into meaningful collections without the imposition of any external structures.</db:para>
 </db:section>
 <db:section>
 <db:title>reStructuredText</db:title>
-<db:para>reSturcuteredText is a lightweight concrete markup language most often associated with the Sphinx documentation framework which was developed for documenting the Python programming language. We looked at reStructuredText briefly as an example of a hybrid markup language in <db:olink targetptr="chapter.markup"/>.</db:para>
+<db:para>reSturcuteredText is a lightweight concrete markup language most often associated with the Sphinx documentation framework which was developed for documenting the Python programming language. We looked at reStructuredText briefly as an example of a hybrid markup language in <db:xref linkend="chapter.markup"/>.</db:para>
 <db:programlisting language="reStructuredText">
 .. image:: images/biohazard.png
    :height: 100
@@ -102,7 +102,7 @@ Metals commonly used include:
   \end{align}
 \end{document}
 </db:programlisting>
-<db:para>Here is how that markup is rendered:[By The original uploader was Bakkedal at English Wikipedia - Own work, CC BY-SA 2.5, https://commons.wikimedia.org/w/index.php?curid=30044147]</db:para>
+<db:para>Here is how that markup is rendered:<db:footnote><db:para>By The original uploader was Bakkedal at English Wikipedia - Own work, CC BY-SA 2.5, https://commons.wikimedia.org/w/index.php?curid=30044147</db:para></db:footnote></db:para>
 <db:mediaobject><db:imageobject><db:imagedata fileref="graphics/Latex_example.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
 <db:para>It is the markup for the equation that shows why LaTeX is popular for academic and scientific publishing. While not exactly transparent, the markup is compact and functionally lucid for anyone with a little experience with it.</db:para>
 <db:para>Wikipedia offers a comparison of various math markup formats which shows how big a difference syntax can make to the lucidity of markup language in some cases.</db:para>
@@ -153,7 +153,7 @@ x=\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 </db:section>
 <db:section>
 <db:title>Subject Domain Languages</db:title>
-<db:para>So far we have looked at languages that are primarily document domain oriented. The document domain is an obvious choice for a public language since the use of common document types like books and articles is widespread. But there are a number of public subject domain languages as well. One example that we have looked at before (<db:olink targetptr="chapter.extract"/>) is JavaDoc. Here is the example we looked at there:</db:para>
+<db:para>So far we have looked at languages that are primarily document domain oriented. The document domain is an obvious choice for a public language since the use of common document types like books and articles is widespread. But there are a number of public subject domain languages as well. One example that we have looked at before (<db:xref linkend="chapter.extract"/>) is JavaDoc. Here is the example we looked at there:</db:para>
 <db:programlisting language="Java">
 /**
  * Validates a chess move.
@@ -178,6 +178,6 @@ boolean isValidMove(int theFromFile, int theFromRank, int theToFile, int theToRa
 <db:title>SAM</db:title>
 <db:para>I’ve talked about SAM a couple of times now, and said that many of the examples in this book are written in SAM. That is true, in the same sense that some of the examples are written in XML. But this is not the same thing as saying that an example is written in reStructuredText. reStructuredText is a complex document domain markup language which also happens to have an extension facility. You can write a complete document in reStructuredText without defining any new structures.</db:para>
 <db:para>SAM, on the other hand, while it has concrete lightweight syntax features, is not a concrete markup language out of the box. The most complex SAM document you can write without defining any structures is a single paragraph or list. (A SAM document must have a single root element, so two paragraphs in a row at the root level is an error. You need a block structure such as <db:code>topic</db:code> or <db:code>chapter</db:code> or <db:code>recipe</db:code> to contain everything and SAM does not predefine any blocks.)</db:para>
-<db:para>SAM is designed for the same purpose as XML: for defining new markup languages. I’ll get back to it in <db:olink targetptr="chapter.extensible"/>.</db:para>
+<db:para>SAM is designed for the same purpose as XML: for defining new markup languages. I’ll get back to it in <db:xref linkend="chapter.extensible"/>.</db:para>
 </db:section>
 </db:chapter>

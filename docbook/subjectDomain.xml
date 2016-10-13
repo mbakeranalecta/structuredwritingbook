@@ -1,15 +1,17 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0">
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.subject-domain">
 <db:title>Writing in the Subject Domain</db:title>
 
 
-<db:para>Structured writing in the subject domain means creating structures that are specific to the subject matter being discussed. Sometimes the use of the subject domain is a minor part of a primarily document domain language. For example, DocBook includes subject domain tags like <db:code>GUILabel</db:code> for references to part of a computer display. Sometimes it takes the form of a document type that is specific to one subject. These may be document oriented or subject oriented. A document-oriented subject specific language is designed to specify how a document on that subject should be organized and presented. A subject-oriented subject-specific language factors out organization and presentation details and to capture information about the subject that could be presented in many different ways.</db:para>
+<db:para>Structured writing in the subject domain means creating structures that are specific to the subject matter being discussed. Sometimes the use of the subject domain is a minor part of a primarily document domain language. For example, DocBook includes subject domain tags like <db:code>GUILabel</db:code> for references to part of a computer display. Sometimes it takes the form of a document type that is specific to one subject such as a recipe, a used car review, a tide table, or a travel itinerary. These may be document oriented or subject oriented. A document-oriented subject specific language is designed to specify how a document on that subject should be organized and presented. A subject-oriented subject-specific language factors out organization and presentation details and to capture information about the subject that could be presented in many different ways.</db:para>
 <db:para>A recipe is a useful example for examining these differences. Notice that the word recipe itself has two meanings. It can mean the formula for a dish. It can also mean the document that records that dish. This reflects a distinction that is important in the subject domain: recording the subject itself, vs creating a document on the subject. We will examine this distinction in this chapter. To begin with, though, we will look at what a recipe looks like in a generic document domain language (one this is not specific to the subject of food preparation).</db:para>
 <db:para>Here is a recipe written in reStructuredText, a lightweight general purpose markup language:</db:para>
-<db:figure><db:mediaobject><db:programlisting language="reStructuredText">
+<db:informalfigure>
+<db:programlisting language="reStructuredText">
 Hard Boiled Eggs
 ================
-A hard boiled egg is simple and nutritious. Prep time, 15 minutes. Serves 6.
+A hard boiled egg is simple and nutritious. 
+Prep time, 15 minutes. Serves 6.
 
 Ingredients
 -----------
@@ -27,13 +29,15 @@ Preparation
     3. Remove from heat and cover for 12 minutes.
     4. Place eggs in cold water to stop cooking.
     5. Peel and serve.
-</db:programlisting></db:mediaobject></db:figure>
+</db:programlisting>
+</db:informalfigure>
 <db:para>In reStructuredText, a line underlined with equals signs is a major heading and one underlined with dashes is a minor heading. A table is created by using equals signs to mark the beginning and end of the table and the boundary between the table head and the table body. Rows are separated by new lines and columns by spaces in the rows of equals signs. Numbered lists are created by putting numbers in front of lines of text. The equivalent HTML document would look like this:</db:para>
 <db:programlisting language="HTML">
 &lt;html&gt;
     &lt;h1&gt;Hard Boiled Eggs&lt;/h1&gt;
     
-    &lt;p&gt;A hard boiled egg is simple and nutritious. Prep time, 15 minutes. Serves 6.&lt;/p&gt;
+    &lt;p&gt;A hard boiled egg is simple and nutritious. 
+    Prep time, 15 minutes. Serves 6.&lt;/p&gt;
     
     &lt;h2&gt;Ingredients&lt;/h2&gt;
     &lt;table&gt;
@@ -68,7 +72,8 @@ Preparation
 <db:programlisting language="sam">
 recipe: Hard Boiled Egg
     introduction:
-        A hard boiled egg is simple and nutritious. Prep time, 15 minutes. Serves 6.
+        A hard boiled egg is simple and nutritious. 
+        Prep time, 15 minutes. Serves 6.
     ingredients:
         * 12 eggs
         * 2qt water
@@ -98,10 +103,10 @@ recipe: Hard Boiled Egg
     prep-time: 15 minutes
     serves: 1
 </db:programlisting>
-<db:para>Enforcing and recording these additional fields not only makes sure your recipes consistently meet your corporate constraints, they also offer some interesting publishing possibilities. For instance, with this markup in place, you could easily query your set of recipes to create a cookbook of recipes you can make in 30 minutes or less.</db:para>
-<db:para>Does this mean that the preparation time will now be displayed as separate fields in the output, rather than in-line? Not necessarily. It might be a good idea to call it out in separate fields so that readers can find the information more easily, but if you really wanted that information at the end of the introduction in every recipe, it would be a simple matter for the presentation  algorithm (see <db:olink targetptr="chapter.publishing"/>) to construct the sentences “Prep time, 15 minutes. Serves 6.” from the <db:code>prep-time</db:code> and <db:code>serves</db:code> field values.</db:para>
-<db:para>In other words, <db:code>prep-time</db:code> and <db:code>serves</db:code> are pure subject domain structures that do not specify presentation at all. Elements of of recipe structure do still specify presentation, though. As we noted, the reStructuredText version in <db:olink targetptr="fig.rest.recipe"/> specify a table presentation for the ingredients. Our recipe structure currently specifies a simple list. The block that contains it is labeled “ingredients”, but the contents of the block is just an ordinary unordered list.</db:para>
-<db:para>There is a relevant constraint here, one which authors need to follow, but one that our markup does not yet impose or record: how to express ingredients. The specification of ingredients in a recipe generally requires three pieces of information, the name of the ingredient, the quantity, and the unit of measure used to express this quantity. These can be presented as a list or a table. To factor out the presentation choice, we can create and ingredient structure that calls out each piece of information separately:</db:para>
+<db:para>Enforcing and recording these additional fields not only makes sure your recipes consistently meet your organization’s constraints, they also offer some interesting publishing possibilities. For instance, with this markup in place, you could easily query your set of recipes to create a cookbook of recipes you can make in 30 minutes or less.</db:para>
+<db:para>Does this mean that the preparation time will now be displayed as separate fields in the output, rather than in-line? Not necessarily. It might be a good idea to call it out in separate fields so that readers can find the information more easily, but if you really wanted that information at the end of the introduction in every recipe, it would be a simple matter for the presentation  algorithm (see <db:xref linkend="chapter.publishing"/>) to construct the sentences “Prep time, 15 minutes. Serves 6.” from the <db:code>prep-time</db:code> and <db:code>serves</db:code> field values.</db:para>
+<db:para>In other words, <db:code>prep-time</db:code> and <db:code>serves</db:code> are pure subject domain structures that do not specify presentation at all. Elements of of recipe structure do still specify presentation, though. As we noted, the reStructuredText version above specify a table presentation for the ingredients. Our recipe structure currently specifies a simple list. The block that contains it is labeled “ingredients”, but the contents of the block is just an ordinary unordered list.</db:para>
+<db:para>There is a relevant constraint here, one which authors need to follow, but one that our markup does not yet impose or record: how to express ingredients. The specification of ingredients in a recipe generally requires three pieces of information, the name of the ingredient, the quantity, and the unit of measure used to express this quantity. These can be presented as a list or a table. To factor out the presentation choice, we can create an ingredient structure that calls out each piece of information separately:</db:para>
 <db:programlisting language="sam">
 ingredients:
     ingredient: 
@@ -146,8 +151,8 @@ ingredients:: ingredient, quantity, unit
 </db:section>
 <db:section>
 <db:title>Using subjects to establish context</db:title>
-<db:para>In the discussion of the document domain (see <db:olink targetptr="chapter.document-domain"/>), we noted that we can use context to identify the role that certain structures play in a document, which allows us to get away with fewer structures. For instance, we can use a single title tag for all titles because we can tell what kind of title each one is from the context in which it occurs. The same is true with subject domain structures. They can provide context that allows us to treat basic text structures differently.</db:para>
-<db:para>Suppose we have a markup language for recipes:</db:para>
+<db:para>In <db:xref linkend="chapter.document-domain"/>, we noted that we can use context to identify the role that certain structures play in a document, which allows us to get away with fewer structures. For instance, we can use a single title tag for all titles because we can tell what kind of title each one is from the context in which it occurs. The same is true with subject domain structures. They can provide context that allows us to treat basic text structures differently.</db:para>
+<db:para>Consider our markup language for recipes:</db:para>
 <db:programlisting language="sam">
 recipe: Hard Boiled Egg
     introduction:
@@ -164,17 +169,15 @@ recipe: Hard Boiled Egg
     prep-time: 15 minutes
     serves: 6
 </db:programlisting>
-<db:para>With the ingredients, we saw that we needed to add additional structure to factor out whether the ingredients would be presented as a list or a table. For the preparation, the steps are currently marked up as a numbered list.</db:para>
-<db:para>Suppose we want to present the steps as steps, rather than just as a generic numbered list (for instance, by labeling them as <db:emphasis role="bold">Step 1.</db:emphasis>, etc, rather than just <db:emphasis role="bold">1.</db:emphasis>). Do we need to create an additional <db:code>step</db:code> structure to do this? Not necessarily. In this case we can can tell the difference between an ordinary ordered list and a set of preparation steps based on context.</db:para>
-<db:para>We can write a rule in the presentation algorithm that creates special formatting just for ordered lists that are the children of <db:code>preparation</db:code> elements that are children of <db:code>recipe</db:code> elements.</db:para>
+<db:para>With the ingredients, we saw that we needed to add additional structure to factor out whether the ingredients would be presented as a list or a table. For the preparation, the steps are currently marked up as a numbered list.  Suppose we want to present the steps as steps, rather than just as a generic numbered list (for instance, by labeling them as <db:emphasis role="bold">Step 1.</db:emphasis>, etc, rather than just <db:emphasis role="bold">1.</db:emphasis>). Do we need to create an additional <db:code>step</db:code> structure to do this? Not necessarily. In this case we can can tell the difference between an ordinary ordered list and a set of preparation steps based on context. We can write a rule in the presentation algorithm that creates special formatting just for ordered lists that are the children of <db:code>preparation</db:code> elements that are children of <db:code>recipe</db:code> elements (just as we could create rules to format a nested list differently from its parent list based on its context).</db:para>
 </db:section>
 <db:section>
 <db:title>Limits of Subject Domain Markup</db:title>
 <db:para>While all content is specific to its subject matter, not all content breaks down into such easily identifiable fields as a recipe. A generic essay document format fits equally well for an essay on radishes as an essay on asteroids. Subject-specific structures are much easier to discern for reference works. The format of a telephone directory, an API reference, or a parts list is always specific to the subject matter. In fact, we find that the format of an API reference for one programming language can be different from the format of another language because of differences between the languages.</db:para>
-<db:para>On the other hand, there are many document types that today are typically written as unstructured text. The content could be separated into distinct fields, as we separated prep time and number served into distinct fields in our recipe example, but is instead presented ad hoc as part of general text. Developing and applying subject domain templates the pull out this content into distinct and accessible fields can serve to make the content more consistent, more accessible to the reader, and more adaptable for various publishing scenarios. We will look at some examples in later chapters.</db:para>
-<db:para>Most document domain languages include some subject domain structures. Often they are quite small, sometimes markup up only individual phrases. In most cases, they are optional features, which means they don’t impose much in the way of constraints. Often they are used to factor out certain formatting or presentation decisions.</db:para>
-<db:para>In other cases, we find document domain languages that are entirely subject specific. They dictate how a document about a particular subject should be written. They often have large subject domain structures, often acting like document templates. In many cases, the smaller structures within these template sections are generic document structures that control how the section is to be presented, rather than expressing exactly which pieces of information are to be included, leaving it to the author to determine what the content of a section will contain.</db:para>
+<db:para>On the other hand, there are many document types that today are typically written as unstructured text, the content of which could be separated into distinct fields, just as we separated prep time and number served into distinct fields in our recipe example. Developing and applying subject domain templates the pull out this content into distinct and accessible fields can serve to make the content more consistent, more accessible to the reader, and more adaptable for various publishing scenarios. We will look at some examples in later chapters.</db:para>
+<db:para>Most document domain languages include some subject domain structures. Often they are quite small, sometimes marking up only individual phrases. In most cases, they are optional features, which means they don’t impose much in the way of constraints. Often they are used to factor out certain formatting or presentation decisions.</db:para>
+<db:para>In other cases, we find document domain languages that are entirely subject specific. They dictate how a document about a particular subject should be written. They have large subject domain structures, often acting like document templates. In many cases, the smaller structures within these template sections are generic document structures that control how the section is to be presented, rather than expressing exactly which pieces of information are to be included, leaving it to the author to determine what the content of a section will contain.</db:para>
 <db:para>Finally, there are predominantly subject domain languages which largely factor out the presentation decisions and specify in detail the information to be included. These languages are the most constrained but they also open up the content to the widest variety of uses as they are effectively miniature databases of subject information that algorithms can query for all kinds of purposes.</db:para>
-<db:para>You cannot put all of your content into these highly constrained and highly specific subject domain languages. But for the content that is suitable for this treatment, the benefits can be enormous, both for the quality of your content and the efficiency of your process. We will see several examples of the potential of these kinds of languages as we look at the structured writing algorithms in <db:olink targetptr="part.algorithms"/>.</db:para>
+<db:para>You cannot put all of your content into these highly constrained and highly specific subject domain languages. But for the content that is suitable for this treatment, the benefits can be enormous, both for the quality of your content and the efficiency of your process. We will see several examples of the potential of these kinds of languages as we look at the structured writing algorithms in <db:xref linkend="part.algorithms"/>.</db:para>
 </db:section>
 </db:chapter>
