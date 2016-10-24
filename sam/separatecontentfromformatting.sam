@@ -1,5 +1,5 @@
-chapter: Algorithms: Separating Content from Formatting
-
+chapter: Separating Content from Formatting
+    <<<(annotations.sam)
     index:: type, term
         concept, separating content from formatting
 
@@ -16,7 +16,7 @@ chapter: Algorithms: Separating Content from Formatting
             {font: 10pt "Open Sans"}[bullet][tab]Gold
         
         
-        This file contains content and formatting, so let's separate the two. Of course, when we remove the formatting from the content we are going to have to add something in its place so we can add this or other formatting back later. The algorithm is not really "separate content from formatting" but "separate formatting from content and replace it with something else". 
+        This file contains content and formatting, so let's separate the two. Of course, when we remove the formatting from the content we are going to have to add something in its place so we can add the formatting back later. The algorithm is not really "separate content from formatting" but "separate formatting from content and replace it with something else". 
         
         The simplest thing to replace it with is a style:
         
@@ -33,7 +33,7 @@ chapter: Algorithms: Separating Content from Formatting
             paragraph = {font: 10pt "Open Sans"}
         
         
-        Now that they are separated, we have the choice of substituting different formatting by changing the definition of the style, not the content:
+        Now that they are separated, we have the choice of substituting different formatting by changing the definition of the style, while leaving the content alone:
         
         ```
             paragraph = {font: 12pt "Century Schoolbook"}
@@ -78,7 +78,7 @@ chapter: Algorithms: Separating Content from Formatting
             bullet-paragraph = {font: 12pt "Century Schoolbook"}[em dash][tab]
         
                
-        And then we maybe realize that "bullet-paragraph" is not the best name any more, because the style is now a dash, not a bullet. In other words we discover that we had not done as good a job as we thought of separating content from formatting, because the content actually still contains formatting information in the form of a style named for a particular piece of formatting. 
+        And then we maybe realize that "bullet-paragraph" is not the best name any more, because the style is now a dash, not a bullet. In other words we discover that we had not done as good a job as we thought of separating content from formatting, because the content actually still contains formatting information in the form of a style that is named for a particular piece of formatting. 
         
     section: Name your abstractions correctly
         
@@ -90,9 +90,9 @@ chapter: Algorithms: Separating Content from Formatting
         
         ```
             {style: paragraph}The box contains:
-            {style: list-item}[tab]Sand
-            {style: list-item}[tab]Eggs
-            {style: list-item}[tab]Gold
+            {style: list-item}Sand
+            {style: list-item}Eggs
+            {style: list-item}Gold
         
         
         and
@@ -116,9 +116,9 @@ chapter: Algorithms: Separating Content from Formatting
         
         ```
             {style: paragraph}The box contains:
-            {style: unordered-list-item}[tab]Sand
-            {style: unordered-list-item}[tab]Eggs
-            {style: unordered-list-item}[tab]Gold
+            {style: unordered-list-item}Sand
+            {style: unordered-list-item}Eggs
+            {style: unordered-list-item}Gold
         
         
         and
@@ -158,7 +158,7 @@ chapter: Algorithms: Separating Content from Formatting
         
     section: Create containers to provide context
        
-        One problem with this approach is that the writer has to remember to apply a different style to the first item of a list. It would be better if they could use the same style for each list item and have the numbering just work. But this is hard to do because there is nothing in the content to say where one numbered list ends and the next begins. For this we need a new abstraction. So far we have abstractions for two kinds of list items: ordered and unordered list items. But we don't have an abstraction for lists themselves. 
+        As we noted in [#chapter.document-domain], one problem with this approach is that the writer has to remember to apply a different style to the first item of a list. It would be better if they could use the same style for each list item and have the numbering just work. But this is hard to do because there is nothing in the content to say where one numbered list ends and the next begins. For this we need a new abstraction. So far we have abstractions for two kinds of list items: ordered and unordered list items. But we don't have an abstraction for lists themselves. 
         
         So far, we have been separating content from formatting purely in the {media domain}(concept). We have replaced direct formatting definitions with indirect definitions through styles. The only thing that abstracts any of this beyond the media domain is the names that we have given to the styles that we have created. But now we start to venture into the {document domain}(concept), creating the abstract idea of a list and inserting that abstract idea into our content.
         
@@ -216,11 +216,10 @@ chapter: Algorithms: Separating Content from Formatting
         
         Moving the abstraction out to the container is an important part of the algorithm of separating content from formatting. It helps keep things consistent and reduces the number of things authors have to remember. 
         
-        Creating containers and abstracting out the differences between their contents is an important piece of separating content for formatting. For example, HTML and Markdown both provide six different level of headings. But content under an `H2` or an `H5` heading is not in any container. The content simply comes after the heading. This means that is it perfectly possible and legal in there languages to place different heading elements in any order you want. Writers have to pay attention to which heading level they are creating and how it fits in the structure of the document they are creating. 
+        Creating containers and abstracting out the differences between their contents is an important piece of separating content for formatting. For example, HTML and Markdown both provide six different level of headings. But content under an `H2` or an `H5` heading is not in any container. The content simply comes after the heading. This means that is it perfectly possible and legal in these languages to place different heading elements in any order you want. Writers have to pay attention to which heading level they are creating and how it fits in the structure of the document they are creating. 
         
-        Furthermore, writers understand that the higher the number of the heading element (`H1` - `H6`) the larger the font will appear in the output. They don't know which font it will be or how big it will be, but larger/smaller is still a formatting distinction. Formatting has not been completely separated from content. 
         
-        By contrast, in {DocBook}(language), we have a `section` element. Like a list, a section is part of the writer's interpretation of what they are creating in the document, but it is only implied, not instantiated by the formatting. By creating a {section}(structure (DocBook) element, DocBook instantiates the concept of a section. And once we have the instantiation of a section, we don't need six levels of heading. We can have one element called {title}(structure (DITA)). Sections can be nested inside other sections, and the formatting algorithm can apply the correct style to the title based on context:
+        By contrast, in {DocBook}(language), we have a `section` element. Like a list, a section is part of the writer's interpretation of what they are creating in the document, but it is only implied, not instantiated by the formatting. By creating a {section}(structure (DocBook)) element, DocBook instantiates the concept of a section. And once we have the instantiation of a section, we don't need six levels of heading. We can have one element called {title}(structure (DITA)). Sections can be nested inside other sections, and the formatting algorithm can apply the correct style to the title based on context:
         
         ```
             section: 
@@ -232,7 +231,7 @@ chapter: Algorithms: Separating Content from Formatting
         
         This will eliminate incorrect heading element choices, ensuring that the headings in the output consistently reflect the section and subsection structure of the document. 
         
-        (Now it must be said that not everyone necessarily holds to the view that heading in a text do or should reflect a hierarchy of sections. Sometimes they may be simply signposts along the way, and like any signpost, the size of the sign reflects the size of the town, not a strict hierarchy of sign sizes. So if that is how you look at document structures, you should choose a different way to separate content from formatting in your content.)
+        (Now it must be said that not everyone necessarily holds to the view that headings in a text do or should reflect a hierarchy of sections. Sometimes they may be simply signposts along the way, and like any signpost, the size of the sign reflects the size of the town, not a strict hierarchy of sign sizes. So if that is how you look at document structures, you should choose a different way to separate content from formatting in your content.)
         
     section: Separate out abstract formatting
         
@@ -240,13 +239,14 @@ chapter: Algorithms: Separating Content from Formatting
         
         Consider a structure that we might call a labeled list:
         
-        |Street| 123 Elm Street
-        
-        |Town| Smallville
-        
-        |Country| USA
-        
-        |Code| 12345
+        """   
+            |Street| 123 Elm Street
+            
+            |Town| Smallville
+            
+            |Country| USA
+            
+            |Code| 12345
         
         The generic structure of a labeled list might look like this:
         
@@ -255,9 +255,18 @@ chapter: Algorithms: Separating Content from Formatting
                 list-item:
                     label: Street
                     content: 123 Elm Street
+                list-item:
+                    label: Town
+                    contents: Smallville
+                list-item:
+                    label: Country
+                    contents: 123 USA
+                list-item:
+                    label: Code
+                    contents: 12345
         
         
-        But what if you have hundreds of addresses, all with the same labels. In this case, are the labels really content, or are they format? Since they don't change from one list to another, we could look at them as being part of how the content is presented, rather than being part of the content itself. So we look for a way to separate them from the content. 
+        But what if you have hundreds of addresses, all with the same labels. In this case, are the labels really content, or are they formatting? Since they don't change from one list to another, we could look at them as being part of how the content is presented, rather than being part of the content itself. So we look for a way to separate them from the content. 
         
         As always, when we separate something from our content, we have to replace it with something else, and that something is generally an appropriately named structure. So that gets us a structure like this:
 
@@ -269,13 +278,15 @@ chapter: Algorithms: Separating Content from Formatting
                 code: 12345
         
         
-        Now, of course, we have moved our content into the {subject domain}(concept). Notice that in our previous attempts at separation we separated out the formatting of a list and replaced it with an abstract form of a list. This certainly separated out some of the formatting, but it still left us with a list. And deciding to list items in a document is still a formatting decision. 
+        Now, of course, we have moved our content into the {subject domain}(concept). This is a good point to make an important distinction between formatting and presentation. Though these two words are often used interchangeably, we need to make a distinction between them for structured writing purposes. For purposes of this discussion, the formatting of text is the precise details of its appearance: the font chosen, the width of the text column, the size of the characters, the spacing between line, the size and shape of the bullet characters. 
+
+        Presentation, on the other hand, is about how we organize the content. Deciding to use a list to present a certain piece of information is a presentation decision, and it is independent of the formatting details we apply to lists. When we move content from the media domain to the document domain, we separate the formatting of the content from the presentation of the content. The decision to present the information as a list remains; the decision about what that list will look like has been separated out. 
+
+        When we move the content from the document domain to the subject domain, however, we separate the information from the presentation. The subject domain structure above is not a labeled list. It is a data record that could be turned into many different forms of presentation. 
         
-        Moving content from the media domain to the document domain actually separates out the style information, but still leaves a lot of general formatting decisions, such as the decision to use lists or tables, firmly attached to the content. Separating style from content is useful in a number of ways, but it does not achieve a complete separation for content from formatting. 
+        The job of turning such structures into a specific form of presentation is the job of the presentation algorithm, which we will look at in more detail in [#chapter.publishing]. The presentation algorithm could turn it into a labeled list, a table, a paragraph (with the fields separated by commas), or the address label for an envelope. 
         
-        In the subject domain example, however, we moved our content away from being a labeled list and turned it into an subject-specific record. We could how have an algorithm turn that record into several document structures. This algorithm, which I will call the "presentation" algorithm, could turn it into a labeled list, a table, a paragraph (with the fields separated by commas), or the address label for an envelope. 
-        
-        In the subject domain, with the content entirely separated from formatting, we also gain the ability to query and reorganize the content in various interesting and useful ways (which we will explore in further chapters). 
+        In the subject domain, with the content separated from both formatting and presentation, we also gain the ability to query and reorganize the content in various interesting and useful ways (which we will explore in further chapters). 
         
         This is as far as we can go in separating content from formatting, and we can't separate all content from formatting to quite this extent. It should be clear at this point that separating content from format is not a binary thing. There are various stages of separation that we can achieve for various reasons. It is important to understand exactly which degree of separation will best serve your needs. 
         

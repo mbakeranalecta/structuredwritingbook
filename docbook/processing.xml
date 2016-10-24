@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.processing">
-<db:title>Algorithms: Processing Structured Text</db:title>
+<db:title>Processing Structured Text</db:title>
 
-<db:para>If structured writing is about separating content from formatting, then it is also about reuniting content and formatting in order to publish content to a specific device. To do this, we process the structured text using algorithms.</db:para>
-<db:para>Since part of the point of structured writing it to be able to publish in different combinations to different media, so we will need different algorithms to create different combinations and target different media. Understanding the basics of these algorithms is important to understanding structured writing even if you don’t intend to code the algorithms yourself.</db:para>
+
+<db:para>As I have said from the beginning, structured writing involves the use of algorithms to assist in writing better content. Now it is time to take a look at what basic structured writing algorithms look like and how they are expressed. There are two parts to every structured writing algorithm: the analysis and imposition of structure, an the processing of that structure.  Since the most basic of structured writing algorithms is separating content form formatting, the exploration of the algorithms is not complete until we look at how you reunite the separated pieces to produce output. So now lets look at the algorithm for putting formatting and content back together. Understanding the basics of these algorithms is important to understanding structured writing even if you don’t intend to code the algorithms yourself.</db:para>
 <db:section>
 <db:title>Two into one: reversing the factoring out of invariants</db:title>
 <db:para>Moving content from the media domain to the document domain and the subject domain involves progressively factoring out invariants in the content. Each step in this process creates two artifacts, the structured content and the invariant piece that was factored out.</db:para>
@@ -38,7 +38,7 @@ find {style: paragraph}
 find {style: bullet-paragraph}
     replace {font: 10pt "Open Sans"}[bullet][tab]
 </db:programlisting>
-<db:para>I said at the beginning that the basic processing algorithm was to combine two source of information to create a new one. Where are these two sources? The first source is the structured text. The second source is the style definitions, and they are embedded in the rules themselves. This is how it is usually done. In some cases, though, the rules may pull content from a separate file. We will see cases of this later.</db:para>
+<db:para>I said at the beginning that the basic processing algorithm was to combine two source of information to create a new one. Where are these two sources? The first source is the structured text. The second source is the style definitions, and they are embedded in the rules themselves. This is how it is usually done. In some cases, though, the rules may pull content from a separate file. We will see examples of this later.</db:para>
 <db:para>The result of applying these rules is that we get back the original content:</db:para>
 <db:programlisting>
 {font: 10pt "Open Sans"}The box contains:
@@ -83,12 +83,11 @@ match bullet-paragraph
 {font: 12pt "Century Schoolbook"}[em dash][tab]Eggs
 {font: 12pt "Century Schoolbook"}[em dash][tab]Gold
 </db:programlisting>
-<db:para>The only real difference is that we have factored out the details of how the structures are recognized. (Yes, code and pseudocode are examples of structured writing at work!)</db:para>
 </db:section>
 <db:section>
 <db:title>The order of the rules does not matter</db:title>
 <db:para>You may have noticed that what these rules are doing is pretty much exactly what style sheets do in an application like Word or FrameMaker. In fact, it is exactly what a style sheet does. If you understand style sheets, you understand a good deal of how structured writing algorithms work.</db:para>
-<db:para>One important thing to notice is that when you create a style sheet in Word or FrameMaker, you don’t specify the order in which styles will be applied to the document. The same is true when you create a CSS stylesheet for the Web. The style sheet is just a flat list of rules. The order in which the rules are applied to the document depends entirely on the order in which the various structures the rules apply to occur in the document.</db:para>
+<db:para>One important thing to notice is that when you create a style sheet in Word or FrameMaker, you don’t specify the order in which styles will be applied to the document. The same is true when you create a CSS stylesheet for the Web. The style sheet is just a flat list of rules. The order in which the rules are applied to the document depends entirely on the order in which the various structures occur in the document.</db:para>
 <db:para>This may seem very obvious, but it is key to understanding how structured text is usually processed. It is a subject that is sometimes quite confusing to people who have been trained to write procedural computer programs, which is why I am making a point of calling it out.</db:para>
 <db:para>Things get a tiny bit more complex when we move into processing the nested structures of the document domain and subject domain, but the basic pattern of a set of unordered rules to describe a transformation algorithm still applies.</db:para>
 </db:section>
@@ -114,7 +113,7 @@ match title
 <db:programlisting language="sam">
 title: Review of {Rio Bravo}(movie)
 </db:programlisting>
-<db:para>Here the annotated text is set off with curly braces and the annotation itself in in parentheses immediately after it. So the annotation says that the words “Rio Bravo” refer to a movie. (I really will explain this markup eventually.) The annotation is a content structure just like the title structure, and is nested inside the text of the title.</db:para>
+<db:para>Here the annotated text is set off with curly braces and the annotation itself in in parentheses immediately after it. (This is a feature of the SAM markup syntax that I am using for most of the examples in this book.) So the annotation says that the words “Rio Bravo” refer to a movie. (I really will explain this markup eventually.) The annotation is a content structure just like the title structure, and is nested inside the text of the title.</db:para>
 <db:para>So what do we do with our rule for processing titles to make it deal with <db:code>movie</db:code> annotations embedded in the title text? Absolutely nothing. Instead, we write a separate rule for handling <db:code>movie</db:code> annotations no matter where they occur:</db:para>
 <db:programlisting language="pseudo">
 match movie
@@ -125,11 +124,11 @@ match movie
 <db:programlisting language="html">
 &lt;h1&gt;Review of &lt;i&gt;Rio Bravo&lt;/i&gt;&lt;/h1&gt;
 </db:programlisting>
-<db:para>The <db:code>continue</db:code> instruction is really all we need to add to our rules to allow them to deal with nested structures. They remain an unordered collection of rules, just like a style sheet. (In fact, XSLT, a language that implements this model, calls a set of processing rules a “stylesheet”.)</db:para>
+<db:para>The <db:code>continue</db:code> instruction is really all we need to add to our rules to allow them to deal with nested structures. They remain an unordered collection of rules, just like a stylesheet. (In fact, XSLT, a language that implements this model, calls a set of processing rules a “stylesheet”.)</db:para>
 </db:section>
 <db:section>
 <db:title>Processing based on context</db:title>
-<db:para>When we move to the document domain, we can use context to reduce the number of structures that we need. For example, where HTML has six different heading structures, <db:code>H1</db:code> through <db:code>H6</db:code>), DocBook has only one: <db:code>title</db:code>, which can occur in many different contexts. So how do we apply the right formatting to a title based on its context? We create different rules for the <db:code>title</db:code> structure in each of its contexts. We express the context by listing the parent structure names separated by slashes:</db:para>
+<db:para>When we move to the document domain, we use context to reduce the number of structures that we need. For example, where HTML has six different heading structures, <db:code>H1</db:code> through <db:code>H6</db:code>), DocBook has only one: <db:code>title</db:code>, which can occur in many different contexts. So how do we apply the right formatting to a title based on its context? We create different rules for the <db:code>title</db:code> structure in each of its contexts. We express the context by listing the parent structure names separated by slashes:</db:para>
 <db:programlisting language="pseudo">
 match book/title
     create h1 
@@ -275,7 +274,7 @@ labeled-list:
         label: Code
         contents: 12345
 </db:programlisting>
-<db:para>Here is the algorithm (set of rules) to accomplish this transformation:</db:para>
+<db:para>Here is the set of rules to accomplish this transformation:</db:para>
 <db:programlisting>
 match address
     create labeled-list

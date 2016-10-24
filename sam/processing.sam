@@ -1,11 +1,9 @@
-chapter:(#chapter.processing) Algorithms: Processing Structured Text
-
+chapter:(#chapter.processing) Processing Structured Text
+    <<<(annotations.sam)
     index:: type, term
         task, processing structured text
 
-    If structured writing is about {separating content from formatting}(concept), then it is also about reuniting content and formatting in order to publish content to a specific device. To do this, we process the structured text using algorithms. 
-    
-    Since part of the point of structured writing it to be able to publish in different combinations to different media, so we will need different algorithms to create different combinations and target different media. Understanding the basics of these algorithms is important to understanding structured writing even if you don't intend to code the algorithms yourself. 
+    As I have said from the beginning, structured writing involves the use of algorithms to assist in writing better content. Now it is time to take a look at what basic structured writing algorithms look like and how they are expressed. There are two parts to every structured writing algorithm: the analysis and imposition of structure, an the processing of that structure.  Since the most basic of structured writing algorithms is separating content form formatting, the exploration of the algorithms is not complete until we look at how you reunite the separated pieces to produce output. So now lets look at the algorithm for putting formatting and content back together. Understanding the basics of these algorithms is important to understanding structured writing even if you don't intend to code the algorithms yourself. 
     
     section: Two into one: reversing the factoring out of invariants
     
@@ -50,7 +48,7 @@ chapter:(#chapter.processing) Algorithms: Processing Structured Text
                 replace {font: 10pt "Open Sans"}[bullet][tab]
         
         
-        I said at the beginning that the basic processing algorithm was to combine two source of information to create a new one. Where are these two sources? The first source is the structured text. The second source is the style definitions, and they are embedded in the rules themselves. This is how it is usually done. In some cases, though, the rules may pull content from a separate file. We will see cases of this later. 
+        I said at the beginning that the basic processing algorithm was to combine two source of information to create a new one. Where are these two sources? The first source is the structured text. The second source is the style definitions, and they are embedded in the rules themselves. This is how it is usually done. In some cases, though, the rules may pull content from a separate file. We will see examples of this later. 
         
         The result of applying these rules is that we get back the original content:
         
@@ -106,15 +104,12 @@ chapter:(#chapter.processing) Algorithms: Processing Structured Text
             {font: 12pt "Century Schoolbook"}[em dash][tab]Sand
             {font: 12pt "Century Schoolbook"}[em dash][tab]Eggs
             {font: 12pt "Century Schoolbook"}[em dash][tab]Gold
-        
-
-        The only real difference is that we have factored out the details of how the structures are recognized. (Yes, code and pseudocode are examples of structured writing at work!)
-        
+                
     section: The order of the rules does not matter
         
         You may have noticed that what these rules are doing is pretty much exactly what style sheets do in an application like {Word}(tool "Microsoft Word") or {FrameMaker}(tool). In fact, it is exactly what a style sheet does. If you understand style sheets, you understand a good deal of how structured writing algorithms work. 
         
-        One important thing to notice is that when you create a style sheet in {Word} or {FrameMaker}, you don't specify the order in which styles will be applied to the document. The same is true when you create a CSS stylesheet for the Web. The style sheet is just a flat list of rules. The order in which the rules are applied to the document depends entirely on the order in which the various structures the rules apply to occur in the document. 
+        One important thing to notice is that when you create a style sheet in {Word} or {FrameMaker}, you don't specify the order in which styles will be applied to the document. The same is true when you create a CSS stylesheet for the Web. The style sheet is just a flat list of rules. The order in which the rules are applied to the document depends entirely on the order in which the various structures occur in the document. 
         
         This may seem very obvious, but it is key to understanding how structured text is usually processed. It is a subject that is sometimes quite confusing to people who have been trained to write procedural computer programs, which is why I am making a point of calling it out.     
         
@@ -152,7 +147,7 @@ chapter:(#chapter.processing) Algorithms: Processing Structured Text
             title: Review of {Rio Bravo}(movie)
         
         
-        Here the annotated text is set off with curly braces and the annotation itself in in parentheses immediately after it. So the annotation says that the words "Rio Bravo" refer to a movie. (I really will explain this markup eventually.) The annotation is a content structure just like the title structure, and is nested inside the text of the title. 
+        Here the annotated text is set off with curly braces and the annotation itself in in parentheses immediately after it. (This is a feature of the SAM markup syntax that I am using for most of the examples in this book.) So the annotation says that the words "Rio Bravo" refer to a movie. (I really will explain this markup eventually.) The annotation is a content structure just like the title structure, and is nested inside the text of the title. 
         
         So what do we do with our rule for processing titles to make it deal with `movie` annotations embedded in the title text? Absolutely nothing. Instead, we write a separate rule for handling `movie` annotations no matter where they occur:
         
@@ -168,11 +163,11 @@ chapter:(#chapter.processing) Algorithms: Processing Structured Text
             <h1>Review of <i>Rio Bravo</i></h1>
         
         
-        The `continue` instruction is really all we need to add to our rules to allow them to deal with nested structures. They remain an unordered collection of rules, just like a style sheet. (In fact, {XSLT}(tool), a language that implements this model, calls a set of processing rules a "stylesheet".)
+        The `continue` instruction is really all we need to add to our rules to allow them to deal with nested structures. They remain an unordered collection of rules, just like a stylesheet. (In fact, {XSLT}(tool), a language that implements this model, calls a set of processing rules a "stylesheet".)
         
     section: Processing based on context
         
-        When we move to the {document domain}, we can use context to reduce the number of structures that we need. For example, where {HTML}(language) has six different heading structures, `H1` through `H6`), {DocBook}(language) has only one: `title`, which can occur in many different contexts. So how do we apply the right formatting to a title based on its context? We create different rules for the `title` structure in each of its contexts. We express the context by listing the parent structure names separated by slashes:
+        When we move to the {document domain}, we use context to reduce the number of structures that we need. For example, where {HTML}(language) has six different heading structures, `H1` through `H6`), {DocBook}(language) has only one: `title`, which can occur in many different contexts. So how do we apply the right formatting to a title based on its context? We create different rules for the `title` structure in each of its contexts. We express the context by listing the parent structure names separated by slashes:
         
         ```(pseudo)
             match book/title
@@ -343,7 +338,7 @@ chapter:(#chapter.processing) Algorithms: Processing Structured Text
                     contents: 12345
             
 
-        Here is the algorithm (set of rules) to accomplish this transformation:
+        Here is the set of rules to accomplish this transformation:
         
         ```
             match address

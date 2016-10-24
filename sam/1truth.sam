@@ -1,10 +1,16 @@
 chapter: Single source of truth
-
-    The third form of single sourcing is the single source of truth. This means that when a piece of information is needed anywhere in your organization, there is one and only one place where that information is stored and from which it should be accessed. 
+    
+    <<<(annotations.sam)
+    
+    index: type, term
+        concept, single source of truth
+        concept, single sourcing
+        
+    The third form of {single sourcing} is the single source of truth. This means that when a piece of information is needed anywhere in your organization, there is one and only one place where that information is stored and from which it should be accessed. 
     
     This is, of course, a case of {content reuse}(algorithm), but whereas the content reuse algorithm deals with how reuse happens, the single source of truth algorithm is concerned with ensuring that only one copy of a given truth is created and maintained. The content reuse algorithm can work without any such assurance, and frequently does. The writer finds some content to reuse and reuses it, without asking if it represents the one and only source of the truth it expresses.
     
-    The task of finding some content that meets your needs and can be reused is very different from that ask of assuring that there is only one piece of content in existence that can meet a specific need. Finding content to reuse is a task for the writer of the content doing the reusing. Ensuring that there is only one source for that content is a task for the writer of the content being reused. They have to make sure when they create and store the content that there really is no other piece of content serving the same purpose in then entire body of content. 
+    The task of finding some content that meets your needs and can be reused is very different from that ask of assuring that there is only one piece of content in existence that can meet a specific need. Finding content to reuse is a task for the writer of the content doing the reusing. Ensuring that there is only one source for that content is a task for the writer of the content being reused. They have to make sure when they create and store some piece of content that there really is no other piece of content serving the same purpose in then entire body of content. 
     
     The problem with the single source of truth algorithm is, as Pontius Pilate asked, “What is truth?”[John 18:38]
     
@@ -12,7 +18,7 @@ chapter: Single source of truth
     
     For other types of information, however, the question becomes much more complex. There are two fundamental problems.
     
-    1. Content, by its nature, deals with those subject that do not fit neatly into rows and columns, and thus cannot be formally normalized according to database rules. Where databases describe relationships formally by use of records and keys, content describes relationships informally in prose. In particular content deals with complex, unique, and potentially ambiguous relationships that could not be reduced to rows and tables at any reasonable cost. The same fact may be mentioned in many different pieces of content for many different purposes. It may be elaborated on in one place, explained briefly in another, and merely mentioned in a third. What is the single source of this fact? Can it be effectively factored out and stored separately when it is described (legitimately) in different levels of detail in different documents?
+    1. Content, by its nature, deals with those subject that do not fit neatly into rows and columns, and thus cannot be formally normalized according to database rules. Where databases describe relationships formally by use of records and keys, content describes relationships informally in prose. In particular, content deals with complex, unique, and potentially ambiguous relationships that could not be reduced to rows and tables at any reasonable cost. The same fact may be mentioned in many different pieces of content for many different purposes. It may be elaborated on in one place, explained briefly in another, and merely mentioned in a third. What is the single source of this fact? Can it be effectively factored out and stored separately when it is described (legitimately) in different levels of detail in different documents?
     
     2. Content is always designed for a particular audience, both to serve a particular need and to suit a particular background and level of knowledge. Everything we know about effective content tells us that we need to address different audiences and different tasks differently. Taking a piece of content designed for one audience and using it for all other audiences, or attempting to write generic content that takes no account of any audience's needs or tasks is certain to produce content that is significantly less effective. What then is the single source of truth for this information? 
 
@@ -25,11 +31,12 @@ chapter: Single source of truth
     A simple case of the single source of truth algorithm is the replacement of certain pieces of text by variables. In technical communication, it is a frequent practice to replace things like company names and product names by variables:
     
     ```(sam)
-        Thank you for buying >($company-name)'s >($product-name). We hope you enjoy it for many years to come.
+        Thank you for buying >($company-name)'s >($product-name). 
+        We hope you enjoy it for many years to come.
         
-    There are a couple of reasons for doing this. One is that company names and product names often then to have a precise formal variant that the marketing department wants everyone to use, and the informal variant that people actually use. There is constraint here: use the formal name for company and product not the common name. But because authors are more used to using the common name (like everyone else) they are likely to slip it in without thinking. And if they do remember that they are supposed to use the formal name, they may not remember it correctly and so use the wrong form. Using the variable instead ensures that the correct version of the name is used at all times.
+    There are a couple of reasons for doing this. One is that company names and product names often have a precise formal variant that the marketing department wants everyone to use, and the informal variant that people actually use. There is constraint here: use the formal name for company and product not the common name. But because authors are more used to using the common name (like everyone else) they are likely to slip it in without thinking. And if they do remember that they are supposed to use the formal name, they may not remember it correctly and so use the wrong form. Using the variable instead ensures that the correct version of the name is used at all times.
     
-    The second reason is that that product and companies are sometimes re-branded. The names change. If the names are written into the source in a hundred places, you will need to find those hundred instances and change them all. If a variable is used, you just need to change the definition of the variable and you don't have to touch the source content at all. 
+    The second reason is that products and companies are sometimes re-branded. The names change. If the names are written into the source in a hundred places, you will need to find those hundred instances and change them all. If a variable is used, you just need to change the definition of the variable and you don't have to touch the source content at all. 
     
     This is clearly a very tactical approach to creating a single source of truth. We have a single source of truth for the name of the company and the name of the product. We don't have a single source of truth for every name. We don't for example, have a variable for the name of every ingredient in a recipe:
     
@@ -46,13 +53,13 @@ chapter: Single source of truth
 
     section: Single vs Findable
 
-        In many cases, the desire to create a single source of truth is to manage change in a content set. Since facts may be scattered across a content set in all kinds of content designed for all kinds of purposes for all kinds of audiences, it can be time consuming and expensive to find and change all of these instances when the subject matter changes. The biggest challenge, perhaps, is making sure that you have found all the instances in which the fact is mentioned, which can be particularly challenging when information is scattered across multiple formats and systems.
+        In many cases, the desire to create a single source of truth is to manage change in a content set. Since facts may be scattered across a content set in all kinds of content designed for all kinds of purposes for all kinds of audiences, it can be time consuming and expensive to find and change all of these instances when the subject matter changes. The biggest challenge, perhaps, is making sure that you have found all the instances in which the fact is mentioned, which can be particularly challenging when information is scattered across multiple formats and systems. We will look at managing change in more depth in [#chapter.change].
 
         Factoring out that information into a single source of truth should, in theory, make the whole update process much easier. Lots of organization use variables to insert product names into documents, for instance, so that they can just update the value of the variable when the product name changes. However, there are a number of problems with this approach:
 
         |Historical usage| Sometimes there is historical usage in a document: a reference to past products or services that remain true after the contemporary changes are made. Not ever instance of a product name, for instance, should change when the current product name changes. But it is often hard to make the distinction between historical and contemporary use at the time the variable is inserted into the content. 
         
-        |Validation| It is hard to make sure that the variable is always used by writers. There is generally no way to structurally remind or constrain the author to use the variable instead of the name. Automated checking systems can sometimes catch instances, but they can be confused by historical usage or by other facts that happen to be expressed with the same words. (Think of a company like Henry's Camera, for instance, who cannot guarantee that every use of Henry's is a reference to the company name. 
+        |Validation| It is hard to make sure that the variable is always used by writers. There is generally no way to structurally remind or constrain the author to use the variable instead of the name. Automated checking systems can sometimes catch instances, but they can be confused by historical usage or by other facts that happen to be expressed with the same words. (Think of a company like Henry's Camera, for instance, who cannot guarantee that every use of "Henry's" is a reference to the company name.) 
         
         |Anticipating change| Finally, there is the problem of which facts to factor out and which not to. Factoring out every fact would be prohibitively expensive and make authoring virtually impossible. You can only afford to factor out those facts are are likely to change. But none of us has a crystal ball, and some of the biggest changes we have to deal with often come from places we did not expect. 
         
@@ -62,11 +69,11 @@ chapter: Single source of truth
         
         This is all about the ability to recognize information in context, and the ability to recognize non-canonical references to facts (a person or thing referred to by a nick name, for instance, like calling John Wayne "The Duke" or IMB "Big Blue"). Having your content in the subject domain make this much easier. Second best is having your content in the document or media domains but stored in a content management system with a cataloging scheme based in the subject domain.  
         
-        Two basic problems: the same truth referred to using different terms, and different truths referred to using the same term. In the latter case, context can tell us much.
+        #Two basic problems: the same truth referred to using different terms, and different truths referred to using the same term. In the latter case, context can tell us much.
         
         
-        Need for strict typing. If only source, got to make sure it does the whole job correctly.
+        #Need for strict typing. If only source, got to make sure it does the whole job correctly.
         
-        Can use differential single sourcing to produce variants.
+        #Can use differential single sourcing to produce variants.
     
     

@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.reuse">
-<db:title>The Reuse Algorithm</db:title>
+<db:title>Reuse</db:title>
 
-<db:para>The reuse of content in different contexts has become one of the main drivers of structured writing, particularly in the form of widespread adoption of DITA. Content reuse is not one technique, but a collection of many techniques, each of which requires specific content structures in the subject and document domains.</db:para>
+<db:para>The reuse of content in different contexts has become one of the main drivers of structured writing, particularly in the form of widespread adoption of DITA. Content reuse is not one technique, but a collection of many techniques, each of which requires specific content structures in the subject, document, and management domains.</db:para>
 <db:para>The simplest content reuse technique is cutting and pasting content from one source to another. This approach is quick and easy to implement, but it creates a host of management problems. When people talk about content reuse they generally mean any and every means of reusing content other than cutting and pasting.</db:para>
 <db:para>This means that reusing content really means storing a piece of content in one place and inserting it into more than one publication by reference. “Reusing” can suggest that this activity is somewhat akin to rummaging through that jar of old nuts and bolts you have in the garage looking for one that is the right size to fix your lawnmower. While you can do it that way, that approach is neither efficient nor reliable. The efficient and reliable approach involves deliberately creating content for use in multiple locations. This means that you need to place constraints on the content to be reused and the content that reuses it, and that means you are in the realm of structured writing.</db:para>
 <db:section>
 <db:title>Fitting pieces of content together</db:title>
 <db:para>If you are going to create one piece of content that can be used in many outputs, you have to make sure it fits in each of those outputs.</db:para>
-<db:para>If you cut and paste, this is not a concern. You can cut any text you like, paste it in anywhere, and edit it to fit if need be. But if the content you want to use is used in other places, you can’t edit it to fit because that might cause it to no longer fit in the other places. For reuse to work, the content must be written to fit in multiple places. In other words, it has to meet a set of constraints that will allow it to fit in multiple places.</db:para>
+<db:para>If you cut and paste, this is not a concern. You can cut any text you like, paste it in anywhere, and edit it to fit if you need to. But if the content you want to use is used in other places, you can’t edit it to fit because that might cause it to no longer fit in the other places. For reuse to work, the content must be written to fit in multiple places. In other words, it has to meet a set of constraints that will allow it to fit in multiple places. We will look at this in more detail in <db:xref linkend="chapter.composability"/>.</db:para>
 <db:para>There are seven basic models for fitting pieces of content together:</db:para>
 <db:itemizedlist>
 <db:listitem>
@@ -39,7 +39,7 @@
 <db:para>In the common into variable case, you have a common piece of content that occurs in many places. This could mean it occurs in many documents or in many places in the same document, or both.</db:para>
 <db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/common2variable.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
 <db:para>For instance, if you are writing procedures and there is a common safety warning that must appear on all dangerous procedures, each individual procedure is the variable part and the standard warning is the common part.</db:para>
-<db:para>We looked at an example of this in the chapter on the management domain.</db:para>
+<db:para>We looked at an example of this in <db:xref linkend="chapter.management-domain"/>.</db:para>
 <db:programlisting language="sam">
 procedure: Blow stuff up
     &gt;&gt;&gt;(files/shared/admonitions/danger)
@@ -49,6 +49,7 @@ procedure: Blow stuff up
     step: Press the big red button.
 </db:programlisting>
 <db:para>To ensure that the included content will always fit, you need to make sure that there is a clear division of responsibilities between the common content and each of the documents it will be inserted into. The inserted content should give the safety warning, the whole safety warning, and nothing but the safety warning. Each document that includes it should include it in the required place in the procedure structure.</db:para>
+<db:para>Of course, you can also use the subject-domain approach to common into variable that we looked at in <db:xref linkend="chapter.management-domain"/>.</db:para>
 </db:section>
 <db:section>
 <db:title>Variable into common</db:title>
@@ -78,9 +79,9 @@ vehicles:
 </db:programlisting>
 <db:para>Then we write the algorithm to process the insert so that it queries this structure.</db:para>
 <db:programlisting language="pseudo">
-match insert with variable where variable = $doors
-    $number_of_doors = vehicles/vehicle[$model]/doors
-    output $number_of_doors
+match insert where variable = $seats
+    $number_of_seats = vehicles/vehicle[$model]/seats
+    output $number_of_seats
 </db:programlisting>
 <db:para>All these insert and query mechanisms are pseudocode, of course. Exactly how things work and exactly how you delineate, identify, and insert content vary from system to system.</db:para>
 <db:para>With the variable into common technique, you are creating a common source by factoring out all the parts of the different outputs that are not common. This is, in some ways, the inverse of the usual pattern of factoring out invariants: we are actually factoring out the variants. But really, it amounts to the same thing. We are factoring variants from invariants. The only real difference between this and the common into variable is whether the common parts are embedded in the variable parts or vice versa. Either way, we still end up with two artifacts: the variable piece or pieces and the common piece or pieces.</db:para>
@@ -93,6 +94,8 @@ match insert with variable where variable = $doors
 <db:para>Here we need to talk about how we identify the content to be inserted. In the common into variable example, we inserted the content of a file that contains a standard warning. But this approach is fragile. You can’t reorganize your files without breaking reuse, and you almost always need to reorganize your files eventually. Plus, it forces you to have every piece of reusable content in a separate file, which may not be efficient.</db:para>
 <db:para>But for variable into variable this approach simply does not work. Variable into variable requires loading a different file, which is difficult when the content specifies a particular file name to import.</db:para>
 <db:para>As always in structured writing, we look for a way to factor out the problematic content. So here we look for a way to factor out the file name and replace it with something else.</db:para>
+<db:section>
+<db:title>Using IDs</db:title>
 <db:para>The most basic way to factor out the file name is to give the content of the file an ID and use the ID to identify the content in a location independent way. Here is the warning file with the ID <db:code>#warn_danger</db:code> added:</db:para>
 <db:programlisting language="sam">
 warning:(#warn_danger) 
@@ -125,6 +128,9 @@ warning:(#warn_danger)
     Pay close attention. You could really hurt yourself.
 </db:programlisting>
 <db:para>By telling the build to search this file for IDs rather than the file with the domestic market warning, you automatically get the the foreign warning rather than the domestic one.</db:para>
+</db:section>
+<db:section>
+<db:title>Using keys</db:title>
 <db:para>Another way to do this is with keys. Instead of assigning an ID directly to the content, the keys approach use an intermediate lookup table to resolve keys to particular resources.</db:para>
 <db:para>So in this case we have the warning in a file called files/shared/admonitions/domestic/danger with the following content (no ID):</db:para>
 <db:programlisting language="sam">
@@ -166,7 +172,6 @@ keys:
 <db:para>You then tell the synthesis algorithm to use this lookup table instead.</db:para>
 <db:para>Using keys is not necessarily better than using IDs. What it comes down to is that you need some kind of bridge between the citation of an identifier in the source file and the location of a resource with that identifier in the content store. This bridge can be created by a key lookup table, by remapping file URLs, or by modifying a query to a content repository.</db:para>
 <db:para>One feature of the key approach is that, because it does not attach the key directly to the content, it can be use to identify resources that do not have IDs, which may include resources that you do not control.</db:para>
-<db:para>On the other hand, we should note that any ID can be treated as a key simply by locating it in a lookup file. In fact, that is all a key really is: an ID that is located in a lookup file instead of directly in a resource. As such, it is perfectly possible to create a system where some IDs are located directly in the content and some are located in lookup tables. All that is required for this to work is for the synthesis algorithm to recognize when an ID is located in a lookup table and load the resource it points to. Nonetheless systems that support keys tend to implement them as separate structures from IDs.</db:para>
 <db:para>One downside of a strictly external approach to keys is that they can only point to a whole resource. This could force you to keep all your reusable units in separate files. To avoid this, you can combine keys with IDs. The following example combines the foreign and domestic danger warnings into one file and gives each an ID:</db:para>
 <db:programlisting language="sam">
 warnings:
@@ -194,6 +199,7 @@ keys:
         name: warn_danger
         resource: files/shared/warnings#warn_danger_foreign
 </db:programlisting>
+</db:section>
 </db:section>
 <db:section>
 <db:title>Common with conditions</db:title>
@@ -278,7 +284,7 @@ match procedure/is-it-dangerous
 </db:programlisting>
 <db:para>The beauty of this approach is that the content is entirely neutral as to what kind of reuse may be going on or how dangerous procedures may be treated. Because the content itself contains only objective information about the procedure itself, you can implement any algorithm you like to publish or reuse the content in any way you like at any time based on this information. By making the content not specific to any form of reuse or any reuse mechanism, we effectively make it much more reusable.</db:para>
 <db:para>We are also making the content much easier to write, since this approach does not require the writer to know how the reuse mechanism works, how to identify reusable content, or even that reuse is occurring at all. All they have to do is answer a simple question about the content -- one to which they should already know the answer.</db:para>
-<db:para>Structured writing is about factoring invariants and complexities out of content and this approach enables the widest range of reuse possibilities while factoring all the complexities of reuse out of the content.</db:para>
+<db:para>Structured writing is about factoring invariants and complexities out of content and this approach enables the widest range of reuse possibilities while factoring all the complexities of reuse out of the content. The downside of this is that it is not as general. The <db:code>is-it-dangerous</db:code> metadata is applies only to dangerous procedures. It does not address the inclusion of reusable content in other places. You would need to factor out other interesting reuse cases in a similar way to create a complete subject-domain solution.</db:para>
 </db:section>
 <db:section>
 <db:title>Factor out the variable</db:title>
@@ -309,7 +315,7 @@ match insert with key
 <db:programlisting language="sam">
 keys:
     key:
-        name: %warn_danger
+        name: %main-features
         resource: from vehicles select features where model = $model
 </db:programlisting>
 <db:para>This retrieves a different set of features from the database depending on how the variable <db:code>$model</db:code> is defined for the build. Launch the build with <db:code>$model = 'compact'</db:code> and you get the feature set for the compact model. Launch the build with <db:code>$model = 'van'</db:code> and you get the feature set for the van model.</db:para>
@@ -339,7 +345,8 @@ map: Widget Wrangler Deluxe User Manual
 <db:programlisting>
 unit: Installing the Widget Wrangler Deluxe
 
-    You should be very careful when installing the Widget Wrangler Deluxe. Follow these steps carefully:
+    You should be very careful when installing the 
+    Widget Wrangler Deluxe. Follow these steps carefully:
     
     &gt;&gt;&gt;(unit units/ww/shared/requirements)
     &gt;&gt;&gt;(unit units/ww/deluxe/requirements)
@@ -347,7 +354,7 @@ unit: Installing the Widget Wrangler Deluxe
     &gt;&gt;&gt;(unit units/ww/deluxe/install_options)
 </db:programlisting>
 <db:para>This avoids the need for a map, but the downside is that it can make the units less reusable. In the above example, for instance, you would need a separate introduction unit for the regular Widget Wrangler since the introduction file imports all the requirements and procedural units. By assembling units with the map, you can use a shared install intro, which increases the amount of reuse you can do.</db:para>
-<db:para>When using the map approach, it is important to think about how your content will single source to paper-like media and hypertext-media. Some people will output the same map to to both media. In hyper-text media that usually results in the map being turned into a table of contents, often displayed in a separate pane as in a help system. This may be fine if you are creating a help system, but it is not how Web content is usually displayed. Another approach to single sourcing content that uses the assemble from pieces approach is to create completely separate maps -- or even to use completely different assembly techniques that don’t involve maps at all -- to produce paper-like and hypertext outputs. This can help you to work around some of the design limitations that we talked about in the <db:xref linkend="chapter.single-sourcing"/>.</db:para>
+<db:para>When using the map approach, it is important to think about how your content will single source to paper-like media and hypertext-media. Some people will output the same map to to both media. In hyper-text media that usually results in the map being turned into a table of contents, often displayed in a separate pane as in a help system. This may be fine if you are creating a help system, but it is not how Web content is usually displayed. Another approach to single sourcing content that uses the assemble from pieces approach is to create completely separate maps -- or even to use completely different assembly techniques that don’t involve maps at all -- to produce paper-like and hypertext outputs. This can help you to work around some of the design limitations that we talked about in  <db:xref linkend="chapter.single-sourcing"/>.</db:para>
 </db:section>
 <db:section>
 <db:title>Combining multiple techniques</db:title>
@@ -355,7 +362,8 @@ unit: Installing the Widget Wrangler Deluxe
 <db:programlisting>
 unit: Installing the &gt;($product_name)
 
-    You should be very careful when installing the &gt;($product_name). Follow these steps carefully:
+    You should be very careful when installing 
+    the &gt;($product_name). Follow these steps carefully:
     
     &gt;&gt;&gt;(unit unit/ww/shared/requirements)
     &gt;&gt;&gt;(unit unit/ww/deluxe/requirements)

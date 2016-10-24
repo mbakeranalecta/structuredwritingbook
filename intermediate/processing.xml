@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter name="chapter.processing">
-<title>Algorithms: Processing Structured Text</title>
+<title>Processing Structured Text</title>
+<annotations>
+<p>Concepts</p>
+<p><phrase><annotation type="concept">subject domain</annotation></phrase> <phrase><annotation type="concept">media domain</annotation></phrase> <phrase><annotation type="concept">document domain</annotation></phrase> <phrase><annotation type="concept">management domain</annotation></phrase> <phrase><annotation type="concept">subject-domain</annotation></phrase> <phrase><annotation type="concept">media-domain</annotation></phrase> <phrase><annotation type="concept">document-domain</annotation></phrase> <phrase><annotation type="concept">management-domain</annotation></phrase> <phrase><annotation type="concept">hybrid tagging language</annotation></phrase> <phrase><annotation type="concept">Every Page is Page One</annotation></phrase> <phrase><annotation type="concept">abstract language</annotation></phrase> <phrase><annotation type="concept">information architecture</annotation></phrase> <phrase><annotation type="concept" specifically="top-down information architecture">top-down</annotation></phrase> <phrase><annotation type="concept">metadata</annotation></phrase></p>
+<p>Languages</p>
+<p><phrase><annotation type="language">SAM</annotation></phrase> <phrase><annotation type="language">DITA</annotation></phrase> <phrase><annotation type="language">DocBook</annotation></phrase> <phrase><annotation type="language">Markdown</annotation></phrase> <phrase><annotation type="language">HTML</annotation></phrase> <phrase><annotation type="language">XML</annotation></phrase></p>
+<p>Algorithms</p>
+<p><phrase><annotation type="algorithm">authoring algorithm</annotation></phrase> <phrase><annotation type="algorithm">authoring</annotation></phrase> <phrase><annotation type="algorithm" specifically="composition">composability</annotation></phrase> <phrase><annotation type="algorithm">composition algorithm</annotation></phrase> <phrase><annotation type="algorithm">composition</annotation></phrase> <phrase><annotation type="algorithm">conformance algorithm</annotation></phrase> <phrase><annotation type="algorithm">conformance</annotation></phrase> <phrase><annotation type="algorithm">content management algorithm</annotation></phrase> <phrase><annotation type="algorithm">content management</annotation></phrase> <phrase><annotation type="algorithm">content reuse algorithm</annotation></phrase> <phrase><annotation type="algorithm">content reuse</annotation></phrase> <phrase><annotation type="algorithm">differential single sourcing algorithm</annotation></phrase> <phrase><annotation type="algorithm">differential single sourcing</annotation></phrase> <phrase><annotation type="algorithm">encoding algorithm</annotation></phrase> <phrase><annotation type="algorithm">encoding</annotation></phrase> <phrase><annotation type="algorithm">exchange algorithm</annotation></phrase> <phrase><annotation type="algorithm">exchange</annotation></phrase> <phrase><annotation type="algorithm">extract and merge algorithm</annotation></phrase> <phrase><annotation type="algorithm">extract and merge</annotation></phrase> <phrase><annotation type="algorithm">formatting algorithm</annotation></phrase> <phrase><annotation type="algorithm">formatting</annotation></phrase> <phrase><annotation type="algorithm">linking algorithm</annotation></phrase> <phrase><annotation type="algorithm">linking</annotation></phrase> <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase> <phrase><annotation type="algorithm">presentation</annotation></phrase> <phrase><annotation type="algorithm">publishing algorithm</annotation></phrase> <phrase><annotation type="algorithm">publishing</annotation></phrase> <phrase><annotation type="algorithm">quality algorithm</annotation></phrase> <phrase><annotation type="algorithm">quality</annotation></phrase> <phrase><annotation type="algorithm">relevance algorithm</annotation></phrase> <phrase><annotation type="algorithm">relevance</annotation></phrase> <phrase><annotation type="algorithm">rendering algorithm</annotation></phrase> <phrase><annotation type="algorithm">rendering</annotation></phrase> <phrase><annotation type="algorithm">reuse algorithm</annotation></phrase> <phrase><annotation type="algorithm">reuse</annotation></phrase> <phrase><annotation type="algorithm">separating content from formatting</annotation></phrase> <phrase><annotation type="algorithm">single source of truth algorithm</annotation></phrase> <phrase><annotation type="algorithm">single source of truth</annotation></phrase> <phrase><annotation type="algorithm">single sourcing algorithm</annotation></phrase> <phrase><annotation type="algorithm">single sourcing</annotation></phrase> <phrase><annotation type="algorithm">synthesis algorithm</annotation></phrase> <phrase><annotation type="algorithm">synthesis</annotation></phrase> <phrase><annotation type="algorithm" specifically="conformance">validation</annotation></phrase></p>
+<p>Tools</p>
+<p><phrase><annotation type="tool">content management system</annotation></phrase> <phrase><annotation type="tool">Content management systems</annotation></phrase></p>
+<p>Roles</p>
+<p><phrase><annotation type="role">information architect</annotation></phrase></p>
+</annotations>
 <index>
 <row>
 <type>task</type>
 <term>processing structured text</term>
 </row>
 </index>
-<p>If structured writing is about <phrase><annotation type="concept">separating content from formatting</annotation></phrase>, then it is also about reuniting content and formatting in order to publish content to a specific device. To do this, we process the structured text using algorithms.</p>
-<p>Since part of the point of structured writing it to be able to publish in different combinations to different media, so we will need different algorithms to create different combinations and target different media. Understanding the basics of these algorithms is important to understanding structured writing even if you don’t intend to code the algorithms yourself.</p>
+<p>As I have said from the beginning, structured writing involves the use of algorithms to assist in writing better content. Now it is time to take a look at what basic structured writing algorithms look like and how they are expressed. There are two parts to every structured writing algorithm: the analysis and imposition of structure, an the processing of that structure.  Since the most basic of structured writing algorithms is separating content form formatting, the exploration of the algorithms is not complete until we look at how you reunite the separated pieces to produce output. So now lets look at the algorithm for putting formatting and content back together. Understanding the basics of these algorithms is important to understanding structured writing even if you don’t intend to code the algorithms yourself.</p>
 <section>
 <title>Two into one: reversing the factoring out of invariants</title>
 <p>Moving content from the <phrase><annotation type="concept">media domain</annotation></phrase> to the <phrase><annotation type="concept">document domain</annotation></phrase> and the <phrase><annotation type="concept">subject domain</annotation></phrase> involves progressively factoring out invariants in the content. Each step in this process creates two artifacts, the structured content and the invariant piece that was factored out.</p>
@@ -43,7 +54,7 @@ find {style: paragraph}
 find {style: bullet-paragraph}
     replace {font: 10pt "Open Sans"}[bullet][tab]
 </codeblock>
-<p>I said at the beginning that the basic processing algorithm was to combine two source of information to create a new one. Where are these two sources? The first source is the structured text. The second source is the style definitions, and they are embedded in the rules themselves. This is how it is usually done. In some cases, though, the rules may pull content from a separate file. We will see cases of this later.</p>
+<p>I said at the beginning that the basic processing algorithm was to combine two source of information to create a new one. Where are these two sources? The first source is the structured text. The second source is the style definitions, and they are embedded in the rules themselves. This is how it is usually done. In some cases, though, the rules may pull content from a separate file. We will see examples of this later.</p>
 <p>The result of applying these rules is that we get back the original content:</p>
 <codeblock>
 {font: 10pt "Open Sans"}The box contains:
@@ -88,12 +99,11 @@ match bullet-paragraph
 {font: 12pt "Century Schoolbook"}[em dash][tab]Eggs
 {font: 12pt "Century Schoolbook"}[em dash][tab]Gold
 </codeblock>
-<p>The only real difference is that we have factored out the details of how the structures are recognized. (Yes, code and pseudocode are examples of structured writing at work!)</p>
 </section>
 <section>
 <title>The order of the rules does not matter</title>
 <p>You may have noticed that what these rules are doing is pretty much exactly what style sheets do in an application like <phrase><annotation type="tool" specifically="Microsoft Word">Word</annotation></phrase> or <phrase><annotation type="tool">FrameMaker</annotation></phrase>. In fact, it is exactly what a style sheet does. If you understand style sheets, you understand a good deal of how structured writing algorithms work.</p>
-<p>One important thing to notice is that when you create a style sheet in <phrase><annotation type="tool" specifically="Microsoft Word">Word</annotation></phrase> or <phrase><annotation type="tool">FrameMaker</annotation></phrase>, you don’t specify the order in which styles will be applied to the document. The same is true when you create a CSS stylesheet for the Web. The style sheet is just a flat list of rules. The order in which the rules are applied to the document depends entirely on the order in which the various structures the rules apply to occur in the document.</p>
+<p>One important thing to notice is that when you create a style sheet in <phrase><annotation type="tool" specifically="Microsoft Word">Word</annotation></phrase> or <phrase><annotation type="tool">FrameMaker</annotation></phrase>, you don’t specify the order in which styles will be applied to the document. The same is true when you create a CSS stylesheet for the Web. The style sheet is just a flat list of rules. The order in which the rules are applied to the document depends entirely on the order in which the various structures occur in the document.</p>
 <p>This may seem very obvious, but it is key to understanding how structured text is usually processed. It is a subject that is sometimes quite confusing to people who have been trained to write procedural computer programs, which is why I am making a point of calling it out.</p>
 <p>Things get a tiny bit more complex when we move into processing the nested structures of the <phrase><annotation type="concept">document domain</annotation></phrase> and <phrase><annotation type="concept">subject domain</annotation></phrase>, but the basic pattern of a set of unordered rules to describe a transformation algorithm still applies.</p>
 </section>
@@ -119,7 +129,7 @@ match title
 <codeblock language="sam">
 title: Review of {Rio Bravo}(movie)
 </codeblock>
-<p>Here the annotated text is set off with curly braces and the annotation itself in in parentheses immediately after it. So the annotation says that the words “Rio Bravo” refer to a movie. (I really will explain this markup eventually.) The annotation is a content structure just like the title structure, and is nested inside the text of the title.</p>
+<p>Here the annotated text is set off with curly braces and the annotation itself in in parentheses immediately after it. (This is a feature of the SAM markup syntax that I am using for most of the examples in this book.) So the annotation says that the words “Rio Bravo” refer to a movie. (I really will explain this markup eventually.) The annotation is a content structure just like the title structure, and is nested inside the text of the title.</p>
 <p>So what do we do with our rule for processing titles to make it deal with <phrase><annotation type="code">movie</annotation></phrase> annotations embedded in the title text? Absolutely nothing. Instead, we write a separate rule for handling <phrase><annotation type="code">movie</annotation></phrase> annotations no matter where they occur:</p>
 <codeblock language="pseudo">
 match movie
@@ -130,11 +140,11 @@ match movie
 <codeblock language="html">
 &lt;h1&gt;Review of &lt;i&gt;Rio Bravo&lt;/i&gt;&lt;/h1&gt;
 </codeblock>
-<p>The <phrase><annotation type="code">continue</annotation></phrase> instruction is really all we need to add to our rules to allow them to deal with nested structures. They remain an unordered collection of rules, just like a style sheet. (In fact, <phrase><annotation type="tool">XSLT</annotation></phrase>, a language that implements this model, calls a set of processing rules a “stylesheet”.)</p>
+<p>The <phrase><annotation type="code">continue</annotation></phrase> instruction is really all we need to add to our rules to allow them to deal with nested structures. They remain an unordered collection of rules, just like a stylesheet. (In fact, <phrase><annotation type="tool">XSLT</annotation></phrase>, a language that implements this model, calls a set of processing rules a “stylesheet”.)</p>
 </section>
 <section>
 <title>Processing based on context</title>
-<p>When we move to the <phrase><annotation type="concept">document domain</annotation></phrase>, we can use context to reduce the number of structures that we need. For example, where <phrase><annotation type="language">HTML</annotation></phrase> has six different heading structures, <phrase><annotation type="code">H1</annotation></phrase> through <phrase><annotation type="code">H6</annotation></phrase>), <phrase><annotation type="language">DocBook</annotation></phrase> has only one: <phrase><annotation type="code">title</annotation></phrase>, which can occur in many different contexts. So how do we apply the right formatting to a title based on its context? We create different rules for the <phrase><annotation type="code">title</annotation></phrase> structure in each of its contexts. We express the context by listing the parent structure names separated by slashes:</p>
+<p>When we move to the <phrase><annotation type="concept">document domain</annotation></phrase>, we use context to reduce the number of structures that we need. For example, where <phrase><annotation type="language">HTML</annotation></phrase> has six different heading structures, <phrase><annotation type="code">H1</annotation></phrase> through <phrase><annotation type="code">H6</annotation></phrase>), <phrase><annotation type="language">DocBook</annotation></phrase> has only one: <phrase><annotation type="code">title</annotation></phrase>, which can occur in many different contexts. So how do we apply the right formatting to a title based on its context? We create different rules for the <phrase><annotation type="code">title</annotation></phrase> structure in each of its contexts. We express the context by listing the parent structure names separated by slashes:</p>
 <codeblock language="pseudo">
 match book/title
     create h1 
@@ -280,7 +290,7 @@ labeled-list:
         label: Code
         contents: 12345
 </codeblock>
-<p>Here is the algorithm (set of rules) to accomplish this transformation:</p>
+<p>Here is the set of rules to accomplish this transformation:</p>
 <codeblock>
 match address
     create labeled-list

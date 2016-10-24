@@ -1,10 +1,10 @@
-chapter:(#chapter.reuse) The Reuse Algorithm
+chapter:(#chapter.reuse) Reuse 
 
     index:: type, term
         concept, reuse algorithm
         concept, content reuse
 
-    The reuse of content in different contexts has become one of the main drivers of structured writing, particularly in the form of widespread adoption of {DITA}(tool). Content reuse is not one technique, but a collection of many techniques, each of which requires specific content structures in the subject and document domains. 
+    The reuse of content in different contexts has become one of the main drivers of structured writing, particularly in the form of widespread adoption of {DITA}(tool). Content reuse is not one technique, but a collection of many techniques, each of which requires specific content structures in the subject, document, and management domains. 
     
     The simplest content reuse technique is cutting and pasting content from one source to another. This approach is quick and easy to implement, but it creates a host of management problems. When people talk about content reuse they generally mean any and every means of reusing content other than cutting and pasting. 
     
@@ -14,7 +14,7 @@ chapter:(#chapter.reuse) The Reuse Algorithm
     
         If you are going to create one piece of content that can be used in many outputs, you have to make sure it fits in each of those outputs. 
         
-        If you cut and paste, this is not a concern. You can cut any text you like, paste it in anywhere, and edit it to fit if need be. But if the content you want to use is used in other places, you can't edit it to fit because that might cause it to no longer fit in the other places. For reuse to work, the content must be written to fit in multiple places. In other words, it has to meet a set of constraints that will allow it to fit in multiple places.  
+        If you cut and paste, this is not a concern. You can cut any text you like, paste it in anywhere, and edit it to fit if you need to. But if the content you want to use is used in other places, you can't edit it to fit because that might cause it to no longer fit in the other places. For reuse to work, the content must be written to fit in multiple places. In other words, it has to meet a set of constraints that will allow it to fit in multiple places. We will look at this in more detail in [#chapter.composability].
                 
         There are seven basic models for fitting pieces of content together:
         
@@ -34,7 +34,7 @@ chapter:(#chapter.reuse) The Reuse Algorithm
         
         For instance, if you are writing procedures and there is a common safety warning that must appear on all dangerous procedures, each individual procedure is the variable part and the standard warning is the common part.
         
-        We looked at an example of this in the chapter on the {management domain}(concept).  
+        We looked at an example of this in [#chapter.management-domain].  
         
         ```(sam)
             procedure: Blow stuff up
@@ -45,7 +45,9 @@ chapter:(#chapter.reuse) The Reuse Algorithm
                 step: Press the big red button.
         
          
-        To ensure that the included content will always fit, you need to make sure that there is a clear division of responsibilities between the common content and each of the documents it will be inserted into. The inserted content should give the safety warning, the whole safety warning, and nothing but the safety warning. Each document that includes it should include it in the required place in the procedure structure.  
+        To ensure that the included content will always fit, you need to make sure that there is a clear division of responsibilities between the common content and each of the documents it will be inserted into. The inserted content should give the safety warning, the whole safety warning, and nothing but the safety warning. Each document that includes it should include it in the required place in the procedure structure. 
+        
+        Of course, you can also use the subject-domain approach to common into variable that we looked at in [#chapter.management-domain].
         
     section: Variable into common
         
@@ -82,9 +84,9 @@ chapter:(#chapter.reuse) The Reuse Algorithm
         Then we write the algorithm to process the insert so that it queries this structure.
         
         ```(pseudo)
-            match insert with variable where variable = $doors
-                $number_of_doors = vehicles/vehicle[$model]/doors
-                output $number_of_doors
+            match insert where variable = $seats
+                $number_of_seats = vehicles/vehicle[$model]/seats
+                output $number_of_seats
         
        
         All these insert and query mechanisms are {pseudocode}(concept), of course. Exactly how things work and exactly how you delineate, identify, and insert content vary from system to system. 
@@ -104,141 +106,143 @@ chapter:(#chapter.reuse) The Reuse Algorithm
         But for variable into variable this approach simply does not work. Variable into variable requires loading a different file, which is difficult when the content specifies a particular file name to import.
     
         As always in structured writing, we look for a way to factor out the problematic content. So here we look for a way to factor out the file name and replace it with something else.
+        
+        section: Using IDs
     
-        The most basic way to factor out the file name is to give the content of the file an ID and use the ID to identify the content in a location independent way. Here is the warning file with the ID `#warn_danger` added: 
-        
-        ```(sam)
-            warning:(#warn_danger) 
-                title: Danger
-                
-                Be very very careful. This could kill you.
-        
-
-        We can then insert the warning into our procedure by referring to that ID.
-        
-        ```(sam)
-            procedure: Blow stuff up
-                >>>(#warn_danger)
-                step: Plant dynamite.
-                step: Insert detonator.
-                step: Run away.
-                step: Press the big red button.
-        
-                
-        The responsibility for locating the warning has now been shifted from the content to the algorithm. 
-        
-        ```(pseudo)
-            match insert with ID
-                $insert_content = find ID in $content_set
-                output $insert_content
-        
-        
-        This is a constant pattern in structured writing. When it comes to locating resources, you want to move that responsibility from the content to the algorithm. This makes it easier to update the locations, but it also gives you far more options for storing and managing your content, since algorithms can interact with a variety of systems in sophisticated ways, rather than just storing a static address. It also means you can make wholesale changes in how your content is stored without having to edit the content itself.   
-        
-        This means that the {synthesis algorithm}(concept) needs some way to resolve the ID and find the content to include. In many cases, a {content management system}(tool) is used to resolve the ID. In other cases it is as simple as the algorithm searching through a set of files to find the ID or building a catalog that points to the files that contain IDs.
-        
-        To do variable into variable reuse in a system that uses IDs, you simply point the {synthesis algorithm} at a different set of files that contain the same IDs, but attached to different content. So if your foreign market requires a different warning, you can create a file like this:
-        
-        ```(sam)
-            warning:(#warn_danger) 
-                title: Look out!
-                
-                Pay close attention. You could really hurt yourself.
-        
-        
-        By telling the build to search this file for IDs rather than the file with the domestic market warning, you automatically get the the foreign warning rather than the domestic one. 
-         
-        Another way to do this is with keys. Instead of assigning an ID directly to the content, the keys approach use an intermediate lookup table to resolve keys to particular resources.
-        
-        So in this case we have the warning in a file called files/shared/admonitions/domestic/danger with the following content (no ID):
-        
-        ```(sam)
-            warning: 
-                title: Danger
-                
-                Be very very careful. This could kill you.
-        
-        
-        And we have the procedure which includes the warning via a key:
-        
-        ```(sam)
-            procedure: Blow stuff up
-                >>>(%warn_danger)
-                step: Plant dynamite.
-                step: Insert detonator.
-                step: Run away.
-                step: Press the big red button.
-        
-        
-        (I am using `#` to denote IDs and `%` to denote keys. This is purely arbitrary and has nothing to do with how they work. Different systems will denote IDs and keys in different ways.)
-        
-        To connect the key to the warning file, we then create a key lookup table:
-        
-        ```(sam)
-            keys:
-                key:
-                    name: warn_danger
-                    resource: files/shared/admonitions/domestic/danger
-        
-        
-        When the {synthesis algorithm} processes the procedure, it sees the key reference `%warn_danger` and looks it up in the key lookup table. The key lookup table tells the algorithm that the key resolves to the resource `files/shared/admonitions/domestic/danger`. The algorithm them loads that file and inserts the contents into the output.
-        
-        ```(pseudo)
-            match insert with key
-                $resource = find key in lookup-table
-                output $resource
-        
-        
-        To output your content for the foreign market, you simply prepare a new key lookup table:
-        
-        ```(sam)
-            keys:
-                key:
-                    name: warn_danger
-                    resource: files/shared/admonitions/foreign/danger
-        
-        
-        You then tell the {synthesis algorithm} to use this lookup table instead. 
-        
-        Using keys is not necessarily better than using IDs. What it comes down to is that you need some kind of bridge between the citation of an identifier in the source file and the location of a resource with that identifier in the content store. This bridge can be created by a key lookup table, by remapping file URLs, or by modifying a query to a content repository. 
-        
-        One feature of the key approach is that, because it does not attach the key directly to the content, it can be use to identify resources that do not have IDs, which may include resources that you do not control. 
-        
-        On the other hand, we should note that any ID can be treated as a key simply by locating it in a lookup file. In fact, that is all a key really is: an ID that is located in a lookup file instead of directly in a resource. As such, it is perfectly possible to create a system where some IDs are located directly in the content and some are located in lookup tables. All that is required for this to work is for the synthesis algorithm to recognize when an ID is located in a lookup table and load the resource it points to. Nonetheless systems that support keys tend to implement them as separate structures from IDs.
-        
-        One downside of a strictly external approach to keys is that they can only point to a whole resource. This could force you to keep all your reusable units in separate files. To avoid this, you can combine keys with IDs.        
-        The following example combines the foreign and domestic danger warnings into one file and gives each an ID:
-        
-        ```(sam)
-            warnings:
-                warning:(#warn_danger_domestic) 
+            The most basic way to factor out the file name is to give the content of the file an ID and use the ID to identify the content in a location independent way. Here is the warning file with the ID `#warn_danger` added: 
+            
+            ```(sam)
+                warning:(#warn_danger) 
                     title: Danger
                     
                     Be very very careful. This could kill you.
+            
 
-                warning:(#warn_danger_foreign) 
+            We can then insert the warning into our procedure by referring to that ID.
+            
+            ```(sam)
+                procedure: Blow stuff up
+                    >>>(#warn_danger)
+                    step: Plant dynamite.
+                    step: Insert detonator.
+                    step: Run away.
+                    step: Press the big red button.
+            
+                    
+            The responsibility for locating the warning has now been shifted from the content to the algorithm. 
+            
+            ```(pseudo)
+                match insert with ID
+                    $insert_content = find ID in $content_set
+                    output $insert_content
+            
+            
+            This is a constant pattern in structured writing. When it comes to locating resources, you want to move that responsibility from the content to the algorithm. This makes it easier to update the locations, but it also gives you far more options for storing and managing your content, since algorithms can interact with a variety of systems in sophisticated ways, rather than just storing a static address. It also means you can make wholesale changes in how your content is stored without having to edit the content itself.   
+            
+            This means that the {synthesis algorithm}(concept) needs some way to resolve the ID and find the content to include. In many cases, a {content management system}(tool) is used to resolve the ID. In other cases it is as simple as the algorithm searching through a set of files to find the ID or building a catalog that points to the files that contain IDs.
+            
+            To do variable into variable reuse in a system that uses IDs, you simply point the {synthesis algorithm} at a different set of files that contain the same IDs, but attached to different content. So if your foreign market requires a different warning, you can create a file like this:
+            
+            ```(sam)
+                warning:(#warn_danger) 
                     title: Look out!
                     
                     Pay close attention. You could really hurt yourself.
+            
+            
+            By telling the build to search this file for IDs rather than the file with the domestic market warning, you automatically get the the foreign warning rather than the domestic one. 
         
-         
-        Now we can rewrite our key lookup tables to use the IDs to pull the right warning out of this common file. For the domestic build we would use a key lookup table like this:
+        section: Using keys
         
-        ```(sam)
-            keys:
-                key:
-                    name: warn_danger
-                    resource: files/shared/warnings#warn_danger_domestic
-        
-        
-        And for the foreign build, one that looks like this:
-        
-        ```(sam)
-            keys:
-                key:
-                    name: warn_danger
-                    resource: files/shared/warnings#warn_danger_foreign
-        
+            Another way to do this is with keys. Instead of assigning an ID directly to the content, the keys approach use an intermediate lookup table to resolve keys to particular resources.
+            
+            So in this case we have the warning in a file called files/shared/admonitions/domestic/danger with the following content (no ID):
+            
+            ```(sam)
+                warning: 
+                    title: Danger
+                    
+                    Be very very careful. This could kill you.
+            
+            
+            And we have the procedure which includes the warning via a key:
+            
+            ```(sam)
+                procedure: Blow stuff up
+                    >>>(%warn_danger)
+                    step: Plant dynamite.
+                    step: Insert detonator.
+                    step: Run away.
+                    step: Press the big red button.
+            
+            
+            (I am using `#` to denote IDs and `%` to denote keys. This is purely arbitrary and has nothing to do with how they work. Different systems will denote IDs and keys in different ways.)
+            
+            To connect the key to the warning file, we then create a key lookup table:
+            
+            ```(sam)
+                keys:
+                    key:
+                        name: warn_danger
+                        resource: files/shared/admonitions/domestic/danger
+            
+            
+            When the {synthesis algorithm} processes the procedure, it sees the key reference `%warn_danger` and looks it up in the key lookup table. The key lookup table tells the algorithm that the key resolves to the resource `files/shared/admonitions/domestic/danger`. The algorithm them loads that file and inserts the contents into the output.
+            
+            ```(pseudo)
+                match insert with key
+                    $resource = find key in lookup-table
+                    output $resource
+            
+            
+            To output your content for the foreign market, you simply prepare a new key lookup table:
+            
+            ```(sam)
+                keys:
+                    key:
+                        name: warn_danger
+                        resource: files/shared/admonitions/foreign/danger
+            
+            
+            You then tell the {synthesis algorithm} to use this lookup table instead. 
+            
+            Using keys is not necessarily better than using IDs. What it comes down to is that you need some kind of bridge between the citation of an identifier in the source file and the location of a resource with that identifier in the content store. This bridge can be created by a key lookup table, by remapping file URLs, or by modifying a query to a content repository. 
+            
+            One feature of the key approach is that, because it does not attach the key directly to the content, it can be use to identify resources that do not have IDs, which may include resources that you do not control. 
+                      
+            One downside of a strictly external approach to keys is that they can only point to a whole resource. This could force you to keep all your reusable units in separate files. To avoid this, you can combine keys with IDs.        
+            The following example combines the foreign and domestic danger warnings into one file and gives each an ID:
+            
+            ```(sam)
+                warnings:
+                    warning:(#warn_danger_domestic) 
+                        title: Danger
+                        
+                        Be very very careful. This could kill you.
+
+                    warning:(#warn_danger_foreign) 
+                        title: Look out!
+                        
+                        Pay close attention. You could really hurt yourself.
+            
+             
+            Now we can rewrite our key lookup tables to use the IDs to pull the right warning out of this common file. For the domestic build we would use a key lookup table like this:
+            
+            ```(sam)
+                keys:
+                    key:
+                        name: warn_danger
+                        resource: files/shared/warnings#warn_danger_domestic
+            
+            
+            And for the foreign build, one that looks like this:
+            
+            ```(sam)
+                keys:
+                    key:
+                        name: warn_danger
+                        resource: files/shared/warnings#warn_danger_foreign
+            
 
         
     section: Common with conditions
@@ -331,7 +335,7 @@ chapter:(#chapter.reuse) The Reuse Algorithm
         
         We are also making the content much easier to write, since this approach does not require the writer to know how the reuse mechanism works, how to identify reusable content, or even that reuse is occurring at all. All they have to do is answer a simple question about the content -- one to which they should already know the answer. 
         
-        Structured writing is about factoring invariants and complexities out of content and this approach enables the widest range of reuse possibilities while factoring all the complexities of reuse out of the content. 
+        Structured writing is about factoring invariants and complexities out of content and this approach enables the widest range of reuse possibilities while factoring all the complexities of reuse out of the content. The downside of this is that it is not as general. The `is-it-dangerous` metadata is applies only to dangerous procedures. It does not address the inclusion of reusable content in other places. You would need to factor out other interesting reuse cases in a similar way to create a complete subject-domain solution. 
         
     section: Factor out the variable
     
@@ -370,7 +374,7 @@ chapter:(#chapter.reuse) The Reuse Algorithm
         ```(sam)
             keys:
                 key:
-                    name: %warn_danger
+                    name: %main-features
                     resource: from vehicles select features where model = $model
         
         
@@ -411,7 +415,8 @@ chapter:(#chapter.reuse) The Reuse Algorithm
         ```
             unit: Installing the Widget Wrangler Deluxe
             
-                You should be very careful when installing the Widget Wrangler Deluxe. Follow these steps carefully:
+                You should be very careful when installing the 
+                Widget Wrangler Deluxe. Follow these steps carefully:
                 
                 >>>(unit units/ww/shared/requirements)
                 >>>(unit units/ww/deluxe/requirements)
@@ -421,7 +426,7 @@ chapter:(#chapter.reuse) The Reuse Algorithm
         
         This avoids the need for a map, but the downside is that it can make the units less reusable. In the above example, for instance, you would need a separate introduction unit for the regular Widget Wrangler since the introduction file imports all the requirements and procedural units. By assembling units with the map, you can use a shared install intro, which increases the amount of reuse you can do. 
         
-        When using the map approach, it is important to think about how your content will {single source}(concept "single sourcing") to paper-like media and hypertext-media. Some people will output the same map to to both media. In hyper-text media that usually results in the map being turned into a table of contents, often displayed in a separate pane as in a help system. This may be fine if you are creating a help system, but it is not how Web content is usually displayed. Another approach to single sourcing content that uses the assemble from pieces approach is to create completely separate maps -- or even to use completely different assembly techniques that don't involve maps at all -- to produce paper-like and hypertext outputs. This can help you to work around some of the design limitations that we talked about in the [#chapter.single-sourcing]. 
+        When using the map approach, it is important to think about how your content will {single source}(concept "single sourcing") to paper-like media and hypertext-media. Some people will output the same map to to both media. In hyper-text media that usually results in the map being turned into a table of contents, often displayed in a separate pane as in a help system. This may be fine if you are creating a help system, but it is not how Web content is usually displayed. Another approach to single sourcing content that uses the assemble from pieces approach is to create completely separate maps -- or even to use completely different assembly techniques that don't involve maps at all -- to produce paper-like and hypertext outputs. This can help you to work around some of the design limitations that we talked about in  [#chapter.single-sourcing]. 
 
     section: Combining multiple techniques
 
@@ -430,7 +435,8 @@ chapter:(#chapter.reuse) The Reuse Algorithm
         ```
             unit: Installing the >($product_name)
             
-                You should be very careful when installing the >($product_name). Follow these steps carefully:
+                You should be very careful when installing 
+                the >($product_name). Follow these steps carefully:
                 
                 >>>(unit unit/ww/shared/requirements)
                 >>>(unit unit/ww/deluxe/requirements)
