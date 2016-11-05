@@ -1,4 +1,4 @@
-chapter: The Exchange Algorithm
+chapter: Exchange
 
     <<<(annotations.sam)
 
@@ -6,7 +6,7 @@ chapter: The Exchange Algorithm
     
     To enable the algorithm of porting a document from one system to another, structured writing techniques were used to move the representation of the document away from a series of embedded typesetting codes towards more abstract structures to which style information could be attached ({separating content from formatting}). The interpretation of this structure and style information into platform-specific typesetting codes or screen display instructions (the {media domain}) could  be done separately on each platform.
     
-    System portability is now much easier because the number of platforms has decreased and much of the low level representation of data has been standardized (thought ASCII and UniCode, for instance). Major applications, or compatible equivalents, now run on all major platforms. The reason they can do this is because the files are structured to factor out specific display instructions for different platforms: structured writing at work.
+    System portability is now much easier because the number of platforms has decreased and much of the low level representation of data has been standardized (thought ASCII and Unicode, for instance). Major applications, or compatible equivalents, now run on all major platforms. The reason they can do this is because the files are structured to factor out specific display instructions for different platforms: structured writing at work.
     
     Portability remains a concern, however, but now it has more to do with portability between organizations. How does one organization send content to another organization in a format that it can accept and use? 
     
@@ -14,7 +14,7 @@ chapter: The Exchange Algorithm
     
     If what the receiving organization wants to do is print and read the content, the PDF format fits the bill. If they want to be able to edit it while making minor modifications to formatting, Word or does the job. If they want to edit it and put it on an internal or external Web server, HTML is fine. 
     
-    But if the receiving organization want to take the received content, manipulate it, query it, reorganize it, and include it in their own publication system, these format are not structured enough to meet the need. Or at least, it will involve a lot of human execution of algorithms because there is not enough structure in the content to hand the job over to machines. This may be find for occasional or ad hoc transfers, but for large or regular exchanges of content it can become inefficient and error prone. 
+    But if the receiving organization want to take the received content, manipulate it, query it, reorganize it, and include it in their own publication system, these format are not structured enough to meet the need. Or at least, it will involve a lot of human execution of algorithms because there is not enough structure in the content to hand the job over to machines. This may be fine for occasional or ad hoc transfers, but for large or regular exchanges of content it can become inefficient and error prone. 
     
     A commonly suggested approach is to exchange content in a common or standardized document domain format. Some common formats suggested are DocBook and DITA. But this is not as easy as it sounds. DocBook and DITA are both large and complex formats that different organizations may use in different ways. Different organizations may specialize either format, and while specialized version should still be formally compatible, they may not process as intended in the recipient's system, especially if one organization has chosen to interpret the standard in different ways -- or to violate it in order to achieve a specific business goal. It is impossible for a standard to express all the constraints that individual businesses or individual writers want to use, so standards are inevitable used in non-standard ways that compromise portability.
     
@@ -22,11 +22,11 @@ chapter: The Exchange Algorithm
     
     As we noted, composability requires a high degree of constraints, particularly if you want to achieve full literary composability. This is not to say that you cannot use one of these standardized languages to exchange content with a particular set of partners, but you will probably need to agree on an additional set of constraints beyond those provided by the standard format, and figure out how to enforce and validate them. 
     
-    Of course, the best way to enforce and validate content constraints is with a structured writing format that either enforces them or (ideally) factors them out. This, of course, requires that both parties agree to create and accept such formats. As we noted in the case of {composability} this does not have to mean using the same format, just using formats that are semantically equivalent or can be used to generate a semantically equivalent output. 
+    Of course, the best way to enforce and validate content constraints is with a structured writing format that either enforces them or (ideally) factors them out. This, of course, requires that both parties agree to create and accept such formats. As we noted, in the case of {composability} this does not have to mean using the same format, just using formats that are semantically equivalent or can be used to generate a semantically equivalent output. 
     
     Some organizations choose formats for their internal work on the basis of those formats being exchangeable with others. As we have seen, different structures support different algorithms. The ideal format for a give organization (cost considerations aside) is the one the supports all the algorithms they want to run on their content. If exchange it the primary goal for adopting structured writing, or if the form that support exchange also supports all the other algorithms you are interested in, choosing a common public format makes sense, since it saves you the cost of any custom development. 
     
-    But such formats tend to have limited validation and audit capability, because they are large and loose. This can compromise {composability} at several levels. It is perfectly possible for one organization to sent a file in a public format to another organization that uses the same format and have the exchanged file not be composable at all with the receiving company's content.  
+    But such formats tend to have limited validation and audit capability, because they are large and loose. This can compromise {composability} at several levels. It is perfectly possible for one organization to send a file in a public format to another organization that uses the same format and have the exchanged file not be composable at all with the receiving company's content.  
     
     A common format, in other words, does not guarantee composability and therefore does not guarantee successful exchange. Different organizations may use a common format like Docbook, for instance, in very different way, rendering their files non-composable with other company's DocBook files. And, of course, other companies may use a different format altogether. To successfully exchange content with another company, you will need to deliver content in the format they use, and in the way they use it. 
     
