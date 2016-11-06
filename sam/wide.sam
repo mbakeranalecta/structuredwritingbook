@@ -2,7 +2,7 @@ chapter:(#chapter.wide) Wide Structures
 
     <<<(annotations.sam)
 
-    The notion of separating content from formatting works quite well when the content is a string of words. A string of words has only one dimension: length. A printed string, of course, has two dimensions: length and height, since each letter had a height and a width. (Yes, in print the ink also had depth, but that is irrelevant for this purpose.) But the height and the width of letters is a pure {media-domain} concern. Fitting a one-dimensional string of characters into a two dimensional font on a two dimensional page is the job of the {rendering algorithm}. It is one of the first things that gets factored out as we begin to structure content.[*1] When we separate content from formatting, we separate the font from the character and are left with a string of characters whose length is measured not in inches but in character count.  
+    The notion of separating content from formatting works quite well when the content is a string of words. A string of words has only one dimension: length. A printed string, of course, has two dimensions: length and height, since each letter had a height and a width. But the height and the width of letters is a pure {media-domain} concern. Fitting a one-dimensional string of characters into a two dimensional font on a two dimensional page is the job of the {rendering algorithm}. It is one of the first things that gets factored out as we begin to structure content.[*1] When we separate content from formatting, we separate the font from the character and are left with a string of characters whose length is measured not in inches but in character count.  
         
     footnote:(*1)
         There can, indeed, be some issues with rendering algorithms when it comes to hyphenation, widows and orphans, and the location of titles relative to the text, but with the appropriate {document domain} markup to delineate basic document structures, algorithms can handle these issues reasonably well. There are some fine points of typesetting aesthetics that may be difficult to automate, and algorithms can't edit the text itself to make a line break work better, as some human book designers will do, but that kind of manipulation is rarely needed. And if it is, you have the options of translating the content into the {media domain} and manipulating it by hand at that point. Of course, you won't do this for high-volume content that is delivered on a frequent schedule, but then you would not be able to do that kind of hand typesetting manipulation on that class of content anyway. Daily newspapers are not typeset with the same level of attention to aesthetic detail as hardcover books. 
@@ -17,6 +17,7 @@ chapter:(#chapter.wide) Wide Structures
     
         Tables are one of the more complex problems in structured writing, particularly in the document domain. A table laid out for presentation in one publication can easily get messed up when an algorithm tries to fit it into another, as in this example from a commercially published book on my Kindle:
         
+        figure:(#broken-table-formatting) Broken table formatting
         >>>(image graphics/tableformatting.jpg)
         
         This particular table is a particularly difficult case as it is not only one wide thing (a table), but it contains another wide thing (preformatted program code). It is impossible to know exactly how this table was marked up, or which domain the content was written in, or how the algorithm failed resulting in the mess above, but including preformatted text in a table cell creates a no win situation for a rendering algorithm when it tries to shrink a table to a narrower view port. Does it:
@@ -37,15 +38,15 @@ chapter:(#chapter.wide) Wide Structures
         
         If you are thinking that there is really not one good option in the bunch, you are appreciating the extent of the problem. For books being transferred to e-readers, of course, there is not much that can be done to salvage the situation. Those books were probably prepared in a word processor on the more abstract edge of the media domain and the tables were prepared for a known page width in the printed book. 
         
-        The tendency of reader to user small devices, such as tablets, e-readers, and phones for reading means the wide tables are problematic for new content. On a phone, the amount of such a table that is visible on screen at any one time may be so small as to make the table essentially unnavigable, and to make it useless of such common table tasks as looking up values or presenting an overview of a subject at a glance.
+        The tendency of readers to user small devices, such as tablets, e-readers, and phones for reading means the wide tables are problematic for new content. On a phone, the amount of such a table that is visible on screen at any one time may be so small as to make the table essentially unnavigable, and to make it useless for such common table tasks as looking up values or presenting an overview of a subject at a glance.
 
-        Tables can cause problems with height as well as width. While most authors would instinctively know not to import a graphic that was six feet tall, we sometimes create tables that are that long or longer. On a web browser, the reader could simply scroll the table. But as soon as you start scrolling, you loose sight of the column headers and it becomes harder to read data across the table. On paper, it is common to repeat the headings at the top of each page when the table flows over several pages. This works, and it is possible to imitate the effect in a web browser by placing the body of the table in a scrollable frame under a fixed set of headings. But what happens on the page if the height of a table row is larger than the height of the page? Then a single row has to be broken over the page break, leading to questions about how you treat the break in the text of each cell in the row. In traditional typesetting, these things can be massaged by hand on case by case basis. Getting a rendering algorithm to do it gracefully in every case is a very challenging task. 
+        Tables can cause problems with height as well as width. While most authors would instinctively know not to import a graphic that was six feet tall, we sometimes create tables that are that long or longer. On a web browser, the reader could simply scroll the table. But as soon as you start scrolling, you loose sight of the column headers and it becomes harder to read data across the table. On paper, it is common to repeat the headings at the top of each page when the table flows over several pages. This works, and it is possible to imitate the effect in a web browser by placing the body of the table in a scrollable frame under a fixed set of headings. But what happens on the page if the height of a table row is larger than the height of the page? Then a single row has to be broken over the page break, leading to questions about how you treat the break in the text of each cell in the row. In traditional typesetting, these things can be massaged by hand on a case by case basis. Getting a rendering algorithm to do it gracefully in every case is a very challenging task. 
         
         Creating tables in the document domain creates problems even when the intended output is paper and a sufficiently wide viewport is assumed. Since a table divides content up into multiple columns, there is always a question of how wide each column should be relative to the others, and whether or not the table should occupy the full width of the viewport or not. A table with just a few numeric value, for instance, probably should not be full page width because that would spread the numbers out too far and make comparisons difficult. One the other hand, a table with a lot of text in each cell needs to be full width, and needs to have column widths roughly proportional to the among of text in the each column. But this is tricky because some columns have side heads which means far fewer words in the first column than in the others, but you don't want to compress that column proportional to its word count because then the headings will be unreadable. 
 
-        In a media domain editor, which shows the formatting of the content as it will appear on paper, writers can create the table at a fixed width of their choice and then drag the column boundaries around to get the aesthetics of column boundaries right by eye. But tables created like this are not likely to format correctly on other devices, as the illustration above shows. And if you move the content creation out of the media domain and into the document domain, it is no longer possible to present the reader with a WYSIWYG page width for them to adjust column widths by eye. At this point you have to leave column width calculation to the rendering algorithm. The best you can do it to give it some hints about how to do its job. 
+        In a media domain editor, which shows the formatting of the content as it will appear on paper, writers can create the table at a fixed width of their choice and then drag the column boundaries around to get the aesthetics of column boundaries right by eye. But tables created like this are not likely to format correctly on other devices, as [#broken-table-formatting] shows. And if you move the content creation out of the media domain and into the document domain, it is no longer possible to present the writer with a WYSIWYG page width for them to adjust column widths by eye. At this point you have to leave column width calculation to the rendering algorithm. The best you can do it to give it some hints about how to do its job. 
         
-        This need to give the rendering algorithm hints about how to fit tables to pages has resulted in the creation of some very complicated table markup languages. Here is a simple example, courtesy of Wikipedia:
+        This need to give the rendering algorithm hints about how to fit tables to pages has resulted in the creation of some very complicated table markup languages. Here is a simple example using the {CALS table model}, courtesy of Wikipedia:
         
         ```(xml)
             <table>
@@ -93,7 +94,7 @@ chapter:(#chapter.wide) Wide Structures
         
         # >>> screen shot
 
-        The problem with this is that while the view of the table in the editor looks just like the view of a table in a world processor like {Microsoft Word}, Word's graphical display is based on the actual page currently set up in printer settings and on the actual font that the document will be printed in. It can therefore show how things will fit in the table on an actual page (allowing the author to make {media domain} adjustments to the table). An XML editor cannot know what page size will be chosen or what font will be used when a {DocBook} document is printed. So while the display looks like it allows the same {media domain} adjustments to be made, this is an illusion and the table will not print as shown on screen.
+        The problem with this is that while the view of the table in the editor looks just like the view of a table in a world processor like {Microsoft Word}, Word's graphical display is based on the actual page currently set up in printer settings and on the actual font that the document will be printed in. It can therefore show how things will fit in the table on an actual page (allowing the author to make {media domain} adjustments to the table). An XML editor cannot know what page size will be chosen or what font will be used when a document is printed. So while the display looks like it allows the same {media domain} adjustments to be made, this is an illusion and the table will not print as shown on screen.
         
         Other markup languages take a different approach to tables. For instance, {reStructuredText} allows you to create a table like this:
         
@@ -117,11 +118,11 @@ chapter:(#chapter.wide) Wide Structures
     
         One of the fundamental principles of structured writing is to factor out constraints wherever possible. Also, as I mentioned in the foreword, structured writing is not about creating markup that has fidelity to existing texts, it is about improving content quality and enabling effective content processing algorithms. 
         
-        One of the most fundamental of those algorithms is {single sourcing}, and as the above shows, tables are a media domain construct that are hard to create in the document domain and do not single source well to different media. 
+        One of the most fundamental of those algorithms is {single sourcing} and tables are a media domain construct that are hard to create in the document domain and they do not single source well to different media. 
         
         Another fundamental algorithms is {authoring}, where the goal it to achieve functional lucidity by ridding the author of distractions. One of the basic ways of doing this is by moving the content to the document or subject domains to remove formatting distractions. Yet tables force the writer either to work in the media domain or to create complex and convoluted markup in the document domain to try and hint appropriate table rendering to the {rendering algorithm}.
         
-        Tables, in other words, as something we should be actively trying to factor out of the authored version of our content. If we are going to factor out tables, though, we need to figure out what to factor the content into. There are a number of alternatives, depending on what the content was being used for. 
+        Tables, therefore, as something we should be actively trying to factor out of the authored version of our content. If we are going to factor out tables, though, we need to figure out what to factor the content into. There are a number of alternatives, depending on what the table was being used for. 
         
         section: Alternate presentation
         
@@ -131,7 +132,7 @@ chapter:(#chapter.wide) Wide Structures
         
         section: Semantic structure
 
-            One way to present the list of ingredients in a recipe is to create a table with the ingredient name aligned left and the quantity aligned right. But as we have seen in our recipe examples, you can create a specific ingredient list structure to capture your ingredient information, which you can then format any way you like for output.
+            One way to present the list of ingredients in a recipe is to create a table with the ingredient name aligned left and the quantity aligned right. But as we have seen in our recipe examples, you can create a subject-specific ingredient list structure to capture your ingredient information, which you can then format any way you like for output.
             
             ```(sam)
                 ingredients:: ingredient, quantity, unit
@@ -153,9 +154,9 @@ chapter:(#chapter.wide) Wide Structures
         
             In the early days of the web it was common to use HTML tables as a way to lay out elements on a page. This practice is how heavily discouraged. CSS positioning is the preferred way to position elements on a page (in particularly because it supports the use of {responsive design}(concept) to make pages display well on different sized display ports. This is old news. However, thinking about information in terms of page layouts is still an easy habit to get into. 
             
-            We have talked about {topic patterns} -- the {rhetorical structure} of content -- as the basis for the development of {topic types} -- the {mechanical structure} of content. But topic patterns are often associated in our minds with a particular layout of page elements. When we imagine or device a topic pattern, we often do it by organizing page elements in certain ways. This is all perfectly legitimate. All content is formatted and displayed for consumption. The point of structured content is not to divorce content from presentation but facilitate a happier marriage, especially when the same content must be married to different media. Thinking about your topic patterns in layout terms, therefore, is perfectly reasonable. 
+            We have talked about {topic patterns} as the starting point for the development of {topic types}. But topic patterns are often associated in our minds with a particular layout of page elements. When we create a topic pattern, we often do it by organizing page elements in certain ways. This is all perfectly legitimate. All content is formatted and displayed for consumption. The point of structured content is not to divorce content from presentation but facilitate a happier marriage, especially when the same content must be married to different media. Thinking about your topic patterns in layout terms, therefore, is perfectly reasonable. 
             
-            But when it comes to devising topic types based on those topic patterns, the specifics of page layout need to be factored out. This is essential to moving the content to he document or subject domains and to realizing all the benefits that come from that. As long as the semantics of each of the content elements is maintained, so that the presentation algorithm can tell which is which, the page layout can be recreated successfully and consistently, and, if needed, different layouts can be created in different media. The trick is to learn to look at your page and not see tables, but objects with clearly defined types and names. Learn to see data as data, lists as lists, procedures as procedure, and prose as prose. 
+            But when it comes to devising topic types based on those topic patterns, the specifics of page layout need to be factored out. This is essential to moving the content to the document or subject domains and to realizing all the benefits that come from that. As long as the semantics of each of the content elements is maintained, so that the presentation algorithm can tell which is which, the page layout can be recreated successfully and consistently, and, if needed, different layouts can be created in different media. The trick is to learn to look at your page and not see tables, but objects with clearly defined types and names. Learn to see data as data, lists as lists, procedures as procedure, and prose as prose. 
             
             When you have done all of that, you will probably be left with two kinds of tables that you still have to deal with: Small ad-hoc grid layouts, and table which are database tables, but which are one of a kind, rather than something like ingredients, where the same table structure occurs in every recipe. For these, you will need some form of document-domain table markup. Which you choose will come down to how much fancy formatting of tables you want to be able to do, and how willing you are to let the rendering algorithm format your tables without extensive hinting from you.
 
@@ -166,19 +167,19 @@ chapter:(#chapter.wide) Wide Structures
 
         All of which is to say that computer code, data, and other similar formats where line ends are meaningful have to be presented in a fixed width font and with line breaks where they are supposed to be. That makes code samples wide objects, just like tables, with many of the same issues when it comes to rendering them on small devices. One saving grace is that there are not usually any height issues with code samples. 
 
-        Fortunately, or unfortunately, there is not much you can do to help the {rendering} algorithm when it comes to code. The options for fitting wide code on a narrow display are to shrink to fit, scroll to view, or truncate. It is not particularly likely that you are going to want you {rendering} algorithm to make a different choice for different kinds of code.
+        Fortunately, or unfortunately, there is not much you can do to help the {rendering} algorithm when it comes to code. The options for fitting wide code on a narrow display are to shrink to fit, scroll to view, or truncate. It is not particularly likely that you are going to want your {rendering} algorithm to make a different choice for different kinds of code.
 
         What is essential is that your document domain or subject domain markup clearly indicates when a piece of text is code. Preferably is should also indicate what kind of code it is, since knowing this can allow the formatting algorithm to do syntax highlighting for code in a known language, and can allow the linking algorithm to detect and link API calls to the API reference. In some cases it might even allow the {conformance algorithm} to validate the code to make sure it runs or uses the current version of the API.
 
     section: Pictures and graphics
     
-        Pictures and graphics are naturally wide objects. The are two basic formats for graphics, {vector}(concept "vector graphics") and {raster}(concept "raster graphics"}. Raster graphics are made up of pixels, like a photograph, and have a fixed resolution. Vector graphics are stored as a set of lines and curves and can be scaled to meet any output requirement. 
+        Pictures and graphics are naturally wide objects. The are two basic formats for graphics, {vector}(concept "vector graphics") and {raster}(concept "raster graphics"). Raster graphics are made up of pixels, like a photograph, and have a fixed resolution. Vector graphics are stored as a set of lines and curves and can be scaled to meet any output requirement. 
                 
-        Sometimes the publishing algorithm needs to know how big the graphic is and as how large it is supposed to be on the page. With raster files, the resolution of the file is set. However, its size may be in question. Is a graphic that is 600 pixels by 600 pixels a 1x1 inch picture at 600 dpi, a 2x2 inch picture at 300 dpi, or a 6x6 picture at 100 dpi? This is important if you are inserting a headshot into a document which will be published on both paper and the Web. You want a 1x1 photo at 600dpi for print, but you don't want that blowing up to a 6x6 photo when you add it to a web page which will display it at a typical 96dpi unless something intervenes to scale it appropriately.
+        Sometimes the publishing algorithm needs to know how big the graphic is and as how large it is supposed to be on the page. With raster files, the resolution of the file is set. However, its size may be in question. Is a graphic that is 600 pixels by 600 pixels a 1x1 inch picture at 600 dpi, a 2x2 inch picture at 300 dpi, or a 6x6 inch picture at 100 dpi? This is important if you are inserting a headshot into a document which will be published on both paper and the Web. You want a 1x1 photo at 600dpi for print, but you don't want that blowing up to a 6x6 photo when you add it to a web page which will display it at a typical 96dpi unless something intervenes to scale it appropriately.
 
         Some raster file formats include metadata which may include the resolution (from which you can calculate the intended size). But there is no guarantee that that information is present in all files, or that the tools typically used to implement {publishing} tool chains can read that information. 
         
-        Then there is the question of the intended size of the image, which is a design consideration independent of the resolution of the raster file. The intention of the person who created the picture and the intention of the person using it both play a role here. Photographs of small objects probably should not be blown up to 10 times life size (unless that is a specific intention, to show detail not visible to the eye). Diagrams showing complex relationships should not be shrunk down to where the relationships are unreadable. Simple diagrams should not be blown up to the size of a full page. Diagrams containing text should not be reduced or expanded so that the text becomes invisible or disproportionate. The person using the graphic may have some discretion, based on the role they wish the graphic to play, but their choices should stay within the range prescribed by the artist's intention.
+        Then there is the question of the intended size of the image, which is a design consideration independent of the resolution of the raster file. The intention of the person who created the picture and the intention of the person using it both play a role here. Photographs of small objects probably should not be blown up to 10 times life size (unless that is a specific intention, to show detail not visible to the naked eye). Diagrams showing complex relationships should not be shrunk down to where the relationships are unreadable. Simple diagrams should not be blown up to the size of a full page. Diagrams containing text should not be reduced or expanded so that the text becomes invisible or disproportionate. The person using the graphic may have some discretion, based on the role they wish the graphic to play, but their choices should stay within the range prescribed by the artist's intention.
         
         If the {rendering algorithm} does not know how big a graphic is supposed to be, it has limited choices:
         
@@ -229,13 +230,13 @@ chapter:(#chapter.wide) Wide Structures
               </imageobject>
             </mediaobject>
 
-        Here the `condition` attribute on the `imageobject` element specifies a different file to be used for two version of a book (this book, actually). The `epub` version is for eReaders, most of which cannot render {SVG}(language) drawings, and so require a raster format ({PNG}(format) in this case), while the `fo` version is for print publication using a system called XSL-FO and uses the vector format {SVG} for high resolution rendering in print. 
+        Here the `condition` attribute on the `imageobject` element specifies a different file to be used for two version of a book (this book, actually). The `epub` version is for eReaders, most of which cannot render {SVG}(language) drawings, and so require a raster format ({PNG}(format) in this case), while the `fo` version is for print publication using the {XSL-FO} {page description language} and uses the vector format {SVG} for high resolution rendering in print. 
         
         But this approach not only involves the use of {media domain} markup, it combines it with {management domain} markup. Is it possible to factor all of this out of the authored format? 
         
         To do so we have to go back to the distinction between the idea of a graphic and the rendering of a graphic. All of the approaches above have the author include a specific rendering of a graphic. To factor it out, we instead have the author include the idea of the graphic. 
         
-        There are several ways to do this. In fact, this is really the same idea as we saw in the {reuse algorithm} were we factored out the filename of the content to be included and replace it with a semantic representation of the file. There we refactored an explicit filename in this example
+        There are several ways to do this. In fact, this is really the same idea as we saw in the {reuse algorithm} were we factored out the filename of the content to be included and replace it with a semantic representation of the file. There we refactored an explicit filename in this example:
         
         ```(sam)
             procedure: Blow stuff up
@@ -245,7 +246,7 @@ chapter:(#chapter.wide) Wide Structures
                 step: Run away.
                 step: Press the big red button.
                 
-        into a management domain {key}(concept) in this example
+        into a management domain {key}(concept) in this example:
         
         ```(sam)
             procedure: Blow stuff up
@@ -255,7 +256,7 @@ chapter:(#chapter.wide) Wide Structures
                 step: Run away.
                 step: Press the big red button.
         
-        and into a {subject-domain} assertion of fact in this example
+        The we refactored that into a {subject-domain} assertion of fact in this example:
         
         ```(sam)
             procedure: Blow stuff up
@@ -287,13 +288,15 @@ chapter:(#chapter.wide) Wide Structures
                     <href>assemble.png</href>
                 </epub>
                 <alt>
-                    <p>A diagram showing multiple pieces being combined in different ways to produce different outputs.</p>
+                    <p>A diagram showing multiple pieces being 
+                    combined in different ways to produce different 
+                    outputs.</p>
                 </alt>
             </image>
 
         This XML file describes the idea of the image, listing not only its source file and both of its renderings, but even a text description for use when the graphic cannot be displayed. By including this file instead of an image file, I was able to include the idea of the graphic in my content. 
         
-        When the content was processed, the {presentation algorithm} loaded and read the `assemble.xml` file and used the information in it to generate the conditionalized {DocBook} file which became the source file for the {formatting algorithm} (which is implemented by the publishers existing tool chain). Using {DocBook} and a presentation layer language in your tool chain is a useful technique, since it enables you to take advantage of all the existing algorithms for processing {DocBook} files, without requiring your authors to learn, or write in, {DocBook}.
+        When the content was processed, the {presentation algorithm} loaded and read the `assemble.xml` file and used the information in it to generate the conditionalized {DocBook} file which became the source file for the {formatting algorithm} (which is implemented by the publishers existing tool chain). Using {DocBook} as a presentation layer language in your tool chain is a useful technique, since it enables you to take advantage of all the existing algorithms for processing {DocBook} files, without requiring your authors to learn, or write in, {DocBook}.
         
         Could I have factored out the filename `assemble.xml` as well? Certainly. There are a number of other ways that I could have chosen to represent the idea of the graphic in the content. There are times when it makes a lot of sense to do that. If you are including screen shots in a procedure, for instance, the name of a dialog box is a good way of representing the idea of a graphic that is semantically relevant to the procedure itself. 
         
@@ -301,7 +304,8 @@ chapter:(#chapter.wide) Wide Structures
         
         ```(sam) 
             procedure: Save a file
-                1. Choose {Save}(menuitem) from the {File}(menuitem) menu. The {Save As}(dialog-box) is shown. 
+                1. Choose {Save}(menuitem) from the {File}(menuitem) menu. 
+                The {Save As}(dialog-box) is shown. 
                 
         Given this markup, we can make a rule that says when the name of a dialog box is mentioned in a step in a procedure, insert a graphic of that dialog box. To implement this, you might maintain a catalog of images that points to the file that describes the idea of the image of that dialog box. That file might then list various versions of the screen shot, perhaps different ones for different platforms. Thus the author does not have to think about graphics at all when writing, but the right screen shot gets inserted in the docs for each platform (and maybe no screen shot when the procedure is viewed on a phone). 
         
@@ -317,7 +321,7 @@ chapter:(#chapter.wide) Wide Structures
             
             There are two techniques you can use to minimize problems with inline graphics. The first is to avoid their use altogether, where that is practical. If there is another way to present the same material just as effectively, it is better to choose that option. 
             
-            The other is to factor out the graphic by using a structure to record its semantics. For instance, instead of including an enter key graphic like this:
+            The other is to factor out the graphic by using a structure to record its semantics. For instance, instead of including an Enter key graphic like this:
             
             ```(sam)
                 3. Press >(image enter_key.png) to confirm the selection. 
@@ -344,6 +348,6 @@ chapter:(#chapter.wide) Wide Structures
                 
             This has all the same advantages as mentioned for keys, with the additional benefit that if the interface designer decides to change an icon or to redefine the whole set, you only have to update the lookup table used by the {presentation} algorithm. This could also be used to sub in different icons for different platforms if you application is run on more than one operating system. This is much more efficient than using conditional text to import different graphics for different configurations. 
              
-            This is a good example of using the idea of the graphic rather than the graphic. The idea of the graphic is to represent the Enter key. This could be done in a number of ways, including a photograph of the key, by the use of a special font that creates the look of a key, or by a textual representation of the key such as `[Enter]`. The idea of a graphic to the representation of a subject. So while you can insert the idea of a graphic in the form of a key or a reference to file that records the idea of a graphic and its implementations, you can also simply use identify the subject itself. 
+            This is a good example of using the idea of the graphic rather than the graphic. The idea of the graphic is to represent the Enter key. This could be done in a number of ways, including a photograph of the key, by the use of a special font that creates the look of a key, or by a textual representation of the key such as `[Enter]`. The idea of a graphic is to represent a subject. So while you can insert the idea of a graphic in the form of a key or a reference to file that records the idea of a graphic and its implementations, you can also simply identify the subject itself. 
            
-            As always a common principle is at work here: better to capture the subject than a resource that represents the subject. Resources may change more often than subjects, and you may want different resources to represent a subject under different circumstance. But as long as the content remains current with it subject matter, the identification of the subject will not change. 
+            As always, a common principle is at work here: better to capture the subject than a resource that represents the subject. Resources may change more often than subjects, and you may want different resources to represent a subject under different circumstance. But as long as the content remains current with it subject matter, the identification of the subject will not change. 

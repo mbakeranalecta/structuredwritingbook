@@ -10,7 +10,7 @@ chapter:(#chapter.patterns) Patterns
     
     A common example of this is the pattern of a URL. In most Web-based editors, if you enter a URL as plain text (no markup identifying it as a URL), the editor will recognize the pattern and will turn the URL into a clickable link in the HTML output. 
     
-    Recognizing patterns rather than forcing the author to mark them up explicitly can make authoring a lot easier. Consider something as simple as a date. A date is a complex piece of data consisting of at least three elements, the year, month, and day. (It gets more complex if you include the day of the week or the time.) If you need those individual components of a date for processing purposes, you might be tempted to require dates to be marked up like this.
+    Recognizing patterns rather than forcing the author to mark them up explicitly can increase functional lucidity significantly. Consider something as simple as a date. A date is a complex piece of data consisting of at least three elements, the year, month, and day. (It gets more complex if you include the day of the week or the time.) If you need those individual components of a date for processing purposes, you might be tempted to require dates to be marked up like this.
     
     ```(sam)
         date: {2016}(year)-{08}(month)-{25}(day)
@@ -23,7 +23,7 @@ chapter:(#chapter.patterns) Patterns
             month: 08
             day: 25
         
-    This is an example of what we might call fully explicit markup. Whether markup should be fully explicit in this way is a debate in data representation circles. For structured writing, however, it is a practical question of whether such markup has {functional lucidity}(concept), which clearly it does not. 
+    This is fully explicit markup. Whether markup should be fully explicit in this way is a debate in data representation circles. For structured writing, however, it is a practical question of whether such markup has {functional lucidity}(concept), which clearly it does not. 
     
     The fact is, a data in the format `2016-08-25` is already a piece of structured markup. In fact, it is a standardized piece of structured markup defined by the international standard {ISO 8601}(standard). The only problem in identifying a date as such is that in another context `2016-08-25` could be a mathematical expression. But we can eliminate this potential confusion if use our markup language to isolate the context so that we can recognize when an {ISO 8601} date is being used, and then use the {ISO 8601} format specification to isolate the year month and day components of that data. In other words, all we need to do is this:
     
@@ -37,14 +37,12 @@ chapter:(#chapter.patterns) Patterns
     
     Of course, a sufficiently clever algorithm could recognize ` December 7, 1941` as a date as well, because that too is a fully predictable pattern. One of the defining features of patterns is that your can recognize the semantic equivalence between two patterns that express the same information. You can increase the {functional lucidity} of your markup by recognizing a wider variety of semantically equivalent patterns in content without having to impose uniform syntax on authors.
     
-    XML recognizes the value of patterns. The XML data types standard define a number of common patterns, and {XSD} schemas allow you to define patterns for use in your own markup. It calls these patterns "simple types" (as opposed to "complex types", which are composed of multiple nested elements). Thus you can specify in {XSD} that a date field is of the simple type `xs:date`. The `xs:date` data type is pattern that is based on {ISO 8601}, so you can do following in XML (as long as the schema define the type of the `date` element as `xs:date`):
+    XML recognizes the value of patterns. The XML data types standard define a number of common patterns, and {XSD} schemas allow you to define patterns for use in your own markup. It calls these patterns "simple types" (as opposed to "complex types", which are composed of multiple nested elements). Thus you can specify in {XSD} that a date field is of the simple type `xs:date`. The `xs:date` data type is a pattern that is based on {ISO 8601}, so you can do following in XML (as long as the schema define the type of the `date` element as `xs:date`):
     
     ```(xml)
         <date>1941-12-07</date> is a day that will live in infamy. 
     
-    It is important to understand what this does. If the type of element `date` in your XML tagging language is defined as `xs:date` then an XSD {schema validator}(tool) will validate `1941-12-07` as a valid date but will reject `<date>last Thursday</date> as invalid. It will not break the date down into its separate year, month, and day formats. If you need that, you will have to get your algorithm to do that for itself. But you algorithm can do that reliably if you know for certain that you are dealing with date in {ISO 8601} format. 
-    
-    Most programming languages will have library functions that know how to manipulate {ISO 8601} dates, so you probably don't have to do any work yourself to get the year, month, and day components of a date. 
+    It is important to understand what this does. If the type of element `date` in your XML tagging language is defined as `xs:date` then an XSD {schema validator}(tool) will validate `1941-12-07` as a valid date but will reject `<date>last Thursday</date> as invalid. It will not break the date down into its separate year, month, and day components. If you need that, you will have to get your algorithm to do that for itself. But your algorithm can do that reliably if you know for certain that you are dealing with date in {ISO 8601} format. Most programming languages will have library functions that know how to manipulate {ISO 8601} dates, so you probably don't have to do any work yourself to get the year, month, and day components of a date. 
     
     # Python or XSLT example of data library dissecting a date.
     
