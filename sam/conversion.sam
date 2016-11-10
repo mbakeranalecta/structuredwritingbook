@@ -1,0 +1,15 @@
+chapter:(#chapter.conversion) Conversion
+
+    There is one final algorithm we should look at, not because it is part of the structured writing process, but because it is a big part of how many organizations make the move to structured writing: the conversion algorithm. The conversion algorithm is how you get content from an unstructured system to a structured system. Or, since we noted in [#chapter.definition] that there are really no unstructured writing systems, only one structured for one purpose or another, how you get content from one structured writing system to another (possibly more structured or differently structured).
+    
+    There are lots of product that advertise that you can easily and cleanly convert all you existing content to a new structured writing system like DITA. Such claims should be taken with a grain of salt. 
+    
+    Structured writing is about constraints. It is about writing to follows a set of constraints and that records the fact that it has followed those constraints. A piece of structured content, therefore, is one that follows a set of constraints and records the constraints it follows. Any given markup language requires certain constraints to be followed. Content cannot validly fit into that markup language if it does not follow those constraints. So, there is no mechanical process -- no algorithm -- that convert content that does not follow the constraints of a markup language and make it follow them. 
+    
+    At best, such a conversion is going to produce a file that validates against the schema for that language, but that validation is going to be a lie. And, of course, conformance that is a lie is on no use to any structured writing algorithm. The only way to bring content that does not conform to the target constraints into conformance is to rewrite it. Anyone who tells you different is selling snake oil. 
+    
+    So what can you do, algorithmically, to convert content to a structured writing format? 
+    
+    section: Syntactic transformation of semantically equivalent structures
+    
+        ... We noted that DITA, DocBook, and HTML, all define a table structure (a semantic block) but that they all define the structure differently. In some cases, however, there is a semantic equivalent between two similar semantics structures. A DITA table and an HTML table may be defined using different internal structures with different names, but they may be semantically identical. That is, they may both describe the same table. 

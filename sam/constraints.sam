@@ -1,4 +1,4 @@
-chapter: Schemas
+chapter:(#constraints) Constraints
 
     <<<(annotations.sam)
 
@@ -6,7 +6,7 @@ chapter: Schemas
     
     For a {concrete markup languages}(concept) like MarkDown, the constraints are established in the code of the MarkDown processor. They are validated when the processor parses the MarkDown file. (In practice, though, MarkDown does no meaningful validation. Anything it does not recognize as markup, it simply outputs as text.)
 
-    For {extensible markup languages}(concept) like XML you define structures yourself (or use an existing definition). Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a "validator".
+    For {abstract markup languages}(concept) like XML you define structures yourself (or use an existing definition). Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a "validator".
     
     A schema language is a structured language for defining structured languages. The schema for a markup languages says what structures are allowed and in what order and relationship. Those definitions are constraints. A given document either conforms to those constraints or it does not. 
 
@@ -55,3 +55,8 @@ chapter: Schemas
     In the {RNG} schema example, the schema is essentially a template that models the hierarchy of the document. The constraints are consequences of the structure of that hierarchy. (The `book` element cannot contain text because there is no place for text in that part of the hierarchy.) Only documents that conform to the template are valid.
     
     In the {Schematron} example, the schema is a series of constraint statements. The hierarchy of the document is a consequence of meeting all the constraints. Any document is valid as long as it conforms to all the stated constraints. 
+    
+    
+    There are essentially two ways to describe constraints. One is to say, nothing is allowed except this. The other is to say, everything is allowed except this. Schematron is based on the latter doctrine. It says anything is valid as long as it passes this set of tests. Other schema languages take the former approach. If you validate an XML document against an empty schema the validator will say it is invalid because it can't find the definition of the root element. In essence, therefore, their constraints are described as a set of permissions. The writer is then constrained to stay within the boundaries of what is permitted.
+    
+    In some cases, the most efficient way to describe a constraint set is to start with a set of permissions, and then state certain restriction on those permissions. This allows you to add additional restricitons in downstream processing.
