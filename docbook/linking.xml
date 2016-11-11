@@ -4,17 +4,19 @@
 
 <db:para>Few readers read content straight though. Unless the content is perfectly matched to their experience and their goals, there will be points where they need more information, points where they need less, or points where they decide that they need something else altogether. These are defection points in the content, points in which the reader’s “next” may not be the thing that comes next in the linear order of the work. That may mean deflecting to other content or to a different way of finding information such as asking a friend or posting a question on a forum.</db:para>
 <db:para>Deflections are a natural part of information seeking. They are part of what is called information foraging. The reader, in pursuit of their individual ends, will follow where the scent of information leads and that will not always be the next paragraph of the current text.</db:para>
-<db:para>Writers know they can’t meet everyone’s needs perfectly every time so they use links and other devices to help readers deflect when they need to. If you have Model A, do this. If you have Model B do that. Supporting deflection helps readers achieve their goals and helps keep the reader in writer’s own content, or content they approve of, rather than deflecting elsewhere.</db:para>
+<db:para>Writers know they can’t meet everyone’s needs perfectly every time so they use links and other devices to help readers deflect when they need to. If you have Model A, do this. If you have Model B do that. Supporting deflection helps readers achieve their goals and helps keep the reader in writer’s own content, or content they approve of, rather than deflecting elsewhere. The Web and other electronic media have made the cost of deflecting much lower, meaning the readers deflect much more readily, and writers need to pay far more attention to deflection in the design of their content.</db:para>
 <db:para>Deflection points can be handled in various ways. The writer may choose to do nothing, leaving it up to the reader to look up a word if they don’t understand it, for instance. They may use footnotes, cross references, sidebars, parenthetical material, or hypertext links to provide deflection choices. They may use tables or flowcharts to allow readers to choose different paths through content. They may even attempt to anticipate and forestall deflection by using information about the individual reader to dynamically reorder the content to suit the reader’s needs.</db:para>
-<db:para>Deflection costs the reader more on paper than online. For paper, we may design content to minimize the need to deflect, or to keep deflections inside the local work. For the Web, we may organize content with deflection in mind, allow different readers to choose their own course, rather than trying to optimize one course for all readers. This difference in the ease of deflection between paper and the Web and other hypertext media is one of the main reasons we want to practice differential single sourcing.</db:para>
+<db:para>Deflection costs the reader more on paper than online. For paper, we may design content to minimize the need to deflect, or to keep deflections inside the local work. For the Web, we may organize content with deflection in mind, allowing different readers to choose their own course, rather than trying to optimize one course for all readers. This difference in the ease of deflection between paper and the Web and other hypertext media is one of the main reasons we want to practice differential single sourcing.</db:para>
 <db:para>Deflection also enters into the discussion of content reuse. We reuse content in multiple documents so that readers don’t have to deflect from one document to another to find it.</db:para>
-<db:para>If we reuse content in different media, we might want to have a different reused strategy between paper and hypertext outputs. Me may want to include the same chunk of content in multiple paper documents but link to a single copy of it when creating a hypertext. (Linking, in other words, is a kind of reuse: reuse by reference rather than copying.)</db:para>
+<db:para>If we reuse content in different media, we might want to have a different deflection strategies between paper and hypertext outputs. We may want to include the same chunk of content in multiple paper documents but link to a single copy of it when creating a hypertext. (Linking, in other words, is a kind of reuse: reuse by reference rather than copying.)</db:para>
 <db:para>Thus we should not be thinking solely in terms of  managing links in our content. We should be thinking about implementing the right deflection strategy in each of our outputs. To see how that works, we need to look at deflection and linking in each of the structured writing domains.</db:para>
 <db:section>
 <db:title>Deflection in the media domain</db:title>
 <db:para>In the media domain, we simply record the various deflection devices as such: cross references, tables, links, etc. For example, in HTML a link simply specifies a page to load:</db:para>
 <db:programlisting language="html">
-&lt;p&gt;In Rio Bravo, &lt;a href="https://en.wikipedia.org/wiki/John_Wayne"&gt;the Duke&lt;/a&gt; plays an ex-Union colonel out for revenge.&lt;/p&gt;
+&lt;p&gt;In Rio Bravo, 
+&lt;a href="https://en.wikipedia.org/wiki/John_Wayne"&gt;the Duke&lt;/a&gt; 
+plays an ex-Union colonel out for revenge.&lt;/p&gt;
 </db:programlisting>
 <db:para>The phrase “the Duke” is a deflection point. The reader may not know who “the Duke” is, or may want more information on him. The link supports the reader at the deflection point. The reader can either deflect by clicking the link or stay the course and read on.</db:para>
 <db:para>But if the HTML page gets printed, the link is lost. The phrase “the Duke” is still a deflection point. The reader can still deflect, by doing a search for “the Duke”, perhaps, or asking a friend what it means. But the printed version lacks any support for that deflection.</db:para>
@@ -24,7 +26,8 @@
 </db:blockquote>
 <db:para>Or it might be handled with a footnote:</db:para>
 <db:programlisting language="text">
-In Rio Bravo, the Duke* plays an ex-Union colonel out for revenge.
+In Rio Bravo, the Duke* plays 
+an ex-Union colonel out for revenge.
         
 ...
         
@@ -36,33 +39,41 @@ In Rio Bravo, the Duke* plays an ex-Union colonel out for revenge.
 <db:title>Deflection in the document domain</db:title>
 <db:para>Moving to the document domain is about factoring out the formatting specific structures of the media domain. But a link is not really a piece of formatting, so conventional refactoring into abstract document structures is not going to apply. For this reason, people working in the document domain often enter hypertext links exactly the way they would in the media domain: by specifying a URL. Thus in DITA you might enter a link as:</db:para>
 <db:programlisting language="DITA">
-&lt;p&gt;In Rio Bravo, &lt;xref href="https://en.wikipedia.org/wiki/John_Wayne" format="html"&gt;The Duke&lt;/xref&gt; plays an ex-Union colonel out for revenge.&lt;/p&gt;
+&lt;p&gt;In Rio Bravo, 
+&lt;xref href="https://en.wikipedia.org/wiki/John_Wayne" format="html"&gt;The Duke&lt;/xref&gt; 
+plays an ex-Union colonel out for revenge.&lt;/p&gt;
 </db:programlisting>
 <db:para>The difference from HTML is slight here. The link element is called <db:code>xref</db:code> rather than <db:code>a</db:code>. But the meaning of <db:code>xref</db:code> is bit more general. The HTML <db:code>a</db:code> element is saying, create a hypertext link to this address. The DITA <db:code>xref</db:code> element is saying, create some sort of reference to this resource. (As we will see in a moment, it is capable of linking to things other than HTML pages, which is why it requires the <db:code>format</db:code> attribute to specify that in this case the target is an HTML page.) This generality gives us a little more leeway in processing. We can legitimately create print output from this markup that looks like this:</db:para>
-<db:programlisting>
-In Rio Bravo, the Duke (see: https://en.wikipedia.org/wiki/John_Wayne) plays and ex-Union colonel out for revenge.
-</db:programlisting>
-<db:para>This is not the way we would handle the deflection point if we were designing for paper, but it is a small improvement from a differential single sourcing point of view. At least the link is now visible to the reader. (Technically we could do this from the HTML markup as well, but that would be cheating. The HTML markup is not really giving us permission to do this. It is telling us to create a hypertext link and nothing else. The problem with cheating is that you are assuming constraints that are not being promised or enforced, and this can fail in ways you may not expect or catch. Some cheats are more reliable than others, but you probably don’t want to get into the habit.)</db:para>
+<db:blockquote>
+<db:para>In Rio Bravo, the Duke (see: https://en.wikipedia.org/wiki/John_Wayne) plays and ex-Union colonel out for revenge.</db:para>
+</db:blockquote>
+<db:para>This is not the way we would handle the deflection point if we were designing for paper, but it is a definite improvement from a differential single sourcing point of view. At least the link is now visible to the reader.<db:footnote>
+<db:para>(Technically we could do this from the HTML markup as well, but that would be cheating. The HTML markup is not really giving us permission to do this. It is telling us to create a hypertext link and nothing else. The problem with cheating is that you are basing your algorithm on constraints that are not being promised or enforced, and this can fail in ways you may not expect or catch. Some cheats are more reliable than others, but you probably don’t want to get into the habit.)</db:para>
+</db:footnote></db:para>
+
 <db:para>Fundamentally, though, this is not a satisfactory differential single sourcing solution. Unless there were no alternative, you would not normally direct a reader of paper to the web for more information, nor vice versa. Linking to an already published file, such as an HTML page, commits us to a particular format for the link target. If we link to content that has not yet been published, we gain the freedom to link to any format of that content that we choose to publish. The simplest way to do that is to link to a source file rather than an output file.</db:para>
 <db:para>In DITA, you can link to another DITA file (the default format, so we don’t need the <db:code>format</db:code> attribute):</db:para>
 <db:programlisting language="html">
-&lt;p&gt;In Rio Bravo, &lt;xref href="John_Wayne.dita"&gt;The Duke&lt;/xref&gt; plays an ex-Union colonel out for revenge.&lt;/p&gt;
+&lt;p&gt;In Rio Bravo, &lt;xref href="John_Wayne.dita"&gt;The Duke&lt;/xref&gt; 
+plays an ex-Union colonel out for revenge.&lt;/p&gt;
 </db:programlisting>
-<db:para>We don’t yet know if that DITA file will be published to paper or the Web, what the address of the published topic will be, or if that topic will stand alone or be assembled into a larger page or document for publication. This means that the publishing system is taking on responsibility for both ends of the link. It has to make sure that the target page is published in a way the source page can link to, and that the source page links to the right address.  But taking on this responsibly gives us the leeway to publish this link as we see fit.</db:para>
+<db:para>We don’t yet know if that DITA file will be published to paper or the Web, what the address of the published topic will be, or if that topic will stand alone or be assembled into a larger page or document for publication. This means that the publishing system is taking on responsibility for both ends of the link. It has to make sure that the target page is published in a way the source page can link to, and that the source page links to the right address.  But transferring this responsibly to an algorithm gives us the leeway to publish this link as we see fit.</db:para>
 <db:para>If we publish as a book on paper and the target resource ends up as part of a chapter in the same book, we can render the <db:code>xref</db:code> as a cross reference to the page that resource appears on. We could format that cross reference inline or as a footnote. These are all legitimate interpretations of the <db:code>xref</db:code>’s instruction to create a reference to a resource.</db:para>
 <db:para>If we publish to a help system and the target resource ends up as a topic in the same help system, we could render the <db:code>xref</db:code> as a hypertext link to that topic.</db:para>
 <db:para>This is a big step forward, but it still does not let us do this:</db:para>
 <db:programlisting>
-In Rio Bravo, the Duke (John Wayne) plays and ex-Union colonel out for revenge.
+In Rio Bravo, the Duke (John Wayne) plays an
+ex-Union colonel out for revenge.
 </db:programlisting>
 <db:para>In other words, we can render the <db:code>xref</db:code> as a cross reference or a link or a footnote, but we can only handle the deflection point as a reference to the specified resource. We can’t decide to link to a different resource or handle it by parenthetical clarification instead. To give ourselves the ability to link to different resources, we can turn to the management domain.</db:para>
 </db:section>
 <db:section>
 <db:title>Deflection in the management domain</db:title>
 <db:para>Linking to a source file rather than to an address gives us more latitude about how the link or cross reference is published, but we are still always linking to the same resource. If we are doing content reuse, this is a problem because you do not know if the same resource will be available everywhere you reuse our topic. We need to be able to link to different resources when our topic is used in different places.</db:para>
-<db:para>To accommodate this, we can factor out the file name and replace it with an ID or a key. IDs and keys are a management domain structure that we looked at in the chapter on the <db:xref linkend="chapter.reuse"/>. They allow us to refer to resources indirectly. Using IDs lets us use an abstract identifier rather than a file name to identify a resource. Using keys lets us remap the resources we point to. This makes keys the more efficient way to address this problem. So instead of referring to a specific resource on John Wayne, we refer to the key <db:code>John_Wayne</db:code> using a <db:code>keyref</db:code> attribute:</db:para>
+<db:para>To accommodate this, we can factor out the file name and replace it with an ID or a key. IDs and keys are a management domain structure that we looked at in <db:xref linkend="chapter.reuse"/>. They allow us to refer to resources indirectly. Using IDs lets us use an abstract identifier rather than a file name to identify a resource. Using keys lets us remap the resources we point to. This makes keys the more efficient way to address this problem. So instead of referring to a specific resource on John Wayne, we refer to the key <db:code>John_Wayne</db:code> using a <db:code>keyref</db:code> attribute:</db:para>
 <db:programlisting language="DITA">
-&lt;p&gt;In Rio Bravo, &lt;xref keyref="John_Wayne"&gt;The Duke&lt;/xref&gt; plays an ex-Union colonel out for revenge.&lt;/p&gt;
+&lt;p&gt;In Rio Bravo, &lt;xref keyref="John_Wayne"&gt;The Duke&lt;/xref&gt; 
+plays an ex-Union colonel out for revenge.&lt;/p&gt;
 </db:programlisting>
 <db:para>Somewhere in the DITA map for each publication, the key <db:code>John_Wayne</db:code> points to a topic. Publications link the <db:code>keyref</db:code> to the resource pointed to by that key in each of their DITA maps. This allows you to link to different resources in each publication.</db:para>
 </db:section>
@@ -75,11 +86,11 @@ In Rio Bravo, the Duke (John Wayne) plays and ex-Union colonel out for revenge.
 <db:title>Relationship tables</db:title>
 <db:para>One approach to the link-only-when-resource-available problem is to use a relationship table. In a conventional linking approach, the source page contains an embedded link structure pointing to the target page. The source  knows it is pointing to the target, but the target does not know it is being pointed to.</db:para>
 <db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/simplelink.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
-<db:para>The idea that the target resource does not know it is being pointed to is important because it means it does not have to do anything in order for other resources to point to it. The fact that only the source and not the target has to know about the link is fundamental to the rapid growth of the Web. If the target resource had to participate in the link process, it would be impossible for the Web to grow explosively and organically as it has.</db:para>
+<db:para>The idea that the target resource does not know it is being pointed to is important because it means it does not have to do anything in order for other resources to point to it. The fact that only the source and not the target has to know about the link is fundamental to the rapid growth of the Web. If the target resource had to participate in the link process, every link would require negotiation between authors and the agreement of the author of the target resource to edit it to accept the link. It would be impossible for the Web to grow explosively and organically as it has under these conditions.</db:para>
 <db:para>A relationship table takes this one step further. When you create a link using a relationship table, you factor the link out of the source document and place it in a separate table. The relationship table says resource A links to resource B, but neither resource A nor resource B knows anything about it. (Think of it like being introduced to a stranger by a third party because you share a common interest. I collect china ducklings. You make china ducklings. We don’t know each other, but our mutual friend Dave introduces us. You and I are the source and destination resource; Dave is the relationship table.</db:para>
 <db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/linktable.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
 <db:para>Notice that Dave has three choices about how he does the introduction. He can tell me about you as a seller of ducklings, or you about me as a buyer of ducklings, or he can introduce us both to each other. In the same way a relationship table can describe a link A to B, B to A, or both ways.</db:para>
-<db:para>One the links are factored out of a piece of content, you can reuse it anywhere you like. If there is a suitable resource available to link to, you enter it in a relationship table for that build and have the presentation algorithm create the link at build time. If no suitable resource is available for a different publication, no entry is made in the relationship table for that publication, and the presentation algorithm does not create a link.</db:para>
+<db:para>Once the links are factored out of a piece of content, you can reuse it anywhere you like. If there is a suitable resource available to link to, you enter it in a relationship table for that build and have the presentation algorithm create the link at build time. If no suitable resource is available for a different publication, no entry is made in the relationship table for that publication, and the presentation algorithm does not create a link.</db:para>
 </db:section>
 <db:section>
 <db:title>The problem with link tables</db:title>
@@ -91,7 +102,11 @@ In Rio Bravo, the Duke (John Wayne) plays and ex-Union colonel out for revenge.
 <db:title>Conditional linking</db:title>
 <db:para>Before we leave the management domain, it is worth mentioning a management domain approach that we could use to address our differential single sourcing problem and get the appropriate deflection strategy for online and paper publishing. We could use conditional structures to define both options in the source file. With a little specialization to support <db:code>media</db:code> as a conditional attribute, you could do this in DITA:</db:para>
 <db:programlisting language="DITA">
-&lt;p&gt;In Rio Bravo, &lt;ph media="online"&gt;&lt;xref keyref="John_Wayne"&gt;The Duke&lt;/xref&gt;&lt;/ph&gt;&lt;ph media="paper"&gt;The Duke (John Wayne)&lt;/ph&gt; plays an ex-Union colonel out for revenge.&lt;/p&gt;
+&lt;p&gt;In Rio Bravo, 
+&lt;ph media="online"&gt;&lt;xref keyref="John_Wayne"&gt;The 
+Duke&lt;/xref&gt;&lt;/ph&gt;&lt;ph media="paper"&gt;The 
+Duke (John Wayne)&lt;/ph&gt; plays an ex-Union 
+colonel out for revenge.&lt;/p&gt;
 </db:programlisting>
 <db:para>In DITA, the <db:code>ph</db:code> element is used to delineate an arbitrary phrase in the content that you want to apply management domain attributes to. Here we define two different versions of the phrase “the Duke”, each with different forms of deflection support, and each with a corresponding media condition. The synthesis algorithm would then choose the appropriate version of the phrase for each publication based on the conditions set for the build.</db:para>
 <db:para>There are some pretty obvious problems with this approach. It is twice the work for authors to create every link, and it doubles the maintenance cost of the content as well. It also flies in the face of the idea of creating formatting-independent content.</db:para>
@@ -120,18 +135,29 @@ In Rio Bravo, the Duke (John Wayne) plays and ex-Union colonel out for revenge.
 <db:para>In the management domain we used keys to factor out the target resource but not the deflection mechanism (it was still an <db:code>xref</db:code>).</db:para>
 <db:para>In the subject domain, we can factor out the target resource as well. We do this by marking up the subject of the deflection point:</db:para>
 <db:programlisting language="xml">
-&lt;p&gt;In &lt;movie&gt;Rio Bravo&lt;/movie&gt;, &lt;actor name="John Wayne"&gt;the Duke&lt;/actor&gt; plays an ex-Union colonel out for revenge.&lt;/p&gt;
+&lt;p&gt;In &lt;movie&gt;Rio Bravo&lt;/movie&gt;, 
+&lt;actor name="John Wayne"&gt;the Duke&lt;/actor&gt; 
+plays an ex-Union colonel out for revenge.&lt;/p&gt;
 </db:programlisting>
 <db:para>This markup clarifies that the phrase “the Duke” refers to the actor named John Wayne. These are respectively the type of the subject (actor) and its value (John Wayne).</db:para>
 <db:para>Given this markup, we can easily create the paper-style deflection mechanisms we have been looking for. We simply have the presentation algorithm take the value of the <db:code>name</db:code> attribute and output it between parentheses:</db:para>
 <db:programlisting language="xml">
-&lt;p&gt;In Rio Bravo, The Duke (John Wayne) plays an ex-Union colonel out for revenge.&lt;/p&gt;
+&lt;p&gt;In Rio Bravo, The Duke (John Wayne) plays an 
+ex-Union colonel out for revenge.&lt;/p&gt;
 </db:programlisting>
 <db:para>The subject domain markup is not link markup. Unlike the document domain markup, it does not insist that a reference should be created nor does it specify any resource to link to. This markup is a subject annotation. It clarifies that the phrase “the Duke” refers to the actor named John Wayne (and not the Duke of Wellington or the Duke of Earl) and that the phrase “Rio Bravo” refers to the movie (and not to the city in Texas or the nature reserve in Belize<db:footnote><db:para>https://en.wikipedia.org/wiki/R%C3%ADo_Bravo_\(disambiguation\)</db:para></db:footnote>). That clarification is what allows us to produce the parenthetical explanation of the phrase in the example above. It also allows us to create a link if we want to. We’ll look at how in a moment. But first we should look at the implications of subject annotation more deeply.</db:para>
-<db:para>Subject annotation markup says, “this is an important subject that we care about in this context”. How is this an appropriate way to handle a deflection point? Writers cannot know with certainty what the deflection points will be for individual reader. But they can anticipate that important related subjects are likely deflection points. This is what they are doing when they create links in the document domain and it is what they are doing in the subject domain. The difference is that in the document domain they handle then mention of an important subject by creating markup that says “create a link to resource X” and in the subject domain they handle it by creating markup that says “this is a mention of important related subject Y”. This leaves us with more options about how to handle the deflection point, and that is what we have been looking for.</db:para>
+<db:para>Subject annotation markup says, “this is an important subject that we care about in this context”. How is this an appropriate way to handle a deflection point? Writers cannot know with certainty what the deflection points will be for individual reader. But they can anticipate that important related subjects are likely deflection points. This is what they are doing when they create links in the document domain and it is what they are doing in the subject domain. The difference is that in the document domain they handle the mention of an important subject by creating markup that says “create a link to resource X” and in the subject domain they handle it by creating markup that says “this is a mention of important related subject Y”. This leaves us with more options about how to handle the deflection point, and that is what we have been looking for.</db:para>
 <db:para>Marking it up a phrase as a significant subject does not oblige the publishing algorithm to create a link. If you decide to have the publishing algorithm create a link on the Web and a cross reference on paper, nothing in the markup obliges you to use any particular formatting or target any particular resource. There is no question of cheating here if you decide to create one kind of deflection device or another, or not to create one at all. The markup is giving us the information to make our own decisions rather than forcing us to create a particular structure.</db:para>
 <db:para>In all our previous examples, mentions of “Rio Bravo” were not marked up, even though it is clearly an important subject and a potential deflection point. This reflects the author’s decision not to create a link to support this deflection point. But what if we want to make a different choice later? By marking up “Rio Bravo” as a significant subject, we keep our options open. Now we tell the presentation algorithm to create links on the names of movies if we want to, or not if we don’t want to.</db:para>
-<db:para>But there are additional reasons to annotate Rio Bravo as a significant subject, because that annotation can be used for other purposes as well. The subject annotation says that “Rio Bravo” is the title of a movie. In the media domain, the titles of movies are commonly printed in italics. We can use the subject domain <db:code>movie</db:code> tags to generate media domain italic styling. We could also use this subject annotation to generate document domain index markers so that we can automatically build an index all mentions of movies in a work.</db:para>
+<db:para>But there are additional reasons to annotate Rio Bravo as a significant subject, because that annotation can be used for other purposes as well.</db:para>
+<db:orderedlist>
+<db:listitem>
+<db:para>The subject annotation says that “Rio Bravo” is the title of a movie. In the media domain, the titles of movies are commonly printed in italics. We can use the subject domain <db:code>movie</db:code> tags to generate media domain italic styling.</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>We could use this subject annotation to generate document domain index markers so that we can automatically build an index of all mentions of movies in a work.</db:para>
+</db:listitem>
+</db:orderedlist>
 <db:para>Subject annotation thus serve multiple purposes, and correspondingly reduces the amount of markup that is required to support all these different publishing functions. This is a common feature of subject domain markup. None of it is directly tied to specific document domain or media domain structures which will be required to publish the content. Each piece of subject-domain markup may be used to generate multiple document domain and media domain structures. For example, we could generate the following document domain markup from from the subject domain markup above (the example is in DocBook):</db:para>
 <db:programlisting language="DocBook">
 &lt;para&gt;
@@ -185,7 +211,7 @@ topic:
 <db:para>Now the linking algorithm looks like this:</db:para>
 <db:programlisting language="pseudo">
 match actor
-    $target = find href of topic with index where type = actor and name = @name
+    $target = find href of topic where type = actor and name = @name
     create xref
         attribute href = $target
         continue
@@ -211,7 +237,7 @@ match actor
 </db:programlisting>
 <db:para>There is a lot more to how this mechanism works in practice, including what you do about imperfect matches and what happens when the query returns multiple resources. But that takes us into the specifics of individual systems and that is more detail than we need for present purposes.</db:para>
 <db:para>Indexing of topics may also be done by a content management system, in which case the linking algorithm would query to CMS to find topics to link to.</db:para>
-<db:para>A useful feature of this approach is that you can have the publishing algorithm fall back to creating a link to an external resource if and internal one is not available. If a search of the index of your own content fails, you can search indexes of external content. You can build such an index yourself, but some external sites may also provide indexes, APIs, or search facilities that you can use to locate appropriate pages to link to.</db:para>
+<db:para>A useful feature of this approach is that you can have the publishing algorithm fall back to creating a link to an external resource if an internal one is not available. If a search of the index of your own content fails, you can search indexes of external content. You can build such an index yourself, but some external sites may also provide indexes, APIs, or search facilities that you can use to locate appropriate pages to link to.</db:para>
 </db:section>
 <db:section>
 <db:title>Deferred Deflection</db:title>
@@ -234,10 +260,12 @@ match actor
     ...
 &lt;/ul&gt;
 </db:programlisting>
-<db:para>But will it be clear out of the context of the original text what the words “the Duke” refer to? (Than answer here is maybe, but it is not hard to image cases where it would be a definite no.)</db:para>
+<db:para>But will it be clear out of the context of the original text what the words “the Duke” refer to? (The answer here is maybe, but it is not hard to image cases where it would be a definite no.)</db:para>
 <db:para>On the other hand, if the deflection point is marked up in the subject domain like this:</db:para>
 <db:programlisting language="xml">
-&lt;p&gt;In &lt;movie&gt;Rio Bravo&lt;/movie&gt;, &lt;actor name="John Wayne"&gt;The Duke&lt;/actor&gt; plays an ex-Union colonel out for revenge.&lt;/p&gt;
+&lt;p&gt;In &lt;movie&gt;Rio Bravo&lt;/movie&gt;, 
+&lt;actor name="John Wayne"&gt;The Duke&lt;/actor&gt; plays 
+an ex-Union colonel out for revenge.&lt;/p&gt;
 </db:programlisting>
 <db:para>Then, given that we know what the subject of the deflection point is, we could use it to create a list of links that are categorized by type and use the real names of actors even when the original text use a nickname:</db:para>
 <db:programlisting language="html">
@@ -258,12 +286,12 @@ match actor
     &lt;/li&gt;
 &lt;/ul&gt;
 </db:programlisting>
-<db:para>In short, algorithmically deferring document domain links is always tricky, but we can comfortably defer linking of subject annotations.</db:para>
+<db:para>In short, algorithmically deferring document domain links is always tricky, but we can comfortably defer linking of subject annotations if we want to.</db:para>
 </db:section>
 <db:section>
 <db:title>Different domain, different algorithm</db:title>
 <db:para>What the linking algorithm illustrates perhaps better than any other is that the movement from one domain to another changes the algorithms in fundamental ways. While the algorithm has the same end in each domain, the way it achieves that end can be significantly different.</db:para>
-<db:para>One of the points I have tried to make about structured writing algorithms is that they always start with the content structures. How you design the content structures -- the way the author records the content -- determines everything you can do with the content. You create content structures to support algorithms. You create algorithms to improve content quality or streamline content management and publishing.</db:para>
+<db:para>One of the points I have tried to make about structured writing algorithms is that they always start with the content structures. How you design the content structures -- the way the author records the content -- determines everything you can do with the content. You create content structures to support algorithms. You create algorithms to improve content quality or streamline content management and publishing. You then choose the content structures that support the algorithm you want to implement.</db:para>
 <db:para>In the document domain, the data structures tend to have a one to one correspondence with their algorithms. As system designers determine they need a particular algorithm, they create structures to support that algorithm. Thus document domain languages that require support for linking, reuse, indexing, and single sourcing have data structures for linking, for reuse, for indexing, and for single sourcing. (Some of these may be management domain structures, of course.)</db:para>
 <db:para>In the subject domain, though, the data structures reflect the subject matter. If you go looking for a one to one correspondence between a structure and the algorithm it supports, you won’t find it. Thus you will not find link markup or reuse markup or index markup or single sourcing markup in the subject domain. You will find markup that clarifies and delineates the subject matter of the content it contains. Any algorithm we want to apply has to interpret that subject domain annotation and use it as the basis for creating whatever kind of document or media domain structure you want for publishing.</db:para>
 <db:para>System designers do still have to think about what algorithms they want to apply, but that is to make sure that the aspects of the subject matter needed to drive the algorithms are captured. Since every subject structure can potentially drive many publishing algorithms, however, you will often find your subject domain content already supports any new algorithms you want to apply. This helps future proof your content.</db:para>

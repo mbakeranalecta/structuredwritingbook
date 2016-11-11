@@ -2,25 +2,128 @@
 <db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0">
 <db:title>Subject structures</db:title>
 
-<db:para>When you create content in the subject domain, or add subject domain structures to document domain languages, the structures should reflect the subject matter rather than the presentation of the content. How exactly do you make this distinction? It is not always obvious, because even in the subject domain you are still often writing in document domain structures like paragraphs and lists. As we have noted, a subject domain structured writing language is not an ontology. It does not attempt to capture the entire semantics of a piece of content as formal data. It merely captures enough to enable the set of structured writing algorithms you are interested in.</db:para>
-<db:para>This means that border between the document domain and the subject domain is somewhat fuzzy. There are subject domain structures in public document domain languages like DocBook, and there are document domain structures in examples of subject domain languages that we have looked at, like recipes, movie reviews, and API references.</db:para>
+
+<db:para>When you create content in the subject domain, or add subject domain structures to document domain languages, the structures should reflect the subject matter rather than the presentation of the content. How exactly do you make this distinction? It is not always obvious, because even in the subject domain you are still often writing in document-domain structures like paragraphs and lists. As we have noted, a subject-domain structured writing language is not an ontology. It does not attempt to capture the entire semantics of a piece of content as formal data. It merely captures enough to enable the set of structured writing algorithms you are interested in, or to factor out constraints in other domains, or to increase functional lucidity.</db:para>
+<db:para>This means that border between the document domain and the subject domain is somewhat fuzzy. There are subject domain structures in public document domain languages like DocBook, and there are document-domain structures in examples of subject domain languages that we have looked at, like recipes, movie reviews, and API references.</db:para>
 <db:para>The key indication that you are in the subject domain is whether or not you could reasonably use the language to write about other subjects. DocBook has a number of subject domain structures related to software and computers, but you can ignore those structures (none of them are mandatory) and use DocBook to write recipes or movie reviews if you want to. Thus DocBook is a document domain language. Can you use our recipe markup language to write about software or movies? No. Can you use our API reference markup to write about preparing food? No. Therefore these languages are in the subject domain.</db:para>
-<db:para>The difference between a subject domain language and a document domain language with subject domain structures is often easiest to see in the larger structures of the language. The fact that the root of a DocBook document is <db:code>book</db:code> or <db:code>article</db:code> is a giveaway that it is a document domain language. The fact that the root of our recipe markup language is <db:code>recipe</db:code> tells us it is a subject domain language.</db:para>
-<db:para>However, it is possible to have a language whose top-level structures are in the document domain but which is still only suitable for a narrow range of subject matter. An organization might, for instance, need to develop highly technical reports with very specific requirements. They might make the root element of their language <db:code>report</db:code> and have the first structures be things like <db:code>authors</db:code>, <db:code>executive-summary</db:code>, and <db:code>introduction</db:code>. It might be only then that specific subject domain structures are required to constrain the body of the report.</db:para>
-<db:para>This approach create what we might look at as a subject-specific document domain language. In keeping with the distinction being based on whether a language can be used for multiple subjects, however, I prefer to think of languages like this as being in the subject domain.</db:para>
-<db:para>On the other hand, there are document domain languages that are suitable for  only certain document types. DocBook’s <db:code>article</db:code> document type and DITA’s task topic are not specific to one subject, but they are specific to one type of document. Similarly, MarkDown is designed only for simple web pages. eLesson Markup Language (eLML) is a format for creating electronic lessons, but it is not restricted to lessons on a particular subject. It is therefore in the document domain. Journal Article Tag Suite (JATS) is a language for scientific journals online. It is document domain because it is specific to a document type, not a subject.</db:para>
-<db:para>The development of a subject-domain language generally begins by formalizing the template of a document on that subject. As we have shown, you can write a recipe in a document domain language. It will still follow the template of a recipe: introduction, picture, ingredients, preparation steps. But that template will not be formalized or recorded in the content. So, the first step into the subject domain is to formalize the template:</db:para>
-<!--  example -->
+<db:para>However, there are document domain languages that are suitable for  only certain document types. DocBook’s <db:code>article</db:code> document type and DITA’s task topic are not specific to one subject, but they are specific to one type of document. Similarly, MarkDown is designed for simple web pages. eLesson Markup Language (eLML) is a format for creating electronic lessons, but it is not restricted to lessons on a particular subject. It is therefore in the document domain. Journal Article Tag Suite (JATS) is a language for scientific journals online. It is document domain because it is specific to a document type, not a subject.</db:para>
+<db:para>The development of a subject-domain language generally begins by formalizing the rhetorical structure of a document on that subject . As we have shown, you can write a recipe in a document domain language. It will still follow the template of a recipe: introduction, picture, ingredients, preparation steps. But that template will not be formalized or recorded in the content. So, the first step into the subject domain is to formalize the rhetorical structure:</db:para>
+<db:programlisting language="sam">
+recipe: Hard Boiled Egg
+    introduction:
+        A hard boiled egg is simple and nutritious. 
+        Prep time, 15 minutes. Serves 6.
+    ingredients:
+        * 12 eggs
+        * 2qt water
+    preparation:
+        1. Place eggs in pan and cover with water.
+        2. Bring water to a boil.
+        3. Remove from heat and cover for 12 minutes.
+        4. Place eggs in cold water to stop cooking.
+        5. Peel and serve.
+</db:programlisting>
 <db:para>The next step is to formalize the data structure of any data that is already presented in fields, lists, or tables. (In other words, not in paragraphs.)</db:para>
-<!--  example -->
+<db:programlisting language="sam">
+recipe: Hard Boiled Egg
+    introduction:
+        A hard boiled egg is simple and nutritious. 
+        Prep time, 15 minutes. Serves 6.
+    ingredients:: ingredient, quantity, unit
+        eggs, 12, each
+        water, 2, qt
+    preparation:
+        step: Place eggs in pan and cover with water.
+        step: Bring water to a boil.
+        step: Remove from heat and cover for 12 minutes.
+        step: Place eggs in cold water to stop cooking.
+        step: Peel and serve.
+</db:programlisting>
 <db:para>The next step is to look for data that is consistent worthy of being constrained and made available to algorithms and pull it out of paragraphs and into structured fields, lists, or tables.</db:para>
-<!--  example -->
+<db:programlisting language="sam">
+recipe: Hard Boiled Egg
+    introduction:
+        A hard boiled egg is simple and nutritious.
+    ingredients:: ingredient, quantity, unit
+        eggs, 12, each
+        water, 2, qt
+    preparation:
+        1. Place eggs in pan and cover with water.
+        2. Bring water to a boil.
+        3. Remove from heat and cover for 12 minutes.
+        4. Place eggs in cold water to stop cooking.
+        5. Peel and serve.
+    prep-time: 15 minutes
+    serves: 6
+</db:programlisting>
 <db:para>The next step is to think about whether there is additional subject domain or management domain metadata that you need to add to the model. Usually this will be for management or tracking purposes, and may not be part of any current content examples you are looking at. Wait to do this step until you have formalized the field, list, and table data from the content itself, as you may find that that data is usable for management and tracking purposes as well, so you won’t need to add additional fields just for management purposes.</db:para>
-<!--  example -->
+<db:programlisting language="sam">
+recipe: Hard Boiled Egg
+    introduction:
+        A hard boiled egg is simple and nutritious.
+    ingredients:: ingredient, quantity, unit
+        eggs, 12, each
+        water, 2, qt
+    preparation:
+        1. Place eggs in pan and cover with water.
+        2. Bring water to a boil.
+        3. Remove from heat and cover for 12 minutes.
+        4. Place eggs in cold water to stop cooking.
+        5. Peel and serve.
+    prep-time: 15 minutes
+    serves: 6
+    wine-match: champagne and orange juice
+    beverage-match: orange juice
+    nutrition:
+        serving: 1 large (50 g)
+        calories: 78
+        total-fat: 5 g
+        saturated-fat: 0.7 g
+        polyunsaturated-fat: 0.7 g    
+        monounsaturated-fat: 2 g    
+        cholesterol: 186.5 mg    
+        sodium: 62 mg    
+        potassium: 63 mg    
+        total-carbohydrate: 0.6 g    
+        dietary-fiber: 0 g    
+        sugar: 0.6 g    
+        protein: 6 g    
+</db:programlisting>
 <db:para>The next step is to look through the remaining paragraph data for the mention of significant subjects that should be annotated, and to define the types of those annotations. This could include annotating things that you decided not to pull out of paragraphs into fields. For instance, if you decided not to pull out all mentions of cooking utensils from your recipe to make a list of required tools, you could annotate the mention of tools in recipe steps. (Or you could decide to do both, so you can validate one against the other.)</db:para>
-<!--  example -->
+<db:programlisting language="sam">
+recipe: Hard Boiled Egg
+    introduction:
+        A hard boiled {egg}(food) is simple and nutritious.
+    ingredients:: ingredient, quantity, unit
+        eggs, 12, each
+        water, 2, qt
+    preparation:
+        1. Place eggs in (pan){utensil} and cover with water.
+        2. Bring water to a boil.
+        3. Remove from heat and cover for 12 minutes.
+        4. Place eggs in cold water to stop cooking.
+        5. Peel and serve.
+    prep-time: 15 minutes
+    serves: 6
+    wine-match: champagne and orange juice
+    beverage-match: orange juice
+    nutrition:
+        serving: 1 large (50 g)
+        calories: 78
+        total-fat: 5 g
+        saturated-fat: 0.7 g
+        polyunsaturated-fat: 0.7 g    
+        monounsaturated-fat: 2 g    
+        cholesterol: 186.5 mg    
+        sodium: 62 mg    
+        potassium: 63 mg    
+        total-carbohydrate: 0.6 g    
+        dietary-fiber: 0 g    
+        sugar: 0.6 g    
+        protein: 6 g    
+</db:programlisting>
 <db:para>Most subject domain languages are small, simple, and fairly strict in their constraints. This is as it should be. Since you have to design them, and the algorithms that translate them into the document domain for publishing, you don’t want them to be elaborate or full of different permutations of structure. If you find yourself needing a similar language for a related subject, it is usually better to create a new equally small, equally strict language for that subject rather than trying to make one language cover both.</db:para>
 <db:para>A subject domain language should communicate with the author in terms that they understand. This means that the names of structures should make sense to them, but it also means that the how the formal structures break things up should make intuitive sense as well. For an author with experience in the field, a subject domain language should be such a good fit that they don’t really feel like they have to learn anything to use it. The vastly increases the functional lucidity of the language leaving more of the author’s attention free to focus on content, while at the same time providing constraints and guidance that make sure that things are complete and consistent.</db:para>
-<db:para>It is easy to get carried away with breaking things down into finer and finer pieces to formally describe the subject matter in finer and finer detail. Remember that all of this is wasted unless it enables one of the structured writing algorithms that matter to you. (Remember that authoring and conformance are among the algorithms.) Making your markup mysterious, difficult, or tedious to create in the name of more precisely modeling the subject matter does more harm than good if reduces functional lucidity without creating a compensating increase in quality or efficiency.</db:para>
-<db:para>Moving your content to the subject domain, in other words, is about doing the simplest thing that works to achieve a given outcome of a give quality. Sometimes MarkDown is the simplest thing that works, but there are lots of quality, management, and production goals that are hard to meet with MarkDown. Going to elaborate document domain languages is often the next step people take in pursuit of those goals, but these are not simple. But in many cases, the subject domain may be the simplest thing that works for these larger goals. But it make it so, you need to make sure that you subject domain languages are as simple as they can be to get the job done.</db:para>
+<db:para>It is easy to get carried away with breaking things down into finer and finer pieces to formally describe the subject matter in finer and finer detail. Remember that all of this is wasted unless it enables one of the structured writing algorithms that matter to you. Remember too that authoring and conformance are among the algorithms. Making your markup mysterious, difficult, or tedious to create in the name of more precisely modeling the subject matter does more harm than good if reduces functional lucidity without creating a compensating increase in quality or efficiency.</db:para>
+<db:para>Moving your content to the subject domain, in other words, is about doing the simplest thing that works to achieve a given outcome of a given quality. Sometimes MarkDown is the simplest thing that works, but there are lots of quality, management, and production goals that are hard to meet with MarkDown. Going to elaborate document domain languages is often the next step people take in pursuit of those goals, but these are not simple. In many cases, the subject domain may be the simplest thing that works for these larger goals. But it make it so, you need to make sure that your subject domain languages are as simple as they can be to get the job done.</db:para>
 </db:chapter>

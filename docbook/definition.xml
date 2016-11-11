@@ -36,26 +36,37 @@
 </db:itemizedlist>
 <db:para>You probably see the problem here. By this definition, all writing, except perhaps the scrawls of a two-year old, is structured. And this is, in fact, the case. All content has structure. Without structure, it would not have meaning.</db:para>
 <db:para>So our get-your-arms-around-the-whole-thing definition, while correct, is not very helpful. We need to constrain it some way.</db:para>
-<db:para>Let’s  begin by asking why it is useful to impose constraints on writing. Constraints make texts useful for a specific purpose. In order to know if a text is useful to us, we have to know what constraints it follows. When we do a Google search, for instance, we are expressing a constraint. We are saying, only show me content that is related to this phrase.</db:para>
+<db:para>Let’s  begin by asking why it is useful to impose constraints on writing. Constraints do two things:</db:para>
+<db:orderedlist>
+<db:listitem>
+<db:para>They constrain the creation of texts, making sure that they meet a specific set of needs. Every time you fill out a form you are writing a document whose creation has been constrained in order to make sure you supply the required information in the desired format.</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>They constrain the interpretation of texts, either by people or by algorithms, ensuring that they are understood correctly.</db:para>
+</db:listitem>
+</db:orderedlist>
+<db:para>Constraining the interpretation of texts by algorithms is important because we use algorithms to help us find information every day. When we do a Google search, for instance, we are asking the Google search algorithm to find us information on a particular subject. Our search is constrained by the search terms we enter.</db:para>
 <db:para>This constraint is somewhat imprecise, which is why search results are not always accurate. Most of the pages that Google searches do not explicitly say which constraints they meet in a universally agreed manner, so the search engine has to try to extrapolate what constraints the page follows as well as what constraints the reader’s search string was meant to express. Given that imprecision on both ends, it is amazing how well Google works.</db:para>
-<db:para>Still, the search process would be much easier if content explicitly stated what constraints it met. This is what the semantic Web initiative is trying to achieve. This is also where the idea of metadata comes in. Metadata is a record of the constraints that a particular piece of content meets. This gives us a clue about how to constrain our definition of structured writing.</db:para>
+<db:para>Still, the search process would be much easier if content explicitly stated what constraints it met. Even if content was written to meet a very precise set of constraints, if the published content does not record what those constraints are, the algorithm cannot precisely determine what the content is about. This is the problem that the semantic Web initiative is trying to address. It wants to annotate web content to make it easier for algorithms to understand precisely what content is about.</db:para>
+<db:para>Searching for content is not only a machine activity, however. People sift though search results and surf across the Web looking for content that may meet their needs. Research shows that they do this using a technique called information foraging which depends largely on detecting and following an information scent. They are looking for content that looks promising -- smells right -- on first inspection. Content that explicitly annotates itself with descriptive titles and subtitles and with familiar patterns of content or layout has a stronger information scent (and is generally easier to read and understand).</db:para>
+<db:para>It is not enough, then, that content should follow constraints, it should annotate the constraints if follows, both for humans and for algorithms. This gives us a clue about how to constrain our definition of structured writing.</db:para>
 <db:blockquote>
-<db:para>Structured writing is the act of creating content that obeys one or more explicitly recorded constraints.</db:para>
+<db:para>Structured writing is the act of creating content that obeys one or more explicitly annotated constraints.</db:para>
 </db:blockquote>
 <db:para>By this definition, unstructured writing is writing that does not tell you what its structure is -- what constraints it obeys. This does not mean it lacks structure in the wider sense. It simply means that its structure is not made explicit. For our purposes, structured writing is writing that keeps a record of the constraints it obeys -- or at least some of them.</db:para>
 <db:para>That “or at least some of them” is important. It is pretty difficult to record every constraint that a text obeys. There would be little point, for example, in explicitly recording that you obeyed the constraint “join independent clauses with a semicolon.” We want to record those constraint that are useful to us, that serve a particular purpose.</db:para>
 <db:para>So let’s further constrain our definition:</db:para>
 <db:blockquote>
-<db:para>Structured writing is the act of creating content that obeys one or more explicitly recorded constraints that serve a defined purpose.</db:para>
+<db:para>Structured writing is the act of creating content that obeys one or more explicitly annotated constraints that serve a defined purpose.</db:para>
 </db:blockquote>
 <db:para>This does not mean that content that has been structured for one purpose may not also turn out to be structured for another purpose. This frequently turns out to be the case. On the other hand, it means that you cannot ever be sure that the structure you apply to your content today will apply to future purposes that you do not yet understand. In this sense, the idea that structured writing can “future proof” your content is misleading. It can only guarantee future uses you foresee today. For more on this, see <db:xref linkend="chapter.change"/>.</db:para>
 <db:para>And what this means, in any given context, is that when someone says, “we are going to switch to structured writing”, what they really mean is that they are going to add an additional bit of structure -- an additional set of constraints -- that they did not apply before. Any piece of recorded content has been structured for some specific purpose or purposes. We are simply talking about adding more structure for additional specific purposes. So:</db:para>
 <db:blockquote>
-<db:para>Structured writing is the act of creating content that obeys one or more predefined and explicitly recorded constraints that serve a defined purpose.</db:para>
+<db:para>Structured writing is the act of creating content that obeys one or more predefined and explicitly annotated constraints that serve a defined purpose.</db:para>
 </db:blockquote>
 <db:para>There is nothing new about this: templates and style guides are examples of predefined constraints that authors are required to obey. However, this is not a book about how to write a style guide, so I need to constrain the definition further:</db:para>
 <db:blockquote>
-<db:para>Structured writing is the act of creating content that obeys one or more predefined and explicitly recorded constraints that serve a defined purpose, in a format readable by machines.</db:para>
+<db:para>Structured writing is the act of creating content that obeys one or more predefined and explicitly annotated constraints that serve a defined purpose, in a format readable by machines.</db:para>
 </db:blockquote>
 <db:para>There is a lot of content out there that uses a consistent layout and headings across multiple documents to explicitly record the fact that they obey a set of constraints for a defined purpose. An API reference, a tax form, and a tide table are all examples of this type of content. All these formats are entitled to call themselves structured, but their structures may only be intended to be read by people, not machines.</db:para>
 <db:para>Suppose we have a collection of content that includes recipes and we want to select all the recipes that are good matches for a Pinot Noir. We could attempt to do this Google style by searching for “recipe Pinot Noir”. This would probably get us a lot of correct results, but probably some incorrect ones as well. Some other types of content might contain the words “recipe” and “Pinot Noir” (such as this essay on the definition of structured writing). Some recipes might use Pinot Noir as an ingredient rather than a wine match. Some recipes might be missed because the text does not include the word “recipe”.</db:para>
@@ -68,7 +79,7 @@ RETURN topic WHERE type='recipe' AND wine-match='pinot noir'
 <db:para>Using a format readable by machines (such as XML) can add several powerful capabilities to structured writing. Making the structure of a text machine readable allows us to enlist the help of machines in making the content better, and also to hand many management and production tasks over to machines so that writers can focus more on content.</db:para>
 <db:para>Of course, any piece of content created on a computer is stored in a format that is readable by machines. In most cases, however, such formats only record those constraints as are required by the software itself for its own purposes. But since those constraints are predefined, explicitly recorded, and serve a defined purpose, any old Word doc technically still meets this definition. To make structured writing distinct and worth talking about, we need to constrain the definition once again:</db:para>
 <db:blockquote>
-<db:para>Structured writing is the act of creating content that obeys one or more predefined and explicitly recorded constraints that serve a defined purpose, in a format readable by machines, with the goal of making the content better.</db:para>
+<db:para>Structured writing is the act of creating content that obeys one or more predefined and explicitly annotated constraints that serve a defined purpose, in a format readable by machines, with the goal of making the content better.</db:para>
 </db:blockquote>
 <db:para>There several other ways I could have gone with this final constraint. I could have added “with the goal of separating the editing function from the publishing function to realize greater control over publishing options.”</db:para>
 <db:para>I could have said, “with the goal of making content interchangeable between systems and organizations.”</db:para>

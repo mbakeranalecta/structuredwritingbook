@@ -29,21 +29,24 @@
 <db:listitem><db:para>You can include graphics and other media that the user can interact with.</db:para></db:listitem>
 </db:varlistentry>
 </db:variablelist>
-<db:para>As always, you can represent these behaviors in each of the structured writing domains.</db:para>
-<db:itemizedlist>
-<db:listitem>
-<db:para>In the media domain, you encode the behavior itself. This means that JavaScript or other forms of executable code may become part of your media domain content.</db:para>
-</db:listitem>
-<db:listitem>
-<db:para>In the document domain, you encode an abstract representation of these behaviors or of the document structures on which these behaviors act. In the document domain, the executable code that implements the behavior is factored out, but the document structures that support the behavior or depend on it are made explicit. The document domain, in other words, may call for the behavior, but it does not contain the implementation of the behavior.</db:para>
-</db:listitem>
-<db:listitem>
-<db:para>In the subject domain, as always, you record information about the subject matter that may be used to make a decision to implement certain behavior. The subject domain markup neither calls for not implements the behavior. You may, however, choose which parts of the subject matter to markup us explicitly based on the behavior you want to implement.</db:para>
-</db:listitem>
-</db:itemizedlist>
-<db:para>Supporting active content in structured writing comes down to one thing. If you create static document structures, you will have static content. If you create structures that an algorithm can interpret in different ways, you have the foundation for active content.</db:para>
-<db:para>In the media domain this means shipping the algorithm itself along with its data set (thought the data set may reside somewhere else and be queried by that algorithm). Of course, all content arrives at the media domain as it is published, so this is always what you are going to deliver. You will always be creating (or borrowing) an algorithm to ship with your content, and setting up your content so that algorithm can read it.</db:para>
-<db:para>In the document domain, this means defining document structures to explicitly support certain kinds of manipulation. For example, a generic table does not support the action of allowing the reader to sort on any column. Sorting by column only makes sense if the content consists of identically structured rows. In other words, when you sort a table on a column, you are actually sorting the rows. Sorting this table by column would accomplish nothing meaningful:</db:para>
+<db:para>You can represent these behaviors in each of the structured writing domains.</db:para>
+<db:variablelist>
+<db:varlistentry>
+<db:term>Media Domain</db:term>
+<db:listitem><db:para>In the media domain, you encode the behavior itself. This means that JavaScript or other forms of executable code may become part of your media domain content.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Document Domain</db:term>
+<db:listitem><db:para>In the document domain, you encode an abstract representation of these behaviors or of the document structures on which these behaviors act. In the document domain, the executable code that implements the behavior is factored out, but the document structures that support the behavior or depend on it are made explicit. The document domain, in other words, may call for the behavior, but it does not contain the implementation of the behavior.</db:para></db:listitem>
+</db:varlistentry>
+<db:varlistentry>
+<db:term>Subject Domain</db:term>
+<db:listitem><db:para>In the subject domain, as always, you record information about the subject matter that may be used to make a decision to implement certain behavior. The subject domain markup neither calls for nor implements the behavior. Rather, the presentation algorithm implements the behavior based on what the subject domain structures and annotations tell it about the subject matter.</db:para></db:listitem>
+</db:varlistentry>
+</db:variablelist>
+<db:para>Supporting active content in structured writing comes down to one thing: If you create static document structures, you will have static content. If you create structures that an algorithm can interpret in different ways, you have the foundation for active content.</db:para>
+<db:para>In the media domain this means shipping the algorithm itself along with its data set (thought the data set may reside somewhere else and be queried by that algorithm). Of course, all content arrives at the media domain as it is published, so this is always what you are going to deliver. You will always be creating (or borrowing) an algorithm to ship with your content, and setting up your content so that algorithm can read it. The question is whether you record the content in the media domain, integrating the algorithm as you go, or whether you write it in another domain and integrate the algorithm at publishing time based on information from that domain.</db:para>
+<db:para>In the document domain, you document structures to explicitly support certain kinds of manipulation. For example, a generic table does not support the action of allowing the reader to sort on any column. Sorting by column only makes sense if the content consists of identically structured rows. In other words, when you sort a table on a column, you are actually sorting the rows. Sorting this table by column would accomplish nothing meaningful:</db:para>
 <db:informaltable><db:tbody>
 <db:tr>
 <db:td><db:emphasis role="bold">item</db:emphasis></db:td>
@@ -87,11 +90,11 @@
 <db:td>Activate the destruct sequence.</db:td>
 </db:tr>
 </db:tbody></db:informaltable>
-<db:para>Even with row-oriented tables sorting on every column does not always make sense. Sorting on the name column or the size columns or the price column makes sense. Sorting on the description column or the picture column does not.</db:para>
+<db:para>Even with row-oriented tables, sorting on every column does not always make sense. Sorting on the name column or the size columns or the price column makes sense. Sorting on the description column or the picture column does not.</db:para>
 <db:para>To implement column sorting at the document domain level, therefore, you need some sort of sortable table structure which assures that the sorting behavior is only applied to columns or rows where it makes sense in tables where it makes sense.</db:para>
 <db:para>In the subject domain, of course, you are not creating a table at all, or at least, not a table in the publishing sense of the word. You are creating a subject-based structure to capture information which can then be used to build different document domain presentations for different purposes. The fact that some of these presentation may be static and some may be active is orthogonal to how the information is represented in the subject domain. In other words, by the time we move content to the subject domain we have factored out the behavior.</db:para>
-<db:para>This is an idea we have looked at before. When we looked at separating content from formatting we noted that in a world that includes interactive media, we also needed to think about separating content from behavior. We mentioned then that separating content from formatting means at minimum moving it to the document domain. We also saw that when it comes to differential single sourcing you often need to move your content to the subject domain in order to create different document domain presentations for different media. The same is true of separating content from behavior.</db:para>
-<db:para>In the subject domain you present a document domain structure that is capable of being acted on by an algorithm, but you factor out the algorithm itself. But in a differential single sourcing scenario, you might want a different structure for different devices. You might want a static table, perhaps laid out differently, for static paper or PDF presentation, a sortable table for presentation in desktop web browsers or tables with sufficient room for a table, and a different kind of lookup mechanism altogether for presentation on the limited real estate of a phone. In this case, you can factor out the particular active content structure by moving the content to the subject domain.</db:para>
+<db:para>This is an idea we have looked at before. When we looked at <db:xref linkend="chapter.separating"/> we noted that in a world that includes interactive media, we also needed to think about separating content from behavior. We mentioned then that separating content from formatting means at minimum moving it to the document domain. We also saw that when it comes to differential single sourcing you often need to move your content to the subject domain in order to create different document domain presentations for different media. The same is true of separating content from behavior.</db:para>
+<db:para>In the document domain, you present a document domain structure that is capable of being acted on by an algorithm, but you factor out the algorithm itself. But in a differential single sourcing scenario, you might want a different structure for different devices. You might want a static table, perhaps laid out differently, for static paper or PDF presentation, a sortable table for presentation in desktop web browsers or tablets with sufficient room for a table, and a different kind of lookup mechanism altogether for presentation on the limited real estate of a phone. In this case, you can factor out the particular active content structure by moving the content to the subject domain.</db:para>
 <db:para>In the subject domain, this might mean using a different kind of table: a database table. The form of a database table is simple: it is a series of rows with a common structure. The values in each row are presented in cells in the same order with the same type of data in each cell. For instance, in the recipe example we have been using, the list of ingredients has this form:</db:para>
 <db:programlisting language="sam">
 ingredients:: ingredient, quantity, unit
@@ -188,7 +191,8 @@ Microsoft ({NASDAQ:MSFT}(ticker)) is a large software company.
 </db:blockquote>
 <db:para>The subject domain markup would be translated to the document domain as part of the publishing algorithm. Here’s what that might look like:</db:para>
 <db:programlisting language="xml">
-&lt;p&gt;Microsoft (&lt;lookup type="stock-price" symbol="NASDAQ:MSFT"/&gt;) is a large software company.&lt;/p&gt;
+&lt;p&gt;Microsoft (&lt;lookup type="stock-price" symbol="NASDAQ:MSFT"/&gt;) 
+is a large software company.&lt;/p&gt;
 </db:programlisting>
 <db:para>This would then be translated into the media domain as a call to a particular web service that provides stock quotes, and perhaps some JavaScript code to format the result.</db:para>
 <!--  Maybe use the War and Peace example form previous article? -->

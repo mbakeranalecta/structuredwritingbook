@@ -498,6 +498,11 @@
                     <xsl:value-of select="@id"/>
                 </xsl:attribute>
             </xsl:if>
+            <xsl:if test="@name">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@name"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates select="title"/>
             <xsl:choose>
                 <xsl:when test="insert[@type='image']">
