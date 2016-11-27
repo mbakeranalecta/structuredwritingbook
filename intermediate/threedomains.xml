@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter name="chapter.three-domains">
-<title>The Three Domains of Content Structure</title>
+<title>Introduction</title>
 <annotations>
 <p>Concepts</p>
 <p><phrase><annotation type="concept">subject domain</annotation></phrase> <phrase><annotation type="concept">media domain</annotation></phrase> <phrase><annotation type="concept">document domain</annotation></phrase> <phrase><annotation type="concept">management domain</annotation></phrase> <phrase><annotation type="concept">subject-domain</annotation></phrase> <phrase><annotation type="concept">media-domain</annotation></phrase> <phrase><annotation type="concept">document-domain</annotation></phrase> <phrase><annotation type="concept">management-domain</annotation></phrase> <phrase><annotation type="concept">hybrid tagging language</annotation></phrase> <phrase><annotation type="concept">Every Page is Page One</annotation></phrase> <phrase><annotation type="concept">abstract language</annotation></phrase> <phrase><annotation type="concept">information architecture</annotation></phrase> <phrase><annotation type="concept" specifically="top-down information architecture">top-down</annotation></phrase> <phrase><annotation type="concept">metadata</annotation></phrase></p>
@@ -34,13 +34,60 @@
 <section>
 <title>From ideas to dots</title>
 <p>The process of creating and delivering content consists of translating ideas (stuff someone thinks or knows) into concrete physical form that can be read (dots or lines of ink on a page, or pixels on screen).</p>
-<insert item="../graphics/ideas_dots.png" type="image"/>
-<p>The writing and publishing process is all about how we get from ideas in a head to dots on a page.</p>
-<p>In the simplest case, an author writes down their ideas with pen and paper, and gives that paper to the reader. This means that recording the content happens at the very end of the process as the final published form is being created. The entire process of going from an idea to the choice of words, the organization and formatting of those words, all takes places in the writer’s head.</p>
-<p>It is rare for writers to record their ideas directly in the final physical form these day. For instance, the writer may write in a word processor, edit the text on screen, and press <phrase><annotation type="guibutton">Print</annotation></phrase> to sent the content to a printer to create the final form that the reader receives. Or they may press <phrase><annotation type="guibutton">Send</annotation></phrase> and have the final form rendered on someone else’s monitor. Either way, recording the content happens before the final form is created, and the way the content looks when you create the final form is often different from how the final form looks.</p>
+<insert item="../graphics/ideas2dots.svg" type="image"/>
+<p>The writing and publishing process is all about how we get from ideas in a head to dots on a page. Structured writing is about applying a structured methodology to that process. It is a long road from ideas to dot, and structured writing techniques can be applied at many points along that road. Almost all writing done today uses structured writing techniques to one extent of another. As this book will show, the basic principles of structured writing apply across the spectrum, from the tools and techniques used in most offices today, to most sophisticated structured writing systems. It is not a matter of unstructured vs structured approaches, but the degree of structure used.</p>
+<p>All writing has structure in the literary sense of the word. Every comprehensible sentence has a grammatical structure. You may even have learned to diagram that structure in school. <citation type="citation" value="By Tjo3ya - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=18312612"/></p>
+<insert item="../graphics/Examples_of_Reed-Kellogg_diagrams.jpg" type="image"/>
+<p>Many texts also have deliberate rhetorical structure: a particular way of assembling words and other media to effectively inform or persuade an audience. Sometimes that rhetorical structure is ad hoc, invented by the writer for a unique individual piece. But often it is repeated for many similar pieces of content. Thus newspapers stories have a repeated rhetorical structure known as the pyramid model, in which the most important facts are promoted to the opening sentences of the pieces. Recipes have a very familiar structure, with and introduction, a list of ingredients, and a list of preparation steps.</p>
+<blockquote>
+<section>
+<title>Hard Boiled Eggs</title>
+<p>A hard boiled egg is simple and nutritious. Prep time, 15 minutes. Serves 6.</p>
+<section>
+<title>Ingredients</title>
+<ul>
+<li>
+<p>12xeggs</p>
+</li>
+<li>
+<p>2qt water</p>
+</li>
+</ul>
+</section>
+<section>
+<title>Preparation</title>
+<ol>
+<li>
+<p>Place eggs in pan and cover with water.</p>
+</li>
+<li>
+<p>Bring water to a boil.</p>
+</li>
+<li>
+<p>Remove from heat and cover for 12 minutes.</p>
+</li>
+<li>
+<p>Place eggs in cold water to stop cooking.</p>
+</li>
+<li>
+<p>Peel and serve.</p>
+</li>
+</ol>
+</section>
+</section>
+</blockquote>
+<p>As a writer, you don’t have to stop to think about the rhetorical structure of a recipe: you follow the established pattern. Many other subjects have similarly well known rhetorical patterns used to describe them. These are all examples of structured writing in the rhetorical sense, and it is well known that adherence to sound rhetorical models greatly improves the quality of writing. They do this by constraining writers to follow the established rhetorical pattern.</p>
+<p>This idea of constraints is fundamental to structured writing. Whenever you specify a structure to be followed, you are imposing a constraint. Constraints define what is and is not required or acceptable in a piece of writing. If you have ever been asked to write following a template or a style guide, you have been asked to follow a set of constraints.</p>
+<p>However, the term structured writing today generally means more than following a style guide or template. It usually means the use of computer data formats (most commonly XML) to capture written content so that it can be processed by algorithms. These data structures are also constraints. They require the writer to write content to fit into a set of specific data structures. These mechanical constraints may or may not correspond to the rhetorical constraints of a particular piece of writing. In some cases, the mechanical constraints are there to serve a publishing or content management purpose and may have nothing to do with the rhetorical structure of the wiring. In some cases they may actually interfere with it.</p>
+<p>However, it is also possible to use mechanical structures like this to help improve the rhetorical structure of content. This is the kind of structured writing that this book is about. From this point on, therefore, I am going to use structured writing to mean writing in data structures. As we go on, we will show how those data structures can give greater and greater support to the literary and rhetorical structure of content.</p>
+<p>Just as all writing has at least a basic grammatical structure, all writing on a computer involves creating basic data structures. Thus the only case in which no structured writing techniques are involved in the writing process is when an author writes down their ideas with pen and paper, and gives that paper directly to the reader. In this case, the entire writing process, from an idea in the writer’s head to words on paper takes place in the writer’s head and any constraints that are imposed on the content are captured and imposed by the writer themselves as they inscribe their words with the pen.</p>
+<insert item="../graphics/ideas2dotsrecordend.svg" type="image"/>
+<p>It is rare for writers to record their ideas directly in the final physical form these day. For instance, the writer may write in a word processor, edit the text on screen, and press <phrase><annotation type="guibutton">Print</annotation></phrase> to sent the content to a printer to create the final form that the reader receives. Or they may press <phrase><annotation type="guibutton">Send</annotation></phrase> and have the final form rendered on someone else’s monitor. Either way, recording the content happens before the final form is created, and the way the content looks when you write may be different from how it looks when the reader sees it in final form. The point at which the content is recorded, in the journey from ideas to dots, has been moved back just a little bit.</p>
+<insert item="../graphics/ideas2dotsrecordmid.svg" type="image"/>
 <p>Word processing, desktop publishing software, and various approaches to structured writing all establish a point in this process from ideas to dots where the content will be recorded by the author, and then provide algorithms to complete the movement from that point to dots on a page.</p>
+<insert item="../graphics/ideas2dotsroles.svg" type="image"/>
 <p>I’m going to use the word <phrase><annotation type="concept">algorithm</annotation></phrase> a lot in this book. An algorithm is a formalized and consistent way to do something. Basically, if you give an algorithm the same inputs, it should always produce the same outputs every time it is is run. Computer software is an encoding of an algorithm that a computer can execute. But an algorithms is not the same thing as a program. An algorithm is a method. A program describes the algorithm to a computer. You do not need to be a programmer to create an algorithm. Nor do you need a computer to execute an algorithm. Human being can execute algorithms as well.</p>
-<p>The reasons I am going to talk about algorithms and not software is that algorithms are fundamental to structured writing. Algorithms and structures work together and you can’t design one without the other. Whenever you add more structure, you add more algorithms. And the reason you add structure is to enable more algorithms. The heart of this book is a description of the principal structured writing algorithms and the structures that support them. The goal of structured writing is to make content better, and it is the algorithms, not the structures that do that. The structures exist to support the algorithms.</p>
+<p>The reasons I am going to talk about algorithms and not software is that algorithms are fundamental to structured writing. Algorithms and structures work together and you can’t design one without the other. The reason you add structure is to enable algorithms. The heart of this book is a description of the principal structured writing algorithms and the structures that support them. The goal of structured writing is to make content better, and it is the algorithms, not the structures that do that. The structures exist to support the algorithms.</p>
 <p>We use structured writing algorithms to help us with the writing process. We use them either to take over or to support parts of the writing task. This usually involves moving the point at which content is recorded earlier in the process from idea to dots, allowing the algorithms more scope to assist in the process.</p>
 <p>We can describe this process of earlier recording in terms of three domains, each domain reflecting a stage in the progress from ideas to dots. The domains are the media domain (which is concerned with lines and dots on paper or screen), the document domain (which is concerned with the expression and organization of documents), and the subject domain (which is concerned with the ideas that we write about.</p>
 </section>

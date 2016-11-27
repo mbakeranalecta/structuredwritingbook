@@ -1,6 +1,5 @@
 book:
-    $title=Structured Writing
-    $subtitle=Theory and Practice
+    $title=Structured Writing for Content Quality
     $author=Mark Baker 
     title: >($title)
     subtitle: >($subtitle)
@@ -8,10 +7,10 @@ book:
     
     >>>(sam foreword.sam)
 
-    >>>(sam definition.sam)
-    
+    #>>>(sam definition.sam)
+    >>>(sam threedomains.sam)  
+        
     part:(#part.domains) The Structured Writing Domains   
-        >>>(sam threedomains.sam)
         >>>(sam MediaDomain.sam)
         >>>(sam DocumentDomain.sam)
         >>>(sam subjectDomain.sam)
@@ -69,6 +68,6 @@ book:
     >>>(xml colophon.xml)
 
     appendix:(?epub) Copyright and Legal Notices
-        subtitle: >($title): >($subtitle)
+        subtitle: >($title)
         >>>(xml info.xml)
 
