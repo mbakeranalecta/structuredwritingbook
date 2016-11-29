@@ -341,9 +341,13 @@
     
     <xsl:template match="citation[@type='nameref']" priority="-.1">
         <db:xref linkend="{@value}"/>
-<!--        <db:olink targetptr="{@value}">
-            <xsl:apply-templates/>
-        </db:olink>-->
+    </xsl:template>
+
+    <xsl:template match="phrase/citation[@type='nameref']">
+        <xsl:apply-templates/>
+        <xsl:text> (</xsl:text>
+        <db:xref linkend="{@value}"/>
+        <xsl:text>)</xsl:text>
     </xsl:template>
     
     <xsl:template match="insert[@type='image']">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter>
+<chapter name="chapter.1truth">
 <title>Single source of truth</title>
 <annotations>
 <p>Concepts</p>
@@ -19,9 +19,12 @@
 </index>
 <p>The third form of <phrase><annotation type="algorithm">single sourcing</annotation></phrase> is the single source of truth. This means that when a piece of information is needed anywhere in your organization, there is one and only one place where that information is stored and from which it should be accessed.</p>
 <p>This is, of course, a case of <phrase><annotation type="algorithm">content reuse</annotation></phrase>, but whereas the content reuse algorithm deals with how reuse happens, the single source of truth algorithm is concerned with ensuring that only one copy of a given truth is created and maintained. The content reuse algorithm can work without any such assurance, and frequently does. The writer finds some content to reuse and reuses it, without asking if it represents the one and only source of the truth it expresses.</p>
-<p>The task of finding some content that meets your needs and can be reused is very different from that ask of assuring that there is only one piece of content in existence that can meet a specific need. Finding content to reuse is a task for the writer of the content doing the reusing. Ensuring that there is only one source for that content is a task for the writer of the content being reused. They have to make sure when they create and store some piece of content that there really is no other piece of content serving the same purpose in then entire body of content.</p>
+<p>The task of finding some content that meets your needs and can be reused is very different from that ask of assuring that there is only one piece of content in existence that can meet a specific need. Finding content to reuse is a task for the writer of the content doing the reusing. Ensuring that there is only one source for that content is a task for the writer of the content being reused. They have to make sure when they create and store some piece of content that there really is no other piece of content serving the same purpose in the entire body of content.</p>
 <p>The problem with the single source of truth algorithm is, as Pontius Pilate asked, “What is truth?”<citation type="citation" value="John 18:38"/></p>
-<p>For some types of content, this is an easy question to answer. What is the customer’s birthday? A person can only have one birthday, so there is no difficulty creating a clear policy that says that a customer’s birthday may only be recorded once across the organization and should be accessed from that single source whenever it is needed. (Stating the policy is straightforward; implementing and enforcing it may be more difficult, since it means every system or document that wants to include the customer’s birthday has to be capable of retrieving it dynamically from the central data story.)</p>
+<p>For some types of content, this is an easy question to answer. What is the customer’s birthday? A person can only have one birthday, so there is no difficulty creating a clear policy that says that a customer’s birthday may only be recorded once across the organization and should be accessed from that single source whenever it is needed.<citation type="idref" value="1"/></p>
+<footnote id="1">
+<p>Stating the policy is straightforward; implementing and enforcing it may be more difficult, since it means every system or document that wants to include the customer’s birthday has to be capable of retrieving it dynamically from the central data story.</p>
+</footnote>
 <p>For other types of information, however, the question becomes much more complex. There are two fundamental problems.</p>
 <ol>
 <li>
@@ -33,13 +36,13 @@
 </ol>
 <p>It comes down to this: there is a difference between a truth and an expression of a truth. You can have one source of a truth, but you often require different expressions of that truth for different purposes and different people.</p>
 <p>In the database world, you can store the customer’s birthday in a single field of a single database, but you will produce may different expressions of this truth for use by different functions in your organization and for presentation to this or other customers in different forms.</p>
-<p>The way we achieve the storage of a single source of a truth is by abstracting it out of all of the expressions of that truth. Abstracting variants from invariants is, of course, what <phrase><annotation type="concept">structured writing</annotation></phrase> is about. But content is, per se, not a truth but an expression of a truth (or of several truths and their relationships).</p>
+<p>The way we achieve the storage of a single source of a truth is by abstracting it out of all of the expressions of that truth. Abstracting variants from invariants is, of course, what <phrase><annotation type="concept">structured writing</annotation></phrase> is about. But content is not a truth but an expression of a truth (or of several truths and their relationships).</p>
 <p>A simple case of the single source of truth algorithm is the replacement of certain pieces of text by variables. In technical communication, it is a frequent practice to replace things like company names and product names by variables:</p>
 <codeblock language="sam">
 Thank you for buying &gt;($company-name)'s &gt;($product-name). 
 We hope you enjoy it for many years to come.
 </codeblock>
-<p>There are a couple of reasons for doing this. One is that company names and product names often have a precise formal variant that the marketing department wants everyone to use, and the informal variant that people actually use. There is constraint here: use the formal name for company and product not the common name. But because authors are more used to using the common name (like everyone else) they are likely to slip it in without thinking. And if they do remember that they are supposed to use the formal name, they may not remember it correctly and so use the wrong form. Using the variable instead ensures that the correct version of the name is used at all times.</p>
+<p>There are a couple of reasons for doing this. One is that company names and product names often have a precise formal variant that the marketing department wants everyone to use, and one or more informal variants that people actually use. There is constraint here: use the formal name for company and product not the common name. But because authors are more used to using the common name (like everyone else) they are likely to slip it in without thinking. And if they do remember that they are supposed to use the formal name, they may not remember it correctly and so use the wrong form. Using the variable instead ensures that the correct version of the name is used at all times.</p>
 <p>The second reason is that products and companies are sometimes re-branded. The names change. If the names are written into the source in a hundred places, you will need to find those hundred instances and change them all. If a variable is used, you just need to change the definition of the variable and you don’t have to touch the source content at all.</p>
 <p>This is clearly a very tactical approach to creating a single source of truth. We have a single source of truth for the name of the company and the name of the product. We don’t have a single source of truth for every name. We don’t for example, have a variable for the name of every ingredient in a recipe:</p>
 <codeblock language="sam">
@@ -55,7 +58,7 @@ ingredients:: ingredient, quantity, measure
 <ll>
 <li>
 <label>Historical usage</label>
-<p>Sometimes there is historical usage in a document: a reference to past products or services that remain true after the contemporary changes are made. Not ever instance of a product name, for instance, should change when the current product name changes. But it is often hard to make the distinction between historical and contemporary use at the time the variable is inserted into the content.</p>
+<p>Sometimes there is historical usage in a document: a reference to past products or services that remain true after the contemporary changes are made. Not every instance of a product name, for instance, should change when the current product name changes. But it is often hard to make the distinction between historical and contemporary use at the time the variable is inserted into the content.</p>
 </li>
 <li>
 <label>Validation</label>
@@ -67,7 +70,7 @@ ingredients:: ingredient, quantity, measure
 </li>
 </ll>
 <p>For all these reasons, factoring out facts into a single source of truth is a limited proposition. It can be highly useful if we apply it in the right way to the right facts, but it can be cumbersome and error prone is we try to take it too far. Thus we are certainly going to end up with all sorts of duplication of facts and names in our content. And from time to time those facts are going to change and we are going to have to find all the instances and make the appropriate changes.</p>
-<p>If we structure our content in a way that makes that search easier, we can potentially save ourselves a large about of time and money. Making expressions of a truth more findable has many of the benefits of creating a single source of truth and can be less extensive, easier to implement, and more resilient in the face of unanticipated changes.</p>
+<p>If we structure our content in a way that makes that search easier, we can potentially save ourselves a large about of time and money. Making expressions of a truth more findable has many of the same benefits as creating a single source of truth and can be less expensive, easier to implement, and more resilient in the face of unanticipated changes.</p>
 <p>This is all about the ability to recognize information in context, and the ability to recognize non-canonical references to facts (a person or thing referred to by a nick name, for instance, like calling John Wayne “The Duke” or IMB “Big Blue”). Having your content in the subject domain make this much easier. Second best is having your content in the document or media domains but stored in a content management system with a cataloging scheme based in the subject domain.</p>
 <!-- Two basic problems: the same truth referred to using different terms, and different truths referred to using the same term. In the latter case, context can tell us much. -->
 <!-- Need for strict typing. If only source, got to make sure it does the whole job correctly. -->

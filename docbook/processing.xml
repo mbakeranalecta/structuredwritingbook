@@ -3,11 +3,11 @@
 <db:title>Processing Structured Text</db:title>
 
 
-<db:para>As I have said from the beginning, structured writing involves the use of algorithms to assist in writing better content. Now it is time to take a look at what basic structured writing algorithms look like and how they are expressed. There are two parts to every structured writing algorithm: the analysis and imposition of structure, an the processing of that structure.  Since the most basic of structured writing algorithms is separating content form formatting, the exploration of the algorithms is not complete until we look at how you reunite the separated pieces to produce output. So now lets look at the algorithm for putting formatting and content back together. Understanding the basics of these algorithms is important to understanding structured writing even if you don’t intend to code the algorithms yourself.</db:para>
+<db:para>As I have said from the beginning, structured writing involves the use of algorithms to assist in writing better content. Now it is time to take a look at what basic structured writing algorithms look like and how they are expressed. There are two parts to every structured writing algorithm: the analysis and imposition of structure, an the processing of that structure.  Since the most basic of structured writing algorithms is separating content form formatting, the exploration of the algorithms is not complete until we look at how you reunite the separated pieces to produce output. Understanding the basics of these algorithms is important to understanding structured writing even if you don’t intend to code the algorithms yourself. So now let’s look at the algorithm for putting formatting and content back together.</db:para>
 <db:section>
 <db:title>Two into one: reversing the factoring out of invariants</db:title>
-<db:para>Moving content from the media domain to the document domain and the subject domain involves progressively factoring out invariants in the content. Each step in this process creates two artifacts, the structured content and the invariant piece that was factored out.</db:para>
-<db:para>Thus processing structured text is about putting the pieces back together: combining the structured content with the invariants that were factored out. If factoring out the invariants moves content toward the document or subject domains, recombining the content with the invariants moves it in the opposite direction, toward the media domain. This could mean moving the content from the subject domain to the document domain or from the document domain to the media domain, or simply from a more abstract form in the media domain to a more concrete form (which will be our first example).</db:para>
+<db:para>Moving content from the media domain to the document domain or the subject domain involves progressively factoring out invariants in the content. Each step in this process creates two artifacts, the structured content and the invariant piece that was factored out.</db:para>
+<db:para>Thus processing structured text is about putting the pieces back together: combining the structured content with the invariants that were factored out. If factoring out the invariants moves content toward the document or subject domains, recombining the content with the invariants moves it in the opposite direction, toward the media domain. This could mean moving the content from the subject domain to the document domain or from the document domain to the media domain, or simply from a more abstract form in the media domain to a more concrete form, which will be our first example.</db:para>
 </db:section>
 <db:section>
 <db:title>Adding back style information</db:title>
@@ -65,7 +65,7 @@ find {style: bullet-paragraph}
 <db:section>
 <db:title>Rules based on structures</db:title>
 <db:para>The tools that do this sort of processing do not literally use search and replace like this. Rather, they parse the source document to pull out the structures and allow you to specify your processing rules by referring to the structures.</db:para>
-<db:para>We are not concerned at this level with the actual mechanism by which a processing tool recognizes structures. We are concerned with what to do when a structure is found. So let’s rewrite our rules to match structures rather than find literal strings in the text:</db:para>
+<db:para>We are not concerned here with the actual mechanism by which a processing tool recognizes structures. We are concerned with what to do when a structure is found. So let’s rewrite our rules to match structures rather than find literal strings in the text:</db:para>
 <db:programlisting>
 match paragraph
     apply style {font: 12pt "Century Schoolbook"}
@@ -75,7 +75,7 @@ match bullet-paragraph
     output "[em dash][tab]"
 </db:programlisting>
 <db:para>The way I have written these rules is an example of what is called pseudocode. It is a way for human being to sketch out an algorithm to make sure that they understand what they are trying to do before they write actual code. There is no formal grammar or syntax to pseudocode. It is intended for humans, not computers, and you can use whatever approach you like as long as it is clear to your intended audience. But pseudocode should clearly lay out a set of logical steps for accomplishing something. It should make clear exactly how the pieces go together.</db:para>
-<db:para>Writing algorithms in pseudocode is a great way to make sure that we understand the algorithms we are creating without worrying about the details of code -- or even learning how to code. They are also a great way to communicate to actual coders what we need an algorithm to do.</db:para>
+<db:para>Writing algorithms in pseudocode is a great way to make sure that we understand the algorithms we are creating without worrying about the details of code -- or even learning how to code. They are also a great way to communicate to actual coders about what we need a program to do.</db:para>
 <db:para>The result of applying these rules is just the same as before:</db:para>
 <db:programlisting>
 {font: 12pt "Century Schoolbook"}The box contains:
@@ -113,7 +113,7 @@ match title
 <db:programlisting language="sam">
 title: Review of {Rio Bravo}(movie)
 </db:programlisting>
-<db:para>Here the annotated text is set off with curly braces and the annotation itself in in parentheses immediately after it. (This is a feature of the SAM markup syntax that I am using for most of the examples in this book.) So the annotation says that the words “Rio Bravo” refer to a movie. (I really will explain this markup eventually.) The annotation is a content structure just like the title structure, and is nested inside the text of the title.</db:para>
+<db:para>Here the annotated text is set off with curly braces and the annotation itself in in parentheses immediately after it. (This is a feature of the SAM markup syntax that I am using for most of the examples in this book.) So the annotation says that the words “Rio Bravo” refer to a movie. The annotation is a content structure just like the title structure, and is nested inside the text of the title.</db:para>
 <db:para>So what do we do with our rule for processing titles to make it deal with <db:code>movie</db:code> annotations embedded in the title text? Absolutely nothing. Instead, we write a separate rule for handling <db:code>movie</db:code> annotations no matter where they occur:</db:para>
 <db:programlisting language="pseudo">
 match movie
@@ -313,7 +313,10 @@ match code
 </db:section>
 <db:section>
 <db:title>Query-based processing</db:title>
-<db:para>The rule-based approach shown here is not the only way to process structured writing. There is another approach which we could call the query-based approach. In this approach, you write a query expression that reaches into the structure of a document and pulls out a structure or a set of structures from the middle of the document.</db:para>
-<db:para>This is a useful technique if you want to radically rearrange the content of a document, or if you want to pull content out of one document to use in another. (The rule-based and query-based approaches are often called “push” and “pull” methods respectively, but I sometimes find it hard to remember which is which. I find rule-based and query-based more descriptive.) We will look at algorithms that use the query-based approach in later chapters.</db:para>
+<db:para>The rule-based approach shown here is not the only way to process structured writing. There is another approach which we could call the query-based approach.<db:footnote>
+<db:para>The rule-based and query-based approaches are often called “push” and “pull” methods respectively, but I sometimes find it hard to remember which is which. I find rule-based and query-based more descriptive.</db:para>
+</db:footnote> In this approach, you write a query expression that reaches into the structure of a document and pulls out a structure or a set of structures from the middle of the document.</db:para>
+<db:para>This is a useful technique if you want to radically rearrange the content of a document or if you want to pull content out of one document to use in another. We will look at algorithms that use the query-based approach in later chapters.</db:para>
+
 </db:section>
 </db:chapter>
