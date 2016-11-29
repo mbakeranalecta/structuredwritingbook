@@ -151,7 +151,13 @@ chapter:(#chapter.metadata) Metadata
         
         * By improving the consistency of the annotations, it makes all the other algorithms that rely on them more reliable as well. (This is one of the greatest virtues of the subject domain. Subject domain markup can serve multiple algorithms, meaning you get the benefits of multiple algorithms with less cost. 
         
+    section: Local and global names
+
+        A big part of functional lucidity is the ability to call things by the names that are familiar to you. We noted in the discussion of the {relevance algorithm} ([#chapter.relevance]) that the use of clearly labeled unambiguous identifiers can help algorithms determine the relevance of a piece of content. The problem is, not everything has a globally unambiguous identifier (such as a company stock ticker) and even for things that do, the author may know know what those identifies are off the top of their heads (for instance, many authors may know the names of companies like Apple, Google, and Microsoft but not know their full ticker symbol). Forcing them to look them up every time you want to to unambiguously identify a company will add a lot of overhead to the authoring process, and it will also make the markup of the information more complex, again impacting the efficiency of authoring. 
+
+        Fortunately, we don't have to unambiguously identify everything we write about at a global scale. We only have to ambiguously identify it within the context of the content we are writing. There is actually a universal truth about language in this. Very few words have only one meaning or identify only one thing. "Sun" is a big ball of burning gas and a computer company that was bought by Oracle. We distinguish these meaning by context, and we can distinguish content identifiers by context in the same way. 
         
+        In fact, doing the identification in context is actually more accurate, since there is less possibility of accidentally introducing a confusion with a usage you are not aware of. The more highly contextualized an identifier is, the less ambiguous it is (as long as you specify both the context and the identifier you are looking for).   
         
     section: Ontology
         Finally it is worth saying a word about ontology. Ontology (in the information processing sense) is an attempt to create a formal mapping of the relationships between entities in the real world such that algorithms can draw inferences and reach conclusions about them.  

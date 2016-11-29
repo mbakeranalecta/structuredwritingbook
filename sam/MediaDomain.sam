@@ -10,7 +10,11 @@ chapter:(#chapter.media-domain) Writing in the Media Domain
         
     The media domain is the {structured writing domain}(concept "structured writing domains") in which the structures relate to the media in which the content is displayed. Such content is often considered "unstructured", but all content has structure, and we can actually find all the patterns and techniques of all forms of structured writing in the media domain. This makes it a good place to study the fundamentals of {structured writing}(concept).
 
-    At its most basic, a hand guiding the pen over paper or chisel into stone is working in the media domain through direct physical interaction with the media. The closest you can get to pen and paper in the computer world is to use a paint program to directly place dots on the screen. You can select the pen tool and use your mouse or a stylus to write your text. This will record the text as a matrix of dots. 
+    At its most basic, a hand guiding the pen over paper or chisel into stone is working in the media domain through direct physical interaction with the media.
+
+    >>>(image ../graphics/handwritten.jpg)
+
+    The closest you can get to pen and paper in the computer world is to use a paint program to directly place dots on the screen. You can select the pen tool and use your mouse or a stylus to write your text. This will record the text as a matrix of dots. 
     
     >>>(image ../graphics/handwritten-bitmap.xml)
 
@@ -22,7 +26,7 @@ chapter:(#chapter.media-domain) Writing in the Media Domain
 
     This allows you to type letters on the keyboard. However, those letters are still recorded as a set of dots, not as characters, so you can't go back and edit your text as text, only as dots. The computer is providing a slightly more structured way to enter the text, but is not maintaining any more structure in recording the text. (This is an important lesson: Some tools record less structure than you may think. For instance, some template-based authoring solutions don't record which template was used, so the template does not guide subsequent editing or use of the content. Structure that is used but not recorded has no downstream value.)
     
-    To work more efficiently, you need to move away from dots and start working in a program that records characters as characters. You could go to a text editor, but a text editor does not keep any formatting information (unless you create markup -- but that would be getting ahead of ourselves). For most publishing purposes, plain text is inadequate. We need to maintain the ability to format the document.
+    To edit more efficiently, you need to move away from dots and start working in a program that records characters as characters. You could go to a text editor, but a text editor does not keep any formatting information (unless you create markup -- but that would be getting ahead of ourselves). For most publishing purposes, plain text is inadequate. We need to maintain the ability to format the document.
 
     One type of program that lets us record text as text and also lets us attach formatting to the text is a vector graphic program. A vector graphics (or "draw") program creates graphics as a collection of  objects (“vector” meaning the mathematical representation of a shape or line). For example, it allows you to create a circle as a shape, described mathematically in computer memory, rather than as a set of dots. Rather than recording an actual circle, the program records an abstraction of a circle: the essential properties needed to reproduce an actual circle on a media, such as its center, diameter, and line weight. The computer then lets you manipulate that abstraction as an object, only rendering it as actual dots when the graphic is displayed on screen or paper.
 
@@ -31,7 +35,7 @@ chapter:(#chapter.media-domain) Writing in the Media Domain
         caption: 
             A circle as an object, displayed in a vector graphics program (Inkscape), left, vs. a circle as a set of dots in a raster graphics program (Microsoft Paint), right.
 
-    In a typical graphics program, a shape is rendered into dots on screen instantly as you draw or edit the shape. Nonetheless, the computer is storing data describing the shape, not a circular pattern of dots, as it would in a paint or photo editing program. This is an instance of what in structured writing circles is called "separating content from formatting". The mathematical abstraction of a circle is the content; the dots that represent it on screen are the formatting, or rather, the result of applying formatting to the object.
+    In a typical vector graphics program, a shape is rendered into dots on screen instantly as you draw or edit the shape. Nonetheless, the computer is storing data describing the shape, not a circular pattern of dots, as it would in a paint or photo editing program. This is an instance of what in structured writing is called "separating content from formatting". The mathematical abstraction of a circle is the content; the dots that represent it on screen are the formatting, or rather, the result of applying formatting to the object.
 
     To give you some idea of how a circle might be represented as an object, here is a sample piece of Java code for creating a circle:
 
@@ -46,7 +50,7 @@ chapter:(#chapter.media-domain) Writing in the Media Domain
 
     If representing the circle as an object creates an abstraction of "circle" in the media domain, this bit of PostScript code takes that abstraction (a circle as a set of coordinates) and (in concert with the underlying graphics driver) makes it concrete again (dots on a media). 
 
-    The point here is not to understand the code, but to see that by creating a more abstract form of the content, we can make it easier to work with, and that we can use algorithms to render it back into concrete form. All of structured writing comes down to finding better ways to represent content for a particular purpose (more efficient, more versatile, more verifiable, more precisely constrained) and ways to transform those representations, into dots on a screen or paper so that the content can be read.
+    The point here is not to understand the code, but to see that by creating a more abstract form of the content we can make it easier to work with, and that we can use algorithms to render it back into concrete form. All of structured writing comes down to finding better ways to represent content for a particular purpose (more efficient, more versatile, more verifiable, more precisely constrained) and ways to transform those representations, into dots on a screen or paper so that the content can be read.
 
     This is a pattern we will see as we look at structured writing across the {three domains}(concept "structured writing domains"). Rather than storing the image of the document to be printed, the computer stores an abstraction of the document which consists of raw text combined with (or, in some cases, replaced by) additional pieces of information which are commonly called metadata. This metadata can then be used to drive algorithms to convert it back into a concrete media domain representation that can be displayed to readers (and also to do a number of other useful thing that we will look at later). 
 
@@ -57,9 +61,9 @@ chapter:(#chapter.media-domain) Writing in the Media Domain
         caption: 
             A text object in a vector graphics program, with object properties shown.
 
-    section: Abstracting out font information
+    section: Factoring out font information
 
-        A vector graphics program displays text in a chosen font. If you change the value of the text object's font attribute, it will immediately redraw the text in the new font. The shapes of the individual letters in the font are required information for rendering the text object in the media domain. However, they are not stored as part of the text object. Whereas the representation of the text in the paint program includes the shape of the letters, in the vector graphics program it does not. That information has been factored out. 
+        A vector graphics program displays text in a chosen font. If you change the value of the text object's font attribute, it will immediately redraw the text in the new font. The shapes of the individual letters in the font are required information for rendering the text object in the media domain. However, they are not stored as part of the text object. The representation of the text in the paint program includes the shape of the letters. In the vector graphics program it does not. That information has been factored out. 
 
         The shape of the characters (technically, “glyphs”) that make up the font are stored separately in font files. Font files consist of a set of shape objects that describe each glyph, together with metadata such as the name of the font and the name of each glyph. To actually display the text block on screen, the graphics program (or rather the graphics system API to which it delegates this task) combines information from the font file with information from the text object by matching the metadata to find the right font and character, and then drawing the appropriate glyph on the current media. 
 
@@ -68,7 +72,7 @@ chapter:(#chapter.media-domain) Writing in the Media Domain
             caption: 
                 The vector graphic text object factors out letter shapes to a separate font file. 
 
-        This is a pattern we will see over and over again in structured writing. In order to simplify the objects that we create to store our content, we take part of the information needed to do the final rendering, like the font, and move it to a separate file. By moving out information that is constant for a given application (the shape of a capital D is the same for all capital D's for text in a given font), we simplify the format of the information we are preparing and keep the downstream presentation more consistent. 
+        This is a pattern we will see over and over again in structured writing. In order to simplify the objects that we create to store our content, we take part of the information needed to do the final rendering, and move it to a separate file. By factoring out information that is constant for a given application (the shape of a capital D is the same for all capital D's for text in a given font), we simplify the format of the information we are preparing and keep the downstream presentation more consistent. 
 
         Adding more structure to content means adding more metadata to it. But if we just kept adding metadata, it would very quickly overwhelm the content. So whenever we can we carve some metadata off into separate files and create rules for pulling it back in when it is time to publish the content. 
 
@@ -88,7 +92,7 @@ chapter:(#chapter.media-domain) Writing in the Media Domain
 
         These constraints are not without their negative consequences. You always give up something when you impose a constraint. There are certain page layout effects that are difficult or impossible to achieve in Word or FrameMaker because you have given up some of the liberty of a vector graphics program. (You also gave up some liberty in moving from raster to vector graphics, which is why photo editing, which requires adjusting individual pixels, is done in raster rather then vector format.) 
 
-        But while they make authoring easier by introducing document domain constraints into the program, both word processors and especially desktop publishing programs still have one foot firmly planted in the media domain. While there are some basic document domain objects being created under the surface, the author sees and interacts with the media domain representation of those objects on their screen. And the way that these programs allow writers to distinguishing one block of text from another is almost always be applying formatting styles. The document domain objects they provide are just enough to give the author something to hang media domain styles on. 
+        But while they make authoring easier by introducing document domain constraints into the program, both word processors and desktop publishing programs still have one foot firmly planted in the media domain. While there are some basic document domain objects being created under the surface, the author sees and interacts with the media domain representation of those objects on the screen. And the way that these programs allow writers to distinguishing one block of text from another is almost always be applying formatting styles. The document domain objects they provide are just enough to give the author something to hang media domain styles on. 
 
     section: Enabling the media domain
 
@@ -111,7 +115,7 @@ chapter:(#chapter.media-domain) Writing in the Media Domain
 
         You can see that this markup is very very similar to the old typesetters marks in [*typesetter].
 
-        The intent of the desktop publishing movement was to combine the job of designer and writer into one, effectively moving the author from working in the document domain to working in the media domain, styling content as it was written. 
+        The intent of the desktop publishing movement was to combine the job of designer and writer into one, effectively moving the author from working in the document domain to working in the media domain, formatting content as it was written. 
 
         The inefficiency of applying formatting directly to every part of the document soon became apparent, however. Stylesheet mechanisms were devised to separate the media domain elements of a document from the document domain elements. 
 
@@ -119,8 +123,8 @@ chapter:(#chapter.media-domain) Writing in the Media Domain
 
         The set of document domain objects in a typical word processor is so small that it does not even distinguish between a heading and a list item. Both are just paragraphs with different styles applied. What distinguishes them is not what type of structure they are, but what styles are applied to them. 
         
-        Relying on just a few document domain structures and distinguishing them with styles makes word processing simple, but it an lead to problems. Microsoft Word's difficulties with maintaining list numbering are well documented, for instance. Because Word does not formally record lists as distinct structures, it can easily lose track of where they begin and end.
+        Relying on just a few document domain structures and distinguishing them with styles makes word processing simple, but it can lead to problems. Microsoft Word's difficulties with maintaining list numbering are well documented, for instance. Because Word does not formally record lists as distinct structures, it can easily lose track of where they begin and end.
 
         Word processing and desktop publishing tend to roughly straddle the boundary between the document and media domains, with authors thinking partially in document domain terms and partially in media domain terms, and the applications creating and storing structures from both domains. 
         
-        While we can clearly divide the structured writing spectrum into the three domains, many actual writing tools and markup languages include structured from more than one domain. We will see this over and over again in this book. But next we will look at what it is like to work more squarely in the document domain. 
+        While we can clearly divide the structured writing spectrum into the three domains, many actual writing tools and markup languages include structures from more than one domain. We will see this over and over again in this book. But next we will look at what it is like to work more squarely in the document domain. 
