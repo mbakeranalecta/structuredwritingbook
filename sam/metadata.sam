@@ -159,6 +159,15 @@ chapter:(#chapter.metadata) Metadata
         
         In fact, doing the identification in context is actually more accurate, since there is less possibility of accidentally introducing a confusion with a usage you are not aware of. The more highly contextualized an identifier is, the less ambiguous it is (as long as you specify both the context and the identifier you are looking for).   
         
+        
+        Rather than forcing the author to add this additional namespace information when they write (the equivalent of calling everyone by their full name and address around the dinner table), we can have the synthesis algorithm add it based on what it knows about the source of the content. This simplifies the author's task, which means they are more likely to provide the markup we want. (It is also another example of factoring out invariants, since we know that all method names in this particular piece of content will belong to the same API.)
+            
+        The namespace of a person's name is implicit in where they live. It is not that people lack a last name or address when they are at home. It is that we don't use those those additional identifiers because they are cumbersome and the first name is sufficiently unique to establish who we are talking about. Similarly, content created within a domain has its namespaces implicit within the domain in which it is created. 
+        
+        When we pull content from multiple domains, however, as we might do for purposed of {content reuse} or simply because we have divided authoring of a large content set into multiple domains to make it easier to create and manage, we need to make the namespaces of all the local names we use explicit in the content as we pull it out of the local domain. This can be done by algorithm because the algorithm can know which domain each pieces of content is coming from. 
+
+            
+        
     section: Ontology
         Finally it is worth saying a word about ontology. Ontology (in the information processing sense) is an attempt to create a formal mapping of the relationships between entities in the real world such that algorithms can draw inferences and reach conclusions about them.  
         

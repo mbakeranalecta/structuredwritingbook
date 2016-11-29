@@ -24,11 +24,13 @@ chapter:(#chapter.publishing) Publishing
         ```(PostScript)
             100 100 50 0 360 arc closepath
             stroke
-        ```  
+         
+        
+        This code is basically moving a virtual pen over a virtual output device; the equivalent of a hand guiding a pen over paper. But it is a much lower-level operation than we need to worry about in structured writing.
         
     section: The Encoding Algorithm
     
-        Since most writers are not going to write directly in a page description language, the page descriptions for your publication are almost certainly going to be created by an algorithm. I call this the encoding algorithm.
+        Since most writers are not going to write directly in a page description language, the page descriptions for your publication are almost certainly going to be created by an algorithm. I call this the encoding algorithm since it encodes your content in the page description language.
 
         While it is possible that someone responsible for a highly specialized publishing tool chain may end up writing a specialized encoding algorithm, most encoding algorithms are going to be implemented by existing tools that translate formatting languages into page descriptions languages. 
         
@@ -65,14 +67,18 @@ chapter:(#chapter.publishing) Publishing
     section: The Formatting Algorithm
     
         The job of the formatting algorithm it to generate the formatting language that drives the encoding and pagination process. The formatting algorithm produces the {media domain} representation of the content from content in the {document domain}. 
-                
-        In the case of HTML output, the formatting algorithm generates HTML (with connections to the relevant CSS, JavaScript, and other formatting resources). This is the end of the publishing process for the Web, since the browser will perform the encoding and rendering algorithms internally. 
         
-        In the case of paper output, the formatting algorithm generates a formatting language such as {TeX} or {XSL-FO} which is then fed to the encoding algorithm as implemented by a TeX or XSL-FO processor. In some cases, organizations use word processing or desktop publishing applications to tweak the formatting of the output by having the formatting algorithm generate the input format of those applications (typically {RTF}(language) for Word and {MIF}(language) for FrameMaker). This allows them to exercise manual control over pagination, but with an obvious loss in process efficiency. In particular, any tweaks made in these applications are not routed back to the source content, so they will have to be done again by hand the next time the content is published. 
+        >>>(image ../graphics/formattingpub.png)
+                
+        In the case of HTML output, the formatting algorithm generates HTML (with connections to the relevant CSS, JavaScript, and other formatting resources). This is the end of the publishing process for the Web, since the browser will perform the encoding algorithm internally. In the case of paper output, the formatting algorithm generates a formatting language such as {TeX} or {XSL-FO} which is then fed to the encoding algorithm as implemented by a TeX or XSL-FO processor. 
+        
+        In some cases, organizations use word processing or desktop publishing applications to tweak the formatting of the output by having the formatting algorithm generate the input format of those applications (typically {RTF}(language) for Word and {MIF}(language) for FrameMaker). This allows them to exercise manual control over pagination, but with an obvious loss in process efficiency. In particular, any tweaks made in these applications are not routed back to the source content, so they will have to be done again by hand the next time the content is published. 
+        
+        This algorithm is usually the province of publication designers. One of the most elementary structured writing algorithms is to {separate content from formatting} ([#chapter.separating]) which means removing formatting as one of the writer's concerns. Almost every structured writing implementation will involve writing formatting algorithms, however. Even if you use off-the-shelf languages like DITA or DocBook, you will have to write or modify formatting algorithms to get the specific formatting your want. 
 
     section: The Presentation Algorithm
 
-        The job of the presentation algorithm is to determine exactly how the content is going to be organized as a document. The presentation algorithm produces a pure document domain version of the content.   
+        The job of the presentation algorithm is to determine exactly how the content is going to be organized as a document. A pure document domain document is a representation of the presentation of the content. The job of the presentation algorithm produces a pure document domain version of the content. This may mean producing the entire presentation from purely subject-domain content, or simply handling the occasional subject-domain structure in a largely document domain file.   
         
         >>>(image ../graphics/presentation.png)
         
@@ -90,7 +96,7 @@ chapter:(#chapter.publishing) Publishing
         
     section: Differential presentation algorithms
         
-        The organization of content is an area where the {document domain} cannot ignore the differences between different media. Although the fact that a relationship exists is a pure document domain issue, how that relationship is expressed, and even whether it is expressed or not, is affected by the media and its capabilities. Following links in online media is very cheap. Following references to other works in the paper world is expensive, so document design for paper tends to favor linear relationships where document design for the web favors {hypertext}(concept) relationships. This is an area, therefore, in which you should expect to implement {differential single sourcing}(algorithm) and use different presentation algorithms for different media.
+        As we saw in [#chapter.single-sourcing], the organization of content is an area where the {document domain} cannot ignore the differences between different media. Although the fact that a relationship exists is a pure document domain issue, how that relationship is expressed, and even whether it is expressed or not, is affected by the media and its capabilities. Following links in online media is very cheap. Following references to other works in the paper world is expensive, so document design for paper tends to favor linear relationships where document design for the web favors {hypertext}(concept) relationships. This is an area, therefore, in which you should expect to implement {differential single sourcing}(algorithm) and use different presentation algorithms for different media.
         
         >>>(image ../graphics/differential.png)
         
@@ -122,7 +128,7 @@ chapter:(#chapter.publishing) Publishing
    
         The job of the synthesis algorithm is to determine exactly what content will be part of a content set. It passes a complete set of content on to the presentation algorithm to be turned into one or more document presentations.     
         
-        Among other things, the synthesis domain resolves all management domain structures in the content (unless some are to be retained for downstream post-publication algorithms to work with). This means that is processes all inclusions and evaluates all conditions. The result is document domain or subject domain content with all of the management structures removed and replaced with the appropriate document or subject domain structures and content. 
+        Among other things, the synthesis domain resolves all management domain structures in the content (unless some are to be retained for downstream post-publication algorithms to work with). This means that it processes all inclusions and evaluates all conditions. The result is document domain or subject domain content with all of the management structures removed and replaced with the appropriate document or subject domain structures and content. 
         
         In the case of document domain content, processing the management domain structures yields a document domain structure which may then be a pass-through for the presentation algorithm (that is, the document domain markup may already express the desired presentation). 
         
@@ -161,7 +167,7 @@ chapter:(#chapter.publishing) Publishing
             
             Generally you want the filtering algorithm to run before other algorithms in the synthesis process so that other algorithms do not waste their time processing content that is going to be filtered out. However, if you run the filtering algorithm before you run the include algorithm, any filtering that needs to happen on the included content will not get executed.
             
-            Doing inclusion before you filter addresses this problem, but creates a new one. If you include before you filter, you may end up including content based on instructions or subject domain structures that are going to be filtered out, which could then leave you with a set of included content that was not supposed to be there, but no easy way to identify that it does not belong. 
+            Doing inclusion before you filter addresses this problem, but creates a new one. If you include before you filter, you may end up including content based on instructions or subject domain structures that are going to be filtered out, which could then leave you with a set of included content that was not supposed to be there. 
             
             The preferred option, therefore, is to run the two algorithms iteratively. Filter your initial source content. When you filter in an include instruction, immediately execute the include and run the filtering algorithm on the included content, processing any further include instructions as they are filtered in.  
             
@@ -171,44 +177,39 @@ chapter:(#chapter.publishing) Publishing
                 match include
                     process content at href
                     continue
-            ```
-
 
         section: The extraction algorithm
         
             In some cases you may wish to extract information from external sources to create content. This can include data created for other purposes, such as application code or data created and maintained as a canonical source of information, such as a database of features for different models of a car. We will look at the extraction and merge algorithms in [#chapter.extract].
             
-
-        section: The cataloging algorithm
+        section: The merge algorithm
         
-            The synthesis algorithm will produce a collection of content, potentially from multiple sources. This collection is then the input to the presentation algorithm. For the presentation algorithm to do its job, it needs to know all of the content it has to work with. In particular, the TOC and index algorithms and the linking algorithm need to know where all the content is, what it is called, and what it is about. They can get this information by reading the entire content set, but this can be slow, and perhaps confusing if the structure is not uniform. As an alternative, you can generate a catalog of all the content that the synthesis algorithm has generated which can then be use by these and potentially other sub-algorithms of the presentation algorithm to perform operations and queries across the content set.
+            In one sense, every structured writing is a merge algorithm. As we saw in [#chapter.processing], most algorithms consist of factoring into content information or metadata that was factored out as we moved the point of recording from the {media domain} to the {document domain} and the {subject domain}. But it is also possible, and often useful, to combine information from different sources to create a new set of content. For instance, if you are creating a reference for any kind of computer code or data, there is almost always a way to {extract} a lot of the information you need from the existing definitions of that code or data. Extracting the information from the source is both more economical and more reliable than rewriting it from scratch. But you will almost certainly want to add additional written information as well. So, if you write the additional information in a structured way that identifies the piece of extracted information it corresponds to, you can use a merge algorithm to pull the two together for publication. More about the merge algorithm in [#chapter.merge].
+            
+
         
         section: The resolve algorithm
             
-            When we create authoring formats for content creation, we should do so with the principal goal in mind of making it as easy as possible for authors to create the content we require of them (see [#chapter.authoring]. This means communicating with them in terms they understand. This may include various forms of expression that need to be clarified based on context before they can be synthesized with the rest of the content. This is the job of the resolve algorithm. Its output is essentially a set of content in which all names and identifications are in fully explicit form suitable for processing by the rest of the processing chain.
+            When we create authoring formats for content creation, we should do so with the principal goal in mind of making it as easy as possible for authors to create the content we require of them (see [#chapter.authoring]). This means communicating with them in terms they understand. This may include various forms of expression that need to be clarified based on context before they can be synthesized with the rest of the content. This is the job of the resolve algorithm. Its output is essentially a set of content in which all names and identifications are in fully explicit form suitable for processing by the rest of the processing chain.
             
             Content written in the subject domain is not always written in a fully realized form. When we create subject domain structures, we put as much emphasis as we can on ease of authoring and correctness of data collection. Both these aims are served by using labels and values that make intuitive sense to authors in their own domain. For example, a programmer writing about an API may mention and markup a method in that API using a simple annotation like this:
         
             ```(sam)
-                To write a Hello World program, use the {hello}(method) method.
-            ```
+                To write a Hello World program, 
+                use the {hello}(method) method.
+            
             
             In your wider documentation set, there may be many APIs. To relate this content correctly in the larger scope you will need to know which API it belongs to. In other words, you need this markup:
             
             ```(sam)
                 To write a Hello World program, 
                 use the {hello}(method (GreetingsAPI)) method.
-            ```
+            
             
             The information in the nested parentheses is a namespace identifier. A namespace specifies the scope in which a name is unique. For instance, in most families, we only use first names to refer to each other because our first names are unique in our families. But when we go to school or to work, we often find that there are other people with the same first name. We then add people's last names when referring to them. The last names serves as a namespace identifier. We may need to add more specific namespace identifiers as we deal with larger groups of people (such as their addresses). But we don't use the full namespace identifiers of our family members at home. We add them as needed when we deal with the wider world.  
             
             In this case, the method name `hello` might occur in more than one API. The namespace specifies that this case of the name refers to the instance in the `GreetingsAPI`. 
             
-            Rather than forcing the author to add this additional namespace information when they write (the equivalent of calling everyone by their full name and address around the dinner table), we can have the synthesis algorithm add it based on what it knows about the source of the content. This simplifies the author's task, which means they are more likely to provide the markup we want. (It is also another example of factoring out invariants, since we know that all method names in this particular piece of content will belong to the same API.)
-            
-            The namespace of a person's name is implicit in where they live. It is not that people lack a last name or address when they are at home. It is that we don't use those those additional identifiers because they are cumbersome and the first name is sufficiently unique to establish who we are talking about. Similarly, content created within a domain has its namespaces implicit within the domain in which it is created. 
-            
-            When we pull content from multiple domains, however, as we might do for purposed of {content reuse} or simply because we have divided authoring of a large content set into multiple domains to make it easier to create and manage, we need to make the namespaces of all the local names we use explicit in the content as we pull it out of the local domain. This can be done by algorithm because the algorithm can know which domain each peices of content is coming from. 
             
     section: Deferred synthesis
         
@@ -242,9 +243,7 @@ chapter:(#chapter.publishing) Publishing
         
         These subject domain documents would have few structures and few options and therefore few permutations. This would mean that the presentation algorithms for each could be simple, robust, and reliable, as well as easy to write and to maintain. You would also be able to do {differential single sourcing} by writing different presentation algorithms for each media or audience.
         
-        The trade-off, of course, is that you have to create and maintain the various subject domain formats you would need and the presentation algorithms that go with them. Its a trade-off between several simple structures and algorithms and a few complex ones.
-        
-        This trade-off comes up time and time again in structured writing. We will see it again when we look at other algorithms.
+        The trade-off, of course, is that you have to create and maintain the various subject domain formats you would need and the presentation algorithms that go with them. It's a trade-off between several simple structures and algorithms and a few complex ones. This trade-off comes up time and time again in structured writing. We will see it again when we look at other algorithms.
     
     section: Functional lucidity and a layered architecture
         

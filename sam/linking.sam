@@ -8,7 +8,7 @@ chapter:(#chapter.linking) Linking
     
     Deflections are a natural part of information seeking. They are part of what is called {information foraging}(concept). The reader, in pursuit of their individual ends, will follow where the scent of information leads and that will not always be the next paragraph of the current text.
     
-    Writers know they can't meet everyone's needs perfectly every time so they use links and other devices to help readers deflect when they need to. If you have Model A, do this. If you have Model B do that. Supporting deflection helps readers achieve their goals and helps keep the reader in writer's own content, or content they approve of, rather than deflecting elsewhere. The Web and other electronic media have made the cost of deflecting much lower, meaning the readers deflect much more readily, and writers need to pay far more attention to deflection in the design of their content. 
+    Writers know they can't meet everyone's needs perfectly every time so they use links and other devices to help readers deflect when they need to. If you have Model A, do this. If you have Model B do that. Supporting deflection helps readers achieve their goals and helps keep the reader in the writer's own content, or content they approve of, rather than deflecting elsewhere. The Web and other electronic media have made the cost of deflecting much lower, meaning the readers deflect much more readily, and writers need to pay far more attention to deflection in the design of their content. 
     
     Deflection points can be handled in various ways. The writer may choose to do nothing, leaving it up to the reader to look up a word if they don't understand it, for instance. They may use footnotes, cross references, sidebars, parenthetical material, or hypertext links to provide deflection choices. They may use tables or flowcharts to allow readers to choose different paths through content. They may even attempt to anticipate and forestall deflection by using information about the individual reader to dynamically reorder the content to suit the reader's needs. 
     
@@ -33,7 +33,7 @@ chapter:(#chapter.linking) Linking
         
         But if the HTML page gets printed, the link is lost. The phrase "the Duke" is still a deflection point. The reader can still deflect, by doing a search for "the Duke", perhaps, or asking a friend what it means. But the printed version lacks any support for that deflection. 
         
-        If the content had been written for paper, the deflection point might be supported in a different way. For example, it might be supported by adding an explanation in parentheses. (Parenthetical material is a type of deflection; it may be read or skipped.):
+        If the content had been written for paper, the deflection point might be supported in a different way. For example, it might be supported by adding an explanation in parentheses:
         
         """
             In Rio Bravo, the Duke (John Wayne) plays 
@@ -59,7 +59,8 @@ chapter:(#chapter.linking) Linking
         
         ```(DITA)
             <p>In Rio Bravo, 
-            <xref href="https://en.wikipedia.org/wiki/John_Wayne" format="html">The Duke</xref> 
+            <xref href="https://en.wikipedia.org/wiki/John_Wayne" 
+             format="html">The Duke</xref> 
             plays an ex-Union colonel out for revenge.</p>
         
         
@@ -67,13 +68,13 @@ chapter:(#chapter.linking) Linking
         
         """
             In Rio Bravo, the Duke 
-            (see: https://en.wikipedia.org/wiki/John_Wayne) plays and ex-Union colonel out for revenge.
+            (see: https://en.wikipedia.org/wiki/John_Wayne) plays an ex-Union colonel out for revenge.
         
         
         This is not the way we would handle the deflection point if we were designing for paper, but it is a definite improvement from a {differential single sourcing} point of view. At least the link is now visible to the reader.[*1] 
         
         footnote:(*1)
-            (Technically we could do this from the HTML markup as well, but that would be cheating. The HTML markup is not really giving us permission to do this. It is telling us to create a hypertext link and nothing else. The problem with cheating is that you are basing your algorithm on constraints that are not being promised or enforced, and this can fail in ways you may not expect or catch. Some cheats are more reliable than others, but you probably don't want to get into the habit.)
+            Technically we could do this from the HTML markup as well, but that would be cheating. The HTML markup is not really giving us permission to do this. It is telling us to create a hypertext link and nothing else. The problem with cheating is that you are basing your algorithm on constraints that are not being promised or enforced, and this can fail in ways you may not expect or catch. Some cheats are more reliable than others, but you probably don't want to get into the habit. Better to move your content creation to a format where cheating is not required to get the output you want.
         
         Fundamentally, though, this is not a satisfactory {differential single sourcing} solution. Unless there were no alternative, you would not normally direct a reader of paper to the web for more information, nor vice versa. Linking to an already published file, such as an HTML page, commits us to a particular format for the link target. If we link to content that has not yet been published, we gain the freedom to link to any format of that content that we choose to publish. The simplest way to do that is to link to a source file rather than an output file.
         
