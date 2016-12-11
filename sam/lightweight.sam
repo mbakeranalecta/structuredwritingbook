@@ -45,7 +45,35 @@ chapter:(#chapter.lightweight) Lightweight Languages
     
     section: reStructuredText
     
-        reSturcuteredText is a lightweight hybrid markup language most often associated with the {Sphinx} documentation framework which was developed for documenting the Python programming language. We looked at reStructuredText briefly as an example of a hybrid markup language in [#chapter.markup]. 
+        {reSturcuteredText} is a lightweight hybrid markup language most often associated with the {Sphinx} documentation framework which was developed for documenting the Python programming language. We looked at reStructuredText briefly as an example of a hybrid markup language in [#chapter.markup]. 
+        
+        Similar to MarkDown, ReStructuredText uses a plain text formatting approach to basic text structures. This part of the markup looks very natural because it uses characters and patterns that you might easily use to format a document if the only editor you had available were a plain text editor:
+        
+        ```(reStructuredText)
+        
+            Hard Boiled Eggs
+            ================
+            A hard boiled egg is simple and nutritious. 
+            Prep time, 15 minutes. Serves 6.
+
+            Ingredients
+            -----------
+                ======  ========
+                Item    Quantity
+                ======  ========
+                eggs    12
+                water   2qt
+                ======  ========
+                
+            Preparation
+            -----------
+                1. Place eggs in pan and cover with water.
+                2. Bring water to a boil.
+                3. Remove from heat and cover for 12 minutes.
+                4. Place eggs in cold water to stop cooking.
+                5. Peel and serve.
+
+        But reStructuredText also has a feature called directives which is used to create markup with more complex semantics. For this, reStructuredText takes the same approach as XML, using characters in a way that they are almost never used in a normal document. This approach simplifies parsing, because there is seldom any question about whether a particular pattern is intended to be markup of text, but it also makes it less natural to read and to write.
         
         ```(reStructuredText)
             .. image:: images/biohazard.png
@@ -54,11 +82,11 @@ chapter:(#chapter.lightweight) Lightweight Languages
                :scale: 50
                :alt: alternate text
         
-        # more?
+        reStructuredText is therefore something of a syntactic hybrid as well as being a hybrid in the sense that it has both fixed concrete parts and extensible parts. 
     
     section: ASCIIDoc
     
-        ASCIIDoc is a lightweight markup language based on the structure of {DocBook}. It is intended for the same sort of document types for which you might choose DocBook, but allows you to use a lightweight syntax. In appearance it is very similar to MarkDown, as shon in this example from Wikipedia:
+        {ASCIIDoc} is a lightweight markup language based on the structure of {DocBook}. It is intended for the same sort of document types for which you might choose DocBook, but allows you to use a lightweight syntax. In appearance it is very similar to MarkDown, as shown in this example from Wikipedia:
         
         ```(ASCIIDoc)
             = My Article
@@ -171,18 +199,16 @@ chapter:(#chapter.lightweight) Lightweight Languages
              </semantics>
             </math>
         
-        Clearly MathML was not designed with the idea that anyone would ever try to write it raw. It is intended to be the output of a graphical equation editor.[*1]
-
+        Clearly MathML was not designed with the idea that anyone would ever try to write it raw. It is intended to be the output of a graphical equation editor.[*1] You might well choose to use a graphical equation editor to create LaTeX math markup as well, but it is certainly possible to write it and read it in raw LaTeX. 
+        
         footnote:(*1)
             Interestingly, MathML comes in two different flavors. Presentation MathML is a {media domain} language describing how an equation is presented. Content MathML is a {subject domain} language describing what it means.
-        
-        You might well choose to use a graphical equation editor to create LaTeX math markup as well, but it is certainly possible to write it and read it in raw LaTeX as well. 
-        
+            
         LaTeX is not as lightweight a language as {Markdown}. It's markup is almost entirely explicit (except for paragraphs, which are delineated by blank lines just in Markdown. But it is certainly lighter weight in its syntax compared to XML-based languages and has much greater {functional lucidity}. There are a number of LaTeX editors, but they tend to be the same style of side-by-side style of editors also popular for {MarkDown}. That is, the author writes in LaTeX syntax and a preview is generated continuously in a separate panel. Sufficient functional lucidity to be able to write in raw markup rather than needing a graphical editor is the hallmark of a lightweight markup language. 
         
     section: Subject Domain Languages
     
-        So far we have looked at languages that are primarily {document domain} oriented. The {document domain} is an obvious choice for a public language since the use of common document types like books and articles is widespread. But there are a number of public {subject domain} languages as well. One example that we have looked at before ([#chapter.extract]) is JavaDoc. Here is the example we looked at there:
+        So far we have looked at languages that are primarily {document domain} oriented. The {document domain} is an obvious choice for a public language since the use of common document types like books and articles is widespread. But there are a number of public {subject domain} languages as well. One example that we have looked at before ([#chapter.merge]) is JavaDoc. Here is the example we looked at there:
         
         ```(Java)
             /**
@@ -204,15 +230,15 @@ chapter:(#chapter.lightweight) Lightweight Languages
         
         Not only does JavaDoc have {subject domain} tags for parameters and return values, it effectively incorporates the Java code itself (all computer programs are structured text). Thus the JavaDoc processor will pull information from the function header itself to incorporate into the output. 
         
-        There are a number of similar languages for documenting different programming languages, such a {Doxygen}(tool) which is used for multiple languages. Wikipedia maintains an extensive list: {https://en.wikipedia.org/wiki/Comparison_of_documentation_generators}(url).
+        There are a number of similar languages for documenting different programming languages, such a {Doxygen}(tool) which is used for multiple languages. Wikipedia maintains an extensive list at: {https://en.wikipedia.org/wiki/Comparison_of_documentation_generators}(url).
 
         It is difficult to find public {subject-domain} lightweight markup languages outside the realm of programming language and API documentation. This is probably because only programmers are likely to write their own parser in order to create a markup language. Most other people are going to choose an extensible language as a base, which today usually means {XML}. Part of my motivation for creating {SAM} is to provide a way to create {subject domain} languages with lightweight syntax. 
     
     
     section: SAM
     
-        I've talked about {SAM} a couple of times now, and said that many of the examples in this book are written in SAM. That is true, in the same sense that some of the examples are written in XML. But this is not the same thing as saying that an example is written in {reStructuredText}. reStructuredText is a concrete {document domain} markup language which also happens to have an extension facility. You can write a complete document in {reStructuredText} without defining any new structures. 
+        I've talked about {SAM} a couple of times now, and said that many of the examples in this book are written in SAM. That is true, in the same sense that some of the examples are written in XML. But this is not the same thing as saying that an example is written in {reStructuredText}. reStructuredText is a hybrid {document domain} markup language that predefines a large range of document domain structures. You can write a complete document in {reStructuredText} without defining any new structures. In other words, you can treat reStructuredText as a purely concrete language, and that is exactly what most people 
         
-        SAM, on the other hand, while it has concrete lightweight syntax features, is not a concrete markup language out of the box. The most complex SAM document you can write without defining any structures is a single paragraph or list. (A SAM document must have a single root element, so two paragraphs in a row at the root level is an error. You need a block structure such as `topic` or `chapter` or `recipe` to contain everything and SAM does not predefine any blocks.)  
+        SAM, on the other hand, cannot be used as a concrete language out of the box. While it has concrete lightweight syntax features, they need to be wrapped in a containing block, and SAM does not predefine any blocks. The most complex SAM document you can write without defining any blocks is a single paragraph or list. You need a block structure such as `topic` or `chapter` or `recipe` to contain everything and SAM requires you define those structures for yourself.  
         
-        SAM is designed for the same purpose as XML: for defining new markup languages. I'll get back to it in [#chapter.extensible].
+        In this respect, SAM is much more like XML than reStructuredText. It is an extensible language that is intended to be used only when extended. It does not belong in this discussion of concrete lightwight markup languages, therefore. I'll get back to it in [#chapter.extensible].
