@@ -112,7 +112,9 @@ chapter:(#chapter.patterns) Patterns
         
     As you can see, the regular expression has broken each ingredient down into ingredient, quantity, and unit fields, just like our explicit markup did. The conventional way of writing ingredients, in other words, is just as structured as or formal way. It just takes a line of code to pull them out of the string. 
     
-    Essentially, any expression that we commonly use in text which follows a well defined patterns is already structured text, and we don't need to structured it again to treat it as structured. All we need to do is to use structure to place it into context so that we can recognize it reliably. Avoiding unnecessary markup of already recognizable patterns both simplifies our markup design and increase the {functional lucidity} of our markup languages. 
+    Essentially, any expression that we commonly use in text which follows a well defined pattern is already structured text, and we don't need to structured it again to treat it as structured. All we need to do is to use structure to place it into context so that we can recognize it reliably. For example, our regular expression for breaking down the components of an ingredient listing will only work when applied to text that we know for sure is supposed to be an ingredient listing. Thus we use normal structured text structures to delineate the ingredients list and each list item. This provides the necessary context to use of ingredient list pattern to pull out the ingredient, quantity, and unit fields that we want without forcing the author to make them explicit in the text. 
+    
+    Avoiding unnecessary markup of already recognizable patterns both simplifies our markup design and increase the {functional lucidity} of our markup languages. 
     
     If we were creating this recipe structure in {XML} and using {XML Schema} (XSD) as our schema language, we could create a data type for the ingredient field that would verify that the text entered met that pattern we are expecting:
     
