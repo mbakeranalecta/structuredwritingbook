@@ -2,72 +2,44 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
 
     <<<(annotations.sam)
     
-    The mechanical structure of structured writing is the structure it presents to machines, which is to say, to algorithms. To create mechanical structures to contain writing, we need a type of structure suitable to what we are capturing and what information we want to capture about it. Traditional computing structures like relational database tables do not work well for this because they are too regular to fit the shape of content. Creating structures that are regular enough for algorithms to deal with yet irregular enough to fit written language is an interesting problem to which more than one solution has been proposed.
-
-    section: Flags vs Boxes
+    Structured writing is writing the obeys constraints and records the constraints it obeys. If the constraints it obeys are its rhetorical structure, the way is records those constraints is its mechanical structure. The mechanical structure of structure writing is a compute data structure. However, conventional computer data structures like relational database tables do not work well for content because they are too regular to fit the shape of content. Creating structures that are regular enough for algorithms to deal with yet irregular enough to fit written language is an interesting problem to which more than one solution has been proposed.
     
-        A document is fundamentally a linear and ordered data structure. One thing comes after another. The {rhetorical structure} of a document is expressed using literary devices (possibly highlighted by formatting changes) within the flow of the text. To impose a topic type to formally constrain the topic pattern that is the rhetorical structure, we need to mechanically delineate the parts of the rhetorical structure. 
+    Raw text is just a stream of characters. Inside that stream of characters, there are rhetorical structures like headings, bibliographical entries, bold text, chapters, allusions, references, links, tables, and labeled lists. The question is, how do you express these various structures on top of the raw stream of characters?
+    
+    One way is to indicate with some kind of markup the place were a rhetorical structure beings or ends. 
+    
+    ```
+        This text is [B>bold<B].
         
-        Two commons ways to do this are flags and boxes. 
-        
-        The boxes approach means creating boxes for words and giving names to those boxes. It may also involve putting a label on the box with additional information on it. The name and the label on the box tells us something about the words in the box. 
-        
-        # Graphic
-        
-        To create the boxes, we insert markup into the text to define the beginning and end of the boxes. This is how it works in XML:
-        
-        ```(xml)
-            <box label_1="foo" lable_2="bar">text</box>
+    What happens if a different rhetorical structure overlaps with this one?
 
-        But not all markup systems use the boxes model. Many older systems, particularly those intended for typesetting, used the flags model. To understand the flags model, consider how road signs delineate zones on a road. As you approach a town, you may see a sign saying that you are entering the town. A little further on, you see a sign for a reduced speed limit. On the far side of the town, you pass a sign saying you are leaving the town limits. Here, however, there are still houses and businesses along the road, so the speed limit does not rise until you are past the built up area. Thus the box defined by the town limits and the box defined by the lower speed zone overlap each other. It is not a case of boxes within boxes, but of independent zones defined by begin and end signs.   
+    ```
+        This text is [B>bold, [I>this is bold and 
+        italic,<B] and this is just italic<I].
+
+    For some markup system, such as that used in the word processor WordPerfect, this works perfectly fine. But this approach really puts a damper on the kinds of algorithms you can run. Many algorithms depend on their ability to isolate certain elements of a text for processing. Suppose your source text contains markup like this:
+
+    ```
+        Use the [B>[function-name>print()<B]<function-name] to print.
         
-        An example of this approach in the content world is the word processor WordPerfect which takes what it calls a "streaming approach" to document structure in which features are turned on and remain on until they are turned off. Thus in Word Perfect, your could do this, with bold starting and then italic starting, the bold stopping and finally italic stopping:
-        
-        ```
-            This text is [B>bold, [I>this is bold and 
-            italic,<B] and this is just italic<I].
+    If a conformance algorithm is trying to validate function names in a text, it is not going to see `print()` as the value of the function name, but `print()<B]`. That is messy to deal with, to say the least. It is messy to write and maintain as well, which is why WordPerfect had a reveal codes mode that allowed the writer to go in and fix up broken markup when things got messy. Thus this approach to markup is not used much anymore. 
+    
+    To avoid this mess, most modern markup systems treat the text stream as consisting of a set of non-overlapping blocks. Blocks can nest inside other blocks, and even inside the content of other blocks, but two blocks can never overlap each other. This makes it much easier for algorithms to process markup but it means that in cases were rhetorical structures do overlap, you have to resort to convoluted markup like this:
+
+    ```
+        <p>This text is <b>bold,</b> <i><b>this is bold 
+        and italic,</b></i> <i>and this is just italic</i>.</p>
+    
             
-        This would print as:
+    There is more to this question than trivial examples like this. In the academic study of text markup, where markup is used not for the preparation of documents but to mark them up for academic study, there is an debate about whether the hierarchical structure of XML-based languages actually reflects the real structure of the text. 
         
-        """
-            This text is {bold,}(bold) {this is bold and 
-            italic,}(bold)(italic) {and this is just italic}(italic). 
-            
-        This overlapping of structures is illegal in XML, so in HTML, for instance, you can't do this:
+    From a structured writing perspective, we don't have to worry so much about whether the markup is objectively true to the text. Our concern is to create structures that improve the quality of content and enable the structured writing algorithms we want to use. 
         
-        ```
-            <p>This text is <b>bold, <i>this is bold and 
-            italic,</b> and this is just italic</i>.</p>
-            
-        You have to do this, keeping everything nested with no overlapping structures:
-        
-        ```
-            <p>This text is <b>bold,</b> <i><b>this is bold 
-            and italic,</b></i> <i>and this is just italic</i>.</p>
-            
-        There is more to this question than trivial examples like this. In the academic study of text markup, where markup is used not for the preparation of documents but to mark them up for academic study, there is an debate about whether the hierarchical structure of XML-based languages actually reflects the real structure of the text. 
-        
-        From a structured writing perspective, we don't have to worry so much about whether the markup is objectively true to the text. Our concern is to create structures that improve the quality of content and enable the structured writing algorithms we want to use. 
-        
-        The use of a flags model like that of WordPerfect is rare today. A hierarchical model is almost universally preferred. Whether they truly represent the structure of text or not, hierarchical models are easier to define and process and provide an easier way to express constraints. If your really want to express overlapping structures in a hierarchical language like XML, it is possible to do so by using empty element tags as flags. Thus you can define a language that lets you do this:
-        
-        ```
-            <p>This text is <b-start/>bold, <i-start/>this is bold 
-            and italic,<b-end/> and this is just italic<i-end/>.</p>
-            
-        However, you would be very hard pressed to find anyone who would tell you this was a good idea. The boxes model works best for most of what you want to do with structured writing and to introduce a flags model into the mix just to express an odd structure like this introduces far more complexity than it is worth. 
-        
-        If you really need to model the highly unlikely bit of formatting in the example above, you should do it as illustrated above:
-        
-        ```
-            <p>This text is <b>bold,</b> <i><b>this is bold and 
-            italic,</b></i> <i>and this is just italic</i>.</p>
-        
-        In short, structured writing today uses the boxes model, and so should you. 
+    A hierarchical model is almost universally preferred. Whether they truly represent the structure of text or not, hierarchical models are easier to define and process and provide an easier way to express constraints. 
         
     section: Flat vs. nested structures
     
-        But even when we choose the boxes model of markup design, we are still left with some fundamental choices about structure. The first is flat vs. nested structure.  
+        But even when we choose the hierarchical approach to markup design, we are still left with some fundamental choices about structure. The first is flat vs. nested structure.  
         
         We noted in [#chapter.document-domain] that in HTML, you have six levels of heading (`h1` through `h6`) whereas in DocBook you have only `title`. In DocBook, you can divide a document up into sections and nest sections inside sections. You can then print the titles of sections inside sections in a smaller font that the titles of first level sections. You get to have differences in heading size without having six different heading tags. 
         
@@ -82,6 +54,17 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
             
             The conventional writer, however — and we expressly exclude the markup expert, as well as the experienced technical authors who responded to the survey — is by repute probably only marginally aware of this tree; but we have been unable to measure this at present. In this view, the document is seen as a continuous linear narrative, broken into successive divisions along semantic lines, and interspersed with explanatory material in the form of figures, tables, lists, and their derivatives. 
 
+        The return from subjection problem, which comes up again and again in structured writing, both at the rhetorical and mechanical level, is an illustration of this point. Within a section, you can create one or more nested subsections. If one applies a hierarchical logic to the design of the document, the role of the subsection is to treat a secondary or supporting point for the main section. In this logic, on ought to be able to return to the section level after a set so subsections in order to sum up the overall point of the section. Logically you might also wish to return to the section level of discourse between subsections so as to locate the matter of the subsection in the narrative of the section. 
+        
+        You could certainly create structured writing section and subjection structures that would let you follow this logic. The problem is, how would you publish this structure. While it is not impossible to imagine a way to format something like this, it would clearly be a violation of all the norms of document layout and organization. In a normal document, if you want to sum up a section after several subjections, you introduce a subheading "Conclusion" after the end of the last subsection. The role of the conclusion is to sum up the section as a whole, so it is not a subsection hierarchical logic of the document, it is a return to the section level.
+
+        But no one, to the best of my knowledge, as ever tried to actually mark it up that way. The conclusion will be marked up as another subsection. And any material that relates a subjection to the matter of the section will be contained within the subsection itself. Thus the section/subsection structure of a document does not reflect any hierarchical logic in the rhetorical structure of the argument, it actually just groups content under different levels of headings. 
+
+        And as Flynn's research illustrates, there is a good chance that the author is not thinking of their argument as consisting of a strict hierarchy of points either, but as a sequence of points with the occasional insertion of heading to break up the text or perhaps signal a change in emphasis or subject matter. 
+        
+        
+        To think of it yet another way, a text is a flattening of the representation of a complex reality -- a reality whose complexity can no more be fairly represented by as a hierarchy than it can by a simple sequence. The building up of the picture of the real world, in all its complexity, is not the job of the document outline, but the job of the whole of the text, of every verb, adjective, and noun, or every sentence, and simile and symbol and story that the writer can assemble to guide the reader to the full grasp of the complex world they are describing. To suggest, therefore, that the mechanical structure of a markup language can capture the full rhetorical structure of a piece of writing is absurd. It can, at best, capture certain aspects of that rhetorical structure, and outside of that it works best when it stays out of the writer's way as much as possible. 
+        
         
         But if the {constraints} that we want to express in structured writing demand hierarchy, while {functional lucidity} demands more of a punctuated linear model, how do we reconcile these two opposing requirements in markup language design? 
         
