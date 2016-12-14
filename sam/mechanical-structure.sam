@@ -63,7 +63,7 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
         And as Flynn's research illustrates, there is a good chance that the author is not thinking of their argument as consisting of a strict hierarchy of points either, but as a sequence of points with the occasional insertion of heading to break up the text or perhaps signal a change in emphasis or subject matter. 
         
         
-        To think of it yet another way, a text is a flattening of the representation of a complex reality -- a reality whose complexity can no more be fairly represented by as a hierarchy than it can by a simple sequence. The building up of the picture of the real world, in all its complexity, is not the job of the document outline, but the job of the whole of the text, of every verb, adjective, and noun, or every sentence, and simile and symbol and story that the writer can assemble to guide the reader to the full grasp of the complex world they are describing. To suggest, therefore, that the mechanical structure of a markup language can capture the full rhetorical structure of a piece of writing is absurd. It can, at best, capture certain aspects of that rhetorical structure, and outside of that it works best when it stays out of the writer's way as much as possible. 
+        To think of it yet another way, a text is a flattening of the representation of a complex reality -- the world -- a reality whose complexity can no more be fairly represented by as a hierarchy than it can by a simple sequence. The building up of the picture of the real world, in all its complexity, is not the job of the document outline, but the job of the whole of the text, of every verb, adjective, and noun, or every sentence, and simile and symbol and story that the writer can assemble to guide the reader to the full grasp of the complex world they are describing. To suggest, therefore, that the mechanical structure of a markup language can capture the full rhetorical structure of a piece of writing is absurd. It can, at best, capture certain aspects of that rhetorical structure, and outside of that it works best when it stays out of the writer's way as much as possible. 
         
         
         
@@ -86,7 +86,7 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
         
         * Move content creation to the {subject domain}. 
         
-        In the {document domain}, however, you have to make a choice between enforcing a hierarchical model of a document or allowing a more linear one. You will almost certainly do this in the context of hierarchical syntax. You probably don't want to go the WordPerfect route of separate on and off commands. But you do need to decide if you are going to allow arbitrary heading levels. Or, to put it another way, to model a document as a hierarchy of sections with each section having a title, or a single flow of text randomly interspersed with headings, or something in between.
+        In the {document domain}, however, you have to make a choice between enforcing a hierarchical model of a document or allowing a more linear one. You will almost certainly do this in the context of hierarchical syntax.  But you do need to decide if you are going to allow arbitrary heading levels. Or, to put it another way, to model a document as a hierarchy of sections with each section having a title, or a single flow of text randomly interspersed with headings, or something in between.
 
         The something-in-between option can seem appealing but you can end up with something really unconstrained, meaning that it is difficult to write reliable algorithms to process it. Here is the kind of issues you can run into:
         
@@ -114,7 +114,7 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
         
         But would it be a good idea to make a distinction between the two? Only if authors clearly understood the difference between the two and clearly know when they were choosing one or the other. (If they are writing in a visual editing view of an XML editor, then they almost certainly won't know the difference.)
         
-        If you are designing your own markup language, do you want to allow both these forms? Probably not. The more permutations of structure your markup language allows, the more work it will be to write the algorithms to process it. Some allowance may be made for ease of authoring, if you wish, but it may be better to wait for authors to complain about a restriction like this than to build in all the possible variations in advance. (This is also a problem that is more likely to occur in an {abstract language} like {XML} than in a concrete language like {Markdown} or {SAM}, where the choice is baked into the syntax and the author does not have a choice to make.)
+        If you are designing your own markup language, do you want to allow both these forms? Probably not. The more permutations of structure your markup language allows, the more work it will be to write the algorithms to process it. Some allowance may be made for ease of authoring, if you wish, but it may be better to wait for authors to complain about a restriction like this than to build in all the possible variations in advance.
         
     bibliography:
         entry:(#Flynn2009)
@@ -148,18 +148,20 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
               
             * The second item.
             
-        The latter has just as much structural hierarchy as the first, but feels much flatter. It uses indentation to indicate that the second paragraph belongs to the first list item, but that feels natural and obvious rather than contrived of imposed. 
+        The latter has just as much structural hierarchy as the first, but feels much flatter. It uses indentation to indicate that the second paragraph belongs to the first list item, but that feels natural and obvious rather than contrived or imposed. 
+        
+        If a structured writing language divides all content up into blocks and nested blocks, XML-based languages make all such blocks completely explicit by markup up the beginning and end of every block. {Lightweight languages} like {Markdown} use a more implicit syntax better reflects the implicit structure of formatted text itself.  
         
         One of my motivations for creating SAM, which is designed for structured writing, and therefore, unavoidably, for hierarchical structures, was to express hierarchy implicit where possible and as naturally as possible where it cannot be implicit, for the sake of improve functional lucidity for strictly constrained structured writing languages. (First and foremost, I created it for myself, to improve functional lucidity for me in the structured writing I do, such as the writing of this book.) 
         
 
     section: Agreeing on boxes, names, and labels
         
-        The names and labels on boxes tell us what kind of thing is in the box. What kind of things they  tell us depends on the domain we are dealing with. 
+        The names and labels on blocks tell us what kind of thing is in the box. What kind of things they  tell us depends on the domain we are dealing with. 
         
         In the {media domain} they tell us what the words in the box look like, either directly (an actual format description) or by reference (the name of a style). In the {document domain} they tell us what part of a document the words are. In the {management domain}, they tell us what to do with the words under different circumstances. In the {subject domain} they tell us what the subject matter of the words is. 
         
-        The box does not only have to have information from one domain on it. It is not uncommon to have a box with a name in the document domain and a label in the management domain or the subject domain. We saw and example of this in [#chapter.subject-domain]:
+        The block does not only have to have information from one domain on it. It is not uncommon to have a block with a name in the document domain and a label in the management domain or the subject domain. We saw and example of this in [#chapter.subject-domain]:
         
         ```(xml)
             <section publication="Wine Weenie">
@@ -173,11 +175,11 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
 
         Here the `section` box is in the document domain, but the `publication` label is in the management domain.
         
-        The names and labels on the boxes tell us what constraints the words in the box obey, or, as we are writing, what constraints the words we write are expected to obey. Algorithms use the names and the labels to process the content, assuming that they accurately reflect the constraints. 
+        The names and labels on the blocks tell us what constraints the structures inside the block obey, or, as we are writing, what constraints the words we write are expected to obey. Algorithms use the names and the labels to process the content, assuming that they accurately reflect the constraints. 
         
         For structured writing to work, it is essential that everyone involved understands and agrees on what the names and labels mean. If we don't, the names and labels will not accurately reflect the constraints we expect, and the whole content quality project falls apart and the algorithms stop working. 
         
-        Confusion and disagreement about what the names and labels of a particular language mean are not uncommon. Large document domain languages like DocBook and DITA have large vocabularies, and many of the names they offer are quite abstract. Questions about the right way to tag certain passages are common in the communities around these languages, and opinions can vary considerably in some cases. These disagreements don't only affect low-level structures. In DITA, for example, it is common to debate if a topic is a concept or a task, while some writers choose to use only generic topics because they don't feel the models of the task, concept, and reference topics fit the content they are creating. 
+        Confusion and disagreement about what the names and labels of a particular language mean are not uncommon. Large document domain languages like {DocBook} and {DITA} have large vocabularies, and many of the names they offer are quite abstract. Questions about the right way to tag certain passages are common in the communities around these languages, and opinions can vary considerably in some cases. These disagreements don't only affect low-level structures. In {DITA}, for example, it is common to debate if a topic that is operational but not procedural is a concept or a task. Some writers choose to use only generic topics because they don't feel the models of the task, concept, and reference topics fit the content they are creating. 
         
         Having precise definition of terms is important, therefore, in developing a structured writing language. But it is equally important that the language be {functionally lucid}. The {authoring algorithm} requires that creating structure should not come at the detriment of the writing itself. This requirement is not met if writers are constantly having to puzzle out or debate the right way to mark something up. 
         
@@ -187,11 +189,19 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
         
         Clear concrete and specific names, and an organization of boxes that intuitively fits the subject matter, all make for easier authoring. There is no reason that such structures cannot be derived from abstract models, or that they cannot be mapped to abstract models after the fact, but it is important not to let the abstractions intrude too munch into the world of the author. 
     
-        Of course, functional lucidity only matters for the formats that authors actually write in. As we have seen, the {publishing algorithm} typically consists of multiple steps, and each one of those steps can create a format that is closer to the media domain than the one before it. It is perfectly possible to design a document domain structure the only purpose of which is to serve as a step in the publishing chain. Separate authoring formats are created for authors to actually write in (perhaps {subject domain} formats or simplified highly constrained ad-hoc document domain formats). Content is transformed from these formats to the document domain format by the {presentation algorithm} and then the document domain format is translated in to various different media domain languages by the {formatting routine}. An arrangement like this eliminates the need to compromise between different demands in designing a single language, generally making each language in the chain simpler and more constrained, which in turn makes it each one easier to {validate} and to process.
+        Of course, functional lucidity only matters for the formats that authors actually write in. As we have seen, the {publishing algorithm} typically consists of multiple steps, and each one of those steps can create a format that is closer to the media domain than the one before it. It is perfectly possible to design a document domain structure for the sole purpose of of serving as a step in the publishing chain. Separate authoring formats are created for authors to actually write in (perhaps {subject domain} formats or simplified highly constrained ad-hoc document domain formats). Content is transformed from these formats to the document domain format by the {presentation algorithm} and then the document domain format is translated in to various different media domain languages by the {formatting routine}. An arrangement like this eliminates the need to compromise between different demands in designing a single language, generally making each language in the chain simpler and more constrained, which in turn makes it each one easier to {validate} and to process.
 
-    section: Structure and annotation
+    section: Constraint and annotation
     
-        Broadly speaking, structured markup provides two things: structure and annotation. Structure governs the relationship of pieces. It is structure that says that a list consists of list items, that an API reference must begin with a function signature followed by a list of parameter values, that says that an ingredient listing consists of the ingredient name followed by a quantity followed by a unit of measure, or that a section must begin with a title. It is in structure that we create, impose, and express most of the {constraints}(concept) that are fundamental to structured writing.
+        Broadly speaking, structured markup provides two things: constraint and annotation. Constraint governs the relationship of pieces. It is constraint that says that a list consists of list items, that an API reference must begin with a function signature followed by a list of parameter values, that an ingredient listing consists of the ingredient name followed by a quantity followed by a unit of measure, or that a section must begin with a title. 
+        
+        Annotation adds information to the constrained structures. The name of the structure is its first and most important annotation. It is the annotation that expresses the core constraint that has been imposed. This may be supplemented by other annotations on the structure that further clarify the constraint that has been imposed, or contain other metadata, such as management domain annotation. 
+        
+        But we can also have unconstrained annotation, or at least, annotation whose usage is very lightly constrained. In some XML-based languages, for instance, there are sets of attributes that are allowed to appear on just about any element in the entire language. (ID attributes are an obvious example.) But the main source of unconstrained annotation are those that can float in the middle of a piece of text.  
+        
+        As we noted, we cannot capture the full rhetorical semantics of any piece of writing using simple linear or hierarchical structures. At some point we have to leave the writer free to express themselves in paragraphs of text on which we can impose no meaningful restriction. But we may still be very much interested in constraining the interpretation of many of the words and phrases used in those paragraphs.
+        
+        Such annotations are constrained in the sense that there is a limited set of them available for use, but they are almost always unconstrained as to where and in what order they appear in the text -- for the very good reason the their text that they annotate obeys no regular rule or pattern. 
         
         Every structure has a name (though the name is implicit in some forms of markup. The name of the structure is an annotation of the constraint that the structure imposes. (Remember that we defined structured writing as both imposing a constraint and recording that the constraint has been applied.)
         
@@ -213,7 +223,7 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
         
         * In {HTML}(language), the style attribute can be used to add {media domain}(concept) metadata to the document structure.
         
-        However, not all annotations are attached to structures. At a certain point in defining the structure of content we get down to what is essentially free-form narrative content -- that is, paragraphs of text. But even within a paragraph, that are pieces of text that we may want to annotate. Examples from each of the domains include:
+        However, not all annotations are attached to structures. At a certain point in defining the structure of content we get down to what is essentially free-form narrative content -- that is, paragraphs of text. But even within a paragraph, there are pieces of text that we may want to annotate. Examples from each of the domains include:
         
         |Media Domain| A `bold` or `strong` annotation on a piece of text you want to emphasize.
         
@@ -225,33 +235,10 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
         
         Different markup systems support structure and annotation in different ways. 
         
-        section: Structure and annotation in SAM
         
-            In SAM (the language used for most of the examples in this book), there are a number of types of structure, but the main extensible structure is the block. Annotations are part of the definition of the language. Annotations can be added to blocks and can also float in text. 
+        section: Secondary structures of interpretation    
             
-            ```(SAM)
-                section:(#annotations) Annotations
-                    This is a paragraph containing an {annotation}(concept).
-
-            
-            In the example above, `section` is a structure containing a title and a paragraph. The `section` structure has an annotation which is contained in parentheses immediately after the colon that defines the structure. In this case it is an ID annotation and assigns the ID "annotations" to the structure.
-            
-            The word "annotation" in the paragraph is annotated with a free-floating annotation. The curly braces delineated the text that is being annotated. The parentheses contain the annotation itself, which in this case is a type annotation, indicating that the word "annotation" is a reference to concept. 
-        
-        section: Structure and annotation in XML
-        
-            In XML we have two principal types of markup, the element and the attribute. Elements are used to define structure and element names annotate those structures. Additional annotations take the form of attributes.  Annotations on phrases withing a body of text are also created with elements. Again, the element name provides the basic annotation and attributes can be used for additional annotations.
-
-            So the SAM example above could be expressed like this in XML:
-            
-            ```(XML)
-                <section id="annotations">
-                    <title>Annotations</title>
-                    <p>This is a paragraph containing an <concept>annotation</concept>. 
-        
-        section: Structure in attributes    
-            
-            Having said that in XML, elements denote structure and attributes are for additional annotations on that structure, we should note that there are exceptions. XML is a fully general markup syntax and therefore markup language designers can use it any way they like. In some case, language designers have decided to use attributes to denote structure. 
+            Under normal circumstance, the structures that constrain the content also constrain its interpretation. But there are cases in which annotations are added to structures to constrain a different interpretation of the content from the one specified by the structure that contains it, and not only of individual fields, but of a structure as a whole. 
 
             Consider these {examples of HTML Microformats from Wikipedia}[https://en.wikipedia.org/wiki/Microformat]. The first example shows an address formatted as a list. 
             
@@ -264,7 +251,7 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
                 </ul>
 
             
-            Here the phrase `The Example Company` is contained in `li` tags. This is part of a list structure delineated by `ul` tags, so the markup is largely structural in the document domain. The `li` does not really tell you anything useful about what the content itself is about. It does not tell you anything useful beyond what document structure it belongs to. It is not much use as an annotation.   
+            Here the phrase `The Example Company` is contained in `li` tags. This is part of a list structure delineated by `ul` tags, so the markup is largely structural in the document domain. The `li` does not really tell you anything useful about what the content itself is about. It does not tell you anything useful beyond what document structure it belongs to.    
 
             The second example adds hCard microformat markup:
             
@@ -277,11 +264,11 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
                 </ul>
 
            
-            This example adds subject domain metadata in the form of the class attributes. For example, it says that the phrase `The Example Company` is a reference to an organization (`org`). So far this is just regular annotation. 
+            This example adds subject domain metadata in the form of the class attributes. For example, it says that the phrase `The Example Company` is a reference to an organization (`org`). This annotation is not modifying or refining the constraint expressed by the `li` tag. It is saying something else entirely. 
             
-            However, there is not just annotation going on here. There is actually {subject domain} structure being expressed. Not only is the list item `The Example Company` annotated as `org`, the list that contains it is annotated as `vcard`. The meaning of `org` is actually dependent on it being part of a `vcard` structure.
+            But this is not just about suggesting a different way of interpreting `The Example Company` (as an organization name, as well as as a list item).  There is actually a complex {subject domain} structure being expressed. Not only is the list item `The Example Company` annotated as `org`, the list that contains it is annotated as `vcard`. The constraint of interpretation provided by `org` is actually dependent on it being part of a `vcard` structure.
             
-            In other words, the annotations in the sample above are equivalent to pure subject domain markup like this:
+            In other words, the secondary structure created by the annotations in the sample above is equivalent to pure subject domain markup like this:
             
             ```(SAM)
                 vcard:
@@ -328,13 +315,27 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
 
             
             
-        section: Structure vs annotation
+        section: Elements vs. attributes
         
-            If the distinction between structure and annotation -- between boxes and the labels on the boxes -- does not seem entirely solid to you, that is because it practice it can be quite fluid. 
+            Another issue in the design of the mechanical structure of a markup language is that of elements vs attributes. Elements and attributes are the core markup structures of XML, and many other markup systems make the same distinctions in one way or another. The simplest way to state it is that attributes add additional annotation to an element. So, for instance, in:
 
-            For instance, if we start with the principle that in XML elements are for structure and attributes are for additional annotation on a structure (which we have already poked holes in above), then surely it should be clear when we should use attributes and when we should use elements. But in practice it is often not clear at all. 
+            ```(xml)
+                <author-name first="Mark" last="Baker">
+                
+            the element is named `author-name` and it has two attributes named `first` and `last` that contain my first and last name respectively. 
+            
+            Why is this marked up like this and not like this:
+            
+            ```(xml)
+                <author-name>
+                    <first>Mark</first>
+                    <last>Baker</first>
+                    
+            Both these constructs express the same information in a way that clearly constrains how author names are to be written and how the markup of author names is to be interpreted by algorithms. 
+            
+            Is one of these options correct and the other incorrect? When should you use attributes and when should you use elements?          
 
-            Consider our previous example. It could be written this way, using just elements:       
+            Consider our vcard example. It could be written this way, using just elements:       
 
             ```(XML)
                 <vcard>
