@@ -48,7 +48,7 @@ chapter:(#chapter.three-domains) Introduction
         
         However, the term structured writing today generally means more than following a style guide or template. It usually means the use of computer data formats (most commonly XML) to capture written content so that it can be processed by algorithms. These data structures are also constraints. They require the writer to write content to fit into a set of specific data structures. These mechanical constraints may or may not correspond to the rhetorical constraints of a particular piece of writing. In some cases, the mechanical constraints are there to serve a publishing or content management purpose and may have nothing to do with the rhetorical structure of the wiring. In some cases they may actually interfere with it. 
         
-        However, it is also possible to use mechanical structures like this to help improve the rhetorical structure of content. This is the kind of structured writing that this book is about. From this point on, therefore, I am going to use structured writing to mean writing in data structures. As we go on, we will show how those data structures can give greater and greater support to the literary and rhetorical structure of content. 
+        However, it is also possible to use mechanical structures like this to help improve the rhetorical structure of content. This is the kind of structured writing that this book is about. From this point on, therefore, I am going to use structured writing to mean writing in data structures. As we go on, we will show how those data structures can give greater and greater support to the literary and rhetorical structure of content, and that this approach can be be hugely beneficial in managing how complexity is distributed in your content creation process. 
         
         Just as all writing has at least a basic grammatical structure, all writing on a computer involves creating basic data structures. Thus the only case in which no structured writing techniques are involved in the writing process is when an author writes down their ideas with pen and paper, and gives that paper directly to the reader. In this case, the entire writing process, from an idea in the writer's head to words on paper takes place in the writer's head and any constraints that are imposed on the content are captured and imposed by the writer themselves as they inscribe their words with the pen. 
         
@@ -68,9 +68,34 @@ chapter:(#chapter.three-domains) Introduction
         
         Constraints play an important role for algorithms. First, they help assure the quality of the data that the algorithms consume by controlling what authors create. Secondly, they constrain the interpretation of the data. In other words, the structures that authors create in the content tell the algorithms what each piece of content means. The more precisely the structures constrain the interpretation of the data, the more the algorithms can do with that data. 
         
-        We use structured writing algorithms to help us with the writing process. We use them either to take over or to support parts of the writing task. This usually involves moving the point at which content is recorded earlier in the process from idea to dots, allowing the algorithms more scope to assist in the process. Generally speaking, the more we constrain the creation and interpretation of content with structure, the earlier we can move the point of recording, and the more we can do with the content.
+        We use structured writing algorithms to help us with the writing process. We use them either to take over or to support parts of the writing task. This usually involves moving the point at which content is recorded earlier in the process from idea to dots, allowing the algorithms more scope to assist in the process. 
         
-        We can describe this process of earlier recording in terms of three domains, each domain reflecting a stage in the progress from ideas to dots. The domains are the media domain (which is concerned with lines and dots on paper or screen), the document domain (which is concerned with the expression and organization of documents), and the subject domain (which is concerned with the ideas that we write about. 
+        This leads us to a working definition of structured writing for purposes of this book:
+            
+        """
+            Structured writing is writing that follows a set of constraints and records that it has done so. 
+            
+        For instance, lets say that we have a constraint that every section must start with a title. We can follow this constraint in just about any tool we choose. We could even follow in when writing by hand on paper. But if we choose a structured writing format, such as {DocBook}, we can not only follow this constraint but record that we have followed it:
+
+        ```(xml)
+            <section>
+                <title>The quick brown fox</title>
+                <para>The quick brown fox jumps over the lazy dog.</para>
+            </section>
+            
+        This markup records that we have followed the constraint by identifying the title as the first thing in the section. This constrains the interpretation of the string "The quick brown fox" by algorithms. Algorithms can now do things such as:
+        
+        * Check that all sections start with titles (that is, check that the constraint has been followed)
+        * Format all section titles the same way
+        * Create a list of all the section titles in the document
+        
+        All of these redirect tasks away from the author, redistributing those bits of complexity to the algorithms and the people who write them.
+        
+        Following constraints can make content better, but it is in recording the constraints that we have followed that we constrain the interpretation of the text and therefore make it available to algorithms. And it is in making it available to algorithms that we gain the ability to redistribute the complexity of the content creation process. 
+            
+        Generally speaking, the more we constrain the creation and interpretation of content with structure, the more accessible it becomes to algorithms, and the more opportunities we gain to distribute complexity effectively. This means recording the content at a point nearer to ideas in the head and further from dots on a page. The nearer we are to ideas in a head, the more we know about what the content says as opposed to what a page looks like, and the more effectively we can constrain the creation and interpretation of the text. 
+        
+        We can describe this process of earlier recording in terms of three domains, each domain reflecting a stage in the progress from ideas to dots. The domains are the media domain (which is concerned with lines and dots on paper or screen), the document domain (which is concerned with the expression and organization of documents), and the subject domain (which is concerned with the ideas that we write about). 
         
  
     section: The three domains
