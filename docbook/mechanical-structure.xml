@@ -2,55 +2,33 @@
 <db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.mechanical-structure">
 <db:title>Mechanical Structure</db:title>
 
-<db:para>The mechanical structure of structured writing is the structure it presents to machines, which is to say, to algorithms. To create mechanical structures to contain writing, we need a type of structure suitable to what we are capturing and what information we want to capture about it. Traditional computing structures like relational database tables do not work well for this because they are too regular to fit the shape of content. Creating structures that are regular enough for algorithms to deal with yet irregular enough to fit written language is an interesting problem to which more than one solution has been proposed.</db:para>
-<db:section>
-<db:title>Flags vs Boxes</db:title>
-<db:para>A document is fundamentally a linear and ordered data structure. One thing comes after another. The rhetorical structure of a document is expressed using literary devices (possibly highlighted by formatting changes) within the flow of the text. To impose a topic type to formally constrain the topic pattern that is the rhetorical structure, we need to mechanically delineate the parts of the rhetorical structure.</db:para>
-<db:para>Two commons ways to do this are flags and boxes.</db:para>
-<db:para>The boxes approach means creating boxes for words and giving names to those boxes. It may also involve putting a label on the box with additional information on it. The name and the label on the box tells us something about the words in the box.</db:para>
-<!--  Graphic -->
-<db:para>To create the boxes, we insert markup into the text to define the beginning and end of the boxes. This is how it works in XML:</db:para>
-<db:programlisting language="xml">
-&lt;box label_1="foo" lable_2="bar"&gt;text&lt;/box&gt;
+<db:para>Structured writing is writing the obeys constraints and records the constraints it obeys. If the constraints it obeys are its rhetorical structure, the way is records those constraints is its mechanical structure. The mechanical structure of structure writing is a compute data structure. However, conventional computer data structures like relational database tables do not work well for content because they are too regular to fit the shape of content. Creating structures that are regular enough for algorithms to deal with yet irregular enough to fit written language is an interesting problem to which more than one solution has been proposed.</db:para>
+<db:para>Raw text is just a stream of characters. Inside that stream of characters, there are rhetorical structures like headings, bibliographical entries, bold text, chapters, allusions, references, links, tables, and labeled lists. The question is, how do you express these various structures on top of the raw stream of characters?</db:para>
+<db:para>One way is to indicate with some kind of markup the place were a rhetorical structure beings or ends.</db:para>
+<db:programlisting>
+This text is [B&gt;bold&lt;B].
 </db:programlisting>
-<db:para>But not all markup systems use the boxes model. Many older systems, particularly those intended for typesetting, used the flags model. To understand the flags model, consider how road signs delineate zones on a road. As you approach a town, you may see a sign saying that you are entering the town. A little further on, you see a sign for a reduced speed limit. On the far side of the town, you pass a sign saying you are leaving the town limits. Here, however, there are still houses and businesses along the road, so the speed limit does not rise until you are past the built up area. Thus the box defined by the town limits and the box defined by the lower speed zone overlap each other. It is not a case of boxes within boxes, but of independent zones defined by begin and end signs.</db:para>
-<db:para>An example of this approach in the content world is the word processor WordPerfect which takes what it calls a “streaming approach” to document structure in which features are turned on and remain on until they are turned off. Thus in Word Perfect, your could do this, with bold starting and then italic starting, the bold stopping and finally italic stopping:</db:para>
+<db:para>What happens if a different rhetorical structure overlaps with this one?</db:para>
 <db:programlisting>
 This text is [B&gt;bold, [I&gt;this is bold and 
 italic,&lt;B] and this is just italic&lt;I].
 </db:programlisting>
-<db:para>This would print as:</db:para>
-<db:blockquote>
-<db:para>This text is <db:emphasis role="bold">bold,</db:emphasis> <db:emphasis role="bold"><db:emphasis>this is bold and italic,</db:emphasis></db:emphasis> <db:emphasis>and this is just italic</db:emphasis>.</db:para>
-</db:blockquote>
-<db:para>This overlapping of structures is illegal in XML, so in HTML, for instance, you can’t do this:</db:para>
+<db:para>For some markup system, such as that used in the word processor WordPerfect, this works perfectly fine. But this approach really puts a damper on the kinds of algorithms you can run. Many algorithms depend on their ability to isolate certain elements of a text for processing. Suppose your source text contains markup like this:</db:para>
 <db:programlisting>
-&lt;p&gt;This text is &lt;b&gt;bold, &lt;i&gt;this is bold and 
-italic,&lt;/b&gt; and this is just italic&lt;/i&gt;.&lt;/p&gt;
+Use the [B&gt;[function-name&gt;print()&lt;B]&lt;function-name] to print.
 </db:programlisting>
-<db:para>You have to do this, keeping everything nested with no overlapping structures:</db:para>
+<db:para>If a conformance algorithm is trying to validate function names in a text, it is not going to see <db:code>print()</db:code> as the value of the function name, but <db:code>print()&lt;B]</db:code>. That is messy to deal with, to say the least. It is messy to write and maintain as well, which is why WordPerfect had a reveal codes mode that allowed the writer to go in and fix up broken markup when things got messy. Thus this approach to markup is not used much anymore.</db:para>
+<db:para>To avoid this mess, most modern markup systems treat the text stream as consisting of a set of non-overlapping blocks. Blocks can nest inside other blocks, and even inside the content of other blocks, but two blocks can never overlap each other. This makes it much easier for algorithms to process markup but it means that in cases were rhetorical structures do overlap, you have to resort to convoluted markup like this:</db:para>
 <db:programlisting>
 &lt;p&gt;This text is &lt;b&gt;bold,&lt;/b&gt; &lt;i&gt;&lt;b&gt;this is bold 
 and italic,&lt;/b&gt;&lt;/i&gt; &lt;i&gt;and this is just italic&lt;/i&gt;.&lt;/p&gt;
 </db:programlisting>
 <db:para>There is more to this question than trivial examples like this. In the academic study of text markup, where markup is used not for the preparation of documents but to mark them up for academic study, there is an debate about whether the hierarchical structure of XML-based languages actually reflects the real structure of the text.</db:para>
 <db:para>From a structured writing perspective, we don’t have to worry so much about whether the markup is objectively true to the text. Our concern is to create structures that improve the quality of content and enable the structured writing algorithms we want to use.</db:para>
-<db:para>The use of a flags model like that of WordPerfect is rare today. A hierarchical model is almost universally preferred. Whether they truly represent the structure of text or not, hierarchical models are easier to define and process and provide an easier way to express constraints. If your really want to express overlapping structures in a hierarchical language like XML, it is possible to do so by using empty element tags as flags. Thus you can define a language that lets you do this:</db:para>
-<db:programlisting>
-&lt;p&gt;This text is &lt;b-start/&gt;bold, &lt;i-start/&gt;this is bold 
-and italic,&lt;b-end/&gt; and this is just italic&lt;i-end/&gt;.&lt;/p&gt;
-</db:programlisting>
-<db:para>However, you would be very hard pressed to find anyone who would tell you this was a good idea. The boxes model works best for most of what you want to do with structured writing and to introduce a flags model into the mix just to express an odd structure like this introduces far more complexity than it is worth.</db:para>
-<db:para>If you really need to model the highly unlikely bit of formatting in the example above, you should do it as illustrated above:</db:para>
-<db:programlisting>
-&lt;p&gt;This text is &lt;b&gt;bold,&lt;/b&gt; &lt;i&gt;&lt;b&gt;this is bold and 
-italic,&lt;/b&gt;&lt;/i&gt; &lt;i&gt;and this is just italic&lt;/i&gt;.&lt;/p&gt;
-</db:programlisting>
-<db:para>In short, structured writing today uses the boxes model, and so should you.</db:para>
-</db:section>
+<db:para>A hierarchical model is almost universally preferred. Whether they truly represent the structure of text or not, hierarchical models are easier to define and process and provide an easier way to express constraints.</db:para>
 <db:section>
 <db:title>Flat vs. nested structures</db:title>
-<db:para>But even when we choose the boxes model of markup design, we are still left with some fundamental choices about structure. The first is flat vs. nested structure.</db:para>
+<db:para>But even when we choose the hierarchical approach to markup design, we are still left with some fundamental choices about structure. The first is flat vs. nested structure.</db:para>
 <db:para>We noted in <db:xref linkend="chapter.document-domain"/> that in HTML, you have six levels of heading (<db:code>h1</db:code> through <db:code>h6</db:code>) whereas in DocBook you have only <db:code>title</db:code>. In DocBook, you can divide a document up into sections and nest sections inside sections. You can then print the titles of sections inside sections in a smaller font that the titles of first level sections. You get to have differences in heading size without having six different heading tags.</db:para>
 <db:para>But the DocBook model assumes that the real structure of a document is  a hierarchy of nested sections and that the size of titles announces the steps up and down that hierarchical tree. HTML makes no such assumption. It will let you put a <db:code>&lt;h4&gt;</db:code> immediately after an <db:code>&lt;h1&gt;</db:code> if you want to. It treats documents as essentially flat structures punctuated by headings of various sizes as and where appropriate.</db:para>
 <db:para>Which model of a document is correct? You can think of a document as being organized hierarchically, with major ideas expressed in sections, sub-ideas supporting the major ideas in subsections, etc. There are doubtless documents that fit that model. But you can also think of documents as being more like a journey in which headings function more like road signs. A city gets a big sign, a hamlet a small sign, and a town a medium sign. But the town is not inside the city, not the hamlet inside the town, and there is no guarantee that on leaving the city you will come to the town before you come to a hamlet.</db:para>
@@ -59,6 +37,11 @@ italic,&lt;/b&gt;&lt;/i&gt; &lt;i&gt;and this is just italic&lt;/i&gt;.&lt;/p&gt
 <db:attribution>Flynn2009</db:attribution><db:para>The classical theory, derived from computer science and graph theory, is that the document is a hierarchical tree (actually inverted: a root-system) and that all necessary actions can be seen in terms of navigation around the tree, and of insertion into and withdrawal from the the nodes which form the branches and leaves.</db:para>
 <db:para>The conventional writer, however — and we expressly exclude the markup expert, as well as the experienced technical authors who responded to the survey — is by repute probably only marginally aware of this tree; but we have been unable to measure this at present. In this view, the document is seen as a continuous linear narrative, broken into successive divisions along semantic lines, and interspersed with explanatory material in the form of figures, tables, lists, and their derivatives.</db:para>
 </db:blockquote>
+<db:para>The return from subjection problem, which comes up again and again in structured writing, both at the rhetorical and mechanical level, is an illustration of this point. Within a section, you can create one or more nested subsections. If one applies a hierarchical logic to the design of the document, the role of the subsection is to treat a secondary or supporting point for the main section. In this logic, on ought to be able to return to the section level after a set so subsections in order to sum up the overall point of the section. Logically you might also wish to return to the section level of discourse between subsections so as to locate the matter of the subsection in the narrative of the section.</db:para>
+<db:para>You could certainly create structured writing section and subjection structures that would let you follow this logic. The problem is, how would you publish this structure. While it is not impossible to imagine a way to format something like this, it would clearly be a violation of all the norms of document layout and organization. In a normal document, if you want to sum up a section after several subjections, you introduce a subheading “Conclusion” after the end of the last subsection. The role of the conclusion is to sum up the section as a whole, so it is not a subsection hierarchical logic of the document, it is a return to the section level.</db:para>
+<db:para>But no one, to the best of my knowledge, as ever tried to actually mark it up that way. The conclusion will be marked up as another subsection. And any material that relates a subjection to the matter of the section will be contained within the subsection itself. Thus the section/subsection structure of a document does not reflect any hierarchical logic in the rhetorical structure of the argument, it actually just groups content under different levels of headings.</db:para>
+<db:para>And as Flynn’s research illustrates, there is a good chance that the author is not thinking of their argument as consisting of a strict hierarchy of points either, but as a sequence of points with the occasional insertion of heading to break up the text or perhaps signal a change in emphasis or subject matter.</db:para>
+<db:para>To think of it yet another way, a text is a flattening of the representation of a complex reality -- the world -- a reality whose complexity can no more be fairly represented by as a hierarchy than it can by a simple sequence. The building up of the picture of the real world, in all its complexity, is not the job of the document outline, but the job of the whole of the text, of every verb, adjective, and noun, or every sentence, and simile and symbol and story that the writer can assemble to guide the reader to the full grasp of the complex world they are describing. To suggest, therefore, that the mechanical structure of a markup language can capture the full rhetorical structure of a piece of writing is absurd. It can, at best, capture certain aspects of that rhetorical structure, and outside of that it works best when it stays out of the writer’s way as much as possible.</db:para>
 <db:para>But if the constraints that we want to express in structured writing demand hierarchy, while functional lucidity demands more of a punctuated linear model, how do we reconcile these two opposing requirements in markup language design?</db:para>
 <db:para>This is of greatest concern in the design of document domain languages. The structure of media domain languages is largely dictated by the shape and relationship of the media-domain object they are modeling. In the subject domain, we have abstracted content out of strict document order. Hierarchy in the subject domain tend to match the hierarchy of relationship in the subject matter itself.<db:footnote>
 <db:para>Though this is not universal. Addresses, for instance, which are based on hierarchal locations, are modeled as flat ordered lists. The order reflect the hierarchy, but the nesting of city inside country and of street within city is not reflected in the structure of an address record.</db:para>
@@ -82,7 +65,7 @@ italic,&lt;/b&gt;&lt;/i&gt; &lt;i&gt;and this is just italic&lt;/i&gt;.&lt;/p&gt
 <db:para>Move content creation to the subject domain.</db:para>
 </db:listitem>
 </db:itemizedlist>
-<db:para>In the document domain, however, you have to make a choice between enforcing a hierarchical model of a document or allowing a more linear one. You will almost certainly do this in the context of hierarchical syntax. You probably don’t want to go the WordPerfect route of separate on and off commands. But you do need to decide if you are going to allow arbitrary heading levels. Or, to put it another way, to model a document as a hierarchy of sections with each section having a title, or a single flow of text randomly interspersed with headings, or something in between.</db:para>
+<db:para>In the document domain, however, you have to make a choice between enforcing a hierarchical model of a document or allowing a more linear one. You will almost certainly do this in the context of hierarchical syntax.  But you do need to decide if you are going to allow arbitrary heading levels. Or, to put it another way, to model a document as a hierarchy of sections with each section having a title, or a single flow of text randomly interspersed with headings, or something in between.</db:para>
 <db:para>The something-in-between option can seem appealing but you can end up with something really unconstrained, meaning that it is difficult to write reliable algorithms to process it. Here is the kind of issues you can run into:</db:para>
 <db:para>Is a list part of the paragraph in which it occurs? Some markup languages, such as Markdown and SAM, take the view that lists are separate blocks that come after a preceding paragraph. But DITA, DocBook, and HTML will all let you place a list either inside or outside a paragraph:</db:para>
 <db:programlisting>
@@ -104,7 +87,7 @@ italic,&lt;/b&gt;&lt;/i&gt; &lt;i&gt;and this is just italic&lt;/i&gt;.&lt;/p&gt
 <db:para>The interesting question here is whether these two structures should be formatted differently for output. Should the list that in inside the paragraph be indented, which the one that comes afterwards be printed flush left?</db:para>
 <db:para>The default for HTML, at least in the browsers I tried it on (Edge, Internet Explorer, and Chrome) is that both are indented by the same amount, but of course you could change this with CSS and DocBook and DITA processors can do what they like.</db:para>
 <db:para>But would it be a good idea to make a distinction between the two? Only if authors clearly understood the difference between the two and clearly know when they were choosing one or the other. (If they are writing in a visual editing view of an XML editor, then they almost certainly won’t know the difference.)</db:para>
-<db:para>If you are designing your own markup language, do you want to allow both these forms? Probably not. The more permutations of structure your markup language allows, the more work it will be to write the algorithms to process it. Some allowance may be made for ease of authoring, if you wish, but it may be better to wait for authors to complain about a restriction like this than to build in all the possible variations in advance. (This is also a problem that is more likely to occur in an abstract language like XML than in a concrete language like Markdown or SAM, where the choice is baked into the syntax and the author does not have a choice to make.)</db:para>
+<db:para>If you are designing your own markup language, do you want to allow both these forms? Probably not. The more permutations of structure your markup language allows, the more work it will be to write the algorithms to process it. Some allowance may be made for ease of authoring, if you wish, but it may be better to wait for authors to complain about a restriction like this than to build in all the possible variations in advance.</db:para>
 </db:section>
 
 <db:section>
@@ -131,14 +114,15 @@ italic,&lt;/b&gt;&lt;/i&gt; &lt;i&gt;and this is just italic&lt;/i&gt;.&lt;/p&gt
   
 * The second item.
 </db:programlisting>
-<db:para>The latter has just as much structural hierarchy as the first, but feels much flatter. It uses indentation to indicate that the second paragraph belongs to the first list item, but that feels natural and obvious rather than contrived of imposed.</db:para>
+<db:para>The latter has just as much structural hierarchy as the first, but feels much flatter. It uses indentation to indicate that the second paragraph belongs to the first list item, but that feels natural and obvious rather than contrived or imposed.</db:para>
+<db:para>If a structured writing language divides all content up into blocks and nested blocks, XML-based languages make all such blocks completely explicit by markup up the beginning and end of every block. Lightweight languages like Markdown use a more implicit syntax better reflects the implicit structure of formatted text itself.</db:para>
 <db:para>One of my motivations for creating SAM, which is designed for structured writing, and therefore, unavoidably, for hierarchical structures, was to express hierarchy implicit where possible and as naturally as possible where it cannot be implicit, for the sake of improve functional lucidity for strictly constrained structured writing languages. (First and foremost, I created it for myself, to improve functional lucidity for me in the structured writing I do, such as the writing of this book.)</db:para>
 </db:section>
 <db:section>
 <db:title>Agreeing on boxes, names, and labels</db:title>
-<db:para>The names and labels on boxes tell us what kind of thing is in the box. What kind of things they  tell us depends on the domain we are dealing with.</db:para>
+<db:para>The names and labels on blocks tell us what kind of thing is in the box. What kind of things they  tell us depends on the domain we are dealing with.</db:para>
 <db:para>In the media domain they tell us what the words in the box look like, either directly (an actual format description) or by reference (the name of a style). In the document domain they tell us what part of a document the words are. In the management domain, they tell us what to do with the words under different circumstances. In the subject domain they tell us what the subject matter of the words is.</db:para>
-<db:para>The box does not only have to have information from one domain on it. It is not uncommon to have a box with a name in the document domain and a label in the management domain or the subject domain. We saw and example of this in <db:xref linkend="chapter.subject-domain"/>:</db:para>
+<db:para>The block does not only have to have information from one domain on it. It is not uncommon to have a block with a name in the document domain and a label in the management domain or the subject domain. We saw and example of this in <db:xref linkend="chapter.subject-domain"/>:</db:para>
 <db:programlisting language="xml">
 &lt;section publication="Wine Weenie"&gt;
     &lt;title&gt;Wine match&lt;/title&gt;
@@ -150,18 +134,22 @@ italic,&lt;/b&gt;&lt;/i&gt; &lt;i&gt;and this is just italic&lt;/i&gt;.&lt;/p&gt
 &lt;/section&gt;
 </db:programlisting>
 <db:para>Here the <db:code>section</db:code> box is in the document domain, but the <db:code>publication</db:code> label is in the management domain.</db:para>
-<db:para>The names and labels on the boxes tell us what constraints the words in the box obey, or, as we are writing, what constraints the words we write are expected to obey. Algorithms use the names and the labels to process the content, assuming that they accurately reflect the constraints.</db:para>
+<db:para>The names and labels on the blocks tell us what constraints the structures inside the block obey, or, as we are writing, what constraints the words we write are expected to obey. Algorithms use the names and the labels to process the content, assuming that they accurately reflect the constraints.</db:para>
 <db:para>For structured writing to work, it is essential that everyone involved understands and agrees on what the names and labels mean. If we don’t, the names and labels will not accurately reflect the constraints we expect, and the whole content quality project falls apart and the algorithms stop working.</db:para>
-<db:para>Confusion and disagreement about what the names and labels of a particular language mean are not uncommon. Large document domain languages like DocBook and DITA have large vocabularies, and many of the names they offer are quite abstract. Questions about the right way to tag certain passages are common in the communities around these languages, and opinions can vary considerably in some cases. These disagreements don’t only affect low-level structures. In DITA, for example, it is common to debate if a topic is a concept or a task, while some writers choose to use only generic topics because they don’t feel the models of the task, concept, and reference topics fit the content they are creating.</db:para>
+<db:para>Confusion and disagreement about what the names and labels of a particular language mean are not uncommon. Large document domain languages like DocBook and DITA have large vocabularies, and many of the names they offer are quite abstract. Questions about the right way to tag certain passages are common in the communities around these languages, and opinions can vary considerably in some cases. These disagreements don’t only affect low-level structures. In DITA, for example, it is common to debate if a topic that is operational but not procedural is a concept or a task. Some writers choose to use only generic topics because they don’t feel the models of the task, concept, and reference topics fit the content they are creating.</db:para>
 <db:para>Having precise definition of terms is important, therefore, in developing a structured writing language. But it is equally important that the language be functionally lucid. The authoring algorithm requires that creating structure should not come at the detriment of the writing itself. This requirement is not met if writers are constantly having to puzzle out or debate the right way to mark something up.</db:para>
 <db:para>In the software world, meta models and abstraction are powerful tools for modeling systems. They provide clear high-level rules for the design of specific structures and create opportunities to reuse code for objects with a shared base model. But these tools can also lead to very abstract naming schemes and even to abstract structures. In the content world, such abstract names and structures can be formally correct but lack the kind of functional lucidity required for effective authoring.</db:para>
 <db:para>The problem of defining a (mechanical structure) to express a (rhetorical structure) is not only one of defining a correct representation of the content. We also have to design and name structures that can be written by our intended set of authors without imposing a heavy burden on their attention. In other words, designing content structures, at least those intended for use by authors, is as much about interface design as it is about data structure design.</db:para>
 <db:para>Clear concrete and specific names, and an organization of boxes that intuitively fits the subject matter, all make for easier authoring. There is no reason that such structures cannot be derived from abstract models, or that they cannot be mapped to abstract models after the fact, but it is important not to let the abstractions intrude too munch into the world of the author.</db:para>
-<db:para>Of course, functional lucidity only matters for the formats that authors actually write in. As we have seen, the publishing algorithm typically consists of multiple steps, and each one of those steps can create a format that is closer to the media domain than the one before it. It is perfectly possible to design a document domain structure the only purpose of which is to serve as a step in the publishing chain. Separate authoring formats are created for authors to actually write in (perhaps subject domain formats or simplified highly constrained ad-hoc document domain formats). Content is transformed from these formats to the document domain format by the presentation algorithm and then the document domain format is translated in to various different media domain languages by the formatting routine. An arrangement like this eliminates the need to compromise between different demands in designing a single language, generally making each language in the chain simpler and more constrained, which in turn makes it each one easier to validate and to process.</db:para>
+<db:para>Of course, functional lucidity only matters for the formats that authors actually write in. As we have seen, the publishing algorithm typically consists of multiple steps, and each one of those steps can create a format that is closer to the media domain than the one before it. It is perfectly possible to design a document domain structure for the sole purpose of of serving as a step in the publishing chain. Separate authoring formats are created for authors to actually write in (perhaps subject domain formats or simplified highly constrained ad-hoc document domain formats). Content is transformed from these formats to the document domain format by the presentation algorithm and then the document domain format is translated in to various different media domain languages by the formatting routine. An arrangement like this eliminates the need to compromise between different demands in designing a single language, generally making each language in the chain simpler and more constrained, which in turn makes it each one easier to validate and to process.</db:para>
 </db:section>
 <db:section>
-<db:title>Structure and annotation</db:title>
-<db:para>Broadly speaking, structured markup provides two things: structure and annotation. Structure governs the relationship of pieces. It is structure that says that a list consists of list items, that an API reference must begin with a function signature followed by a list of parameter values, that says that an ingredient listing consists of the ingredient name followed by a quantity followed by a unit of measure, or that a section must begin with a title. It is in structure that we create, impose, and express most of the constraints that are fundamental to structured writing.</db:para>
+<db:title>Constraint and annotation</db:title>
+<db:para>Broadly speaking, structured markup provides two things: constraint and annotation. Constraint governs the relationship of pieces. It is constraint that says that a list consists of list items, that an API reference must begin with a function signature followed by a list of parameter values, that an ingredient listing consists of the ingredient name followed by a quantity followed by a unit of measure, or that a section must begin with a title.</db:para>
+<db:para>Annotation adds information to the constrained structures. The name of the structure is its first and most important annotation. It is the annotation that expresses the core constraint that has been imposed. This may be supplemented by other annotations on the structure that further clarify the constraint that has been imposed, or contain other metadata, such as management domain annotation.</db:para>
+<db:para>But we can also have unconstrained annotation, or at least, annotation whose usage is very lightly constrained. In some XML-based languages, for instance, there are sets of attributes that are allowed to appear on just about any element in the entire language. (ID attributes are an obvious example.) But the main source of unconstrained annotation are those that can float in the middle of a piece of text.</db:para>
+<db:para>As we noted, we cannot capture the full rhetorical semantics of any piece of writing using simple linear or hierarchical structures. At some point we have to leave the writer free to express themselves in paragraphs of text on which we can impose no meaningful restriction. But we may still be very much interested in constraining the interpretation of many of the words and phrases used in those paragraphs.</db:para>
+<db:para>Such annotations are constrained in the sense that there is a limited set of them available for use, but they are almost always unconstrained as to where and in what order they appear in the text -- for the very good reason the their text that they annotate obeys no regular rule or pattern.</db:para>
 <db:para>Every structure has a name (though the name is implicit in some forms of markup. The name of the structure is an annotation of the constraint that the structure imposes. (Remember that we defined structured writing as both imposing a constraint and recording that the constraint has been applied.)</db:para>
 <db:para>The different structured writing domains are defined by what these annotation of structure are saying about the content they contain.</db:para>
 <db:variablelist>
@@ -192,7 +180,7 @@ italic,&lt;/b&gt;&lt;/i&gt; &lt;i&gt;and this is just italic&lt;/i&gt;.&lt;/p&gt
 <db:para>In HTML, the style attribute can be used to add media domain metadata to the document structure.</db:para>
 </db:listitem>
 </db:itemizedlist>
-<db:para>However, not all annotations are attached to structures. At a certain point in defining the structure of content we get down to what is essentially free-form narrative content -- that is, paragraphs of text. But even within a paragraph, that are pieces of text that we may want to annotate. Examples from each of the domains include:</db:para>
+<db:para>However, not all annotations are attached to structures. At a certain point in defining the structure of content we get down to what is essentially free-form narrative content -- that is, paragraphs of text. But even within a paragraph, there are pieces of text that we may want to annotate. Examples from each of the domains include:</db:para>
 <db:variablelist>
 <db:varlistentry>
 <db:term>Media Domain</db:term>
@@ -213,28 +201,8 @@ italic,&lt;/b&gt;&lt;/i&gt; &lt;i&gt;and this is just italic&lt;/i&gt;.&lt;/p&gt
 </db:variablelist>
 <db:para>Different markup systems support structure and annotation in different ways.</db:para>
 <db:section>
-<db:title>Structure and annotation in SAM</db:title>
-<db:para>In SAM (the language used for most of the examples in this book), there are a number of types of structure, but the main extensible structure is the block. Annotations are part of the definition of the language. Annotations can be added to blocks and can also float in text.</db:para>
-<db:programlisting language="SAM">
-section:(#annotations) Annotations
-    This is a paragraph containing an {annotation}(concept).
-</db:programlisting>
-<db:para>In the example above, <db:code>section</db:code> is a structure containing a title and a paragraph. The <db:code>section</db:code> structure has an annotation which is contained in parentheses immediately after the colon that defines the structure. In this case it is an ID annotation and assigns the ID “annotations” to the structure.</db:para>
-<db:para>The word “annotation” in the paragraph is annotated with a free-floating annotation. The curly braces delineated the text that is being annotated. The parentheses contain the annotation itself, which in this case is a type annotation, indicating that the word “annotation” is a reference to concept.</db:para>
-</db:section>
-<db:section>
-<db:title>Structure and annotation in XML</db:title>
-<db:para>In XML we have two principal types of markup, the element and the attribute. Elements are used to define structure and element names annotate those structures. Additional annotations take the form of attributes.  Annotations on phrases withing a body of text are also created with elements. Again, the element name provides the basic annotation and attributes can be used for additional annotations.</db:para>
-<db:para>So the SAM example above could be expressed like this in XML:</db:para>
-<db:programlisting language="XML">
-&lt;section id="annotations"&gt;
-    &lt;title&gt;Annotations&lt;/title&gt;
-    &lt;p&gt;This is a paragraph containing an &lt;concept&gt;annotation&lt;/concept&gt;. 
-</db:programlisting>
-</db:section>
-<db:section>
-<db:title>Structure in attributes</db:title>
-<db:para>Having said that in XML, elements denote structure and attributes are for additional annotations on that structure, we should note that there are exceptions. XML is a fully general markup syntax and therefore markup language designers can use it any way they like. In some case, language designers have decided to use attributes to denote structure.</db:para>
+<db:title>Secondary structures of interpretation</db:title>
+<db:para>Under normal circumstance, the structures that constrain the content also constrain its interpretation. But there are cases in which annotations are added to structures to constrain a different interpretation of the content from the one specified by the structure that contains it, and not only of individual fields, but of a structure as a whole.</db:para>
 <db:para>Consider these examples of HTML Microformats from Wikipedia<db:footnote><db:para>https://en.wikipedia.org/wiki/Microformat</db:para></db:footnote>. The first example shows an address formatted as a list.</db:para>
 <db:programlisting language="HTML">
 &lt;ul&gt;
@@ -244,7 +212,7 @@ section:(#annotations) Annotations
    &lt;li&gt;&lt;a href="http://example.com/"&gt;http://example.com/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </db:programlisting>
-<db:para>Here the phrase <db:code>The Example Company</db:code> is contained in <db:code>li</db:code> tags. This is part of a list structure delineated by <db:code>ul</db:code> tags, so the markup is largely structural in the document domain. The <db:code>li</db:code> does not really tell you anything useful about what the content itself is about. It does not tell you anything useful beyond what document structure it belongs to. It is not much use as an annotation.</db:para>
+<db:para>Here the phrase <db:code>The Example Company</db:code> is contained in <db:code>li</db:code> tags. This is part of a list structure delineated by <db:code>ul</db:code> tags, so the markup is largely structural in the document domain. The <db:code>li</db:code> does not really tell you anything useful about what the content itself is about. It does not tell you anything useful beyond what document structure it belongs to.</db:para>
 <db:para>The second example adds hCard microformat markup:</db:para>
 <db:programlisting language="HTML">
 &lt;ul class="vcard"&gt;
@@ -254,9 +222,9 @@ section:(#annotations) Annotations
    &lt;li&gt;&lt;a class="url" href="http://example.com/"&gt;http://example.com/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </db:programlisting>
-<db:para>This example adds subject domain metadata in the form of the class attributes. For example, it says that the phrase <db:code>The Example Company</db:code> is a reference to an organization (<db:code>org</db:code>). So far this is just regular annotation.</db:para>
-<db:para>However, there is not just annotation going on here. There is actually subject domain structure being expressed. Not only is the list item <db:code>The Example Company</db:code> annotated as <db:code>org</db:code>, the list that contains it is annotated as <db:code>vcard</db:code>. The meaning of <db:code>org</db:code> is actually dependent on it being part of a <db:code>vcard</db:code> structure.</db:para>
-<db:para>In other words, the annotations in the sample above are equivalent to pure subject domain markup like this:</db:para>
+<db:para>This example adds subject domain metadata in the form of the class attributes. For example, it says that the phrase <db:code>The Example Company</db:code> is a reference to an organization (<db:code>org</db:code>). This annotation is not modifying or refining the constraint expressed by the <db:code>li</db:code> tag. It is saying something else entirely.</db:para>
+<db:para>But this is not just about suggesting a different way of interpreting <db:code>The Example Company</db:code> (as an organization name, as well as as a list item).  There is actually a complex subject domain structure being expressed. Not only is the list item <db:code>The Example Company</db:code> annotated as <db:code>org</db:code>, the list that contains it is annotated as <db:code>vcard</db:code>. The constraint of interpretation provided by <db:code>org</db:code> is actually dependent on it being part of a <db:code>vcard</db:code> structure.</db:para>
+<db:para>In other words, the secondary structure created by the annotations in the sample above is equivalent to pure subject domain markup like this:</db:para>
 <db:programlisting language="SAM">
 vcard:
    fn: Joe Doe
@@ -265,7 +233,7 @@ vcard:
    url: http://example.com/
 </db:programlisting>
 <db:para>In other words again, the microformats are overlaying a second structure on the list structure. In the world of HTML, this makes sense. HTML needs to be a standardized document domain language so that browsers can display it for human reading. Humans don’t need the vCard annotations to recognize that the content is an address, but algorithms do. So the microformat adds a second, hidden, subject domain structure to the document for readers who are algorithms rather than people.</db:para>
-<db:para>We noted in <db:xref linkend="chapter.definition"/> that structured writing constrains both the creation and the interpretation of content. In the normal case we expect that the creation of the content would be just as constrained as the interpretation. After all, it is hard to rely on the interpretation of structure if the creation of the structure is not constrained. However in this case the interpretation of the data is more constrained than the creation.</db:para>
+<db:para>Structured writing constrains both the creation and the interpretation of content. In the normal case we expect that the creation of the content would be just as constrained as the interpretation. After all, it is hard to rely on the interpretation of structure if the creation of the structure is not constrained. However in this case the interpretation of the data is more constrained than the creation.</db:para>
 <db:para>Authoring our content this way would obviously be inefficient and error prone. But this is only a problem if the content is actually authored in this format. If the content is authored in a format in which its creation is constrained to the same extent as we wish the output to be constrained, it does not actually matter that the resulting output constrains interpretation more than it constrains creation. Our concern as content creators is simply to make sure that any content we produce that promises to abide by a constraint actually does so, whether the format we deliver it in actually imposes that constraint or merely annotates it.</db:para>
 <db:para>So, we can confidently produce this information using subject domain markup and then deliver it as HTML with hCard annotation markup using a presentation algorithm something like this (as with all example algorithms in this book, this is pseudocode):</db:para>
 <db:programlisting language="pseudo">
@@ -298,10 +266,21 @@ match url
 </db:programlisting>
 </db:section>
 <db:section>
-<db:title>Structure vs annotation</db:title>
-<db:para>If the distinction between structure and annotation -- between boxes and the labels on the boxes -- does not seem entirely solid to you, that is because it practice it can be quite fluid.</db:para>
-<db:para>For instance, if we start with the principle that in XML elements are for structure and attributes are for additional annotation on a structure (which we have already poked holes in above), then surely it should be clear when we should use attributes and when we should use elements. But in practice it is often not clear at all.</db:para>
-<db:para>Consider our previous example. It could be written this way, using just elements:</db:para>
+<db:title>Elements vs. attributes</db:title>
+<db:para>Another issue in the design of the mechanical structure of a markup language is that of elements vs attributes. Elements and attributes are the core markup structures of XML, and many other markup systems make the same distinctions in one way or another. The simplest way to state it is that attributes add additional annotation to an element. So, for instance, in:</db:para>
+<db:programlisting language="xml">
+&lt;author-name first="Mark" last="Baker"&gt;
+</db:programlisting>
+<db:para>the element is named <db:code>author-name</db:code> and it has two attributes named <db:code>first</db:code> and <db:code>last</db:code> that contain my first and last name respectively.</db:para>
+<db:para>Why is this marked up like this and not like this:</db:para>
+<db:programlisting language="xml">
+&lt;author-name&gt;
+    &lt;first&gt;Mark&lt;/first&gt;
+    &lt;last&gt;Baker&lt;/first&gt;
+</db:programlisting>
+<db:para>Both these constructs express the same information in a way that clearly constrains how author names are to be written and how the markup of author names is to be interpreted by algorithms.</db:para>
+<db:para>Is one of these options correct and the other incorrect? When should you use attributes and when should you use elements?</db:para>
+<db:para>Consider our vcard example. It could be written this way, using just elements:</db:para>
 <db:programlisting language="XML">
 &lt;vcard&gt;
    &lt;fn&gt;Joe Doe&lt;/fn&gt;

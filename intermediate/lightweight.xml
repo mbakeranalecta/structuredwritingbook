@@ -27,12 +27,12 @@
 <section>
 <title>Markdown</title>
 <p>The most prominent of the lightweight languages, and arguably the lightest-weight, is Markdown. Invented in 2004 by John Gruber as a way to quickly write simple web pages using syntax similar to that of an text-format email, it has spread to all kind of systems and now exists is multiple variants that have been adapted for different purposes.</p>
-<p>Adapted for different purposes mostly means that people have created version with specific additional semantics in addition to those of Gruber’s first version. For instance, the code sharing site GitHub has adopted “Git Hub flavored markdown” as the standard format for user-supplied information on the site, such as project descriptions and issues, and has added syntax specific to tracking issue numbers and code commits for projects, allowing the automatic generation of links between commits and the issues that relate to them.</p>
+<p>Adapted for different purposes mostly means that people have created version with specific additional syntax and semantics in addition to those of Gruber’s first version. For instance, the code sharing site GitHub has adopted “Git Hub flavored markdown” as the standard format for user-supplied information on the site, such as project descriptions and issues, and has added syntax specific to tracking issue numbers and code commits for projects, allowing the automatic generation of links between commits and the issues that relate to them.</p>
 <p>Markdown is a simple <phrase><annotation type="concept">document-domain</annotation></phrase> language. While it semantics are essentially a subset of HTML, it is more squarely in the document domain than HTML since it lacks any ability to specify formatting or even to create tables (though various MarkDown flavors have added support for tables).</p>
 <p>One of the recurring patterns of technology development, and certainly markup language development, is that when some simple format becomes popular because of its simplicity, people start to add “just one more thing” to it, with the result that it either becomes more complex (and thus less attractive) or more fragmented (and thus harder to build a tool chain for). Markdown is definitely going the route of fragmentation at the moment (though a standardization effort, in the form of CommonMark is also under way). There is even a project to add semantic annotation to MarkDown as part of the <phrase><annotation type="system">Lightweight DITA</annotation></phrase> project.</p>
 <p>None of this is a reason not to use MarkDown where its structures and syntax make it an appropriate source. MarkDown provides useful constraints on the basic formatting of a web page both by factoring out direct formatting features and by providing a very limited set of document domain features. These constraints help keep all contributors to a site from indulging in extravagant non-standard formatting or overly elaborate text structures.</p>
 <p>It does not provide any kind of subject domain constraints at all. This may be a welcome feature when comparing it with more complex document domain languages, many of which do include some subject domain structures which can be confusing to some writers, or which writers may abuse to achieve formatting effects.</p>
-<p>The inspiration for its syntax, text-format emails, has faded to obscurity, so it is not clear that everyone automatically knows how to write markdown, as was the original design intent, but a lot of it remain obvious and intuitive, meaning that, within it limits, MarkDown has good functional lucidity.</p>
+<p>The inspiration for its syntax, text-format emails, has faded to obscurity, so it is not clear that everyone automatically knows how to write markdown, as was the original design intent, but a lot of it remains obvious and intuitive, meaning that, within it limits, MarkDown has good functional lucidity.</p>
 </section>
 <section>
 <title>Wiki markup</title>
@@ -45,7 +45,32 @@
 </section>
 <section>
 <title>reStructuredText</title>
-<p>reSturcuteredText is a lightweight concrete markup language most often associated with the <phrase>Sphinx</phrase> documentation framework which was developed for documenting the Python programming language. We looked at reStructuredText briefly as an example of a hybrid markup language in <citation type="nameref" value="chapter.markup"/>.</p>
+<p><phrase>reSturcuteredText</phrase> is a lightweight hybrid markup language most often associated with the <phrase>Sphinx</phrase> documentation framework which was developed for documenting the Python programming language. We looked at reStructuredText briefly as an example of a hybrid markup language in <citation type="nameref" value="chapter.markup"/>.</p>
+<p>Similar to MarkDown, ReStructuredText uses a plain text formatting approach to basic text structures. This part of the markup looks very natural because it uses characters and patterns that you might easily use to format a document if the only editor you had available were a plain text editor:</p>
+<codeblock language="reStructuredText">
+Hard Boiled Eggs
+================
+A hard boiled egg is simple and nutritious. 
+Prep time, 15 minutes. Serves 6.
+
+Ingredients
+-----------
+    ======  ========
+    Item    Quantity
+    ======  ========
+    eggs    12
+    water   2qt
+    ======  ========
+    
+Preparation
+-----------
+    1. Place eggs in pan and cover with water.
+    2. Bring water to a boil.
+    3. Remove from heat and cover for 12 minutes.
+    4. Place eggs in cold water to stop cooking.
+    5. Peel and serve.
+</codeblock>
+<p>But reStructuredText also has a feature called directives which is used to create markup with more complex semantics. For this, reStructuredText takes the same approach as XML, using characters in a way that they are almost never used in a normal document. This approach simplifies parsing, because there is seldom any question about whether a particular pattern is intended to be markup of text, but it also makes it less natural to read and to write.</p>
 <codeblock language="reStructuredText">
 .. image:: images/biohazard.png
    :height: 100
@@ -53,11 +78,11 @@
    :scale: 50
    :alt: alternate text
 </codeblock>
-<!--  more? -->
+<p>reStructuredText is therefore something of a syntactic hybrid as well as being a hybrid in the sense that it has both fixed concrete parts and extensible parts.</p>
 </section>
 <section>
 <title>ASCIIDoc</title>
-<p>ASCIIDoc is a lightweight markup language based on the structure of <phrase><annotation type="language">DocBook</annotation></phrase>. It is intended for the same sort of document types for which you might choose DocBook, but allows you to use a lightweight syntax. In appearance it is very similar to MarkDown, as shon in this example from Wikipedia:</p>
+<p><phrase>ASCIIDoc</phrase> is a lightweight markup language based on the structure of <phrase><annotation type="language">DocBook</annotation></phrase>. It is intended for the same sort of document types for which you might choose DocBook, but allows you to use a lightweight syntax. In appearance it is very similar to MarkDown, as shown in this example from Wikipedia:</p>
 <codeblock language="ASCIIDoc">
 = My Article
 J. Smith
@@ -159,16 +184,15 @@ x=\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
  &lt;/semantics&gt;
 &lt;/math&gt;
 </codeblock>
-<p>Clearly MathML was not designed with the idea that anyone would ever try to write it raw. It is intended to be the output of a graphical equation editor.<citation type="idref" value="1"/></p>
+<p>Clearly MathML was not designed with the idea that anyone would ever try to write it raw. It is intended to be the output of a graphical equation editor.<citation type="idref" value="1"/> You might well choose to use a graphical equation editor to create LaTeX math markup as well, but it is certainly possible to write it and read it in raw LaTeX.</p>
 <footnote id="1">
 <p>Interestingly, MathML comes in two different flavors. Presentation MathML is a <phrase><annotation type="concept">media domain</annotation></phrase> language describing how an equation is presented. Content MathML is a <phrase><annotation type="concept">subject domain</annotation></phrase> language describing what it means.</p>
 </footnote>
-<p>You might well choose to use a graphical equation editor to create LaTeX math markup as well, but it is certainly possible to write it and read it in raw LaTeX as well.</p>
 <p>LaTeX is not as lightweight a language as <phrase><annotation type="language">Markdown</annotation></phrase>. It’s markup is almost entirely explicit (except for paragraphs, which are delineated by blank lines just in Markdown. But it is certainly lighter weight in its syntax compared to XML-based languages and has much greater <phrase>functional lucidity</phrase>. There are a number of LaTeX editors, but they tend to be the same style of side-by-side style of editors also popular for <phrase>MarkDown</phrase>. That is, the author writes in LaTeX syntax and a preview is generated continuously in a separate panel. Sufficient functional lucidity to be able to write in raw markup rather than needing a graphical editor is the hallmark of a lightweight markup language.</p>
 </section>
 <section>
 <title>Subject Domain Languages</title>
-<p>So far we have looked at languages that are primarily <phrase><annotation type="concept">document domain</annotation></phrase> oriented. The <phrase><annotation type="concept">document domain</annotation></phrase> is an obvious choice for a public language since the use of common document types like books and articles is widespread. But there are a number of public <phrase><annotation type="concept">subject domain</annotation></phrase> languages as well. One example that we have looked at before (<citation type="nameref" value="chapter.extract"/>) is JavaDoc. Here is the example we looked at there:</p>
+<p>So far we have looked at languages that are primarily <phrase><annotation type="concept">document domain</annotation></phrase> oriented. The <phrase><annotation type="concept">document domain</annotation></phrase> is an obvious choice for a public language since the use of common document types like books and articles is widespread. But there are a number of public <phrase><annotation type="concept">subject domain</annotation></phrase> languages as well. One example that we have looked at before (<citation type="nameref" value="chapter.merge"/>) is JavaDoc. Here is the example we looked at there:</p>
 <codeblock language="Java">
 /**
  * Validates a chess move.
@@ -188,13 +212,13 @@ int theToFile, int theToRank) {
 }
 </codeblock>
 <p>Not only does JavaDoc have <phrase><annotation type="concept">subject domain</annotation></phrase> tags for parameters and return values, it effectively incorporates the Java code itself (all computer programs are structured text). Thus the JavaDoc processor will pull information from the function header itself to incorporate into the output.</p>
-<p>There are a number of similar languages for documenting different programming languages, such a <phrase><annotation type="tool">Doxygen</annotation></phrase> which is used for multiple languages. Wikipedia maintains an extensive list: <phrase><annotation type="url">https://en.wikipedia.org/wiki/Comparison_of_documentation_generators</annotation></phrase>.</p>
+<p>There are a number of similar languages for documenting different programming languages, such a <phrase><annotation type="tool">Doxygen</annotation></phrase> which is used for multiple languages. Wikipedia maintains an extensive list at: <phrase><annotation type="url">https://en.wikipedia.org/wiki/Comparison_of_documentation_generators</annotation></phrase>.</p>
 <p>It is difficult to find public <phrase><annotation type="concept">subject-domain</annotation></phrase> lightweight markup languages outside the realm of programming language and API documentation. This is probably because only programmers are likely to write their own parser in order to create a markup language. Most other people are going to choose an extensible language as a base, which today usually means <phrase><annotation type="language">XML</annotation></phrase>. Part of my motivation for creating <phrase><annotation type="language">SAM</annotation></phrase> is to provide a way to create <phrase><annotation type="concept">subject domain</annotation></phrase> languages with lightweight syntax.</p>
 </section>
 <section>
 <title>SAM</title>
-<p>I’ve talked about <phrase><annotation type="language">SAM</annotation></phrase> a couple of times now, and said that many of the examples in this book are written in SAM. That is true, in the same sense that some of the examples are written in XML. But this is not the same thing as saying that an example is written in <phrase>reStructuredText</phrase>. reStructuredText is a concrete <phrase><annotation type="concept">document domain</annotation></phrase> markup language which also happens to have an extension facility. You can write a complete document in <phrase>reStructuredText</phrase> without defining any new structures.</p>
-<p>SAM, on the other hand, while it has concrete lightweight syntax features, is not a concrete markup language out of the box. The most complex SAM document you can write without defining any structures is a single paragraph or list. (A SAM document must have a single root element, so two paragraphs in a row at the root level is an error. You need a block structure such as <phrase><annotation type="code">topic</annotation></phrase> or <phrase><annotation type="code">chapter</annotation></phrase> or <phrase><annotation type="code">recipe</annotation></phrase> to contain everything and SAM does not predefine any blocks.)</p>
-<p>SAM is designed for the same purpose as XML: for defining new markup languages. I’ll get back to it in <citation type="nameref" value="chapter.extensible"/>.</p>
+<p>I’ve talked about <phrase><annotation type="language">SAM</annotation></phrase> a couple of times now, and said that many of the examples in this book are written in SAM. That is true, in the same sense that some of the examples are written in XML. But this is not the same thing as saying that an example is written in <phrase>reStructuredText</phrase>. reStructuredText is a hybrid <phrase><annotation type="concept">document domain</annotation></phrase> markup language that predefines a large range of document domain structures. You can write a complete document in <phrase>reStructuredText</phrase> without defining any new structures. In other words, you can treat reStructuredText as a purely concrete language, and that is exactly what most people</p>
+<p>SAM, on the other hand, cannot be used as a concrete language out of the box. While it has concrete lightweight syntax features, they need to be wrapped in a containing block, and SAM does not predefine any blocks. The most complex SAM document you can write without defining any blocks is a single paragraph or list. You need a block structure such as <phrase><annotation type="code">topic</annotation></phrase> or <phrase><annotation type="code">chapter</annotation></phrase> or <phrase><annotation type="code">recipe</annotation></phrase> to contain everything and SAM requires you define those structures for yourself.</p>
+<p>In this respect, SAM is much more like XML than reStructuredText. It is an extensible language that is intended to be used only when extended. It does not belong in this discussion of concrete lightwight markup languages, therefore. I’ll get back to it in <citation type="nameref" value="chapter.extensible"/>.</p>
 </section>
 </chapter>

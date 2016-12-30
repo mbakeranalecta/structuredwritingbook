@@ -326,6 +326,16 @@
         </db:blockquote>
     </xsl:template>
     
+    <xsl:template match="blockquote//section">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
+    <xsl:template match="blockquote//section/title">
+        <db:bridgehead renderas="sect4">
+            <xsl:apply-templates/>
+        </db:bridgehead>
+    </xsl:template>
+    
     <xsl:template match="blockquote/citation[@type='citation']">   
         <db:attribution>
             <xsl:value-of select="@value"/>

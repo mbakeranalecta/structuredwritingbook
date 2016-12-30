@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0">
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.active">
 <db:title>Active content</db:title>
 
 <db:para>When you publish to electronic media, you can create active content, that is, content that has behavior as well as formatting. Some examples:</db:para>
@@ -29,49 +29,63 @@
 <db:listitem><db:para>You can include graphics and other media that the user can interact with.</db:para></db:listitem>
 </db:varlistentry>
 </db:variablelist>
-<db:para>You can represent these behaviors in each of the structured writing domains.</db:para>
-<db:variablelist>
-<db:varlistentry>
-<db:term>Media Domain</db:term>
-<db:listitem><db:para>In the media domain, you encode the behavior itself. This means that JavaScript or other forms of executable code may become part of your media domain content.</db:para></db:listitem>
-</db:varlistentry>
-<db:varlistentry>
-<db:term>Document Domain</db:term>
-<db:listitem><db:para>In the document domain, you encode an abstract representation of these behaviors or of the document structures on which these behaviors act. In the document domain, the executable code that implements the behavior is factored out, but the document structures that support the behavior or depend on it are made explicit. The document domain, in other words, may call for the behavior, but it does not contain the implementation of the behavior.</db:para></db:listitem>
-</db:varlistentry>
-<db:varlistentry>
-<db:term>Subject Domain</db:term>
-<db:listitem><db:para>In the subject domain, as always, you record information about the subject matter that may be used to make a decision to implement certain behavior. The subject domain markup neither calls for nor implements the behavior. Rather, the presentation algorithm implements the behavior based on what the subject domain structures and annotations tell it about the subject matter.</db:para></db:listitem>
-</db:varlistentry>
-</db:variablelist>
-<db:para>Supporting active content in structured writing comes down to one thing: If you create static document structures, you will have static content. If you create structures that an algorithm can interpret in different ways, you have the foundation for active content.</db:para>
-<db:para>In the media domain this means shipping the algorithm itself along with its data set (thought the data set may reside somewhere else and be queried by that algorithm). Of course, all content arrives at the media domain as it is published, so this is always what you are going to deliver. You will always be creating (or borrowing) an algorithm to ship with your content, and setting up your content so that algorithm can read it. The question is whether you record the content in the media domain, integrating the algorithm as you go, or whether you write it in another domain and integrate the algorithm at publishing time based on information from that domain.</db:para>
-<db:para>In the document domain, you document structures to explicitly support certain kinds of manipulation. For example, a generic table does not support the action of allowing the reader to sort on any column. Sorting by column only makes sense if the content consists of identically structured rows. In other words, when you sort a table on a column, you are actually sorting the rows. Sorting this table by column would accomplish nothing meaningful:</db:para>
+<db:para>Active content is simply the postponement of one or more of the structured writing algorithms to the time of reading. Changing the layout of the page when you resize you browser or rotate your phone is executing the presentation algorithm in the browser. Allowing the reader to change the font size is allowing the reader to configure execute the the formatting algorithm in the browser. Pulling a live stock quote into a page that mentions a company is having the web server or the web browser executes the synthesis algorithm when the page is served/displayed.</db:para>
+<db:para>In principle, therefore, you support active content in exactly the same way you support those algorithms in any form of structured writing: by creating your content in the appropriate domain and with the appropriate structures to reliably support the algorithms you want to run. Reliability is key here, of course. If you are creating static books or web pages you may be able to get away with reviewing the results before they are published and even hand tweaking the output to fix any issues, but you can’t do that with active content. You need to be able to trust the algorithm 100%, which means you need to trust the content it is working on 100%. This makes the conformance algorithm crucial to an active content project, and, as we have seen, different domain support the conformance algorithm with varying degrees of reliability.</db:para>
+<db:para>Another factor to consider, though, is that while active content is essentially just postponing the point at which you execute various structured writing algorithms until the content is in the user’s hands, you don’t necessarily want to postpone running those algorithms on the whole page. You usually only postpone them for the parts of the page that you want to make active. For instance, if you want real-time stock quotes embedded in your business stories whenever a company is mentioned, there is no reason to postpone the synthesis, presentation, and formatting of the entire page; you only need to postpone the synthesis of the stock quote itself. And if you want that quote to continue to update in real time while the page is displayed, you certainly don’t want to be redrawing the whole page every time the price changes.</db:para>
+<db:para>The display of stock quotes depends on subject domain metadata that unambiguously identifies the company mentioned in the content. For example:</db:para>
+<db:programlisting language="sam">
+{Microsoft}(company "NASDAQ:MSFT") is a large software company.
+</db:programlisting>
+<db:para>In a normal static publishing flow, this subject domain information would be resolved into a static piece of content by the presentation algorithm:</db:para>
+<db:programlisting language="sam">
+*Microsoft* US$60.29 +0.34 (+0.57%) is a large software company.
+</db:programlisting>
+<db:para>But for active content the main presentation algorithm needs to pass through the subject-domain information to the browser so that that bit of synthesis can be executed in real time when the content is displayed.</db:para>
+<db:para>This means that only those parts of the content that you want displayed as active content need to be captured in the domain, and specific structures, required to reliably run the applicable algorithms. The rest of the content can be in a different domain. In practice, this usually means that you have subject domain structures to support the active content embedded in document domain structures. Of course, having all your content in the subject domain is also an option, in which case you would perform the presentation algorithm on the content you want to deliver statically, while passing on the subject-domain representation of the content you want to be active to the system that will perform the active content algorithms.</db:para>
+<db:para>However, this is not necessarily, or even likely, to be a straightforward pass through. The downstream system, such as the web browser, that is going to execute the active content algorithm, may expect or require the subject domain information it uses in a particular format. For instance, you might have to embed the ticker symbol in a call to a function that returns stock quotes:</db:para>
+<db:programlisting language="xml">
+&lt;p&gt;Microsoft (&lt;span onload="getStockQuote(NASDAQ:MSFT)"/&gt;) 
+is a large software company.&lt;/p&gt;
+</db:programlisting>
+<db:para>Which domain should you work in if you want to deliver active content?</db:para>
+<db:section>
+<db:title>Media Domain</db:title>
+<db:para>There is relatively little that you can do in the way of active content in the media domain. Active content involves the action of algorithms on content and the media domain represents the final or almost-final form of content, leaving little scope for algorithms to act, and little in the way of metadata for them to act on. In the media domain, there are really no constraints on the interpretation of the content, and therefore not much that an algorithm can know about content that it could use as a basis for any action. In practice, therefore, active content almost always works on content written in the document or subject domains.</db:para>
+</db:section>
+<db:section>
+<db:title>Document Domain</db:title>
+<db:para>The document domain represents the desired presentation of a piece of content. Therefore the only kinds of active content algorithms that you can execute of ordinary document domain structures are those that leave the presentation alone and only affect the formatting. For example, you can allow readers to select the font size of a web page, which is a purely formatting concern.</db:para>
+<db:para>If you want to do active content that dynamically changes the presentation of the content, or that changes the text of the content (as in our stock price example) then you need either subject domain structures or document domain structures that are explicitly designed to support active content algorithms.</db:para>
+<db:para>For example, a generic table structure does not support the action of allowing the reader to sort on any column. Sorting by column only makes sense if the content inherently sortable.</db:para>
 <db:informaltable><db:tbody>
 <db:tr>
 <db:td><db:emphasis role="bold">item</db:emphasis></db:td>
-<db:td>table</db:td>
-<db:td>stool</db:td>
-<db:td>shooting stick</db:td>
-<db:td>chair</db:td>
-</db:tr>
-<db:tr>
 <db:td><db:emphasis role="bold">legs</db:emphasis></db:td>
-<db:td>4</db:td>
-<db:td>3</db:td>
-<db:td>1</db:td>
-<db:td>4</db:td>
+<db:td><db:emphasis role="bold">price</db:emphasis></db:td>
 </db:tr>
 <db:tr>
-<db:td><db:emphasis role="bold">price</db:emphasis></db:td>
+<db:td>table</db:td>
+<db:td>4</db:td>
 <db:td>$400</db:td>
+</db:tr>
+<db:tr>
+<db:td>stool</db:td>
+<db:td>3</db:td>
 <db:td>$20</db:td>
+</db:tr>
+<db:tr>
+<db:td>shooting stick</db:td>
+<db:td>1</db:td>
 <db:td>$75</db:td>
+</db:tr>
+<db:tr>
+<db:td>chair</db:td>
+<db:td>4</db:td>
 <db:td>$60</db:td>
 </db:tr>
 </db:tbody></db:informaltable>
-<db:para>As laid out on a page, a table may group related information by row or by column. Unless you know which is which, you don’t know which sort makes sense. Still other tables provide a single value lookup based on two inputs. Sorting this kind of table makes no sense either way. The only logical sorts are on the first column and the first row, which presumable are sorted correctly to begin with.</db:para>
-<db:para>Still other tables may be lists in disguise. Imagine the consequence of sorting this table on the second column:</db:para>
+<db:para>For example, in the table above the columns are sortable. The reader could choose to sort the table on the item name, the number of legs, or the price, all of which might be useful arrangements, based on their needs.</db:para>
+<db:para>But consider what might happen if you sorted this table by on the second column:</db:para>
 <db:informaltable><db:tbody>
 <db:tr>
 <db:td>1.</db:td>
@@ -90,112 +104,32 @@
 <db:td>Activate the destruct sequence.</db:td>
 </db:tr>
 </db:tbody></db:informaltable>
-<db:para>Even with row-oriented tables, sorting on every column does not always make sense. Sorting on the name column or the size columns or the price column makes sense. Sorting on the description column or the picture column does not.</db:para>
-<db:para>To implement column sorting at the document domain level, therefore, you need some sort of sortable table structure which assures that the sorting behavior is only applied to columns or rows where it makes sense in tables where it makes sense.</db:para>
-<db:para>In the subject domain, of course, you are not creating a table at all, or at least, not a table in the publishing sense of the word. You are creating a subject-based structure to capture information which can then be used to build different document domain presentations for different purposes. The fact that some of these presentation may be static and some may be active is orthogonal to how the information is represented in the subject domain. In other words, by the time we move content to the subject domain we have factored out the behavior.</db:para>
-<db:para>This is an idea we have looked at before. When we looked at separating content from formatting(<db:xref linkend="chapter.separating"/>) we noted that in a world that includes interactive media, we also needed to think about separating content from behavior. We mentioned then that separating content from formatting means at minimum moving it to the document domain. We also saw that when it comes to differential single sourcing you often need to move your content to the subject domain in order to create different document domain presentations for different media. The same is true of separating content from behavior.</db:para>
-<db:para>In the document domain, you present a document domain structure that is capable of being acted on by an algorithm, but you factor out the algorithm itself. But in a differential single sourcing scenario, you might want a different structure for different devices. You might want a static table, perhaps laid out differently, for static paper or PDF presentation, a sortable table for presentation in desktop web browsers or tablets with sufficient room for a table, and a different kind of lookup mechanism altogether for presentation on the limited real estate of a phone. In this case, you can factor out the particular active content structure by moving the content to the subject domain.</db:para>
-<db:para>In the subject domain, this might mean using a different kind of table: a database table. The form of a database table is simple: it is a series of rows with a common structure. The values in each row are presented in cells in the same order with the same type of data in each cell. For instance, in the recipe example we have been using, the list of ingredients has this form:</db:para>
+<db:para>Thus you can’t just decide to make all the tables on a page sortable by column. Unless the document domain structure explicitly states which columns of a table are sortable and which are not, you can’t implement this kind of active content.</db:para>
+<db:para>To implement column sorting at the document domain level, therefore, you need some sort of sortable table structure which assures that the sorting behavior is only applied to columns where it makes sense in tables where it makes sense.</db:para>
+</db:section>
+<db:section>
+<db:title>Subject Domain</db:title>
+<db:para>While the document domain typically requires different markup for different algorithms, the subject domain typically does not. In the subject domain you capture the semantics of the subject matter, which are the same no matter what algorithms you are applying to the content.</db:para>
+<db:para>In the subject domain, the destruct sequence would be structured as a procedure, not a table, and therefore there would be no ambiguity about whether the step could be sorted or not.</db:para>
 <db:programlisting language="sam">
-ingredients:: ingredient, quantity, unit
-    eggs, 3, each
-    salt, 1, tsp
-    butter, .5, cup
+procedure: Self Destruct 
+    is-it-dangerous: yes
+    steps:
+        step: Don protective clothing.
+        step: Clear the area.
+        step: Block all entrances.
+        step: Activate the destruct sequence.
 </db:programlisting>
-<db:para>In SAM, the markup language used for most of the examples in this book, there is a specific markup structure for this kind of information. It is called a record set, and the markup above is an example of it.</db:para>
-<db:para>With this markup, you can construct a table this way:</db:para>
-<db:blockquote>
-<db:informaltable><db:tbody>
-<db:tr>
-<db:td>eggs</db:td>
-<db:td>3</db:td>
-<db:td>each</db:td>
-</db:tr>
-<db:tr>
-<db:td>salt</db:td>
-<db:td>1</db:td>
-<db:td>tsp</db:td>
-</db:tr>
-<db:tr>
-<db:td>butter</db:td>
-<db:td>.5</db:td>
-<db:td>cup</db:td>
-</db:tr>
-</db:tbody></db:informaltable>
-</db:blockquote>
-<db:para>Or this way:</db:para>
-<db:blockquote>
-<db:informaltable><db:tbody>
-<db:tr>
-<db:td>eggs</db:td>
-<db:td>salt</db:td>
-<db:td>butter</db:td>
-</db:tr>
-<db:tr>
-<db:td>3</db:td>
-<db:td>1</db:td>
-<db:td>.5</db:td>
-</db:tr>
-<db:tr>
-<db:td>each</db:td>
-<db:td>tsp</db:td>
-<db:td>cup</db:td>
-</db:tr>
-</db:tbody></db:informaltable>
-</db:blockquote>
-<db:para>We know, from the semantics of the record set, which rows or columns it would make sense to be sortable, and we can create a document domain sortable table accordingly.</db:para>
-<db:para>Of course, we can also construct this:</db:para>
-<db:blockquote>
-<db:itemizedlist>
-<db:listitem>
-<db:para>3 eggs</db:para>
-</db:listitem>
-<db:listitem>
-<db:para>1 tsp salt</db:para>
-</db:listitem>
-<db:listitem>
-<db:para>.5 cup butter</db:para>
-</db:listitem>
-</db:itemizedlist>
-</db:blockquote>
-<db:para>Or this:</db:para>
-<db:blockquote>
-<db:itemizedlist>
-<db:listitem>
-<db:para>eggs, 3</db:para>
-</db:listitem>
-<db:listitem>
-<db:para>salt, 1 tsp</db:para>
-</db:listitem>
-<db:listitem>
-<db:para>butter, .5 cup</db:para>
-<!--  Need better samples -\- things that are more naturally sortable. -->
-</db:listitem>
-</db:itemizedlist>
-</db:blockquote>
-<db:para>We can generate almost any kind of active content that we can think of on a piece of content as long as we know its subject domain semantics. For instance, if you annotate a stock symbol:</db:para>
+<db:para>In the subject domain, the product list would be a structured data set with known semantics (probably maintained as a separate database).</db:para>
 <db:programlisting language="sam">
-Microsoft ({NASDAQ:MSFT}(ticker)) is a large software company.
+products:: item, legs, price
+    table, 4, $400      
+    stool, 3, $20             
+    shooting stick, 1, $75
+    chair , 4, $60
 </db:programlisting>
-<db:para>Then you can look up the current stock price when the page loads and display it like this:</db:para>
-<db:blockquote>
-<db:para>Microsoft (58.02USD -0.18 (0.31%)) is a large software company.</db:para>
-</db:blockquote>
-<db:para>Alternatively, you could use the ticker symbol to annotate the company name:</db:para>
-<db:programlisting language="sam">
-{Microsoft}(company "NASDAQ:MSFT") is a large software company.
-</db:programlisting>
-<db:para>This can be output with active behavior in exactly the same way:</db:para>
-<db:blockquote>
-<db:para>Microsoft (58.02USD -0.18 (0.31%)) is a large software company.</db:para>
-</db:blockquote>
-<db:para>The subject domain markup would be translated to the document domain as part of the publishing algorithm. Here’s what that might look like:</db:para>
-<db:programlisting language="xml">
-&lt;p&gt;Microsoft (&lt;lookup type="stock-price" symbol="NASDAQ:MSFT"/&gt;) 
-is a large software company.&lt;/p&gt;
-</db:programlisting>
-<db:para>This would then be translated into the media domain as a call to a particular web service that provides stock quotes, and perhaps some JavaScript code to format the result.</db:para>
-<!--  Maybe use the War and Peace example form previous article? -->
-<db:para>As you can see, creating your content in the subject domain gives you the greatest flexibility to generate active content in ways that are appropriate to the subject matter and the device, and to do so without requiring authors to understand or even think about how the active content might work.</db:para>
-<db:para>This does not mean that active content is a free gift of the subject domain, however. Apart from the fact that you still have to design and implement the content behavior, you also have to think about the subject domain structures and annotation that you will need in your content to drive these behaviors and design them into your content structures. You will also need to make sure that you get a high degree of conformance to these structured from your writers, as it is difficult to validate the correct operation of every active content algorithm on every content set at run time. The success of your active content strategy is going to depend heavily on the quality and consistency of your input data.</db:para>
+<db:para>Knowing what the semantics are, you would know whether that data set is sortable and therefore whether it can be presented as a sortable table.</db:para>
+<db:para>Creating your content in the subject domain gives you the greatest flexibility to generate active content in ways that are appropriate to the subject matter and the device. And because the subject domain does not require any different structures to support active content, your authors don’t have to understand or even think about how the active content might work.</db:para>
+<db:para>This does not mean that active content is always going to be a free gift of the subject domain. Apart from the fact that you still have to design and implement the content behavior, you are going to have to make sure that you are capturing the subject domain semantics that are needed to drive the active content behaviors you want. Those semantics may not be different in kind from any other subject domain semantics, but you may need more of them, or to break them down in greater detail, than you might have to for other algorithms. You will also need to make sure that you get a high degree of conformance to these structured from your writers, as it is difficult to validate the correct operation of every active content algorithm on every content set at run time. The success of your active content strategy is going to depend heavily on the quality and consistency of your input data.</db:para>
+</db:section>
 </db:chapter>
