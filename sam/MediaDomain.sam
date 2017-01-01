@@ -24,7 +24,9 @@ chapter:(#chapter.media-domain) Writing in the Media Domain
 
     >>>(image ../graphics/typed-bitmap.xml)
 
-    This partitions the complexity of forming letter shapes and allows the author to type letters on the keyboard. However, those letters are still recorded as a set of dots, not as characters, so you can't go back and edit your text as text, only as dots. The computer is providing a slightly more structured way to enter the text, but is not maintaining any more structure in recording the text. (This is an important lesson: Some tools partition off less of the complexity than you might think.)
+    This partitions the complexity of forming letter shapes from writing letters and directs it to an algorithm in the paint program (which does a better and more efficient job of it than the author does). However, those letters are still recorded as a set of dots, not as characters, so you can't go back and edit your text as text, only as dots. The act of forming letter shapes has been partitioned off, but the partitioning in not maintained in how the content is recorded.  
+    
+    This failure to maintain the partitioning of complexity in how content is recorded is a problem you may encounter many times in structured writing. The ability to maintain the partitioning of complexity is one of the key features of a mature and reliable content system, and one that is often neglected in the name of using simpler tools. 
     
     To partition the complexity of forming and editing letter shapes completely, you need to move away from dots and start working in a program that records characters as characters. You could go to a text editor, but a text editor does not keep any formatting information (unless you create markup -- but that would be getting ahead of ourselves). That would not be partitioning the letter shape complexity, but dropping it. For most publishing purposes, plain text is inadequate. We need to maintain the ability to format the document.
 
@@ -35,33 +37,21 @@ chapter:(#chapter.media-domain) Writing in the Media Domain
         caption: 
             A circle as an object, displayed in a vector graphics program (Inkscape), left, vs. a circle as a set of dots in a raster graphics program (Microsoft Paint), right.
 
-    In a typical vector graphics program, a shape is rendered into dots on screen instantly as you draw or edit the shape. Nonetheless, the computer is storing data describing the shape, not a circular pattern of dots, as it would in a paint or photo editing program. This is an instance of what in structured writing is called "separating content from formatting". The mathematical abstraction of a circle is the content; the dots that represent it on screen are the formatting, or rather, the result of applying formatting to the object.
+    In a typical vector graphics program, a shape is rendered into dots on screen instantly as you draw or edit the shape. Nonetheless, the computer is storing data describing the shape, not a circular pattern of dots, as it would in a paint program. This is an instance of what in structured writing is called "separating content from formatting". The mathematical abstraction of a circle is the content; the dots that represent it on screen are the formatting, or rather, the result of applying formatting to the object.
 
-    To give you some idea of how a circle might be represented as an object, here is a sample piece of Java code for creating a circle:
-
-    ```(Java)
-        Circle circle = new Circle();
-        circle.setCenterX(100.0f);
-        circle.setCenterY(100.0f);
-        circle.setRadius(50.0f);
-    
-
-    This code creates a new circle object and specifies three values that you would need to draw a basic circle, an X and Y coordinate for the center of the circle, and the radius. When a vector graphics file is displayed or printed, a {rendering algorithm}(concept) turns those objects into a matrix of dots on the current media, using more dots for higher resolution media and fewer dots for low resolution media. 
-
-    If representing the circle as an object creates an abstraction of "circle" in the media domain, this bit of PostScript code takes that abstraction (a circle as a set of coordinates) and (in concert with the underlying graphics driver) makes it concrete again (dots on a media). 
-
-    The point here is not to understand the code, but to see that by partitioning aspects of the content into a form that algorithms can work with, we can make it easier to create and manage the content. 
+    By partitioning aspects of the content into a form that algorithms can work with, we can make it easier to create and manage the content. All the principles of structured writing are present in this basic piece of computer graphics. It illustrates that we have been using structured writing techniques for decades now. The question is not one of changing course, but of proceeding further along the course we have already been pursuing. 
 
     This is a pattern we will see as we look at structured writing across the {three domains}(concept "structured writing domains"). Rather than storing the image of the document to be printed, the computer stores an abstraction of the document which consists of raw text combined with (or, in some cases, replaced by) additional pieces of information which are commonly called metadata. This metadata can then be used to drive algorithms to convert it back into a concrete media domain representation that can be displayed to readers (and also to do a number of other useful thing that we will look at later). 
 
-    Just as a vector graphics program represents a circle as a circle object, it represents text as a text object. A text object is a rectangular area that contains characters. It has numerous {media domain} properties, such as margins, background and foreground colors, the text string, and the font face, size, and weight used to display that text, as in this example from InkScape: 
-
-    figure:(*text-object) A vector graphics text object
-        >>>(image ../graphics/text-object.png)
-        caption: 
-            A text object in a vector graphics program, with object properties shown.
-
     section: Factoring out font information
+
+        Just as a vector graphics program represents a circle as a circle object, it represents text as a text object. A text object is a rectangular area that contains characters. It has numerous {media domain} properties, such as margins, background and foreground colors, the text string, and the font face, size, and weight used to display that text, as in this example from InkScape: 
+
+        figure:(*text-object) A vector graphics text object
+            >>>(image ../graphics/text-object.png)
+            caption: 
+                A text object in a vector graphics program, with object properties shown.
+
 
         A vector graphics program displays text in a chosen font. If you change the value of the text object's font attribute, it will immediately redraw the text in the new font. The shapes of the individual letters in the font are required information for rendering the text object in the media domain. However, they are not stored as part of the text object. The representation of the text in the paint program includes the shape of the letters. In the vector graphics program it does not. That information has been factored out. 
 
@@ -76,50 +66,33 @@ chapter:(#chapter.media-domain) Writing in the Media Domain
         
         This is a pattern we will see over and over again in the partitioning of content complexity. In order to simplify the objects that we create to store our content, we take part of the information needed to do the final rendering, and move it to a separate file. By factoring out information that is constant for a given application (the shape of a capital D is the same for all capital D's for text in a given font), we simplify the format of the information we are preparing and keep the downstream presentation more consistent. 
 
-        Adding more structure to content means adding more metadata to it. But if we just kept adding metadata, it would very quickly overwhelm the content. So whenever we can we carve some metadata off into separate files and create rules for pulling it back in when it is time to publish the content. 
+        We also partition the task of drawing letters in different shapes (typefaces) from the task of drawing the rest of the shapes in the graphic.
 
-        Whether it is, "the capital D will always be this shape" or "the list of ingredients will always have the ingredient name aligned left and the quantity aligned right", filtering out these invariant rules into a separate file is a key part of structuring content.
+        Whether it is, "the capital D will always be this shape" or "the list of ingredients will always have the ingredient name aligned left and the quantity aligned right", filtering out these invariant rules into a separate file is a key part of structuring content to effect the partitioning of content creation complexity.
 
         This means that designing a content structure, regardless of the domain you choose to work in, essentially consists of identifying the places in the content where we can separate out these invariant properties into separate structures: separating variants from invariants using metadata. 
 
-    section: Using constraints to improve efficiency
+    section: Partitioning the complexity of pagination
 
-        Writing a document in a vector graphics program is certainly better than in a paint program, but it is hardly ideal for writing long documents. This is why most of us use tools that are designed specifically for writing documents.
-
-        A vector graphics program works purely in the media domain, and pretty much lets you put shapes and text boxes anywhere you like. This gives you enormous freedom, but it also makes you do a lot of extra work if what you want to create is a typical document that is basically one long text flow with some headings and graphics thrown in. 
+        Writing a document in a vector graphics program is certainly better than in a paint program, but you quickly run into a problem if you try to write a document that needs more than one page. A vector graphics program works purely in the media domain, and pretty much lets you put shapes and text boxes anywhere you like. This certainly allows you to create a new page whenever you need one, simply by creating a new drawing. But what happens when you want to edit the text and need to change how it flows from one page to the next? Pagination is a complex process, and we need a way to partition that complexity from the writing task and distribute it elsewhere, preferably to an algorithm.  
          
-        Word processors and desktop publishing programs make it easier to create documents by introducing some document domain constraints, as well as some higher-level tools for managing large text flows. A document is made up of a series of pages that have margins and contain text flows. Text flows are made up of blocks (paragraphs, headings) inside of which text can flow, even from one page to the next. Common features like tables are supported as objects than can exist in text flows. New pages are created automatically as text expands. 
+        Word processors and desktop publishing programs effectively partition the pagination process from the writing process by introducing some document domain constraints, as well as some higher-level tools for managing large text flows. A document is made up of a series of pages that have margins and contain text flows. Text flows are made up of blocks (paragraphs, headings) inside of which text can flow, even from one page to the next. Common features like tables are supported as objects than can exist in text flows. New pages are created automatically as text expands. This leaves authors free to focus on writing and leave pagination to the program.
 
         Pages, paragraphs, headings, and tables, are all {document domain}(concept) objects. Rather than working on a blank slate, as you do in a graphics program, you are now working within the {constraints}(concept) of these document domain objects.  These constraints remove or constrain decisions about positioning of elements, which makes creating documents faster and more consistent. Structured writing is about making content that obeys constraints, and these basic document domain constraints are the next step in that journey.
 
-        These constraints are not without their negative consequences. You always give up something when you impose a constraint. There are certain page layout effects that are difficult or impossible to achieve in Word or FrameMaker because you have given up some of the liberty of a vector graphics program. (You also gave up some liberty in moving from raster to vector graphics, which is why photo editing, which requires adjusting individual pixels, is done in raster rather then vector format.) 
+        Partitioning off the pagination problem is not without its drawbacks, however. There are certain page layout effects that are difficult or impossible to achieve in Word or FrameMaker because you have given up some of the liberty of a vector graphics program. We also gave up some liberty when we moved from raster to vector graphics, which is why photo editing, which requires adjusting individual pixels, is done in raster rather then vector format.
 
-        But while they make authoring easier by introducing document domain constraints into the program, both word processors and desktop publishing programs still have one foot firmly planted in the media domain. While there are some basic document domain objects being created under the surface, the author sees and interacts with the media domain representation of those objects on the screen. And the way that these programs allow writers to distinguishing one block of text from another is almost always be applying formatting styles. The document domain objects they provide are just enough to give the author something to hang media domain styles on. 
+        There is an important lesson here. We are starting to see that different partitioning of the content creation process is appropriate for different kinds of content. There is no one universal correct partitioning and distribution of content complexity that works for every type of content or every organization. This will continue to be the case as we look at more advanced forms of structured writing.        
 
-    section: Enabling the media domain
-
-        Providing the ability for the author to work in the media domain was at the heart of the desktop publishing revolution. For centuries, scribes worked directly in the media domain, using pen and ink to inscribe words and pictures on paper or velum. With the printing press, however, authors no longer worked directly in the media domain. While authors were still directly placing ink on paper, at first by pen and then by typewriter, they were no longer preparing the final visual form of the content. That would be created later by the typesetter.  
-
-        To tell the typesetter how to create the final visual form, document designers had to add additional instructions (metadata) to the author's manuscript. The designers did this using typesetter's marks, and the process was called "marking up" the document. We still use "marking up" to describe how structured writing is done today. 
-
-        figure:(*typesetter) Printer's markup
-            >>>(image ../graphics/printermarkup.png)
-
-        The writer preparing a manuscript for typesetting was working in the document domain, indicating basic document structures like paragraphs, lists, and titles, without any indication of how they should look in print. The designer then wrote a set of instructions for applying formatting to those structures -- a {formatting algorithm}(concept). Then the typesetter executed that algorithm by setting the type which the printer then used to print final output. 
-
-        This is pretty much exactly what we do today when we create an HTML page and specify a CSS stylesheet to supply the formatting instructions. Those instructions are then executed by the browser to render the content on screen or paper.
-
-        Actually, we are getting ahead of ourselves here. A better analogy to old style typesetter's marks is an HTML page with the styles specified inline. 
-
-        ```(HTML)
-            <p style="{font-family: serif; font-weight: bold; font-size: 12pt}">
+    section: Partitioning the complexity of formatting
+    
+        The intent of the desktop publishing movement was to combine the job of designer and writer into one, effectively moving the author from working in the document domain to working in the media domain, formatting content as it was written. As we noted, this was an attempt to repartition the publishing process to avoid the overhead of passing a publication from one hand to another. This was a net gain for some organizations, allowing them to spend less time and money getting content to the public. 
         
+        But the inherent inefficiencies of the model, and the problems it caused by piling all the responsibilities of writing, design, and layout on the head of the author, were apparent from the beginning. In a sense, everything that has been done in the content management, publishing, and structured writing worlds since then has been about partitioning and distributing those responsibilities away from authors without returning us to the days of multiple time-consuming hand-offs between different trades to bring a publication to market. 
 
-        You can see that this markup is very very similar to the old typesetters marks in [*typesetter].
-
-        The intent of the desktop publishing movement was to combine the job of designer and writer into one, effectively moving the author from working in the document domain to working in the media domain, formatting content as it was written. 
-
-        The inefficiency of applying formatting directly to every part of the document soon became apparent, however. Stylesheet mechanisms were devised to separate the media domain elements of a document from the document domain elements. 
+        One of the earliest attempts at such repartitioning was the introduction of stylesheets. Stylesheet mechanisms separate the media domain (formatting) elements of a document from the document domain elements such as paragraphs and tables. 
+        
+    section: The limits of partitioning in the media domain
 
         Using styles rather than direct formatting does not mean that you have moved from working in the media domain to working in the document domain. It just means that you have moved from working in an unstructured way in the media domain to working in a structured way in the media domain. 
 
@@ -130,3 +103,6 @@ chapter:(#chapter.media-domain) Writing in the Media Domain
         Word processing and desktop publishing tend to roughly straddle the boundary between the document and media domains, with authors thinking partially in document domain terms and partially in media domain terms, and the applications creating and storing structures from both domains. 
         
         While we can clearly divide the structured writing spectrum into the three domains, many actual writing tools and markup languages include structures from more than one domain. We will see this over and over again in this book. But next we will look at what it is like to work more squarely in the document domain. 
+        
+        
+ 
