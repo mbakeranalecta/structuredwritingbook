@@ -19,12 +19,9 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
             <p>Lemonade</p>
         </section>
 
-    Here the `publication` attribute on the `section` element is management domain metadata. It does not specify the formatting, organization, or subject matter of the document. It specifies which publication the content should appear in, which is a management decision.   
+    Here the `publication` attribute on the `section` element belongs to the management domain. It does not specify the formatting, organization, or subject matter of the document. It specifies which publication the content should appear in, which is a management decision.   
 
-    This idea of placing management metadata in the content itself is something that is unique to structured writing. When you manage unstructured content, the content file contains just the content.[*1] Any management {metadata}(concept) related to the content is contained in a separate file or some kind of {content management system}. But this approach limits how fine-grained your management of the content can be. You can only manage content at the file level. Because structured writing makes it possible to address, and therefore manage, individual content structures within a file, you can extend management structures and management metadata into the content itself. 
-    
-    footnote:(*1)
-        As we noted in [#chapter.three-domains], all content is structured. What matters is, what purpose is it structured for. So "unstructured" here means unstructured relative to your requirements. If you don't create or choose a format that supports the management metadata you need at the content level, you can only manage that content at the file level. 
+    Sometimes partitioning complexity involves distributing that complexity through the system. While it might seem that partitioning complexity should always involve distributing complexity away from the many and towards the few or the one that are most equipped to handle it. But we have to remember that if complexity is not going to get dropped in the transfer, all of the information needed to act on complexity has to be transferred to whoever is going to act on it. Sometimes the transfer of information to a central person or process creates more complexity that it removes, and we need to distribute the handling of complexity out to the places where it can best be handled. Thus the management domain distributed the complexity of content management decision out to individual authors and asks them to make those decision as they write. 
     
     section: Example: Including boilerplate content
 
@@ -51,9 +48,11 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
         
     section: An alternative approach in the subject domain
 
-        There is another way to handle this situation, this time using the subject domain. As we saw in [#chapter.subject-domain], factoring out invariant text is a feature of the subject domain. To understand the subject domain approach to this problem, remember what the invariant rule is here: A dangerous procedure must have a standard warning. 
+        The downside of the management domain include instruction is that it introduces system complexity into the author's world. Adding complexity to the author's task is always a problem because the author's attention is a limited resource and everything that takes away their attention from writing has a direct impact on content quality. But the use of an include instruction is not just a problem for the author, it also makes change management and content management more complicated by distributing file paths throughout the content. Is there a way to partition the system complexity from the authoring and keep the system dependency out of the content?
+        
+        As we saw in [#chapter.subject-domain], factoring out invariant text is a feature of the subject domain. Since we are dealing with invariant text here, the subject domain may provide the solution. To understand the subject domain approach to this problem, remember what the invariant rule is here: A dangerous procedure must have a standard warning. 
 
-        The management domain approach to this is to allow authors to insert the standard warning so that it is only stored once instead of being repeated in every procedure (something that is often called {content reuse}(concept)) an algorithms we will look at in [#chapter.reuse]. Notice that the management domain markup does not encapsulate our invariant rule that dangerous procedures must have a standard warning. It just provides a generic mechanism for inserting content as a reference to a file. It leaves it entirely up to the author to remember and enforce the rule about dangerous procedures.  
+        The management domain approach to this is to allow authors to insert the standard warning so that it is only stored once instead of being repeated in every procedure (something that is often called {content reuse}(concept)) an algorithms we will look at in [#chapter.reuse]. Notice that the management domain markup does not encapsulate our invariant rule that dangerous procedures must have a standard warning. It just provides a generic mechanism for inserting content as a reference to a file. The requirement has not been partitioned, we have merely provided a mechanism for implementing each case of the requirement. It leaves it entirely up to the author to remember and enforce the rule about dangerous procedures -- complexity is not being distributed away from the author.  
 
         The subject domain approach, on the other hand, is all about the invariant rule itself. Specifically, it expresses the aspect of the subject domain that triggers the rule: whether a procedure is dangerous or not:
 
@@ -66,15 +65,15 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
                 step: Press the big red button.
         
         
-        This markup simply records that this procedure is dangerous, a fact about the subject matter. This retains the information on which our invariant rule is based, but factors out the action to be taken. Rather than asking authors to remember to include the file (and how to included it, and how to find it) we delegate that responsibility to the {presentation algorithm}(concept). It is now the algorithm, not the writer, that needs to remember to include the material in `files/shared/admonitions/danger` whenever the `is-it-dangerous` field of a `procedure` structure is set to "yes". This is the sort of task that algorithms are much better at than humans. 
+        This markup simply records that this procedure is dangerous, a fact about the subject matter. This partitions the requirement by retaining the information on which our invariant rule is based, but factors out the action to be taken. Rather than asking authors to remember to include the file (and how to included it, and how to find it) we delegate that responsibility to the {presentation algorithm}(concept). It is now the algorithm, not the writer, that needs to remember to include the material in `files/shared/admonitions/danger` whenever the `is-it-dangerous` field of a `procedure` structure is set to "yes". This is the sort of task that algorithms are much better at than humans. 
 
-        Of course, the human writer does still have a job to do here. They have to remember set `is-it-dangerous` to "yes". But we can make remembering to do this much easier if we make `is-it-dangerous` a required field in the procedure structure. In other words, we set up our structured writing language in such a way that an error will occur if `is-it-dangerous` is not specified. Now the writer is forced to answer the question "yes" or "no" for every procedure they write. 
+        Of course, the human writer does still have a job to do here. They have to remember set `is-it-dangerous` to "yes". But we can make remembering to do this much easier if we make `is-it-dangerous` a required field in the procedure structure. In other words, we set up our structured writing language in such a way that an error will occur if `is-it-dangerous` is not specified for a procedure. This transfers the complexity of remembering to requirement and fulfilling it from the write and editor to the conformance algorithm. 
         
-        This approach makes the writer's job much easier because they not only get reminded of the need to address the question of danger with every procedure, they are also asked it in a way that does not require them to know anything about how the content management system works, what warning text is required, or were it is located. They are recording a fact about the subject, not giving an instruction or interpreting a style guide. 
+        This approach makes the writer's job much easier because they not only get reminded of the need to address the question of danger with every procedure, they are also asked it in a way that does not require them to know anything about how the content management system works, what warning text is required, or were it is located. They are recording a fact about the subject, not giving an instruction or interpreting a style guide. This is a much more efficient partitioning of the requirement that does a better job of distributing complexity of this important rule to the person or process best able to handle it, thus minimizing the possibility that this complexity could get dumped on the reader, for whom there might be potentially painful consequences. 
         
         One the other hand, this approach only factors out the reuse of one particular piece of content -- the warning for dangerous procedures. If you had multiple such invariant rules about different kinds of subject matter you would need separate subject domain structures for each of them, whereas a single management domain include instructions would let authors handle them all. 
         
-        On the other other hand, if you have many such invariant rules, and you expect all of them to be enforced by authors from memory, your are going to limit your pool of authors to a few highly trained individuals, and even then they are still likely to miss some instances. The cost of ensuring full compliance with all these rules without subject domain markup to enforce the constraints could be quite high. 
+        On the other other hand, if you have many such invariant rules, and you expect all of them to be enforced by authors from memory, you are dumping an awful lot of complexity on your authors and you are going to limit your pool of authors to a few highly trained individuals. Even then they are still likely to miss some instances, dumping this dangerous complexity on the reader again. 
 
     section: Hybrid approaches
     
@@ -104,7 +103,7 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
         This information could be presented as data similar to its source format or it could be used to algorithmically construct a sentence like this:
         
         """
-            The CX-5 seats 5 and the CX-7 seats 7.
+            The CX-5 seats 5 and the CX-9 seats 7.
         
         That is not something that the product attribute supports:
         
@@ -116,7 +115,7 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
         
         This markup is only designed to produce a CX-5 or CX-9 specific document. It is not designed to support the production of a document that covers both cars at once because it does not specify that the values 5 and 7 are numbers of seats. That information is in the text, but not in a form that a publishing algorithm could reliably locate and act on.  
         
-        Also, creating a single document covering both cars is not the expectation that goes with creating the markup. It is not what the author is told the markup means. The markup is not a simple declaration of facts about each car. It is conditional text markup, and therefore an instruction. 
+        Also, creating a single document covering both cars is not the expectation that goes with creating the markup. It is not what the author is told the markup means. The markup is not a simple declaration of facts about each car, it id markup of a document intended to produce a document about one car or the other, not both. It is conditional text markup, and therefore an instruction. 
         
         Really, is it a contraction of the more explicitly imperative form (not actually used in DITA):
         
@@ -137,19 +136,3 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
         
         You can minimize these problems by storing the content once and inserting it wherever it is needed. This approach is not without its own downsides, however, which we will look at in [#chapter.reuse].
         
-    section: The management domain and content management
-    
-        So far I have talked about the management domain as in intrusion into structured writing. But it is worth looking at where that intrusion comes from. Management domain structures in structured writing are in intrusion from the {content management} process. 
-        
-        So far in this book I have talked about structured writing as a way to make content better. In other words, I have talked about it having a fundamentally rhetorical purpose: it is there to improve the text. And since we now live in a world of dynamic content delivery options, it is there to help us build better rhetorical structures that might be difficult to build and manage by hand. 
-        
-        The world of content management, on the other hand, exists mainly to manage the vast collection of content that many organizations own today, and the process by which it is created. Content management is a significant business problem quite apart from the rhetorical properties of the content. Many organizations adopt structured writing not for any rhetorical purpose, but as an enabler of content management processes. 
-        
-        Many content management processes involve finding, identifying, combining and publishing content from diverse sources. These processes often require that content meets certain constraints, which means that structured writing -- the application of constraints to writing -- is a useful content management tool. 
-        
-        Tools and processes that are designed primarily to tackle the content management problem, rather than the rhetorical problem, almost invariably use document domain structures with a significant injection of the management domain, though in these cases is might be more accurate to say that the document domain structures are being used as an extension of the management domain. 
-        
-        The focus of this book is the use of structured writing as a tool for rhetoric -- for making content better. As such, it will talk a lot more about the subject domain than would a text focused on content management. Nonetheless, as shown briefly here, the subject domain can have powerful content management features as well. I will look more at this in later chapters. 
-
-
-
