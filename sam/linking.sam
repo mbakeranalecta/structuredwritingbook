@@ -1,24 +1,31 @@
 chapter:(#chapter.linking) Linking
 
+    <<<(annotations.sam)
+
     index:: type, term
         concept, linking
         concept, linking algorithm
+        
+    A large part of the complexity of content is that readers do not read in a straight line. Numerous studies[*1] have shown that readers often read opportunistically, looking for one piece of information or the answer to a particular question. Their behavior can best be described as information foraging. They are sniffing for the scent of the information they want and will follow its trail as long as the scent gets stronger and the trail is easy to follow. They use search to start their quest for information and will follow links as long as they feel the information scent is increasing. No two readers take the same path though your content. They want to forge their own path based on their particular interest of the moment.
     
-    Few readers read content straight though. Unless the content is perfectly matched to their experience and their goals, there will be points where they need more information, points where they need less, or points where they decide that they need something else altogether. These are defection points in the content, points in which the reader's "next" may not be the thing that comes next in the linear order of the work. That may mean deflecting to other content or to a different way of finding information such as asking a friend or posting a question on a forum. 
+    footnote:(*1)
+        For a discussion of these studies and their implications for how we write, see my book {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}(citetitle).
     
-    Deflections are a natural part of information seeking. They are part of what is called {information foraging}(concept). The reader, in pursuit of their individual ends, will follow where the scent of information leads and that will not always be the next paragraph of the current text.
+    The path the reader takes is always based on relationships between the subject matter of one piece of content and another. Suppose a reader is reading a recipe and comes across the instruction "sweat the onions" but does not know how to do that. They are then going to start looking for information on how to sweat onions because they can't usefully continue with the recipe without knowing how to do this. This is a deflection point in your content, a point as which the reader may need to deflect from the current content to some other content. 
     
-    Writers know they can't meet everyone's needs perfectly every time so they use links and other devices to help readers deflect when they need to. If you have Model A, do this. If you have Model B do that. Supporting deflection helps readers achieve their goals and helps keep the reader in the writer's own content, or content they approve of, rather than deflecting elsewhere. The Web and other electronic media have made the cost of deflecting much lower, meaning the readers deflect much more readily, and writers need to pay far more attention to deflection in the design of their content. 
+    But the deflection point is not an arbitrary one. It is based on the relationship between the task of making the dish described in the recipe and a cooking technique used in that task. We can fully anticipate that such deflection points will occur in our content, and that some of our readers will wish to deflect at those points. The need to make such deflections is part of the complexity of information seeking. The point of information delivery is to make information seeking simpler. If we don't make adequate provision for our readers to deflect when they need to, we are dumping complexity on the reader. If we force them to use search again or to go to a table of contents or an index when we could easily provide a direct link, we are dumping complexity on the reader.  
     
     Deflection points can be handled in various ways. The writer may choose to do nothing, leaving it up to the reader to look up a word if they don't understand it, for instance. They may use footnotes, cross references, sidebars, parenthetical material, or hypertext links to provide deflection choices. They may use tables or flowcharts to allow readers to choose different paths through content. They may even attempt to anticipate and forestall deflection by using information about the individual reader to dynamically reorder the content to suit the reader's needs. 
-    
-    Deflection costs the reader more on paper than online. For paper, we may design content to minimize the need to deflect, or to keep deflections inside the local work. For the Web, we may organize content with deflection in mind, allowing different readers to choose their own course, rather than trying to optimize one course for all readers. This difference in the ease of deflection between paper and the Web and other hypertext media is one of the main reasons we want to practice {differential single sourcing}(concept).
     
     Deflection also enters into the discussion of {content reuse}(concept). We reuse content in multiple documents so that readers don't have to deflect from one document to another to find it. 
     
     If we reuse content in different media, we might want to have a different deflection strategies between paper and hypertext outputs. We may want to include the same chunk of content in multiple paper documents but link to a single copy of it when creating a hypertext. (Linking, in other words, is a kind of reuse: reuse by reference rather than copying.)
     
-    Thus we should not be thinking solely in terms of  managing links in our content. We should be thinking about implementing the right deflection strategy in each of our outputs. To see how that works, we need to look at deflection and linking in each of the {structured writing domains}(concept).
+    Thus we should not be thinking solely in terms of  managing links in our content. We should be thinking about implementing the right deflection strategy in each of our outputs. 
+    
+    The problem is that implementing these strategies, particular a comprehensive linking strategy, is itself very complex. Thus many organizations do not link their content adequately and do not provide adequate alternative deflection strategies either. Just they dump the complexity of the reader finding the next piece of information they need right back on the reader.
+    
+    However, there are ways to partition the complexity of linking and other types of deflection support. Different approaches work in each of the {structured writing domains}, but some domains offer much more effective partitioning than others.
       
     section: Deflection in the media domain
     
@@ -130,20 +137,18 @@ chapter:(#chapter.linking) Linking
         A relationship table takes this one step further. When you create a link using a relationship table, you factor the link out of the source document and place it in a separate table. The relationship table says resource A links to resource B, but neither resource A nor resource B knows anything about it. (Think of it like being introduced to a stranger by a third party because you share a common interest. I collect china ducklings. You make china ducklings. We don't know each other, but our mutual friend Dave introduces us. You and I are the source and destination resource; Dave is the relationship table. 
         
         >>>(image ../graphics/linktable.png)
-        
-        Notice that Dave has three choices about how he does the introduction. He can tell me about you as a seller of ducklings, or you about me as a buyer of ducklings, or he can introduce us both to each other. In the same way a relationship table can describe a link A to B, B to A, or both ways.
-         
+                
         Once the links are factored out of a piece of content, you can reuse it anywhere you like. If there is a suitable resource available to link to, you enter it in a relationship table for that build and have the presentation algorithm create the link at build time. If no suitable resource is available for a different publication, no entry is made in the relationship table for that publication, and the presentation algorithm does not create a link. 
         
-    section: The problem with link tables
+    section: The problem with relationship tables
         
-        The problem with link tables is that while they address the problem of link management in reused content and allow you to link to different targets in different publications, they separate the link from the deflection point it supports. The link that was created to server the deflection point in the content has been factored out of the content into a separate file. The deflection point itself has not been marked up, so there is no way to but the link back where it belongs. Links generate by relationship tables end up in a block, usually at the end of the page. 
+        The problem with link tables is that while they address the problem of link management in reused content and allow you to link to different targets in different publications, they separate the link from the deflection point it supports. The link that was created to serve the deflection point in the content has been factored out of the content into a separate file. The deflection point itself has not been marked up, so there is no way to put the link back where it belongs. Links generate by relationship tables end up in a block, usually at the end of the page. 
         
-        The fundamental problem here is that links exist as a way to service deflection points in content. If we lose sight of this and think only in terms of managing links, it makes sense to pull links out of the content and manage them separately. But this is to ignore the reason the links exist in the first place, which is to provide the reader with options at a deflection point. It is a classic case of a focus on content management in structured writing leading to a neglect of content quality, and thus damaging content quality in the name of process efficiency. 
+        The fundamental problem here is that links exist as a way to service deflection points in content. If we lose sight of this and think only in terms of managing links, it makes sense to pull links out of the content and manage them separately. But this is to ignore the reason the links exist in the first place -- which is to provide the reader with options at a deflection point. It is a classic case of a focus on one part of the partition problem without adequate regard for the complexity that is being redirected. By moving the link away from the deflection point, we simplify link management, but in doing so we lose a level of support for the reader's need to deflect, thus dumping the complexity of navigating from the deflection point to suitable content onto the reader, damaging content quality in the name of process efficiency. 
         
         Since the end of a page is a deflection point in a hypertext system, there is a legitimate case for creating and managing page-level links. But if the page is well designed to fulfill a discrete purpose for the reader, the end of the page is actually the point at which the writer knows least about what the reader might want to read next. The relationship table approach is fine as a ways to manage deflection points that occur at the end of a page (or at the beginning). But they are not the way to support the full array of foreseeable reader deflection points which occur in the body of the page. 
         
-        The other problem with the relationship table approach is that it is time consuming. You have to rewrite the links for each content set, and because the deflection points are not recorded in the content source, you have to figure out the appropriate links each time. This goes against the spirit of recording something once and using it many times. A mechanism intended to help you reuse content ends up forcing you to redo the work of linking for each publication you create. 
+        The other problem with the relationship table approach is that it is time consuming. You have to rewrite the links for each content set, and because the deflection points are not recorded in the content source, you have to figure out the appropriate links each time. This goes against the spirit of recording something once and using it many times. A mechanism intended to help you reuse content ends up forcing you to redo the work of linking for each publication you create. In other words, this mechanism does not partition the complexity of link management very well. 
         
     section: Conditional linking
         
@@ -167,11 +172,11 @@ chapter:(#chapter.linking) Linking
         
     section: Deflection in the subject domain
     
-        There are a number of problems with the management domain approach to links. 
+        The inescapable fact is that the management domain approach does not do a great job or partitioning the complexity of links, and of deflection point handling in general. 
         
-        * Like all management domain structures, they are artificial. They don't correspond to things in the author's everyday world, which makes them harder to learn and use. 
+        * Like all management domain structures, they are artificial. They don't correspond to things in the author's everyday world, which makes them harder to learn and use. The introduce complexity into the author's world, which is sufficient to make most authors severely limit the links they create. 
         
-        * You can't link to a key or an ID that does not exist. This means that as you are developing a set of content, the first pages you write have very few other pages to link to. Authors cannot enter links to content that has not been written yet.  
+        * You can't link to a key or an ID that does not exist. This means that as you are developing a set of content, the first pages you write have very few other pages to link to. Authors cannot enter links to content that has not been written yet. This introduces the complexity of system dependencies into the author's world. 
         
         * In reuse scenarios, the use of IDs and keys does not solve the whole problem because it cannot guarantee that the resource that an ID or key refers to will be present in the final publication. You can use relationship tables to address this problem, but they create additional complexity for authors and don't correctly handle deflection points in the middle of the content.
         
@@ -242,10 +247,12 @@ chapter:(#chapter.linking) Linking
         * There is no issue with wanting to link to content that has not been written yet. The subject annotation refers to the subject matter, not a resource. Links to content that is written later will appear once that content becomes available to link to. 
         
         * It is much easier for authors to write because they do not have to find content to link to or manage complex link tables or keys. They just create subject annotations when the text mentions a significant subject. This requires no knowledge of the publishing or content management system. It does not even require knowledge of any other resources in the content set. It only requires knowledge of the subject matter, which the author already has.    
-
+        
     section: Finding resources to link to
         
-        Of course, the question remains, what resources do we link to, since they are not specified in the text? If we choose to translate subject annotations into links, we need a way to find resource to link to.  We do this by looking up resources based on the subject information (type and value) captured by the subject annotation. For this we need content that is indexed using those types and values (or their semantic equivalents). So naturally this means that we need to index our content. If you have a page on John Wayne, you can index it like this:
+        The {subject domain} approach represents a radically different partitioning of the complexity of linking and deflection point handling. Most notable, it partitions and redirects the responsibility for finding content to link to away from the author. All partitioning introduces some new form or complexity to replace the one that has been partitioned out. In this case, it is the complexity of doing the subject domain annotations of the text. But this is a particularly effective piece of complexity both because that annotation only requires knowledge the writer already has, but also because that same annotation is useful for so many other algorithms as well. This is one of the best features of the subject domain -- its structures tend to serve multiple algorithms rather than just one, which is, in itself, a highly effective piece of partitioning of complexity. 
+
+        But since we have partitioned off the responsibility of finding resources to link to, we also have to look at how the people and processes in that partition go about locating appropriate resources.  They do this by looking up resources based on the subject information (type and value) captured by the subject annotation. For this we need content that is indexed using those types and values (or their semantic equivalents). So naturally this means that we need to index our content. If you have a page on John Wayne, you can index it like this:
         
         ```(sam)
             topic: 
@@ -316,7 +323,8 @@ chapter:(#chapter.linking) Linking
         
         ```(DITA)
             <p>In Rio Bravo, 
-            <xref href="https://en.wikipedia.org/wiki/John_Wayne">The Duke</xref>
+            <xref href="https://en.wikipedia.org/wiki/John_Wayne"
+            >The Duke</xref>
             plays an ex-Union colonel out for revenge.</p>        
         
         
@@ -326,7 +334,8 @@ chapter:(#chapter.linking) Linking
             <p>For more information, see:</p>
             
             <ul>
-                <li><a href="https://en.wikipedia.org/wiki/John_Wayne">The Duke</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/John_Wayne"
+                >The Duke</a></li>
                 ...
             </ul>
         
@@ -366,7 +375,7 @@ chapter:(#chapter.linking) Linking
         
     section: Different domain, different algorithm
     
-        What the linking algorithm illustrates perhaps better than any other is that the movement from one domain to another changes the structured writing algorithms in fundamental ways. While the algorithm has the same end in each domain, the way it achieves that end can be significantly different. 
+        What the linking algorithm illustrates perhaps better than any other is that the movement from one domain to another represents are significantly different partitioning of of content complexity, which means that it changes the structured writing algorithms in fundamental ways. While the algorithm has the same end in each domain, the way it achieves that end can be significantly different. 
         
         One of the points I have tried to make about structured writing algorithms is that they always start with the content structures. How you design the content structures -- the way the author records the content -- determines everything you can do with the content. You create content structures to support algorithms. You create algorithms to improve content quality or streamline content management and publishing. You then choose the content structures that support the algorithm you want to implement.
         
@@ -376,7 +385,7 @@ chapter:(#chapter.linking) Linking
         
         System designers do still have to think about what algorithms they want to apply, but that is to make sure that the aspects of the subject matter needed to drive the algorithms are captured. Since every subject structure can potentially drive many publishing algorithms, however, you will often find your subject domain content already supports any new algorithms you want to apply. This helps future proof your content.
                 
-        Moving from the document domain to the subject domain is not a matter of asking what the subject domain equivalent of a document domain structure is, therefore, but a matter of asking what information in the subject domain drives the creation of document domain structures. Subject domain content can look very different from its document domain counterpart and will often be starkly simpler and easier to understand.  
+        Moving from the document domain to the subject domain is not a matter of asking what the subject domain equivalent of a document domain structure is, therefore, but a matter of asking what information in the subject domain drives the creation of document domain structures. Subject domain content can look very different from its document domain counterpart and will often be starkly simpler and easier to understand. This represents a better partitioning of complexity. But as noted before, all complexity has to go somewhere, and the use of the subject domain tends the transfer more of the complexity to the information architect or content engineer.
        
         
         
