@@ -7,9 +7,11 @@ chapter:(#chapter.publishing) Publishing
 
     All structured writing must eventually be published. Publishing structured content mean transforming it from the domain in which it was created ({subject domain}(concept), {document domain}(concept), or the abstract end of the {media domain}(concept)) to the most concrete end of the media domain spectrum: dots on paper or screen.
     
-    In almost all structured writing tools, this process is done in multiple steps. Using multiple steps makes it easier to write and maintain code and to reuse code for multiple purposes. 
+    Publishing is a complex process, particularly in an environment where you may be practicing single sourcing, content reuse, or many of the other structured writing algorithms we have yet to look at. The best way to handle that complexity is to partition and distribute it to appropriate people and processes.  
     
-    In this chapter, I am going to describe the publishing process as consisting of four basic algorithms which I have mentioned in passing in earlier chapter: the synthesis, presentation, formatting, and encoding algorithms. These four stages are formalized in the {SPFE architecture}(tool), which I will talk about later, but I think they are a fair representation of what goes on in most publishing tool chains, even if those tool chains don't divide responsibilities exactly as I describe them here, or make such clear separation between them as I do here.
+    In this chapter, I am going to describe a partitioning of the publishing process into four basic algorithms which I have mentioned in passing in earlier chapters: the synthesis, presentation, formatting, and encoding algorithms. These four stages are formalized in the {SPFE architecture}(tool), which I will talk about later, but I think they are a fair representation of what goes on in most publishing tool chains, even if those tool chains don't divide responsibilities exactly as I describe them here, or make such clear separation between them as I do here.
+    
+    We have noted that the successful partitioning of a process depends on the ability to communicate everything that is needed for a partition to do its job, and that one hallmark of a successful partitioning is how clear and functional the required communication is. In partitioning of the publication process that I will describe here, each step deal with a different concern and each step produces an output, in the form of a structured document or set of documents, that is structured in terms of the concern it deal with. This then becomes the input to the next step. The structures that these steps produce and consume are stages along the path from the subject to document to media domains. In other words, the publication process is structured to move content through the domains, just as we described in [#chapter.3domains].
     
     section: The Rendering Algorithm
     
@@ -78,7 +80,7 @@ chapter:(#chapter.publishing) Publishing
 
     section: The Presentation Algorithm
 
-        The job of the presentation algorithm is to determine exactly how the content is going to be organized as a document. A pure document domain document is a representation of the presentation of the content. The job of the presentation algorithm produces a pure document domain version of the content. This may mean producing the entire presentation from purely subject-domain content, or simply handling the occasional subject-domain structure in a largely document domain file.   
+        The job of the presentation algorithm is to determine exactly how the content is going to be organized as a document. A pure document domain document is a representation of the presentation of the content. The job of the {presentation algorithm} id to produce a pure {document domain} version of the content. This may mean producing the entire presentation from purely {subject domain} content, or simply handling the occasional subject domain structure in a largely document domain file.   
         
         >>>(image ../graphics/presentation.png)
         
@@ -102,27 +104,16 @@ chapter:(#chapter.publishing) Publishing
         
     section: Presentation sub-algorithms
        
-        The presentation algorithm may usefully broken down into several  sub-algorithms, each dealing with a different aspect of the presentation process. How you subdivide your publishing algorithm is something you need to decide based on your particular business needs, but the following are some operations that it may well pay to treat as separate algorithms.
+        Many other structured writing algorithm, are executed as part of the presentation algorithm. Among them:
                
         section: The linking algorithm
        
             How content is linked or cross-referenced is a key part of how it is organized in different media, and a key part of differential single sourcing. We will look at the {linking algorithm}(algorithm) in detail in [#chapter.linking].
        
-        section: The navigation algorithm
+        section: The information architecture algorithm
        
-            Part of the presentation of a document or document set is creating the table of contents, index, and other navigation aids. Creating these is part of the presentation process. Because these algorithms create new resources by extracting information from the rest of the content, it is often easier to run these algorithm in serial after the main presentation algorithm has run. This also makes it easier to change the way a TOC or index is generated without affecting your other algorithms.
+            Part of the presentation of a document or document set is creating the table of contents, index, and other navigation aids. Creating these is part of the presentation process. Because these algorithms create new resources by extracting information from the rest of the content, it is often easier to run these algorithm in serial after the main presentation algorithm has run. This also makes it easier to change the way a TOC or index is generated without affecting your other algorithms. For more on the information architecture algorithm, see [#chapter.architecture].
        
-        section: The public metadata algorithm
-       
-            Many formats today contain embedded metadata designed to be use by downstream processes to find or manage published content. One of the most prominent of these is {HTML microformats}(language) which is used to identify content to other services on the web, including search engines. This is a case of subject domain information being included in the output. Just as subject domain metadata allows algorithms to process content in intelligent ways as part of the publishing process, subject domain metadata embedded in the published content allows downstream algorithms (such as search engines) to use the published content in more intelligent ways.
-            
-            If content is written in document domain structures, public metadata is generally created by writers as annotations on document domain structures. But if content is created in the subject domain, the public metadata is usually based on the existing subject domain structures. In this case the public metadata algorithm may translate subject domain structures in the source to document domain structures with subject domain annotations in the output.
-            
-            This does not necessarily mean that the public metadata you produce is a direct copy of subject domain metadata you use internally. Internally, subject domain structures and metadata are generally based on your internal terminology and structures that meet your internal needs. Public terminology and categories may differ from the ones that are optimal for your internal use. But because this is subject domain metadata, and thus rooted in the real world, there should be a semantic equivalence between your private metadata and the public metadata (the public usually being more generic and less precise than the private). The job of the public metadata algorithm, therefore, is not merely to insert the metadata but sometimes to translate it to the appropriate public categories and terminology.  
-            
-        section: The document structure normalization algorithm
-            In many cases, content written in the subject domain will also include many document domain structures. If those document domain structures match the structures in the document domain formats you are creating, all the presentation algorithm needs to do is to copy them to the document domain. In some cases, however, the document domain structures in the input content will not match those required in the output, in which case you will need to translate them to the desired output structures. 
-            
            
     section: The Synthesis Algorithm
    
@@ -146,7 +137,7 @@ chapter:(#chapter.publishing) Publishing
         
     section: Synthesis sub-algorithms
         
-        The synthesis algorithm can involve a number of sub-algorithms, depending on the kind of content you have and its original source.
+        A number of structured writing algorithms are executed at the synthesis stage. In order to keep things well partitioned, it is often advisable to execute each one as a separate sub step in the synthesis stage.
 
        
         section: The inclusion algorithm
