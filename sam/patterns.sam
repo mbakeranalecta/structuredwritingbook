@@ -1,6 +1,9 @@
 chapter:(#chapter.patterns) Patterns
 
     <<<(annotations.sam)
+    
+    index::type, term
+        concept, patterns
 
     We noted that lightweight markup languages like {Markdown} rely on patterns in the text rather than explicit markup characters to delineate basic structures like paragraphs and lists. XML, on the other hand, makes a strict distinction between what is markup and what is text. Markup is always recognized explicitly by markup sequences that cannot occur as normal text in any part of the document. (If you want to enter those sequences as text, you either have to escape the markup characters with character entities or use CDATA marked sections.)
     
@@ -33,16 +36,17 @@ chapter:(#chapter.patterns) Patterns
     It also means that if the author wants to enter the date in another format, we can annotate it with the {ISO 8601} format to make the meaning clear to algorithms. 
     
     ```(sam)
-        {December 7, 1941}(date "1941-12-07") is a day that will live in infamy. 
+        {December 7, 1941}(date "1941-12-07") is a day 
+        that will live in infamy. 
     
     Of course, a sufficiently clever algorithm could recognize ` December 7, 1941` as a date as well, because that too is a fully predictable pattern. One of the defining features of patterns is that you can recognize the semantic equivalence between two patterns that express the same information. You can increase the {functional lucidity} of your markup by recognizing a wider variety of semantically equivalent patterns in content without having to impose uniform syntax on authors.
     
-    XML recognizes the value of patterns. The XML data types standard define a number of common patterns, and {XSD} schemas allow you to define patterns for use in your own markup. It calls these patterns "simple types" (as opposed to "complex types", which are composed of multiple nested elements). Thus you can specify in {XSD} that a date field is of the simple type `xs:date`. The `xs:date` data type is a pattern that is based on {ISO 8601}, so you can do following in XML (as long as the schema define the type of the `date` element as `xs:date`):
+    XML recognizes the value of patterns. The XML data types standard define a number of common patterns, and {XSD} schemas allow you to define patterns for use in your own markup. It calls these patterns "simple types" (as opposed to "complex types", which are composed of multiple nested elements). Thus you can specify in {XSD} that a date field is of the simple type `xs:date`. The `xs:date` data type is a pattern that is based on {ISO 8601}, so you can do following in XML (as long as the schema defines the type of the `date` element as `xs:date`):
     
     ```(xml)
         <date>1941-12-07</date> is a day that will live in infamy. 
     
-    It is important to understand what this does. If the type of element `date` in your XML tagging language is defined as `xs:date` then an XSD {schema validator}(tool) will validate `1941-12-07` as a valid date but will reject `<date>last Thursday</date> as invalid. It will not break the date down into its separate year, month, and day components. If you need that, you will have to get your algorithm to do that for itself. But your algorithm can do that reliably if you know for certain that you are dealing with date in {ISO 8601} format. Most programming languages will have library functions that know how to manipulate {ISO 8601} dates, so you probably don't have to do any work yourself to get the year, month, and day components of a date. 
+    It is important to understand what this does. If the type of element `date` in your XML tagging language is defined as `xs:date` then an XSD {schema validator}(tool) will validate `1941-12-07` as a valid date but will reject `<date>last Thursday</date>` as invalid. It will not break the date down into its separate year, month, and day components. If you need that, you will have to get your algorithm to do that for itself. But your algorithm can do that reliably if you know for certain that you are dealing with date in {ISO 8601} format. Most programming languages will have library functions that know how to manipulate {ISO 8601} dates, so you probably don't have to do any work yourself to get the year, month, and day components of a date. 
         
     For other patterns, most programming languages have a library called "regular expressions" which you can use to rip a pattern apart and get at the pieces. (XSD actually lets you define new patterns by specifying a regular expression for the pattern you want to match.) {Regular expressions}(tool) will let your algorithms decode any sufficiently well defined and contextualized pattern in your content, removing the need to ask authors to explicitly break down many types of information into separate fields. 
     
@@ -76,7 +80,7 @@ chapter:(#chapter.patterns) Patterns
         butter 2tbsp
         pork chops 4
 
-    Here is the result of applying the regular expression above to those values:
+    Here is the result of applying the regular expression above to those values[#rx101]:
     
     ```(text)
         Match 1
@@ -107,10 +111,10 @@ chapter:(#chapter.patterns) Patterns
         Group `ingredient`	41-52	`pork chops `
         Group `quantity`	52-53	`4`
         
-    footnote:
+    footnote:(#rx101)
         This output was generated using the regular expression builder and tester found at Regular Expression 101 (https://regex101.com/). The site is an excellent place to explore what you can do with regular expressions.  
         
-    As you can see, the regular expression has broken each ingredient down into ingredient, quantity, and unit fields, just like our explicit markup did. The conventional way of writing ingredients, in other words, is just as structured as or formal way. It just takes a line of code to pull them out of the string. 
+    As you can see, the regular expression has broken each ingredient down into ingredient, quantity, and unit fields, just like our explicit markup did. The conventional way of writing ingredients, in other words, is just as structured as our formal way. It just takes a line of code to pull them out of the string. Once again we are partitioning and transferring a bit of complexity from the author to the information architect or content engineer.
     
     Essentially, any expression that we commonly use in text which follows a well defined pattern is already structured text, and we don't need to structured it again to treat it as structured. All we need to do is to use structure to place it into context so that we can recognize it reliably. For example, our regular expression for breaking down the components of an ingredient listing will only work when applied to text that we know for sure is supposed to be an ingredient listing. Thus we use normal structured text structures to delineate the ingredients list and each list item. This provides the necessary context to use of ingredient list pattern to pull out the ingredient, quantity, and unit fields that we want without forcing the author to make them explicit in the text. 
     
@@ -122,7 +126,7 @@ chapter:(#chapter.patterns) Patterns
         <xsd:element name="ingredient">
             <xsd:simpleType>
                 <xsd:restriction base="xsd:string">
-                    <xsd:pattern value="(.+?)(\d+)(qt|tsp|tbsp)?"></xsd:pattern>
+                    <xsd:pattern value="(.+?)(\d+)(qt|tsp|tbsp)?"/>
                 </xsd:restriction>
             </xsd:simpleType>
         </xsd:element>  

@@ -2,11 +2,9 @@ chapter:(#chapter.markup) Markup
 
     <<<(annotations.sam)
 
-    Through much of this book I have talked about markup without really explaining it. Markup is the way much, though not all, structured writing is done. 
+    If structures in structured writing consist of nested blocks, markup is the main way that those blocks are created in the text.  
     
-    Markup has long been part of how we partitioned and distributed content creation tasks. 
-       
-    For centuries, scribes worked directly in the media domain, using pen and ink to inscribe words and pictures on paper or velum. With the printing press, however, can a fundamental partitioning of the publishing process. Authors no longer worked directly in the media domain. While authors were still directly placing ink on paper, at first by pen and then by typewriter, they were no longer preparing the final visual form of the content. That task has been partitioned off and directed to the typesetter.  
+    Markup has long been part of how we partitioned and distributed content creation tasks. For centuries, scribes worked directly in the media domain, using pen and ink to inscribe words and pictures on paper or velum. With the printing press, however, can a fundamental partitioning of the publishing process. Authors no longer worked directly in the media domain. While authors were still directly placing ink on paper, at first by pen and then by typewriter, they were no longer preparing the final visual form of the content. That task has been partitioned off and directed to the typesetter.  
 
     To tell the typesetter how to create the final visual form, document designers had to add additional instructions (metadata) to the author's manuscript. The designers did this using typesetter's marks, and the process was called "marking up" the document. We still use "marking up" to describe how structured writing is done today. 
 
@@ -57,11 +55,12 @@ chapter:(#chapter.markup) Markup
 
         ```(HTML)
             <h1>Moby Dick</h1>
-            <p>Herman Melville's <i>Moby Dick</i> is a long book about a big whale.</p>      
+            <p>Herman Melville's <i>Moby Dick</i> is a long 
+            book about a big whale.</p>      
         
-        HTML uses open angle brackets `<` to indicate the start of markup and closing angle brackets `>` to indicate the end of markup and a return to regular text. Actually the recognition of markup in HTML is a little more complicated than that, but that is more detail than we need to get into here. What matters is that there are certain sequences in the text which trigger a processing program (generally called a "parser") to recognize when markup starts and when it ends.
+        HTML uses open angle brackets `<` to indicate the start of markup and closing angle brackets `>` to indicate the end of markup and a return to regular text. (Actually the recognition of markup in HTML is a little more complicated than that, but that is more detail than we need to get into here.) What matters is that there are certain sequences in the text which trigger a processing program (generally called a "parser") to recognize when markup starts and when it ends.
         
-        What if you want to enter these "markup start" characters into the text of your document? You can't just type them in because the parser will think they are markup. To fix this, markup languages either define "escape" characters, that signal the parser to treat the following character as content, or they include markup for inserting individual characters in a way that won't be confused with markup characters. HTML takes the second approach. To include a `<` character in HTML, you use another type of markup called a "character entity." A character entity is a code for a character. It begins with `&` (another markup start character), followed by a character code and ending with a semicolon. The character entity for `<` in HTML and XML is `&lt;`. ("lt" is short for "less than", the name of the `<` character.) 
+        What if you want to enter these "markup start" characters into the text of your document? You can't just type them in because the parser will think they are markup. To fix this, markup languages either define "escape" characters, that signal the parser to treat the following character as text, or they include markup for inserting individual characters in a way that won't be confused with markup characters. HTML takes the second approach. To include a `<` character in HTML, you use another type of markup called a "character entity." A character entity is a code for a character. It begins with `&` (another markup start character), followed by a character code and ending with a semicolon. The character entity for `<` in HTML and XML is `&lt;`. ("lt" is short for "less than", the name of the `<` character.) 
               
         ```(html)
             <p>In HTML, tags start with the &lt; character.</p>
@@ -90,7 +89,7 @@ chapter:(#chapter.markup) Markup
         This will display as:
         
         """
-            The character entity for an ampersand is &amp;.
+            The character entity for an ampersand is &amp;amp;.
             
         Other markup languages do not make such an explicit distinction between text and markup. For example, in Markdown a numbered list is created by putting numbers in front of list items:
         
@@ -158,7 +157,7 @@ chapter:(#chapter.markup) Markup
             
         None of these abstract structures describes document structures in any of the structured writing domains. Instead, specific markup languages based on XML (or its cousin, SGML) indicate {subject}, {document}, {management}, or {media domain} structures as named instances of elements and attributes. 
         
-        Here is the {Moby Dick} passage again, this time in {XML} (and more specifically, in {Docbook}):
+        Here is the {Moby Dick} passage again, this time in {XML} (more specifically, in {Docbook}):
         
         ```(DocBook)
             <section>
@@ -231,9 +230,9 @@ chapter:(#chapter.markup) Markup
                        
     section: The ability to extend
     
-        The downside of concrete languages is that their concrete syntax defines a fixed set of structures. If you want other structures, there is no way to create them short of inventing your own concrete language, or a variant on an existing one, and coding the parser and all the other tools to interpret that language. And designing new concrete languages is non-trivial because you need to make sure that any combination of characters that the writer may type is interpreted in an unambiguous way. Many versions of Markdown, including the original, contain ambiguities about how certain sequences of characters should be interpreted, which obviously detracts from its reliability and functional lucidity. 
+        The downside of concrete languages is that their concrete syntax defines a fixed set of structures. If you want other structures, there is no way to create them short of inventing your own concrete language, or a variant of an existing one, and coding the parser and all the other tools to interpret that language. Designing new concrete languages is non-trivial because you need to make sure that any combination of characters that the writer may type is interpreted in an unambiguous way. Many versions of Markdown, including the original, contain ambiguities about how certain sequences of characters should be interpreted, which obviously detracts from its reliability and functional lucidity. 
         
-        If you want to define your own structures to express the constraints that matter to your business, you need an easier way to do it. Abstract languages like XML make this much easier. You just write a {schema}(tool) describing the structures you want, and any algorithms you need to process those structures. 
+        If you want to define your own structures to express the constraints that matter to your business, you need an easier way to do it. Abstract languages like XML make this much easier. You just write a {schema}(tool) describing the structures you want, and any algorithms you need to process those structures. (I'll talk about schemas in [#chapter.constraints].)
         
         
     section: The ability to constrain
@@ -248,13 +247,13 @@ chapter:(#chapter.markup) Markup
                
     section: Showing and hiding structure
     
-        The whole point of structured writing it to create content that meets constraints and that records the constraints it meets so that it can be reliably validated, audited, and processed. For this to happen, authors need to see the structures they are creating as formatted structures on screen. In the {media domain}(concept) a WYSIWYG interface shows you the media domain structures you are creating by visually rendering them on screen. But what about in the other domains? The document domain creates abstract document structures that are deliberately separated from their formatting. The subject domain creates subject-based structures that don't have a one-to-one relationship with any organization or formatting of a document. The management domain creates structures that have nothing to do with the representation of content at all. How does the author get to see these structures when writing in these domains?
+        The whole point of structured writing it to create content that meets constraints and that records the constraints it meets so that it can be reliably validated, audited, and processed. For this to happen, authors need to see the structures they are creating. In the {media domain}(concept) a WYSIWYG interface shows you the media domain structures you are creating by visually rendering them on screen. But what about in the other domains? The document domain creates abstract document structures that are deliberately separated from their formatting. The subject domain creates subject-based structures that don't have a one-to-one relationship with any organization or formatting of a document. The management domain creates structures that have nothing to do with the representation of content at all. How does the author get to see these structures when writing in these domains?
         
-        This is a big problem with {XML}, the only abstract language in widespread use today. XML tends to hide structure. As an abstract language, an XML document is a hierarchy of elements and attributes -- not the concrete {subject}, {document}, {management}, or {media domain} structures the author is supposed to be create. Those concrete structures are present in the markup because their names are there, but they are not visually distinguished the way the basic document structures are in a concrete language like Markdown. And XML syntax is verbose, meaning that there is a lot of clutter in the raw text of an XML document, which makes it hard to discern both the structure and the content (and also very laborious to write).
+        This is a big problem with {XML}, the only abstract language in widespread use today. XML tends to hide structure. As an abstract language, an XML document is a hierarchy of elements and attributes -- not the concrete {subject}, {document}, {management}, or {media domain} structures the author is supposed to be create. Those concrete structures are present in the markup because their names are there, but they are not visually distinguished the way the basic document structures are in a concrete language like Markdown. And XML syntax is verbose, meaning that there is a lot of clutter in the raw text of an XML document, which makes it hard to discern both the structure and the content (and also very laborious to write). XML's verbose syntax and strict hierarchy were designed to make it easy to parse and to help guard against transmission errors. It was not designed to be a format to write in. Thus is does a poor job of partitioning parsing issues from authoring issues. 
         
         To remove that clutter, many authors use XML editors that provide a graphical view of the content similar to that of a word processor. But while XML editors removes visual clutter, they also hide the structure. Even if the author is supposed to be working in the document domain or the subject domain, the editor is now displaying content in the media domain. This greatly reduces the functional lucidity of the {document domain} or {subject domain} language and encourages backsliding into the {media domain}. 
         
-        And then there are the problems that arise when you try to edit the WYSIWYG view of an XML document. Underneath is a hierarchical XML structure, but all you can see is the flat media-domain view of the graphical editor. Editing or cutting and pasting structures you can't see can be an exercise in futility. You can learn to do it, but it is frustrating and it takes time, and even when you learn, the process is still more complicated than it should be. 
+        And then there are the problems that arise when you try to edit the WYSIWYG view of an XML document. Underneath is a hierarchical XML structure, but all you can see is the flat media-domain view of the graphical editor. Editing or cutting and pasting structures you can't see can be an exercise in futility. You can learn to do it, but it is frustrating and it takes time, and even when you learn, the process is still more complicated than it should be. This is a case of unmanaged complexity being dumped on the author.
         
         Concrete markup languages like Markdown, on the other hand, show you the structure you are creating and are simple to edit. 
         
@@ -287,7 +286,8 @@ chapter:(#chapter.markup) Markup
         ```(sam)
             section: Moby Dick
             
-                Herman Melville's {Moby Dick}(novel) is a long book about a big whale.
+                Herman Melville's {Moby Dick}(novel) is a long 
+                book about a big whale.
 
         
         In SAM, as in Markdown and most other concrete markup languages, a paragraph is just a block of text set off by whitespace. Thus there is no explicit  structure named `p` or `para`.
@@ -306,7 +306,8 @@ chapter:(#chapter.markup) Markup
             section: 
                 title: Moby Dick
             
-                Herman Melville's {Moby Dick}(novel) is a long book about a big whale.
+                Herman Melville's {Moby Dick}(novel) is a long 
+                book about a big whale.
 
         
         Unlike {RestructuredText}, however, {SAM} does not have an extensive set of predefined blocks. It has just a few, which correspond the the basic text structures for which it provides shortcuts or concrete syntax. And SAM is designed to have a constraint mechanism, allowing you to write a schema to define what blocks and annotation are allowed in s SAM document. This includes constraining the use of the concrete syntax as well. SAM thus represents a different type of hybrid from {RestructuredText} which is not extensible but not constrainable. 
