@@ -108,7 +108,49 @@ chapter:(#chapter.metadata) Metadata
         We should also note that the two approaches are not mutually exclusive. The subject metadata used in both cases is essentially the same, since it describes the same subject. There is no reason, therefore, why you cannot take {subject domain} content, with its integrated metadata, and extract the metadata to an external metadata store. This way you can use the same query interface to find the content without giving up the validation and auditing capability of subject domain content or the finer-grained application of metadata that the subject domain enables. This approach can significantly improve the quality of the metadata in the system because all the subject domain guidance and constraints have been applied to the content before it is stored. Thus, as long as the content itself is correct, there cannot be a mismatch between what the metadata promises and what the content delivers.
         
         There are ease-of-use advantages to his approach as well. Since the CMS metadata is extracted from the content metadata, the writer does not have to enter the metadata separately from the content after is is written. If your take such an approach, however, it is vital to be very clear about which is the canonical source of the metadata. The subject-domain content is the canonical source and the only one that should ever be edited. The exported metadata in the CMS is a cache of the content metadata created for the sake of optimizing searches. Of course, if your CMS was based on an {XML database}(tool), you would not need to cache the metadata in relational tables; you could query it directly. 
-               
+        
+        
+        
+        
+        The final step is to think about whether there is any management domain metadata that you need to add to the model. Usually this will be for management or tracking purposes, and may not be part of any current content examples you are looking at. This should be the last step because once you have formalized the rest of the model you may find that that data is usable for management and tracking purposes as well, so you won't need to add additional fields just for management purposes. For instance, lots of the {subject domain} information that is already formalized in the model can be used for managing which recipes you include in particular publications, such as quick and easy meals (less than 20 minutes prep time, fewer than 6 ingredients, fewer than 5 steps) or a low-cal vegetarian cookbook (fewer than 160 calories, no meat ingredient).
+
+    
+        ```(sam)
+            recipe: Hard Boiled Egg
+                author: bcrocker
+                rights: full
+                season: winter, spring, summer, fall
+                introduction:
+                    A hard boiled {egg}(food) is simple and nutritious.
+                ingredients:: ingredient, quantity, unit
+                    eggs, 12, each
+                    water, 2, qt
+                preparation:
+                    1. Place eggs in (pan){utensil} and cover with water.
+                    2. Bring water to a boil.
+                    3. Remove from heat and cover for 12 minutes.
+                    4. Place eggs in cold water to stop cooking.
+                    5. Peel and serve.
+                prep-time: 15 minutes
+                serves: 6
+                wine-match: champagne and orange juice
+                beverage-match: orange juice
+                nutrition:
+                    serving: 1 large (50 g)
+                    calories: 78
+                    total-fat: 5 g
+                    saturated-fat: 0.7 g
+                    polyunsaturated-fat: 0.7 g    
+                    monounsaturated-fat: 2 g    
+                    cholesterol: 186.5 mg    
+                    sodium: 62 mg    
+                    potassium: 63 mg    
+                    total-carbohydrate: 0.6 g    
+                    dietary-fiber: 0 g    
+                    sugar: 0.6 g    
+                    protein: 6 g    
+
+            
     section: Ontology
         Finally it is worth saying a word about ontology. Ontology (in the information processing sense) is an attempt to create a formal mapping of the relationships between entities in the real world such that algorithms can draw inferences and reach conclusions about them.  
         
