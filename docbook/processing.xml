@@ -3,7 +3,7 @@
 <db:title>Processing Structured Text</db:title>
 
 
-<db:para>As I have said from the beginning, structured writing involves the use of algorithms to assist in writing better content. Now it is time to take a look at what basic structured writing algorithms look like and how they are expressed. There are two parts to every structured writing algorithm: the analysis and imposition of structure, an the processing of that structure.  Since the most basic of structured writing algorithms is separating content form formatting, the exploration of the algorithms is not complete until we look at how you reunite the separated pieces to produce output. Understanding the basics of these algorithms is important to understanding structured writing even if you don’t intend to code the algorithms yourself. So now let’s look at the algorithm for putting formatting and content back together.</db:para>
+<db:para>In the last chapter we looked at separating content from formatting. But of course they cannot stay separated. Content must be formatted before it is presented to the reader. So lets look at the algorithm for putting them back together again. Understanding the basics of these algorithms is important to understanding structured writing even if you don’t intend to code the algorithms yourself. Understanding how things can be put back together is a big part of understanding how to separate them. Indeed, it is only be describing how you would put them back together that you know for certain that you did not lose anything when you did the separation.</db:para>
 <db:section>
 <db:title>Two into one: reversing the factoring out of invariants</db:title>
 <db:para>Moving content from the media domain to the document domain or the subject domain involves progressively factoring out invariants in the content. Each step in this process creates two artifacts, the structured content and the invariant piece that was factored out.</db:para>
@@ -74,8 +74,6 @@ match bullet-paragraph
     apply style {font: 12pt "Century Schoolbook"}
     output "[em dash][tab]"
 </db:programlisting>
-<db:para>The way I have written these rules is an example of what is called pseudocode. It is a way for human being to sketch out an algorithm to make sure that they understand what they are trying to do before they write actual code. There is no formal grammar or syntax to pseudocode. It is intended for humans, not computers, and you can use whatever approach you like as long as it is clear to your intended audience. But pseudocode should clearly lay out a set of logical steps for accomplishing something. It should make clear exactly how the pieces go together.</db:para>
-<db:para>Writing algorithms in pseudocode is a great way to make sure that we understand the algorithms we are creating without worrying about the details of code -- or even learning how to code. They are also a great way to communicate to actual coders about what we need a program to do.</db:para>
 <db:para>The result of applying these rules is just the same as before:</db:para>
 <db:programlisting>
 {font: 12pt "Century Schoolbook"}The box contains:
@@ -83,11 +81,13 @@ match bullet-paragraph
 {font: 12pt "Century Schoolbook"}[em dash][tab]Eggs
 {font: 12pt "Century Schoolbook"}[em dash][tab]Gold
 </db:programlisting>
+<db:para>The way I have written these rules is an example of what is called pseudocode. It is a way for human being to sketch out an algorithm to make sure that they understand what they are trying to do before they write actual code. There is no formal grammar or syntax to pseudocode. It is intended for humans, not computers, and you can use whatever approach you like as long as it is clear to your intended audience. But pseudocode should clearly lay out a set of logical steps for accomplishing something. It should make clear exactly how the pieces go together.</db:para>
+<db:para>Writing algorithms in pseudocode is a great way to make sure that we understand the algorithms we are creating without worrying about the details of code -- or even learning how to code. They are also a great way to communicate to actual coders about what we need a program to do.</db:para>
 </db:section>
 <db:section>
 <db:title>The order of the rules does not matter</db:title>
-<db:para>You may have noticed that what these rules are doing is pretty much exactly what style sheets do in an application like Word or FrameMaker. In fact, it is exactly what a style sheet does. If you understand style sheets, you understand a good deal of how structured writing algorithms work.</db:para>
-<db:para>One important thing to notice is that when you create a style sheet in Word or FrameMaker, you don’t specify the order in which styles will be applied to the document. The same is true when you create a CSS stylesheet for the Web. The style sheet is just a flat list of rules. The order in which the rules are applied to the document depends entirely on the order in which the various structures occur in the document.</db:para>
+<db:para>You may have noticed that what these rules are doing is pretty much exactly what style sheets do in an application like Word or FrameMaker. In fact, it is exactly what a style sheet does. If you understand stylesheets, you understand a good deal of how structured writing algorithms work.</db:para>
+<db:para>One important thing to notice is that when you create a stylesheet in Word or FrameMaker, you don’t specify the order in which styles will be applied to the document. The same is true when you create a CSS stylesheet for the Web. The stylesheet is just a flat list of rules. The order in which the rules are applied to the document depends entirely on the order in which the various structures occur in the document.</db:para>
 <db:para>This may seem very obvious, but it is key to understanding how structured text is usually processed. It is a subject that is sometimes quite confusing to people who have been trained to write procedural computer programs, which is why I am making a point of calling it out.</db:para>
 <db:para>Things get a tiny bit more complex when we move into processing the nested structures of the document domain and subject domain, but the basic pattern of a set of unordered rules to describe a transformation algorithm still applies.</db:para>
 </db:section>
@@ -97,7 +97,7 @@ match bullet-paragraph
 <db:programlisting language="sam">
 title: Moby Dick
 </db:programlisting>
-<db:para>We want to transform this document into HTML (which kind of sits on the boundary between the media domain and the document domain). When our rule matches a structure in the source document, it outputs the equivalent HTML structure. Here is the pseudocode for this rule (it is in a slightly different format from the pseudocode above):</db:para>
+<db:para>We want to transform this document into HTML. When our rule matches a structure in the source document, it outputs the equivalent HTML structure. Here is the pseudocode for this rule (it is in a slightly different format from the pseudocode above):</db:para>
 <db:programlisting language="pseudo">
 match title
     create h1 
@@ -149,7 +149,7 @@ match figure/title
 <db:para>Now here is the clever bit. You don’t have to change the <db:code>movie</db:code> rule to work with any of these versions of the <db:code>title</db:code> rule. Suppose our title is the title of a section, like this:</db:para>
 <db:programlisting language="sam">
 section:
-    title: Review of {Rio Bravo}(movie)&lt;/title&gt;
+    title: Review of {Rio Bravo}(movie)
 </db:programlisting>
 <db:para>When we process this with our rules, the <db:code>section/title</db:code> rule will be executed to deal with the title structure, and the <db:code>movie</db:code> rule will be executed when the <db:code>movie</db:code> structure occurs in the course of processing the content of the <db:code>title</db:code> structure, with the following result:</db:para>
 <db:programlisting language="html">
@@ -170,7 +170,7 @@ section:
 <db:para>If you want a different rule for a structure occurring in different contexts, write a separate rule for each context.</db:para>
 </db:listitem>
 </db:itemizedlist>
-<db:para>Why is it important for you to understand this? Because when you are going through the process of abstracting out invariants to move content to the document domain or subject domain, it is really useful to understand how those invariants will be factored back in. In fact, understanding how this works can help you recognize invariants in your source and give you the confidence to factor them out. Writing down the pseudocode for processing the structure you are creating can help you validate that you have factored things out correctly and that the structures you are creating will be easy to process and that the processing rules will be clear, consistent, and reliable.</db:para>
+<db:para>Why is it important for you to understand this? Because when you are going through the process of abstracting out invariants to move content to the document domain or subject domain, it is really useful to understand how those invariants will be factored back in. In fact, understanding how this works can help you recognize invariants in your source and give you the confidence to factor them out. Writing down the pseudocode for processing the structures you are creating can help you validate that you have factored things out correctly and that the structures you are creating will be easy to process and that the processing rules will be clear, consistent, and reliable.</db:para>
 <db:para>Obviously there is more involved in a complete processing system, and we are not going to get into the gritty details here, but let’s look at few a cases that come up frequently.</db:para>
 </db:section>
 <db:section>
@@ -224,7 +224,7 @@ match ordered-list/list-item
 </db:programlisting>
 <db:para>Every time the <db:code>ordered-list/list-item</db:code> rule is fired, the count will increase by one, resulting in the list items being numbered sequentially.</db:para>
 <db:para>If a new numbered list in encountered, the <db:code>ordered-list</db:code> rule will be fired, resetting the count to 1.</db:para>
-<db:para>This rule will not match <db:code>list-item</db:code> elements that are children of an <db:code>unordered-list</db:code> element, so we need a separate set of rules of unordered lists. Because <db:code>unordered-list</db:code> is just a container and does not produce any formatted output, its rule has nothing to do:</db:para>
+<db:para>This rule will not match <db:code>list-item</db:code> elements that are children of an <db:code>unordered-list</db:code> element, so we need a separate set of rules of unordered lists:</db:para>
 <db:programlisting>
 match unordered-list
     continue
@@ -234,7 +234,7 @@ match ordered-list/list-item
     output "[em dash][tab]"
     continue
 </db:programlisting>
-<db:para>Applying these rules will produce output like this:</db:para>
+<db:para>Applying the combined set of rules will produce output like this:</db:para>
 <db:programlisting>
 {font: 10pt "Century Schoolbook"}To wash hair:
 {font: 10pt "Century Schoolbook"}1.[tab]Lather

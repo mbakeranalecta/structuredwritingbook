@@ -13,8 +13,18 @@
 <p>Roles</p>
 <p><phrase><annotation type="role">information architect</annotation></phrase></p>
 </annotations>
+<index>
+<row>
+<term>concept</term>
+<type>active content</type>
+</row>
+</index>
 <p>When you publish to electronic media, you can create active content, that is, content that has behavior as well as formatting. Some examples:</p>
 <ll>
+<li>
+<label>Personalized content</label>
+<p>You can select and arrange content for individual readers based on the things you know about them. For instance, if you are logged into Amazon it customizes elements of every page based on your previous purchases, your wishlist, and things you previously browsed.</p>
+</li>
 <li>
 <label>Dynamic arrangement</label>
 <p>Part of the presentation algorithm is arranging content on the page or screen, but with online media you can allow the reader to arrange the content. For instance, you can publish tables that readers can sort for themselves.</p>
@@ -40,8 +50,8 @@
 <p>You can include graphics and other media that the user can interact with.</p>
 </li>
 </ll>
-<p>Active content is simply the postponement of one or more of the structured writing algorithms to the time of reading. Changing the layout of the page when you resize you browser or rotate your phone is executing the <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase> in the browser. Allowing the reader to change the font size is allowing the reader to configure execute the the <phrase><annotation type="algorithm">formatting algorithm</annotation></phrase> in the browser. Pulling a live stock quote into a page that mentions a company is having the web server or the web browser executes the <phrase><annotation type="algorithm">synthesis algorithm</annotation></phrase> when the page is served/displayed.</p>
-<p>In principle, therefore, you support active content in exactly the same way you support those algorithms in any form of structured writing: by creating your content in the appropriate domain and with the appropriate structures to reliably support the algorithms you want to run. Reliability is key here, of course. If you are creating static books or web pages you may be able to get away with reviewing the results before they are published and even hand tweaking the output to fix any issues, but you can’t do that with active content. You need to be able to trust the algorithm 100%, which means you need to trust the content it is working on 100%. This makes the <phrase><annotation type="algorithm">conformance algorithm</annotation></phrase> crucial to an active content project, and, as we have seen, different domain support the <phrase><annotation type="algorithm">conformance algorithm</annotation></phrase> with varying degrees of reliability.</p>
+<p>Active content is simply the postponement of one or more of the structured writing algorithms to the time of reading. Personalized content is executing hte synthesis algorithm on the server when you request a page, using personal details as query terms to select content for the individual. Changing the layout of the page when you resize you browser or rotate your phone is executing the <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase> in the browser. Allowing the reader to change the font size is allowing the reader to configure execute the the <phrase><annotation type="algorithm">formatting algorithm</annotation></phrase> in the browser. Pulling a live stock quote into a page that mentions a company is having the web server or the web browser executes the <phrase><annotation type="algorithm">synthesis algorithm</annotation></phrase> when the page is served/displayed.</p>
+<p>In principle, therefore, you support active content in exactly the same way you support those algorithms in any form of structured writing: by creating your content in the appropriate domain and with the appropriate structures to reliably support the algorithms you want to run. Reliability is key here, of course. If you are creating static books or web pages you may be able to get away with reviewing the results before they are published and even hand tweaking the output to fix any issues, but you can’t do that with active content. You need to be able to trust the algorithm 100%, which means you need to trust the content it is working on 100%. This makes the <phrase><annotation type="algorithm">conformance algorithm</annotation></phrase> crucial to an active content project, and, as we have seen, different domains support the <phrase><annotation type="algorithm">conformance algorithm</annotation></phrase> with varying degrees of reliability.</p>
 <p>Another factor to consider, though, is that while active content is essentially just postponing the point at which you execute various structured writing algorithms until the content is in the user’s hands, you don’t necessarily want to postpone running those algorithms on the whole page. You usually only postpone them for the parts of the page that you want to make active. For instance, if you want real-time stock quotes embedded in your business stories whenever a company is mentioned, there is no reason to postpone the synthesis, presentation, and formatting of the entire page; you only need to postpone the synthesis of the stock quote itself. And if you want that quote to continue to update in real time while the page is displayed, you certainly don’t want to be redrawing the whole page every time the price changes.</p>
 <p>The display of stock quotes depends on <phrase><annotation type="concept">subject domain</annotation></phrase> metadata that unambiguously identifies the company mentioned in the content. For example:</p>
 <codeblock language="sam">
@@ -96,7 +106,7 @@ is a large software company.&lt;/p&gt;
 </row>
 </grid>
 <p>For example, in the table above the columns are sortable. The reader could choose to sort the table on the item name, the number of legs, or the price, all of which might be useful arrangements, based on their needs.</p>
-<p>But consider what might happen if you sorted this table by on the second column:</p>
+<p>But consider what might happen if you sorted this table on the second column:</p>
 <grid>
 <row>
 <cell>1.</cell>
@@ -117,11 +127,7 @@ is a large software company.&lt;/p&gt;
 </grid>
 <p>Thus you can’t just decide to make all the tables on a page sortable by column. Unless the document domain structure explicitly states which columns of a table are sortable and which are not, you can’t implement this kind of active content.</p>
 <p>To implement column sorting at the <phrase><annotation type="concept">document domain</annotation></phrase> level, therefore, you need some sort of sortable table structure which assures that the sorting behavior is only applied to columns where it makes sense in tables where it makes sense.</p>
-</section>
-<section>
-<title>Subject Domain</title>
-<p>While the document domain typically requires different markup for different algorithms, the subject domain typically does not. In the subject domain you capture the semantics of the subject matter, which are the same no matter what algorithms you are applying to the content.</p>
-<p>In the subject domain, the destruct sequence would be structured as a procedure, not a table, and therefore there would be no ambiguity about whether the step could be sorted or not.</p>
+<p>In a more sophisticated application of the <phrase><annotation type="concept">document domain</annotation></phrase>, the destruct sequence would be structured as a procedure, not a table, and therefore there would be no ambiguity about whether the step could be sorted or not.</p>
 <codeblock language="sam">
 procedure: Self Destruct 
     is-it-dangerous: yes
@@ -131,6 +137,11 @@ procedure: Self Destruct
         step: Block all entrances.
         step: Activate the destruct sequence.
 </codeblock>
+<p>However, which this markup removes ambiguity about whether the step can be sorted, it answers it in the negative. There is nothing here to support any kind of active content.</p>
+</section>
+<section>
+<title>Subject Domain</title>
+<p>While the document domain typically requires different markup for different algorithms, the subject domain typically does not. In the subject domain you capture the semantics of the subject matter, which are the same no matter what algorithms you are applying to the content.</p>
 <p>In the subject domain, the product list would be a structured data set with known semantics (probably maintained as a separate database).</p>
 <codeblock language="sam">
 products:: item, legs, price
@@ -142,5 +153,6 @@ products:: item, legs, price
 <p>Knowing what the semantics are, you would know whether that data set is sortable and therefore whether it can be presented as a sortable table.</p>
 <p>Creating your content in the subject domain gives you the greatest flexibility to generate active content in ways that are appropriate to the subject matter and the device. And because the subject domain does not require any different structures to support active content, your authors don’t have to understand or even think about how the active content might work.</p>
 <p>This does not mean that active content is always going to be a free gift of the subject domain. Apart from the fact that you still have to design and implement the content behavior, you are going to have to make sure that you are capturing the subject domain semantics that are needed to drive the active content behaviors you want. Those semantics may not be different in kind from any other subject domain semantics, but you may need more of them, or to break them down in greater detail, than you might have to for other algorithms. You will also need to make sure that you get a high degree of <phrase><annotation type="algorithm">conformance</annotation></phrase> to these structured from your writers, as it is difficult to validate the correct operation of every active content algorithm on every content set at run time. The success of your active content strategy is going to depend heavily on the quality and consistency of your input data.</p>
+<!--  More? -->
 </section>
 </chapter>

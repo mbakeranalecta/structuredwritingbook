@@ -3,9 +3,9 @@
 <db:title>Constraint Languages</db:title>
 
 
-<db:para>Structured writing is about applying constraints to content and recording the constraints that the content follows, both to constrain what writers write and to constrain how algorithms interpret the content. This requires some way to express constraints in a formal and machine readable way. The way you do this is with a schema language. Schema languages are, quite simply, languages for expressing constraints.</db:para>
+<db:para>Structured writing is about applying constraints to content and recording the constraints that the content follows, both to constrain what writers write and to constrain how algorithms interpret the content. This requires some way to express constraints in a formal and machine readable way. Schema languages partition this problem and redirect it to a common validation algorithm expressed by a standard piece of software that everyone can use. Schema languages are, quite simply, languages for expressing constraints.</db:para>
 <db:para>For a concrete markup languages like MarkDown, the content constraints are established in the code of the MarkDown processor. They are validated when the processor parses the MarkDown file. (In practice, though, MarkDown does no meaningful validation. Anything it does not recognize as markup, it simply outputs as text.)</db:para>
-<db:para>For abstract markup languages like XML you define structures yourself (or use an existing definition). Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a “validator”.</db:para>
+<db:para>For abstract markup languages like XML you define structures yourself (or use an existing definition, such as DocBook). Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a “validator”.</db:para>
 <db:para>A schema language is a structured language for defining structured languages. The schema for a markup languages says what structures are allowed and in what order and relationship. A given document either conforms to those constraints or it does not.</db:para>
 <db:para>Here is an example of a schema in a schema language called RelaxNG, which is one of several schema languages available for defining XML-based markup languages:<db:footnote><db:para>https://en.wikipedia.org/wiki/RELAX_NG#XML_syntax</db:para></db:footnote></db:para>
 <db:programlisting language="RNG">
@@ -42,11 +42,13 @@
 <db:para>There are several different schema languages for XML each of which is capable of expressing and enforcing different sets of constraints. It is not unusual to combine different schema languages to more completely constrain a markup language. In particular, it is not uncommon to use a schema language called Schematron in concert with other schema languages like RNG or XSD. While most schema languages work by modeling the structure of a document, as in the RNG example above, Schematron works by making assertions about the structure in a language called XPath. A Schematron schema would make a lousy guide for authoring, but it can test assertions, and therefore enforce constraints, that no other schema language can.</db:para>
 <db:para>Here is a simple Schematron example. It defines one of the constraints listed above, namely that a book element must contain at least one page element.</db:para>
 <db:programlisting language="schematron">
-&lt;schema xmlns="http://purl.oclc.org/dsdl/schematron"  queryBinding="xslt2"&gt;
+&lt;schema xmlns="http://purl.oclc.org/dsdl/schematron"  
+ queryBinding="xslt2"&gt;
     &lt;pattern&gt;
         &lt;title&gt;Book constraint&lt;/title&gt;
         &lt;rule context="book"&gt;
-            &lt;assert test="page"&gt;A book must contain at least one page.&lt;/assert&gt;
+            &lt;assert test="page"&gt;A book must contain at 
+            least one page.&lt;/assert&gt;
         &lt;/rule&gt;
     &lt;/pattern&gt;
 &lt;/schema&gt;

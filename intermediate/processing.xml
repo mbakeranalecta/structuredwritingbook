@@ -19,7 +19,7 @@
 <term>processing structured text</term>
 </row>
 </index>
-<p>As I have said from the beginning, structured writing involves the use of algorithms to assist in writing better content. Now it is time to take a look at what basic structured writing algorithms look like and how they are expressed. There are two parts to every structured writing algorithm: the analysis and imposition of structure, an the processing of that structure.  Since the most basic of structured writing algorithms is separating content form formatting, the exploration of the algorithms is not complete until we look at how you reunite the separated pieces to produce output. Understanding the basics of these algorithms is important to understanding structured writing even if you don’t intend to code the algorithms yourself. So now let’s look at the algorithm for putting formatting and content back together.</p>
+<p>In the last chapter we looked at separating content from formatting. But of course they cannot stay separated. Content must be formatted before it is presented to the reader. So lets look at the algorithm for putting them back together again. Understanding the basics of these algorithms is important to understanding structured writing even if you don’t intend to code the algorithms yourself. Understanding how things can be put back together is a big part of understanding how to separate them. Indeed, it is only be describing how you would put them back together that you know for certain that you did not lose anything when you did the separation.</p>
 <section>
 <title>Two into one: reversing the factoring out of invariants</title>
 <p>Moving content from the <phrase><annotation type="concept">media domain</annotation></phrase> to the <phrase><annotation type="concept">document domain</annotation></phrase> or the <phrase><annotation type="concept">subject domain</annotation></phrase> involves progressively factoring out invariants in the content. Each step in this process creates two artifacts, the structured content and the invariant piece that was factored out.</p>
@@ -90,8 +90,6 @@ match bullet-paragraph
     apply style {font: 12pt "Century Schoolbook"}
     output "[em dash][tab]"
 </codeblock>
-<p>The way I have written these rules is an example of what is called <phrase><annotation type="concept">pseudocode</annotation></phrase>. It is a way for human being to sketch out an algorithm to make sure that they understand what they are trying to do before they write actual code. There is no formal grammar or syntax to pseudocode. It is intended for humans, not computers, and you can use whatever approach you like as long as it is clear to your intended audience. But pseudocode should clearly lay out a set of logical steps for accomplishing something. It should make clear exactly how the pieces go together.</p>
-<p>Writing algorithms in pseudocode is a great way to make sure that we understand the algorithms we are creating without worrying about the details of code -- or even learning how to code. They are also a great way to communicate to actual coders about what we need a program to do.</p>
 <p>The result of applying these rules is just the same as before:</p>
 <codeblock>
 {font: 12pt "Century Schoolbook"}The box contains:
@@ -99,11 +97,13 @@ match bullet-paragraph
 {font: 12pt "Century Schoolbook"}[em dash][tab]Eggs
 {font: 12pt "Century Schoolbook"}[em dash][tab]Gold
 </codeblock>
+<p>The way I have written these rules is an example of what is called <phrase><annotation type="concept">pseudocode</annotation></phrase>. It is a way for human being to sketch out an algorithm to make sure that they understand what they are trying to do before they write actual code. There is no formal grammar or syntax to pseudocode. It is intended for humans, not computers, and you can use whatever approach you like as long as it is clear to your intended audience. But pseudocode should clearly lay out a set of logical steps for accomplishing something. It should make clear exactly how the pieces go together.</p>
+<p>Writing algorithms in pseudocode is a great way to make sure that we understand the algorithms we are creating without worrying about the details of code -- or even learning how to code. They are also a great way to communicate to actual coders about what we need a program to do.</p>
 </section>
 <section>
 <title>The order of the rules does not matter</title>
-<p>You may have noticed that what these rules are doing is pretty much exactly what style sheets do in an application like <phrase><annotation type="tool" specifically="Microsoft Word">Word</annotation></phrase> or <phrase><annotation type="tool">FrameMaker</annotation></phrase>. In fact, it is exactly what a style sheet does. If you understand style sheets, you understand a good deal of how structured writing algorithms work.</p>
-<p>One important thing to notice is that when you create a style sheet in <phrase><annotation type="tool" specifically="Microsoft Word">Word</annotation></phrase> or <phrase><annotation type="tool">FrameMaker</annotation></phrase>, you don’t specify the order in which styles will be applied to the document. The same is true when you create a CSS stylesheet for the Web. The style sheet is just a flat list of rules. The order in which the rules are applied to the document depends entirely on the order in which the various structures occur in the document.</p>
+<p>You may have noticed that what these rules are doing is pretty much exactly what style sheets do in an application like <phrase><annotation type="tool" specifically="Microsoft Word">Word</annotation></phrase> or <phrase><annotation type="tool">FrameMaker</annotation></phrase>. In fact, it is exactly what a style sheet does. If you understand stylesheets, you understand a good deal of how structured writing algorithms work.</p>
+<p>One important thing to notice is that when you create a stylesheet in <phrase><annotation type="tool" specifically="Microsoft Word">Word</annotation></phrase> or <phrase><annotation type="tool">FrameMaker</annotation></phrase>, you don’t specify the order in which styles will be applied to the document. The same is true when you create a CSS stylesheet for the Web. The stylesheet is just a flat list of rules. The order in which the rules are applied to the document depends entirely on the order in which the various structures occur in the document.</p>
 <p>This may seem very obvious, but it is key to understanding how structured text is usually processed. It is a subject that is sometimes quite confusing to people who have been trained to write procedural computer programs, which is why I am making a point of calling it out.</p>
 <p>Things get a tiny bit more complex when we move into processing the nested structures of the <phrase><annotation type="concept">document domain</annotation></phrase> and <phrase><annotation type="concept">subject domain</annotation></phrase>, but the basic pattern of a set of unordered rules to describe a transformation algorithm still applies.</p>
 </section>
@@ -113,7 +113,7 @@ match bullet-paragraph
 <codeblock language="sam">
 title: Moby Dick
 </codeblock>
-<p>We want to transform this document into HTML (which kind of sits on the boundary between the <phrase><annotation type="concept">media domain</annotation></phrase> and the <phrase><annotation type="concept">document domain</annotation></phrase>). When our rule matches a structure in the source document, it outputs the equivalent HTML structure. Here is the pseudocode for this rule (it is in a slightly different format from the pseudocode above):</p>
+<p>We want to transform this document into HTML. When our rule matches a structure in the source document, it outputs the equivalent HTML structure. Here is the pseudocode for this rule (it is in a slightly different format from the pseudocode above):</p>
 <codeblock language="pseudo">
 match title
     create h1 
@@ -165,7 +165,7 @@ match figure/title
 <p>Now here is the clever bit. You don’t have to change the <phrase><annotation type="code">movie</annotation></phrase> rule to work with any of these versions of the <phrase><annotation type="code">title</annotation></phrase> rule. Suppose our title is the title of a section, like this:</p>
 <codeblock language="sam">
 section:
-    title: Review of {Rio Bravo}(movie)&lt;/title&gt;
+    title: Review of {Rio Bravo}(movie)
 </codeblock>
 <p>When we process this with our rules, the <phrase><annotation type="code">section/title</annotation></phrase> rule will be executed to deal with the title structure, and the <phrase><annotation type="code">movie</annotation></phrase> rule will be executed when the <phrase><annotation type="code">movie</annotation></phrase> structure occurs in the course of processing the content of the <phrase><annotation type="code">title</annotation></phrase> structure, with the following result:</p>
 <codeblock language="html">
@@ -186,7 +186,7 @@ section:
 <p>If you want a different rule for a structure occurring in different contexts, write a separate rule for each context.</p>
 </li>
 </ul>
-<p>Why is it important for you to understand this? Because when you are going through the process of abstracting out invariants to move content to the <phrase><annotation type="concept">document domain</annotation></phrase> or <phrase><annotation type="concept">subject domain</annotation></phrase>, it is really useful to understand how those invariants will be factored back in. In fact, understanding how this works can help you recognize invariants in your source and give you the confidence to factor them out. Writing down the pseudocode for processing the structure you are creating can help you validate that you have factored things out correctly and that the structures you are creating will be easy to process and that the processing rules will be clear, consistent, and reliable.</p>
+<p>Why is it important for you to understand this? Because when you are going through the process of abstracting out invariants to move content to the <phrase><annotation type="concept">document domain</annotation></phrase> or <phrase><annotation type="concept">subject domain</annotation></phrase>, it is really useful to understand how those invariants will be factored back in. In fact, understanding how this works can help you recognize invariants in your source and give you the confidence to factor them out. Writing down the pseudocode for processing the structures you are creating can help you validate that you have factored things out correctly and that the structures you are creating will be easy to process and that the processing rules will be clear, consistent, and reliable.</p>
 <p>Obviously there is more involved in a complete processing system, and we are not going to get into the gritty details here, but let’s look at few a cases that come up frequently.</p>
 </section>
 <section>
@@ -240,7 +240,7 @@ match ordered-list/list-item
 </codeblock>
 <p>Every time the <phrase><annotation type="code">ordered-list/list-item</annotation></phrase> rule is fired, the count will increase by one, resulting in the list items being numbered sequentially.</p>
 <p>If a new numbered list in encountered, the <phrase><annotation type="code">ordered-list</annotation></phrase> rule will be fired, resetting the count to 1.</p>
-<p>This rule will not match <phrase><annotation type="code">list-item</annotation></phrase> elements that are children of an <phrase><annotation type="code">unordered-list</annotation></phrase> element, so we need a separate set of rules of unordered lists. Because <phrase><annotation type="code">unordered-list</annotation></phrase> is just a container and does not produce any formatted output, its rule has nothing to do:</p>
+<p>This rule will not match <phrase><annotation type="code">list-item</annotation></phrase> elements that are children of an <phrase><annotation type="code">unordered-list</annotation></phrase> element, so we need a separate set of rules of unordered lists:</p>
 <codeblock>
 match unordered-list
     continue
@@ -250,7 +250,7 @@ match ordered-list/list-item
     output "[em dash][tab]"
     continue
 </codeblock>
-<p>Applying these rules will produce output like this:</p>
+<p>Applying the combined set of rules will produce output like this:</p>
 <codeblock>
 {font: 10pt "Century Schoolbook"}To wash hair:
 {font: 10pt "Century Schoolbook"}1.[tab]Lather

@@ -3,7 +3,7 @@
 <db:title>Separating Content from Formatting</db:title>
 
 
-<db:para>If there is one phrase that most people associate with structured writing, it is “separating content from formatting”. We structure content so that we can process it with algorithms. An algorithm is a repeatable method for doing something. If we want our processing algorithms to be repeatable, we need the structure of the content to be consistent. That means that the separation of content from formatting has to be done consistently and repeatably. That makes it the first algorithm of structured writing.</db:para>
+<db:para>If there is one phrase that most people associate with structured writing, it is “separating content from formatting”. The is the most basic and well-known form of partitioning and redirecting of complexity that we do in structured writing, and it illustrates the basic method by which we do all the rest. But partitioning content from formatting is not as simple as it may seem. So let’s take a look at it one step at a time.</db:para>
 <db:section>
 <db:title>Separate out style instructions</db:title>
 <db:para>Let’s start with a simple bit of content that includes a description of its format. I’m going to use CSS syntax to describe the format, but that is not significant. This is just to show what we are doing when we do the separation. I’m also going to represents certain characters by their names in square brackets, just so we can see exactly where everything is going:</db:para>
@@ -61,11 +61,11 @@ bullet-paragraph = {font: 12pt "Century Schoolbook"}[bullet][tab]
 <db:programlisting>
 bullet-paragraph = {font: 12pt "Century Schoolbook"}[em dash][tab]
 </db:programlisting>
-<db:para>And then we maybe realize that “bullet-paragraph” is not the best name any more, because the style is now a dash, not a bullet. In other words we discover that we had not done as good a job as we thought of separating content from formatting, because the content actually still contains formatting information in the form of a style that is named for a particular piece of formatting.</db:para>
+<db:para>And then we maybe realize that “bullet-paragraph” is not the best name any more, because the style is now a dash, not a bullet. In other words we discover that we had not done as good a job as we thought of partitioning content and formatting, because the content actually still contains formatting information in the form of a style that is named for a particular piece of formatting.</db:para>
 </db:section>
 <db:section>
 <db:title>Name your abstractions correctly</db:title>
-<db:para>When we separate formatting from content, we have to insert something in its place, and it matters what that something is and what it is called. If we call it the wrong thing we set up a false expectation, and that will lead to authors using it incorrectly, which will mean we can’t format it reliably.</db:para>
+<db:para>When we separate formatting from content, we have to insert something in its place, and it matters what that something is and what it is called. If we call it the wrong thing we set up a false expectation, and that will lead to authors using it incorrectly, which will mean we can’t format it reliably. This is simply poor partitioning.</db:para>
 <db:para>So the first lesson about the algorithm of separating content from formatting is that it matters what you call things. When you do this, you are creating an abstraction, and you need to figure out what that abstraction is and name it appropriately.</db:para>
 <db:para>So what is the abstraction here? It is a list, of course. So maybe we do this:</db:para>
 <db:programlisting>
@@ -119,7 +119,7 @@ first-ordered-list-item = {font: 12pt "Century Schoolbook"}&lt;count=1&gt;.[tab]
 ordered-list-item = {font: 12pt "Century Schoolbook"}&lt;++count&gt;.[tab]
 </db:programlisting>
 <db:para>(<db:code>++count</db:code> here means add one to <db:code>count</db:code> and then display it.)</db:para>
-<db:para>And this is pretty much how you do lists in FrameMaker or Microsoft Word today, as well as a number of other tools. But the reason for going through it in such detail is to point out what is involved in even this simple bit of separation. We began by simply removing formatting commands, but then started to remove characters as well, which forced us to include characters in our style definitions, and then to be able to actually calculate characters in our style definitions. And we saw that in performing these separations, we were creating abstractions, and that it was important to consider all the cases we might run into and create the appropriate abstractions to handle them.</db:para>
+<db:para>And this is pretty much how you do lists in FrameMaker or Microsoft Word today, as well as a number of other tools. But the reason for going through it in such detail is to point out what is involved in even this simple bit of partitioning. We began by simply removing formatting commands, but then started to remove characters as well, which forced us to include characters in our style definitions, and then to be able to actually calculate characters in our style definitions. And we saw that in performing these separations, we were creating abstractions, and that it was important to consider all the cases we might run into and create the appropriate abstractions to handle them.</db:para>
 </db:section>
 <db:section>
 <db:title>Create containers to provide context</db:title>
@@ -165,7 +165,7 @@ unordered-list:
     list-item:Gold
 </db:programlisting>
 <db:para>And, of course, the <db:code>list-item</db:code> structure can be used in either an unordered list or an ordered list, because it is a list item in either case, and the formatting algorithm can tell the difference based on which type of list it belongs to. The name <db:code>list-item</db:code> describes it role in the document in a way that is entirely separated from how it will be styled.</db:para>
-<db:para>Moving the abstraction out to the container is an important part of the algorithm of separating content from formatting. It helps keep things consistent and reduces the number of things authors have to remember.</db:para>
+<db:para>Moving the abstraction out to the container is an important part of the algorithm of separating content from formatting. It partitions ordered and unordered lists making the construction of each simpler an more reliable. This helps keep things consistent and reduces the number of things authors have to remember.</db:para>
 <db:para>Creating containers and abstracting out the differences between their contents is an important piece of separating content for formatting. For example, HTML and Markdown both provide six different level of headings. But content under an <db:code>H2</db:code> or an <db:code>H5</db:code> heading is not in any container. The content simply comes after the heading. This means that is it perfectly possible and legal in these languages to place different heading elements in any order you want. Writers have to pay attention to which heading level they are creating and how it fits in the structure of the document they are creating.</db:para>
 <db:para>By contrast, in DocBook, we have a <db:code>section</db:code> structure. Like a list, a section is part of the writer’s interpretation of what they are creating in the document, but it is only implied, not instantiated by the formatting. The <db:code>section</db:code> structure,  instantiates the concept of a section. And once we have the instantiation of a section, we don’t need six levels of heading. We can have one structure called <db:code>title</db:code>. Sections can be nested inside other sections, and the formatting algorithm can apply the correct style to the title based on context:</db:para>
 <db:programlisting>

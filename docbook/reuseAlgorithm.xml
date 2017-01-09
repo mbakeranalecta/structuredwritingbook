@@ -2,12 +2,29 @@
 <db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.reuse">
 <db:title>Reuse</db:title>
 
-<db:para>The reuse of content in different contexts has become one of the main drivers of structured writing, particularly in the form of widespread adoption of DITA. Content reuse is not, in itself, a technique that promotes content quality (except perhaps is it succeeds in freeing up time to focus on creating new and better content with the time saved by reusing existing content). However, implementing content reuse without thinking about content quality can do serious damage to content quality. Therefore any consideration of structured writing for content quality has to look seriously at the content reuse algorithm and how it can be implemented without hurting content quality.</db:para>
-<db:para>Content reuse is not one technique, but a collection of many techniques, each of which requires specific content structures in the subject, document, and management domains. The simplest content reuse technique is cutting and pasting content from one source to another. This approach is quick and easy to implement, but it creates a host of management problems. When people talk about content reuse they generally mean any and every means of reusing content other than cutting and pasting.</db:para>
+<db:para>Another source of complexity in content creation occurs when you want the same information to occur in more than one publication. If there is no coordination between authors, each author who want to include the piece of information will research and write it for themselves. In the case of authors who want to use the same information in more than on publication they are writing, they will copy the information from one publication to another. However it happens, you now have two or more instances of the same information that have to be maintain and edited whenever the subject matter changes. If not all the instances get updated, or some of them get updated incorrectly, that is content maintenance complexity that is not being handled, and, as always happens, it falls through to the reader in the form of inconsistent or incorrect information.</db:para>
+<db:para>Content reuse is an attempt to handle the complexity associated with using the same information in more than one place. Reuse has become one of the main drivers of structured writing, particularly in the form of widespread adoption of DITA. Unfortunately, reuse techniques themselves introduce a lot of complexity and a single-minded focus on reuse has sometimes led to the implementation of many systems that dumped large amounts of complexity on authors (and thus, eventually, on readers). It is an area in which, if you are not careful, you can easily end up with more unhandled complexity in the system than when you began with.</db:para>
+<db:para>There are a number of different scenarios in which you might want to duplicate information in more than one place. (It is important to remember that content reuse is always content duplication. You should always be asking yourself why you want to duplicate the information you are reusing.)</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>You are writing about different products in a product line that share common technology. You want to duplicate information on the common features in a document on each individual product.</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>You are writing about several version (different releases) or a product. You want information on features that have not changed to be duplicated in all documents.</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>You are writing documents for different audiences (marketing material, technical documentation for various roles, training material) and you want to  duplicate product descriptions in all these documents.</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>There is general information about your organization that you want to duplicated in many different publications (such as your copyright and trademark ownership statements).</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>The ways in which information gets duplicated between and inserted into publications can vary considerably depending on the use case. Content reuse is not one technique, therefore, but a collection of many techniques, each of which requires a different approach to partitioning and relating the content, and thus requires specific content structures in the subject, document, and management domains.</db:para>
+<db:para>The simplest content reuse technique is cutting and pasting content from one source to another. This approach is quick and easy to implement, but it creates a host of management problems. When people talk about content reuse they generally mean any and every means of reusing content other than cutting and pasting.</db:para>
 <db:para>This means that reusing content really means storing a piece of content in one place and inserting it into more than one publication by reference. “Reusing” can suggest that this activity is somewhat akin to rummaging through that jar of old nuts and bolts you have in the garage looking for one that is the right size to fix your lawnmower. While you can do it that way, that approach is neither efficient nor reliable. The efficient and reliable approach involves deliberately creating content for use in multiple locations. This means that you need to place constraints on the content to be reused and the content that reuses it, and that means you are in the realm of structured writing.</db:para>
 <db:section>
 <db:title>Fitting pieces of content together</db:title>
-<db:para>If you are going to create one piece of content that can be used in many outputs, you have to make sure it fits in each of those outputs.</db:para>
+<db:para>If you are going to create one piece of content that can be used in many outputs, you have to make sure it fits in each of those outputs. In other words, partition it appropriately for reuse.</db:para>
 <db:para>If you cut and paste, this is not a concern. You can cut any text you like, paste it in anywhere, and edit it to fit if you need to. But if the content you want to use is used in other places, you can’t edit it to fit because that might cause it to no longer fit in the other places. For reuse to work, the content must be written to fit in multiple places. In other words, it has to meet a set of constraints that will allow it to fit in multiple places. We will look at this in more detail in <db:xref linkend="chapter.composition"/>. In this chapter we will focus on the algorithms for fitting the pieces together.</db:para>
 <db:para>There are seven basic models for fitting pieces of content together:</db:para>
 <db:itemizedlist>
@@ -91,7 +108,7 @@ match insert where variable = $seats
 <db:para>Variable into variable is a variation on common into variable in which you can make a wholesale change of the common elements that you are pulling into a set of variable documents.</db:para>
 <db:para>For example, suppose you decide to market your product line to a new market. The new market has different safety regulation which means you need to insert a different standard warning into all your manuals. In this case, you want to swap out the common elements used in your home market and substitute the common elements for the foreign market.</db:para>
 <db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/variable2variable.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
-<db:para>Here we need to talk about how we identify the content to be inserted. In the common into variable example, we inserted the content of a file that contains a standard warning. But this approach is fragile. You can’t reorganize your files without breaking reuse, and you almost always need to reorganize your files eventually. Plus, it forces you to have every piece of reusable content in a separate file, which may not be efficient.</db:para>
+<db:para>Here we need to talk about how we identify the content to be inserted. In the common into variable example, we inserted the content of a file that contains a standard warning.</db:para>
 <db:para>But for variable into variable this approach simply does not work. Variable into variable requires loading a different file, which is difficult when the content specifies a particular file name to import.</db:para>
 <db:para>As always in structured writing, we look for a way to factor out the problematic content. So here we look for a way to factor out the file name and replace it with something else.</db:para>
 <db:section>
@@ -118,9 +135,9 @@ match insert with ID
     $insert_content = find ID in $content_set
     output $insert_content
 </db:programlisting>
-<db:para>This is a constant pattern in structured writing. When it comes to locating resources, you want to move that responsibility from the content to the algorithm. This makes it easier to update the locations, but it also gives you far more options for storing and managing your content, since algorithms can interact with a variety of systems in sophisticated ways, rather than just storing a static address. It also means you can make wholesale changes in how your content is stored without having to edit the content itself.</db:para>
+<db:para>This is a constant pattern in structured writing. When it comes to locating resources, you want to move that responsibility from the content to the algorithm. This makes it easier to update the locations, but it also gives you far more options for storing and managing your content, since algorithms can interact with a variety of systems in sophisticated ways, rather than just storing a static address. It also means you can make wholesale changes in how your content is stored without having to edit the content itself. This is a major win in terms of partitioning complexity so it can be distributed and handled more efficiently.</db:para>
 <db:para>This means that the synthesis algorithm needs some way to resolve the ID and find the content to include. In many cases, a content management system is used to resolve the ID. In other cases it is as simple as the algorithm searching through a set of files to find the ID or building a catalog that points to the files that contain IDs.</db:para>
-<db:para>To do variable into variable reuse in a system that uses IDs, you simply point the synthesis algorithm at a different set of files that contain the same IDs, but attached to different content. So if your foreign market requires a different warning, you can create a file like this:</db:para>
+<db:para>To do variable into variable reuse in a system that uses IDs, you simply point the algorithm at a different set of files that contain the same IDs, but attached to different content. So if your foreign market requires a different warning, you can create a file like this:</db:para>
 <db:programlisting language="sam">
 warning:(#warn_danger) 
     title: Look out!
@@ -199,6 +216,7 @@ keys:
         name: warn_danger
         resource: files/shared/warnings#warn_danger_foreign
 </db:programlisting>
+<db:para>Here we have partitioned the warnings off into separate file and also partitioned of the location of those files from the author. The use of keys as a bridge between two partitions can be a convenient way to manage content relationships without having to update source files every time the relationships change. The downside is that keys introduce an abstract element into the author’s world, and abstractions are a form of complexity that can be difficult to deal with.</db:para>
 </db:section>
 </db:section>
 <db:section>
@@ -227,7 +245,7 @@ match phrase with condition
 <db:para>When the subject matter changes, you have to find all the places the conditions occur and update them.</db:para>
 </db:listitem>
 <db:listitem>
-<db:para>If the same data point (the number of seats) is mentioned in many different documents, that information is still being duplicated all over the content, which makes it hard to maintain and verify, and hard to change if the compact seats five in the next model year.</db:para>
+<db:para>If the same data point (the number of seats) is mentioned in many different documents, that information is still being duplicated all over the content, which makes it hard to maintain and verify, and hard to change if, for example, the compact seats five in the next model year.</db:para>
 </db:listitem>
 </db:itemizedlist>
 <db:para>Common with conditions is not limited to cases where there are alternate values, however. In some cases, content may simply be inserted or omitted for certain outputs.</db:para>
@@ -257,7 +275,7 @@ ol:
 <db:para>The current tools don’t support variable into common.</db:para>
 </db:listitem>
 </db:itemizedlist>
-<db:para>How successful a common with conditions approach will be also depends on what you choose for your conditional expressions. Generally, subject domain conditions will be much more stable and manageable than document domain conditions. For instance, conditions that relate to different vehicles (subject domain) are based in the real world and are therefore objectively true as long as the subject matter remains the same. Conditions that relate to different publications or different media, on the other hand, are not objectively true and can’t be verified independently. They only way to verify them is to build the different documents or media and see if you got the content you expected. This makes maintaining such conditions cumbersome and error prone.</db:para>
+<db:para>How successful a common with conditions approach will be also depends on what you choose for your conditional expressions. Generally, subject domain conditions will be much more stable and manageable than document domain conditions. For instance, conditions that relate to different vehicles (subject domain) are based in the real world and are therefore objectively true as long as the subject matter remains the same. Conditions that relate to different publications or different media, on the other hand, are not objectively true and can’t be verified independently. They only way to verify them is to build the different documents or media and see if you got the content you expected. This makes maintaining such conditions cumbersome and error prone -- an indications that complexity is not being distributed in an optimal way.</db:para>
 </db:section>
 <db:section>
 <db:title>Factor out the common</db:title>
@@ -282,9 +300,17 @@ match procedure/is-it-dangerous
     if is-it-dangerous = 'yes'
         output files/shared/warnings#warn_danger_foreign
 </db:programlisting>
-<db:para>The beauty of this approach is that the content is entirely neutral as to what kind of reuse may be going on or how dangerous procedures may be treated. Because the content itself contains only objective information about the procedure itself, you can implement any algorithm you like to publish or reuse the content in any way you like at any time based on this information. By making the content not specific to any form of reuse or any reuse mechanism, we effectively make it much more reusable.</db:para>
-<db:para>We are also making the content much easier to write, since this approach does not require the writer to know how the reuse mechanism works, how to identify reusable content, or even that reuse is occurring at all. All they have to do is answer a simple question about the content -- one to which they should already know the answer.</db:para>
-<db:para>Structured writing is about factoring invariants and complexities out of content and this approach enables the widest range of reuse possibilities while factoring all the complexities of reuse out of the content. The downside of this is that it is not as general. The <db:code>is-it-dangerous</db:code> metadata is applies only to dangerous procedures. It does not address the inclusion of reusable content in other places. You would need to factor out other interesting reuse cases in a similar way to create a complete subject-domain solution.</db:para>
+<db:para>Or, to further the partitioning of complexity in the code, you can use keys here:</db:para>
+<db:programlisting language="pseudo">
+match procedure/is-it-dangerous 
+    if is-it-dangerous = 'yes'
+        $resource = find key '%warn_danger' in lookup-table
+        output $resource      
+</db:programlisting>
+<db:para>The beauty of this approach is that the content is entirely neutral as to what kind of reuse may be going on or how dangerous procedures may be treated. Because the content itself contains only objective information about the procedure itself, you can implement any algorithm you like to publish or reuse the content in any way you like at any time based on this information. By making the content not specific to any form of reuse or any reuse mechanism, we effectively make it much more reusable and have partitioned the complexity of reuse much more neatly and reliably.</db:para>
+<db:para>We are also making the content much easier to write, since this approach does not require the writer to know how the reuse mechanism works, how to identify reusable content, or even that reuse is occurring at all. All they have to do is answer a simple question about the content -- one to which they should already know the answer. In other words, this approach partitions the entire reuse mechanism from the author. This is a really big win because the biggest problem with most reuse techniques is the amount of complexity they add to the author’s task, directly compromising their finite and valuable attention.</db:para>
+<db:para>This is very important from both a complexity point of view and a cost point of view. Where a writer is asked to consciously reuse content they have to go looking for that content every time the potential for reuse occurs. This cost is incurred whether or not the find reusable content, whereas any savings from reuse are realized only when reusable content is found. But with this approach, the writer is relieved of all responsibility for the reusable content. Locating that content is the job of an algorithm. If it does not exist, the algorithm will report that it is missing and it will be somebody’s job to create it, after which the algorithm will locate it automatically every time it is needed. This is far more efficient that authors looking for reusable content over and over and over.</db:para>
+<db:para>Structured writing is about factoring invariants and complexities out of content and this approach enables the widest range of reuse possibilities while factoring all the complexities of reuse out of the content. The downside of this is that it is not as general. The <db:code>is-it-dangerous</db:code> metadata is applies only to dangerous procedures. It does not address the inclusion of reusable content in other places. You would need to factor out other interesting reuse cases in a similar way to create a complete subject-domain solution. Again we see that complexity always has to go somewhere. But as we have also seen, if authors cannot fully handle the complexity thrust on them, that complexity ultimately gets dumped on the reader.</db:para>
 </db:section>
 <db:section>
 <db:title>Factor out the variable</db:title>
@@ -316,10 +342,11 @@ match insert with key
 keys:
     key:
         name: %main-features
-        resource: from vehicles select features where model = $model
+        resource: from vehicles select features 
+                  where model = $model
 </db:programlisting>
 <db:para>This retrieves a different set of features from the database depending on how the variable <db:code>$model</db:code> is defined for the build. Launch the build with <db:code>$model = 'compact'</db:code> and you get the feature set for the compact model. Launch the build with <db:code>$model = 'van'</db:code> and you get the feature set for the van model.</db:para>
-<db:para>Naturally, this is leaving out a whole lot of detail about how this query gets executed and how the results get structured into a document domain list structure. But these are implementation details.</db:para>
+<db:para>Naturally, this is leaving out a whole lot of detail about how this query gets executed and how the results get structured into a document domain list structure. But those are implementation details.</db:para>
 </db:section>
 <db:section>
 <db:title>Assemble from pieces</db:title>
@@ -340,7 +367,6 @@ map: Widget Wrangler Deluxe User Manual
        unit: units/ww/shared/install
        unit: units/ww/deluxe/install_options
 </db:programlisting>
-<db:para>It is important to note here that a map does not always have to be written by hand by an author. In some cases the map may be created by an algorithm based on the metadata of the units themselves. Whether this is possible depends on what determines the desired order of units. If the assembled units are supposed to form a narrative flow, they may need to be ordered by hand as it is difficult to generate a narrative ordering from metadata. But if the units do not form a narrative flow, they can easily be ordered using metadata. For instance, if you are assembling a cookbook from recipe units you might order them by season or main ingredient without caring if the boiled egg recipe comes before or after the scrambled egg recipe.</db:para>
 <db:para>Rather than using a map, you can allow the units themselves to pull in other units, which may in turn pull in other units. So the Widget Wrangler Deluxe install introduction unit might look like this:</db:para>
 <db:programlisting>
 unit: Installing the Widget Wrangler Deluxe
@@ -370,11 +396,12 @@ unit: Installing the &gt;($product_name)
     &gt;&gt;&gt;(unit unit/ww/shared/install)
     &gt;&gt;&gt;(unit unit/ww/deluxe/install_options)
 </db:programlisting>
-<db:para>There are a number of ways in which you can mix and match the basic reuse patterns to achieve an overall reuse strategies. Most systems designed to support reuse will allow you to do all these patterns and to combine them however you wish.</db:para>
+<db:para>There are a number of ways in which you can mix and match the basic reuse patterns to achieve an overall reuse strategies. Most systems designed to support reuse will allow you to do all these patterns and to combine them however you wish. However, you should not lose site of the amount of complexity that you are introducing into your content and into your writer’s work.</db:para>
 </db:section>
 <db:section>
 <db:title>Content reuse is not a panacea</db:title>
 <db:para>Content reuse can seem like an easy win, and in some cases it can return substantial benefits, but there are pitfalls to be aware of. You will need to plan carefully to make sure that you avoid the traps that await the unwary.</db:para>
+<db:para>Many reuse techniques introduce a lot of complexity into the author’s job and into the content itself. These techniques may address major sources of content complexity in your organization but they come with a high cost in terms of new complexity introduced. Even if the reuse tools look easy to use, they can introduce large amounts of complexity into your process.</db:para>
 <db:section>
 <db:title>Quality traps</db:title>
 <db:para>There are three main quality traps with content reuse.</db:para>
@@ -389,7 +416,7 @@ unit: Installing the &gt;($product_name)
 <db:para>Failure to address the audience appropriately</db:para>
 </db:listitem>
 </db:itemizedlist>
-<db:para>Many works on content reuse casually recommend making content more generic or more abstract as a means to making it more reusable, without saying anything about the potential downside. This is very dangerous and can do serious harm to the quality of your content. Statements that are specific and concrete are easier to understand and communicate better than statements that are generic and abstract. Replacing specific and concrete statements with generic or abstract statements will reduce the effectiveness of your content significantly.</db:para>
+<db:para>Many works on content reuse casually recommend making content more generic or more abstract as a means to making it more reusable, without saying anything about the potential downside. This is very dangerous and can do serious harm to the quality of your content. Statements that are specific and concrete are easier to understand and communicate better than statements that are generic and abstract. Replacing specific and concrete statements with generic or abstract statements will reduce the effectiveness of your content significantly. This is a classic case of dumping complexity onto the reader.</db:para>
 <db:para>Unfortunately, human beings suffer from the curse of knowledge. The curse of knowledge is a cognitive bias that makes it very hard for people who understand an idea to appreciate the difficulties that idea presents to people who do not understand it. The curse of knowledge makes the generic or abstract statement of an idea appear equally communicative, and perhaps more succinct and precise, than the concrete and specific statement of it. This is a problem for writers at all times, pulling them away from the kind of specific and concrete statement that make ideas easier to comprehend. The desire to make content reusable reinforces this temptation.</db:para>
 <db:para>Replacing the specific and concrete with the generic and abstract always reduces content quality and effectiveness. You may decide that the economic benefits of content reuse outweigh the economic costs of less effective content, but you should at least be aware that there are real economic consequences to this choice.</db:para>
 <db:para>Another potential quality problem comes with the loss of narrative flow. Not all content has or needs a lengthy narrative flow, but if you start breaking your content into reusable units and putting them back together in different ways, the narrative flow can easily be lost. In some cases you can avoid this problem by making the topics you present to your audience more self contained using an Every Page is Page One information design. But don’t assume that you have an effective Every Page is Page One design just because you have broken your content into reusable units. If that content was written in a way that assumed a narrative flow, it is not going to work when reused in a way that breaks that flow.</db:para>
@@ -406,5 +433,12 @@ unit: Installing the &gt;($product_name)
 <db:para>Once the cohesion and discipline of a content set starts to break down, the decline tends to accelerate. As it becomes harder to find content to reuse, more duplication occurs, which further complicates the search for reusable content, creating a vicious circle. As links and other content relationships break down, people tend to form ad hoc links and relationships to get a job finished, further tangling the existing rat’s nest. Under the gun, it is almost always easier to get the next document out by ignoring the structure and discipline of the content set structure, but the effects of this are corrosive. Without consistent discipline, even in the face of deadlines, a reuse system can fail over time.</db:para>
 <db:para>All of these issues can be managed successfully with the right techniques and the right tools, but they all introduce costs as well, both up-front costs and ongoing costs. Those costs have to be reckoned up and subtracted from the projected cost savings before you can determine if a content reuse strategy is really going to save you money.</db:para>
 </db:section>
+</db:section>
+<db:section>
+<db:title>Alternative to reuse</db:title>
+<db:para>There are three alternative to content reuse as a way of dealing with information that appears in more than one place:</db:para>
+<db:para>Allow the information to be expressed in more than one place but make sure that it is clearly and unambiguously labeled so that it is easy to find when updates are required. If this sounds like an inferior solution, reflect that in fact there is all kinds of repeated information in the content of any organization and reuse techniques cannot possibly eliminate all of it without adding way more complexity into the system than they eliminate.</db:para>
+<db:para>Reuse is predicated on the idea that you actually want to duplicate information in multiple publications. This is actually a somewhat out of date idea. In the paper world, it was important to give each customer a book with all the information they needed in it, even if the same information occurred in many different books. But in an online environment, you don’t need to duplicate information to make sure it is available to every user who needs it. Maintaining the information once and linking to it whenever it is needed is a much less complex solution. To do this efficiently may require some of the techniques described in <db:xref linkend="chapter.linking"/>.</db:para>
+<db:para>Another approach to reducing duplication in your content is to combine information on multiple products into a single publication. There are limits to this, obviously, an some organization got into content reuse specifically so that they could remove the complexity for multiple versions in a single manual. Still, there are times when it is an appropriate solution.</db:para>
 </db:section>
 </db:chapter>
