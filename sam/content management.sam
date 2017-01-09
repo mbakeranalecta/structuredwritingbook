@@ -82,11 +82,11 @@ chapter:(#chapter.content-management) Content Management
     
     section: Conflicting constraints
     
-        As we have said all along, structured writing is about imposing constraints on content, and about recording the constraints applied to content so that algorithms can detect them. The first reason to impose constraints on content is to improve content quality. But as content collections grow, and as online content becomes more integrated, we also have a growing need to manage content, and to use algorithms to help manage content.
+        The purpose of structured writing is to help partition and redirect the complexity of the content system. The ultimate purpose of this is to make sure that none of the complexity get dropped in the process and falls through to the reader. But as content collections grow, and as online content becomes more integrated, we also have a growing need to manage content, and to use algorithms to help manage content.
         
-        For algorithms to manage content they need to know what constraints it meets, so structured writing is a natural place to turn when you want to implement content management. 
+        For algorithms to manage content they need to know what constraints it meets, so structured writing is a natural place to turn when you want to implement content management. We can partition and redirect content management complexity using structured writing techniques. Establishing constraints on content is part of the process of partitioning complexity and making sure that all the needed information is transmitted between partitions.
         
-        But the constraints you use to implement content management may not be the same as those you implement to improve content quality. It is easier to manage content (or anything else) if it is more uniform. The constraints that you will naturally wish to impose to make content more manageable are those that make it more uniform. Thus a system like DITA which, as a starting point, proposes that there are just three types of content (concept, task, and reference) has an obvious appeal from a management point of view.
+        But the constraints you use to partition the content management problem may not always be the same as those you would implement to improve content quality. It is easier to manage content (or anything else) if it is more uniform. The constraints that you will naturally wish to impose to make content more manageable are those that make it more uniform. Thus a system like DITA which, as a starting point, proposes that there are just three types of content (concept, task, and reference) has an obvious appeal from a management point of view.
         
         The constraints that you impose to improve content quality, on the other hand, are those which make sure that a piece of content does just the job it is supposed to to. They are the kind of constraints that make sure that a recipe contains everything a recipe needs and is presented in the way a recipe should be presented. They are highly specific to the subject matter and to the audience. Three generic content types are not going to provide all the constraints we need to effectively manage content quality. Indeed, some of the constraints that are designed to facilitate content management may be positively damaging to content quality.
         
@@ -108,10 +108,11 @@ chapter:(#chapter.content-management) Content Management
     
     section: Content management and reuse
     
-        The {reuse algorithm} requires two things:
+        The {reuse algorithm} requires three things:
         
         * that you create content that will fit together with other content
-        * that you be able to find reusable content when you need it. 
+        * that you have a way to fit bits of content together
+        * that you be able to find reusable content when you need it
         
         Finding reusable content is a content management function. 
         
@@ -122,7 +123,7 @@ chapter:(#chapter.content-management) Content Management
         * Is it addressed to the same audience?
         * Does it meet my quality constraints?
         * Is it in a compatible form? 
-        * Is it blackboxed across all uses? Could one instance change independent of the others. 
+        * Is it blackboxed across all uses? Could one instance change independent of the others? 
         
         It is also important to remember that answer to the question "does this unit of content already exist" will often be no. Every query costs time, and divides the writer's attention, but only those where the answer is yes save the organization any time or money. Thus the search for reusable content adds an overhead to the writing process even when there is no content to reuse. This can have two undesirable effects:
         
