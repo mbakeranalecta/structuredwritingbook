@@ -22,33 +22,33 @@ chapter:(#chapter.heavyweight) Heavyweight markup languages
     
     section: DITA
     
-        There are two ways of looking at DITA. You can look at it as a complete structured writing system which can be used more or less out of the box. (Even packaged applications like Word of FrameMaker are not used completely out of the box for serious content creation: some customization of styles and output format is needed at least, and the same is true of DITA.)
+        There are two ways of looking at DITA. You can look at it as a complete structured writing system which can be used more or less out of the box. (Even packaged applications like Word or FrameMaker are not used completely out of the box for serious content creation: some customization of styles and output format is needed at least, and the same is true of DITA.)
         
         Alternatively, you can look at as what it's name proclaims it to be: an information typing architecture. The acronym DITA stand for Darwin Information Typing Architecture, with the word "Darwin" representing DITA's approach to the {extensibility} of markup: {specialization}.
         
+        Each represents a different partitioning of the complexity of the content system. At the most basic level, out-of-the-box DITA, like any out-of-the-box tool, partitions the complexity of structure and algorithm development away from the user. This is a very attractive partitioning, such many customers don't currently have the expertise to develop structures and algorithms, and are shy about developing and maintaining that expertise. This does not mean, of course, that a generic off-the-shelf system (DITA or any other) is capable of adequately partitioning and redirection the complexity of their content system such that all complexity is handled by people or processes with the right skills, knowledge, and resources to handle it. And, of course, is any of the complexity is not handled, the unhandled complexity falls through to the reader as content quality problems. One begins the study of structured structured writing, as opposed to the learning of a specific tool, precisely because you have come to the conclusion that no off-the-shelf tool will allow you to adequately partition and redirect the complexity of your content system. 
+        
         With out-of-the-box DITA, you get a fixed set of topic types provided by the DITA specification and implemented in the DITA Open Toolkit and other tools. With DITA as an information typing architecture, you get the capability to create a unbounded number of information types. I will discuss DITA as an information typing architecture in [#chapter.extensible]. Here I will look at out-of-the-box DITA. 
         
-        Out-of-the-box DITA comes in three main forms. 
+        Out-of-the-box DITA comes in two main forms. 
         
         1. The DITA Open Toolkit. You can download the DITA Open Toolkit for free and use it to produce content. The {formatting} stylesheets that come with the toolkit are very basic, so you will likely want to do some customization of the output as a minimum.
         
-        2. Packaged DITA tools. There are a variety of tools that package DITA. Most of these are essentially content management systems of one degree of sophistication or another. These may add additional capabilities over what is supplied by the DITA Open Toolkit and may hide the underlying DITA structures to one extent or another. I don't intend to say anything about any of these tools here. 
-        
-        3. Customized DITA systems. You may be handed a customized system created by a consultant or vendor, generally built using one of the available DITA CMS platforms. This may have been extended to provide new topic types, new output formats, or new management facilities. These could work in almost any way and it may not even be obvious that DITA has been used in their construction. Obviously there is not much that we can say about them here. 
-                
+        2. Packaged DITA tools. There are a variety of tools that package DITA. Most of these are essentially content management systems of one degree of sophistication or another. These may add additional capabilities over what is supplied by the DITA Open Toolkit and may hide the underlying DITA structures to one extent or another. I don't intend to say anything about any of these tools here. The package they offer may differ from the DITA Open Toolkit and should be evaluated on its own merits.
+                        
         The key features of out-of-the-box DITA that will determine how well its fits with your needs are its topic model and its focus on the {reuse algorithm}. The description of the {document-domain}/{management-domain} approach in to reuse [#chapter.reuse] is based on the DITA model, which provides comprehensive support in those domains. 
         
-        As described in [#chapter.blocks], the DITA topic model is based on the concept of information typing, which is the idea that information can be usefully broken down into different abstract types, and that there is value in clearly separating the different types. One of the problems with this theory, and consequently with the application of DITA's topic model, is that it is not clear how big an information type is, and whether an information type constitutes a narrative block or just a semantic block. Specializing DITA may allows you to be more specific on this point, but if you are using out-of-the-box DITA you are probably using the basic concept, task, and reference topic types (though out-of-the-box DITA now includes a number of other topic types such as Machine industry task and Troubleshooting). There is no clear answer to whether these topic types constitute semantic blocks or narrative blocks. In practice they are used both ways.
+        As described in [#chapter.blocks], the DITA topic model is based on the concept of information typing, which is the idea that information can be usefully broken down into different abstract types, and that there is value in clearly separating the different types. (This is an approach to partitioning the complexity of information design.) One of the problems with this theory, and consequently with the application of DITA's topic model, is that it is not clear how big an information type is, and whether an information type constitutes a narrative block or just a semantic block. Specializing DITA may allows you to be more specific on this point, but if you are using out-of-the-box DITA you are probably using the basic concept, task, and reference topic types (though out-of-the-box DITA now includes a number of other topic types such as Machine industry task and Troubleshooting). There is no clear answer to whether these topic types constitute semantic blocks or narrative blocks. In practice they are used both ways.
         
-        The principal thing that sets out-of-the-box DITA apart from other approaches to structured writing is its map and topic architecture. In most other systems, the unit that the writer writes and the unit that the reader reads are the same. For very long works, there may be a mechanism for breaking up and assembling pieces. For instance, in DocBook, you can write a book using a `book` document type in which you can include various `chapter` document types to create a complete book out of multiple files. In this model, a chapter is a narrative unit, though it may also be an element of a larger narrative unit which is the whole book. But DITA factors out this document assembly function into a separate file type, the map. In a DocBook book document, there is a lot of book content in addition to the included chapters. Indeed, you could write the entire book in one file if you wanted to. The content model of a {DocBook} document is described by a single schema and the content model of the chapters is simply part of the content model of the book. In other words, a DocBook book is a single document structure that just happens to be made up of individual files. A DITA map file, on the other hand, is an independent structure. It does not create a single logical document structure. It does not usually contain any actual content, and you can't write an entire book in a single map file. Instead, a map file is an instruction to a publishing tool chain about how to assemble a larger work out of component pieces.[*1]
+        The principal thing that sets out-of-the-box DITA apart from other approaches to structured writing is its map and topic architecture. In most other systems, the unit that the writer writes and the unit that the reader reads are the same. For very long works, there may be a mechanism for breaking up and assembling pieces. For instance, in DocBook, you can write a book using a `book` document type in which you can include various `chapter` document types to create a complete book out of multiple files. In this model, a chapter is a narrative unit, though it may also be an element of a larger narrative unit which is the whole book. But DITA factors out this document assembly function into a separate file type, the map. In a DocBook book document, there is a lot of book content in addition to the included chapters. Indeed, you could write the entire book in one book file if you wanted to. The content model of a {DocBook} document is described by a single schema and the content model of the chapters is simply part of the content model of the book. In other words, a DocBook book is a single document structure that just happens to be made up of individual files. A DITA map file, on the other hand, is an independent structure. It does not create a single logical document structure. It does not usually contain any actual content, and you can't write an entire book in a single map file. Instead, a map file is an instruction to a publishing tool chain about how to assemble a larger work out of component pieces.[*1]
 
         footnote:(*1)
 
             DITA does also support the DocBook model of including one topic directly in another, but this practice is discouraged.
         
-        This distinction is very important. In the DocBook model, there is a continuity of constraint between the book and its chapters. In DITA, the constraints on the map and the constraints on the topics in the map, are completely separate. This means that in DITA, the topic is the largest unit of content to which content constraints can be applied (at least in the conventional way). 
+        This distinction is very important. In the DocBook model, there is a continuity of constraint between the book and its chapters. In DITA, the constraints on the map and the constraints on the topics in the map, are completely separate. This means that in DITA, the topic is the largest unit of content to which content constraints can be applied (at least in the conventional way). This represents a partitioning of the conformance, quality, and composition algorithms with leaves responsibility for larger units entirely with the writer.
               
-        Maps are structured like tree so they can construct hierarchies an arbitrary number of layers deep. This means you have a choice about what parts of your structure you create using a map and what part you create inside a topic. If you have a list of four items, each of which needs two or three paragraphs of description, do you create one topic with the list of four items in it or do you create one topic for each item and then tie them together using a map? This is particularly important when we remember that the topic is the largest using of content constraint in DITA. If we break the content down to this fine a level, we lose the ability to apply constraints to it. On the other hand, we are now able to {reuse} each of these items separately.
+        Maps are structured like a tree so they can construct hierarchies an arbitrary number of layers deep. This means you have a choice about what parts of your structure you create using a map and what part you create inside a topic. If you have a list of four items, each of which needs two or three paragraphs of description, you can create one topic with the list of four items in it or you can create one topic for each item and then tie them together using a map. This is particularly important when we remember that the topic is the largest using of content constraint in DITA. If we break the content down to this fine a level, we lose the ability to apply constraints to it. On the other hand, we are now able to {reuse} each of these items separately.
         
         This presents something of a dilemma. We have already talked about {structure writing as dividing content into blocks and made a distinction between semantic blocks and narrative blocks.}[#chapter.blocks] In the design of a markup language, narrative blocks are made up of semantic blocks which may be made up of smaller semantic blocks. This works fine for developing the structure of a narrative block, which is the work that will be presented whole to the reader. In that scenario, the unit that the writer writes is the narrative block. The semantic blocks are just elements of the model.
         
@@ -60,35 +60,33 @@ chapter:(#chapter.heavyweight) Heavyweight markup languages
 
         The idea that blocks are reusable is a very attractive one. But it is important to think through exactly what the reusable unit of content is. It is one thing to reuse {narrative blocks} whole (perhaps with some variations in the text). It is quite a different thing to reuse {semantic blocks} below the level of the {narrative block}, particularly if it is important to constrain the {narrative block} or to apply any of the other structured writing algorithms at the level of the {narrative block}.
         
-        Quality should be a serious concern with this model. If {narrative blocks} are being assembled out of smaller reusable units without proper attention to the narrative integrity or completeness and consistency of the result, quality can be seriously affected. If the author no longer sees, thinks, or works in the context of the {narrative block}, and if the structure of the {narrative block} is not constrained, content quality is very difficult to maintain. 
+        Quality should be a serious concern with this model. If {narrative blocks} are being assembled out of smaller reusable units without proper attention to the narrative integrity or completeness and consistency of the result, quality can be seriously affected. If the author no longer sees, thinks, or works in the context of the {narrative block}, and if the structure of the {narrative block} is not constrained, content quality is very difficult to maintain. Complexity is being dumped on the reader because the cure for the reuse problem did not consider where the complexity of {composition} would go.
         
         DITA, as a technology, does not prevent you from working in whole {narrative blocks}, or from constraining your blocks in any way you want (using its information typing capabilities). But the block and map model (whether implemented by DITA or any other system) presents this inherent tension between creating smaller {semantic blocks} to optimize for reuse vs creating constrainable {narrative blocks} to optimize for content quality. 
         
         A related note here is that in a reuse scenario, your motives for constraining the semantic block may be different from your motives for constraining the narrative block. The reasons for constraining the semantic block might be to adhere to the theory of information typing, or to enhance the {composability} of the reusable blocks. The reasons for constraining the {narrative block} might be to ensure the quality or consistency of the information presented to the user. 
 
-        But merely doing reuse of content blocks does not require either kind of constraint. The constraints may improve quality and reliability of the system if used correctly and consistently, but the actual act of composing larger blocks out of smaller blocks does not require them. This has led many organization to use DITA for its reuse capabilities without paying any particular attention to its constraint capabilities or its information typing roots. People taking this approach will sometime write their content in the base `topic` topic type rather than a more constrained specialization.
+        But merely doing reuse of content blocks does not require either kind of constraint. The constraints may improve quality and reliability of the system if used correctly and consistently, but the actual act of composing larger blocks out of smaller blocks does not require them. This has led many organization to use DITA for its reuse capabilities without paying any particular attention to its constraint capabilities or its information typing roots. People taking this approach will sometime write their content in the base `topic` topic type rather than a more constrained specialization. Quite simply, they are not finding that the partitioning of information design provided by DITA's information typing to be useful and so are ignoring it. Of course, this means that they are laying the responsibility for composability on the writers, but this does not make them any worse off if DITA's information typing was not helping the writers, or DITAs approach did not fit the material. 
         
-        The growing popularity of this approach to reuse has led to the development of alternatives to DITA that provide the same reuse-management capabilities but remove the constraint mechanisms. One example of this trend is {Paligo}(tool), a reuse-focused component content management system that uses {DocBook} as its underlying content format, specifically for the purpose of minimizing constraints on the content.[http://idratherbewriting.com/2016/08/01/paligo-the-story-xml-ccms-in-the-cloud/] Such systems can reduce the up-front complexity of component-based {content-reuse}, though possibly at the expense of costs down the road due the failure to apply constraints up front.  
-        
-        DITA's sweet spot, therefore, would appear to be {content reuse} scenarios in which you want to place constraints on the reusable content units that follow the "information typing" model, but can live without placing constraints on the narrative blocks that are built from those units. 
-
-        Note, though, that this analysis is only focused on DITA as a tool for structured writing. DITA is also a tool for {content management} and it role in making content management systems work effectively has to be evaluated separately. And, as pointed out above, DITA provides a high-level tools for information typing which can be used for things outside this sweet spot, and potentially having nothing to do with its {reuse} features. How broad this range of applicability is depends largely on where the sweet spots of other tools lie. Your needs may not coincide perfectly with the sweet spot of any one tool. At that point, the right choice is the one that can be adapted for your needs at the least cost. That calculation is outside the scope of this book. I will try to point out where costs lie in each alternative, but quantifying them for individual situations is an exercise left to the reader.        
+        The growing popularity of this approach to reuse has led to the development of alternatives to DITA that provide the same reuse-management capabilities but remove the constraint mechanisms. One example of this trend is {Paligo}(tool), a reuse-focused component content management system that uses {DocBook} as its underlying content format, specifically for the purpose of minimizing constraints on the content.[http://idratherbewriting.com/2016/08/01/paligo-the-story-xml-ccms-in-the-cloud/] Such systems can reduce the up-front complexity of component-based {content-reuse}, though possibly at the expense of costs down the road due the failure to apply constraints up front. In other words, more unhandled complexity falling through to readers. 
          
     section: DocBook
     
-        {DocBook} is an extensive, largely document-domain language with a long history and an extensive body of processing tools and support. As we have noted, {DocBook} is not a tightly constrained language. Instead it is focused on providing very broad capability for describing document structures. 
+        {DocBook} is an extensive, largely document-domain language with a long history and an extensive body of processing tools and support. As we have noted, {DocBook} is not a tightly constrained language. Instead it is focused on providing very broad capability for describing document structures. In other words, it is mainly concerned with partitioning the document domain from the media domain in as comprehensive manner as possible. It is making no attempt to constrain the rhetoric of content in any way, and therefor no attempt to partition and distribute any part of the creative aspects of the content system. 
         
-        Unlike {DITA}, {DocBook} does not ascribe to any information typing theory. It does not have an opinion about how content should be written or organized. It is very much about the structure of books, and leaves it to the author to decide what the {rhetorical structure} of the text should be. In other words, DocBook makes no attempt to constrain the rhetorical structure of a work, and in fact makes every attempt to avoid constraining it. 
+        Unlike {DITA}, {DocBook} does not ascribe to any information typing theory. It does not have an opinion about how content should be written or organized. It is very much about the structure of books, and leaves it to the author to decide what the {rhetorical structure} of the text should be. In other words, DocBook makes no attempt to constrain the rhetorical structure of a work, and in fact makes every attempt to avoid constraining it. The downside of this hands-off approach is that DocBook is a complex system, and the writer is forced to deal with this tool complexity without any of the benefit of other aspects of their task being partitioned and directed away. Of course, this is not to say that the tool complexity of DocBook is any worse than that of similarly complex and capable publishing tools like FrameMaker. It may well be less so. 
         
-        The result, however, is an extremely complex system that can be quite challenging to learn and use. Because of this, writers often use simplified subsets of DocBook. (Where DITA is sometimes customized by the addition of elements, DocBook is often customized by their subtraction.) However, DocBook remains popular with many for its lack of constraint combined with its rich feature set. 
+        DocBook is, nonetheless, an extremely complex system that can be quite challenging to learn and use. Because of this, writers often use simplified subsets of DocBook. (Where DITA is sometimes customized by the addition of elements, DocBook is often customized by their subtraction.) However, DocBook remains popular with many for its lack of constraint combined with its rich feature set. 
         
-        Because of its lack of constraint, {DocBook} is not a particularly great fit with the idea of structured writing as a means improve content quality through the application of constraints. However, it can play a very useful role in a structured writing tools chain as a language for the {presentation algorithm}. This is exactly how it is used in the production of this book. The book is written in SAM is a small, constrained language developed just for the purpose, which is then transformed by the presentation algorithm into DocBook, which then feeds the publisher's standard publishing tools.  The DocBook created by this method matches the publisher's exact specifications as required to make the tools work correctly. 
+        Because of its lack of constraint, {DocBook} is not a particularly great fit with the idea of structured writing as a means to partition and redirect the complexity of the content system. However, it can play a very useful role in a structured writing tools chain as a language for the {presentation algorithm}. This is exactly how it is used in the production of this book. The book is written in SAM is a small, constrained language developed just for the purpose, which is then transformed by the presentation algorithm into DocBook, which then feeds the publisher's standard publishing tools.  The DocBook created by this method matches the publisher's exact specifications as required to make the tools work correctly. 
         
-        This is a more reliable process than if I had written the book in DocBook directly. I wrote my previous book in DocBook (an experience that contributed to my decision to develop SAM) but it took a lot of revision to get the DocBook I wrote into the form that the publication process required. In other words, the publishing process has a set of constraints that are not enforced by DocBook itself, and have to be imposed by human oversight and editing when an author writes in DocBook. But in my highly constrained SAM-based markup language, all those constraints were factored out, which enabled me to translate it reliably into the DocBook that the publisher needed.  
+        In using this approach I was partitioning the complexity of meeting the Publisher's DocBook requirements from my task of writing the book and providing myself with a much simpler authoring interface (both syntactically and semantically simpler). Of course, I was transferring that complexity to myself in another role, since I had to write the algorithm that transformed my SAM source from my simple book authoring language to the publisher's preferred form of DocBook. But this was a big win for me, because writing that algorithm was a separate activity that did not impinge on my attention when I was engaged in the writing task. Another benefit was that because my little book writing language is highly constrained, conformance was much easier, and that meant that the DocBook produced by my algorithm was much more consistent and conformed much better to the publisher's requirements than if I had written in DocBook directly. 
+
+        I wrote my previous book directly in DocBook (an experience that contributed to my decision to develop SAM) but it took a lot of revision to get the DocBook I wrote into the form that the publication process required. In other words, the publishing process has a set of constraints that are not enforced by DocBook itself, and have to be imposed by human oversight and editing when an author writes in DocBook. But in my highly constrained SAM-based markup language, all those constraints were factored out, which enabled me to translate it reliably into the DocBook that the publisher needed.  
         
     section: S1000D
 
-        {S1000D} is a specification developed in the aviation and defense industries specifically for the complex documentation tasks of those industries, and intended to support the development of the Interactive Electronic Technical Manuals (IETMs) that are typically required in that space. While it obviously has a fair amount of {subject domain} structures for the target domains, it also has media domain structures targeted at the production of IETMs and extensive management domain structures designed to support the common source database (CSDB), the content management architecture which is part of the S1000D specification. S1000D, in other words, is much more than a structured writing format. It is a specification for a complete document production system for a specific industrial sector. 
+        {S1000D} is a specification developed in the aviation and defense industries specifically for the complex documentation tasks of those industries, and intended to support the development of the Interactive Electronic Technical Manuals (IETMs) that are typically required in that space. While it obviously has a fair amount of {subject domain} structures for the target domains, it also has media domain structures targeted at the production of IETMs and extensive management domain structures designed to support the common source database (CSDB), the content management architecture which is part of the S1000D specification. S1000D, in other words, is much more than a structured writing format. It is a specification for a complete document production system for a specific industrial sector. S1000D, in other words, represents a particular partitioning of the content system designed for a particular industry.
 
     section: HTML
     
@@ -99,148 +97,9 @@ chapter:(#chapter.heavyweight) Heavyweight markup languages
         
     section: Subject domain languages
     
-        There are hundreds of subject domain languages written in XML. Most of these are more data oriented than content oriented, but you might be able to derive content from some of them using the {extract and merge} algorithm. Wikipedia maintains an extensive list at {https://en.wikipedia.org/wiki/List_of_markup_languages}(url). 
+        There are hundreds of subject domain languages written in XML. Most of these are more data oriented than content oriented, but you might be able to derive content from some of them using the {extract and merge} algorithm. Wikipedia maintains an extensive list at {https://en.wikipedia.org/wiki/List_of_markup_languages}(url). However, most subject domain languages used for content are developed in house to suit a particular subject matter and reader base. 
         
-        One interesting example is {BeerXML}(language):
-        
-        ```(BeerXML)
-            <?xml version="1.0" encoding="ISO-8859-1"?>
-            <RECIPES>
-                <RECIPE>
-                    <NAME>Dry Stout</NAME>
-                    <VERSION>1</VERSION>
-                    <TYPE>All Grain</TYPE>
-                    <BREWER>Brad Smith</BREWER>
-                    <BATCH_SIZE>18.93</BATCH_SIZE>
-                    <BOIL_SIZE>20.82</BOIL_SIZE>
-                    <BOIL_TIME>60.0</BOIL_TIME>
-                    <EFFICIENCY>72.0</EFFICIENCY>
-                    <TASTE_NOTES>Nice dry Irish stout with a warm body but low starting gravity much like the famous drafts.</TASTE_NOTES>
-                    <RATING>41</RATING>
-                    <DATE>3 Jan 04</DATE>
-                    <OG>1.036</OG>
-                    <FG>1.012</FG>
-                    <CARBONATION>2.1</CARBONATION>
-                    <CARBONATION_USED>Kegged</CARBONATION_USED>
-                    <AGE>24.0</AGE>
-                    <AGE_TEMP>17.0</AGE_TEMP>
-                    <FERMENTATION_STAGES>2</FERMENTATION_STAGES>
-                    <STYLE>
-                        <NAME>Dry Stout</NAME>
-                        <CATEGORY>Stout</CATEGORY>
-                        <CATEGORY_NUMBER>16</CATEGORY_NUMBER>
-                        <STYLE_LETTER>A</STYLE_LETTER>
-                        <STYLE_GUIDE>BJCP</STYLE_GUIDE>
-                        <VERSION>1</VERSION>
-                        <TYPE>Ale</TYPE>
-                        <OG_MIN>1.035</OG_MIN>
-                        <OG_MAX>1.050</OG_MAX>
-                        <FG_MIN>1.007</FG_MIN>
-                        <FG_MAX>1.011</FG_MAX>
-                        <IBU_MIN>30.0</IBU_MIN>
-                        <IBU_MAX>50.0</IBU_MAX>
-                        <COLOR_MIN>35.0</COLOR_MIN>
-                        <COLOR_MAX>200.0</COLOR_MAX>
-                        <ABV_MIN>3.2</ABV_MIN>
-                        <ABV_MAX>5.5</ABV_MAX>
-                        <CARB_MIN>1.6</CARB_MIN>
-                        <CARB_MAX>2.1</CARB_MAX>
-                        <NOTES>Famous Irish Stout.  Dry, roasted, almost coffee like flavor.  Often soured with pasteurized sour beer.  Full body perception due to flaked barley, though starting gravity may be low.  Dry roasted flavor.</NOTES>
-                    </STYLE>
-                    <HOPS>
-                        <HOP>
-                            <NAME>Goldings, East Kent</NAME>
-                            <VERSION>1</VERSION>
-                            <ALPHA>5.0</ALPHA>
-                            <AMOUNT>0.0638</AMOUNT>
-                            <USE>Boil</USE>
-                            <TIME>60.0</TIME>
-                            <NOTES>Great all purpose UK hop for ales, stouts, porters</NOTES>
-                        </HOP>
-                    </HOPS>
-                    <FERMENTABLES>
-                        <FERMENTABLE>
-                            <NAME>Pale Malt (2 row) UK</NAME>
-                            <VERSION>1</VERSION>
-                            <AMOUNT>2.27</AMOUNT>
-                            <TYPE>Grain</TYPE>
-                            <YIELD>78.0</YIELD>
-                            <COLOR>3.0</COLOR>
-                            <ORIGIN>United Kingdom</ORIGIN>
-                            <SUPPLIER>Fussybrewer Malting</SUPPLIER>
-                            <NOTES>All purpose base malt for English styles</NOTES>
-                            <COARSE_FINE_DIFF>1.5</COARSE_FINE_DIFF>
-                            <MOISTURE>4.0</MOISTURE>
-                            <DIASTATIC_POWER>45.0</DISASTATIC_POWER>
-                            <PROTEIN>10.2</PROTEIN>
-                            <MAX_IN_BATCH>100.0</MAX_IN_BATCH>
-                        </FERMENTABLE>
-            ...
-                    
-                    </FERMENTABLES>
-                    <MISCS>
-                        <MISC>
-                            <NAME>Irish Moss</NAME>
-                            <VERSION>1</VERSION>
-                            <TYPE>Fining</TYPE>
-                            <USE>Boil</USE>
-                            <TIME>15.0</TIME>
-                            <AMOUNT>0.010</AMOUNT>
-                            <NOTES>Used as a clarifying agent during the last few minutes of the boil</NOTES>
-                        </MISC>
-                    </MISCS>
-                    <WATERS>
-                        <WATER>
-                            <NAME>Burton on Trent, UK</NAME>
-                            <VERSION>1</VERSION>
-                            <AMOUNT>20.0</AMOUNT>
-                            <CALCIUM>295.0</CALCIUM>
-                            <MAGNESIUM>45.0</MAGNESIUM>
-                            <SODIUM>55.0</SODIUM>
-                            <SULFATE>725.0</SULFATE>
-                            <CHLORIDE>25.0</CHLORIDE>
-                            <BICARBONATE>300.0</BICARBONATE>
-                            <PH>8.0</PH>
-                            <NOTES> Use for distinctive pale ales strongly hopped.  Very hard water accentuates the hops flavor. Example: Bass Ale
-                            </NOTES>
-                        </WATER>
-                    </WATERS>
-                    <YEASTS>
-                        <YEAST>
-                            <NAME>Irish Ale</NAME>
-                            <TYPE>Ale</TYPE>
-                            <VERSION>1</VERSION>
-                            <FORM>Liquid</FORM>
-                            <AMOUNT>0.250</AMOUNT>
-                            <LABORATORY>Wyeast Labs</LABORATORY>
-                            <PRODUCT_ID>1084</PRODUCT_ID>
-                            <MIN_TEMPERATURE>16.7</MIN_TEMPERATURE>
-                            <MAX_TEMPERATURE>22.2</MAX_TEMPERATURE>
-                            <ATTENUATION>73.0</ATTENUATION>
-                            <NOTES>Dry, fruity flavor characteristic of stouts.  Full bodied, dry, clean flavor. </NOTES>
-                            <BEST_FOR>Irish Dry Stouts</BEST_FOR>
-                            <FLOCCULATION>Medium</FLOCCULATION>
-                        </YEAST>
-                    </YEASTS>
-                    <MASH>
-                        <NAME>Single Step Infusion, 68 C</NAME>
-                        <VERSION>1</VERSION>
-                        <GRAIN_TEMP>22.0</GRAIN_TEMP>
-                        <MASH_STEPS>
-                            <MASH_STEP>
-                                <NAME>Conversion Step, 68C </NAME>
-                                <VERSION>1</VERSION>
-                                <TYPE>Infusion</TYPE>
-                                <STEP_TEMP>68.0</STEP_TEMP>
-                                <STEP_TIME>60.0</STEP_TIME>
-                                <INFUSE_AMOUNT>10.0</INFUSE_AMOUNT>
-                            </MASH_STEP>
-                        </MASH_STEPS>
-                    </MASH>
-                </RECIPE>
-            </RECIPES>        
-        
-        As you can see, this is a recipe language, but a much more detailed and precise recipe language than any that we have looked at before. It is a recipe language for beer and for beer only. It takes a lot of information that might normally be written in paragraphs and breaks it up into precisely labeled fields. This means, of course, that it is far more {constrained} than generic recipe markup. You can do far more {conformance} testing on this recipe than you could on a normal one, and manipulate and query the information in far more ways that you could with a conventional recipe format. 
+
         
         
         
