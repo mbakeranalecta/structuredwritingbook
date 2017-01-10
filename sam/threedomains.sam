@@ -106,34 +106,26 @@ chapter:(#chapter.three-domains) How ideas become content
 
         >>>(image ../graphics/3d.png)
 
-        They then decide to give the dish the name “Chicken Noodle Soup.” That name is content. However, it is not yet part of a document. It is a piece of data in the subject domain.  
+        They then decide to give the dish the name “Chicken Noodle Soup.” That name is content. They figure out which ingredients they want to use and how they want to make the dish. This is all information about making chicken noodle soup but it is not yet part of a document. It is information in the subject domain.  
         
         >>>(image ../graphics/3d_name.png)
 
-        Then the author composes a recipe for Chicken Noodle Soup. They are now composing piece of information like a list of ingredients and a preparation procedure. This is information in the subject domain. Writing itself is always in the subject domain. It exists to describe its subject. But they are also deciding how to organize and present this information: how to present this information in a way that is accessible to the reader. These are decision in the document domain. If the matter of a document is always in the subject domain, its organization is always in the document domain. Documents are how we organize and present information. 
+        Then the author decides how they want to present this information to help other people make Chicken Noodle Soup. They decide they want to have a title, a picture, an introduction, a list of ingredients, and a set of preparation steps. They are no longer gathering information; now they are focused on how to present the information they have gathered. These are decision in the document domain. Documents are how we organize and present information. 
 
         >>>(image ../graphics/3d_title.png)
 
-        As the process continues, some format for publishing the recipe is chosen. This might be HTML. HTML is a markup language in the document domain. That is, it contains markup for typical document structures such as titles, paragraphs, and lists. To express the title of the recipe in HTML, we turn the declaration of the title of the recipe into a declaration about an HTML heading level:
+        Then the writer starts to think about how the document will look on screen or on paper. What font will be used for the heading and the body text. How large will the heading and the body be. Will the quantity of the ingredients be flush right? Will the be leading dots? Will the presentation steps be numberer or just presented sequentially?  How big will the picture be? Will the text wrap around it? These are decision in the media domain. 
         
         >>>(image ../graphics/3d_h1.png)
        
-        This breaks the association of the title with the subject domain. At this stage we are recording that “Chicken Noodle Soup” is the title of a web page, not that it is the title of a recipe, and not that it is the name of a dish. However, we have now specified what type of document this is: a web page.
-
-        If you follow modern practice, your HTML should not include any specific information about how the document will be rendered -- what fonts will be used, how big the margins will be, etc. These things should be specified by a CSS stylesheet. 
-        
-        >>>(image ../graphics/3d_css.png)
-
-        Adding the CSS moves the entire package further into the media domain. Notice, however, that in this case, all of the document domain information in the HTML format has been retained. The movement from the subject domain through the document domain into the media domain does not have to mean that information from an earlier domain has to be thrown away as you add information from the later domains. For instance, HTML5 microformats allow you to retain subject domain information all the way into the user’s browser. Traditional publishing techniques tended to throw away subject domain information as the process advanced. Today, that information is more likely to be retained as long as possible. (One of the implications of the term “intelligent content”.)
-
-        When the resulting page is loaded into a browser, dots are painted on the screen in the appropriate shape. 
-        
-        >>>(image ../graphics/3d_chicken.png)
-
-        This process involves translating the document and media domain information in the HTML and CSS into the graphics primitives of the platform on which the content is displayed -- basically lighting up dots on a screen or printing dots on paper. This final step will destroy all document and subject domain information, but since the browser retains the HTML source, any information that has reached that point is available to code running in the browser and to other services running on the Web. 
-
         All content passes through the three domains. Content always begins with the author thinking about subjects in the real world. They then decide to express ideas about those subjects in words. They collect their ideas together and determine an order and structure to express them. Finally, they decide how they will be formatted in a particular media. The question is, where in this process that all content goes through does the author start recording the content. 
         
-        Where did the author in this scenario actually record their content? They could have recorded it in the subject domain and let an algorithm take it from there. Since the chosen output format is HTML, which is a document domain language, they could not have delayed recording any longer than that. Actually, that's not entirely true. If they used a graphical HTML editor that allowed them to add styles by hand, they could actually have done their work in the media domain, even if a document domain tagging language was being created under the surface. Of course, if they had been intended to publish the recipe on paper, perhaps just making one copy to give to a friend, they could have delayed recording it until the very end of the media domain. Wherever they recorded it, however, their thought process in creating the finished recipe would have had to go through all three domains. 
+        Do they lay it all out in the formatted version as they write? Then they are working in the media domain. 
         
-        An content must pass through all three domains to get from ideas in a head to dots on a page. But the author can record that content in the media domain, the document domain, or the subject domain. In the next three chapters we will look at what it is like to write in each domain. 
+        Do they record the presentation units like lists, heading, and step without associating specific formatting to them? Then they are working in the document domain. 
+        
+        Do they record the raw information as data, for instance, recording each ingredient and its quantity as ingredients and quantities, rather than as list items? They they are working in the subject domain. 
+        
+        If they recorded it in the media domain, it is ready to publish. If they recorded it in the document domain, then it needs to be formatted before it can be published (and could potentially be formatted differently for different media or different publications). If they recorded it in the subject domain, it needs to be organized into a document (and then formatted) before it can be published (but can potentially be organized into different kinds or documents or different collections).   
+             
+        All content must pass through all three domains to get from ideas in a head to dots on a page. But the author can record that content in the media domain, the document domain, or the subject domain. In the next three chapters we will look at what it is like to write in each domain. 
