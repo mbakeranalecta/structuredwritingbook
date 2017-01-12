@@ -235,6 +235,16 @@
     <xsl:template match="annotation[@type='format']">
         <xsl:apply-templates/>
     </xsl:template>
+
+    <xsl:template match="annotation[@type='person']">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
+    <xsl:template match="annotation[@type='citetitle']">
+        <db:citetitle>
+            <xsl:apply-templates/>
+        </db:citetitle>
+    </xsl:template>
     
     <xsl:template match="annotation[@type='url']">
         <db:olink targetptr="{.}">
