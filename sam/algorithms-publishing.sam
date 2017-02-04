@@ -7,11 +7,11 @@ chapter:(#chapter.publishing) Publishing
 
     All structured writing must eventually be published. Publishing structured content mean transforming it from the domain in which it was created ({subject domain}(concept), {document domain}(concept), or the abstract end of the {media domain}(concept)) to the most concrete end of the media domain spectrum: dots on paper or screen.
     
-    Publishing is a complex process, particularly in an environment where you may be practicing single sourcing, content reuse, or many of the other structured writing algorithms we have yet to look at. The best way to handle that complexity is to partition and distribute it to appropriate people and processes.  
+    Publishing is a complex process, particularly in an environment where you may be practicing single sourcing, content reuse, or many of the other structured writing algorithms we have looked at. The best way to handle that complexity is to partition and distribute it to appropriate people and processes.  
     
-    In this chapter, I am going to describe a partitioning of the publishing process into four basic algorithms which I have mentioned in passing in earlier chapters: the synthesis, presentation, formatting, and encoding algorithms. These four stages are formalized in the {SPFE architecture}(tool), which I will talk about later, but I think they are a fair representation of what goes on in most publishing tool chains, even if those tool chains don't divide responsibilities exactly as I describe them here, or make such clear separation between them as I do here.
+    In this chapter, I am going to describe a partitioning of the publishing process into four basic algorithms which I have mentioned in passing in earlier chapters: the synthesis, presentation, formatting, and encoding algorithms. These four stages are formalized in the {SPFE architecture}(tool), which I will talk about later, but I think they are a fair representation of what goes on in most publishing tool chains, even if those tool chains don't divide responsibilities exactly as I describe them here, or make such clear separation between them as I do.
     
-    We have noted that the successful partitioning of a process depends on the ability to communicate everything that is needed for a partition to do its job, and that one hallmark of a successful partitioning is how clear and functional the required communication is. In partitioning of the publication process that I will describe here, each step deal with a different concern and each step produces an output, in the form of a structured document or set of documents, that is structured in terms of the concern it deal with. This then becomes the input to the next step. The structures that these steps produce and consume are stages along the path from the subject to document to media domains. In other words, the publication process is structured to move content through the domains, just as we described in [#chapter.three-domains].
+    We have noted that the successful partitioning of a process depends on the ability to communicate everything that is needed for a partition to do its job, and that one hallmark of a successful partitioning is how clear and functional the required communication is. In partitioning of the publication process that I will describe here, each step deals with a different concern and each step produces an output, in the form of a structured document or set of documents, that is structured in terms of the concern it deal with. This then becomes the input to the next step. The structures that these steps produce and consume are stages along the path from the subject to document to media domains. In other words, the publication process is structured to move content through the domains, just as we described in [#chapter.three-domains].
     
     section: The Rendering Algorithm
     
@@ -58,9 +58,9 @@ chapter:(#chapter.publishing) Publishing
         
         It is the pagination function, for instance, that figures out how to honor the keep-with-next formatting in an application like Word or FrameMaker. It also has to work out how to deal with complex figures such as tables: how to wrap text in each column, how to break a table across pages, and how to repeat the header rows when a table breaks to a new page. Finally, it has to figure out how to number each page and then fill in the right numbers for any references that include a particular page number. 
         
-        This is all complex and exacting stuff and depending on your requirements you may have to pay some attention to make sure that you are using a formatting language the is capable of doing all this the way you want it done. 
+        This is all complex and exacting stuff and depending on your requirements you may have to pay some attention to make sure that you are using a formatting language that is capable of doing all this the way you want it done. 
         
-        Also, you are going to have to think about just how automatic you want all of this to be. In a high-volume publication environment you want it to be fully automatic, but this could involve accepting some compromises. For example, it is not uncommon for writers and editors to make slight edits to the actual text of a document in order to make pagination work better. This is very easy to do when you are working in the {media domain} in an application like {Word}(tool "Microsoft Word") or {FrameMaker}(tool). If you end up with the last two words of a chapter at the top of a page all by itself, for instance, it is usually possible to find a way to edit the final paragraph to reduce the word count just enough to pull the end of the chapter back to the preceding page. This sort of thing gets much harder to do when you are writing in the {document domain} or the {subject domain}, particularly if you are {single sourcing}(algorithm) content to more than one publication or {reusing content}(algorithm "content reuse") in many places. An edit that fixes one pagination problem could cause another, and a major reason for writing in those domains it to take formatting concerns off the author's plate.
+        Also, you are going to have to think about just how automatic you want all of this to be. In a high-volume publication environment you want it to be fully automatic, but this could involve accepting some compromises. For example, in book publishing it is not uncommon for writers and editors to make slight edits to the actual text of a document in order to make pagination work better. This is very easy to do when you are working in the {media domain} in an application like {Word}(tool "Microsoft Word") or {FrameMaker}(tool). If you end up with the last two words of a chapter at the top of a page all by itself, for instance, it is usually possible to find a way to edit the final paragraph to reduce the word count just enough to pull the end of the chapter back to the preceding page. This sort of thing gets much harder to do when you are writing in the {document domain} or the {subject domain}, particularly if you are {single sourcing}(algorithm) content to more than one publication or {reusing content}(algorithm "content reuse") in many places. An edit that fixes one pagination problem could cause another, and a major reason for writing in those domains it to take formatting concerns off the author's plate.
         
         For Web browsers and similar dynamic media viewers, such as E-Book readers or help systems, the whole pagination process takes place dynamically when the content is loaded into the view port, and it can be redone on the fly if the reader resizes their browser or rotates their tablet. This means the publisher has very little opportunity to tweak the pagination process. They can guide it by providing rules such as keep-together instructions through things like {CSS}(language), but they obviously cannot hand tweak the text to make it fit better each time the view port is resized. 
         
@@ -72,15 +72,15 @@ chapter:(#chapter.publishing) Publishing
         
         >>>(image ../graphics/formattingpub.png)
                 
-        In the case of HTML output, the formatting algorithm generates HTML (with connections to the relevant CSS, JavaScript, and other formatting resources). This is the end of the publishing process for the Web, since the browser will perform the encoding algorithm internally. In the case of paper output, the formatting algorithm generates a formatting language such as {TeX} or {XSL-FO} which is then fed to the encoding algorithm as implemented by a TeX or XSL-FO processor. 
+        In the case of HTML output, the formatting algorithm generates HTML (with connections to the relevant CSS, JavaScript, and other formatting resources). This is the end of the publishing process for the Web, since the browser will perform the encoding algorithm internally and the computer operating system will likely take care of the rendering. In the case of paper output, the formatting algorithm generates a formatting language such as {TeX} or {XSL-FO} which is then fed to the encoding algorithm as implemented by a TeX or XSL-FO processor. 
         
         In some cases, organizations use word processing or desktop publishing applications to tweak the formatting of the output by having the formatting algorithm generate the input format of those applications (typically {RTF}(language) for Word and {MIF}(language) for FrameMaker). This allows them to exercise manual control over pagination, but with an obvious loss in process efficiency. In particular, any tweaks made in these applications are not routed back to the source content, so they will have to be done again by hand the next time the content is published. 
         
-        This algorithm is usually the province of publication designers. One of the most elementary structured writing algorithms is to {separate content from formatting} ([#chapter.separating]) which means removing formatting as one of the writer's concerns. Almost every structured writing implementation will involve writing formatting algorithms, however. Even if you use off-the-shelf languages like DITA or DocBook, you will have to write or modify formatting algorithms to get the specific formatting your want. 
+        This algorithm is usually the province of publication designers. One of the most elementary structured writing algorithms is to {separate content from formatting} ([#chapter.separating]) which means removing formatting as one of the writer's concerns. Almost every structured writing implementation will involve writing formatting algorithms, however. Even if you use off-the-shelf languages like DITA or DocBook, you will have to write or modify formatting algorithms to get the specific formatting you want. We looked at some examples of basic formatting algorithms in [#chapter.processing]. 
 
     section: The Presentation Algorithm
 
-        The job of the presentation algorithm is to determine exactly how the content is going to be organized as a document. A pure document domain document is a representation of the presentation of the content. The job of the {presentation algorithm} id to produce a pure {document domain} version of the content. This may mean producing the entire presentation from purely {subject domain} content, or simply handling the occasional subject domain structure in a largely document domain file.   
+        The job of the presentation algorithm is to determine exactly how the content is going to be organized as a document. A pure document domain document is a representation of the presentation of the content. The job of the {presentation algorithm} is to produce a pure {document domain} version of the content. This may mean producing the entire presentation from purely {subject domain} content, or simply handling the occasional subject domain structure in a largely document domain file.   
         
         >>>(image ../graphics/presentation.png)
         
@@ -94,7 +94,7 @@ chapter:(#chapter.publishing) Publishing
        
         |Labeling| Any grouping of content requires labels to identify the groups. This includes things like titles and labels on data fields. Again, these are typically created by authors in the {document domain}, but are almost always factored out when authors write in the {subject domain} (most labels indicate the place of content in the subject domain, so inserting them is a necessary part of reversing the factoring out of labels that occurs when you move to the subject domain).
        
-        |Relating| Ordering, grouping, blocking, and labeling cover organization on a two dimensional page or screen. But content can be organized in other dimensions by creating non-linear relationships between pieces of content. This includes hypertext links and cross references. 
+        |Relating| Ordering, grouping, blocking, and labeling cover organization on a two dimensional page or screen. But information is related to other information in complex ways which we can express by creating non-linear relationships between pieces of content. This includes hypertext links and cross references. 
         
     section: Differential presentation algorithms
         
@@ -108,7 +108,7 @@ chapter:(#chapter.publishing) Publishing
                
         section: The linking algorithm
        
-            How content is linked or cross-referenced is a key part of how it is organized in different media, and a key part of differential single sourcing. We will look at the {linking algorithm}(algorithm) in detail in [#chapter.linking].
+            How content is linked or cross-referenced is a key part of how it is organized in different media, and a key part of differential single sourcing. We looked at the {linking algorithm}(algorithm) in detail in [#chapter.linking].
        
         section: The information architecture algorithm
        
@@ -121,7 +121,7 @@ chapter:(#chapter.publishing) Publishing
         
         Among other things, the synthesis domain resolves all management domain structures in the content (unless some are to be retained for downstream post-publication algorithms to work with). This means that it processes all inclusions and evaluates all conditions. The result is document domain or subject domain content with all of the management structures removed and replaced with the appropriate document or subject domain structures and content. 
         
-        In the case of document domain content, processing the management domain structures yields a document domain structure which may then be a pass-through for the presentation algorithm (that is, the document domain markup may already express the desired presentation). 
+        In the case of document domain content, processing the management domain structures yields a document-domain structure which may then be a pass-through for the presentation algorithm (that is, the document domain markup may already express the desired presentation). 
         
         In the case of the subject domain content, processing management domain structures yields a definitive set of subject domain structures which can be passed to the presentation algorithm for processing to the document domain.
         
@@ -141,23 +141,23 @@ chapter:(#chapter.publishing) Publishing
 
         section: The reuse algorithm
         
-            Pulling in reused content is part of the synthesis process. 
+            Pulling in reused content is part of the synthesis process. We looked at the reuse algorithm in [#chapter.reuse].
 
 
         section: The extraction algorithm
         
-            In some cases you may wish to extract information from external sources to create content. This can include data created for other purposes, such as application code or data created and maintained as a canonical source of information, such as a database of features for different models of a car. We will look at the extraction and merge algorithms in [#chapter.extract].
+            In some cases you may wish to extract information from external sources to create content. This can include data created for other purposes, such as application code or data created and maintained as a canonical source of information, such as a database of features for different models of a car. See [#chapter.extract].
             
         section: The merge algorithm
         
-            In one sense, every structured writing is a merge algorithm. As we saw in [#chapter.processing], most algorithms consist of factoring into content information or metadata that was factored out as we moved the point of recording from the {media domain} to the {document domain} and the {subject domain}. But it is also possible, and often useful, to combine information from different sources to create a new set of content. For instance, if you are creating a reference for any kind of computer code or data, there is almost always a way to {extract} a lot of the information you need from the existing definitions of that code or data. Extracting the information from the source is both more economical and more reliable than rewriting it from scratch. But you will almost certainly want to add additional written information as well. So, if you write the additional information in a structured way that identifies the piece of extracted information it corresponds to, you can use a merge algorithm to pull the two together for publication. More about the merge algorithm in [#chapter.merge].
+            In one sense, every structured writing algorithm is a merge algorithm. As we saw in [#chapter.processing], most algorithms consist of factoring into content information or metadata that was factored out as we moved the point of recording from the {media domain} to the {document domain} and the {subject domain}. But it is also possible, and often useful, to combine information from different sources to create a new set of content. For instance, if you are creating a reference for any kind of computer code or data, there is almost always a way to {extract} a lot of the information you need from the existing definitions of that code or data. Extracting the information from the source is both more economical and more reliable than rewriting it from scratch. But you will almost certainly want to add additional written information as well. So, if you write the additional information in a structured way that identifies the piece of extracted information it corresponds to, you can use a merge algorithm to pull the two together for publication. More about the merge algorithm in [#chapter.merge].
             
 
         
             
     section: Deferred synthesis
         
-        For static presentation, all synthesis happens before the material is presented. But if you are presenting content on the web, you can defer parts of the synthesis algorithm to the browser, which can synthesize and present content by making calls to web services or other back-end data source, or by making a request to code running on the server to synthesize and present part of the page. 
+        For static presentation, all synthesis happens before the material is presented. But if you are presenting content on the web, you can defer parts of the synthesis algorithm to the browser, which can synthesize and present content by making calls to web services or other back-end data source, or by making a request to code running on the server to synthesize and present part of the page. We looked at this in [#chapter.active].
         
         # more?
     
