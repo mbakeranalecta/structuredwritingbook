@@ -122,6 +122,29 @@ chapter:(#chapter.change) Change management
 
         As should be coming clear by this point, the change management algorithm is really an aspect of all the other algorithms. For any of the algorithms to keep working over time and as content changes, the structures that support those algorithms have to stay conformant. Part of designing those structures, therefore, should be thinking seriously about what it will take to maintain them in a conformant state when changes happen. Change management, therefore, relies heavily on the {conformance algorithm}. And this is a reciprocal relationship. To maintain conformance of your content, you have to be able to manage change successfully. But to manage change successfully, you need content to be conformant so that you can reliably identify the changes that are required and, as far as possible, execute those changes algorithmically. 
         
+        For example, say you have a movie review site that contains movie reviews as well as biographies of actors and directors. You have a review of _Rio Bravo_ marked up like this:
+        
+        ```(sam)
+            movie-review:
+                movie-title: Rio Bravo
+                review-text:
+                    In {Rio Bravo}(movie), {the Duke}(actor "John Wayne") 
+                    plays an ex-Union colonel.
+                    
+        At first, you do not have a biography for John Wayne on your site, so none of the reviews that mention John Wayne have a link to a biography. Then you add a John Wayne biography to your collection:
+        
+        ```(sam)
+            topic: 
+                title: Biography of John Wayne
+                index:
+                    type: actor
+                    value: John Wayne
+                body:
+                
+                    John Wayne was an American actor known for westerns.
+ 
+        Suddenly every movie review that mentions John Wayne in the text or lists him as a star should be linking to this biography. That might be fifty pages of your site that now should be linking to the topic you just added. That is a lot of change to process just because of one added page. But if you have used the linking technique based on subject annotations, as described in [#chapter.linking], then all you have to do is rebuild your content set and those links will be created automatically. There is literally no separate change management step that need needs to be done to get those links. It has been entirely factored out. 
+        
         As we noted in [#chapter.conformance], the heart of conformance is designing structures that are easy to conform to. Change management is not something you can tack on as an afterthought, but nor is is something that necessarily requires a separate set of structures. Content that is highly conformant and highly auditable is easy to change consistently, which in turn help maintain conformance. The heart of the problem lies in designing content for conformance. 
         
         

@@ -62,6 +62,29 @@ chapter:(#chapter.relevance) Relevance
         
         While humans and algorithms assess relevance in different ways, the foundations of relevance are the same for both: clear identification of the type and subject matter of the information. This means that you need to maintain {metadata} that clearly identifies the type and subject, and also present the content in a way that makes its type and subject evident at a glance. 
         
+        ```(sam)
+            recipe: Hard Boiled Egg
+                introduction:
+                    A hard boiled egg is simple and nutritious.
+                picture: 
+                    >>>(image egg.jpg)
+                ingredients:: ingredient, quantity
+                    eggs, 12
+                    water, 2qt
+                preparation:
+                    1. Place eggs in pan and cover with water.
+                    2. Bring water to a boil.
+                    3. Remove from heat and cover for 12 minutes.
+                    4. Place eggs in cold water to stop cooking.
+                    5. Peel and serve.
+                prep-time: 15 minutes
+                serves: 6
+                nutrition:
+                    serving: 1 large (50 g)
+                    calories: 78
+        
+        This recipe example contains a number of structures that both humans and algorithms can use to assess relevance. The simple fact that this is specifically a document of type `recipe` establishes basic relevance. The inclusion of a picture helps humans visually identify the recipe they are looking for. Information like the number of calories could be used by an algorithm to select recipes for a low-calorie cookbook. 
+        
         It is possible to maintain metadata on type and subject of content in a {content management system} that hosts content written in the document or subject domains. In this scenario, ensuring that the organization of the content makes the type and subject evident at a glance is a separate problem from correctly labeling the content in the CMS. While it is certainly possible, with the right authoring discipline, to make sure that the content demonstrates what the metadata claims about it, it is also possible for the content not to match what the metadata claims, or not to demonstrate its type and subject effectively. 
         
         Moving content to the {subject domain} allows you to show relevance to both humans and machines with the same structures, assuring that the two do not get out of sync. 

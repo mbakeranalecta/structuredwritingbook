@@ -25,7 +25,30 @@ chapter:(#chapter.conformance) Conformance
     
     But while this factors out one set of constraints, it also creates a new set of constraint in the new domain. When we factored out the formatting constraint for the titles of works cited, we introduced a new constraint, which is to markup the title of works using `citetitle`. Factoring one constraint into another is useful if it makes the constraint easier to conform to or easier to validate. A constraint may be easier to conform to if it is simpler, easier to remember, or does not require knowledge that is outside the writer's field. For instance, the `citetitle` tag is a single tag, not a set of formatting instructions, and the author knows when they are citing the title of a work. It may be easier to validate if it has fewer components or can be limited to a narrower scope. For instance, the set of things that are titles is smaller than the set of things that are formatted in italic, so validating the `citetitle` constraint requires looking at a smaller and more homogeneous set.  
     
-    If the constraint you are introducing is not easier to conform to or easier to validate, you probably should think twice before you introduce it. There are certainly cases where moving content to a more formal document domain model introduces more constraints than it eliminates without making those constraints easier to comply with or validate. On the other hand, sometimes those additional constraints are required to reduce complexity somewhere else in the process, or to manage previously unmanaged complexity. Inevitably, authors have to make some concessions to the needs of algorithms, but we don't want algorithms to impose such a burden on authors that we distract them from doing good research and quality writing. Any complexity that writers can't handle gets dumped on the reader. So if the structures you create for the sake of algorithms prove too complex for authors to conform to, or too difficult to validate, you should ask if you could refactor those constraints again, perhaps to the {subject domain}(concept), so that you get both the precision and detail that the algorithm needs and the ease of use and validation that the writer needs. In other words, don't address one source of complexity in isolation. Keep moving complexity until every piece of it is handled by a person or process with skills, bandwidth, and resources to handle it. 
+    If the constraint you are introducing is not easier to conform to or easier to validate, you probably should think twice before you introduce it. There are certainly cases where moving content to a more formal document domain model introduces more constraints than it eliminates without making those constraints easier to comply with or validate. On the other hand, sometimes those additional constraints are required to reduce complexity somewhere else in the process, or to manage previously unmanaged complexity. In other words, you are transferring complexity to writers from somewhere else in the content system.
+    
+    Inevitably, writers have to make some concessions to the needs of algorithms, but we don't want algorithms to impose such a burden on authors that we distract them from doing good research and quality writing. Any complexity that writers can't handle gets dumped on the reader. So if the structures you create for the sake of algorithms prove too complex for authors to conform to, or too difficult to validate, you should ask if you could refactor those constraints again, perhaps to the {subject domain}(concept), so that you get both the precision and detail that the algorithm needs and the ease of use and validation that the writer needs. In other words, don't address one source of complexity in isolation. Keep moving complexity until every piece of it is handled by a person or process with skills, bandwidth, and resources to handle it. 
+    
+    The recipe examples we have been using shows how a subject-domain structure can transfer complexity away from writers while providing for a high level of conformance checking. 
+    
+    ```(sam)
+        recipe: Hard Boiled Egg
+            introduction:
+                A hard boiled egg is simple and nutritious.
+            ingredients:: ingredient, quantity
+                eggs, 12
+                water, 2qt
+            preparation:
+                1. Place eggs in pan and cover with water.
+                2. Bring water to a boil.
+                3. Remove from heat and cover for 12 minutes.
+                4. Place eggs in cold water to stop cooking.
+                5. Peel and serve.
+            prep-time: 15 minutes
+            serves: 6
+            
+    Pulling the prep-time and serving numbers into separate fields makes it easy to validate that the writer has conformed to the constraint to include this information while also making it easier for the writer to supply this information. Putting the ingredients into a record set rather than a list or table factors out any presentation constraint entirely, making it impossible not to comply. And again, it is easier for the writer to create the content in this form than it is to create a presentation-level table, for instance. 
+
     
     section: Completeness
         Completeness is an obvious aspect of content quality. Unfortunately, lack of completeness is often hard for writers and reviewers to spot. The curse of knowledge meant that omission of information is hard to see unless there is an obvious hole in a predefined and explicit document structure. Defining structures that highlight information requirements can significantly improve completeness. 
