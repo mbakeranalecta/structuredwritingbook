@@ -36,6 +36,24 @@ chapter:(#chapter.metadata) Metadata
         
     Basic {publishing} algorithms can be performed using {document domain} metadata alone. To publish a list of ingredients it is enough to know that the string "6 eggs" is a list item.But, as we have seen, publishing-related algorithms such as {differential single sourcing}, {content reuse}, and {content generation} also require {subject domain} metadata.  If we want to present ingredients differently in different media, we need to know that "eggs" is an ingredient and "6" is a quantity of that ingredient. Establishing the {relevance} of content requires {subject domain} metadata because we search for content based largely on its subject matter. {Validation}(algorithm "conformance"), which deals with whether content meets its defined constraints, depends on the metadata of the domain in which the content is recorded. {Auditing}, which deals with whether content meets business requirements, generally requires {subject-domain} metadata as most business requirements are in the {subject domain}.  
  
+    section: The recursive nature of metadata
+    
+        Metadata is a confusing concept because metadata is recursive. If metadata is the data that describes (and thereby creates) data, it is also data itself. And since data is created by metadata, this means that metadata is itself created by metadata. In other words, if the line `ingredients:: ingredient, quantity, unit` turns the ingredient lines into metadata in this markup: 
+        
+        ```(sam)
+            ingredients:: ingredient, quantity, unit
+                eggs, 12, each
+                water, 2, qt
+            
+        Then what makes `ingredients:: ingredient, quantity, unit` a piece of metadata and not just another string of characters? Whatever it is, it is also metadata, and the content depends on that metadata as well, since it cannot exist without its metadata and that metadata cannot exist without the metadata that defines it. 
+            
+        In structured writing, we add structure to content to replace the things we have factored out. That structure is metadata to the data that is the text of the file. But if we store that file in any kind of repository, the information that identifies the file in that repository is metadata to the file as a whole. If the structure of the file is described by a {schema}, the schema is also metadata for the file. 
+                
+        But we're not done yet because the specification of the schema language is the metadata that tells you what the schema means.  And then of course, there is the specification of the markup to consider. The XML specification is part of the metadata tree for every XML document in existence. And we are still not be done, because the XML specification uses a formal grammar description language, called {BNF}(language). The BNF specification is metadata for the schema language description. 
+        
+        How do we break out of this infinite recursion of metadata? Data is information that has been formalized for interpretation by algorithms. Fortunately, human beings can understand natural language without that degree of formalization. Eventually, then, we reach a point where the last piece of metadata is not described by metadata but by human language. That human language document essentially bootstraps the whole metadata cascade that eventually yields pieces of data that can be unambiguously interpreted by algorithms. 
+        
+        So, every piece of data has a spreading tree of metadata supporting it, which, if traced to its roots, eventually leads to plain language documents that explain things in human terms. Thus the XML specification combines plain English definitions with BNF, if if we go to the BNF specification we will find the plain English definitions that describe BNF.
         
         
     section: Where should metadata live?
