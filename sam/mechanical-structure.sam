@@ -4,6 +4,8 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
     
     Mechanical structure is the way we record, encode, and enforce the rhetorical structure, of a formal content model. While the rhetorical structure is concerned with how the content fulfills it purpose, the mechanical structure has to deal with specific representational issues and get the nuts and bolts of content recording right -- without dropping any complexity in the process.  
     
+    However detailed you may have been in delineating the rhetorical structures your want to achieve, you will find there is more detailed work to do when it comes to the specifics of the mechanical structure, and particularly with the mechanics of factoring out structures in order to partition and transfer content system complexity. 
+    
     The mechanical structure of structure writing is a computer data structure. However, conventional computer data structures like relational database tables do not work well for content because they are too regular to fit the shape of content. Creating structures that are regular enough for algorithms to deal with yet irregular enough to fit written language is an interesting problem to which more than one solution has been proposed.
     
     Raw text is just a stream of characters. Inside that stream of characters, there are rhetorical structures like headings, bibliographical entries, bold text, chapters, ingredient lists, links, wine matches, tables, function signatures, and labeled lists. The question is, how do you express these various structures within the raw stream of characters?
@@ -69,11 +71,9 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
 
     section: Agreeing on names
         
-        The names of blocks tell us what kind of thing is in the block. What kind of things they  tell us depends on the domain we are dealing with. 
+        Every block is annotated to tell us, and algorithms, what it means, which is to say, what constraints it meets. The most basic of these annotations is the name of the block, which describes it basic type. The name of a table block is "table", which tells us that its type is table. Blocks may also have other annotations that either refine its type of provide additional information about the block. 
         
-        In the {media domain} they tell us what the words in the box look like, either directly (an actual format description) or by reference (the name of a style). In the {document domain} they tell us what part of a document the words are. In the {management domain}, they tell us what to do with the words under different circumstances. In the {subject domain} they tell us what the subject matter of the words is. 
-        
-        But blocks may contain additional annotations that tell us additional things about the content. Those annotations don't have to be in the same domain as the block name. We saw and example of this in [#chapter.subject-domain]:
+        These additional annotations don't have to be in the same domain as the block name. We saw and example of this in [#chapter.subject-domain]:
         
         ```(xml)
             <section publication="Wine Weenie">
@@ -85,15 +85,13 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
                 <p>Lemonade</p>
             </section>
 
-        Here the `section` element defines a block is in the document domain, and the `publication` attribute is an annotation is in the management domain.
-        
-        The names and annotations on the blocks tell us what constraints the structures inside the block obey, or, as we are writing, what constraints the words we write are expected to obey. Algorithms use the names and the annotations to process the content, assuming that they accurately reflect the constraints. 
-        
-        For structured writing to work, it is essential that everyone involved understands and agrees on what the names and annotations mean. If we don't, the names and annotations will not accurately reflect the constraints we expect, and the whole content quality project falls apart and the algorithms stop working. 
+        Here the `section` element defines a block in the document domain, and the `publication` attribute adds an annotation is in the management domain. 
+                
+        For structured writing to work, it is essential that everyone involved understands and agrees on what the names and annotations mean. These annotations tell downstream people and processes what constraints each block obeys. If the names and the values of the other attributes don't mean what we have all agreed they are to mean, communication between the partitions of the content system breaks down and complexity leaks out of the seems and descends on the reader. 
         
         Confusion and disagreement about what the names and annotations of a particular language mean are not uncommon. Large document domain languages like {DocBook} and {DITA} have large vocabularies, and many of the names they offer are quite abstract. Questions about the right way to tag certain passages are common in the communities around these languages, and opinions can vary considerably in some cases. These disagreements don't only affect low-level structures. In {DITA}, for example, it is common to debate if a topic that is operational but not procedural is a concept or a task. Some writers choose to use only generic topics because they don't feel the models of the task, concept, and reference topics fit the content they are creating. 
         
-        Having precise definition of terms is important, therefore, in developing a structured writing language. But it is equally important that the language be {functionally lucid}. The {authoring algorithm} requires that creating structure should not come at the detriment of the writing itself. This requirement is not met if writers are constantly having to puzzle out or debate the right way to mark something up. 
+        Having precise definition of terms is important, therefore, in developing a structured writing language. But it is equally important that the language be {functionally lucid}. The {authoring algorithm} requires that creating structure should not come at the detriment of the writing itself. This requirement is not met if writers are constantly having to puzzle out or debate the right way to mark something up. As we have seen, conformance is chiefly served by designing structures that are easy to conform to. This does not only mean defining what the names mean, but choosing the structures that are it is easiest for authors to name correctly. 
         
         In the software world, meta models and abstraction are powerful tools for modeling systems. They provide clear high-level rules for the design of specific structures and create opportunities to reuse code for objects with a shared base model. But these tools can also lead to very abstract naming schemes and even to abstract structures. In the content world, such abstract names and structures can be formally correct but lack the kind of {functional lucidity} required for effective authoring.        
         
@@ -105,50 +103,7 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
     
         Of course, functional lucidity only matters for the formats that authors actually write in. As we have seen, the {publishing algorithm} typically consists of multiple steps, and each one of those steps can create a format that is closer to the media domain than the one before it. It is perfectly possible to design a document domain structure for the sole purpose of of serving as a step in the publishing chain. Separate authoring formats are created for authors to actually write in (perhaps {subject domain} formats or simplified highly constrained ad-hoc document domain formats). Content is transformed from these formats to the document domain format by the {presentation algorithm} and then the document domain format is translated in to various different media domain languages by the {formatting routine}. An arrangement like this eliminates the need to compromise between different demands in designing a single language, generally making each language in the chain simpler and more constrained, which in turn makes it each one easier to {validate} and to process.
 
-    section: Constraint and annotation
-    
-        Broadly speaking, structured markup provides two things: constraint and annotation. Constraint governs the relationship of pieces. It is constraint that says that a list consists of list items, that an API reference must begin with a function signature followed by a list of parameter values, that an ingredient listing consists of the ingredient name followed by a quantity followed by a unit of measure, or that a section must begin with a title. 
-        
-        Annotation tells you what the structures are, what they mean. The name of the structure is its first and most important annotation. It is the annotation that expresses the core constraint that has been imposed. This may be supplemented by other annotations on the structure that further clarify the constraint that has been imposed, or contain other metadata, such as management domain annotation. 
-        
-        But we can also have unconstrained annotation, or at least, annotation whose usage is very lightly constrained. In some XML-based languages, for instance, there are sets of attributes that are allowed to appear on just about any element in the entire language. (ID attributes are an obvious example.) But the main source of unconstrained annotations are those that can float in the middle of a piece of text.  
-        
-        As we noted, we cannot capture the full rhetorical semantics of any piece of writing using simple linear or hierarchical structures. At some point we have to leave the writer free to express themselves in paragraphs of text on which we can impose no meaningful restriction. But we may still be very much interested in constraining the interpretation of many of the words and phrases used in those paragraphs.
-        
-        Such annotations are constrained in the sense that there is a limited set of them available for use, but they are almost always unconstrained as to where and in what order they appear in the text -- for the very good reason the the text that they annotate obeys no regular rule or pattern. It has to be free for the writer to express the particulars of the individual subject they are writing about. 
-        
-        Every structure has a name (though the name is implicit in some forms of markup. The name of the structure is an annotation of the constraint that the structure imposes. (Remember that we defined structured writing as both imposing a constraint and recording that the constraint has been applied.)
-        
-        The different structured writing domains are defined by what these annotation of structure are saying about the content they contain. 
-        
-        |Media Domain| The annotation says what the content should look like. 
-        
-        |Document Domain| The annotation says what role the content plays in the document.
-        
-        |Subject Domain| The annotation relates the content to its subject matter.
-        
-        |Management Domain| The annotation says how the content should be managed.
-        
-        But the name of a structure only allow you to say one thing about the content. In some cases you may want to add more than one annotation to a structure. For instance, you might want to add a condition to a paragraph. In this case, the name of the structure annotates that it is a paragraph and you need an additional management-domain annotation to hold the condition.  
-        
-        This use of additional annotations is quite common. For instance:
-
-        * In {DITA}(language), the {keyref}(attribute (DITA)) attribute is used to add {management domain}(concept) metadata to a number of document structure elements.
-        
-        * In {HTML}(language), the style attribute can be used to add {media domain}(concept) metadata to the document structure.
-        
-        However, not all annotations are attached to structures. At a certain point in defining the structure of content we get down to what is essentially free-form narrative content -- that is, paragraphs of text. But even within a paragraph, there are pieces of text that we may want to annotate. Examples from each of the domains include:
-        
-        |Media Domain| A `bold` or `strong` annotation on a piece of text you want to emphasize.
-        
-        |Document Domain| An `xref` annotation to create a reference to another part of the content.
-        
-        |Subject Domain| A `function` annotation to identify that a piece of text is the name of a function.
-        
-        |Management Domain| A conditional annotation to identify a piece of text that may be conditionally included or excluded from output. 
-        
-        Different markup systems support structure and annotation in different ways. 
-        
+       
         
         section: Secondary structures of interpretation    
             
@@ -229,11 +184,13 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
 
             
             
-        section: Elements vs. attributes
+        section: Child blocks vs. additional annotations
         
-            Sometimes the name of a block is not sufficient to fully describe the constraints it meets. In these cases, we can add additional {metadata} to a block. Different markup languages do this in different ways. We'll look as the issue using XML for an example. In XML a block is represented by an element and any additional metadata you add to an element is called an attribute. 
+            Sometimes the name of a block is not sufficient to fully describe the constraints it meets. In these cases, we can add additional annotations to a block. But we can also achieve much the same thing by adding child blocks to the block. A child block belongs to the main block, so it is part of it and can constrain the interpretation of the main block just as much as an additional annotation does. One of the issues in designing mechanical structures for content, therefore, is when to use additional annotation on a block and when to use child blocks. 
             
-            While the need for attributes is clear enough in general, they create lots of question about when it makes sense to add an attribute to an element and when it makes sense to add a nested block containing the same information.        
+            Different markup languages have different levels of support for additional annotation on blocks, so this issue is affected by the markup language you choose. SAM, for instance, only supports a limited fixed set of additional annotation on blocks, and therefore any additional constraint of interpretation you want to do in a SAM-based markup language has to be one with child blocks.  
+            
+            In XML, though, there is broad (though not unlimited) support for additional annotations on blocks in the form of attributes. In the XML world, therefore, there is considerable choice, and considerable debate, about when and where you should use elements vs. attributes in your content models.         
             
             Consider, for example, this XML element that contains no content but two attributes:
 
@@ -248,6 +205,7 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
                 <author-name>
                     <first>Mark</first>
                     <last>Baker</first>
+                </author-name>
                     
             Both these constructs express the same information in a way that clearly constrains how author names are to be written and how the markup of author names is to be interpreted by algorithms. 
             
@@ -343,7 +301,7 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
 
             So is the right way to markup a play to preserve the original printed text -- which includes all of the playwright's metadata -- or is it better to separate the playwrights metadata from the speeches which are the 'real' play?
 
-            The answers to questions like this need not concern us greatly. Our concern is to partition the task of content creation so we can simply choose the format that does that in the most functionally lucid way while ensuring that all the information required by the next partition is accurately captured. The fact that such question exist, however, help us to understand both why a markup language like XML is structured the way it is, and why so many texts are marked up the way they are -- and why so many tagging languages are designed the way they are. 
+            But while these question may be important for the scholarly study of text, they are not nearly so important for structured writing. Our concern is to partition the task of content creation so we can simply choose the format that does that in the most functionally lucid way while ensuring that all the information required by the next partition is accurately captured. The fact that such question exist, however, help us to understand both why a markup language like XML is structured the way it is, and why so many texts are marked up the way they are -- and why so many tagging languages are designed the way they are. 
 
             The way we, as practitioners of structured writing for content quality, settle these matters is by asking ourselves which approach best supports the structured writing algorithms that we want to implement, and always remembering that the reliability of every other algorithm depends on how well the conformance algorithms works, and that the conformance algorithm depends to a large extent on how the authoring algorithm designs for conformance and for functional lucidity. 
 
@@ -357,9 +315,7 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
                    url: http://example.com/
             
             SAM only supports a very limited set of annotations on blocks, all of which have predefined meetings. You could, in fact, eliminate annotations on blocks altogether, and use child blocks for everything, but I have supported a limited set of common {management-domain} block annotations in SAM, mostly to improve functional lucidity. 
-            
-            Support for free-floating annotation in text is another matter. Those you will always need for document-oriented markup and structured writing. 
-        
+                   
             In summary, when defining the mechanical structure of your structured writing, don't get hung up on what is text and what is markup. In each domain, text and markup together form a body of constrained content which can be successfully created by an author and successfully processes by one or more algorithms. Only when you resolve the content all the way to the media domain do you finally have to sort our exactly which characters appear in which order and decoration to represent that content to a particular audience. When we choose to create content in the other domains it is precisely because we want to exercise more control over these things, and to use algorithms to help us create and manage them. Whether some idea or constraint is expressed by text of markup in those domains should be based solely on what works best in those domains. (Which is precisely why attempting to do structured writing using a WYSIWYG editor is so counter productive, and why it is so important to ensure the functional lucidity of your markup as markup.)
         
         
