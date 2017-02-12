@@ -53,7 +53,11 @@ chapter:(#chapter.content-management) Content Management
                 
         But storing metadata in the content presents some challenges as well. Having each piece of content stored in the subject domain makes a lot of sense from a semantic point of view and makes it easy to submit content, since no additional metadata forms have to be filled out. The problem is how to retrieve it. A CMS is essentially a database, and the way you retrieve information from a database is to write a query. A query is different from a search. A search is fuzzy. A search engine takes a plain text question or search phrase and tries to figure out which documents are the best match. Search engines may be powerful and sophisticated, but their results are essentially a sophisticated mechanical guess, and sometimes they get it wrong. Ask a search engine for a list of recipes with less than 100 calories, and it will give you a bunch of guesses based mostly on the plain text of those documents. Chances are it will catch some, miss others, and give you some false hits. 
         
+        >>>(image ../graphics/search.svg)
+        
         A query, on the other hand, is a precise request for items whose metadata precisely matches specified criteria. If you write a query to return recipes for which the value of the field recipe/nutrition/calories is less than 100, it will return all the results, miss none, and give you no false hits. However, it will work only for content that is stored that way. To write that query, you will need to know exactly how recipes are stored in the system. 
+        
+        >>>(image ../graphics/query.svg)
         
         If you have many different content structures in your repository, you will need to know how each of them is structured in order to create the queries to return them. This is not the end of the world. Information architects and content engineers can save writers from having to remember how to do all of the queries by creating saved queries that they can run at any time. But is is still a complicating factor. 
                 
