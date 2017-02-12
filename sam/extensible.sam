@@ -17,13 +17,13 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
     
     Each of these approaches has its merits and its drawbacks. For instance, creating a new language entirely from scratch may enable to to achieve exceptional functional lucidity for a particular type of information; extending/constraining an existing language can save you a lot of tool development costs; while defining your own semantics based on an existing syntax may let you find the right balance between functional lucidity and development costs. 
 
-    This chapter will look at some of the languages you can use for the second of these approaches.     
+    This chapter will look at the various kinds of extensible and constrainable markup languages.     
 
     section: XML
     
         The X in {XML} stands for eXtensible, but, as we noted in [#chapter.markup] XML is an abstract language that does not define any document structures itself. Extension in XML, therefore, is extension from zero. Syntactically, everything is defined for you. Semantically you are starting from scratch. 
         
-        You can define the structure of a new XML markup language using one of the several available {schema languages}. We will look at schema languages in [#chapter.constraints].
+        You can define the structure of a new XML markup language using one of the several available {schema languages}. We will look at schema languages in [#chapter.constraints], but the mechanics of defining a markup language in XML are out of scope for this book. 
 
     section: DITA
     
@@ -113,7 +113,7 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
         
         For the data-oriented subject domain, which, let us remember, can include material recorded in databases and source code, there is no necessary relationship between the structure of content in the source and the presentation of content in the document domain. Information that is in separate fields in the subject domain may need to be combined to form sentences by the {presentation algorithm} before it is even readable as a piece of content. Such structures are clearly have no is-a relationship to a DITA generic topic.  
         
-        More generally, as we have seen, the {subject domain} changes the algorithm for each function so inheritance of the code is moot -- an unnecessary complication. 
+        More generally, as we have seen, the {subject domain} changes the algorithm for each function so inheritance of the code is moot. Subject domain algorithms work differently. And since all subject domain algorithms work on the same structures, rather than there being separate structures for each algorithm as in the document and management domains, there is little scope for inheritance from the document domain to the subject domain. Rather, the document domain is semantically downstream from the subject domain. Subject domain algorithms essentially create document domain structures as part of the publication process.  
 
     section: DocBook
     

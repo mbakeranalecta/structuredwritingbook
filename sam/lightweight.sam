@@ -81,7 +81,7 @@ chapter:(#chapter.lightweight) Lightweight Languages
                 4. Place eggs in cold water to stop cooking.
                 5. Peel and serve.
 
-        But reStructuredText also has a feature called directives which is used to create markup with more complex semantics. For this, reStructuredText takes the same approach as XML, using characters in a way that they are almost never used in a normal document. This approach simplifies parsing, because there is seldom any question about whether a particular pattern is intended to be markup of text, but it also makes it less natural to read and to write.
+        But reStructuredText also has a feature called directives which is used to create markup with more complex semantics. Here, for example, is a directive for inserting an image:
         
         ```(reStructuredText)
             .. image:: images/biohazard.png
@@ -89,8 +89,10 @@ chapter:(#chapter.lightweight) Lightweight Languages
                :width: 200
                :scale: 50
                :alt: alternate text
+               
+        For this, reStructuredText takes the same approach as XML, using characters in a way that they are almost never used in a normal document. This approach simplifies parsing, because there is seldom any question about whether a particular pattern is intended to be markup of text, but it also makes it less natural to read and to write. reStructuredText is therefore something of a syntactic hybrid as well as being a hybrid in the sense that it has both fixed concrete parts and extensible parts. 
         
-        reStructuredText is therefore something of a syntactic hybrid as well as being a hybrid in the sense that it has both fixed concrete parts and extensible parts. 
+        If you are looking for a lightweight {document domain} markup language of moderate complexity and a degree of extensibility, or if you are interested in {Sphinx} as an authoring and publishing system, reStructuredTextis an option to consider. 
     
     section: ASCIIDoc
     
@@ -120,6 +122,8 @@ chapter:(#chapter.lightweight) Lightweight Languages
             * lead
             
         However, while {MarkDown} was designed for simple Web pages, ASCIIDoc was designed for complex publishing projects with support for a much wider array of document domain structures such as tables, definition lists, and tables of contents.
+        
+        If you are looking for a lightweight document domain markup language of medium complexity that is compatible with {DocBook} (meaning you are interested in creating books rather than web pages) then ASCIIDoc is something to consider. 
     
     section: LaTeX
     
