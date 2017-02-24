@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <book>
-<string name="title">Structured Writing for Content Quality</string>
+<string name="title">Structured Writing</string>
+<string name="subtitle">Theory and Practice</string>
 <string name="author">Mark Baker</string>
 <title><inline-insert item="title" type="string"/></title>
 <subtitle><inline-insert item="subtitle" type="string"/></subtitle>
-<by><inline-insert item="author" type="string"/></by>
-<insert item="foreword.sam" type="sam"/>
+<by>
+<title><inline-insert item="author" type="string"/></title>
+<!-- >>>(sam foreword.sam) -->
+</by>
 <insert item="why.sam" type="sam"/>
 <part name="part.domains">
 <title>The Structured Writing Domains</title>
@@ -24,7 +27,7 @@
 <insert item="SingleSourcingAlgorithm.sam" type="sam"/>
 <insert item="reuseAlgorithm.sam" type="sam"/>
 <insert item="composition.sam" type="sam"/>
-<insert item="1truth.sam" type="sam"/>
+<insert item="normalization.sam" type="sam"/>
 <insert item="linking.sam" type="sam"/>
 <insert item="conformance.sam" type="sam"/>
 <insert item="audit.sam" type="sam"/>
@@ -38,26 +41,23 @@
 <insert item="collaboration.sam" type="sam"/>
 <insert item="timeliness.sam" type="sam"/>
 <insert item="repeatability.sam" type="sam"/>
-<insert item="algorithms-publishing.sam" type="sam">
-<!-- >>>(sam conversion.sam) -->
-<!-- >>>(sam exchange.sam) -->
-<!-- >>>(sam translation.sam) -->
-</insert>
+<insert item="algorithms-publishing.sam" type="sam"/>
+<insert item="translation.sam" type="sam"/>
 </part>
 <part name="part.structures">
 <title>Structures</title>
 <insert item="rhetorical-structure.sam" type="sam"/>
 <insert item="mechanical-structure.sam" type="sam"/>
-<insert item="metadata.sam" type="sam"/>
-<insert item="taxonomy.sam" type="sam"/>
 <insert item="structures_chunks.sam" type="sam"/>
 <insert item="wide.sam" type="sam"/>
 <insert item="subject-structures.sam" type="sam"/>
-<insert item="markup.sam" type="sam"/>
-<insert item="patterns.sam" type="sam"/>
+<insert item="metadata.sam" type="sam"/>
+<insert item="taxonomy.sam" type="sam"/>
 </part>
 <part name="part-languages">
 <title>Languages</title>
+<insert item="markup.sam" type="sam"/>
+<insert item="patterns.sam" type="sam"/>
 <insert item="lightweight.sam" type="sam"/>
 <insert item="heavyweight.sam" type="sam"/>
 <insert item="extensible.sam" type="sam"/>

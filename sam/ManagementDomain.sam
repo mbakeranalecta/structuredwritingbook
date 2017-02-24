@@ -37,18 +37,18 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
                 step: Press the big red button.
         
         In the SAM markup above the `<<<` is an include command. It includes the content of the file located at `files/shared/admonitions/danger.sam` in the source file as it is read.
-		
-		The equivalent in XML would look something like this:
-		
-		```(XML)
-			<procedure>
-				<title>Blow stuff up</title>
+        
+        The equivalent in XML would look something like this:
+        
+        ```(XML)
+            <procedure>
+                <title>Blow stuff up</title>
                 <xi:include href="files/shared/admonitions/danger.xml"/>
                 <step>Plant dynamite.</step>
                 <step>Insert detonator.</step>
                 <step>Run away.</step>
                 <step>Press the big red button.</step>
-		    </procedure>
+            </procedure>
         
         
         Why is this operation part of the management domain, rather than the document domain? Because it deals with a system operation: locating a file in the system and loading its contents. If we were purely in the document domain, the author would be the one performing this operation: finding the file with the warning in it, opening it, and copying the contents into the document. The include instruction is just that: an instruction. It is not a declaration about the subject matter or structure of a document, such as we find in subject domain or document domain markup. It is an instruction to a machine to perform an operation. The management domain consists of instructions or the declaration of data required to perform management functions. 
@@ -133,14 +133,14 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
         
         
         While the introduction of subject domain names into management domain structures is an appropriate bit of semantic sugar for authors, this hybrid approach really remains firmly in the management domain.
-    		
+            
     section: Distribution of complexity in the management domain
-	
-		The inclusion of management domain structures in content represents the distribution of management decisions to the content and thus to the people who write the content. The use of the subject domain for the equivalent content distributes the management decisions away from the author, towards the informaiton architect or content engineer and the algorithms they write. 
+    
+        The inclusion of management domain structures in content represents the distribution of management decisions to the content and thus to the people who write the content. The use of the subject domain for the equivalent content distributes the management decisions away from the author, towards the informaiton architect or content engineer and the algorithms they write. 
 
         One of the things that this shows us is that the partitioning of complexity is not always towards the center. The idea is to partition complexity towards the person or process best able to handle it without letting any of it slip throught the cracks and find it way down to the reader. Sometimes the person best placed to make a decision or handle complexity is an expert in the middle, but sometimes it is the person on the front lines. 
-		
-		By suggesting a subject domain alternative that distributed the complexity of inserting a warning on dangerous procedures towards the middle, rather than the management domain approach of distributing the complexity of conent reuse towards the writer, I am suggesting the the tendency of content management system designers to turn to the management domain for these kinds of problems (thus distributing content complexity away from themselves towards your writers) is one you should seriously question. But at the same time the subject domain solution is less general, and therefore created more development complexity. This is a worthwhile trade in many cases, but not necessarilly in all cases.
+        
+        By suggesting a subject domain alternative that distributed the complexity of inserting a warning on dangerous procedures towards the middle, rather than the management domain approach of distributing the complexity of conent reuse towards the writer, I am suggesting the the tendency of content management system designers to turn to the management domain for these kinds of problems (thus distributing content complexity away from themselves towards your writers) is one you should seriously question. But at the same time the subject domain solution is less general, and therefore created more development complexity. This is a worthwhile trade in many cases, but not necessarilly in all cases.
 
         Sometimes the transfer of information to a central person or process creates more complexity that it removes. In these cases, the use of generic management domain structures is appropriate. We should remember, in making this calculation, that the scope of management involved in managing a modern online information set, or even a modern content systems that published many individual pieces to paper or other narrow channels, invovles far more integration of content, and thus far more management of content, than was ever required of authors in the days when each one worked on their own book separatetly. Thus when we do direct a management burden out to the front line, we should be conscious that it may be a much heavier burden than writers have had to bear in the past, and that its impact on their limited store of attention may be all the greater. Distributing managment complexity to authors may sometimes be the best solution, but it should never be done casually or without thought, and it should never be done simply to make life easier for content managers, information architects, or content engineers.  
  

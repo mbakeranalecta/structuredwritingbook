@@ -3,7 +3,7 @@
 <title>Patterns</title>
 <annotations>
 <p>Concepts</p>
-<p><phrase><annotation type="concept">subject domain</annotation></phrase> <phrase><annotation type="concept">media domain</annotation></phrase> <phrase><annotation type="concept">document domain</annotation></phrase> <phrase><annotation type="concept">management domain</annotation></phrase> <phrase><annotation type="concept">subject-domain</annotation></phrase> <phrase><annotation type="concept">media-domain</annotation></phrase> <phrase><annotation type="concept">document-domain</annotation></phrase> <phrase><annotation type="concept">management-domain</annotation></phrase> <phrase><annotation type="concept">hybrid tagging language</annotation></phrase> <phrase><annotation type="concept">Every Page is Page One</annotation></phrase> <phrase><annotation type="concept">abstract language</annotation></phrase> <phrase><annotation type="concept">information architecture</annotation></phrase> <phrase><annotation type="concept" specifically="top-down information architecture">top-down</annotation></phrase> <phrase><annotation type="concept">metadata</annotation></phrase></p>
+<p><phrase><annotation type="concept">subject domain</annotation></phrase> <phrase><annotation type="concept">media domain</annotation></phrase> <phrase><annotation type="concept">document domain</annotation></phrase> <phrase><annotation type="concept">management domain</annotation></phrase> <phrase><annotation type="concept">subject-domain</annotation></phrase> <phrase><annotation type="concept">media-domain</annotation></phrase> <phrase><annotation type="concept">document-domain</annotation></phrase> <phrase><annotation type="concept">management-domain</annotation></phrase> <phrase><annotation type="concept">hybrid markup language</annotation></phrase> <phrase><annotation type="concept">Every Page is Page One</annotation></phrase> <phrase><annotation type="concept">abstract language</annotation></phrase> <phrase><annotation type="concept">information architecture</annotation></phrase> <phrase><annotation type="concept" specifically="top-down information architecture">top-down</annotation></phrase> <phrase><annotation type="concept">metadata</annotation></phrase></p>
 <p>Languages</p>
 <p><phrase><annotation type="language">SAM</annotation></phrase> <phrase><annotation type="language">DITA</annotation></phrase> <phrase><annotation type="language">DocBook</annotation></phrase> <phrase><annotation type="language">Markdown</annotation></phrase> <phrase><annotation type="language">HTML</annotation></phrase> <phrase><annotation type="language">XML</annotation></phrase></p>
 <p>Algorithms</p>
@@ -19,9 +19,9 @@
 <term>patterns</term>
 </row>
 </index>
-<p>We noted that lightweight markup languages like <phrase><annotation type="language">Markdown</annotation></phrase> rely on patterns in the text rather than explicit markup characters to delineate basic structures like paragraphs and lists. XML, on the other hand, makes a strict distinction between what is markup and what is text. Markup is always recognized explicitly by markup sequences that cannot occur as normal text in any part of the document. (If you want to enter those sequences as text, you either have to escape the markup characters with character entities or use CDATA marked sections.)</p>
+<p>We noted that lightweight markup languages like <phrase><annotation type="language">Markdown</annotation></phrase> rely on patterns in the text rather than explicit markup characters to delineate basic structures like paragraphs and lists. XML, on the other hand, makes a strict distinction between what is markup and what is text. Markup is always recognized explicitly by markup sequences that cannot occur as normal text in any part of the document.</p>
 <p>All the same, even XML markup is defined by patterns. If you look at the <phrase><annotation type="standard">XML spec</annotation></phrase> you will see that XML is defined by a series of patterns which are described using a pattern notation called <phrase><annotation type="language">EBNF</annotation></phrase>. The difference between XML syntax and Markdown syntax is that in XML, patterns are defined absolutely, so that a markup start character is a markup start character no matter where is occurs, whereas in Markdown, the patterns are defined in context, so that a <phrase><annotation type="code">*</annotation></phrase> character starts a list item only at the beginning of a line, not the end.</p>
-<p>Since markup is all about patterns, we are not confined only to the patterns defined by the markup language itself. There are lots of patterns that occur naturally in content and we can recognize those patterns in our content and act on them even if they are not formally marked up in our markup language.</p>
+<p>Since markup is all about patterns, we are not confined only to the patterns defined by the markup language itself. There are lots of patterns that occur naturally in content and we can recognize those patterns in our content and act on them with algorithms even if they are not formally marked up in our markup language.</p>
 <p>A common example of this is the pattern of a URL. In most Web-based editors, if you enter a URL as plain text (no markup identifying it as a URL), the editor will recognize the pattern and will turn the URL into a clickable link in the HTML output.</p>
 <p>Recognizing patterns rather than forcing the author to mark them up explicitly can increase functional lucidity significantly. Consider something as simple as a date. A date is a complex piece of data consisting of at least three elements, the year, month, and day. (It gets more complex if you include the day of the week or the time.) If you need those individual components of a date for processing purposes, you might be tempted to require dates to be marked up like this.</p>
 <codeblock language="sam">
@@ -34,8 +34,8 @@ date:
     month: 08
     day: 25
 </codeblock>
-<p>This is fully explicit markup. Whether markup should be fully explicit in this way is a debate in data representation circles. For structured writing, however, it is a practical question of whether such markup has <phrase><annotation type="concept">functional lucidity</annotation></phrase>, which clearly it does not.</p>
-<p>A date in the format <phrase><annotation type="code">2016-08-25</annotation></phrase> is already a piece of structured markup. In fact, it is a standardized piece of structured markup defined by the international standard <phrase><annotation type="standard">ISO 8601</annotation></phrase>. The only problem in identifying a date as such is that in another context <phrase><annotation type="code">2016-08-25</annotation></phrase> could be a mathematical expression that resolves to <phrase><annotation type="code">1983</annotation></phrase>. But we can eliminate this potential confusion if use our markup language to isolate the context so that we can recognize when an <phrase><annotation type="standard">ISO 8601</annotation></phrase> date is being used, and then use the <phrase><annotation type="standard">ISO 8601</annotation></phrase> format specification to isolate the year month and day components of that data. In other words, all we need to do is this:</p>
+<p>This is fully explicit markup. It places every piece of the data in its own explicit structure. However lacks <phrase><annotation type="concept">functional lucidity</annotation></phrase>.</p>
+<p>A date in the format <phrase><annotation type="code">2016-08-25</annotation></phrase> is already a piece of structured markup. In fact, it is a standardized piece of structured markup defined by the international standard <phrase><annotation type="standard">ISO 8601</annotation></phrase>. The only problem in identifying a date as such is that in another context <phrase><annotation type="code">2016-08-25</annotation></phrase> could be a mathematical expression that resolves to <phrase><annotation type="code">1983</annotation></phrase>. But we can eliminate this potential confusion if we isolate the context so that we can recognize when an <phrase><annotation type="standard">ISO 8601</annotation></phrase> date is being used, and then use the <phrase><annotation type="standard">ISO 8601</annotation></phrase> format specification to isolate the year month and day components of that data. In other words, all we need to do is this:</p>
 <codeblock language="sam">
 {1941-12-07}(date) is a day that will live in infamy. 
 </codeblock>
@@ -45,11 +45,13 @@ date:
 that will live in infamy. 
 </codeblock>
 <p>Of course, a sufficiently clever algorithm could recognize <phrase><annotation type="code"> December 7, 1941</annotation></phrase> as a date as well, because that too is a fully predictable pattern. One of the defining features of patterns is that you can recognize the semantic equivalence between two patterns that express the same information. You can increase the <phrase><annotation type="concept">functional lucidity</annotation></phrase> of your markup by recognizing a wider variety of semantically equivalent patterns in content without having to impose uniform syntax on authors.</p>
+<section>
+<title>Design implications</title>
 <p>XML recognizes the value of patterns. The XML data types standard define a number of common patterns, and <phrase>XSD</phrase> schemas allow you to define patterns for use in your own markup. It calls these patterns “simple types” (as opposed to “complex types”, which are composed of multiple nested elements). Thus you can specify in <phrase>XSD</phrase> that a date field is of the simple type <phrase><annotation type="code">xs:date</annotation></phrase>. The <phrase><annotation type="code">xs:date</annotation></phrase> data type is a pattern that is based on <phrase><annotation type="standard">ISO 8601</annotation></phrase>, so you can do following in XML (as long as the schema defines the type of the <phrase><annotation type="code">date</annotation></phrase> element as <phrase><annotation type="code">xs:date</annotation></phrase>):</p>
 <codeblock language="xml">
 &lt;date&gt;1941-12-07&lt;/date&gt; is a day that will live in infamy. 
 </codeblock>
-<p>It is important to understand what this does. If the type of element <phrase><annotation type="code">date</annotation></phrase> in your XML tagging language is defined as <phrase><annotation type="code">xs:date</annotation></phrase> then an XSD <phrase><annotation type="tool">schema validator</annotation></phrase> will validate <phrase><annotation type="code">1941-12-07</annotation></phrase> as a valid date but will reject <phrase><annotation type="code">&lt;date&gt;last Thursday&lt;/date&gt;</annotation></phrase> as invalid. It will not break the date down into its separate year, month, and day components. If you need that, you will have to get your algorithm to do that for itself. But your algorithm can do that reliably if you know for certain that you are dealing with date in <phrase><annotation type="standard">ISO 8601</annotation></phrase> format. Most programming languages will have library functions that know how to manipulate <phrase><annotation type="standard">ISO 8601</annotation></phrase> dates, so you probably don’t have to do any work yourself to get the year, month, and day components of a date.</p>
+<p>It is important to understand what this does. If the type of element <phrase><annotation type="code">date</annotation></phrase> in your XML markup language is defined as <phrase><annotation type="code">xs:date</annotation></phrase> then an XSD <phrase><annotation type="tool">schema validator</annotation></phrase> will validate <phrase><annotation type="code">1941-12-07</annotation></phrase> as a valid date but will reject <phrase><annotation type="code">&lt;date&gt;last Thursday&lt;/date&gt;</annotation></phrase> as invalid. It will not break the date down into its separate year, month, and day components. If you need that, you will have to get your algorithm to do that for itself. But your algorithm can do that reliably if it knows for certain that it is dealing with date in <phrase><annotation type="standard">ISO 8601</annotation></phrase> format. Most programming languages will have library functions that know how to manipulate <phrase><annotation type="standard">ISO 8601</annotation></phrase> dates, so you probably don’t have to do any work yourself to get the year, month, and day components of a date.</p>
 <p>For other patterns, most programming languages have a library called “regular expressions” which you can use to rip a pattern apart and get at the pieces. (XSD actually lets you define new patterns by specifying a regular expression for the pattern you want to match.) <phrase><annotation type="tool">Regular expressions</annotation></phrase> will let your algorithms decode any sufficiently well defined and contextualized pattern in your content, removing the need to ask authors to explicitly break down many types of information into separate fields.</p>
 <p>For example, in our most of our recipe examples, we have been explicitly breaking down the items in an ingredient list into ingredient, quantity, and unit of measure like this:</p>
 <codeblock language="sam">
@@ -76,35 +78,35 @@ salt 1tsp
 butter 2tbsp
 pork chops 4
 </codeblock>
-<p>Here is the result of applying the regular expression above to those values<citation type="nameref" value="rx101"/>:</p>
+<p>Here is the result of applying the regular expression above to those values (this is a report generated by regex101.com, a fantastic site for designing and testing regular expressions):</p>
 <codeblock language="text">
 Match 1
-Full match	0-7	`eggs 12`
-Group `ingredient`	0-5	`eggs `
-Group `quantity`	5-7	`12`
+Full match    0-7    `eggs 12`
+Group `ingredient`    0-5    `eggs `
+Group `quantity`    5-7    `12`
 
 Match 2
-Full match	8-17	`water 4qt`
-Group `ingredient`	8-14	`water `
-Group `quantity`	14-15	`4`
-Group `unit`	15-17	`qt`
+Full match    8-17    `water 4qt`
+Group `ingredient`    8-14    `water `
+Group `quantity`    14-15    `4`
+Group `unit`    15-17    `qt`
 
 Match 3
-Full match	18-27	`salt 1tsp`
-Group `ingredient`	18-23	`salt `
-Group `quantity`	23-24	`1`
-Group `unit`	24-27	`tsp`
+Full match    18-27    `salt 1tsp`
+Group `ingredient`    18-23    `salt `
+Group `quantity`    23-24    `1`
+Group `unit`    24-27    `tsp`
 
 Match 4
-Full match	28-40	`butter 2tbsp`
-Group `ingredient`	28-35	`butter `
-Group `quantity`	35-36	`2`
-Group `unit`	36-40	`tbsp`
+Full match    28-40    `butter 2tbsp`
+Group `ingredient`    28-35    `butter `
+Group `quantity`    35-36    `2`
+Group `unit`    36-40    `tbsp`
 
 Match 5
-Full match	41-53	`pork chops 4`
-Group `ingredient`	41-52	`pork chops `
-Group `quantity`	52-53	`4`
+Full match    41-53    `pork chops 4`
+Group `ingredient`    41-52    `pork chops `
+Group `quantity`    52-53    `4`
 </codeblock>
 <footnote name="rx101">
 <p>This output was generated using the regular expression builder and tester found at Regular Expression 101 (https://regex101.com/). The site is an excellent place to explore what you can do with regular expressions.</p>
@@ -130,4 +132,5 @@ ingredients:
     ingredient: butter 4 lumps
 </codeblock>
 <p>The first would fail because the pattern would not find the quantity where it expected to. The next two would fail because cups and lumps are not on the list of strings recognized by the pattern (which probably should be extended to allow cups, but not lumps). In the XML schema example, the names of the fields that were present in the original regular expression are omitted because XML schema is not going to break the values apart and put them in separate fields for us. As far as XML schema is concerned, this is just the definition of a single element. It would be up to a processing application to break the pieces apart and make separate fields of them. It is design intent for <phrase><annotation type="language">SAM</annotation></phrase> that its schema language will let you do just this: define multiple fields with a regular expression that tells you how to break a string apart and names the individual fields to extract from the pattern.</p>
+</section>
 </chapter>

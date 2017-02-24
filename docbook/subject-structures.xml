@@ -3,7 +3,44 @@
 <db:title>Subject domain structures</db:title>
 
 
-<db:para>A subject domain structure is one that is specific to a particular subject. As we have seen with our recipe example, there are two approaches to the subject domain. One it to create a document type that specifies how a particular subject is to be presented. Thus it defines subject domain blocks in terms of the document domain structures that should be used to present them. For example, it might specify that the ingredients of a recipe must be presented as a list:</db:para>
+<db:para>Not all content can be meaningfully moved into the subject domain. The subject domain require a repeatable rhetorical structure. Sometimes the nature of your content, or your subject matter, or your argument does not lend itself to a repeatable structure. In those cases, the best you can do is work in the document domain. However, you can add subject domain annotations -- marking up significant subjects in your content by their type and value -- across all your subject domain and document domain content, allowing you to apply the conformance, change management, linking, and information architecture algorithms across your entire body of content.</db:para>
+<db:para>But as we noted in <db:xref linkend="chapter.blocks"/>, you can move a lot of your content into the subject domain, even if it does not currently obey a closely defined rhetorical type, and you can move your content into smaller rhetorical blocks that are easier to apply a repeatable rhetorical structure to. In this chapter we will walk through the step of defining a repeatable rhetorical type using the recipe example we have been looking at throughout the book.</db:para>
+<db:para>To begin with, lets take a step back and look at what a recipe might look like if it were not presented in its familiar rhetorical pattern:</db:para>
+<db:programlisting language="reStructuredText">
+Hard Boiled Eggs
+================
+A hard boiled egg is simple and nutritious. 
+Place 12 eggs in a pan and cover with 
+water. Bring water to a boil. Remove
+from heat and cover for 12 minutes.Place eggs
+in cold water to stop cooking. Peel and 
+serve. Prep time, 15 minutes. Serves 6.
+</db:programlisting>
+<db:para>If were were discerning the rhetorical structure of a recipe for the first time we might then look at several examples and try making dishes ourselves, or observe others doing so, and conclude that it was easier to find and follow a recipe if the ingredients were listed separately and the preparation steps were presented one at a time, and we would come up with a structure that looked something like this:</db:para>
+<db:programlisting language="reStructuredText">
+Hard Boiled Eggs
+================
+A hard boiled egg is simple and nutritious. 
+Prep time, 15 minutes. Serves 6.
+
+Ingredients
+-----------
+    ======  ========
+    Item    Quantity
+    ======  ========
+    eggs    12
+    water   2qt
+    ======  ========
+    
+Preparation
+-----------
+    1. Place eggs in pan and cover with water.
+    2. Bring water to a boil.
+    3. Remove from heat and cover for 12 minutes.
+    4. Place eggs in cold water to stop cooking.
+    5. Peel and serve.
+</db:programlisting>
+<db:para>At this point we have discovered the basic rhetorical pattern of a recipe, but we have not done anything to provide formal constraints for authors to make the format repeatable, so we create a rhetorical block that we name <db:code>recipe</db:code> and require that it consist of three semantic blocks called <db:code>introduction</db:code>, <db:code>ingredients</db:code>, and <db:code>preparation</db:code>, factoring out the titles of those sections in the process. We also define that the ingredients will be presented as a bulleted list and the preparation as a numbered lists (both document domain semantic blocks, composed of structural blocks that we need not delve into here).</db:para>
 <db:programlisting language="sam">
 recipe: Hard Boiled Egg
     introduction:
@@ -19,25 +56,25 @@ recipe: Hard Boiled Egg
         4. Place eggs in cold water to stop cooking.
         5. Peel and serve.
 </db:programlisting>
-<db:para>Here the narrative block -- the recipe and its parts are in the subject domain, since they are specific to the subject of recipes, but the language is only specifying how to present a recipe. Presentation is a document domain concern, but here the presentation is specific to a single subject, putting this structure on the border between domains. The structural blocks that specify how the ingredients and preparations steps are to be presented are simply two different types of lists: document domain structures.</db:para>
-<db:para>This structure provide guidance for authors, which helps with repeatability, at the top level, but it does not provide a lot of support for validating things like the way ingredients are presented or making sure that the prep time and servings are always stated.</db:para>
-<db:para>We can address these things by moving the recipe format further into the subject domain. To do this, we make data structure of any data that is already presented in fields, lists, or tables. (In other words, not in paragraphs.)</db:para>
+<db:para>So far what we have is a basic presentation-oriented subject domain content type. It specifies how to present a recipe.  This structure provide guidance for authors, which helps with repeatability, at the top level, but when we look closer we realize that there are some other things we would like to make repeatable in the rhetorical model, so that we make sure they are included every time.</db:para>
+<db:para>Two obvious items are prep time and the number of servings. They are important information that we think should be in every recipe, but currently they are only in the introduction, where writers could forget them. Also, algorithms can’t access them, so if we wanted to make a collection of recipes that took less than 30 minutes to make, we would not be able to find them algorithmically. So we pull those items out into separate fields. Now we can verify that they are included and algorithms can find the information (we have constrained the interpretation of this information, using metadata to turn it from text into data).</db:para>
 <db:programlisting language="sam">
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious. 
-        Prep time, 15 minutes. Serves 6.
-    ingredients:: ingredient, quantity, unit
-        eggs, 12, each
-        water, 2, qt
+    ingredients:
+        * 12 eggs
+        * 2qt water
     preparation:
-        step: Place eggs in pan and cover with water.
-        step: Bring water to a boil.
-        step: Remove from heat and cover for 12 minutes.
-        step: Place eggs in cold water to stop cooking.
-        step: Peel and serve.
+        1. Place eggs in pan and cover with water.
+        2. Bring water to a boil.
+        3. Remove from heat and cover for 12 minutes.
+        4. Place eggs in cold water to stop cooking.
+        5. Peel and serve.
+    prep-time: 15 minutes
+    serves: 6
 </db:programlisting>
-<db:para>The next step is to look for data that is consistent across instances of the type and worthy of being constrained and made available to algorithms, and to pull it out of paragraphs and into structured fields, lists, or tables. Here we pull out the prep time and number of servings:</db:para>
+<db:para>But if we look a little close we can find other information that we might want to make sure is provided consistently and repeatable, and made accessible to algorithms, and that we might need to differentially single source in different media: the list of ingredients. There are actually three elements to a ingredient listing, the name and quantity of the ingredient, and the unit of measurement for that quantity. Different units of measure are used for different types of ingredients and for large and small quantities in cooking, so we have to specify the unit of measure each time. So we use metadata to turn the list of ingredients into a piece of data:</db:para>
 <db:programlisting language="sam">
 recipe: Hard Boiled Egg
     introduction:
@@ -54,7 +91,10 @@ recipe: Hard Boiled Egg
     prep-time: 15 minutes
     serves: 6
 </db:programlisting>
-<db:para>The next step it to think about other information that you might want to capture. Usually during this process, people start to say things like “Wait, shouldn’t we tell them X?” The process of formalizing the information you are proposing to offer often produces the realization that there is valuable information that you have not been providing.</db:para>
+<db:para>Once we have got all of the current content into repeatable accessible structures, it is time to think about whether there is any other information that we should be including in our recipes.</db:para>
+<db:para>Usually during this process, people start to say things like “Wait, shouldn’t we tell them X?” The process of formalizing the information you are proposing to offer often produces the realization that there is valuable information that you have not been providing or not providing consistently in your current content.</db:para>
+<db:para>Also, it is at this stage that you think about differential single sourcing, where you might want to capture content that might be presented in one domain but not another, and about reuse scenarios in which you night want to capture information that might presented in one publication but not another.</db:para>
+<db:para>So at this point we add in wine and beverage matches and nutritional information to the model:</db:para>
 <db:programlisting language="sam">
 recipe: Hard Boiled Egg
     introduction:
@@ -85,11 +125,51 @@ recipe: Hard Boiled Egg
         total-carbohydrate: 0.6 g    
         dietary-fiber: 0 g    
         sugar: 0.6 g    
-        protein: 6 g    
+        protein: 6 g               
 </db:programlisting>
-<db:para>The next step is to look through the remaining paragraph data for the mention of significant subjects that should be annotated, and to define the types of those annotations. This could include annotating things that you decided not to pull out of paragraphs into fields. For instance, if you decided not to pull out all mentions of cooking utensils from your recipe to make a list of required tools, you could annotate the mention of tools in recipe steps. (Or you could decide to do both, so you can validate one against the other.)</db:para>
+<db:para>Once we are satisfied that we have got the overall structure of the rhetorical block correct, it is time to think about subject annotation. We know that there are a number of algorithms, from linking and information architecture to validation and terminology control that depend on the clear annotation of significant subjects mentioned in the text. So we go through the text looking for mentions of subjects related to cooking. We find that there are mentions of food, utensils, and common cooking tasks, so we add annotation markup for them to our model:</db:para>
 <db:programlisting language="sam">
 recipe: Hard Boiled Egg
+    introduction:
+        A hard boiled {egg}(food) is simple and nutritious.
+    ingredients:: ingredient, quantity, unit
+        eggs, 12, each
+        water, 2, qt
+    preparation:
+        1. Place eggs in (pan){utensil} and cover with water.
+        2. {Bring water to a boil}(task).
+        3. Remove from heat and cover for 12 minutes.
+        4. Place eggs in cold water to stop cooking.
+        5. Peel and serve.
+    prep-time: 15 minutes
+    serves: 6
+    wine-match: champagne and orange juice
+    beverage-match: orange juice
+    nutrition:
+        serving: 1 large (50 g)
+        calories: 78
+        total-fat: 5 g
+        saturated-fat: 0.7 g
+        polyunsaturated-fat: 0.7 g    
+        monounsaturated-fat: 2 g    
+        cholesterol: 186.5 mg    
+        sodium: 62 mg    
+        potassium: 63 mg    
+        total-carbohydrate: 0.6 g    
+        dietary-fiber: 0 g    
+        sugar: 0.6 g    
+        protein: 6 g    
+</db:programlisting>
+<db:para>This process can raise some interesting question. Here it might make us realize that every recipe uses utensils. Then we ask ourselves, if we are listing ingredients separately, why are we not making a list of utensils as well? Wouldn’t such a list help readers determine if they had the equipment needed to make a recipe? And we might notice that a close cousin of the recipe, the knitting pattern, does list equipment -- the precise knitting needles used -- separately.</db:para>
+<db:para>This then cause us to examine whether we need to change the structure of the rhetorical block to include a list of utensils. Sometimes the answer to questions like this is no. For whatever reason, the cooks of the world have determined over the years that while a list on ingredients is an essential part of the rhetorical structure of a recipe, a list of utensils is not. Don’t create additional structures just because you can. Create them because the are useful.</db:para>
+<db:para>Finally, you may want to think about whether there is any management domain metadata that you need to add to the model. Usually this will be for management or tracking purposes, and it depends on what decisions you have made about where this type of metadata belongs in your system, in order to best partition the complexity of content management in your system.</db:para>
+<db:para>This metadata may not be part of any current content examples you are looking at. This should be the last step because once you have formalized the rest of the model you may find that that data is usable for management and tracking purposes as well, so you won’t need to add additional fields just for management purposes. For instance, lots of the subject domain information that is already formalized in the model can be used for managing which recipes you include in particular publications, such as quick and easy meals (less than 20 minutes prep time, fewer than 6 ingredients, fewer than 5 steps) or a low-cal vegetarian cookbook (fewer than 160 calories, no meat ingredients).</db:para>
+<db:para>This example adds some basic tracking metadata:</db:para>
+<db:programlisting language="sam">
+recipe: Hard Boiled Egg
+    author: bcrocker
+    rights: full
+    season: winter, spring, summer, fall
     introduction:
         A hard boiled {egg}(food) is simple and nutritious.
     ingredients:: ingredient, quantity, unit
@@ -120,9 +200,12 @@ recipe: Hard Boiled Egg
         sugar: 0.6 g    
         protein: 6 g    
 </db:programlisting>
+<db:section>
+<db:title>Keep it simple and lucid</db:title>
 <db:para>Most subject domain languages are small, simple, and fairly strict in their constraints. This is as it should be. Since you have to design them, and the algorithms that translate them into the document domain for publishing, you don’t want them to be elaborate or full of different permutations of structure. The point of a subject domain language is to partition the gathering of information about a subject from all the processes that you might want to perform on that content, from differential single sourcing, to linking, to information architecture, to content reuse.</db:para>
-<db:para>All subject domain structured essentially do the same thing: they isolate a piece of content and describe its relationship to its subject matter in precise terms. We said that data is created by metadata, and subject domain markup is the application of metadata to content to make it into data that can be accessed interpreted reliably by both people and algorithms.</db:para>
+<db:para>All subject domain structures essentially do the same thing: they isolate a piece of content and describe its relationship to its subject matter in precise terms. We said that data is created by metadata (<db:xref linkend="chapter.metadata"/>), and subject domain markup is the application of metadata to content to make it into data that can be accessed interpreted reliably by both people and algorithms.</db:para>
 <db:para>If you find yourself needing a similar language for a related subject, it is usually better to create a new equally small, equally strict language for that subject rather than trying to make one language cover both. Subject domain languages get both their power and ease of use from the simple and direct way that the language related to its subject matter. Trying to make one language cover more than one subject takes away from these properties. If you have ever tried to fill out a government form in which different people or entities are supposed to fill out different fields in different ways, you know how difficult it can be to be sure you have filled out all the sections, and just the sections, that apply to you. It is far better to have one form for each case (though obviously you need to make sure that it is very clear which case each form applies to).</db:para>
-<db:para>A subject domain language should communicate with the author in terms that they understand. This means that the names of structures should make sense to them, but it also means that the how the formal structures break things up should make intuitive sense as well. For an author with experience in the field, a subject domain language should be such a good fit that they don’t really feel like they have to learn anything to use it. The vastly increases the functional lucidity of the language leaving more of the author’s attention free to focus on content, while at the same time providing constraints and guidance that make sure that things are complete and consistent.</db:para>
-<db:para>It is easy to get carried away with breaking things down into finer and finer pieces to formally describe the subject matter in finer and finer detail. Remember that all of this is wasted unless it enables one of the structured writing algorithms that matter to you. Remember too that authoring and conformance are among the algorithms. Making your markup mysterious, difficult, or tedious to create in the name of more precisely modeling the subject matter does more harm than good if reduces functional lucidity without creating a compensating increase in quality or efficiency. Again, this is an improper partitioning of the complexity of content: increasing complexity without any benefit in transferring complexity to a more appropriate person or process.</db:para>
+<db:para>A subject domain language should communicate with the author in terms that they understand. This means that the names of structures should make sense to them, but it also means that the how the formal structures break things up should make intuitive sense as well. For an author with experience in the field, a subject domain language should be such a good fit that they don’t really feel like they have to learn anything to use it. This vastly increases the functional lucidity of the language leaving more of the author’s attention free to focus on content, while at the same time providing constraints and guidance that make sure that things are complete and consistent.</db:para>
+<db:para>Be careful not to take things too far, though. Once you get stated, it is easy to get carried away with breaking things down into finer and finer pieces to formally describe the subject matter in finer and finer detail. Remember that all of this is wasted unless it enables one of the structured writing algorithms that matter to you. Remember too that authoring and conformance are among the algorithms. Making your markup mysterious, difficult, or tedious to create in the name of more precisely modeling the subject matter does more harm than good if reduces functional lucidity without creating a compensating increase in quality or efficiency. Again, this is an improper partitioning of the complexity of content: increasing complexity without any benefit in transferring complexity to a more appropriate person or process.</db:para>
+</db:section>
 </db:chapter>
