@@ -7,15 +7,8 @@ chapter:(#chapter.subject-domain) Writing in the Subject Domain
 
     Structured writing in the {subject domain} means creating structures that are specific to the subject matter being discussed. In essence, the subject domain partitions the subject matter of the text from its presentation. The utility of that partitioning may not be immediately obvious, but as we will see, it provides powerful solutions across are range of problems in the content system. 
     
-    Sometimes the use of the subject domain is a minor part of a primarily {document domain} language. For example, {DocBook} includes subject domain tags like {GUILabel}(structure(DocBook)) for references to part of a computer display. Sometimes it takes the form of a document type that is specific to one subject such as a recipe, a used car review, a tide table, or a travel itinerary. 
-    
-    When a document type is specific to one subject, it may be either rhetorically focused or data-focused. If the document type is designed to constrain the way the information on a particular subject is presented, it is rhetorically focused. A rhetorically-focused subject domain document type is still mainly concerned with document-domain structures, but it specifies exactly which document domain structures are supposed to be used in which order to present a specific subject. 
-    
-    Alternatively, a subject-domain document type may choose to factor out the presentation details and just capture the pieces of information required to cover a subject. This makes it possible to apply different rhetorical strategies when presenting the document to the reader. Each of these approaches is partitioning the complexity of composition and presentation in a different way.  
-    
-    A recipe is a useful example for examining these differences. Notice that the word recipe itself has two meanings. It can mean the formula for a dish. It can also mean the document that records that dish. Recording the formula for a dish is a data oriented approach. Recording the desired presentation of a recipe is the rhetorical approach. We will examine this distinction in this chapter. To begin with, though, we will look at what a recipe looks like in a generic {document domain} language (one this is not specific to the subject of food preparation). 
-
-    Here is a recipe written in {reStructuredText}(language), a lightweight general purpose markup language:
+   
+    A recipe is a useful example for illustrating the use of the subject domain. Here is a recipe written in {reStructuredText}(language), a lightweight general purpose document domain markup language:
   
     figure:
         
@@ -105,10 +98,8 @@ chapter:(#chapter.subject-domain) Writing in the Subject Domain
     
     Partitioning requires that we pass enough information to the partition to do its job. Here the presence of the `ingredients` and `presentation` sections in the recipe structure provide the information that the algorithm needs to insert the appropriate titles.
     
-    By factoring out titles, we factor out the constraint on what those titles must be. An author no longer has to remember the standard titles to use, and a whimsical author can no longer decide to title these sections "Stuff you need" and "Stuff your do", or any other variant of the standard that the organization has chosen. If we want to change these titles across all the recipes, on the other hand, we only have to change the algorithm.
-    
-    In effect, this approach partitions the facts of a recipe from the way in which a recipe is presented. Anyone who knows how to cook a dish knows the facts of a recipe, but they may not know the best way to present those facts to enable another person to cook the same dish. One way to solve this problem is to try to teach everyone how to write a recipe. Another is to present a skeleton of a recipe and ask the cooks to fill in the blanks. Still another is to present a form that requests the facts of dish preparation in a presentation-neutral way. Each of these approaches partitions the task knowledge and the craft of presenting that knowledge in a different way. 
-        
+    By factoring out titles, we factor out the constraint on what those titles must be. An author no longer has to remember the standard titles to use, and a whimsical author can no longer decide to title these sections "Stuff you need" and "Stuff you do", or any other variant of the standard that the organization has chosen. If we want to change these titles across all the recipes, on the other hand, we only have to change the algorithm.
+           
     If your organization publishes a lot of recipes, you probably have a lot more constraints on the rhetorical structure of your recipes. For instance, you might have a constraint that every recipe must state its preparation time and the number of people it serves. In our subject domain markup, we can enforce and record that constraint by moving the information from the introduction section to separate fields:
 
     ```(sam)
@@ -131,8 +122,6 @@ chapter:(#chapter.subject-domain) Writing in the Subject Domain
 
     Does this mean that the preparation time will now be displayed as separate fields in the output, rather than in-line? Not necessarily. It might be a good idea to call it out in separate fields so that readers can find the information more easily, but if you really wanted that information at the end of the introduction in every recipe, it would be a simple matter for the {presentation  algorithm} (see [#chapter.publishing]) to construct the sentences "Prep time, 15 minutes. Serves 6." from the `prep-time` and `serves` field values. 
     
-    You will always have a rhetorical constraint about how this information is to be presented, but the markup does not enforce the how or the where. It merely enforces that the information must be captured, leaving it to the presentation algorithm to implement the current governing constraint on how it is to be presented. 
-    
     So, something interesting has happened here. In order to enforce a rhetorical constraint -- that prep time and number of servings must be specified -- we have moved away from markup that specifies presentation to markup that merely records data. In other words, `prep-time` and `serves` are data-oriented {subject domain} structures that do not specify presentation at all. We are now partitioning the presentation of the recipe from the information the recipe must contain. This allows us to shift responsibility for conformance to our requirements from the author to a {conformance algorithm}. This makes our design more testable and more {repeatable} -- a welcome redistribution of complexity. 
     
     This is a recurring pattern in structured writing, and one of the most important things to understand about how structured writing works. It is almost always better to factor out a constrain than to enforce it. This can be a difficult idea to adjust to. If we have a particular form of presentation we want to achieve, our first instinct naturally is to specify it in detail. But this is not always easy to do, especially if you want to specify that a paragraph should always contain certain pieces of information. Nor is it flexible if you want to vary the presentation for any reason (we will look at some reasons why you might in [#chapter.single-sourcing]). It is important to condition yourself so that when you look at these kinds of problem the first question you ask yourself is, is there a way I can factor out this constraint. Only resort to trying to impose a constraint if it is not possible to factor it out.  
@@ -141,7 +130,7 @@ chapter:(#chapter.subject-domain) Writing in the Subject Domain
 
     Are there other elements of presentation that we can factor out of the recipe structure? As we noted, the reStructuredText version above uses a table presentation for the ingredients. Our recipe structure currently specifies a simple list. The block that contains it is labeled "ingredients", but the contents of the block is just an ordinary unordered list. 
      
-    There is a constraint here about how ingredients are expressed, one which authors need to follow, but one that our markup does not yet impose or record: how to express ingredients. The specification of ingredients in a recipe generally requires three pieces of information, the name of the ingredient, the quantity, and the unit of measure used to express this quantity. These can be presented as a list or a table. To factor out the presentation choice, we can create an ingredient structure that calls out each piece of information separately:
+    There is a constraint here about how ingredients are expressed, one which authors need to follow, but one that our markup does not yet impose or record. The specification of ingredients in a recipe generally requires three pieces of information, the name of the ingredient, the quantity, and the unit of measure used to express this quantity. These can be presented as a list or a table. To factor out the presentation choice, we can create an ingredient structure that calls out each piece of information separately:
 
     ```(sam)
         ingredients:
@@ -162,44 +151,22 @@ chapter:(#chapter.subject-domain) Writing in the Subject Domain
             eggs, 12, each
             water, 2, qt
 
-    This markup turns the ingredients into a set of records with named fields for ingredient, quantity, and unit. This enforces and records that the constraint on ingredients is followed. And because the way they are recorded is independent of any one form of presentation, we are not free to use an algorithm to present them either as a table or as a list. 
+    This markup turns the ingredients into a set of records with named fields for ingredient, quantity, and unit. This enforces and records that the constraint on ingredients is followed. And because the way they are recorded is independent of any one form of presentation, we are now free to use an algorithm to present them either as a table or as a list. 
     
     By adding and recording these constraints, we get similar benefits as before. We can better enforce any constraints we have about how ingredient lists are structured and formatted, and we gain access to the specific data involved, meaning, for example, that we could write an algorithm to convert our units from imperial to metric for publication in markets where metric units are preferred.
+       
+    section: The role of the subject domain
     
-    Here we are partitioning complexity out of content management and publishing processes, letting us collect and present content for different purposes by algorithm rather than by hand. 
+        We don't always use the {subject domain} for an entire document.         Sometimes the use of the subject domain is a minor part of a primarily {document domain} language. For example, {DocBook} includes subject domain tags like {GUILabel}(structure(DocBook)) for references to part of a computer display. 
+        
+        Conversely, most subject domain languages also contain some {document domain} text structures like paragraphs and lists. It is usually not possible to break your treatment of a subject down completely into named fields, after all, and the subject domain cannot represent the entire argument of a piece of content. For the rest we use text, and we organize that text in document domain structures. 
+        
+        When we do create a subject domain document, we may go to different lengths in factoring out content into subject-domain fields. Some subject domain document types are mainly focused on dictating the rhetorical structure to be used for handling a particular subject. It is defining the rhetorical construction of a recipe document. This is what we did in the first subject domain refactoring of our recipe example. This approach does not typically give us much access to the information in the document, it merely governs it shape. 
+        
+        When we start to pull out the prep and serves numbers and turn the ingredients list into a fielded data structure, however, we are factoring out the specifics of recipe presentation and focusing on the elements of recipe as data. This gives us presentation independence, but it also give us access to the data in the document. Getting access to the data in a document can be key to many of the structured writing algorithms, as we will see in subsequent chapters.
+        
+
     
-    section: A key difference between subject and document domains
-
-        At this point we can see that by partitioning information from presentation with subject domain markup, we have created a lot of choices about how documents can be constructed. This highlights an important difference between document domain and subject domain markup. A document domain markup language specifies the content and order of a document. We expect that the document domain markup will specify exactly what content is to appear on the page and in what order. This is necessary in the document domain because the document domain does not record any information about the specific subject matter of individual pieces of text. We can't write an algorithm to publish certain pieces of a document domain file, because the markup does not record which pieces are which. (More on this in the next chapter.)
-        
-        In pure document domain structured writing, the structures created when writing express the author's intent about the rhetorical presentation of the content. But if the author was complying with any specific rhetorical constraints, they did so without any guidance or constraint from the document domain language. The language may have imposed general rhetorical constraints, like how to structure a procedure, but nothing specific to the subject matter.  
-        
-        When we move a to rhetorically-focused subject domain structure, a specific rhetorical approach to the subject matter is enforced on the author and expressed by the structures they create. With these subject-specific rhetorical structure in place, you could begin to select different blocks of content to be included or excluded. As we factor out more of the presentation, we can do more and more to manipulate the presentation algorithmically. The recorded content no longer specifies exactly what content is to appear on the eventual rendered page and in what order. Rather it is a collection of identifiable pieces of content that you can select from or reorder for publication. 
-
-        Let's suppose we run a publishing company that publishes a number of magazines. We want to create a common store of recipes for use in all the magazines. But different magazines have different requirements. _Wine Weenie_ magazine needs to have a wine match with every recipe. _The Teetotaler's Trumpet_, naturally, wants a non-alcoholic suggestion. 
-
-        Here is how that might be handled in the document domain:
-
-        ```(xml)
-            <section publication="Wine Weenie">
-                <title>Wine match</title>
-                <p>Pinot Noir</p>
-            </section>
-            <section publication="The Teetotaler's Trumpet">
-                <title>Suggested beverage</title>
-                <p>Lemonade</p>
-            </section>
-        
-
-        This is an example of what we call {conditional text}(algorithm). The `publication` attribute on the `section` element says, display this text only in this publication. (This makes it {management metadata}(concept), which we will talk about in [#chapter.management-domain].)
-
-        By contrast, this is how this might be handled in the data-oriented subject domain structures:
-
-        ```(xml)
-            <wine-match>Pinot Noir</wine-match>
-            <beverage-match>Lemonade</beverage-match>
-
-        This markup says nothing about which documents should contain either of these pieces of information (a clear example of partitioning). Nor does it contain the subheadings what would introduce either of them in the appropriate publication. All these decisions are now left to algorithms (and the people who write them). This allows us to do far more things with this content without having to rewrite the source files in any way (a partitioning that significantly reduces the complexity of {change managment}, an algorithms we will look at in [#chapter.change]). 
 
     section: Using subjects to establish context
 
