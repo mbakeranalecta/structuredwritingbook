@@ -5,7 +5,7 @@ chapter:(#chapter.publishing) Publishing
     index:: type, term
         concept, publishing algorithm
 
-    All structured writing must eventually be published. Publishing structured content mean transforming it from the domain in which it was created ({subject domain}(concept), {document domain}(concept), or the abstract end of the {media domain}(concept)) to the most concrete end of the media domain spectrum: dots on paper or screen.
+    All structured writing must eventually be published. Publishing structured content means transforming it from the domain in which it was created ({subject domain}(concept), {document domain}(concept), or the abstract end of the {media domain}(concept)) to the most concrete end of the media domain spectrum: dots on paper or screen.
     
     Publishing is a complex process, particularly in an environment where you may be practicing single sourcing, content reuse, or many of the other structured writing algorithms we have looked at. The best way to handle that complexity is to partition and distribute it to appropriate people and processes.  
     
@@ -173,7 +173,7 @@ chapter:(#chapter.publishing) Publishing
         
     section: Architecture of a publishing tool chain
     
-        Overall the architecture of a publishing tool chain should be designed to facilitate the partitioning and distribution of complexity in the content system. Almost all of the structured writing algorithms we have talked about are executed at some point in the publishing process. (The exceptions are those that are concerned with conformance, which operate on the content store independent of any publishing events.)
+        Overall the architecture of a publishing tool chain should be designed to facilitate the partitioning and distribution of complexity in the content system. Almost all of the structured writing algorithms we have talked about are executed at some point in the publishing process. (The exceptions are those that are concerned with aspects of conformance, which operate on the content store independent of any publishing events.)
         
         The partitioning of the system needs to make sure that information is passed from one partition to another (whether the task of that partition is executed by a person or an algorithm). This means that the execution of that partition needs to happen at the right time and place -- the time and place in which the information it needs is available, and before the time and place where the information it produces is needed. The SPFE structure -- Synthesis, Presentation, Formatting, Encoding -- seems to provide a good general framework into which the various algorithms and their timing fit reasonably well. However, you should not get hung up on either the names or the order of operations that this architecture describes. The goal is to partition and distribute the complexity of your content system so that none of the complexity goes unhandled and no one person or process is asked to handle more of the complexity than they have the time and resources to manage. Any architecture that accomplishes that for you particular content system is a good architecture. 
         
