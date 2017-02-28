@@ -2,8 +2,8 @@
 <db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.markup">
 <db:title>Markup</db:title>
 
-<db:para>If structures in structured writing consist of a structure of nested blocks, the way those blocks are expressed in text and created by writers is (most of the time) markup. Markup is, essentially, the insertion of metadata into a text to constrain the interpretation of that text. The trick is to design markup that is both precise enough and complete enough to provide and constrain the information needed by the next partition in the content system while still being lucid enough for authors to create without imposing on their attention so much that ti affects the quality of their content.</db:para>
-<db:para>Markup has long been part of how we partitioned and distributed content creation tasks. For centuries, scribes worked directly in the media domain, using pen and ink to inscribe words and pictures on paper or velum. With the printing press, however, came a fundamental partitioning of the publishing process. Authors no longer worked directly in the media domain. While authors were still directly placing ink on paper, at first by pen and then by typewriter, they were no longer preparing the final visual form of the content. That task has been partitioned off and directed to the typesetter.</db:para>
+<db:para>If structures in structured writing consist of nested blocks, the way those blocks are expressed in text and created by writers is (most of the time) markup. Markup is, essentially, the insertion of metadata into a text to constrain the interpretation of that text. The trick is to design markup that is both precise enough and complete enough to provide and constrain the information needed by the next partition in the content system while still being lucid enough for authors to create without imposing on their attention so much that ti affects the quality of their content. We have been looking at structured writing examples expressed in markup all through this book. Now let’s take a look at markup itself.</db:para>
+<db:para>Markup has long been part of how we partitioned and distributed content creation tasks. For centuries, scribes worked directly in the media domain, using pen and ink to inscribe words and pictures on papyrus or velum. With the printing press, however, came a fundamental partitioning of the publishing process. Authors no longer worked directly in the media domain. While authors were still directly placing ink on paper, at first by pen and then by typewriter, they were no longer preparing the final visual form of the content. That task has been partitioned off and directed to the typesetter.</db:para>
 <db:para>To tell the typesetter how to create the final visual form, document designers had to add additional instructions (metadata) to the author’s manuscript. The designers did this using typesetter’s marks, and the process was called “marking up” the document. We still use “marking up” to describe how structured writing is done today and the term “markup language” to describe the languages used for most structured writing.</db:para>
 <db:figure xml:id="typesetter"><db:title>Printer’s markup</db:title><db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/printermarkup.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject></db:figure>
 <db:para>The writer preparing a manuscript for typesetting was working in the document domain, indicating basic document structures like paragraphs, lists, and titles, without any indication of how they should look in print. The designer then wrote a set of instructions for applying formatting to those structures -- a formatting algorithm. Then the typesetter executed that algorithm by setting the type which the printer then used to print final output.</db:para>
@@ -14,7 +14,6 @@
  font-size: 12pt}"&gt;
 </db:programlisting>
 <db:para>You can see that this markup is very very similar to the old typesetters marks in <db:xref linkend="typesetter"/>.</db:para>
-<db:para>Structured writing, in the broadest sense, is writing that applies any form of structure (any set of constraints) to writing. As such, most forms of writing on a computer, other than perhaps in a straight text editor without the use of markup, are structured writing since they all contain text in structures.</db:para>
 <db:para>All writing programs have to store the writing in files. There are two possible file types they can use: binary and text.</db:para>
 <db:para>For all intents and purposes, a binary file is one that can only be read or written by a computer program, usually the program that created it. Open up a binary file in a text editor and you won’t be able to make heads or tails of it. And even if parts of it look like plain text, editing those sections and saving the file is likely to result in a corrupt file that the original application can no longer open.</db:para>
 <db:para>A text file, by contrast, is one that you can open in a text editor and actually be able to read and write without breaking it. But to express structure in a text file, you need a way to interpolate information about structure into the text. The way we interpolate structure is with markup -- special sequences of text characters that are recognized as defining structure rather than  expressing text.</db:para>
@@ -24,34 +23,18 @@
 <db:emphasis role="bold">&lt;p&gt;</db:emphasis>Herman Melville’s <db:emphasis role="bold">&lt;i&gt;</db:emphasis>Moby Dick<db:emphasis role="bold">&lt;/i&gt;</db:emphasis> is a long 
 book about a big whale.<db:emphasis role="bold">&lt;/p&gt;</db:emphasis>      
 </db:programlisting>
-<db:para>A markup parser recognizes the markup characters and builds a structure with the text and nested structures as content. A processing application then access that data, applying rules to the structures define by the markup, as we saw in <db:xref linkend="chapter.processing"/>.</db:para>
-<db:section>
-<db:title>Why markup?</db:title>
-<db:para>Structured writing is writing to which explicit structure has been applied. But binary formats can express such structures just a well as markup can. Why do we so often use markup rather than binary file formats for structured writing? There are three main reasons:</db:para>
-<db:variablelist>
-<db:varlistentry>
-<db:term>Application independence</db:term>
-<db:listitem><db:para>With binary files, it is possible to obscure how the file is interpreted, making it more difficult to write other applications that can edit the file, in part because you can use third party parsing libraries to do most of the work for you. With markup, it is generally much easier to create other applications that can read and write the same file. This supports the development of tool chains, often based on open-source tools, to implement whatever set of structured writing algorithms are important to a business.</db:para></db:listitem>
-</db:varlistentry>
-<db:varlistentry>
-<db:term>Ad hoc structure definition</db:term>
-<db:listitem><db:para>If you need to define a structure to serve a particular purpose, perhaps one that will be used for relatively few documents, then you need a simple and inexpensive way to create that structure. Markup can provide such a format. It is much easier, for instance, to define a subject-domain markup language for a particular purpose than it is to create a binary file format and a program to read and write it.</db:para></db:listitem>
-</db:varlistentry>
-<db:varlistentry>
-<db:term>Human reading and writing</db:term>
-<db:listitem><db:para>Markup makes it possible for humans to read and write files that are processable by computers. This makes it much easier to build a tool chain for different components and to integrate them to meet your needs. All markup formats make it possible for humans to read and write the files, but not all formats make it easy. As we shall see, some formats are much easier to write in than others.</db:para></db:listitem>
-</db:varlistentry>
-</db:variablelist>
-</db:section>
+<db:para>A markup parser recognizes the markup characters and builds a structure that has the text and nested structures as content. A processing application then access that data, applying rules to the structures define by the markup, as we saw in <db:xref linkend="chapter.processing"/>.</db:para>
 <db:section>
 <db:title>Markup vs. regular text</db:title>
 <db:para>Some markup languages make the distinction between markup and regular text completely explicit. An example of explicit markup is an HTML tag. Tags are set off by opening and closing angle brackets:</db:para>
-<db:programlisting language="HTML">
-&lt;h1&gt;Moby Dick&lt;/h1&gt;
-&lt;p&gt;Herman Melville's &lt;i&gt;Moby Dick&lt;/i&gt; is a long 
-book about a big whale.&lt;/p&gt;      
+<db:programlisting>
+<db:emphasis role="bold">&lt;h1&gt;</db:emphasis>      
 </db:programlisting>
-<db:para>HTML uses open angle brackets <db:code>&lt;</db:code> to indicate the start of markup and closing angle brackets <db:code>&gt;</db:code> to indicate the end of markup and a return to regular text. (Actually the recognition of markup in HTML is a little more complicated than that, but that is more detail than we need to get into here.) What matters is that there are certain sequences in the text which trigger a processing program (generally called a “parser”) to recognize when markup starts and when it ends.</db:para>
+<db:para>HTML uses open angle brackets <db:code>&lt;</db:code> to indicate the start of markup and closing angle brackets <db:code>&gt;</db:code> to indicate the end of markup and a return to regular text. The use of a slash after <db:code>/</db:code> the opening <db:code>&lt;</db:code> indicates and end tag, which marks the end of a structure:</db:para>
+<db:programlisting>
+<db:emphasis role="bold">&lt;h1&gt;</db:emphasis>Moby Dick<db:emphasis role="bold">&lt;/h1&gt;</db:emphasis>
+</db:programlisting>
+<db:para>Actually the recognition of markup in HTML is a little more complicated than that, but that is more detail than we need to get into here. The point here is simply that there are certain sequences in the text which trigger a processing program (generally called a “parser”) to recognize when markup starts and when it ends.</db:para>
 <db:para>What if you want to enter these “markup start” characters into the text of your document? You can’t just type them in because the parser will think they are markup. To fix this, markup languages either define “escape” characters, that signal the parser to treat the following character as text, or they include markup for inserting individual characters in a way that won’t be confused with markup characters. HTML takes the second approach. To include a <db:code>&lt;</db:code> character in HTML, you use what is called a “character entity.” A character entity is a code for a character. It begins with <db:code>&amp;</db:code> (another markup start character), followed by a character code and ending with a semicolon. The character entity for <db:code>&lt;</db:code> in HTML and XML is <db:code>&amp;lt;</db:code>. (“lt” is short for “less than”, the name of the <db:code>&lt;</db:code> character.)</db:para>
 <db:programlisting language="html">
 &lt;p&gt;In HTML, tags start with the &amp;lt; character.&lt;/p&gt;
@@ -62,7 +45,8 @@ book about a big whale.&lt;/p&gt;
 </db:blockquote>
 <db:para>Since <db:code>&amp;</db:code> is also a markup start character, we need to replace it with a character entity as well if we want to include it literally. To include a literal <db:code>&amp;</db:code> you use the character entity <db:code>&amp;amp;</db:code>.</db:para>
 <db:programlisting language="html">
-&lt;p&gt;In HTML, character entities start with the &amp;amp; character.&lt;/p&gt;
+&lt;p&gt;In HTML, character entities start 
+with the &amp;amp; character.&lt;/p&gt;
 </db:programlisting>
 <db:para>This will display as:</db:para>
 <db:blockquote>
@@ -90,7 +74,7 @@ book about a big whale.&lt;/p&gt;
     &lt;li&gt;Third&lt;/li&gt;
 &lt;/ol&gt;
 </db:programlisting>
-<db:para>But at the same time, the numbers look like text to the writer or reader of the Markdown file, and there is no need to escape numbers followed by periods when they occur elsewhere in the text. Thus the following markdown file:</db:para>
+<db:para>But numbers followed by a period are only markup a certain context -- the beginning of a line. Elsewhere, they are plain text. There is no need to escape numbers followed by periods when they occur elsewhere in the text. Thus the following markdown file:</db:para>
 <db:programlisting language="markdown">
 1. First comes 1.
 2. Second comes 2.
@@ -104,7 +88,7 @@ book about a big whale.&lt;/p&gt;
     &lt;li&gt;Third comes 3.&lt;/li&gt;
 &lt;/ol&gt;
 </db:programlisting>
-<db:para>Rather than thinking of markup as being something entirely distinct from text, therefore, it is better to think of markup as being a pattern within a piece of text that delineates its structure. In some cases those patterns may be absolute, meaning the same thing everywhere, and sometimes they may be contextual, meaning one thing in one location and something else in another location. Sometimes the markup characters may be entirely distinct from the text characters, and sometimes a pattern in the text may serve as markup as well.</db:para>
+<db:para>In Markdown, then, markup is not fully explicit. It is a pattern recognized in context. Rather than thinking of markup as being something entirely distinct from text, therefore, it is better to think of markup as being a pattern within a piece of text that delineates its structure. In some cases those patterns may be absolute, meaning the same thing everywhere, and sometimes they may be contextual, meaning one thing in one location and something else in another location. Sometimes the markup characters may be entirely distinct from the text characters, and sometimes a pattern in the text may serve as markup as well.</db:para>
 </db:section>
 <db:section>
 <db:title>Markup languages</db:title>
@@ -113,7 +97,7 @@ book about a big whale.&lt;/p&gt;
 </db:section>
 <db:section>
 <db:title>Concrete markup languages</db:title>
-<db:para>A concrete markup language has a fixed set of markup that describes a fixed set of content structures. For example, Markdown is a concrete markup language that uses a markup that is designed to mimic the way people write plain text emails. Here is the passage about <db:citetitle>Moby Dick</db:citetitle> written in Markdown:</db:para>
+<db:para>A concrete markup language has a fixed set of markup patterns that describes a fixed set of content structures. For example, Markdown is a concrete markup language that uses a markup that is designed to mimic the way people write plain text emails. Here is the passage about <db:citetitle>Moby Dick</db:citetitle> written in Markdown:</db:para>
 <db:programlisting language="markdown">
 Moby Dick
 =========
@@ -125,7 +109,7 @@ Herman Melville's _Moby Dick_ is a long book about a big whale.
 </db:section>
 <db:section>
 <db:title>Abstract markup languages</db:title>
-<db:para>An abstract markup languages does not describe specific concrete document structures directly. It describes abstract structures which can be named to represent structures in any domain.</db:para>
+<db:para>An abstract markup languages does not describe specific concrete document structures directly. It describes abstract concrete structures which can be named to represent structures in any domain.</db:para>
 <db:para>XML is an example of an abstract markup language.<db:footnote>
 <db:para>The formal term for a language like XML is “meta language”, a language for describing other languages. In calling XML an “abstract” language, I am focusing on a different property, its use of structures that are not parts of a document but generic containers. A meta language needs such abstract containers. But I find that the term “meta language” is not helpful to most readers, so I have chosen instead to focus on this property of using abstract structures as opposed to the concrete structures of a language like Markdown.</db:para>
 </db:footnote> The markup in an XML file does not directly indicates things like headings or paragraphs. Instead, it indicates a set of abstract structures called elements, attributes, entities, processing instructions, marked sections, and comments.</db:para>
@@ -139,7 +123,7 @@ Herman Melville's _Moby Dick_ is a long book about a big whale.
     is a long book about a big whale.&lt;/para&gt;
 &lt;/section&gt;
 </db:programlisting>
-<db:para>The structure described by the XML syntax here is that of an element (<db:code>section</db:code>) which contains two other elements (<db:code>title</db:code> and <db:code>para</db:code>), one of which contains text (<db:code>title</db:code>), and one of which (<db:code>para</db:code>) contains a mix of text and another element (<db:code>citetitle</db:code>). There is no separate syntax for titles or paragraphs as there is in Markdown. Everything is an element and every element has a name. To define specific document domain structuresuse named elements.</db:para>
+<db:para>The structure described by the XML syntax here is that of an element (<db:code>section</db:code>) which contains two other elements (<db:code>title</db:code> and <db:code>para</db:code>), one of which contains text (<db:code>title</db:code>), and one of which (<db:code>para</db:code>) contains a mix of text and another element (<db:code>citetitle</db:code>). There is no separate syntax for titles or paragraphs as there is in Markdown. Everything is an element and every element has a name. To define specific document domain structures, you use named elements. This allows you to create any set of named elements you like to represent any structure you need.</db:para>
 <db:para>Unlike a Markdown parser, an XML parser does not see paragraphs or titles. It sees elements. It passes the elements it finds, along with their names, down to a processing application which is responsible for knowing what “section”, “title”, and “para” elements mean in a particular markup language like DocBook. The parser is common to all XML-based languages, but the processing application is specific to DocBook. Thus while processing a concrete language like Markdown is generally a one step operation, processing an abstract language like XML is a two step operation, with the first step being to parse the file to discover the structures defined by elements and the second step to process those structures according to a specific set of rules applicable to a particular markup language.</db:para>
 </db:section>
 <db:section>
@@ -149,7 +133,7 @@ Herman Melville's _Moby Dick_ is a long book about a big whale.
 </db:footnote>. XML is virtually the only abstract language used for content these days, so it is the only abstract language I am going to talk about.</db:para>
 
 <db:para>Since specific markup languages like DocBook are instances of XML, I need to revise my earlier statement: We can usefully divide markup languages into <db:emphasis role="bold">four</db:emphasis> types: concrete, abstract, instances of abstract, and hybrid. In fact (spoiler alert), lets revise it again: We can usefully divide markup languages into <db:emphasis role="bold">five</db:emphasis> types: concrete, abstract, instances of abstract, hybrid, and instances of hybrid.</db:para>
-<db:para>You can’t write directly in a abstract language like XML, only in an instance. YOu can write directly in some hybrid languages, though not all of them.</db:para>
+<db:para>You can’t write directly in a abstract language like XML, only in an instance. You can write directly in some hybrid languages, though not all of them.</db:para>
 
 <db:para>Or to put it another way, as a designer of markup languages your can either:</db:para>
 <db:itemizedlist>
@@ -200,9 +184,8 @@ int theToFile, int theToRank) {
     // ...body
 }
 </db:programlisting>
-<!--  Duplicate of content in publishing algorithms chapter -->
 <db:para>In this sample, <db:code>@param</db:code> and <db:code>@return</db:code> are named blocks. But in JavaDoc, there is a fixed set of named blocks that are defined as part of the language. You can’t create a new language by defining your own block names. By contrast, XML itself defines absolutely no element names. Only instances of XML, like Docbook, define element names.</db:para>
-<db:para>A particularly notable example of a concrete language in abstract clothing is HTML. HTML looks a lot like an instance of XML, but it is not. An XML parser cannot parse most HTML. HTML is nominally an instance of SGML but never did quite conform to it. HTML generally requires a specific HTML parser, such as is found in all browsers. XHTML is a version of HTML that is an instance of XML. HTML5 actually supports two different syntaxes, one of which is an instance of XML and one of which is not, meaning that it has both a concrete syntax and a syntax which is a instance of an abstract language. (Sigh. This is consequence of having made a mess early on and having to live with it for evermore. A lesson for all markup language designers.)</db:para>
+<db:para>A particularly notable example of a concrete language in abstract clothing is HTML. HTML looks a lot like an instance of XML, but it is not. An XML parser cannot parse most HTML. HTML is nominally an instance of SGML but never did quite conform to it. HTML generally requires a specific HTML parser, such as is found in all browsers. XHTML is a version of HTML that is an instance of XML. HTML5 actually supports two different syntaxes, one of which is an instance of XML and one of which is not, meaning that it has both a concrete syntax and a syntax which is a instance of an abstract language. (This is consequence of having made a mess early on and having to live with it for evermore. A lesson for all markup language designers.)</db:para>
 </db:section>
 <db:section>
 <db:title>The ability to extend</db:title>
@@ -219,8 +202,8 @@ int theToFile, int theToRank) {
 <db:title>Showing and hiding structure</db:title>
 <db:para>To reliably create structured content, writers need to see the structures they are creating. In the media domain a WYSIWYG interface shows you the media domain structures you are creating by visually rendering them on screen. But what about in the other domains? The document domain creates abstract document structures that are deliberately separated from their formatting. The subject domain creates subject-based structures that don’t have a one-to-one relationship with any organization or formatting of a document. The management domain creates structures that have nothing to do with the representation of content at all. How does the author get to see these structures when writing in these domains?</db:para>
 <db:para>This is a big problem with XML, the only abstract language in widespread use today. XML tends to hide structure. As an abstract language, an XML document is a hierarchy of elements and attributes -- not the concrete subject, document, management, or media domain structures the author is supposed to be create. Those concrete structures are present in the markup because their names are there, but they are not visually distinguished the way the basic document structures are in a concrete language like Markdown. And XML syntax is verbose, meaning that there is a lot of clutter in the raw text of an XML document, which makes it hard to discern both the structure and the content. XML’s verbose syntax and strict hierarchy were designed to make it easy to parse and to help guard against transmission errors. It was not designed to be a format to write in. Thus is does a poor job of partitioning parsing issues from authoring issues.</db:para>
-<db:para>To remove that clutter, many authors use XML editors that provide a graphical view of the content similar to that of a word processor. But while XML editors removes visual clutter, they also hide the structure. Even if the author is supposed to be working in the document domain or the subject domain, the editor is now displaying content in the media domain. This greatly reduces the functional lucidity of the document domain or subject domain language and encourages backsliding into the media domain.</db:para>
-<db:para>And then there are the problems that arise when you try to edit the WYSIWYG view of an XML document. Underneath is a hierarchical XML structure, but all you can see is the flat media-domain view of the graphical editor. Editing or cutting and pasting structures you can’t see can be frustrating and time consuming. You can learn to do it, but even when you learn, the process is still more complicated than it should be. This is a case of unmanaged complexity being dumped on the author.</db:para>
+<db:para>To remove that clutter, many authors use XML editors that provide a graphical view of the content similar to that of a word processor. But while graphical XML editors removes visual clutter, they also hide the structure. Even if the author is supposed to be working in the document domain or the subject domain, the editor is now displaying content in the media domain. This greatly reduces the functional lucidity of the document domain or subject domain language and encourages backsliding into the media domain.</db:para>
+<db:para>And then there are the problems that arise when you try to edit the graphical view of an XML document. Underneath is a hierarchical XML structure, but all you can see is the flat media-domain view of the graphical editor. Editing or cutting and pasting structures you can’t see can be frustrating and time consuming. You can learn to do it, but even when you learn, the process is still more complicated than it should be. This is a case of unmanaged complexity being dumped on the author.</db:para>
 <db:para>Concrete markup languages like Markdown, on the other hand, show you the structure you are creating and are simple to edit.</db:para>
 </db:section>
 <db:section>
@@ -248,7 +231,7 @@ section: Moby Dick
 </db:programlisting>
 <db:para>In SAM, as in Markdown and most other concrete markup languages, a paragraph is just a block of text set off by whitespace. Thus there is no explicit  structure named <db:code>p</db:code> or <db:code>para</db:code>.</db:para>
 <db:para>At the beginning of a line, a single word without spaces and followed by a colon creates an abstract structure called a block. The word before the colon is the name of the block. Thus <db:code>section:</db:code> above creates a block structure named “section” just as in XML an element named <db:code>&lt;section&gt;</db:code> would create a structure named “section”. Blocks can contain blocks or text structures such as paragraphs and lists.</db:para>
-<db:para>The hierarchy of a SAM document is indicated by indentation. Thus the paragraph in the sample in indented under the section block. This removes the need for end tags, which reduces verbosity and helps make the structure of the document visually clear.</db:para>
+<db:para>The hierarchy of a SAM document is indicated by indentation. Thus the paragraph in the sample is contained in the <db:code>section</db:code> block. Using indentation to indicate containers helps make the structure of the document visually clear and removes the need for end tags, which reduces verbosity, making the text easier to read.</db:para>
 <db:para>Within a paragraph, curly braces markup a phrase, to which you can attach an annotation in parentheses. Here the phrase “Moby Dick” is annotated to indicate that it is a novel. SAM also supports decorations, like the underscores in the Markdown example, so in the media domain “Moby Dick” could have been written <db:code>_Moby Dick_</db:code>.</db:para>
 <db:para>SAM is not intended to be nearly as general in scope as a purely abstract markup language like XML. It is meant for semantic authoring (which is to say, structured writing). As such it incorporates a number of shortcuts to make writing typical structured documents easier.</db:para>
 <db:para>In a typical document, a block of text (larger than a paragraph) typically has a title. So in SAM, a string after a block tag is considered to be a title. That means that the markup above is equivalent to:</db:para>
@@ -259,7 +242,8 @@ section:
     Herman Melville's {Moby Dick}(novel) is a long 
     book about a big whale.
 </db:programlisting>
-<db:para>Unlike RestructuredText, however, SAM does not have an extensive set of predefined named blocks. It only predefines the basic text structures that it provides concrete syntax for. You can write and entire book in reStructuredText without defining any new directives, The most you can write in SAM without defining any blocks is a single paragraph or list. And SAM is designed to have a constraint mechanism, allowing you to write a schema to define what blocks and annotation are allowed in s SAM document. This includes constraining the use of the concrete syntax as well. SAM thus represents a different type of hybrid from RestructuredText which is not extensible but not constrainable. This reflects the fact that reStructuredText is intended as an extensible document domain language, whereas SAM is intended primarily as a neutral starting point for designing subject domain languages (though you can design document domain languages in it as well).</db:para>
+<db:para>Unlike RestructuredText, however, SAM does not have an extensive set of predefined named blocks. It only predefines the basic text structures that it provides concrete syntax for. You can write an entire book in reStructuredText without defining any new directives, The most you can write in SAM without defining any blocks is a single paragraph or list.</db:para>
+<db:para>SAM is designed to have a constraint mechanism, allowing you to write a schema to define what blocks and annotation are allowed in a SAM document. This includes constraining the use of the concrete syntax as well. SAM thus represents a different type of hybrid from reStructuredText which is  extensible but not constrainable. This reflects the fact that reStructuredText is intended as an extensible document domain language, whereas SAM is intended primarily as a neutral starting point for designing subject domain languages (though you can design document domain languages in it as well).</db:para>
 <db:para>Also unlike RestructuredText, SAM is not intended to have its own publishing tool chain. The SAM parser outputs an XML document which can then be processed by XML publishing tools by transforming it into an appropriate document domain language. This book was written in SAM, using a simple document-domain language I created for the purpose, with a number of subject domain annotations. That language was transformed into a semantically equivalent XML document by the SAM parser. That XML document was then transformed into DocBook according to the publisher’s specifications (the publisher has a number of constraints on the DocBook they use that are not expressed in DocBook itself). From that point on, the publisher’s existing DocBook tool chain took over.</db:para>
 <db:para>Most concrete markup languages, at least those designed for documents, try to make their marked-up documents look and read as much as possible like a formatted document. SAM is designed to be easy and natural to read, like a concrete markup language, but it is also designed to make the structure of the content as clear and explicit as possible while requiring the minimum of markup. This is why it uses indentation to express structure. Indentation shows structure clearly with a minimum of markup noise to distract the reader’s eye.</db:para>
 <db:para>Because it is meant specifically for authoring, a SAM parser outputs XML, which can then be processed by the standard XML tool chain. Below is how the SAM markup above would be output by a SAM parser:</db:para>
@@ -277,6 +261,6 @@ section:
 <db:title>Instances of hybrid markup languages</db:title>
 <db:para>I said above that this book is written in SAM, but that is not quite accurate. As noted above, you can’t write anything in an abstract or hybrid language directly. You write in instances of those languages. Thus DocBook is an instance of the abstract language XML. You can write documents in DocBook. We do say, of course, that we write documents in XML, but that statement is, if not wholly inaccurate, certainly non-specific. Saying the a document is written in DocBook tells you what constraints it meets. Saying it is written in XML merely tells you which syntax it uses, which is a whole lot less informative.</db:para>
 <db:para>So, to be more specific, this book is written in a markup language written in SAM, one that I created for the specific purpose of writing this book. That markup language was then transformed by a processing application into DocBook, which is the markup language that the publisher uses for producing books. From there is was processed through the publisher’s regular DocBook-based tool chain to produce print and e-book output.</db:para>
-<db:para>Choosing the style of markup you will use is very much tied to the choices you make about the structures you want. In the following chapters we will look at a variety of markup languages using a variety of markup styles. As always, of course, you choices should be dictated by what works best for the overall partitioning and direction of complexity that you are seeing to achieve in your content system.</db:para>
+<db:para>Choosing the style of markup you will use is very much tied to the choices you make about the structures you want. In the following chapters we will look at a variety of markup languages using a variety of markup styles. As always, of course, your choices should be dictated by what works best for the overall partitioning and direction of complexity that you are seeking to achieve in your content system.</db:para>
 </db:section>
 </db:chapter>

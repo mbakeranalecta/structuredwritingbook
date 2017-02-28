@@ -29,11 +29,11 @@
 </index>
 <p>Word processors and desktop publishing applications tend to straddle the divide between the media domain and the document domain. While they are built on a basic set of document domain objects -- pages, paragraphs, tables, etc. -- they use a WYSIWYG display, which unifies, rather than partitions, the writing and formatting of a document, to keep the author working and thinking mostly in terms of styles and formatting -- the concerns of the media domain. This makes it difficult to apply meaningful document domain constraints to the author’s work, or to record which constraints the author has followed. This makes it impossible to redistribute formatting complexity away from the author. For that we need to move more fully into the document domain.</p>
 <p>The simplest reason for moving to the document domain is actually to enforce media domain constraints that are hard to enforce in the media domain itself. In fact, the reason for moving to the next domain is often to enforce -- or factor out -- constraints in the previous domain. This is one of the consistent patterns we find in structured writing.</p>
-<p>Consider a list. You may want to impose a constraint that the spacing above the first item of a list must be different from the spacing between other items of the list. This is a media domain constraint -- it is about formatting, not the structure of the document -- but it is hard to enforce in the media domain. Most media domain applications create lists by applying styles to ordinary paragraphs. The usual way to apply the extra space above the first item is to create two different styles, which we can call first-item-of-list style, and following-item-of-list style. The first-item-of-list style is defined with more spacing above.</p>
-<p>This creates a constraint that the author is required to follow. They are required to apply first-item-of-list style to the first item of a list and following-item-of-list style to the rest. Nothing in the word processor enforces this constraint. The author simply has to remember it. This creates two problems:</p>
+<p>Consider a list. You may want to impose a constraint that the spacing above the first item of a list must be different from the spacing between other items of the list. This is a media domain constraint -- it is about formatting, not the structure of the document -- but it is hard to enforce in the media domain. Most media domain writing applications create lists by applying styles to ordinary paragraphs. The usual way to apply the extra space above the first item is to create two different styles, which we can call first-item-of-list style, and following-item-of-list style. The first-item-of-list style is defined with more spacing above.</p>
+<p>This creates a constraint that the author is required to follow. They are required to apply first-item-of-list style to the first item of a list and following-item-of-list style to the following items. Nothing in the word processor enforces this constraint. The author simply has to remember it. This creates two problems:</p>
 <ol>
 <li>
-<p>It makes authoring a little bit harder (and all the little bits add up). New authors may not know to do this and may just use the list button. These errors than have to be caught and fixed.</p>
+<p>It makes authoring a little bit harder (and all the little bits add up). New authors may not know to do this and may just use the list button. These errors then have to be caught and fixed.</p>
 </li>
 <li>
 <p>The author can get it wrong without anyone noticing. They may forget to apply first-item-of-list style or they may add a new first item to the list and not realize that the second item in the list now has first-item-of-list style.</p>
@@ -53,8 +53,8 @@ list:
     list-item: Celery
     list-item: Onions
 </codeblock>
-<p>A list structure partitions listness from the physical formatting of a list by creating a container that did not exist before -- the list structure. That list container has no media-domain analog. It is an abstraction created to instantiate the partitioning of listness from the formatting of list items. It is a document domain structure.</p>
-<p>Once we have a list object, we can create rules -- in a separate file -- about how lists are formatted. We are familiar with this from <phrase><annotation type="language">HTML</annotation></phrase> and <phrase>CSS</phrase>. Here’s that same structure in <phrase><annotation type="language">HTML</annotation></phrase> (actually, this is a slightly more specific structure, but we’ll get to that):</p>
+<p>A list structure partitions the idea of a list from the physical formatting of a list by creating a container that did not exist before -- the <phrase><annotation type="code">list</annotation></phrase> structure. That <phrase><annotation type="code">list</annotation></phrase> container has no media-domain analog. It is an abstraction created to instantiate the partitioning of the idea of a list from the formatting of list items. It is a document domain structure.</p>
+<p>Once we have a <phrase><annotation type="code">list</annotation></phrase> structure, we can create rules -- in a separate file -- about how lists are formatted. We are familiar with this from <phrase><annotation type="language">HTML</annotation></phrase> and <phrase>CSS</phrase>. Here’s that same structure in <phrase><annotation type="language">HTML</annotation></phrase> (actually, this is a slightly more specific structure, but we’ll get to that):</p>
 <codeblock language="HTML">
 &lt;ol&gt;
     &lt;li&gt;Carrots&lt;/li&gt;
@@ -75,10 +75,10 @@ li:first-child
 <section>
 <title>Extensibility</title>
 <p>At this point it is worth looking at a very important feature of all structured writing systems: extensibility. In media-domain word processing and desktop publishing programs, authors may need many different styles to format their documents, and these applications do not attempt to anticipate or provide all the styles every author might need. Some, like Word, come with a basic set of styles that may meet some basic needs, but all these programs let authors define new styles as well. The set of document domain structures in these programs is small and fixed, but the set of media domain styles is extensible -- you can create as many as you need.</p>
-<p>A word processor or desktop publishing application that supports the definition of styles is essentially creating an extensible media domain environment. Styles are media domain structures that partition out a set of style metadata that you can attach to a block of text to specify how it will be displayed. Every time you create a new style you are extending your set of media domain structures.</p>
+<p>A word processor or desktop publishing application that supports the definition of styles is essentially creating an extensible media domain environment. Styles are media domain structures that partition out a set of style information that you can attach to a block of text to specify how it will be displayed. Every time you create a new style you are extending your set of media domain structures.</p>
 <p>This need for extensibility is another common pattern in structured writing. If you are working in the media domain, you may need to extend your set of styles. If you are working in the document domain, you may need to extend your set of <phrase><annotation type="concept">document domain</annotation></phrase> structures.</p>
 <p>How many types do we need? One obvious formatting difference between lists is that some are numbered and some are bulleted. How does a formatting algorithm tell whether to use bullets or numbers to format a given list? One way would be to add a style attribute to specify bullets or numbers, but then the author would be working in the media domain again, breaking the partitioning we had hoped to achieve. To keep the author in the document domain, we need to create document domain structures that expresses different list types at the doc domain level.</p>
-<p>The common way to handle bullets vs numbers is to create two different list structures, the ordered list and the unordered list. Different markup languages call them by different names -- <phrase><annotation type="structure" namespace="HTML">ol</annotation></phrase> and <phrase><annotation type="structure" namespace="HTML">ul</annotation></phrase> in HTML, <phrase><annotation type="structure" namespace="DocBook">orderedlist</annotation></phrase> and <phrase><annotation type="structure" namespace="DocBook">itemized-list</annotation></phrase> in DocBook, for example -- but they are conceptually the same thing. (Thus the HTML example above is a little more specific than just being a list structure. It is an ordered list structure.)</p>
+<p>The common way to handle bullets vs. numbers is to create two different list structures, the ordered list and the unordered list. Different markup languages call them by different names -- <phrase><annotation type="structure" namespace="HTML">ol</annotation></phrase> and <phrase><annotation type="structure" namespace="HTML">ul</annotation></phrase> in HTML, <phrase><annotation type="structure" namespace="DocBook">orderedlist</annotation></phrase> and <phrase><annotation type="structure" namespace="DocBook">itemized-list</annotation></phrase> in DocBook, for example -- but they are conceptually the same thing. (Thus the HTML example above is a little more specific than just being a list structure. It is an ordered list structure.)</p>
 <p>The choice of the terms “unordered” and “ordered” is important, because it focuses on the <phrase><annotation type="concept">document-domain</annotation></phrase> properties of a list -- whether its order matters -- rather than on its <phrase><annotation type="concept">media domain</annotation></phrase> properties -- bullets or numbers. Whether an ordered list should be formatted with numbers or letters or Roman numerals, belongs entirely to the <phrase><annotation type="concept">media domain</annotation></phrase>. It has been partitioned out of the <phrase><annotation type="concept">document domain</annotation></phrase> structures.</p>
 </section>
 <section>
@@ -106,13 +106,8 @@ li:first-child
 &lt;/ol&gt;
 </codeblock>
 <p>In the <phrase><annotation type="concept">document domain</annotation></phrase> the inner and outer list are both identical <phrase><annotation type="code">ol</annotation></phrase>/<phrase><annotation type="code">li</annotation></phrase> structures. In the <phrase><annotation type="concept">media domain</annotation></phrase>, one will be formatted with Arabic numerals and the other with letters.</p>
-<figure>
-<title>One document domain object, two media domain styles</title>
 <insert item="../graphics/nested-list.png" type="image"/>
-<caption>
 <p>Both the inner and outer lists are ordered list items in the document domain, but in the media domain they are formatted differently based on context.</p>
-</caption>
-</figure>
 <p>In this case, the algorithm that formats the page distinguishes the inner and outer lists by looking at their parentage. For instance in CSS:</p>
 <codeblock language="css">
 ol&gt;li&gt;ol&gt;li
@@ -136,100 +131,13 @@ figure:
     caption: This is a cute kitten.
     image: images/cute.jpg
 </codeblock>
-<p>If the only way to include an image is to use the image element, and the only place where the image element is allowed is inside the figure element, and if the title and the caption elements are required and must have content, then there is no way for an author to add a graphic without a figure, title, and caption. A document that lacked these elements would be rejected by the <phrase><annotation type="algorithm">conformance algorithm</annotation></phrase> (see <citation type="nameref" value="chapter.conformance"/>).</p>
+<p>If the only way to include an image is to use the image element, and the only place where the image element is allowed is inside the figure element, and if the title and the caption elements are required and must have content, then there is no way for a writer to add a graphic without a figure, title, and caption. A document that lacked these elements would be rejected by the <phrase><annotation type="algorithm">conformance algorithm</annotation></phrase> (see <citation type="nameref" value="chapter.conformance"/>).</p>
 <p>This is an example of a constraint being enforced rather than factored out. But it is still a form of partitioning because we have created a partition for figures which is the only place images are allowed. This partions off the design question about image handling. With the list formatting we could partition out the formatting constraint completely by separating the formatting information from the list structure. Here we enforce the image constraint by providing a specific structure that must be used to insert images.</p>
 <p>There are many ways in which you might want to constrain the structure of a document. In a typical <phrase><annotation type="concept">media domain</annotation></phrase> application, there is no restrictions on the order in which paragraph styles can be applied. If you want to put a level two heading between two steps in a procedure, nothing other than common sense will stand in the way of your doing so. In a document domain language, however, that kind of thing will usually not be allowed.</p>
 <p>Instead, the <phrase><annotation type="concept">document domain</annotation></phrase> language will have a set of constraints on how procedures are structured. Procedure structures will have step structures nested within them. Step structures will only be allowed to appear inside procedure structures. Only certain text elements -- such as paragraphs, lists, or code blocks -- will be allowed to occur inside a step. There will be no way to place a second level heading inside a procedure.</p>
 <p>Constraints like these are important to document domain languages. If you want to control how procedure are written, or how graphics are labeled, you need to create specific document domain structures for these things, and  constrain them to avoid them being misused. Without such constraints, it is easy for a language to slip back into the media domain, something that has happened to HTML.</p>
-</section>
-<section>
-<title>Backsliding into the media domain</title>
-<p>HTML was originally designed for sharing scientific papers. It was not designed to strictly control the organization and presentation of scientific papers -- it was designed more to accommodate requirements than to constrain them -- but it does have features that betray its origins. One example is definition lists. Definition lists are a common feature of scientific papers, which need to precisely define how they will use key terms. But as HTML has come to be adopted as the generic language of web pages, the definition list (<phrase><annotation type="structure" namespace="HTML">dl</annotation></phrase>) structure has come to be treated as a generic labeled list structure, used for all kinds of things other than definition lists.</p>
-<p>This highlights one of the challenges of structured writing, which is to make sure that structures do not get used for purposes other than what they were intended for. This often happens when people look for an easy way to create an effect in the media domain. If the writer wants a piece of text formatted in a particular way, but the only document domain structure that formats that way is intended for something different, it is easy for them to use the structure incorrectly to get the formatting effect they are after.</p>
-<p>But this means that the document domain structure that is being misused no longer expresses the constraints it was designed to express. The partitioning of complexity has broken down. This means you loose functionality. For instance, you can’t find all the definitions in a set of HTML documents by looking for all the <phrase><annotation type="structure" namespace="HTML">dl</annotation></phrase> elements. You will get all kinds of things that are not definitions. You might also miss a lot of definitions that were not created using the <phrase><annotation type="structure" namespace="HTML">dl</annotation></phrase> structure.</p>
-<p>This highlights something that is clearly true about HTML, and that can potentially affect any document domain language. It can slip back into the media domain if people start using it for the media domain effects produced the default transformation algorithms rather than adhering to its document domain structures. Not only does this represent a breakdown of the partitioning of complexity, it is a strong indication that the complexity was not being distributed correctly in the first place -- that somebody was frustrated by the limitations or overwhelmed by the complexity of their environment or task and broke the rules to make their work more manageable. Of course, the probably means the the unhandled complexity is directed somewhere down the line -- to the publishing or content management functions, or to the reader.</p>
 <p>Today, structured writing advocates often dismiss HTML as an unstructured language. They will point to other languages, such as DocBook or DITA, as being structured by contrast, despite the fact that all three languages are document domain languages at heart with many similar structures between them.</p>
 <p>And while it was not always so, HTML has largely become a set of basic document domain structures that authors can hang styles on (using CSS). In other words, it has come to be used much like traditional media-domain word processing and desktop publishing applications. When people write in HTML, they largely do so in WYSIWYG environments, using style-oriented tools that mimic traditional word processing very closely. The result is often an HTML document that formats more or less correctly, but that is coded very inconsistently from the point of view of the document domain, and which is thus very hard to work with -- either to edit by hand or manipulate with algorithms.</p>
-</section>
-<section>
-<title>Reversing the backsliding</title>
-<p>One way to get back to writing in the document domain has emerged recently in the form of a new markup language called <phrase><annotation type="language">MarkDown</annotation></phrase>. The idea behind MarkDown it to represent the major document domain structures of HTML using the kind of formatting people use in text-only email messages. This approach removes the difficulties associated with typing raw HTML. Here’s a sample of Markdown (courtesy of Wikipedia):</p>
-<codeblock language="markdown">
-Heading
-=======
-
-Sub-heading
------------
- 
-### Another deeper heading
- 
-Paragraphs are separated
-by a blank line.
-
-Leave 2 spaces at the end of a line to do a  
-line break
-
-Text attributes *italic*, **bold**, 
-`monospace`, ~~strikethrough~~ .
-
-A [link](http://example.com).
-[28]
-
-Shopping list:
-
-  * apples
-  * oranges
-  * pears
-
-Numbered list:
-
-  1. apples
-  2. oranges
-  3. pears
-
-The rain---not the reign---in
-Spain.
-</codeblock>
-<p>It translates into the following HTML (again, courtesy of Wikipedia):</p>
-<codeblock language="HTML">
-&lt;h1&gt;Heading&lt;/h1&gt;
-
-&lt;h2&gt;Sub-heading&lt;/h2&gt;
-
-&lt;h3&gt;Another deeper heading&lt;/h3&gt;
-
-&lt;p&gt;Paragraphs are separated
-by a blank line.&lt;/p&gt;
-
-&lt;p&gt;Leave 2 spaces at the end of a line to do a&lt;br /&gt;
-line break&lt;/p&gt;
-
-&lt;p&gt;Text attributes &lt;em&gt;italic&lt;/em&gt;, &lt;strong&gt;bold&lt;/strong&gt;,
-&lt;code&gt;monospace&lt;/code&gt;, &lt;s&gt;strikethrough&lt;/s&gt;.&lt;/p&gt;
-
-&lt;p&gt;A &lt;a href="http://example.com"&gt;link&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Shopping list:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;apples&lt;/li&gt;
-&lt;li&gt;oranges&lt;/li&gt;
-&lt;li&gt;pears&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Numbered list:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;apples&lt;/li&gt;
-&lt;li&gt;oranges&lt;/li&gt;
-&lt;li&gt;pears&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;The rain&amp;mdash;not the
-reign&amp;mdash;in Spain.&lt;/p&gt;
-</codeblock>
-<p>Markdown is an attempt to distribute the complexity of Web authoring by partitioning the basic document structures of HTML from the formatting. It does so using a simple markup language, which reduces complexity for those writers who are used to working in a plain text editor. But it does so by leaving out a lot of the features of HTML.</p>
-<p>Many markdown editors use a split screen view that shows the formatted version in one pane as the writer writes markdown syntax in the other. But even here, the writer is still working in the document domain because they still see the structure in the view they are working on. A Markdown editor is never going to produce the kind of messy HTML that a pure WYSIWYG HTML editor can produce.</p>
 </section>
 <section>
 <title>Extending the document domain</title>
@@ -264,7 +172,6 @@ biblioentry:(#bib.xslttrec)
     publishername: W3C Recommendation
     pubdate: 16 November 1999
 </codeblock>
-<p>This structure does not just constrain how bibliography entires are presented and formatted, it actually factors out many of those constraints by breaking down the components of a bibliography entry into separate labeled fields. Given a <phrase><annotation type="structure" namespace="DocBook">biblioentry</annotation></phrase> structure like this, you could create an algorithm to present and format a bibliography entry almost any way you wanted to, effectively partitioning not only the formatting of the bibliography from the presentation of the bibliography, but presentation from the underlying bibliographical data on which it is based. Not only that, you could write an algorithm to extract bibliography information from a document by looking for <phrase><annotation type="structure" namespace="DocBook">biblioentry</annotation></phrase> structures and selecting the desired information from them. For instance, if you want to build a list of authors cited in the document, you could do so by searching the <phrase><annotation type="structure" namespace="DocBook">biblioentry</annotation></phrase> records and extracting the name of the authors from the structures that record them in the bibliography structure.</p>
-<p>This is another important way in which we can cut down the number of document domain structures we need. If we capture the individual pieces of information that make up a bibliography entry, we only need one bibliography entry structure even if we want to present bibliography entries differently in different publications.</p>
+<p>This structure does not just constrain how bibliography entires are presented and formatted, it actually factors out many of those constraints by breaking down the components of a bibliography entry into separate labeled fields. Given a <phrase><annotation type="structure" namespace="DocBook">biblioentry</annotation></phrase> structure like this, you could create an algorithm to present and format a bibliography entry almost any way you wanted to. This means that this structure not only partitions the formatting of the bibliography from the presentation of the bibliography, it also partitions the presentation from the underlying bibliographical data from the presentation. This means you could write an algorithm to extract bibliography information from a document by looking for <phrase><annotation type="structure" namespace="DocBook">biblioentry</annotation></phrase> structures and extracting the desired information from them. For instance, if you want to build a list of authors cited in the document, you could do so by searching the <phrase><annotation type="structure" namespace="DocBook">biblioentry</annotation></phrase> records and extracting the name of the authors from the structures that record them in the bibliography structure.</p>
 </section>
 </chapter>

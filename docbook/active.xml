@@ -22,16 +22,12 @@
 <db:listitem><db:para>You can present content in a way that only shows part of the content on the screen initially but reveals more when the user clicks on a link or takes another action. For instance, you might show the high-level of a procedure and provide a link that opens detailed steps for those who need them. This is a way to cater to audiences with different levels of preparedness.</db:para></db:listitem>
 </db:varlistentry>
 <db:varlistentry>
-<db:term>Transclusion</db:term>
-<db:listitem><db:para>You can pull in content from another source.</db:para></db:listitem>
-</db:varlistentry>
-<db:varlistentry>
 <db:term>Feeds and dynamic sources</db:term>
 <db:listitem><db:para>You can include content that comes from an external source which updates independently of your content such as a feed or a web service.</db:para></db:listitem>
 </db:varlistentry>
 <db:varlistentry>
 <db:term>Interactive media</db:term>
-<db:listitem><db:para>You can include graphics and other media that the user can interact with.</db:para></db:listitem>
+<db:listitem><db:para>You can include apps, widgets, and other media that the user can interact with.</db:para></db:listitem>
 </db:varlistentry>
 </db:variablelist>
 <db:para>Active content is simply the postponement of one or more of the structured writing algorithms to the time of reading. Personalized content is executing the synthesis algorithm on the server when you request a page, using personal details as query terms to select content for the individual. Changing the layout of the page when you resize you browser or rotate your phone is executing the presentation algorithm in the browser. Allowing the reader to change the font size is allowing the reader to configure and execute the formatting algorithm in the browser. Pulling a live stock quote into a page that mentions a company is having the web server or the web browser executes the synthesis algorithm when the page is served/displayed.</db:para>
@@ -62,13 +58,6 @@ match company
         create attribute onload = $fncall
     output ') '
 </db:programlisting>
-<db:para>Which domain should you work in if you want to deliver active content?</db:para>
-<db:section>
-<db:title>Media Domain</db:title>
-<db:para>There is relatively little that you can do in the way of active content in the media domain. For active content to be feasible, you need to constrain the interpretation of your content and the media domain does very little of this. The media domain represents the final or almost-final form of content, leaving little scope for algorithms to act, and little in the way of metadata for them to act on. In the media domain, there are really no constraints on the interpretation of the content, and therefore not much that an algorithm can know about content that it could use as a basis for any action. In practice, therefore, active content almost always works on content written in the document or subject domains.</db:para>
-</db:section>
-<db:section>
-<db:title>Document Domain</db:title>
 <db:para>The document domain represents the desired presentation of a piece of content. Therefore the only kinds of active content algorithms that you can execute on ordinary document domain structures are those that leave the presentation alone and only affect the formatting. For example, you can allow readers to select the font size of a web page, which is a purely formatting concern.</db:para>
 <db:para>If you want to do active content that dynamically changes the presentation of the content, or that changes the text of the content (as in our stock price example) then you need either subject domain structures or document domain structures that are explicitly designed to support active content algorithms.</db:para>
 <db:para>For example, a generic table structure does not support the action of allowing the reader to sort on any column. Sorting by column only makes sense if the content is inherently sortable.</db:para>
@@ -121,9 +110,6 @@ match company
 </db:tbody></db:informaltable>
 <db:para>Thus you can’t just decide to make all the tables on a page sortable by column. Unless the document domain structure explicitly states which columns of a table are sortable and which are not, you can’t implement this kind of active content.</db:para>
 <db:para>To implement column sorting at the document domain level, therefore, you need some sort of sortable table structure which assures that the sorting behavior is only applied to columns where it makes sense in tables where it makes sense.</db:para>
-</db:section>
-<db:section>
-<db:title>Subject Domain</db:title>
 <db:para>While the document domain typically requires different markup for different algorithms, the subject domain typically does not. In the subject domain you capture the semantics of the subject matter, which are the same no matter what algorithms you are applying to the content.</db:para>
 <db:para>In the subject domain, the product list would be a structured data set with known semantics (probably maintained as a separate database).</db:para>
 <db:programlisting language="sam">
@@ -135,7 +121,5 @@ products:: item, legs, price
 </db:programlisting>
 <db:para>Knowing what the semantics are, you would know whether that data set is sortable and therefore whether it can be presented as a sortable table.</db:para>
 <db:para>Creating your content in the subject domain gives you the greatest flexibility to generate active content in ways that are appropriate to the subject matter and the device. And because the subject domain does not require any different structures to support active content, your writers don’t have to understand or even think about how the active content might work, effectively partitioning the complexity of active content from your writers. As we have seen before, an additional benefit of partitioning content from its presentation is that it allows you to experiment with different forms of presentation. This allows you to test if active content is working or not or change the form of active content you use, al without involving authors of changing your content.</db:para>
-<db:para>This does not mean that active content is always going to be a free gift of the subject domain. Apart from the fact that you still have to design and implement the content behavior, you are going to have to make sure that you are capturing the subject domain semantics that are needed to drive the active content behaviors you want. Those semantics may not be different in kind from any other subject domain semantics, but you may need more of them, or to break them down in greater detail, than you might have to for other algorithms. You will also need to make sure that you get a high degree of conformance to these structured from your writers, as it is difficult to validate the correct operation of every active content algorithm on every content set at run time. The success of your active content strategy is going to depend heavily on the quality and consistency of your input data.</db:para>
-<!--  More? -->
-</db:section>
+<db:para>This does not mean that active content is always going to be a free gift of the subject domain. Apart from the fact that you still have to design and implement the content behavior, you are going to have to make sure that you are capturing the subject domain semantics that are needed to drive the active content behaviors you want. Those semantics may not be different in kind from any other subject domain semantics, but you may need to break things down in greater detail than you might have to for other algorithms. You will also need to make sure that you get a high degree of conformance to these structures from your writers, as it is difficult to validate the correct operation of every active content algorithm on every content set at run time. The success of your active content strategy is going to depend heavily on the quality and consistency of your input data.</db:para>
 </db:chapter>
