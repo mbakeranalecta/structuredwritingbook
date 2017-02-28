@@ -11,21 +11,19 @@ chapter:(#chapter.linking) Linking
     footnote:(*1)
         For a discussion of these studies and their implications for how we write, see my book {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}(citetitle).
     
-    The path the reader takes is always based on relationships between the subject matter of one piece of content and another. Suppose a reader is reading a recipe and comes across the instruction "sweat the onions" but does not know how to do that. They are then going to start looking for information on how to sweat onions because they can't usefully continue with the recipe without knowing how to do this. This is a deflection point in your content, a point as which the reader may need to deflect from the current content to some other content. 
+    The path the reader takes is always based on relationships between the subject matter of one piece of content and the subject matter of another. Suppose a reader is reading a recipe and comes across the instruction "sweat the onions" but does not know how to do that. They are then going to start looking for information on how to sweat onions because they can't usefully continue with the recipe without knowing how to do this. This is a deflection point in your content, a point as which the reader needs to deflect from the current content to some other source of information. 
     
     But the deflection point is not an arbitrary one. It is based on the relationship between the task of making the dish described in the recipe and a cooking technique used in that task. We can fully anticipate that such deflection points will occur in our content, and that some of our readers will wish to deflect at those points. The need to make such deflections is part of the complexity of information seeking. The point of information delivery is to make information seeking simpler. If we don't make adequate provision for our readers to deflect when they need to, we are dumping complexity on the reader. If we force them to use search again or to go to a table of contents or an index when we could easily provide a direct link, we are dumping complexity on the reader.  
     
-    Deflection points can be handled in various ways. The writer may choose to do nothing, leaving it up to the reader to look up a word if they don't understand it, for instance. They may use footnotes, cross references, sidebars, parenthetical material, or hypertext links to provide deflection choices. They may use tables or flowcharts to allow readers to choose different paths through content. They may even attempt to anticipate and forestall deflection by using information about the individual reader to dynamically reorder the content to suit the reader's needs. 
-    
-    Deflection also enters into the discussion of {content reuse}(concept). We reuse content in multiple documents so that readers don't have to deflect from one document to another to find it. 
-    
+    But linking is not the only way to handle deflection points. The writer may also choose to use footnotes, cross references, sidebars, or parenthetical material to provide deflection choices. They may use tables or flowcharts to allow readers to choose different paths through content. They may even attempt to anticipate and forestall deflection by using information about the individual reader to dynamically reorder the content to suit the reader's needs. A discussion of linking, therefore, needs to take account of other types of deflection which may be appropriate in particular circumstances.
+       
     If we reuse content in different media, we might want to have a different deflection strategies between paper and hypertext outputs. We may want to include the same chunk of content in multiple paper documents but link to a single copy of it when creating a hypertext. (Linking, in other words, is a kind of reuse: reuse by reference rather than copying.)
     
     Thus we should not be thinking solely in terms of  managing links in our content. We should be thinking about implementing the right deflection strategy in each of our outputs. 
     
-    The problem is that implementing these strategies, particular a comprehensive linking strategy, is itself very complex. Thus many organizations do not link their content adequately and do not provide adequate alternative deflection strategies either. Just they dump the complexity of the reader finding the next piece of information they need right back on the reader.
+    The problem is that implementing these strategies, particular a comprehensive linking strategy, is itself very complex. Thus many organizations do not link their content adequately and do not provide adequate alternative deflection strategies either. They just dump the complexity of the reader finding the next piece of information they need right back on the reader.
     
-    However, there are ways to partition the complexity of linking and other types of deflection support. Different approaches work in each of the {structured writing domains}, but some domains offer much more effective partitioning than others.
+    However, there are ways to partition the complexity of linking and other types of deflection support, making them easier and more economical to manage. Different approaches work in each of the {structured writing domains}, but some domains offer much more effective partitioning than others.
       
     section: Deflection in the media domain
     
@@ -83,7 +81,7 @@ chapter:(#chapter.linking) Linking
         footnote:(*2)
             Technically we could do this from the HTML markup as well, but that would be cheating. The HTML markup is not really giving us permission to do this. It is telling us to create a hypertext link and nothing else. The problem with cheating is that you are basing your algorithm on constraints that are not being promised or enforced, and this can fail in ways you may not expect or catch. Some cheats are more reliable than others, but you probably don't want to get into the habit. Better to move your content creation to a format where cheating is not required to get the output you want.
         
-        Fundamentally, though, this is not a satisfactory {differential single sourcing} solution. Unless there were no alternative, you would not normally direct a reader of paper to the web for more information, nor vice versa. Linking to an already published file, such as an HTML page, means linking to the address where the published file resides. It commits us to a particular format for the link target. If instead of linking to the published address, we link to the address of the unpublished source file, or to an identifier for that file, we gain the freedom to link to any format of that content that we choose to publish. 
+        Fundamentally, though, this is not a satisfactory {differential single sourcing} solution. Unless there were no alternative (such as when you are citing a specific source), you would not normally direct a reader of paper to the web for more information, nor vice versa. Linking to an already published file, such as an HTML page, means linking to the address where the published file resides. It commits us to a particular format for the link target. If instead of linking to the published address, we link to the address of the unpublished source file, or to an identifier for that file, we gain the freedom to link to any format of that content that we choose to publish. 
         
         In DITA, you can link to another DITA file (the default format, so we don't need the `format` attribute):
         
@@ -111,7 +109,7 @@ chapter:(#chapter.linking) Linking
        
         Linking to a source file rather than to an address gives us more latitude about how the link or cross reference is published, but we are still always linking to the same resource. If we are doing {content reuse}, this is a problem because you do not know if the same resource will be available everywhere we reuse our topic. We need to be able to link to different resources when our topic is used in different places.
         
-        To accommodate this, we can factor out the file name and replace it with an ID or a key. IDs and keys are a {management domain} structure that we looked at in [#chapter.reuse]. They allow us to refer to resources indirectly. Using IDs lets us use an abstract identifier rather than a file name to identify a resource. Using keys lets us remap the resources we point to. This makes keys the more efficient way to address this problem. So instead of referring to a specific resource on John Wayne, we refer to the key `John_Wayne` using a reference to a key. In DITA this would look like this: 
+        To accommodate this, we can factor out the file name and replace it with an ID or a key. IDs and keys are {management domain} structures that we looked at in [#chapter.reuse]. They allow us to refer to resources indirectly. Using IDs lets us use an abstract identifier rather than a file name to identify a resource. Using keys lets us remap the resources we point to. This makes keys the more efficient way to address this problem. So instead of referring to a specific resource on John Wayne, we refer to the key `John_Wayne` using a reference to a key. In DITA this would look like this: 
         
         ```(DITA)
             <p>In Rio Bravo, <xref keyref="John_Wayne">The Duke</xref> 
@@ -142,12 +140,13 @@ chapter:(#chapter.linking) Linking
         
     section: The problem with relationship tables
         
-        The problem with link tables is that while they address the problem of link management in reused content and allow you to link to different targets in different publications, they separate the link from the deflection point it supports. The link that was created to serve the deflection point in the content has been factored out of the content into a separate file. The deflection point itself has not been marked up, so there is no way to put the link back where it belongs. Links generate by relationship tables end up in a block, usually at the end of the page. 
+        The problem with relationship tables is that they separate the link from the deflection point it supports. The link that was created to serve the deflection point in the content, the point at which the reader encountered something they might not understand, or might need more information on, or might find more appropriate to their needs that what they are reading now.  But the relationship table does not record the deflection point, it says that there is some connection between topic A and topic B. It does not say where in topic A the deflection point that creates the relationship is located. The deflection point itself has not been marked up, so there is no way to put the link back where it belongs. Links generated by relationship tables end up in a block, usually at the end of the page.[*3]
+
+        footnote:(*3)
+            It is not impossible to imagine a markup system in which you could markup the source of the deflection point in topic A, and then have the relationship table reference that deflection point by ID, thus allowing you to put the link at the deflection point. But this is clearly cumbersome for writers to implement and would complicate the management task. I don't know of any systems that work this way. 
         
         The fundamental problem here is that links exist as a way to service deflection points in content. If we lose sight of this and think only in terms of managing links, it makes sense to pull links out of the content and manage them separately. But this is to ignore the reason the links exist in the first place -- which is to provide the reader with options at a deflection point. It is a classic case of a focus on one part of the partition problem without adequate regard for the complexity that is being redirected. By moving the link away from the deflection point, we simplify link management, but in doing so we lose a level of support for the reader's need to deflect, thus dumping the complexity of navigating from the deflection point to suitable content onto the reader, damaging content quality in the name of process efficiency. 
-        
-        Since the end of a page is a deflection point in a hypertext system, there is a legitimate case for creating and managing page-level links. But if the page is well designed to fulfill a discrete purpose for the reader, the end of the page is actually the point at which the writer knows least about what the reader might want to read next. The relationship table approach is fine as a ways to manage deflection points that occur at the end of a page (or at the beginning). But they are not the way to support the full array of foreseeable reader deflection points which occur in the body of the page. 
-        
+               
         The other problem with the relationship table approach is that it is time consuming. You have to rewrite the links for each content set, and because the deflection points are not recorded in the content source, you have to figure out the appropriate links each time. This goes against the spirit of recording something once and using it many times. A mechanism intended to help you reuse content ends up forcing you to redo the work of linking for each publication you create. In other words, this mechanism does not partition the complexity of link management very well. 
         
     section: Conditional linking
@@ -166,13 +165,9 @@ chapter:(#chapter.linking) Linking
         
         There are some pretty obvious problems with this approach. It is twice the work for authors to create every link, and it doubles the maintenance cost of the content as well. It also flies in the face of the idea of creating formatting-independent content. 
         
-        Unfortunately, in a general purpose document domain tagging language with management domain support, it is pretty much impossible to prevent writers from doing things like this in order to achieve the effects they want. And in practice writers do end up using conditional markup like this for all kinds of differential single sourcing and reuse problems that are not easy to solve in the document and management domains. In some cases this can lead to tangles of conditions that are hard to maintain and debug. 
+        Unfortunately, in a general purpose document domain markup language with management domain support, it is pretty much impossible to prevent writers from doing things like this in order to achieve the effects they want. And in practice writers do end up using conditional markup like this for all kinds of differential single sourcing and reuse problems that are not easy to solve in the document and management domains. In some cases this can lead to tangles of conditions that are hard to maintain and debug. 
         
-        For an alternate approach to this problem, and the others we have discussed, we can to turn to the {subject domain}(concept). 
-        
-    section: Deflection in the subject domain
-    
-        The inescapable fact is that the management domain approach does not do a great job or partitioning the complexity of links, and of deflection point handling in general. 
+        The inescapable fact is that the management domain approach does not do a great job of partitioning the complexity of links, and of deflection point handling in general. 
         
         * Like all management domain structures, they are artificial. They don't correspond to things in the author's everyday world, which makes them harder to learn and use. The introduce complexity into the author's world, which is sufficient to make most authors severely limit the links they create. 
         
@@ -182,7 +177,10 @@ chapter:(#chapter.linking) Linking
         
         * Unless you resort to ugly conditional structures, you can't use media-appropriate deflection mechanism for differential single sourcing. 
         
-        {As we have seen before}[#chapter.reuse], we can often remove the need for management domain structures by moving content to the subject domain. The same it true with deflection points. In the document domain we handled a deflection point by specifying a resource to link to, specifying both that the deflection mechanism would be a link and that the link target would be a particular page. In the management domain we used keys to factor out the target resource but not the deflection mechanism (it was still an `xref`).  In the subject domain, we can factor out the target resource as well. We do this by marking up the subject of the deflection point:
+        
+    section: Deflection in the subject domain
+    
+        {As we have seen before}[#chapter.reuse], we can often remove the need for management domain structures by moving content to the subject domain. The same is true with deflection points. In the document domain we handled a deflection point by specifying a resource to link to, specifying both that the deflection mechanism would be a link and that the link target would be a particular page. In the management domain we used keys to factor out the target resource but not the deflection mechanism (it was still an `xref`).  In the subject domain, we can factor out the target resource as well. We do this by marking up the subject of the deflection point:
         
         ```(xml)
             <p>In <movie>Rio Bravo</movie>, 
@@ -205,9 +203,9 @@ chapter:(#chapter.linking) Linking
         
         Subject annotation markup says, "this is an important subject that we care about in this context". How is this an appropriate way to handle a deflection point? The intersection of subjects -- where a topic on one subject makes a significant mention or another significant subject --  are likely deflection points. When we create a link in the media domain or the document domain it is because our text is mentioning a significant related subject that the reader may want to know more about. The difference is that in the document domain we handle the mention of an important subject by creating markup that specifies a resource on that subject and in the subject domain we create markup that specifies the subject itself.  This leaves us with more options about how to handle the deflection point, and that is what we have been looking for.         
         
-        Marking it up a phrase as a significant subject does not oblige the publishing algorithm to create a link. If you decide to have the publishing algorithm create a link on the Web and a cross reference on paper, nothing in the markup obliges you to use any particular formatting or target any particular resource. There is no question of cheating here if you decide to create one kind of deflection device or another, or not to create one at all. 
+        Marking up a phrase as a significant subject does not oblige the publishing algorithm to create a link. If you decide to have the publishing algorithm create a link on the Web and a cross reference on paper, nothing in the markup obliges you to use any particular formatting or target any particular resource. There is no question of cheating here if you decide to create one kind of deflection device or another, or not to create one at all. 
         
-        In all our previous examples, mentions of "Rio Bravo" were not marked up, even though it is clearly an important subject and a potential deflection point. This reflects the author's decision not to create a link to support this deflection point. But what if we want to make a different choice later? By marking up "Rio Bravo" as a significant subject, we keep our options open. Now we tell the {presentation algorithm} to create links on the names of movies if we want to, or not if we don't want to. 
+        In all our previous examples based on this text, mentions of "Rio Bravo" were not marked up, even though it is clearly an important subject and a potential deflection point. This reflects the author's decision not to create a link to support this deflection point. But what if we want to make a different choice later? By marking up "Rio Bravo" as a significant subject, we keep our options open. Now we tell the {presentation algorithm} to create links on the names of movies if we want to, or not if we don't want to. 
         
         But there are additional reasons to annotate Rio Bravo as a significant subject, because that annotation can be used for other purposes as well.      
         
@@ -215,7 +213,7 @@ chapter:(#chapter.linking) Linking
         
         2. We could use this subject annotation to generate {document domain} index markers so that we can automatically build an index of all mentions of movies in a work. 
         
-        Subject annotation thus serve multiple purposes, and correspondingly reduces the amount of markup that is required to support all these different publishing functions. This is a common feature of subject domain markup. None of it is directly tied to specific document domain or media domain structures which will be required to publish the content. Each piece of subject-domain markup may be used to generate multiple document domain and media domain structures. For example, we could generate the following document domain markup from from the subject domain markup above (the example is in DocBook):
+        Subject annotation thus serves multiple purposes, and correspondingly reduces the amount of markup that is required to support all these different publishing functions. This is a common feature of subject domain markup. None of it is directly tied to specific document domain or media domain structures which will be required to publish the content. Each piece of subject-domain markup may be used to generate multiple document domain and media domain structures. For example, we could generate the following document domain markup from from the subject domain markup above (the example is in DocBook):
         
         ```(DocBook)
             <para>
@@ -229,7 +227,9 @@ chapter:(#chapter.linking) Linking
                     <primary>John Wayne</primary>
                     <secondary>Actors</secondary>
                 </indexterm>
-                <ulink url="https://en.wikipedia.org/wiki/John_Wayne">The Duke</ulink>
+                <ulink url="https://en.wikipedia.org/wiki/John_Wayne">
+                    The Duke
+                </ulink>
                 plays an ex-Union colonel out for revenge.
             </para>        
         
@@ -238,11 +238,11 @@ chapter:(#chapter.linking) Linking
 
         Generating links from subject annotations has a number of other advantages:
         
-        * In a {reuse}(concept "content reuse") scenario, you never have to worry about broken links or creating relationship tables. You generate whatever links are appropriate to whatever topics are available in the {presentation algorithm}.
+        * In a {reuse}(concept "content reuse") scenario, you never have to worry about broken links or creating relationship tables. The {presentation algorithm} generates whatever links are appropriate to whatever topics are available.
         
         * In a {differential single sourcing}(concept) scenario, you are never tied to one deflection mechanism. You can generate any mechanism you like in whatever media you like. 
         
-        * You don't have to worry about maintaining the links in your content because you source content does not contain any links. The subject annotations in your content are objective statements about your subject matter, so they don't change. All the links in the published content are generated by the presentation algorithm, so no management is required.
+        * You don't have to worry about maintaining the links in your content because your source content does not contain any links. The subject annotations in your content are objective statements about your subject matter, so they don't change. All the links in the published content are generated by the linking algorithm, so no management is required.
         
         * There is no issue with wanting to link to content that has not been written yet. The subject annotation refers to the subject matter, not a resource. Links to content that is written later will appear once that content becomes available to link to. 
         
@@ -250,7 +250,7 @@ chapter:(#chapter.linking) Linking
         
     section: Finding resources to link to
         
-        The {subject domain} approach represents a radically different partitioning of the complexity of linking and deflection point handling. Most notable, it partitions and redirects the responsibility for finding content to link to away from the author. All partitioning introduces some new form or complexity to replace the one that has been partitioned out. In this case, it is the complexity of doing the subject domain annotations of the text. But this is a particularly effective piece of complexity both because that annotation only requires knowledge the writer already has, but also because that same annotation is useful for so many other algorithms as well. This is one of the best features of the subject domain -- its structures tend to serve multiple algorithms rather than just one, which is, in itself, a highly effective piece of partitioning of complexity. 
+        The {subject domain} approach represents a radically different partitioning of the complexity of linking and deflection point handling. Most notable, it partitions and redirects the responsibility for finding content to link to away from the author. All partitioning introduces some new form or complexity to replace the one that has been partitioned out. In this case, it is the complexity of doing the subject domain annotations of the text. But this is a particularly effective piece of partitioning both because that annotation only requires knowledge the writer already has, but also because that same annotation is useful for so many other algorithms as well. This is one of the best features of the subject domain -- its structures tend to serve multiple algorithms rather than just one, which is, in itself, a highly effective piece of partitioning of complexity. 
 
         But since we have partitioned off the responsibility of finding resources to link to, we also have to look at how the people and processes in that partition go about locating appropriate resources.  They do this by looking up resources based on the subject information (type and value) captured by the subject annotation. For this we need content that is indexed using those types and values (or their semantic equivalents). So naturally this means that we need to index our content. If you have a page on John Wayne, you can index it like this:
         
@@ -269,13 +269,15 @@ chapter:(#chapter.linking) Linking
         
         ```(pseudo)
             match actor
-                $target = find href of topic where type = actor and name = @name
+                $target = find href of topic 
+                           where type = actor 
+                           and name = @name
                 create xref
                     attribute href = $target
                     continue
         
         
-        However, content stored in the subject domain may already be indexed effectively enough by its inherent subject domain structures. Suppose your content collection includes thai subject-domain actor bio:
+        However, content stored in the subject domain may already be indexed effectively enough by its inherent subject domain structures. Suppose your content collection includes thas subject-domain actor bio:
         
         ```(sam)
             actor: 
@@ -287,7 +289,7 @@ chapter:(#chapter.linking) Linking
                     film: The Shootist
         
         
-        Here the topic type is actor, and the name field specifies the name of the actor in question. This is all the information we need to identify this topic as a source of information on the actor John Wayne.
+        Here the topic type is actor, and the `name` field specifies the name of the actor in question. This is all the information we need to identify this topic as a source of information on the actor John Wayne.
         
         Only very minor changes to the linking algorithm are required to use this:
         
@@ -304,6 +306,8 @@ chapter:(#chapter.linking) Linking
         Indexing of topics may also be done by a {content management system}(tool), in which case the linking algorithm would query to CMS to find topics to link to.  
         
         A useful feature of this approach is that you can have the {publishing algorithm}(concept) fall back to creating a link to an external resource if an internal one is not available. If a search of the index of your own content fails, you can search indexes of external content. You can build such an index yourself, but some external sites may also provide indexes, APIs, or search facilities that you can use to locate appropriate pages to link to. 
+        
+        Of course, building these linking algorithms is a piece of additional complexity in your content system. The effect of the subject domain it to partition complexity away from writers and distribute it to information architects and content engineers. 
         
     section: Deferred Deflection
     
@@ -356,18 +360,26 @@ chapter:(#chapter.linking) Linking
             <p>For more information, see:</p>
             
             <ul>
-                <li>Actors:       
-                    <ul>
-                        <li><a href="https://en.wikipedia.org/wiki/John_Wayne">John Wayne</a></li>
-                        ...
-                    </ul>
-                </li>
-                <li>Movies:       
-                    <ul>
-                        <li><a href="https://en.wikipedia.org/wiki/Rio_Bravo_(film)">Rio Bravo</a></li>
-                        ...
-                    </ul>
-                </li>
+             <li>Actors:       
+              <ul>
+               <li>
+                <a href="https://en.wikipedia.org/wiki/John_Wayne">
+                 John Wayne
+                </a>
+               </li>
+                ...
+              </ul>
+             </li>
+             <li>Movies:       
+              <ul>
+               <li>
+                <a href="https://en.wikipedia.org/wiki/Rio_Bravo_(film)">
+                  Rio Bravo
+                </a>
+               </li>
+               ...
+              </ul>
+             </li>
             </ul>
         
         
@@ -375,13 +387,13 @@ chapter:(#chapter.linking) Linking
         
     section: Different domain, different algorithm
     
-        What the linking algorithm illustrates perhaps better than any other is that the movement from one domain to another represents are significantly different partitioning of of content complexity, which means that it changes the structured writing algorithms in fundamental ways. While the algorithm has the same end in each domain, the way it achieves that end can be significantly different. 
+        What the linking algorithm illustrates perhaps better than any other is that the movement from one domain to another represents are significantly different partitioning of of content complexity, which means that it changes the structured writing algorithms in fundamental ways. While the algorithm has the same purpose in each domain, the way it achieves that purpose can be significantly different. 
         
-        One of the points I have tried to make about structured writing algorithms is that they always start with the content structures. How you design the content structures -- the way the author records the content -- determines everything you can do with the content. You create content structures to support algorithms. You create algorithms to improve content quality or streamline content management and publishing. You then choose the content structures that support the algorithm you want to implement.
+        Structured writing algorithms always start with the content structures. How you design the content structures -- the way the author records the content -- determines everything you can do with the content. You create content structures to support algorithms. You create algorithms to improve content quality or streamline content management and publishing. You then choose the content structures that support the algorithm you want to implement.
         
         In the document domain, the data structures tend to have a one to one correspondence with their algorithms. As system designers determine they need a particular algorithm, they create structures to support that algorithm. Thus document domain languages that require support for linking, reuse, indexing, and single sourcing have separate data structures for linking, for reuse, for indexing, and for single sourcing. (Some of these may be {management domain} structures, of course.)
         
-        In the subject domain, though, the data structures reflect the subject matter. If you go looking for a one to one correspondence between a structure and the algorithm it supports, you won't find it. Thus you will not find link markup or reuse markup or index markup or single sourcing markup in the subject domain. You will find markup that clarifies and delineates the subject matter of the content it contains. Any algorithm we want to apply has to interpret that subject domain annotation and use it as the basis for creating whatever kind of document or media domain structure you want for publishing. 
+        In the subject domain, though, the data structures reflect the subject matter. If you go looking for a one-to-one correspondence between a structure and the algorithm it supports, you won't find it. Thus you will not find link markup or reuse markup or index markup or single sourcing markup in the subject domain. You will find markup that clarifies and delineates the subject matter of the content it contains. Any algorithm we want to apply has to interpret that subject domain annotation and use it as the basis for creating whatever kind of document or media domain structure you want for publishing. 
         
         System designers do still have to think about what algorithms they want to apply, but that is to make sure that the aspects of the subject matter needed to drive the algorithms are captured. Since every subject structure can potentially drive many publishing algorithms, however, you will often find your subject domain content already supports any new algorithms you want to apply. This helps future proof your content.
                 

@@ -4,25 +4,21 @@ chapter:(#chapter.reuse) Reuse
         concept, reuse algorithm
         concept, content reuse
 
-    Another source of complexity in content creation occurs when you want the same information to occur in more than one publication. If there is no coordination between authors, each author who want to include the piece of information will research and write it for themselves. In the case of authors who want to use the same information in more than on publication they are writing, they will copy the information from one publication to another. However it happens, you now have two or more instances of the same information that have to be maintain and edited whenever the subject matter changes. If not all the instances get updated, or some of them get updated incorrectly, that is content maintenance complexity that is not being handled, and, as always happens, it falls through to the reader in the form of inconsistent or incorrect information. 
+    Another source of complexity in content creation occurs when you want the same information to occur in more than one publication. If there is no coordination between authors, each author who want to include the piece of information will research and write it for themselves. Individual writers who want to use the same information in more than on publication they are writing, will copy the information from one publication to another. However it happens, you now have two or more instances of the same information that have to be maintain and edited whenever the subject matter changes. If some instances do not get updated, or some of them get updated incorrectly, that is content maintenance complexity that is not being handled, and, as always, it falls through to the reader in the form of inconsistent or incorrect information. 
     
-    Content reuse is an attempt to handle the complexity associated with using the same information in more than one place. Reuse has become one of the main drivers of structured writing, particularly in the form of widespread adoption of {DITA}(tool). Unfortunately, reuse techniques themselves introduce a lot of complexity and a single-minded focus on reuse has sometimes led to the implementation of many systems that dumped large amounts of complexity on authors (and thus, eventually, on readers). It is an area in which, if you are not careful, you can easily end up with more unhandled complexity in the system than when you began with. 
+    Content reuse is an attempt to handle the complexity associated with using the same information in more than one place. Reuse has become one of the main drivers of structured writing, particularly in the form of widespread adoption of {DITA}(tool). Unfortunately, most reuse techniques also introduce a lot of {management domain} complexity. A single-minded focus on reuse has sometimes led to the implementation of systems that dump large amounts of complexity on authors (and thus, eventually, on readers). It is an area in which, if you are not careful, you can easily end up with more unhandled complexity in the system than when you began. 
     
-    There are a number of different scenarios in which you might want to duplicate information in more than one place. (It is important to remember that content reuse is always content duplication. You should always be asking yourself why you want to duplicate the information you are reusing.)
+    There are a number of different scenarios in which you might want to duplicate information in more than one place. For example: 
     
     * You are writing about different products in a product line that share common technology. You want to duplicate information on the common features in a document on each individual product. 
     
-    * You are writing about several version (different releases) or a product. You want information on features that have not changed to be duplicated in all documents. 
+    * You are writing about several different releases of a product. You want information on features that have not changed to be duplicated in all documents. 
     
     * You are writing documents for different audiences (marketing material, technical documentation for various roles, training material) and you want to  duplicate product descriptions in all these documents. 
     
     * There is general information about your organization that you want to duplicated in many different publications (such as your copyright and trademark ownership statements). 
     
-    The ways in which information gets duplicated between and inserted into publications can vary considerably depending on the use case. Content reuse is not one technique, therefore, but a collection of many techniques, each of which requires a different approach to partitioning and relating the content, and thus requires specific content structures in the subject, document, and management domains. 
-    
-    The simplest content reuse technique is cutting and pasting content from one source to another. This approach is quick and easy to implement, but it creates a host of management problems. When people talk about content reuse they generally mean any and every means of reusing content other than cutting and pasting. 
-    
-    This means that reusing content really means storing a piece of content in one place and inserting it into more than one publication by reference. "Reusing" can suggest that this activity is somewhat akin to rummaging through that jar of old nuts and bolts you have in the garage looking for one that is the right size to fix your lawnmower. While you can do it that way, that approach is neither efficient nor reliable. The efficient and reliable approach involves deliberately creating content for use in multiple locations. This means that you need to place constraints on the content to be reused and the content that reuses it, and that means you are in the realm of structured writing.
+    "Reusing" can suggest that this activity is somewhat akin to rummaging through that jar of old nuts and bolts you have in the garage looking for one that is the right size to fix your lawnmower. While you can do it that way, that approach is neither efficient nor reliable. The efficient and reliable approach involves deliberately creating content for use in multiple locations. This means that you need to place constraints on the content to be reused and the content that reuses it, and that means you are in the realm of structured writing.
 
     section: Fitting pieces of content together
     
@@ -46,9 +42,7 @@ chapter:(#chapter.reuse) Reuse
         
         >>>(image ../graphics/common2variable.png)
         
-        For instance, if you are writing procedures and there is a common safety warning that must appear on all dangerous procedures, each individual procedure is the variable part and the standard warning is the common part.
-        
-        We looked at an example of this in [#chapter.management-domain].  
+        Each individual procedure is the variable part and the standard warning is the common part. We looked at an example of this in [#chapter.management-domain]:  
         
         ```(sam)
             procedure: Blow stuff up
@@ -59,9 +53,9 @@ chapter:(#chapter.reuse) Reuse
                 step: Press the big red button.
         
          
-        To ensure that the included content will always fit, you need to make sure that there is a clear division of responsibilities between the common content and each of the documents it will be inserted into. The inserted content should give the safety warning, the whole safety warning, and nothing but the safety warning. Each document that includes it should include it in the required place in the procedure structure. 
+        To ensure that the included content will always fit, you need to make sure that there is a clear partitioning of responsibilities between the common content and each of the procedures it will be inserted into. The inserted content should give the safety warning, the whole safety warning, and nothing but the safety warning. The procedure structure should describe the steps and only the steps and should insert the reusable warning at the right place. 
         
-        Of course, you can also use the subject-domain approach to common into variable that we looked at in [#chapter.management-domain].
+        Of course, you can also use the subject-domain approach to common into variable that we looked at in [#chapter.management-domain]. I will go into more detail on that approach later in this chapter.
         
     section: Variable into common
         
@@ -123,7 +117,7 @@ chapter:(#chapter.reuse) Reuse
         
         section: Using IDs
     
-            The most basic way to factor out the file name is to give the content of the file an ID and use the ID to identify the content in a location independent way. Here is the warning file with the ID `#warn_danger` added: 
+            The most basic way to factor out the file name is to give the content of the file an ID. An ID is a management domain structure used to identify a piece of content in a location independent way. No matter where the content is stored, it keeps the same ID. Here is the warning file with the ID `#warn_danger` added: 
             
             ```(sam)
                 warning:(#warn_danger) 
@@ -153,7 +147,7 @@ chapter:(#chapter.reuse) Reuse
             
             This is a constant pattern in structured writing. When it comes to locating resources, you want to move that responsibility from the content to the algorithm. This makes it easier to update the locations, but it also gives you far more options for storing and managing your content, since algorithms can interact with a variety of systems in sophisticated ways, rather than just storing a static address. It also means you can make wholesale changes in how your content is stored without having to edit the content itself. This is a major win in terms of partitioning complexity so it can be distributed and handled more efficiently.  
             
-            This means that the {synthesis algorithm}(concept) needs some way to resolve the ID and find the content to include. In many cases, a {content management system}(tool) is used to resolve the ID. In other cases it is as simple as the algorithm searching through a set of files to find the ID or building a catalog that points to the files that contain IDs.
+            This means that the {synthesis algorithm}(concept) (which I will talk about in [#chapter.publishing] needs some way to resolve the ID and find the content to include. In many cases, a {content management system}(tool) is used to resolve the ID. In other cases it is as simple as the algorithm searching through a set of files to find the ID or building a catalog that points to the files that contain IDs.
             
             To do variable into variable reuse in a system that uses IDs, you simply point the {algorithm} at a different set of files that contain the same IDs, but attached to different content. So if your foreign market requires a different warning, you can create a file like this:
             
@@ -164,11 +158,11 @@ chapter:(#chapter.reuse) Reuse
                     Pay close attention. You could really hurt yourself.
             
             
-            By telling the build to search this file for IDs rather than the file with the domestic market warning, you automatically get the the foreign warning rather than the domestic one. 
+            By telling the build of the foreign market docs to search this file for IDs rather than the file with the domestic market warning, you automatically get the the foreign warning rather than the domestic one. 
         
         section: Using keys
         
-            Another way to do this is with keys. Instead of assigning an ID directly to the content, the keys approach use an intermediate lookup table to resolve keys to particular resources.
+            Another way to do this is with another {management domain} structure called a key. A key is like an ID that is not directly tied to a resource. Instead, it is an abstract identifier for an abstract resource that might be instantiated by many different resources in different circumstances. Since a key does not represent any one concrete resource, we don't assign the key to a resource. Instead we use an intermediate lookup table to resolve keys to particular resources for a particular purpose.
             
             So in this case we have the warning in a file called files/shared/admonitions/domestic/danger with the following content (no ID):
             
@@ -190,7 +184,7 @@ chapter:(#chapter.reuse) Reuse
                     step: Press the big red button.
             
             
-            (I am using `#` to denote IDs and `%` to denote keys. This is purely arbitrary and has nothing to do with how they work. Different systems will denote IDs and keys in different ways.)
+            (I am using `#` to denote IDs and `%` to denote keys. This is the notation that SAM uses for IDs and keys, but it is purely arbitrary and has nothing to do with how they work. Different systems will denote IDs and keys in different ways.)
             
             To connect the key to the warning file, we then create a key lookup table:
             
@@ -201,7 +195,7 @@ chapter:(#chapter.reuse) Reuse
                         resource: files/shared/admonitions/domestic/danger
             
             
-            When the {synthesis algorithm} processes the procedure, it sees the key reference `%warn_danger` and looks it up in the key lookup table. The key lookup table tells the algorithm that the key resolves to the resource `files/shared/admonitions/domestic/danger`. The algorithm them loads that file and inserts the contents into the output.
+            When the {synthesis algorithm} processes the procedure, it sees the key reference `%warn_danger` and looks it up in the key lookup table. The key lookup table tells the algorithm that the key resolves to the resource `files/shared/admonitions/domestic/danger`. The algorithm then loads that file and inserts the contents into the output.
             
             ```(pseudo)
                 match insert with key
@@ -224,7 +218,7 @@ chapter:(#chapter.reuse) Reuse
             
             One feature of the key approach is that, because it does not attach the key directly to the content, it can be use to identify resources that do not have IDs, which may include resources that you do not control. 
                       
-            One downside of a strictly external approach to keys is that they can only point to a whole resource. This could force you to keep all your reusable units in separate files. To avoid this, you can combine keys with IDs.        
+            One downside of keys is that by themselves they can only point to a whole resource. This could force you to keep all your reusable units in separate files. To avoid this, you can combine keys with IDs.        
             The following example combines the foreign and domestic danger warnings into one file and gives each an ID:
             
             ```(sam)
@@ -257,7 +251,7 @@ chapter:(#chapter.reuse) Reuse
                         name: warn_danger
                         resource: files/shared/warnings#warn_danger_foreign
             
-            Here we have partitioned the warnings off into separate file and also partitioned of the location of those files from the author. The use of keys as a bridge between two partitions can be a convenient way to manage content relationships without having to update source files every time the relationships change. The downside is that keys introduce an abstract element into the author's world, and abstractions are a form of complexity that can be difficult to deal with. 
+            Here we have partitioned the warnings into a separate file and also partitioned the location of those files from the author. The use of keys as a bridge between two partitions can be a convenient way to manage content relationships without having to update source files every time the relationships change. The downside is that keys introduce an abstract element into the author's world, and abstractions are a form of complexity that can be difficult to deal with. 
         
     section: Common with conditions
         
@@ -265,7 +259,7 @@ chapter:(#chapter.reuse) Reuse
         
         >>>(image ../graphics/commonconditions.png)
         
-        For instance in content for a car manual you might have conditional text for the number of people the car seats.
+        For instance, in content for a car manual you might have conditional text for the number of people the car seats.
         
         ```(sam)
             The vehicle seats {four}(?compact){five}(?midsize){seven}(?van).
@@ -301,7 +295,7 @@ chapter:(#chapter.reuse) Reuse
                 li: Mud flaps
         
         
-        In this case, the list item "Leather seats" would only be published if the condition `deluxe` was specified in the build. It would be omitted for all other builds. These are the kinds of cases where it is harder to get away from the use of conditionals as a reuse mechanism.
+        In this case, the list item "Leather seats" would only be published if the condition `deluxe` was specified in the build. It would be omitted for all other builds. In these kinds of cases, it is harder to get away from the use of conditionals as a reuse mechanism.
            
         This approach to reuse is often called filtering or profiling. Some systems have elaborate ways of specifying filtering or profiling of the content. The net effect is the same as the simple condition tokens shown here, but they may allow for more sophisticated or elaborate conditions than shown here.         
         
@@ -319,7 +313,7 @@ chapter:(#chapter.reuse) Reuse
         
     section: Factor out the common
     
-        In [#chapter.management-domain], we noted that the subject domain alternative to using an insertion instruction for the warning text was to specify which procedures were dangerous, thus factoring out the constraint that the warning must appear. In effect, this factors out the common content as well.
+        In [#chapter.management-domain], we noted that the subject domain alternative to using an insertion instruction for the warning text was to specify which procedures were dangerous, thus factoring out the constraint that the warning must appear. 
              
         ```(sam)
             procedure: Blow stuff up
@@ -344,7 +338,7 @@ chapter:(#chapter.reuse) Reuse
                 if is-it-dangerous = 'yes'
                     output files/shared/warnings#warn_danger_foreign
                     
-        Or, to further the partitioning of complexity in the code, you can use keys here:
+        Or, to further the partitioning of complexity in the code, you can use keys:
         
         ```(pseudo)
             match procedure/is-it-dangerous 
@@ -352,13 +346,13 @@ chapter:(#chapter.reuse) Reuse
                     $resource = find key '%warn_danger' in lookup-table
                     output $resource      
         
-        The beauty of this approach is that the content is entirely neutral as to what kind of reuse may be going on or how dangerous procedures may be treated. Because the content itself contains only objective information about the procedure itself, you can implement any algorithm you like to publish or reuse the content in any way you like at any time based on this information. By making the content not specific to any form of reuse or any reuse mechanism, we effectively make it much more reusable and have partitioned the complexity of reuse much more neatly and reliably. 
+        The beauty of this approach is that the content is entirely neutral as to what kind of reuse may be going on or how dangerous procedures may be treated. Because the content contains only objective information about the procedure itself, you can implement any algorithm you like to publish or reuse the content in any way you like at any time based on this information. By making the content not specific to any form of reuse or any reuse mechanism, we effectively make it much more reusable and have partitioned the complexity of reuse much more neatly and reliably. 
         
-        We are also making the content much easier to write, since this approach does not require the writer to know how the reuse mechanism works, how to identify reusable content, or even that reuse is occurring at all. All they have to do is answer a simple question about the content -- one to which they should already know the answer. In other words, this approach partitions the entire reuse mechanism from the author. This is a really big win because the biggest problem with most reuse techniques is the amount of complexity they add to the author's task, directly compromising their finite and valuable attention.  
+        We are also making the content much easier to write, since this approach does not require the writer to know how the reuse mechanism works, how to identify reusable content, or even that reuse is occurring at all. All they have to do is answer a simple question about the content -- is the procedure dangerous or not  -- to which they should already know the answer. In other words, this approach partitions the entire reuse mechanism from the author. This is a really big win because the biggest problem with most reuse techniques is the amount of complexity they add to the author's task, directly compromising their finite and valuable attention.  
         
-        This is very important from both a complexity point of view and a cost point of view. Where a writer is asked to consciously reuse content they have to go looking for that content every time the potential for reuse occurs. This cost is incurred whether or not the find reusable content, whereas any savings from reuse are realized only when reusable content is found. But with this approach, the writer is relieved of all responsibility for the reusable content. Locating that content is the job of an algorithm. If it does not exist, the algorithm will report that it is missing and it will be somebody's job to create it, after which the algorithm will locate it automatically every time it is needed. This is far more efficient that authors looking for reusable content over and over and over. 
+        This is very important from both a complexity point of view and a cost point of view. Where a writer is asked to consciously reuse content they have to go looking for that content every time the potential for reuse occurs. This cost is incurred whether or not they find reusable content, whereas any savings from reuse are realized only when reusable content is found. But with this approach, the writer is relieved of all responsibility for the reusable content. Locating that content is the job of an algorithm. If it does not exist, the algorithm will report that it is missing and it will be somebody's job to create it, after which the algorithm will locate it automatically every time it is needed. This is far more efficient than authors looking for reusable content over and over and over. 
         
-        Structured writing is about factoring invariants and complexities out of content and this approach enables the widest range of reuse possibilities while factoring all the complexities of reuse out of the content. The downside of this is that it is not as general. The `is-it-dangerous` metadata is applies only to dangerous procedures. It does not address the inclusion of reusable content in other places. You would need to factor out other interesting reuse cases in a similar way to create a complete subject-domain solution. Again we see that complexity always has to go somewhere. But as we have also seen, if authors cannot fully handle the complexity thrust on them, that complexity ultimately gets dumped on the reader.
+        The downside of this approach is that it is not as general. The `is-it-dangerous` metadata is applies only to dangerous procedures. It does not address the inclusion of reusable content in other places. You would need to factor out other interesting reuse cases in a similar way to create a complete subject-domain solution. Again we see that complexity always has to go somewhere. But as we have also seen, if authors cannot fully handle the complexity thrust on them, that complexity ultimately gets dumped on the reader.
         
     section: Factor out the variable
     
@@ -447,8 +441,6 @@ chapter:(#chapter.reuse) Reuse
         
         This avoids the need for a map, but the downside is that it can make the units less reusable. In the above example, for instance, you would need a separate introduction unit for the regular Widget Wrangler since the introduction file imports all the requirements and procedural units. By assembling units with the map, you can use a shared install intro, which increases the amount of reuse you can do. 
         
-        When using the map approach, it is important to think about how your content will {single source}(concept "single sourcing") to paper-like media and hypertext-media. Some people will output the same map to to both media. In hyper-text media that usually results in the map being turned into a table of contents, often displayed in a separate pane as in a help system. This may be fine if you are creating a help system, but it is not how Web content is usually displayed. Another approach to single sourcing content that uses the assemble from pieces approach is to create completely separate maps -- or even to use completely different assembly techniques that don't involve maps at all -- to produce paper-like and hypertext outputs. This can help you to work around some of the design limitations that we talked about in  [#chapter.single-sourcing]. 
-
     section: Combining multiple techniques
 
         There is one problem with the idea of using a common install intro for both the regular and deluxe widget wrangler. The intro mentions the name of the product. To solve this problem without requiring two different units, we can use the variable into common or common with conditions reuse techniques within the intro unit. Here is an example using variable into common:
@@ -465,7 +457,7 @@ chapter:(#chapter.reuse) Reuse
                 >>>(unit unit/ww/deluxe/install_options)
         
 
-        There are a number of ways in which you can mix and match the basic reuse patterns to achieve an overall reuse strategies. Most systems designed to support reuse will allow you to do all these patterns and to combine them however you wish. However, you should not lose site of the amount of complexity that you are introducing into your content and into your writer's work.
+        There are a number of ways in which you can mix and match the basic reuse patterns to achieve an overall reuse strategies. Most systems designed to support reuse will allow you to do all these patterns and to combine them however you wish. However, you should not lose site of the amount of complexity that you are introducing into your content and into your writer's work when you rely on a complex set of reuse techniques like this.
                        
     section: Content reuse is not a panacea
     
@@ -495,26 +487,35 @@ chapter:(#chapter.reuse) Reuse
         
             It is easy to see content reuse as a big cost saving. Reusing content means you do not have to write the same content over and over again. It is easy to add up the cost of all that redundant writing and regard that number as pure cost savings from a content reuse strategy.
         
-            But all of the reuse techniques create multiple artifacts that need to be managed. This includes both content and processing code. You need mechanism to make sure that your content obeys the constraints required to make the pieces of content fit together reliably. You need a mechanism to make sure that way you have done reuse actually produces the documents you want. The cost of such management can be non-trivial and the consequences of the management breaking down can be significant. 
+            But all of the reuse techniques create multiple artifacts that need to be managed. This includes both content and processing code. You need a mechanism to make sure that your content obeys the constraints required to make the pieces of content fit together reliably. You need a mechanism to make sure that way you have done reuse actually produces the documents you want. The cost of such management can be non-trivial and the consequences of the management breaking down can be significant. 
             
-            Where costs can really mount, though, it when it comes to modifying the content when the subject matter changes. It is often not until the subject matter changes that you find out if the content we have treated as common is really common once the subject matter changes. If not, you may have a complex management task to sort out what is really common and what isn't. This can involve complex edits that then have to be tested and verified. If you get everything right, you can realize major savings when it comes time to modify your content, but if you get it wrong, it can multiply costs.
+            While reuse is supposed to reduce the cost of modifying content when the subject matter changes, there are hidden cost traps here as well. It is often not until the subject matter changes that you find out if the content we have treated as common is really common once the subject matter changes. If not, you may have a complex management task to sort out what is really common and what isn't. This can involve complex edits that then have to be tested and verified. If you get everything right, you can realize major savings when it comes time to modify your content, but if you get it wrong, it can multiply costs. Not only that, it also means that the money you spent factoring duplicate content out in anticipation a change that did not happen is wasted as well. Reacting to changes that actually happen is sometimes cheaper than preparing for multiple changes that never happen. 
 
             If your content collection and its web of reuse relationships is not audited and validated regularly, it can become chaotic over time and lose cohesion. This can make adding new content or changing existing content increasingly difficult and expensive. 
             
-            Depending of the techniques you use, content reuse strategies can complicate the lives of authors, which may reduce the pool of authors you can use or reduce their productivity. As the size of the content set grows, it can take longer and longer to determine if reusable content exists and to find and reuse it. It is possible for this to end up costing more time than was saved by not rewriting content. (Reuse techniques that factor out the reuse from the author's work avoid this problem.)
+            Depending of the techniques you use, content reuse strategies can complicate the lives of authors, which may reduce the pool of authors you can use or reduce their productivity. 
+            
+            With many reuse techniques, the writer has to find the content to be reused each time. Not only does this take time and impose a piece of complexity on the writer, it is a cost that has to be paid every time the writer looks for content to reuse, whether they find any or not. Indeed, if a writer is expected to look for reusable content before they write anything at all, much of their time may be taken up with unsuccessful content queries. Reducing the expense of content queries, therefore, has to be a major component of any general reuse strategy. We will look more at this in [#chapter.normalization].
+
+            Localized and constrained forms of reuse can avoid this cost trap. For instance, reuse that is focused on producing different versions of a manual for different versions of a product, is doing reuse in constrained places for constrained reasons does not require frequent broad-based content queries to find reusable content. It merely requires that the writers on the project be aware of the specific reuse strategies being used in that project (unless the reuse has been factored out altogether).            
+
             
             Some content reuse techniques are easy to use in non-structured ways and early in a project it may seem like a non-structured approach to reuse speeds things up by allowing writers to reuse content wherever they find it. Over time, however, this approach can lead to a rat's nest of dependencies and relationships between bits of content that makes it hard to update or edit the content with any confidence. 
             
             Once the cohesion and discipline of a content set starts to break down, the decline tends to accelerate. As it becomes harder to find content to reuse, more duplication occurs, which further complicates the search for reusable content, creating a vicious circle. As links and other content relationships break down, people tend to form ad hoc links and relationships to get a job finished, further tangling the existing rat's nest. Under the gun, it is almost always easier to get the next document out by ignoring the structure and discipline of the content set structure, but the effects of this are corrosive. Without consistent discipline, even in the face of deadlines, a reuse system can fail over time. 
-
-            All of these issues can be managed successfully with the right techniques and the right tools, but they all introduce costs as well, both up-front costs and ongoing costs. Those costs have to be reckoned up and subtracted from the projected cost savings before you can determine if a content reuse strategy is really going to save you money.             
             
-    section: Alternative to reuse
+ 
+            All of these issues can be managed successfully with the right techniques and the right tools, but they all introduce costs as well, both up-front costs and ongoing costs. Those costs have to be reckoned up and subtracted from the projected cost savings before you can determine if a content reuse strategy is really going to save you money.      
+
+            One final trap: there may not be as much reuse potential reuse as your thought. Some organizations have plunged into reuse strategies in hopes of a big payoff only to find that they had far less reusable content than they first thought. The cost of systems and the complexity added to the process by complex reuse techniques require a high level of reuse to pay off. If that level is not there, your systems will end up costing you more than it saves.             
+            
+    section: Alternatives to reuse
     
         There are three alternative to content reuse as a way of dealing with information that appears in more than one place:
         
-        Allow the information to be expressed in more than one place but make sure that it is clearly and unambiguously labeled so that it is easy to find when updates are required. If this sounds like an inferior solution, reflect that in fact there is all kinds of repeated information in the content of any organization and reuse techniques cannot possibly eliminate all of it without adding way more complexity into the system than they eliminate. 
+        |Duplicate but label| Allow the information to be expressed in more than one place but make sure that it is clearly and unambiguously labeled so that it is easy to find when updates are required. If this sounds like an inferior solution, reflect that in fact there is all kinds of repeated information in the content of any organization and reuse techniques cannot possibly eliminate all of it without adding way more complexity into the system than they eliminate. No matter how much reuse you do, you are still going to have to search your content set for instances of content that needs changing whenever a major change in subject matter occurs. 
         
-        Reuse is predicated on the idea that you actually want to duplicate information in multiple publications. This is actually a somewhat out of date idea. In the paper world, it was important to give each customer a book with all the information they needed in it, even if the same information occurred in many different books. But in an online environment, you don't need to duplicate information to make sure it is available to every user who needs it. Maintaining the information once and linking to it whenever it is needed is a much less complex solution. To do this efficiently may require some of the techniques described in [#chapter.linking].
+        |Reduce duplication| Content reuse is always content duplication. Reuse is predicated on the idea that you actually want to duplicate information in multiple publications. This is actually a somewhat out of date idea. In the paper world, it was important to give each customer a book with all the information they needed in it, even if the same information occurred in many different books. But in an online environment, you don't need to duplicate information to make it available to every user who needs it. Maintaining the information once and linking to it whenever it is needed is a much less complex solution for a number of cases. To do this efficiently may require some of the techniques described in [#chapter.linking].
         
-        Another approach to reducing duplication in your content is to combine information on multiple products into a single publication. There are limits to this, obviously, an some organization got into content reuse specifically so that they could remove the complexity for multiple versions in a single manual. Still, there are times when it is an appropriate solution. 
+        |Combine and differentiate| Another approach to reducing duplication in your content is to combine information on multiple products into a single publication and differentiate them in the text. There are limits to this, obviously, and some organization got into content reuse specifically so that they could remove the complexity of multiple versions in a single manual. Still, there are times when it is an appropriate solution. 
+        

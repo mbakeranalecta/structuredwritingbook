@@ -3,7 +3,7 @@
 <title>Active content</title>
 <annotations>
 <p>Concepts</p>
-<p><phrase><annotation type="concept">subject domain</annotation></phrase> <phrase><annotation type="concept">media domain</annotation></phrase> <phrase><annotation type="concept">document domain</annotation></phrase> <phrase><annotation type="concept">management domain</annotation></phrase> <phrase><annotation type="concept">subject-domain</annotation></phrase> <phrase><annotation type="concept">media-domain</annotation></phrase> <phrase><annotation type="concept">document-domain</annotation></phrase> <phrase><annotation type="concept">management-domain</annotation></phrase> <phrase><annotation type="concept">hybrid tagging language</annotation></phrase> <phrase><annotation type="concept">Every Page is Page One</annotation></phrase> <phrase><annotation type="concept">abstract language</annotation></phrase> <phrase><annotation type="concept">information architecture</annotation></phrase> <phrase><annotation type="concept" specifically="top-down information architecture">top-down</annotation></phrase> <phrase><annotation type="concept">metadata</annotation></phrase></p>
+<p><phrase><annotation type="concept">subject domain</annotation></phrase> <phrase><annotation type="concept">media domain</annotation></phrase> <phrase><annotation type="concept">document domain</annotation></phrase> <phrase><annotation type="concept">management domain</annotation></phrase> <phrase><annotation type="concept">subject-domain</annotation></phrase> <phrase><annotation type="concept">media-domain</annotation></phrase> <phrase><annotation type="concept">document-domain</annotation></phrase> <phrase><annotation type="concept">management-domain</annotation></phrase> <phrase><annotation type="concept">hybrid markup language</annotation></phrase> <phrase><annotation type="concept">Every Page is Page One</annotation></phrase> <phrase><annotation type="concept">abstract language</annotation></phrase> <phrase><annotation type="concept">information architecture</annotation></phrase> <phrase><annotation type="concept" specifically="top-down information architecture">top-down</annotation></phrase> <phrase><annotation type="concept">metadata</annotation></phrase></p>
 <p>Languages</p>
 <p><phrase><annotation type="language">SAM</annotation></phrase> <phrase><annotation type="language">DITA</annotation></phrase> <phrase><annotation type="language">DocBook</annotation></phrase> <phrase><annotation type="language">Markdown</annotation></phrase> <phrase><annotation type="language">HTML</annotation></phrase> <phrase><annotation type="language">XML</annotation></phrase></p>
 <p>Algorithms</p>
@@ -38,19 +38,15 @@
 <p>You can present content in a way that only shows part of the content on the screen initially but reveals more when the user clicks on a link or takes another action. For instance, you might show the high-level of a procedure and provide a link that opens detailed steps for those who need them. This is a way to cater to audiences with different levels of preparedness.</p>
 </li>
 <li>
-<label>Transclusion</label>
-<p>You can pull in content from another source.</p>
-</li>
-<li>
 <label>Feeds and dynamic sources</label>
 <p>You can include content that comes from an external source which updates independently of your content such as a feed or a web service.</p>
 </li>
 <li>
 <label>Interactive media</label>
-<p>You can include graphics and other media that the user can interact with.</p>
+<p>You can include apps, widgets, and other media that the user can interact with.</p>
 </li>
 </ll>
-<p>Active content is simply the postponement of one or more of the structured writing algorithms to the time of reading. Personalized content is executing hte synthesis algorithm on the server when you request a page, using personal details as query terms to select content for the individual. Changing the layout of the page when you resize you browser or rotate your phone is executing the <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase> in the browser. Allowing the reader to change the font size is allowing the reader to configure execute the the <phrase><annotation type="algorithm">formatting algorithm</annotation></phrase> in the browser. Pulling a live stock quote into a page that mentions a company is having the web server or the web browser executes the <phrase><annotation type="algorithm">synthesis algorithm</annotation></phrase> when the page is served/displayed.</p>
+<p>Active content is simply the postponement of one or more of the structured writing algorithms to the time of reading. Personalized content is executing the synthesis algorithm on the server when you request a page, using personal details as query terms to select content for the individual. Changing the layout of the page when you resize you browser or rotate your phone is executing the <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase> in the browser. Allowing the reader to change the font size is allowing the reader to configure and execute the <phrase><annotation type="algorithm">formatting algorithm</annotation></phrase> in the browser. Pulling a live stock quote into a page that mentions a company is having the web server or the web browser executes the <phrase><annotation type="algorithm">synthesis algorithm</annotation></phrase> when the page is served/displayed.</p>
 <p>In principle, therefore, you support active content in exactly the same way you support those algorithms in any form of structured writing: by creating your content in the appropriate domain and with the appropriate structures to reliably support the algorithms you want to run. Reliability is key here, of course. If you are creating static books or web pages you may be able to get away with reviewing the results before they are published and even hand tweaking the output to fix any issues, but you can’t do that with active content. You need to be able to trust the algorithm 100%, which means you need to trust the content it is working on 100%. This makes the <phrase><annotation type="algorithm">conformance algorithm</annotation></phrase> crucial to an active content project, and, as we have seen, different domains support the <phrase><annotation type="algorithm">conformance algorithm</annotation></phrase> with varying degrees of reliability.</p>
 <p>Another factor to consider, though, is that while active content is essentially just postponing the point at which you execute various structured writing algorithms until the content is in the user’s hands, you don’t necessarily want to postpone running those algorithms on the whole page. You usually only postpone them for the parts of the page that you want to make active. For instance, if you want real-time stock quotes embedded in your business stories whenever a company is mentioned, there is no reason to postpone the synthesis, presentation, and formatting of the entire page; you only need to postpone the synthesis of the stock quote itself. And if you want that quote to continue to update in real time while the page is displayed, you certainly don’t want to be redrawing the whole page every time the price changes.</p>
 <p>The display of stock quotes depends on <phrase><annotation type="concept">subject domain</annotation></phrase> metadata that unambiguously identifies the company mentioned in the content. For example:</p>
@@ -58,26 +54,29 @@
 {Microsoft}(company "NASDAQ:MSFT") is a large software company.
 </codeblock>
 <p>In a normal static publishing flow, this subject domain information would be resolved into a static piece of content by the <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase>:</p>
-<codeblock language="sam">
-*Microsoft* US$60.29 +0.34 (+0.57%) is a large software company.
-</codeblock>
+<blockquote>
+<p><phrase><annotation type="bold">Microsoft</annotation></phrase> US$60.29 +0.34 (+0.57%) is a large software company.</p>
+</blockquote>
 <p>But for active content the main <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase> needs to pass through the subject-domain information to the browser so that that bit of synthesis can be executed in real time when the content is displayed.</p>
-<p>This means that only those parts of the content that you want displayed as active content need to be captured in the domain, and specific structures, required to reliably run the applicable algorithms. The rest of the content can be in a different domain. In practice, this usually means that you have subject domain structures to support the active content embedded in document domain structures. Of course, having all your content in the subject domain is also an option, in which case you would perform the <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase> on the content you want to deliver statically, while passing on the subject-domain representation of the content you want to be active to the system that will perform the active content algorithms.</p>
-<p>However, this is not necessarily, or even likely, to be a straightforward pass through. The downstream system, such as the web browser, that is going to execute the active content algorithm, may expect or require the subject domain information it uses in a particular format. For instance, you might have to embed the ticker symbol in a call to a function that returns stock quotes:</p>
+<p>This means that only those parts of the content that you want displayed as active content need to be captured in the structured writing domain, and in the specific structures, required to reliably run the applicable algorithms. The rest of the content can be in a different domain. In practice, this usually means that you have subject domain structures to support the active content embedded in document domain structures. Of course, having all your content in the subject domain is also an option, in which case you would perform the <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase> on the content you want to deliver statically, while passing on the subject-domain representation of the content you want to be active to the system that will perform the active content algorithms.</p>
+<p>However, this is not necessarily, or even likely, to be a straightforward pass through. The downstream system that is going to execute the active content algorithm, such as a JavaScript app running in the web browser, may expect or require the subject domain information it uses in a particular format. For instance, you might have to embed the ticker symbol in a call to a function that returns stock quotes:</p>
 <codeblock language="xml">
 &lt;p&gt;Microsoft (&lt;span onload="getStockQuote(NASDAQ:MSFT)"/&gt;) 
 is a large software company.&lt;/p&gt;
 </codeblock>
-<p>Which domain should you work in if you want to deliver active content?</p>
-<section>
-<title>Media Domain</title>
-<p>There is relatively little that you can do in the way of active content in the media domain. Active content involves the action of algorithms on content and the media domain represents the final or almost-final form of content, leaving little scope for algorithms to act, and little in the way of metadata for them to act on. In the media domain, there are really no constraints on the interpretation of the content, and therefore not much that an algorithm can know about content that it could use as a basis for any action. In practice, therefore, active content almost always works on content written in the document or subject domains.</p>
-</section>
-<section>
-<title>Document Domain</title>
-<p>The <phrase><annotation type="concept">document domain</annotation></phrase> represents the desired presentation of a piece of content. Therefore the only kinds of active content algorithms that you can execute of ordinary document domain structures are those that leave the presentation alone and only affect the formatting. For example, you can allow readers to select the font size of a web page, which is a purely formatting concern.</p>
+<p>So your server side presentation algorithm needs to transform your subject domain annotation into this format.</p>
+<codeblock language="pseudocode">
+match company
+    continue
+    $fncall = 'getStockQuote(' + @specifically + ')'
+    output ' ('
+    create span
+        create attribute onload = $fncall
+    output ') '
+</codeblock>
+<p>The <phrase><annotation type="concept">document domain</annotation></phrase> represents the desired presentation of a piece of content. Therefore the only kinds of active content algorithms that you can execute on ordinary document domain structures are those that leave the presentation alone and only affect the formatting. For example, you can allow readers to select the font size of a web page, which is a purely formatting concern.</p>
 <p>If you want to do active content that dynamically changes the presentation of the content, or that changes the text of the content (as in our stock price example) then you need either subject domain structures or document domain structures that are explicitly designed to support active content algorithms.</p>
-<p>For example, a generic table structure does not support the action of allowing the reader to sort on any column. Sorting by column only makes sense if the content inherently sortable.</p>
+<p>For example, a generic table structure does not support the action of allowing the reader to sort on any column. Sorting by column only makes sense if the content is inherently sortable.</p>
 <grid>
 <row>
 <cell><phrase><annotation type="bold">item</annotation></phrase></cell>
@@ -127,20 +126,6 @@ is a large software company.&lt;/p&gt;
 </grid>
 <p>Thus you can’t just decide to make all the tables on a page sortable by column. Unless the document domain structure explicitly states which columns of a table are sortable and which are not, you can’t implement this kind of active content.</p>
 <p>To implement column sorting at the <phrase><annotation type="concept">document domain</annotation></phrase> level, therefore, you need some sort of sortable table structure which assures that the sorting behavior is only applied to columns where it makes sense in tables where it makes sense.</p>
-<p>In a more sophisticated application of the <phrase><annotation type="concept">document domain</annotation></phrase>, the destruct sequence would be structured as a procedure, not a table, and therefore there would be no ambiguity about whether the step could be sorted or not.</p>
-<codeblock language="sam">
-procedure: Self Destruct 
-    is-it-dangerous: yes
-    steps:
-        step: Don protective clothing.
-        step: Clear the area.
-        step: Block all entrances.
-        step: Activate the destruct sequence.
-</codeblock>
-<p>However, which this markup removes ambiguity about whether the step can be sorted, it answers it in the negative. There is nothing here to support any kind of active content.</p>
-</section>
-<section>
-<title>Subject Domain</title>
 <p>While the document domain typically requires different markup for different algorithms, the subject domain typically does not. In the subject domain you capture the semantics of the subject matter, which are the same no matter what algorithms you are applying to the content.</p>
 <p>In the subject domain, the product list would be a structured data set with known semantics (probably maintained as a separate database).</p>
 <codeblock language="sam">
@@ -151,8 +136,6 @@ products:: item, legs, price
     chair , 4, $60
 </codeblock>
 <p>Knowing what the semantics are, you would know whether that data set is sortable and therefore whether it can be presented as a sortable table.</p>
-<p>Creating your content in the subject domain gives you the greatest flexibility to generate active content in ways that are appropriate to the subject matter and the device. And because the subject domain does not require any different structures to support active content, your authors don’t have to understand or even think about how the active content might work.</p>
-<p>This does not mean that active content is always going to be a free gift of the subject domain. Apart from the fact that you still have to design and implement the content behavior, you are going to have to make sure that you are capturing the subject domain semantics that are needed to drive the active content behaviors you want. Those semantics may not be different in kind from any other subject domain semantics, but you may need more of them, or to break them down in greater detail, than you might have to for other algorithms. You will also need to make sure that you get a high degree of <phrase><annotation type="algorithm">conformance</annotation></phrase> to these structured from your writers, as it is difficult to validate the correct operation of every active content algorithm on every content set at run time. The success of your active content strategy is going to depend heavily on the quality and consistency of your input data.</p>
-<!--  More? -->
-</section>
+<p>Creating your content in the subject domain gives you the greatest flexibility to generate active content in ways that are appropriate to the subject matter and the device. And because the subject domain does not require any different structures to support active content, your writers don’t have to understand or even think about how the active content might work, effectively partitioning the complexity of active content from your writers. As we have seen before, an additional benefit of partitioning content from its presentation is that it allows you to experiment with different forms of presentation. This allows you to test if active content is working or not or change the form of active content you use, al without involving authors of changing your content.</p>
+<p>This does not mean that active content is always going to be a free gift of the subject domain. Apart from the fact that you still have to design and implement the content behavior, you are going to have to make sure that you are capturing the subject domain semantics that are needed to drive the active content behaviors you want. Those semantics may not be different in kind from any other subject domain semantics, but you may need to break things down in greater detail than you might have to for other algorithms. You will also need to make sure that you get a high degree of <phrase><annotation type="algorithm">conformance</annotation></phrase> to these structures from your writers, as it is difficult to validate the correct operation of every active content algorithm on every content set at run time. The success of your active content strategy is going to depend heavily on the quality and consistency of your input data.</p>
 </chapter>
