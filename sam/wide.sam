@@ -2,10 +2,8 @@ chapter:(#chapter.wide) Wide Structures
 
     <<<(annotations.sam)
 
-    The notion of separating content from formatting works quite well when the content is a string of words. A string of words has only one dimension: length. A printed string, of course, has two dimensions: length and height, since each letter has a height and a width. But the height and the width of letters is a pure {media-domain} concern. Fitting a one-dimensional string of characters into a two dimensional font on a two dimensional page is the job of the {rendering algorithm}. It is one of the first things that gets factored out as we begin to structure content.[*1] When we separate content from formatting, we separate the font from the character and are left with a string of characters whose length is measured not in inches but in character count.  
+    The notion of separating content from formatting works quite well when the content is a string of words. A string of words has only one dimension: length. A printed string, of course, has two dimensions: length and height, since each letter has a height and a width. But the height and the width of letters is a pure {media-domain} concern. Fitting a one-dimensional string of characters into a two dimensional font on a two dimensional page is one of the first things that gets factored out as we begin to structure content. When we separate content from formatting, we separate the font from the character and are left with a string of characters whose length is measured not in inches but in character count.  
         
-    footnote:(*1)
-        There can, indeed, be some issues with rendering algorithms when it comes to hyphenation, widows and orphans, and the location of titles relative to the text, but with the appropriate {document domain} markup to delineate basic document structures, algorithms can handle these issues reasonably well. There are some fine points of typesetting aesthetics that may be difficult to automate, and algorithms can't edit the text itself to make a line break work better, as some human book designers will do. But that kind of manipulation is rarely needed. And if it is, you have the options of translating the content into the {media domain} and manipulating it by hand at that point. Of course, you won't do this for high-volume content that is delivered on a frequent schedule, but then you would not be able to do that kind of hand typesetting manipulation on that class of content anyway. Daily newspapers, for instance, are not typeset with the same level of attention to aesthetic detail as hardcover books. 
     
     Once these formatting dimensions are factored out, it becomes easy to create and manage text in the {document}(concept "document domain") and {subject}(concept "subject domain") domains without thinking about how it will eventually flow onto a page or screen.
     
@@ -22,7 +20,7 @@ chapter:(#chapter.wide) Wide Structures
         figure:(#broken-table-formatting) Broken table formatting
             >>>(image ../graphics/tableformatting.jpg)
         
-        This table is a particularly difficult case as it is not only one wide thing (a table), but it contains another wide thing (preformatted program code). I don't know exactly how this table was marked up, or which domain the content was written in, or how the {formatting algorithm} failed, resulting in the mess above, but including preformatted text in a table cell creates a no win situation for a rendering algorithm when it tries to shrink a table to a narrower view port. Does it:
+        This table is a particularly difficult case as it is not only one wide thing (a table), but it contains another wide thing (preformatted program code). I don't know exactly how this table was marked up, or which domain the content was written in, or how the {formatting algorithm} failed, resulting in the mess above, but including preformatted text in a table cell creates a no-win situation for a rendering algorithm when it tries to shrink a table to a narrower view port. Does it:
 
         * violate the formatting of the program code by introducing extra line breaks
         
@@ -155,7 +153,7 @@ chapter:(#chapter.wide) Wide Structures
 
         All of which is to say that computer code, data, and other similar formats where line ends are meaningful have to be presented in a fixed width font and with line breaks where they are supposed to be. That makes code samples wide objects, just like tables, with many of the same issues when it comes to rendering them on small devices. One saving grace is that there are not usually any height issues with code samples. 
 
-        There is not much you can do to help the {rendering} algorithm when it comes to code. The options for fitting wide code on a narrow display are to shrink to fit, scroll to view, or truncate. It is not particularly likely that you are going to want your {rendering} algorithm to make a different choice for different kinds of code. Needless to say, putting a code block inside another wide structure, such as a table, is a recipe for disaster, as [#broken-table-formatting] shows. It would be wisest not to allow this in you markup language design.
+        There is not much you can do to help the {rendering} algorithm when it comes to code. The options for fitting wide code on a narrow display are to shrink to fit, scroll to view, or truncate. It is not particularly likely that you are going to want your {rendering} algorithm to make a different choice for different kinds of code. Needless to say, putting a code block inside another wide structure, such as a table, is a recipe for disaster, as [#broken-table-formatting] shows. It would be wisest not to allow this in your markup language design.
 
         What is essential is that your document domain or subject domain markup clearly indicates when a piece of text is code. Preferably is should also indicate what kind of code it is, since knowing this can allow the formatting algorithm to do syntax highlighting for code in a known language, and can allow the linking algorithm to detect and link API calls to the API reference. In some cases it might even allow the {conformance algorithm} to validate the code to make sure it runs or uses the current version of the API.
 
@@ -194,7 +192,7 @@ chapter:(#chapter.wide) Wide Structures
         
         {DocBook} allows you to make this distinction. Its `imagedata` tag supports attributes for specifying the size of the viewport (`height` and `width`) and for specifying the size of the image (`contentheight` and `contentwidth`). The specification also contains additional attributes related to scaling and alignment and complex rules about how the {rendering algorithm} is supposed to behave based on which combination of these attributes is specified.[http://www.docbook.org/tdg/en/html/imagedata.html] In other words, it contains a sophisticated language to describe the sizing and scaling of graphics. It not only deals with {media domain} properties, it actually gives {media domain} instructions. 
         
-        Working in the media domain is a problem, of course. It interferes with {functional lucidity} and it is problematic for {differential single sourcing}. But there is another issue to consider as well. Sometimes the best approach to {differential single sourcing} is to use the vector version of a graphic for one media and the raster format for another. For instance, you may want to use the vector version of a graphic for print and a raster version for online media. (Many online media cannot render common vector graphics formats.) 
+        Working in the media domain is a problem, of course. It interferes with {functional lucidity} and it is problematic for {differential single sourcing}. But there is another issue to consider as well. Sometimes the best approach to {differential single sourcing} is to use the vector version of a graphic for one media and the raster format for another. For instance, you may want to use the vector version of a graphic for print and a raster version for online media.
 
         For all these reasons, we ought to make a distinction between the source of an image and the rendering of that image. For raster images, the source is the original high-resolution file recorded by the camera, the original screen shot, or the original raster file produced by an image editing program. For vector graphics, it is the original vector drawing file. From these source images, various image renderings may be made. 
         
@@ -262,7 +260,7 @@ chapter:(#chapter.wide) Wide Structures
             procedure: Save a file
                 step: 
                     From the File menu, choose 
-                    Save. The dialog-box 
+                    Save. The *Save As* 
                     dialog box appears. 
                     
                     >>>(%dialog.save-as)
@@ -290,7 +288,7 @@ chapter:(#chapter.wide) Wide Structures
                 
         There are several benefits to this partitioning of the image problem:
         
-        1. Authors do not have to worry about finding or inserting graphics or remembering the rules about when they are supposed to use screenshots. They just have to remember to mark up the names of dialog boxes when they mention them.
+        1. Authors do not have to worry about finding or inserting graphics or remembering the rules about when they are supposed to use screenshots. They just have to remember to mark up the names of dialog boxes when they mention them. (If you only want to show screen shots for certain screens, you only supply the screen shots for those screens, and have your algorithm pass silently over any `dialog-box` entry that does not have a screen shot in the collection. This allows you to adjust to reader feedback about whether more of fewer screen shots are needed simply by adding them to the collection, without changing the content at all -- partitioning at work.)
         
         2. Updating graphics for UI changes is simpler because you just update the catalog of images. You don't have to go searching through docs to find images that are affected by the change. 
         
@@ -366,7 +364,7 @@ chapter:(#chapter.wide) Wide Structures
             """
                 3\. Press >(image ../graphics/computer_key_Enter.xml) to confirm the selection. 
                 
-            This approach allows the document designer to switch out the graphics used for keys to find ones that work best on different displays or at different scales. This partitions the graphic maintenance problem to the most qualified person. It is also much easier for the author who does not have to stop to think about which graphic to use. The same approach could be used in another common case, which is describing tool bar icons in a GUI application. 
+            This approach allows the document designer to switch out the graphics used for keyboard keys to find ones that work best on different displays or at different scales. This partitions the graphic maintenance problem to the most qualified person. It is also much easier for the author who does not have to stop to think about which graphic to use. The same approach could be used in another common case, which is describing tool bar icons in a GUI application. 
             
             ```(sam)
                 4. Press {Save}(button) to save your changes.

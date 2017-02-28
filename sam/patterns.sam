@@ -26,7 +26,7 @@ chapter:(#chapter.patterns) Patterns
             month: 08
             day: 25
         
-    This is fully explicit markup. It places every piece of the data in its own explicit structure. However lacks {functional lucidity}(concept). 
+    This is fully explicit markup. It places every piece of the data in its own explicit structure. However, it lacks {functional lucidity}(concept). 
     
     A date in the format `2016-08-25` is already a piece of structured markup. In fact, it is a standardized piece of structured markup defined by the international standard {ISO 8601}(standard). The only problem in identifying a date as such is that in another context `2016-08-25` could be a mathematical expression that resolves to `1983`. But we can eliminate this potential confusion if we isolate the context so that we can recognize when an {ISO 8601} date is being used, and then use the {ISO 8601} format specification to isolate the year month and day components of that data. In other words, all we need to do is this:
     
@@ -43,14 +43,14 @@ chapter:(#chapter.patterns) Patterns
     
     section: Design implications
     
-        XML recognizes the value of patterns. The XML data types standard define a number of common patterns, and {XSD} schemas allow you to define patterns for use in your own markup. It calls these patterns "simple types" (as opposed to "complex types", which are composed of multiple nested elements). Thus you can specify in {XSD} that a date field is of the simple type `xs:date`. The `xs:date` data type is a pattern that is based on {ISO 8601}, so you can do following in XML (as long as the schema defines the type of the `date` element as `xs:date`):
+        XML recognizes the value of patterns. The XML data types standard[https://www.w3.org/TR/xmlschema-2/] defines a number of common patterns, and the XML schema language ({XSD})[https://www.w3.org/standards/xml/schema] allow you to define patterns for use in your own markup. It calls these patterns "simple types" (as opposed to "complex types", which are composed of multiple nested elements). Thus you can specify in {XSD} that a date field is of the simple type `xs:date`. The `xs:date` data type is a pattern that is based on {ISO 8601}, so you can do following in XML (as long as the schema defines the type of the `date` element as `xs:date`):
         
         ```(xml)
             <date>1941-12-07</date> is a day that will live in infamy. 
         
-        It is important to understand what this does. If the type of element `date` in your XML markup language is defined as `xs:date` then an XSD {schema validator}(tool) will validate `1941-12-07` as a valid date but will reject `<date>last Thursday</date>` as invalid. It will not break the date down into its separate year, month, and day components. If you need that, you will have to get your algorithm to do that for itself. But your algorithm can do that reliably if it knows for certain that it is dealing with date in {ISO 8601} format. Most programming languages will have library functions that know how to manipulate {ISO 8601} dates, so you probably don't have to do any work yourself to get the year, month, and day components of a date. 
+        It is important to understand what this does. If the type of element `date` in your XML markup language is defined as `xs:date` then an XSD {schema validator}(tool) will validate `1941-12-07` as a valid date but will reject `<date>last Thursday</date>` as invalid. It will not break the date down into its separate year, month, and day components. If you need that, you will have to get your algorithm to do that for itself. But your algorithm can do that reliably because the markup constrains the interpretation of the date, establishing that it is indeed an {ISO 1806} date. Most programming languages will have library functions that know how to manipulate {ISO 8601} dates, so you probably don't have to do any work yourself to get the year, month, and day components of a date. 
             
-        For other patterns, most programming languages have a library called "regular expressions" which you can use to rip a pattern apart and get at the pieces. (XSD actually lets you define new patterns by specifying a regular expression for the pattern you want to match.) {Regular expressions}(tool) will let your algorithms decode any sufficiently well defined and contextualized pattern in your content, removing the need to ask authors to explicitly break down many types of information into separate fields. 
+        For other patterns, most programming languages have a library called "regular expressions" which you can use to rip a pattern apart and get at the pieces. (XSD actually lets you define new patterns by specifying a regular expression for the pattern you want to match.) {Regular expressions}(tool) will let your algorithms decode pattern in your content if its interpretation is sufficiently constrained by its context, removing the need to ask authors to explicitly break down many types of information into separate fields. 
         
         For example, in our most of our recipe examples, we have been explicitly breaking down the items in an ingredient list into ingredient, quantity, and unit of measure like this:
         
@@ -62,9 +62,9 @@ chapter:(#chapter.patterns) Patterns
         That format is not terribly onerous to write, but there is still a small functional lucidity penalty here. An author might more naturally write:
         
         ```(sam)
-            ingredients:
-                ingredient: eggs 12
-                ingredient: water 2qt
+            ingredients::
+                eggs 12
+                water 2qt
         
         Ingredient name, quantity, and unit of measure are still clearly distinct here. Any human reader can see them instantly. The trick is to get an algorithm to read them the same way. This trick can be accomplished fairly easily using a regular expression:[*2}
         
@@ -118,7 +118,7 @@ chapter:(#chapter.patterns) Patterns
             
         As you can see, the regular expression has broken each ingredient down into ingredient, quantity, and unit fields, just like our explicit markup did. The conventional way of writing ingredients, in other words, is just as structured as our formal way. It just takes a line of code to pull them out of the string. Once again we are partitioning and transferring a bit of complexity from the author to the information architect or content engineer.
         
-        Essentially, any expression that we commonly use in text which follows a well defined pattern is already structured text, and we don't need to structured it again to treat it as structured. All we need to do is to use structure to place it into context so that we can recognize it reliably. For example, our regular expression for breaking down the components of an ingredient listing will only work when applied to text that we know for sure is supposed to be an ingredient listing. Thus we use normal structured text structures to delineate the ingredients list and each list item. This provides the necessary context to use of ingredient list pattern to pull out the ingredient, quantity, and unit fields that we want without forcing the author to make them explicit in the text. 
+        Essentially, any expression that we commonly use in text which follows a well defined pattern is already structured text, and we don't need to structured it again to treat it as structured. All we need to do is to use structure to place it into context so that we can recognize it reliably. For example, our regular expression for breaking down the components of an ingredient listing will only work when applied to text that we know for sure is supposed to be an ingredient listing. Thus we use normal structured text structures to delineate the ingredients list and each list item. This provides the necessary context to use the ingredient list pattern to pull out the ingredient, quantity, and unit fields that we want without forcing the author to make them explicit in the text. 
         
         Avoiding unnecessary markup of already recognizable patterns both simplifies our markup design and increase the {functional lucidity} of our markup languages. 
         
@@ -135,13 +135,16 @@ chapter:(#chapter.patterns) Patterns
         
         This type definition would ensure that if the writer entered ingredients in the wrong form or using the wrong names for units, an error would be raised. For instance, these ingredient list items would trigger an error:
         
-        ```(sam)
-            ingredients:
-                ingredient: 12 eggs 
-                ingredient: water 2 cups
-                ingredient: butter 4 lumps
+        ```(xml)
+            <ingredients>
+                <ingredient>12 eggs</ingredient> 
+                <ingredient>water 2 cups</ingredient>
+                <ingredient>butter 4 lumps</ingredient>
+            </ingredients>
                 
         The first would fail because the pattern would not find the quantity where it expected to. The next two would fail because cups and lumps are not on the list of strings recognized by the pattern (which probably should be extended to allow cups, but not lumps). In the XML schema example, the names of the fields that were present in the original regular expression are omitted because XML schema is not going to break the values apart and put them in separate fields for us. As far as XML schema is concerned, this is just the definition of a single element. It would be up to a processing application to break the pieces apart and make separate fields of them. It is design intent for {SAM} that its schema language will let you do just this: define multiple fields with a regular expression that tells you how to break a string apart and names the individual fields to extract from the pattern. 
+        
+        By the way, though I have used the ingredients listing as an example here, I probably would not use this pattern in a production system. While the `eggs, 12, each` structure is a tiny bit unnatural, its explicitness makes it less error prone. It is less likely that writers will get the order of information wrong, and then have to pause to deal with the error message they get. Asking them to break the items of information apart explicitly here is probably the lesser of two evils. The use of patterns is an aid to functional lucidity and you need to balance naturalness against explicitness in the way that best supports functional lucidity in each case. 
         
         
 

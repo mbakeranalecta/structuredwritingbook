@@ -13,7 +13,7 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
     The most common answer is that you divide the text up into a series of blocks, and divide those blocks into smaller blocks until all the structures you want to capture are contained in blocks. This is not the only way to do it. Some file formats, such as WordPerfect, use independent stop and start markers to delineate structures, meaning the the boundaries of structures can overlap. But while this kind of structured can work for the media domain, it is very difficult for many structured writing algorithms to work with. Therefore most structured writing today uses the nested block approach.[*1] 
     
     footnote:(*1)
-        Is is technically possible to implement independent stop and start markers even in languages that are mainly block based. You simply define empty blocks for the start and stop markers. Both DITA and DocBook do this for things like delineating arbitrary bits of content for reuse and defining arbitrary spans of content for indexing. Both of these uses strike me as a really bad idea and I would recommend against their user in any content that has any lifespan beyond its first publication.  
+        Is is technically possible to implement independent stop and start markers even in languages that are mainly block based. You simply define empty blocks for the start and stop markers. Both DITA and DocBook do this for things like delineating arbitrary bits of content for reuse and defining arbitrary spans of content for indexing. Both of these uses strike me as a really bad idea and I would recommend against their use in any content that has any lifespan beyond its first publication.  
         
     >>>(image ../graphics/blocks.svg)
 
@@ -40,7 +40,9 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
             The conventional writer, however — and we expressly exclude the markup expert, as well as the experienced technical authors who responded to the survey — is by repute probably only marginally aware of this tree; but we have been unable to measure this at present. In this view, the document is seen as a continuous linear narrative, broken into successive divisions along semantic lines, and interspersed with explanatory material in the form of figures, tables, lists, and their derivatives. 
 
 
-        And as Flynn's research illustrates, there is a good chance that the author is not thinking of their argument as consisting of a strict hierarchy of points either, but as a sequence of points with the occasional insertion of heading to break up the text or perhaps signal a change in emphasis or subject matter. Clearly defining the rhetorical structure of a document demands dividing it up into blocks such as introduction, ingredients, and preparation. As we have noted, treating these parts of the rhetorical structure as blocks is essential to establishing the context in which our block names are defined and by which our processing rules tell the difference between one type of block and another. This clearly involves asking the author to think a little bit more hierarchically than they might otherwise, which means imposing a little bit of complexity on them for the sake of all the partitioning and redirection of complexity we need to do for the content system overall. Some semantic and rhetorical blocks are going to be naturally more hierarchical than others as well. But there is no need to do any more of this than the needs of our partitioning system demand.          
+        And as Flynn's research illustrates, there is a good chance that the author is not thinking of their argument as consisting of a strict hierarchy of points either, but as a sequence of points with the occasional insertion of headings to break up the text or perhaps signal a change in emphasis or subject matter. 
+        
+        Clearly defining the rhetorical structure of a document demands dividing it up into blocks such as introduction, ingredients, and preparation. As we have noted, treating these parts of the rhetorical structure as blocks is essential to establishing the context in which our block names are defined and by which our processing rules tell the difference between one type of block and another. This clearly involves asking the author to think a little bit more hierarchically than they might otherwise, which means imposing a little bit of complexity on them for the sake of all the partitioning and redirection of complexity we need to do for the content system overall. Some semantic and rhetorical blocks are going to be naturally more hierarchical than others as well. But there is no need to do any more of this than the needs of our partitioning system demand.          
                 
         If the {constraints} that we want to express in structured writing demand hierarchy, while {functional lucidity} demands more of a punctuated linear model, how do we reconcile these two opposing requirements in markup language design? 
         
@@ -69,7 +71,7 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
         
         
 
-    section: Agreeing on names
+    section: Annotating blocks
         
         Every block is annotated to tell us, and algorithms, what it means, which is to say, what constraints it meets. The most basic of these annotations is the name of the block, which describes it basic type. The name of a table block is "table", which tells us that its type is table. Blocks may also have other annotations that either refine its type of provide additional information about the block. 
         
@@ -87,6 +89,9 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
 
         Here the `section` element defines a block in the document domain, and the `publication` attribute adds an annotation is in the management domain. 
                 
+                
+    section: Agreeing on names
+    
         For structured writing to work, it is essential that everyone involved understands and agrees on what the names and annotations mean. These annotations tell downstream people and processes what constraints each block obeys. If the names and the values of the other attributes don't mean what we have all agreed they are to mean, communication between the partitions of the content system breaks down and complexity leaks out of the seems and descends on the reader. 
         
         Confusion and disagreement about what the names and annotations of a particular language mean are not uncommon. Large document domain languages like {DocBook} and {DITA} have large vocabularies, and many of the names they offer are quite abstract. Questions about the right way to tag certain passages are common in the communities around these languages, and opinions can vary considerably in some cases. These disagreements don't only affect low-level structures. In {DITA}, for example, it is common to debate if a topic that is operational but not procedural is a concept or a task. Some writers choose to use only generic topics because they don't feel the models of the task, concept, and reference topics fit the content they are creating. 
@@ -97,7 +102,7 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
         
         The problem of defining a mechanical structure to express a rhetorical structure is not only one of defining a correct representation of the content. We also have to design and name structures that can be written by our intended set of authors without imposing a heavy burden on their attention. In other words, designing content structures, at least those intended for use by authors, is as much about interface design as it is about data structure design. And interface design is all about partitioning and distributing complexity.
         
-        Clear concrete and specific names, and an organization of blocks that intuitively fits the subject matter, all make for easier authoring. There is no reason that such structures cannot be derived from abstract models, or that they cannot be mapped to abstract models after the fact, but it is important not to let the abstractions intrude too munch into the world of the author. 
+        Clear concrete and specific names, and an organization of blocks that intuitively fits the subject matter, all make for easier authoring. There is no reason that such structures cannot be derived from abstract models, or that they cannot be mapped to abstract models after the fact, but it is important not to let the abstractions intrude into the world of the author. 
         
     section: Different rules for intermediate languages
     
@@ -116,24 +121,30 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
                    <li>Joe Doe</li>
                    <li>The Example Company</li>
                    <li>604-555-1234</li>
-                   <li><a href="http://example.com/">http://example.com/</a></li>
+                   <li>
+                     <a href="http://example.com/">http://example.com/</a>
+                   </li>
                 </ul>
 
             
-            Here the phrase `The Example Company` is contained in `li` tags. This is part of a list structure delineated by `ul` tags, so the markup is largely structural in the document domain. The `li` does not really tell you anything useful about what the content itself is about. It does not tell you anything useful beyond what document structure it belongs to.    
+            Here the phrase "The Example Company" is contained in `li` tags. This is part of a list structure delineated by `ul` tags, so the markup is largely structural in the document domain. The `li` does not really tell you anything about what the content itself is about. It does not tell you anything useful beyond what document structure it belongs to.    
 
             The second example adds vCard microformat markup:
             
             ```(HTML)
                 <ul class="vcard">
-                   <li class="fn">Joe Doe</li>
-                   <li class="org">The Example Company</li>
-                   <li class="tel">604-555-1234</li>
-                   <li><a class="url" href="http://example.com/">http://example.com/</a></li>
+                  <li class="fn">Joe Doe</li>
+                  <li class="org">The Example Company</li>
+                  <li class="tel">604-555-1234</li>
+                  <li>
+                    <a class="url" href="http://example.com/">
+                       http://example.com/
+                    </a>
+                  </li>
                 </ul>
 
            
-            This example adds subject domain metadata in the form of the class attributes. For example, it says that the phrase `The Example Company` is a reference to an organization (`org`). This annotation is not modifying or refining the constraint expressed by the `li` tag. It is saying something else entirely. 
+            This example adds subject domain metadata in the form of the class attributes. For example, it says that the phrase "The Example Company" is a reference to an organization (`org`). This annotation is not modifying or refining the constraint expressed by the `li` tag. It is saying something else entirely. 
             
             But this is not just about suggesting a different way of interpreting `The Example Company` (as an organization name, as well as as a list item).  There is actually a complex {subject domain} structure being expressed by the vCard markup. Not only is the list item `The Example Company` annotated as `org`, the list that contains it is annotated as `vcard`. The constraint of interpretation provided by `org` is actually dependent on it being part of a `vcard` structure.
             
@@ -146,7 +157,7 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
                    tel: 604-555-1234
                    url: http://example.com/
             
-            Tthe microformats are overlaying a second structure on the list structure. In the world of HTML, this makes sense. HTML needs to be a standardized {document domain} language so that browsers can display it for human reading. Humans don't need the vCard annotations to recognize that the content is an address, but algorithms do. (This is part of dumbing it down for robots, as we discussed in [#chapter.quality].) So the microformat adds a second, hidden, {subject domain} structure to the document for readers who are algorithms rather than people. 
+            The microformats are overlaying a second structure on the list structure. In the world of HTML, this makes sense. HTML needs to be a standardized {document domain} language so that browsers can display it for human reading. Humans don't need the vCard annotations to recognize that the content is an address, but algorithms do. (This is part of dumbing it down for robots, as we discussed in [#chapter.quality].) So the microformat adds a second, hidden, {subject domain} structure to the document for readers who are algorithms rather than people. 
             
             Structured writing constrains both the creation and the interpretation of content. In the normal case we expect that the creation of the content would be just as constrained as the interpretation. After all, it is hard to rely on the interpretation of structure if the creation of the structure is not constrained. However in this case the interpretation of the data is more constrained than the creation. 
             
@@ -186,9 +197,9 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
             
         section: Child blocks vs. additional annotations
         
-            Sometimes the name of a block is not sufficient to fully describe the constraints it meets. In these cases, we can add additional annotations to a block. But we can also achieve much the same thing by adding child blocks to the block. A child block belongs to the main block, so it is part of it and can constrain the interpretation of the main block just as much as an additional annotation does. One of the issues in designing mechanical structures for content, therefore, is when to use additional annotation on a block and when to use child blocks. 
+            As noted above, sometimes the name of a block is not sufficient to fully describe the constraints it meets. In these cases, we can add additional annotations to a block. But we can also achieve much the same thing by adding child blocks to the block. A child block belongs to the main block, so it is part of it and can constrain the interpretation of the main block just as much as an additional annotation does. One of the issues in designing mechanical structures for content, therefore, is when to use additional annotation on a block and when to use child blocks. 
             
-            Different markup languages have different levels of support for additional annotation on blocks, so this issue is affected by the markup language you choose. SAM, for instance, only supports a limited fixed set of additional annotation on blocks, and therefore any additional constraint of interpretation you want to do in a SAM-based markup language has to be one with child blocks.  
+            Different markup languages have different levels of support for additional annotation on blocks, so this issue is affected by the markup language you choose. SAM, for instance, only supports a limited fixed set of additional annotation on blocks, and therefore any additional constraint of interpretation you want to do in a SAM-based markup language has to be done with child blocks.  
             
             In XML, though, there is broad (though not unlimited) support for additional annotations on blocks in the form of attributes. In the XML world, therefore, there is considerable choice, and considerable debate, about when and where you should use elements vs. attributes in your content models.         
             
@@ -237,7 +248,7 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
 
             Given this, you may be wondering why people bother with attributes, since you can do the same things with elements and have both more flexibility and more capacity to impose constraints. Yet people continue to use attributes extensively when designing markup languages in XML.  When people create XML document types for representing data, rather than for writing document, they almost always use the attribute format, perhaps because it is slightly less verbose and slightly easier to read, or perhaps because as programmers they are accustomed to representing data as key/value pairs linked with `=` signs.
 
-            But for documents it is more complex. To understand why XML even has attributes, and why other languages, such as SAM or reStructuredText, also have similar mechanisms for adding annotations to blocks, we need to go back to the original concept of markup as something written onto a manuscript after the fact. Markup is an addition to the text, not part of it. The content of an element is part of the underlying text. Anything you want to add, therefore, cannot be element content, since that would be adding to the text. Everything else has to be added to element definitions as attributes. 
+            But for documents it is more complex. To understand why XML even has attributes, and why other languages, such as SAM or reStructuredText, also have similar mechanisms for adding annotations to blocks, we need to go back to the original concept of markup as something written onto a manuscript after the fact. In this view, markup is an addition to the text, not part of it. The content of an element is part of the underlying text. Anything you want to add, therefore, cannot be element content, since that would be adding to the text. Everything else has to be added to element definitions as attributes. 
 
             This view is reinforced by the academic interest in markup as a way to prepare texts for study. Again, here, the text is preexisting and canonical. The markup is external to it and so everything that is external to the original text must be contained in the markup itself (as attributes) and nothing that is internal to the original text must be removed or replaced by markup. (This is a form of partitioning in its own right, to serve a particular purpose.) Thus in this fragment of a Shakespeare play marked up by John Bosek we see that the original text is kept perfectly intact:
             
@@ -284,7 +295,7 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
             or even this:
 
             ```(xml)
-                <SCENE location=Rousillon. The COUNT's palace.">
+                <SCENE location="Rousillon. The COUNT's palace.">
             
             And similarly, we might have replaced:
             
@@ -301,9 +312,9 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
 
             So is the right way to markup a play to preserve the original printed text -- which includes all of the playwright's metadata -- or is it better to separate the playwrights metadata from the speeches which are the 'real' play?
 
-            But while these question may be important for the scholarly study of text, they are not nearly so important for structured writing. Our concern is to partition the task of content creation so we can simply choose the format that does that in the most functionally lucid way while ensuring that all the information required by the next partition is accurately captured. The fact that such question exist, however, help us to understand both why a markup language like XML is structured the way it is, and why so many texts are marked up the way they are -- and why so many markup languages are designed the way they are. 
+            But while these question may be important for the scholarly study of text, they are not nearly so important for structured writing. Our concern is to partition the task of content creation, so we can simply choose the format that does that in the most functionally lucid way while ensuring that all the information required by the next partition is accurately captured. The fact that such question exist, however, help us to understand both why a markup language like XML is structured the way it is, and why so many texts are marked up the way they are -- and why so many markup languages are designed the way they are. 
 
-            The way we, as practitioners of structured writing for content quality, settle these matters is by asking ourselves which approach best supports the structured writing algorithms that we want to implement, and always remembering that the reliability of every other algorithm depends on how well the conformance algorithms works, and that the conformance algorithm depends to a large extent on how the authoring algorithm designs for conformance and for functional lucidity. 
+            The way we, as practitioners of structured writing, settle these matters is by asking ourselves which approach best supports the structured writing algorithms that we want to implement, and always remembering that the reliability of every other algorithm depends on how well the conformance algorithms works, and that the conformance algorithm depends to a large extent on how the authoring algorithm designs for conformance and for functional lucidity. 
 
             In none of this are we in the least concerned about preserving the canonical nature of a preexisting text. There is no preexisting text. We are all about creating new texts. Because of this we have every reason to prefer to use sub-structures rather than annotations on existing structures, to express things like our vCard example. In fact, SAM, which is designed specifically for structured authoring, only supports this format:             
             
