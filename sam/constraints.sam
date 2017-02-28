@@ -13,7 +13,7 @@ chapter:(#chapter.constraints) Constraint Languages
     
     For a {concrete markup languages}(concept) like MarkDown, the content constraints are established in the code of the MarkDown processor. They are validated when the processor parses the MarkDown file. (In practice, though, MarkDown does no meaningful validation. Anything it does not recognize as markup, it simply outputs as text.)
 
-    For {abstract markup languages}(concept) like XML you define structures yourself (or use an existing definition, such as DocBook). Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a "validator".
+    For {abstract markup languages}(concept) like XML you define structures yourself. Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a "validator".
     
     A schema language is a structured language for defining structured languages. The schema for a markup languages says what structures are allowed and in what order and relationship. A given document either conforms to those constraints or it does not. 
 
@@ -78,4 +78,4 @@ chapter:(#chapter.constraints) Constraint Languages
     
     One of the most basic design principles of any process is that errors should be caught as early in the process as possible, and that any error-prone process should be designed to make errors less likely. Factoring out constraints by moving content to a different domain, as we have noted several times, is an excellent way to reduce errors in structured writing, and to ensure that errors are caught earlier in the process. 
     
-    It is tempting, of course, to avoid having to design constraints for yourself by adopting an off-the-shelf structured writing system. But you should reflect on exactly how effective such a system can be in enforcing the constraints that matter to your business, and the how much it costs you to handle the errors that the lack of such constraints cause throughout your publishing process. 
+   

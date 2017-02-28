@@ -168,9 +168,19 @@
         </db:itemizedlist>
     </xsl:template>
     
+    <xsl:template match="formatted-code">
+        <db:programlisting>
+            <xsl:apply-templates select="@*|node()"/>
+        </db:programlisting>
+    </xsl:template>
+    
+    <xsl:template match="formatted-code/line">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
     <xsl:template match="codeblock">
         <db:programlisting>
-             <xsl:apply-templates select="@*|node()"/>
+            <xsl:apply-templates select="@*|node()"/>
         </db:programlisting>
     </xsl:template>
     

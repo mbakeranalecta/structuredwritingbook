@@ -21,21 +21,22 @@ chapter:(#chapter.metadata) Metadata
             eggs, 12, each
             water, 2, qt
     
-    This subject domain markup is metadata, and it turns what were just list items into a set of ingredient data. It is not the the data existed and the metadata came along afterward to describe it. It is that the data exists as data only because the metadata is there to describe it. Take away the metadata and data becomes noise. We (as designers of algorithms) simply do not know what it means. 
-    
-    In the {definition of structured writing}[#chapter.three-domains] I said that structured writing is writing that obeys constraints and that records the constraints it obeys. In other words, structured writing is the application of metadata to content which turns content into data by constraining the interpretation of the content. If structured writing is writing that obeys constraints and records the constraints it obeys,  Metadata is the means by which those constraints are recorded. Without it, you have no formal assurance that the information is what it seems to be. 
-    
-    This is the basis for all partitioning of the complexity of content creation. The metadata we attach to content allows us to pass the content to different people of processes without letting any of the complexity drop. We cannot partition complexity safely if we drop any of the complexity in the process. Metadata is how we ensure that all the complexity has been successfully transferred from one partition to another. 
-    
-    This is not to say that a list structure is not metadata also. It is. It is {document domain} metadata that constrains the interpretation of the data as a particular document structure. It formally identifies a piece of text as a list item. It allows us to partition the formatting of lists from the writing of recipes, and all kinds of other content. This makes it easy to write algorithms that recognize lists. This  allows you to reliably format list items in whatever media you choose to publish in. The operations we can perform on list item data are obviously far less sophisticated than those we can perform on ingredient data.  
+    This subject domain markup is metadata, and it turns what were just list items into a set of ingredient data. It is not that the data existed and the metadata came along afterward to describe it. It is that the data exists as data only because the metadata is there to describe it. While a human reader can recognize that the values in the list are ingredients, based on their familiarity with the recipe format, an algorithm sees only strings of characters until we apply the metadata that lets it recognize them as ingredients.[*1]
 
-    There is a very important point here: The same set of values, the same string of letters, words, and numbers, can be turned into different kinds of data by applying different kinds of metadata to them. This is a very clear illustration of the fact that it is metadata that creates data. And what it tells us is that we can choose what kind of data we turn our content into by choosing what type of metadata we apply to it.     
+    footnote:(*1)
+        I am talking here about ordinary algorithms: simple rules written by humans to govern the processing of well defined data. As I noted in [#chapter.quality], advances in AI are making inroads on enabling robots to read the way humans do. An AI is an algorithm, and a sufficiently advanced AI algorithm might not need this level of explicit metadata to recognized list items are ingredients. Technically, though, such an AI would still be depending on metadata to interpret this data. It would just be using the same metadata that humans use, which we might fairly, if briefly, characterize as a combination of grammar and memory. Until such AIs are available to us, though, structured writing allows us to add more explicit metadata to content to make it accessible to simpler algorithms. 
+    
+    Structured writing is writing that obeys constraints and that records the constraints it obeys, so as to create an interface between partitions in your content system. In other words, structured writing is the application of metadata to content which turns content into data by constraining the interpretation of the content. If structured writing is writing that obeys constraints and records the constraints it obeys,  Metadata is the means by which those constraints are recorded. Metadata constrains the interpretation of values in content, making them accessible as data. 
+    
+    This is the basis for all partitioning of the complexity of content creation. The metadata we attach to content allows us to pass the content to different people or processes without letting any of the complexity drop. (This includes search engines and other downstream processes that we do not control but can inform.) We cannot partition complexity safely if we drop any of the complexity in the process. Metadata is how we ensure that all the complexity has been successfully transferred from one partition to another. 
+    
+    Saying the the subject domain metadata makes the text of the ingredients list more precise data is not the same as saying that a list structure is not metadata also. It is document domain metadata. It formally identifies a piece of text as a list item. It allows us to partition the formatting of lists from the writing of recipes, and all kinds of other content. This makes it easy to write algorithms that recognize lists which allows you to reliably format list items in whatever media you choose to publish in. The operations we can perform on list item data are obviously far less sophisticated than those we can perform on ingredient data, but list item data are still data and still created by metadata.  
+
+    There is a very important point here: The same set of values, the same string of letters, words, and numbers, can be turned into different kinds of data by applying different kinds of metadata to them. This means that we can choose what kind of data we turn our content into by choosing what type of metadata we apply to it. Moving content from one structured writing domain to another means turning it into different kinds of data by applying different metadata to it. By turning it into different kinds of data, we make it accessible to different kinds of algorithms.     
         
-    Basic {publishing} algorithms can be performed using {document domain} metadata alone. To publish a list of ingredients it is enough to know that the string "6 eggs" is a list item. If we want to present ingredients differently in different media, we need to know that "eggs" is an ingredient and "6" is a quantity of that ingredient. But, as we have seen, publishing-related algorithms such as {differential single sourcing}, {content reuse}, and {content generation} also require {subject domain} metadata. Establishing the {relevance} of content requires {subject domain} metadata because we search for content based largely on its subject matter. {Validating}(algorithm "conformance"), which deals with whether content meets its defined constraints, depends on the metadata of the domain in which the content is recorded. {Auditing}, which deals with whether content meets business requirements, generally requires {subject-domain} metadata as most business requirements are in the {subject domain}.  
- 
     section: The recursive nature of metadata
     
-        Metadata is a confusing concept because metadata is recursive. If metadata is the data that describes (and thereby creates) data, it is also the data itself. And since data is created by metadata, this means that metadata is itself created by metadata. In other words, if the line `ingredients:: ingredient, quantity, unit` turns the ingredient lines into metadata in this markup: 
+        Metadata is a confusing concept because metadata is recursive. If metadata is the data that describes (and thereby creates) data, it is also data itself. And since data is created by metadata, this means that metadata is itself created by metadata. In other words, if the line `ingredients:: ingredient, quantity, unit` turns the ingredient lines into metadata in this markup: 
         
         ```(sam)
             ingredients:: ingredient, quantity, unit
@@ -44,119 +45,42 @@ chapter:(#chapter.metadata) Metadata
             
         Then what makes `ingredients:: ingredient, quantity, unit` a piece of metadata and not just another string of characters? Whatever it is, it is also metadata, and the content depends on that metadata as well, since it cannot exist without its metadata and that metadata cannot exist without the metadata that defines it. 
             
-        In structured writing, we add structure to content to replace the things we have factored out. That structure is metadata to the data that is the text of the file. But if we store that file in any kind of repository, the information that identifies the file in that repository is metadata to the file as a whole. But that is not the only kind of metadata for that file. If the structure of the file is described by a {schema}, the schema is also metadata for the file. 
+        In structured writing, we add structure to content to replace the things we have factored out. That structure is metadata to the data that is the text of the file. But if we store that file in any kind of repository, the information that identifies the file in that repository is metadata to the file as a whole. If the structure of the file is described by a {schema}, the schema is also metadata for the file. 
                 
         But we're not done yet because the specification of the schema language is the metadata that tells you what the schema means.  And then of course, there is the specification of the markup to consider. The XML specification is part of the metadata tree for every XML document in existence. And we are still not be done, because the XML specification uses a formal grammar description language, called {BNF}(language). The BNF specification is metadata for the schema language description. 
         
-        How do we break out of this infinite recursion of metadata. Data is information that has been formalized for interpretation by algorithms. Fortunately, human beings can understand natural language without that degree of formalization. Eventually, then, we reach a point where the last piece of metadata is not described by metadata but by human language. That human language document essentially bootstraps the whole metadata cascade that eventually yields pieces of data that can be unambiguously interpreted by algorithms. 
+        How do we break out of this infinite recursion of metadata? Data is information that has been formalized for interpretation by algorithms. Fortunately, human beings can understand natural language without that degree of formalization. Eventually, then, we reach a point where the last piece of metadata is not described by metadata but by human language. That human language document essentially bootstraps the whole metadata cascade that eventually yields pieces of data that can be unambiguously interpreted by algorithms. 
         
-        So, every piece of data has a spreading tree of metadata supporting it, which, if traced to its roots, eventually leads to plain language documents that explain things in human terms.
+        So, every piece of data has a spreading tree of metadata supporting it, which, if traced to its roots, eventually leads to plain language documents that explain things in human terms. Thus the XML specification combines plain English definitions with BNF, if if we go to the BNF specification we will find the plain English definitions that describe BNF.
         
         
     section: Where should metadata live?
         
-        One of the great questions about metadata is where it should live: with the data it describes or separate from it? For much metadata the answer is obvious. It lives separately because its scope is wider than one resource. An XML document does not include the XML spec, for instance. But for metadata that is unique to an individual resource, the question is an important one. 
+        One of the great questions about metadata is where it should live: with the data it describes or separate from it? We looked at this issue a little in [#chapter.content-management], but now that we have a better understanding of what metadata is, we can give a more complete answer to the question. 
         
-        The issue of where metadata should live is closely related to the issue of how responsibilities are partitioned in your content system. Since metadata is how complexity is transferred safely from one partition to another, the responsibility for creating the metadata lies with the person or process in the originating partition, which the metadata requirements are dictated by the need of the receiving partition. 
+        The issue of where metadata should live is closely related to the issue of how responsibilities are partitioned in your content system. Since metadata is how complexity is transferred safely from one partition to another, the responsibility for creating the metadata lies with the person or process in the originating partition, while the metadata requirements are dictated by the needs of the receiving partition. By adjusting how the system is partitioned, you can adjust how onerous the metadata requirements are on any one actor in the system. The location of the metadata, therefore, is essentially dictated by the partitioning. It is located in the place that achieves the desired partitioning of complexity for the particular content system. 
 
-        Unfortunately, tools are often designed with other priorities in mind. For one thing, many tool developers think almost exclusively in relational database terms. The idea that you could store metadata anywhere other than relational tables is foreign to them. For another, system vendors have a vested interest in a partitioning of the process that requires you to have a licensed seat for their system. Both these things encourage to to implement models in which the metadata is separate from the content.
+        Most early graphic file formats only stored the image. Most modern format also store extensive metadata about the image. The pictures you take with your digital camera include lots of information about the camera and the settings that were used to take the shot, all of which can help rendering algorithms and graphic editing applications the handle the raw image data better. Having that metadata embedded in the file ensure that the picture and its metadata stay together. Separating them would greatly complicate the system. Keeping the image metadata in the image file is better partitioning than keeping it separate. 
 
-        Most early graphic file formats only stored the image. Most modern format also store extensive metadata about the image. The pictures you take with your digital camera include lots of information about the camera and the settings that were used to take the shot, and, if the camera has a GPS receiver, even the geographic coordinates of where the shot was taken. Having that metadata embedded in the file ensure that the picture and its metadata stay together. 
-
-        In part the argument is about who is responsible for creating the metadata. In the case of the photo, the metadata is in the file because the camera is the best placed instrument to record it. Sometimes it is about whether the metadata is intrinsic or extrinsic to the content. Sometimes it is about control.
+        Unfortunately, tools are often designed with other priorities in mind. For one thing, many tool developers think almost exclusively in relational database terms. The idea that you could store metadata anywhere other than relational tables is foreign to them. For another, system vendors have a vested interest in a partitioning of the process that requires every user to be interacting with their system all day long because this forces people to buy every contributor a licensed seat for their tool. Both these things encourage them to implement models in which the metadata is separate from the content, ensuring that you need access to the system to have access to the metadata.
 
         For example, should the history of a file be stored in the file or in the repository? Storing it in the file lessens the file's dependence on the repository and makes it more portable. But a repository vendor may prefer to sell you a system in which to uninstall their repository would be to lose all your file history. If file status information is only stored in a workflow system, for instance, it is very hard to move away from that system. It it is stored in the file, it is easy to move away, and also to edit when not connected to the system, which can save you on licenses. 
+
+        In the case of the photo, the metadata is in the file because the camera is the best placed instrument to record it. This is the best partitioning of the complexity of the recording and transferring this information, both in terms of its convenience of creation and in terms of ease of access and management. The location of the metadata should be determined by the best partitioning of the content system, not the convenience of a tool vendor. 
+
         
         Writing your content in the subject domain means that more of your metadata is stored in the same file as the content, increasing its independence and portability. Also, as we have seen, the use of subject domain structures can lessen the need for management domain structures for algorithms like {single sourcing} and {content reuse}, which reduces the need for external management domain metadata. All of this contributes to improved functional lucidity, referential integrity, and change management.
-
-
         
-        There is another way to apply {subject domain} metadata to content besides recording the content in the subject domain. This is to apply subject domain metadata externally to the content or an an overlay to the document domain structures in which the content is recorded. 
+        But this does not mean that all metadata related to an piece of content belongs in the content file. For example, when we import a graphic into a document, we often give it a caption or a title and we specify the size it should be displayed at. These are all metadata about the graphic, but it would not make sense to include this information in the graphic file itself. This information is not actually describing the graphic itself, it is describing its relationship to the current document. In a different document, the same graphic might be displayed at a different size with a different caption or title. This information is therefore included in the file that imports the graphic, not the graphic file itself. In other words, the metadata is stored on the right side of the relationship between the two content objects. This is simply good partitioning. (In [#chapter.wide] we  looked at another way of partitioning this metadata, again based on the nature of the relationship between the files, and on the way that the complexity of the content system is partitioned.)
         
-        For example, if you wanted to have access to the data on which ingredients were mentioned in each recipe (perhaps as an aid to finding recipes), you could record the recipe itself in the document domain and then place it in a relational database table with a many-to-many relationship to a table that listed all known ingredients.
-        
-        # Example
-        
-        Systems designed primarily for document domain content creation, such as DITA, can include formalized structures for attaching subject domain metadata to document domain structures. In DITA, the primary such mechanism is the {subject schema}(concept "DITA subject schema").
-               
-        But the two approaches are not equivalent. They vary substantially in capability, implementation requirements and ease of use.
-        
-        For example, when we talked about {differential single sourcing}(concept) we saw that {subject domain} content could be transformed into radically different document domain structures for publication in different media. (A table for paper vs. an interactive widget online, for instance.) Attaching subject domain metadata to a piece of content that contains a document domain structure (such as a table) does not give you the capability to differentially single source that table to different structures for other media.
-        
-        One area in which external subject-domain metadata excels is {finding and filtering}(algorithm). You can certainly find and filter on subject domain content, but because there are many different subject domain structures, it can be non-trivial to figure out how to write the query expression that does the {finding and filtering} you require. By contrast, external subject domain metadata can be stored in normalized data structures that are consistent and therefore easier to write queries for. This consistency also allows tools and systems to put high-level interfaces over these query mechanisms for users that don't know how to write queries themselves. As such, the approach is widely favored in {content management} systems.
-        
-        On the other hand, there is a limit to how fine grained a {find and filter} operation can be with external metadata. If you want the advantage of external metadata stored in normalized structures for ease of querying, it can only discriminate down to the level of the pieces of content it is applied to. It can retrieve that whole content unit, but not pieces of it. 
-        
-        For {validation}(algorithm "conformance"), it comes down to a matter of what {constraints} you want to validate against. As we have seen, moving content to the subject domain allows us to factor out many of the constraints that we want to apply to the document domain and to express and enforce the constraints we want to apply to how the content treats its subject matter. If content quality is your primary reason for adopting structured writing, these advantages are hard to ignore. 
-
-        For {auditing}, the situation is much the same. If you are looking to audit the consistency of your content, document domain metadata will not suffice, as we noted in [#chapter.conformance]. If you are looking to audit your coverage of subject matter, external subject domain metadata attached to document domain content will give you a high level look at your coverage, but tell you little about quality or how well subjects are being covered. 
-        
-        When it comes to ease of use, there are things in favor of each approach. If you have standardized document structures and standardized metadata structures, then users only have to learn those structures.
-        
-        On the other hand, separating subject metadata from the writing of the content itself means that writers have to do two separate jobs. Rather than creating the metadata as they write in the {subject domain}, they have to write in the {document domain} and then create separate subject domain metadata to describe the document they have just written. This creates more work for the writer, and has frequently proven error prone. 
-        
-        This can significantly impact the quality of both the content and the metadata. Because the document domain does not impose any constraints on how a subject is treated, it it quite easy to apply external subject domain metadata to content that simply does not merit it. Since metadata is supposed to express a promise that certain constraints have been met, this creates a broken promise. 
-        
-        The fact is, promising that a constraint has been met without validating that it has actually been met is a recipe for broken promises. Attaching {subject domain} metadata externally to {document domain} structures always runs this risk. Subject-related constraints have not been factored out or enforced. There has not even been effective subject-domain guidance provided to the writer while {writing}(algorithm "authoring") the content. 
-        
-        This is the complexity that is being neglected by partitioning metadata into relational tables for the convenience of CMS developers.
-        
-        I noted above that external subject domain metadata excels in the area of {finding} because it makes it easy to write queries on standardized metadata structures. But there is a large caveat to this, which is data quality. If the promises the metadata makes are not kept by the content itself, the value and reliability of searches is severely diminished. 
-        
-        At the end of the day, the value of any system is limited by the quality of its data. Content management systems often fail or underperform because of poor quality data caused by a poor fit between content and its metadata. In particular, there is a tendency for data quality to decline over time. Systems based on external subject-domain metadata need to be aware of the problem and vigilant to prevent it.
-        
-        We should also note that the two approaches are not mutually exclusive. The subject metadata used in both cases is essentially the same, since it describes the same subject. There is no reason, therefore, why you cannot take {subject domain} content, with its integrated metadata, and extract the metadata to an external metadata store. This way you can use the same query interface to find the content without giving up the validation and auditing capability of subject domain content or the finer-grained application of metadata that the subject domain enables. This approach can significantly improve the quality of the metadata in the system because all the subject domain guidance and constraints have been applied to the content before it is stored. Thus, as long as the content itself is correct, there cannot be a mismatch between what the metadata promises and what the content delivers.
-        
-        There are ease-of-use advantages to his approach as well. Since the CMS metadata is extracted from the content metadata, the writer does not have to enter the metadata separately from the content after is is written. If your take such an approach, however, it is vital to be very clear about which is the canonical source of the metadata. The subject-domain content is the canonical source and the only one that should ever be edited. The exported metadata in the CMS is a cache of the content metadata created for the sake of optimizing searches. Of course, if your CMS was based on an {XML database}(tool), you would not need to cache the metadata in relational tables; you could query it directly. 
-        
-        
-        
-        
-        The final step is to think about whether there is any management domain metadata that you need to add to the model. Usually this will be for management or tracking purposes, and may not be part of any current content examples you are looking at. This should be the last step because once you have formalized the rest of the model you may find that that data is usable for management and tracking purposes as well, so you won't need to add additional fields just for management purposes. For instance, lots of the {subject domain} information that is already formalized in the model can be used for managing which recipes you include in particular publications, such as quick and easy meals (less than 20 minutes prep time, fewer than 6 ingredients, fewer than 5 steps) or a low-cal vegetarian cookbook (fewer than 160 calories, no meat ingredient).
-
-    
-        ```(sam)
-            recipe: Hard Boiled Egg
-                author: bcrocker
-                rights: full
-                season: winter, spring, summer, fall
-                introduction:
-                    A hard boiled {egg}(food) is simple and nutritious.
-                ingredients:: ingredient, quantity, unit
-                    eggs, 12, each
-                    water, 2, qt
-                preparation:
-                    1. Place eggs in (pan){utensil} and cover with water.
-                    2. Bring water to a boil.
-                    3. Remove from heat and cover for 12 minutes.
-                    4. Place eggs in cold water to stop cooking.
-                    5. Peel and serve.
-                prep-time: 15 minutes
-                serves: 6
-                wine-match: champagne and orange juice
-                beverage-match: orange juice
-                nutrition:
-                    serving: 1 large (50 g)
-                    calories: 78
-                    total-fat: 5 g
-                    saturated-fat: 0.7 g
-                    polyunsaturated-fat: 0.7 g    
-                    monounsaturated-fat: 2 g    
-                    cholesterol: 186.5 mg    
-                    sodium: 62 mg    
-                    potassium: 63 mg    
-                    total-carbohydrate: 0.6 g    
-                    dietary-fiber: 0 g    
-                    sugar: 0.6 g    
-                    protein: 6 g    
-
-            
+        Storing the metadata on the right side of the relationship means that there are definitely types of metadata that belong on the repository or content management side of the relationship as well. If you store your content in a version control system (VCS) such as GIT (something that is increasingly popular in the "treat docs like code" movement), the VCS will record the difference between each version of the file you submit as well as who did each commit of the file. This will allow the VCS to do valuable management things like tell you exactly who changed an individual line of a file and on what date they changed it. Storing such metadata in the file itself would make it impossible complex to author. Again, the metadata is stored on the right side of the relationship and the partitioning of complexity is correct. 
+                    
     section: Ontology
         Finally it is worth saying a word about ontology. Ontology (in the information processing sense) is an attempt to create a formal mapping of the relationships between entities in the real world such that algorithms can draw inferences and reach conclusions about them.  
         
         In many way, therefore, an ontology is an attempt to do for algorithms what content does for humans. After all, one of the main reasons that we read is so that we can understand the world better, understand what various objects and institutions are and how they relate to each other, statically and in action, so that we can decide what to do. 
         
-        In some sense, therefore, ontology is the ultimate in {subject domain} markup. And just as {subject domain} markup can be used to drive content management functions, so there are attempts to use ontologies to drive content management functions, especially at the enterprise level. One should also be able to generate human-readable content from an ontology, given a sufficiently sophisticated algorithm and a sufficiently sophisticated ontology. 
+        In some sense, therefore, ontology is the ultimate in {subject domain} markup. Indeed, one should also be able to generate human-readable content from an ontology, given a sufficiently sophisticated algorithm and a sufficiently sophisticated ontology. 
         
         All of this is very much outside our scope in this book. {Subject domain} markup is an attempt to capture certain aspects of the subject matter of a work. But it is not an attempt to model the argument of a work. Consider the passage:
         
@@ -168,4 +92,4 @@ chapter:(#chapter.metadata) Metadata
         
         Similarly, this {subject domain} markup does not bother to denote that Union is a reference to both a country and its armed forces, and that colonel is a rank in those armed forces. It does not denote these things because this particular markup language is concerned with movies and these facts are entirely incidental to the movie business. Actors, directors, and movies are significant subjects in the movie review domain. The names of nations and their armies that figure in the plot of individual movies are incidental in that domain. A full ontological treatment of the passage above, however, would need to model those relationships. 
         
-        Structured writing does make certain aspects of content clear to algorithms, but not with the intention of making it possible for the algorithms to make real-world inferences and decisions based on the information in that content. It only does what is necessary to allow human authors to use algorithms as tools to improve the quality of the content they prepare for human readers. 
+        Structured writing does make certain aspects of content clear to algorithms, but not with the intention of making it possible for the algorithms to make real-world inferences and decisions based on the information in that content. It only does what is necessary to partition and redirect content complexity in a content system in which human authors to use algorithms as tools to improve the quality of the content they prepare for human readers. 
