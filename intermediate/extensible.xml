@@ -51,7 +51,7 @@
 <p>In DITA’s case, the architecture consists of a set of predefined markup languages that are intended as a basis for extension through a mechanism known as specialization together with an extensive set of <phrase><annotation type="concept">management domain</annotation></phrase> markup and the specification of the behavior it should produce, as well as a facility (maps) for assembling information products, and a facility (subject schema) for managing metadata.</p>
 <p>In other words, it predefines a range of structures, semantics, and operations that you might need in establishing an information architecture and then provides a way for you to build from there.</p>
 <p>As with any other architecture, its usefulness depend on how well the predefined structures, semantics, and operations suit your needs, how easy the extension mechanism is to use, and how reliable the available implementations are.</p>
-<p>It is common in the software world for there to be many competing architectures with different sweet spots -- different ways of partitioning and distributing the complexity of the development process or the process the tool you are developing it to serve. Because an architecture is essentially a series of guesses about what a variety of systems may have in common, different architectures may be constructed very differently to cover different sets of commonalities among diverse projects and you may not see equivalent architectural features from one architecture to another.</p>
+<p>It is common in the software world for there to be many competing architectures with different sweet spots – different ways of partitioning and distributing the complexity of the development process or the process the tool you are developing it to serve. Because an architecture is essentially a series of guesses about what a variety of systems may have in common, different architectures may be constructed very differently to cover different sets of commonalities among diverse projects and you may not see equivalent architectural features from one architecture to another.</p>
 <p>There are not a lot of information typing architectures. The only other one I am aware of is the one I am developing myself, which is called <phrase>SPFE</phrase>. <phrase>SPFE</phrase>, however, is a very different kind of architecture from <phrase><annotation type="language">DITA</annotation></phrase>. <phrase><annotation type="language">DITA</annotation></phrase> has grown into a very large and complex architecture over the years, and it is out of scope for this book to attempt to describe its architecture in full.<citation type="idref" value="1"/> All I shall attempt to do here is to do a basic mapping of some key features of the DITA architecture to the structured writing concepts explored in this book.</p>
 <footnote id="1">
 <p>Obviously I am not a fan of the DITA architecture or I would not be developing my own architecture in <phrase>SPFE</phrase>. For a much fuller and more sympathetic treatment of the DITA architecture, see <phrase><annotation type="citetitle">DITA for Practitioners Volume 1: Architecture and Technology</annotation></phrase> by Elliot Kimber, <phrase><annotation type="url">http://xmlpress.net/publications/dita/practitioners-1/</annotation></phrase></p>
@@ -60,7 +60,7 @@
 <blockquote>
 <citation type="citation" value="http://docs.oasis-open.org/dita/dita/v1.3/csd01/part3-all-inclusive/archSpec/base/information-typing.html"/><p>Information typing is the practice of identifying types of topics, such as concept, reference, and task, to clearly distinguish between different types of information.</p>
 </blockquote>
-<p>Unfortunately this definition is largely circular -- information typing defines information types. But it does help establish a scale. Information typing is about defining topic types. The spec goes on to define the purpose of information typing:</p>
+<p>Unfortunately this definition is largely circular – information typing defines information types. But it does help establish a scale. Information typing is about defining topic types. The spec goes on to define the purpose of information typing:</p>
 <blockquote>
 <p>Information typing is a practice designed to keep documentation focused and modular, thus making it clearer to readers, easier to search and navigate, and more suitable for reuse.</p>
 </blockquote>
@@ -111,7 +111,7 @@ ingredients:: ingredient, quantity, unit
 </section>
 <section>
 <title>RestructuredText</title>
-<p>Restructured text has a number of blocks for things like paragraphs, titles, and lists that are defined with a concrete syntax. It defines other blocks using directives:</p>
+<p>RestructuredText has a number of blocks for things like paragraphs, titles, and lists that are defined with a concrete syntax. It defines other blocks using directives:</p>
 <codeblock language="reStructuredText">
 .. image:: images/biohazard.png
    :height: 100
@@ -119,7 +119,7 @@ ingredients:: ingredient, quantity, unit
    :scale: 50
    :alt: alternate text
 </codeblock>
-<p>It is extensible by adding new directives to the language. However, there is no schema language for RestrucuredText. To create a new directive, you have to create the code that processes it.</p>
+<p>It is extensible by adding new directives to the language. However, there is no schema language for RestructuredText. To create a new directive, you have to create the code that processes it.</p>
 <p>There is an important distinction to be made between languages that are extensible by schema and those that are extensible by writing code to process the extension. If a language is extended by writing processing code for the extension, the only way to know if the input is valid is by processing it. If it raises a processing error, it is invalid.</p>
 <p>If you have only one processor for a language, you can treat that processor as normative. That is, the definition of a correct file is any file that can be successfully processed by the normative processor. The language, in other words, is defined by the processor. But if you have multiple processors, how do you determine who is at fault when of of those processor fails to process a given input file? Is the processor incorrect or the source file?</p>
 <p>A schema creates a language definition that is independent of any processor. (In other words, it partitions and redirects the complexity of validation in language design.) It is the schema that is normative, not any of the processors. If the source file is valid per the schema, the processor is at fault if it does not process that file correctly. If the source file is not valid per the schema, the blame lies with the source file.</p>
