@@ -219,7 +219,7 @@ keys:
 <db:section>
 <db:title>Common with conditions</db:title>
 <db:para>In some cases of variable into common, the variant pieces is not actually  factored out into a separate file. Rather, each of the possible alternatives is included in the file conditionally.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/commonconditions.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/commonconditions.svg" contentwidth="2in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/commonconditions.png"/></db:imageobject><db:textobject><db:para>Diagram of the common with conditions reuse pattern.</db:para></db:textobject></db:mediaobject>
 <db:para>For instance, in content for a car manual you might have conditional text for the number of people the car seats.</db:para>
 <db:programlisting language="sam">
 The vehicle seats {four}(?compact){five}(?midsize){seven}(?van).
@@ -348,10 +348,10 @@ keys:
 <db:section>
 <db:title>Assemble from pieces</db:title>
 <db:para>In the assemble from pieces approach, there is no common vs. variable distinction and no single source document into which reused content is inserted or to which conditions are applied. Instead, there is a set of content units that are assembled to form a finished document.</db:para>
-<db:mediaobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/assemble.png"/></db:imageobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/assemble.svg" contentwidth="4in" align="left"/></db:imageobject><db:textobject><db:para>A diagram showing multiple pieces being combined in different ways to produce different outputs.</db:para></db:textobject></db:mediaobject>
+<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/assemble.svg" contentwidth="4in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/assemble.png"/></db:imageobject><db:textobject><db:para>A diagram showing multiple pieces being combined in different ways to produce different outputs.</db:para></db:textobject></db:mediaobject>
 <db:para>For example, if you have a range of products with common features, you might assemble the documentation for those products using a common introduction with a piece representing each feature of each model.</db:para>
 <db:para>This could be a flat list, or it could be a tree structure. For instance, you might assemble a chapter of a manual with a introductory piece and then several sections below it in the tree.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/tree.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/tree.svg" contentwidth="2in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/tree.png"/></db:imageobject><db:textobject><db:para>A diagram showing the tree structure of a book.</db:para></db:textobject></db:mediaobject>
 <db:para>The assembly approach requires a structure to describe how the units are assembled. This structure is often called a map. (It is called a map in DITA, for instance.) Some applications may also refer to it as a table of contents.</db:para>
 <db:programlisting language="sam">
 map: Widget Wrangler Deluxe User Manual

@@ -82,7 +82,7 @@ li:first-child
 &lt;/ol&gt;
 </db:programlisting>
 <db:para>In the document domain the inner and outer list are both identical <db:code>ol</db:code>/<db:code>li</db:code> structures. In the media domain, one will be formatted with Arabic numerals and the other with letters.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/nested-list.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/nested-list.png" contentwidth="2in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/nested-list.png"/></db:imageobject><db:textobject><db:para>Showing how a nested list is formatted in a browser.</db:para></db:textobject></db:mediaobject>
 <db:para>Both the inner and outer lists are ordered list items in the document domain, but in the media domain they are formatted differently based on context.</db:para>
 <db:para>In this case, the algorithm that formats the page distinguishes the inner and outer lists by looking at their parentage. For instance in CSS:</db:para>
 <db:programlisting language="css">

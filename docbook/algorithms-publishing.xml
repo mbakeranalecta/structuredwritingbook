@@ -11,7 +11,7 @@
 <db:title>The Rendering Algorithm</db:title>
 <db:para>There is actually a fifth algorithm in the publishing chain, which we can call the rendering algorithm. The rendering algorithm is the one responsible for actually placing the right dots on the right surface, be that paper, screen, or a printing plate. But this is a low-level device-specific algorithm and no one in the structured writing business is likely to be involved in writing rendering algorithms. The closest we ever get is the next step up, the encoding algorithm.</db:para>
 <db:para>The rendering algorithm requires some form of input to tell it where to place the dots. In writing, this usually comes in the form of something called a page description language. Like it sounds, this is a language for describing what goes where on a page, but in higher level terms that describing where each dot of ink or pixel of light is placed. A page description language deals in things like lines, circles, gradients, margins, and fonts.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/rendering.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/rendering.svg" contentwidth="2in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/rendering.png"/></db:imageobject><db:textobject><db:para>A diagram showing role of the rendering algorithm.</db:para></db:textobject></db:mediaobject>
 <db:para>One example of a page description language is PostScript. Here is the PostScript code for drawing a circle:</db:para>
 <db:programlisting language="PostScript">
 100 100 50 0 360 arc closepath
