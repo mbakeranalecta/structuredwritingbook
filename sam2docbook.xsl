@@ -59,7 +59,7 @@
     
     <xsl:template match="appendix">
         <db:appendix>
-            <xsl:apply-templates/>
+            <xsl:apply-templates select="@* | *"/>
         </db:appendix>
     </xsl:template>
     
