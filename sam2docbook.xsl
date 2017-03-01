@@ -404,17 +404,6 @@
                 <xsl:variable name="item-file" select="strings:tokenize(@item, '/\')[last()]"/>
                 <xsl:variable name="item-path" select="substring(@item, 1, string-length(@item)-string-length($item-file))"/>
                 <xsl:variable name="imagedata" select="document(@item)"/>
-                <db:imageobject condition="epub">
-                    <db:imagedata>
-                        <xsl:attribute name="fileref"><xsl:value-of select="concat($item-path,$imagedata/image/epub/href)"/></xsl:attribute>
-                        <xsl:if test="$imagedata/image/epub/contentwidth != ''">
-                            <xsl:attribute name="contentwidth"><xsl:value-of select="$imagedata/image/epub/contentwidth"/></xsl:attribute>      
-                        </xsl:if>
-                        <xsl:if test="$imagedata/image/epub/align != ''">
-                            <xsl:attribute name="align"><xsl:value-of select="$imagedata/image/epub/align"/></xsl:attribute>     
-                        </xsl:if>
-                    </db:imagedata> 
-                </db:imageobject>
                 <db:imageobject condition="fo">
                     <db:imagedata>
                         <xsl:attribute name="fileref"><xsl:value-of select="concat($item-path,$imagedata/image/fo/href)"/></xsl:attribute>
@@ -423,6 +412,17 @@
                         </xsl:if>
                         <xsl:if test="$imagedata/image/fo/align != ''">
                             <xsl:attribute name="align"><xsl:value-of select="$imagedata/image/fo/align"/></xsl:attribute>     
+                        </xsl:if>
+                    </db:imagedata> 
+                </db:imageobject>
+                <db:imageobject condition="epub">
+                    <db:imagedata>
+                        <xsl:attribute name="fileref"><xsl:value-of select="concat($item-path,$imagedata/image/epub/href)"/></xsl:attribute>
+                        <xsl:if test="$imagedata/image/epub/contentwidth != ''">
+                            <xsl:attribute name="contentwidth"><xsl:value-of select="$imagedata/image/epub/contentwidth"/></xsl:attribute>      
+                        </xsl:if>
+                        <xsl:if test="$imagedata/image/epub/align != ''">
+                            <xsl:attribute name="align"><xsl:value-of select="$imagedata/image/epub/align"/></xsl:attribute>     
                         </xsl:if>
                     </db:imagedata> 
                 </db:imageobject>
