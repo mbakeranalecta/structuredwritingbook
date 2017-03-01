@@ -9,7 +9,7 @@ SAM Parser.
 
 The command line to convert one SAM file to DocBook is:
 
-    samparser <sam file> -o <docbook file> -x sam2docbook.xsl
+    samparser <sam file> -o <docbook file> -x sam2docbook.xsl -i intermediate/<intermediate file>
     
 For example (assuming the parser is run from the root directory of the project):
 
