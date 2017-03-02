@@ -13,18 +13,12 @@ The command line to convert one SAM file to DocBook is:
     
 For example (assuming the parser is run from the root directory of the project):
 
-    samparser sam/whatis.sam -o docbook/whatis.xml -x sam2docbook.xsl
+    samparser sam/whatis.sam -o docbook/whatis.xml -x sam2docbook.xsl -i intermediate/whatis.xml
     
 To run on Mac of Linux you will need to invoke the Python 3 interpreter to
 run the SAM Parser. For example:
 
     python3 samparser.py sam/whatis.sam -o docbook/whatis.xml -x sam2docbook.xsl -i intermediate/whatis.xml
-    
-In case of an error, it may be helpful to dump the intermediate XML file 
-which is produced by the SAM parser from the SAM markup. This is the file 
-that sam2docbook.xslt is processing. To dump this file, use the `-i` option:
-
-    samparser sam/whatis.sam -o docbook/whatis.xml -x sam2docbook.xsl -i intermediate/whatis.int.xml
     
 To invoke the smart quotes function of the parser, use the `-q` option. 
 
@@ -36,7 +30,7 @@ intermediate file if using this option because validation errors will
 be reported against this file, not the SAM file. (True SAM Schema support is 
 TBD.)
  
-    samparser sam/whatis.sam -o docbook/whatis.xml -x sam2docbook.xsl -i intermediate/whatis.int.xml -xsd swchapter.xsd
+    samparser sam/whatis.sam -o docbook/whatis.xml -x sam2docbook.xsl -i intermediate/whatis.xml -xsd swchapter.xsd
     
 Batch conversion
 ================
