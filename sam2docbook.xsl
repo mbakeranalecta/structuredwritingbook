@@ -257,9 +257,9 @@
     </xsl:template>
     
     <xsl:template match="annotation[@type='url']">
-        <db:olink targetptr="{.}">
+        <db:link xlink:href="{.}">
             <xsl:apply-templates/>
-        </db:olink>        
+        </db:link>        
     </xsl:template>
     
     <xsl:template match="bibliography"></xsl:template>
