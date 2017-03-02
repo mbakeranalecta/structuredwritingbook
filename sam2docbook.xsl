@@ -10,6 +10,8 @@
     
     <xsl:output method="xml" omit-xml-declaration="no"/>
     
+    <xsl:variable name="default-content-width" select="5.25"/>
+    
     <xsl:template match="@*|node()">
         <xsl:copy>
             <xsl:apply-templates select="@*|node()"/>
@@ -435,7 +437,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <db:imageobject>
-                    <db:imagedata fileref="{@item}" contentwidth="4in" align="left"/>
+                    <db:imagedata fileref="{@item}" contentwidth="{$default-content-width}" align="left"/>
                 </db:imageobject>
             </xsl:otherwise>
         </xsl:choose>
@@ -491,7 +493,7 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <db:imageobject>
-                        <db:imagedata fileref="{@item}" contentwidth="4in" align="left"/>
+                        <db:imagedata fileref="{@item}" contentwidth="{$default-content-width}" align="left"/>
                     </db:imageobject>
                 </xsl:otherwise>
             </xsl:choose>
