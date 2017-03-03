@@ -38,7 +38,7 @@ chapter:(#chapter.publishing) Publishing
         
         There are several formatting languages that are used in content processing. They are often called typesetting languages as well. {XSL-FO}(language) (XSL - Formatting Objects) is one of the more commonly used in structured writing projects. {TeX}(tool) is another. 
         
-        >>>(image ../graphics/encoding.png)
+        >>>(image ../graphics/encoding.xml)
         
         Here is an example of XSL-FO that we looked at in [#chapter.single-sourcing]:
         
@@ -70,7 +70,7 @@ chapter:(#chapter.publishing) Publishing
     
         The job of the formatting algorithm it to generate the formatting language that drives the encoding and pagination process. The formatting algorithm produces the {media domain} representation of the content from content in the {document domain}. 
         
-        >>>(image ../graphics/formattingpub.png)
+        >>>(image ../graphics/formattingpub.xml)
                 
         In the case of HTML output, the formatting algorithm generates HTML (with connections to the relevant CSS, JavaScript, and other formatting resources). This is the end of the publishing process for the Web, since the browser will perform the encoding algorithm internally and the computer operating system will likely take care of the rendering. In the case of paper output, the formatting algorithm generates a formatting language such as {TeX} or {XSL-FO} which is then fed to the encoding algorithm as implemented by a TeX or XSL-FO processor. 
         
@@ -82,7 +82,7 @@ chapter:(#chapter.publishing) Publishing
 
         The job of the presentation algorithm is to determine exactly how the content is going to be organized as a document. A pure document domain document is a representation of the presentation of the content. The job of the {presentation algorithm} is to produce a pure {document domain} version of the content. This may mean producing the entire presentation from purely {subject domain} content, or simply handling the occasional subject domain structure in a largely document domain file.   
         
-        >>>(image ../graphics/presentation.png)
+        >>>(image ../graphics/presentation.xml)
         
         The organization of content involves several things:
         
