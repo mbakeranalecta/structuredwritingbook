@@ -52,7 +52,7 @@
 <db:section>
 <db:title>Common into variable</db:title>
 <db:para>In the common into variable case, you have a common piece of content that occurs in many places. This could mean it occurs in many documents or in many places in the same document, or both.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/common2variable.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/common2variable.svg" contentwidth="5.25in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/common2variable.png"/></db:imageobject><db:textobject><db:para>A diagram showing the common to variable reuse pattern.</db:para></db:textobject></db:mediaobject>
 <db:para>Each individual procedure is the variable part and the standard warning is the common part. We looked at an example of this in <db:xref linkend="chapter.management-domain"/>:</db:para>
 <db:programlisting language="sam">
 procedure: Blow stuff up
@@ -68,7 +68,7 @@ procedure: Blow stuff up
 <db:section>
 <db:title>Variable into common</db:title>
 <db:para>In the variable into common case, you have a single document that will be output in many different ways by inserting variable content at certain locations.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/variable2common.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/variable2common.png" contentwidth="5.25" align="left"/></db:imageobject></db:mediaobject>
 <db:para>For instance, if you are writing a manual to cover a number of car models you can factor out the number of seats each model has.</db:para>
 <db:programlisting language="sam">
 The vehicle seats &gt;($seats) people.
@@ -104,7 +104,7 @@ match insert where variable = $seats
 <db:title>Variable into variable</db:title>
 <db:para>Variable into variable is a variation on common into variable in which you can make a wholesale change of the common elements that you are pulling into a set of variable documents.</db:para>
 <db:para>For example, suppose you decide to market your product line to a new market. The new market has different safety regulation which means you need to insert a different standard warning into all your manuals. In this case, you want to swap out the common elements used in your home market and substitute the common elements for the foreign market.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/variable2variable.png" contentwidth="4in" align="left"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/variable2variable.png" contentwidth="5.25" align="left"/></db:imageobject></db:mediaobject>
 <db:para>Here we need to talk about how we identify the content to be inserted. In the common into variable example, we inserted the content of a file that contains a standard warning.</db:para>
 <db:para>But for variable into variable this approach simply does not work. Variable into variable requires loading a different file, which is difficult when the content specifies a particular file name to import.</db:para>
 <db:para>As always in structured writing, we look for a way to factor out the problematic content. So here we look for a way to factor out the file name and replace it with something else.</db:para>
@@ -348,7 +348,7 @@ keys:
 <db:section>
 <db:title>Assemble from pieces</db:title>
 <db:para>In the assemble from pieces approach, there is no common vs. variable distinction and no single source document into which reused content is inserted or to which conditions are applied. Instead, there is a set of content units that are assembled to form a finished document.</db:para>
-<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/assemble.svg" contentwidth="4in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/assemble.png"/></db:imageobject><db:textobject><db:para>A diagram showing multiple pieces being combined in different ways to produce different outputs.</db:para></db:textobject></db:mediaobject>
+<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/assemble.svg" contentwidth="5.25in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/assemble.png"/></db:imageobject><db:textobject><db:para>A diagram showing multiple pieces being combined in different ways to produce different outputs.</db:para></db:textobject></db:mediaobject>
 <db:para>For example, if you have a range of products with common features, you might assemble the documentation for those products using a common introduction with a piece representing each feature of each model.</db:para>
 <db:para>This could be a flat list, or it could be a tree structure. For instance, you might assemble a chapter of a manual with a introductory piece and then several sections below it in the tree.</db:para>
 <db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/tree.svg" contentwidth="2in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/tree.png"/></db:imageobject><db:textobject><db:para>A diagram showing the tree structure of a book.</db:para></db:textobject></db:mediaobject>
