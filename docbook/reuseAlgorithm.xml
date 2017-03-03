@@ -68,7 +68,7 @@ procedure: Blow stuff up
 <db:section>
 <db:title>Variable into common</db:title>
 <db:para>In the variable into common case, you have a single document that will be output in many different ways by inserting variable content at certain locations.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/variable2common.png" contentwidth="5.25" align="left"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/TextPlusFont.svg" contentwidth="4in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/TextPlusFont.png"/></db:imageobject><db:textobject><db:para>Diagram showing how information from a font file is combined with informaiton from a content file to create formatted output.</db:para></db:textobject></db:mediaobject>
 <db:para>For instance, if you are writing a manual to cover a number of car models you can factor out the number of seats each model has.</db:para>
 <db:programlisting language="sam">
 The vehicle seats &gt;($seats) people.
@@ -104,7 +104,7 @@ match insert where variable = $seats
 <db:title>Variable into variable</db:title>
 <db:para>Variable into variable is a variation on common into variable in which you can make a wholesale change of the common elements that you are pulling into a set of variable documents.</db:para>
 <db:para>For example, suppose you decide to market your product line to a new market. The new market has different safety regulation which means you need to insert a different standard warning into all your manuals. In this case, you want to swap out the common elements used in your home market and substitute the common elements for the foreign market.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/variable2variable.png" contentwidth="5.25" align="left"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/variable2variable.svg" contentwidth="4in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/variable2variable.png"/></db:imageobject><db:textobject><db:para>Diagram showing the variable to variable reuse pattern.</db:para></db:textobject></db:mediaobject>
 <db:para>Here we need to talk about how we identify the content to be inserted. In the common into variable example, we inserted the content of a file that contains a standard warning.</db:para>
 <db:para>But for variable into variable this approach simply does not work. Variable into variable requires loading a different file, which is difficult when the content specifies a particular file name to import.</db:para>
 <db:para>As always in structured writing, we look for a way to factor out the problematic content. So here we look for a way to factor out the file name and replace it with something else.</db:para>

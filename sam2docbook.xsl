@@ -10,9 +10,9 @@
     
     <xsl:output method="xml" omit-xml-declaration="no"/>
     
-    <xsl:variable name="default-content-width" select="5.25"/>
+    <xsl:variable name="default-content-width">5.25in</xsl:variable>
     
-    <xsl:template match="@*|node()">
+  <xsl:template match="@*|node()">
         <xsl:copy>
             <xsl:apply-templates select="@*|node()"/>
         </xsl:copy>

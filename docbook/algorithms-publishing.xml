@@ -24,7 +24,7 @@ stroke
 <db:para>Since most writers are not going to write directly in a page description language, the page descriptions for your publication are almost certainly going to be created by an algorithm. I call this the encoding algorithm since it encodes your content in the page description language.</db:para>
 <db:para>While it is possible that someone responsible for a highly specialized publishing tool chain may end up writing a specialized encoding algorithm, most encoding algorithms are going to be implemented by existing tools that translate formatting languages into page descriptions languages.</db:para>
 <db:para>There are several formatting languages that are used in content processing. They are often called typesetting languages as well. XSL-FO (XSL - Formatting Objects) is one of the more commonly used in structured writing projects. TeX is another.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/encoding.png" contentwidth="5.25" align="left"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/encoding.svg" contentwidth="2in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/encoding.png"/></db:imageobject><db:textobject><db:para>A diagram showing the encoding step of the publishing process.</db:para></db:textobject></db:mediaobject>
 <db:para>Here is an example of XSL-FO that we looked at in <db:xref linkend="chapter.single-sourcing"/>:</db:para>
 <db:programlisting language="XSL-FO">
 &lt;fo:block space-after="4pt"&gt;
@@ -47,7 +47,7 @@ stroke
 <db:section>
 <db:title>The Formatting Algorithm</db:title>
 <db:para>The job of the formatting algorithm it to generate the formatting language that drives the encoding and pagination process. The formatting algorithm produces the media domain representation of the content from content in the document domain.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/formattingpub.png" contentwidth="5.25" align="left"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/formattingpub.svg" contentwidth="3in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/formattingpub.png"/></db:imageobject><db:textobject><db:para>A diagram showing the formatting step of the publishing process.</db:para></db:textobject></db:mediaobject>
 <db:para>In the case of HTML output, the formatting algorithm generates HTML (with connections to the relevant CSS, JavaScript, and other formatting resources). This is the end of the publishing process for the Web, since the browser will perform the encoding algorithm internally and the computer operating system will likely take care of the rendering. In the case of paper output, the formatting algorithm generates a formatting language such as TeX or XSL-FO which is then fed to the encoding algorithm as implemented by a TeX or XSL-FO processor.</db:para>
 <db:para>In some cases, organizations use word processing or desktop publishing applications to tweak the formatting of the output by having the formatting algorithm generate the input format of those applications (typically RTF for Word and MIF for FrameMaker). This allows them to exercise manual control over pagination, but with an obvious loss in process efficiency. In particular, any tweaks made in these applications are not routed back to the source content, so they will have to be done again by hand the next time the content is published.</db:para>
 <db:para>This algorithm is usually the province of publication designers. One of the most elementary structured writing algorithms is to separate content from formatting (<db:xref linkend="chapter.separating"/>) which means removing formatting as one of the writer’s concerns. Almost every structured writing implementation will involve writing formatting algorithms, however. Even if you use off-the-shelf languages like DITA or DocBook, you will have to write or modify formatting algorithms to get the specific formatting you want. We looked at some examples of basic formatting algorithms in <db:xref linkend="chapter.processing"/>.</db:para>
@@ -55,7 +55,7 @@ stroke
 <db:section>
 <db:title>The Presentation Algorithm</db:title>
 <db:para>The job of the presentation algorithm is to determine exactly how the content is going to be organized as a document. A pure document domain document is a representation of the presentation of the content. The job of the presentation algorithm is to produce a pure document domain version of the content. This may mean producing the entire presentation from purely subject domain content, or simply handling the occasional subject domain structure in a largely document domain file.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/presentation.png" contentwidth="5.25" align="left"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/presentation.svg" contentwidth="4in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/presentation.png"/></db:imageobject><db:textobject><db:para>Diagram showing the presentation stage in the content process.</db:para></db:textobject></db:mediaobject>
 <db:para>The organization of content involves several things:</db:para>
 <db:variablelist>
 <db:varlistentry>
@@ -103,12 +103,12 @@ stroke
 <db:para>Among other things, the synthesis domain resolves all management domain structures in the content (unless some are to be retained for downstream post-publication algorithms to work with). This means that it processes all inclusions and evaluates all conditions. The result is document domain or subject domain content with all of the management structures removed and replaced with the appropriate document or subject domain structures and content.</db:para>
 <db:para>In the case of document domain content, processing the management domain structures yields a document-domain structure which may then be a pass-through for the presentation algorithm (that is, the document domain markup may already express the desired presentation).</db:para>
 <db:para>In the case of the subject domain content, processing management domain structures yields a definitive set of subject domain structures which can be passed to the presentation algorithm for processing to the document domain.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/synthesis.png" contentwidth="5.25" align="left"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/synthesis.svg" contentwidth="2in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/synthesis.png"/></db:imageobject><db:textobject><db:para>Diagram showing the synthesis stage of the publishing process.</db:para></db:textobject></db:mediaobject>
 </db:section>
 <db:section>
 <db:title>Differential synthesis</db:title>
 <db:para>We noted above that you can use differential presentation to do differential single sourcing were two publications contain the same content but organized differently. If you want two publications in different media to have differences in their content, you can do this by doing differential synthesis and including different content in each publication.</db:para>
-<db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/differential-synthesis.png" contentwidth="5.25" align="left"/></db:imageobject></db:mediaobject>
+<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/differential-synthesis.svg" contentwidth="5.25in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/differential-synthesis.png"/></db:imageobject><db:textobject><db:para>A diagram showing differential synthesis publishing.</db:para></db:textobject></db:mediaobject>
 </db:section>
 <db:section>
 <db:title>Synthesis sub-algorithms</db:title>

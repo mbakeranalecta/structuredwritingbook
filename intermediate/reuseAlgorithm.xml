@@ -77,7 +77,7 @@ procedure: Blow stuff up
 <section>
 <title>Variable into common</title>
 <p>In the variable into common case, you have a single document that will be output in many different ways by inserting variable content at certain locations.</p>
-<insert item="../graphics/variable2common.png" type="image"/>
+<insert item="../graphics/variable2common.xml" type="image"/>
 <p>For instance, if you are writing a manual to cover a number of car models you can factor out the number of seats each model has.</p>
 <codeblock language="sam">
 The vehicle seats &gt;($seats) people.
@@ -113,7 +113,7 @@ match insert where variable = $seats
 <title>Variable into variable</title>
 <p>Variable into variable is a variation on common into variable in which you can make a wholesale change of the common elements that you are pulling into a set of variable documents.</p>
 <p>For example, suppose you decide to market your product line to a new market. The new market has different safety regulation which means you need to insert a different standard warning into all your manuals. In this case, you want to swap out the common elements used in your home market and substitute the common elements for the foreign market.</p>
-<insert item="../graphics/variable2variable.png" type="image"/>
+<insert item="../graphics/variable2variable.xml" type="image"/>
 <p>Here we need to talk about how we identify the content to be inserted. In the common into variable example, we inserted the content of a file that contains a standard warning.</p>
 <p>But for variable into variable this approach simply does not work. Variable into variable requires loading a different file, which is difficult when the content specifies a particular file name to import.</p>
 <p>As always in structured writing, we look for a way to factor out the problematic content. So here we look for a way to factor out the file name and replace it with something else.</p>

@@ -40,7 +40,7 @@ stroke
 <p>Since most writers are not going to write directly in a page description language, the page descriptions for your publication are almost certainly going to be created by an algorithm. I call this the encoding algorithm since it encodes your content in the page description language.</p>
 <p>While it is possible that someone responsible for a highly specialized publishing tool chain may end up writing a specialized encoding algorithm, most encoding algorithms are going to be implemented by existing tools that translate formatting languages into page descriptions languages.</p>
 <p>There are several formatting languages that are used in content processing. They are often called typesetting languages as well. <phrase><annotation type="language">XSL-FO</annotation></phrase> (XSL - Formatting Objects) is one of the more commonly used in structured writing projects. <phrase><annotation type="tool">TeX</annotation></phrase> is another.</p>
-<insert item="../graphics/encoding.png" type="image"/>
+<insert item="../graphics/encoding.xml" type="image"/>
 <p>Here is an example of XSL-FO that we looked at in <citation type="nameref" value="chapter.single-sourcing"/>:</p>
 <codeblock language="XSL-FO">
 &lt;fo:block space-after="4pt"&gt;
@@ -63,7 +63,7 @@ stroke
 <section>
 <title>The Formatting Algorithm</title>
 <p>The job of the formatting algorithm it to generate the formatting language that drives the encoding and pagination process. The formatting algorithm produces the <phrase><annotation type="concept">media domain</annotation></phrase> representation of the content from content in the <phrase><annotation type="concept">document domain</annotation></phrase>.</p>
-<insert item="../graphics/formattingpub.png" type="image"/>
+<insert item="../graphics/formattingpub.xml" type="image"/>
 <p>In the case of HTML output, the formatting algorithm generates HTML (with connections to the relevant CSS, JavaScript, and other formatting resources). This is the end of the publishing process for the Web, since the browser will perform the encoding algorithm internally and the computer operating system will likely take care of the rendering. In the case of paper output, the formatting algorithm generates a formatting language such as <phrase><annotation type="tool">TeX</annotation></phrase> or <phrase><annotation type="language">XSL-FO</annotation></phrase> which is then fed to the encoding algorithm as implemented by a TeX or XSL-FO processor.</p>
 <p>In some cases, organizations use word processing or desktop publishing applications to tweak the formatting of the output by having the formatting algorithm generate the input format of those applications (typically <phrase><annotation type="language">RTF</annotation></phrase> for Word and <phrase><annotation type="language">MIF</annotation></phrase> for FrameMaker). This allows them to exercise manual control over pagination, but with an obvious loss in process efficiency. In particular, any tweaks made in these applications are not routed back to the source content, so they will have to be done again by hand the next time the content is published.</p>
 <p>This algorithm is usually the province of publication designers. One of the most elementary structured writing algorithms is to <phrase>separate content from formatting</phrase> (<citation type="nameref" value="chapter.separating"/>) which means removing formatting as one of the writer’s concerns. Almost every structured writing implementation will involve writing formatting algorithms, however. Even if you use off-the-shelf languages like DITA or DocBook, you will have to write or modify formatting algorithms to get the specific formatting you want. We looked at some examples of basic formatting algorithms in <citation type="nameref" value="chapter.processing"/>.</p>
@@ -71,7 +71,7 @@ stroke
 <section>
 <title>The Presentation Algorithm</title>
 <p>The job of the presentation algorithm is to determine exactly how the content is going to be organized as a document. A pure document domain document is a representation of the presentation of the content. The job of the <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase> is to produce a pure <phrase><annotation type="concept">document domain</annotation></phrase> version of the content. This may mean producing the entire presentation from purely <phrase><annotation type="concept">subject domain</annotation></phrase> content, or simply handling the occasional subject domain structure in a largely document domain file.</p>
-<insert item="../graphics/presentation.png" type="image"/>
+<insert item="../graphics/presentation.xml" type="image"/>
 <p>The organization of content involves several things:</p>
 <ll>
 <li>
@@ -119,12 +119,12 @@ stroke
 <p>Among other things, the synthesis domain resolves all management domain structures in the content (unless some are to be retained for downstream post-publication algorithms to work with). This means that it processes all inclusions and evaluates all conditions. The result is document domain or subject domain content with all of the management structures removed and replaced with the appropriate document or subject domain structures and content.</p>
 <p>In the case of document domain content, processing the management domain structures yields a document-domain structure which may then be a pass-through for the presentation algorithm (that is, the document domain markup may already express the desired presentation).</p>
 <p>In the case of the subject domain content, processing management domain structures yields a definitive set of subject domain structures which can be passed to the presentation algorithm for processing to the document domain.</p>
-<insert item="../graphics/synthesis.png" type="image"/>
+<insert item="../graphics/synthesis.xml" type="image"/>
 </section>
 <section>
 <title>Differential synthesis</title>
 <p>We noted above that you can use differential presentation to do <phrase><annotation type="algorithm">differential single sourcing</annotation></phrase> were two publications contain the same content but organized differently. If you want two publications in different media to have differences in their content, you can do this by doing differential synthesis and including different content in each publication.</p>
-<insert item="../graphics/differential-synthesis.png" type="image"/>
+<insert item="../graphics/differential-synthesis.xml" type="image"/>
 </section>
 <section>
 <title>Synthesis sub-algorithms</title>
