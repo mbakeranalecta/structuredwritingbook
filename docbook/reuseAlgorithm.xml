@@ -68,7 +68,7 @@ procedure: Blow stuff up
 <db:section>
 <db:title>Variable into common</db:title>
 <db:para>In the variable into common case, you have a single document that will be output in many different ways by inserting variable content at certain locations.</db:para>
-<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/TextPlusFont.svg" contentwidth="4in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/TextPlusFont.png"/></db:imageobject><db:textobject><db:para>Diagram showing how information from a font file is combined with informaiton from a content file to create formatted output.</db:para></db:textobject></db:mediaobject>
+<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/variable2common.svg" contentwidth="4in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/variable2common.png"/></db:imageobject><db:textobject><db:para>Diagram showing the variable to common reuse pattern.</db:para></db:textobject></db:mediaobject>
 <db:para>For instance, if you are writing a manual to cover a number of car models you can factor out the number of seats each model has.</db:para>
 <db:programlisting language="sam">
 The vehicle seats &gt;($seats) people.
@@ -219,7 +219,7 @@ keys:
 <db:section>
 <db:title>Common with conditions</db:title>
 <db:para>In some cases of variable into common, the variant pieces is not actually  factored out into a separate file. Rather, each of the possible alternatives is included in the file conditionally.</db:para>
-<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/commonconditions.svg" contentwidth="2in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/commonconditions.png"/></db:imageobject><db:textobject><db:para>Diagram of the common with conditions reuse pattern.</db:para></db:textobject></db:mediaobject>
+<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/commonconditions.svg" contentwidth="3in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/commonconditions.png"/></db:imageobject><db:textobject><db:para>Diagram of the common with conditions reuse pattern.</db:para></db:textobject></db:mediaobject>
 <db:para>For instance, in content for a car manual you might have conditional text for the number of people the car seats.</db:para>
 <db:programlisting language="sam">
 The vehicle seats {four}(?compact){five}(?midsize){seven}(?van).
