@@ -1,0 +1,122 @@
+article: SAMBook + Structured Writing Annotations
+
+    SAMBookBasic is a minimal SAM-based {document domain} {markup language} for writing basic expository books. (This is, it does not support more complex document domain features required for layout-intensive of highly technical books.) It is intended to be used with a set of subject-domain annotations that are particular to the subject matter being treated.    
+
+    Structured Writing Annotations are a set of subject domain annotation types designed to be used in discussing the subject of structured writing. Properly speaking, they are a separate subject from SAMBookBasic and this information should eventually be broken out into a separate document. 
+
+    section: SAMBook
+
+        SAMBook includes two possible document root, `book` for a book file, and `chapter` for a chapter file. 
+        
+        
+        section: `chapter` document structure
+        
+            The chapter structure contain the metadata and content of a chapter.
+            
+            section: `chapter` element
+            
+                `chapter` is the root element of a chapter. It can contain the following:
+                
+                * `title`
+                * `index`
+                * string definitions (standard SAM strings)
+                * general text
+                * `section`
+                
+            section: `title` element
+                Normally that title will be entered used the SAM title shortcut, which is to give the title immediately after the `chapter:` block declaration. 
+                
+                ```(sam)
+                    chapter: In the beginning
+                
+                However it can also be entered as a separate child block. 
+                
+                ```(sam)
+                    chapter:
+                        title: In the beginning
+                
+            section: `index` element
+                The index element contains index entries that apply to the chapter as a whole. They indicated the principle subjects and their types. The index is a SAM recordset with the fields `type` and `term`:
+                
+                ```(sam)
+                    index:: type, term
+                        function, foo()
+                        concept: fooness
+                        
+            section: `section` element
+                The section element contains a section. It can contain:
+                
+                * title
+                * general text
+                
+                We may also decide that it should be allowed to contain an index entry for the subject matter treated by the section.
+                
+            section: general text
+                General text is the collection of structures that contain the text of the chapter. It includes.
+                
+                * paragraphs (standard SAM paragraphs)
+                * lists (standard SAM ordered, unordered, and labeled lists)
+                * codeblocks (standard SAM codeblocks)
+                * blockquotes (standatrd SAM blockquotes)
+                * grids (standard SAM grids)
+                * inserts (standard SAM inserts)
+                * includes (standard SAM includes)
+                * `footnote`
+                * `formatted-code`
+                * `figure`
+                
+            section: `footnote`
+                A `footnote` block contains a footnote. A `footnote` block must have an ID (standard SAM ID) and must be in the same file as the footnote reference (footnote references are standard SAM citations citing the footnote ID).
+                
+                Footnotes can contain:
+                
+                * general text
+                
+            section: `formatted-code`
+                Standard SAM codeblocks do not allow for any markup within the body of the codeblock. The code in codeblocks may be prettyprinted and highlighted by a syntax coloring routing in the formatting process, but the author cannot do any explicit highlighting. If you want to highlight something in a code sample, therefore, you have to use the `formatted-code` element instead. 
+                
+                The `formatted-code` element consists of one or more standard SAM lines. The lines can contain normal SAM decorations and annotations. Note that these lines are parsed as SAM so any occurrence of SAM markup characters in the code must be escaped. Example:
+                
+                ```(sam)
+                    formatted-code:
+                        | *<h1>*Moby Dick*</h1>*
+                        | *<p>*Herman Melville's *<i>*Moby Dick*</i>* is a long 
+                        | book about a big whale.*</p>*      
+                
+            section: `figure`
+                A `figure` block contains a sample or graphic that you want to be able to assign an ID or name to for reference purposes, or that you want to be able to give a caption and title to. 
+
+            section: paragraphs
+            
+                Paragraphs are standard SAM paragraph which support the set of annotations described below. 
+                
+            
+        section: `book` document structure
+        
+            The book document defines the structure of a book by indicating the chapters to include as well as other book matter, such as parts and the location of the index. It can include:
+        
+            * string definitions (standard SAM strings)
+            * inserts (standard SAM inserts of type 'sam' or type 'xml' are used to include other book parts. Note that inserts are not resolved by the SAM parser. They are passed through to the application layer. 
+            * `part`
+            * `index` 
+            * `appendix`
+            
+            section: 'part' 
+                A part is a collection of chapters on a related theme. A part can include:
+                
+                * A title (either an through SAMs implicit block title mechanism or via an explicit `title` field.
+                
+                * One or more includes to include the chapter files. 
+   
+                ```(sam)
+                    part:(#part.domains) Domains   
+                        >>>(sam threedomains.sam)  
+                        >>>(sam MediaDomain.sam)
+            
+            section: `index`
+                An empty field indicating the location of the index.
+                
+            section: `appendix`
+                Basically indicates that the material included inside the `appendix` block it to be treated as an appendix.  
+                
+                
