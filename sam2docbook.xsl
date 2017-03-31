@@ -58,6 +58,7 @@
     </xsl:template>
     
     <xsl:template match="chapter/index"/>
+    <xsl:template match="preface/index"/>
     
     <xsl:template match="appendix">
         <db:appendix>
@@ -106,16 +107,28 @@
     
     <xsl:template match="/chapter">
         <db:chapter 
-           version="5.0"> 
+            version="5.0"> 
             <xsl:if test="@name">
-              <xsl:attribute name="xml:id">
-                  <xsl:value-of select="@name"/>
-              </xsl:attribute>
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@name"/>
+                </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
         </db:chapter>
     </xsl:template>
-
+    
+    <xsl:template match="/preface">
+        <db:preface 
+            version="5.0"> 
+            <xsl:if test="@name">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@name"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </db:preface>
+    </xsl:template>
+    
     <xsl:template match="book/chapter | part/chapter">
         <db:chapter>
             <xsl:choose>
