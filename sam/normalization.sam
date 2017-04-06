@@ -1,18 +1,34 @@
-chapter:(#chapter.normalization) Normalization
+chapter:(#chapter.normalization) Avoiding duplication
     
     <<<(annotations.sam)
     
     index: type, term
         concept, single source of truth
         concept, single sourcing
+        concept, duplication
+        algorithm, avoiding duplication
         
-    A significant source of complexity in any content organization is simply determining if a piece of content already exists or not. This problem obviously affects any attempt at content reuse, since every time you consciously reuse content you have to determine if reusable content exists. The longer it takes to determine if a piece of content already exists, the longer, and therefore more expensive, each instance of content reuse becomes. (And bear in mind that the cost of determining if reusable content exists is incurred every time the writer looks for it, even if they don't find it, but any saving associated with reuse are realized only when reusable content is found.) 
+    A significant source of complexity in any content organization is simply determining if a piece of content already exists or not. If content exists but it is not easy to find, writers may create a duplicate piece of content. Duplicate content can cause a number of problems. Not only is it expensive to create, different versions of the content may not agree with each other, which creates complexity for readers. When the subject matter changes, only one of the duplicates may get updated, causing further drift between the two versions (and updating two versions is twice the work). Duplicate content may also get punished by search engines. The need to detect duplicate content is therefore a major source of complexity in the content system.
+
+    However, detecting duplication in content is not easy. Indeed, even defining what constitutes duplication, let alone detecting that it exists, is not easy. Structured writing techniques can help, to a point, but it is important not to get carried way in the attempt to eliminate duplication, as this can easily do more harm than good, and can inject more complexity into the content system than it removes. 
+
+    The problem of avoiding duplication is essentially the problem of detecting if content that serves a particular purpose already exists. If a writers is to avoid creating duplicate content, they need to determine as quickly as possible whether that content already exists or not. This check takes place countless times in the content systems so even if the cost of a single check is small, the cumulative cost can be large, creating a huge overhead that can significantly slow down your content system. Small costs with his repetition rates are often the hardest to detect and least satisfying to fix, whereas the wins from detecting duplication are often more visible and more satisfying. But it is important to make sure that your efforts to limit content duplication are not actually costing you more than they save.  
+
+    This problem obviously affects any attempt at content reuse, since every time you set out to reuse content, you have to determine if reusable content exists. The longer it takes to determine if a piece of content already exists, the longer, and therefore more expensive, each instance of content reuse becomes. And bear in mind that the cost of determining if reusable content exists is incurred every time the writer looks for it, even if they don't find it, but any saving associated with reuse are realized only when reusable content is found.
+
+    If you are going to implement a system for detecting and eliminating duplicate content, therefore, it is vital to have clear plan that tells you exactly how authors are going to detect duplicate content, or find content to reuse, and to make sure that the overhead of using such a system does not outweigh the benefits it provides. This generally requires are formal system for identifying duplicate and/or reusable content, since only an appropriately formal system can operate reliably, an only a formal system will allow you to measure its costs and benefits accurately.  
     
-    Even if reuse is not a major part of your process, however, determining if content already exists is still important, as it helps you avoid recreating content you already have, and all of the complexity that goes with maintaining two copies of the same thing. 
+    Creating a formal system for ensuring that content only exists once is sometimes called establishing a single source or truth. We should be very clear from the beginning that "single source of truth" does not mean that there is only one place or system from which all truths come; it means that for every significant truth you manage, that truth is only stored once. Different truths can certainly be stored in different places. The point is to make sure that the same truth is not stored in two different places, or two times in the same place. 
+
+    A formal system for detecting duplication essentially means establishing a set of constraints by which duplication can be defined and detected. In other words, there needs to be a set of rules that says that if item X matches item Y in aspects A, B, and C, then X is a duplicate of Y. 
+
+    To do this in any kind of formal and consistent way, aspects A, B, and C have to be a defined part of the model of X and Y, or of the way X and Y are stored. This allows an algorithm can detect the duplication. 
+
+    Where no such formal constraints exist, writers also have the option of using a search engine to look for existing content on the subject they want to write about. A search engine can certainly turn up existing content on a subject, but search engines are not precise enough to detect duplication reliably. They may miss an actual duplicate because of a variation in {terminology} while returning several possible matches that are not duplicates. To eliminate the possibility that a duplicate exists in those results, the writer has to assess each one of them. That takes a lot of time, and, as we have noted, this task has to be performed before writing any piece of content, if the possibility of duplication is to be eliminated. This is a tremendous amount of overhead to impose on the content system.   
+
+    How exactly do you construct a set of constraints for detecting duplicate content?   
     
-    Creating a formal system for ensuring that content only exists once is called normalization. Normalization is not just about eliminating duplicates from an information set -- that is merely housekeeping. It is about creating a set of constraints by which duplication can be defined, detected, and eliminated. Normalization is not something that happens after the fact, after your data types are defined. It is something that is integral to the design process itself. It is about designing each data type in your system so that you can tell at once if one piece of data is a duplicate of another. Essentially is says that if item X matches item Y in aspects A, B, and C, then it is either a complete  duplicate or it contains duplicated overlapping information. And this means that aspects A, B, and C have to be formalized as part of the model of X and Y if we are going to implement any algorithmic support for normalization, and even if we are going to have clear criteria for human decision making on what is or is not a duplicate. 
-    
-    Consider two movie reviews written in markdown:
+    Consider two movie reviews, written in markdown:
     
     ```(markdown)
     
@@ -35,12 +51,14 @@ chapter:(#chapter.normalization) Normalization
         and _Sands of Iwo Jima_, the Duke is brilliant 
         in _Rio Bravo_.
         
-    Do we have two reviews of _Rio Bravo_ or not? A human reading the text can tell easily enough, but an algorithms would have no way to tell. But suppose these same reviews were written in a subject domain movie review language:
+    Do we have two reviews of _Rio Bravo_ or not? A human reading the text can tell easily enough, but an algorithms would have no way to tell, since nothing in the markup of either review directly identifies which movie is being reviewed. Even if it could recognize the names of movies in the text, it would have no way to tell which one of those titles was the subject of the review. 
+
+    But suppose these same reviews were written in a subject domain movie review language:
 
     ```(markdown)
     
         movie-review: Disappointing outing for the Duke
-            movie: Rio Bravo
+            movie-title: Rio Bravo
             review-text:
                 After a memorable outing in {Rio Grande}(movie) 
                 and {Sands of Iwo Jima}(movie), 
@@ -50,7 +68,7 @@ chapter:(#chapter.normalization) Normalization
         
     and\:
     
-    ```(markdown)
+    ```(sam)
     
         movie-review: Wayne's best yet
             movie-title: Rio Bravo
@@ -60,29 +78,25 @@ chapter:(#chapter.normalization) Normalization
                 {the Duke}(actor, "John Wayne") is brilliant 
                 in {Rio Bravo}(movie).
     
-    Now it is very easy to tell that these two pieces of content are both movie reviews and that they both review the same movie. However, since they each take a very different view of the movie, it is fair to ask if the fact that they are both movie reviews about the same film is enough to consider them duplicates. That is a business decision that the content owner has to make. 
-    
-    
-    You can do content reuse without the assurance that your content set is free from duplication, and organizations frequently do. The task of finding some content that meets your needs and can be reused is very different from the task of assuring that there is only one piece of content in existence that can meet a specific need. Finding content to reuse is a task for the writer doing the reusing. Ensuring that there is only one source for that content is a task for the writer of every piece of original content that is created. They have to make sure when they create and store some piece of content that there really is no other piece of content serving the same purpose. 
-    
-    There is a clear partitioning of responsibility here. Normalization partitions the problem of ensuring that only one copy of something exists from the problem of finding content that can be reused. Unfortunately, normalizing your content set is a much more difficult task than simply doing ad hoc reuse. Many attempts at creating a reuse system founder because people focus on establishing ad hoc reuse capability without giving any thought to normalization. That neglected complexity has to do somewhere, and it tends to accumulate in the system until it brings it to a halt. 
-    
-    But the problem with establishing and maintaining a normalized content set is defining exactly when one piece of content is the duplicate of another.  For some types of content, this question is easy to answer. What is the customer's birthday? A person can only have one birthday, so there is no difficulty creating a clear policy that says that a customer's birthday may only be recorded once across the organization and should be accessed from that single source whenever it is needed.[*1] 
-    
-    footnote:(*1)
-        Stating the policy is straightforward; implementing and enforcing it may be more difficult, since it means every system or document that wants to include the customer's birthday has to be capable of retrieving it dynamically from the central data story.
-    
-    Normalization rules are constraints, and the set of constraints that defines a piece of information as unique are not universal. The definition of what constitutes unique for different pieces of information is complex and specific to the subject matter at hand. Take a recipe for guacamole, for instance. Is guacamole a single dish for which there can only be one recipe? Then normalization is easy enough. If the type of the item is "recipe" and the value of the dish field is "guacamole", then the content is duplicate.
-    
-    But there are many different ways in which you can prepare guacamole, some differing only slightly from one another and some presenting welcome variations that different people might like to try. Clearly a recipe site would not want eight essentially identical guacamole recipes, but nor would they want to pick one variation to the exclusion of all others. So then the question becomes, how do you decide when a recipe is an effective duplicate of another text and when the subject is a welcome variation? If you decide the variation is welcome, how do you differentiate it from other guacamole recipes in your collection? 
-    
-    If we decided that we were willing to have multiple reviews of the same film in our collection as long as they gave different opinions, we might add a grading system to our review structure, and allow more than one review of the same movie to be created as long as each gave the film a different rating:
+    Now it is very easy for an algorithm to tell that these two pieces of content are both movie reviews and that they both review the same movie.[#1]
 
-    ```(markdown)
+        footnote:(*1) 
+            If the two markdown examples were stored in a CMS that kept movie-review specific {metadata}, including the name of the movie reviewed, an algorithm could do the same check using the CMS metadata. For more on the choice between locating subject domain metadata in the topic vs. in a CSM, see [#chapter.content-management] and [#chapter.metadata]. 
+
+    But is this one criteria sufficient to declare these two reviews duplicates of each other? While they review the same movie, they express two very different opinions about it. The question of whether we want to keep both reviews is therefore a business decision. You will seldom find two independently written pieces of content that are word for word identical. You will seldom find reusable content that is word for word what you would have written yourself. The definition of duplicate content is not based on identical text, but on whether or not the content serves an identical business purpose. The constraints that determine if two pieces of content are duplicates of each other, therefore, are business rules.
+    
+    For some types of content, coming up with a business rule for determining if two pieces of information are duplicates is easy enough. What is the customer's birthday? A person can only have one birthday, so there is no difficulty creating a clear policy that says that a customer's birthday may only be recorded once across the organization and should be accessed from that single source whenever it is needed.[*2] 
+    
+    footnote:(*2)
+        Stating the policy is straightforward; implementing and enforcing it may be more difficult, since it means every system or document that wants to include the customer's birthday has to be capable of retrieving it dynamically from the central data store. That requirement is also a source of complexity that has to be weighed in the balance. 
+    
+    Let's say we are willing to have multiple reviews of the same movie in our collection as long as they gave different opinions. To accommodate this we can change our business rule for detecting duplicate movie reviews by adding a grading system to our review structure:
+
+    ```(sam)
     
         movie-review: Disappointing outing for the Duke
-            movie: Rio Bravo
-            5star-rating: 2
+            movie-title: Rio Bravo
+            5-star-rating: 2
             review-text:
                 After a memorable outing in {Rio Grande}(movie) 
                 and {Sands of Iwo Jima}(movie), 
@@ -92,60 +106,76 @@ chapter:(#chapter.normalization) Normalization
         
     and\:
     
-    ```(markdown)
+    ```(sam)
     
         movie-review: Wayne's best yet
             movie-title: Rio Bravo
-            5star-rating: 5
+            5-star-rating: 5
             review-text:
                 After tiresome performances in {Rio Grande}(movie) 
                 and {Sands of Iwo Jima}(movie), 
                 {the Duke}(actor, "John Wayne") is brilliant 
                 in {Rio Bravo}(movie).
     
-    Now if our normalization rule is that a piece is a duplicate if it is a movie-review and the movie-title is the same and the 5star-rating is the same, then these two reviews are not duplicates because they have different 5star-ratings. (Note that you don't have to include every field in your type definition in your normalization rule, just those fields that determine if a piece of content is a duplicate or not according to your business rules.)
+    Now we can rewrite our duplicate detection rule for movie reviews to say that two reviews duplicate each other if the `movie-title` fields have the same value and the `5-star-rating` fields have the same value. By that rule, these two reviews are not duplicates because they have different '5-star-rating' values. 
 
-    Clearly the answers to these questions are not universal. The way you decide these questions for recipes are not the same way you decide them for API reference topics, used car reviews, movie reviews, or conceptual discussions of ideas. Normalization happens in the subject domain and is specific to a particular type of content about a particular type of subject. To do any kind of content normalization you either need content in the subject domain or in a content management system that applies subject domain metadata to the content. (More on this in [#chapter.content-management]). Whatever constraint you decide upon, the business processes and systems that ensure that these constraints are followed are not universal, but specific to each function and organization. 
+    But in other cases, the business rules for determining duplication may be more difficult to express. Take a recipe for guacamole, for instance. Is guacamole a single dish for which there can only be one recipe? Then detecting duplication is easy enough. If the type of the item is "recipe" and the value of the dish field is "guacamole", then the content is duplicate.
     
-    section: The limits of content normalization
+    But there are many different ways in which you can prepare guacamole, some differing only slightly from one another and some presenting welcome variations that different people might like to try. Clearly a recipe site would not want eight essentially identical guacamole recipes, but nor would they want to pick one variation to the exclusion of all others. So then the question becomes, how do you decide when a recipe is an effective duplicate of another recipe and when it is a welcome variation? If you decide the variation is welcome, how do you differentiate it from other guacamole recipes in your collection? Merely adding an additional data field to the duplication detection rule may not suffice for deciding if a variant of guacamole is interesting enough to add to our collection. In the end, this may have to be a human editorial decision. 
+    
+    Clearly, therefore, the business rules of detecting duplication are not universal. The way you decide these questions for recipes are not the same way you decide them for API reference topics, used car reviews, movie reviews, or conceptual discussions of ideas. Duplication detection happens in the subject domain and is specific to a particular type of content about a particular type of subject. To do any kind of algorithmic duplication detection you either need content in the subject domain or in a content management system that applies subject domain metadata to the content. (More on this in [#chapter.content-management]). Whatever constraint you decide upon, the business processes and systems that ensure that these constraints are followed are not universal, but specific to each function and organization. 
+    
+    section: The scale of duplication
 
-        Content, by its nature, deals with those subjects that do not fit neatly into rows and columns, and thus cannot be formally normalized according to database rules. Where databases describe and normalize relationships formally by use of records and keys, content describes relationships informally in prose. In particular, content deals with complex, unique, and potentially ambiguous relationships that could not be reduced to rows and tables at any reasonable cost. 
+        So far we have looked at detecting duplication of whole documents. But what if the duplication we want to avoid occurs below the level of a document? In [#chapter.management] we looked at the example of a warning that was to be attached to all dangerous procedures. The duplication of that warning occurred at a much smaller scale. It was just a single element of a procedure, and could not only occur in many different documents, it could also occur multiple times within a single document. 
+
+        Note that while the duplication of whole documents is something we generally want to eliminate, the duplication of parts of documents is often something we deliberately want to encourage. We want the identical warning to occur in every dangerous procedure so that readers are duly warned when attempting that procedure. All forms of {content reuse} are, in face, methods for deliberately duplication in the content set. With {reuse}, we are trying to eliminate duplication on the writing and content management side of the content system, while creating duplication on the publishing side. 
+
+        When we are dealing with duplication below the scale of the document, we have to look at ways of factoring the content out of each of the documents it occurs in and inserting it back into those documents at publication time. We looked a a variety of methods for doing this in [#chapter.reuse]. But having a method for abstracting and reinserting the duplicate content is not enough. We need also need a reliable method determining when the content we need in a particular document is a duplicate of existing content, and of identifying that content. In other words, we need to determine when duplication is occurring and what the role and scope of the duplicate content is so that we can abstract it out. 
+
+        It helps immeasurably is the duplicate content plays a wholly consistent role in the documents it belongs to. That is the case for examples such as the warning for dangerous procedures. That warning has a clear and distinct purpose and a clear anchor point in any document it appears in: a procedure that is dangerous. Without such a clear purpose and anchor point, the chances of authors remembering to include the existing content rather than create a duplicate goes down substantially. As we saw in [#chapter.management], the use of subject domain structures in the form of a compulsory `is-it-dangerous` field in a procedure structure, can fully define both the purpose and the anchor point, thus making it impossible for authors to forget or neglect to include the warning. 
+
+        Finding a reliable anchor for detecting duplication tends to get more difficult the smaller the content unit you try to apply it to. For example, should you try to remove the duplication of sentences that occur frequently but in different contexts. Should we, for instance, try to eliminate the duplication of the phrase "Press OK." that occurs so many times in many technical documents? This phrase occurs frequently and always means the same thing. But would replacing it with a variable actually reduce complexity or make any part of the content system more reliable?  
+
+    section: Duplication of information vs duplication of text.
+
+        Part of the reason for not wanting to factor out "Press OK" is that anything you replace it with would probably be longer than the original, and certainly more abstract. But a big part of the reason lies in the distinction between the duplication of information and the duplication of text. The same text can occur in multiple places without actually being duplicate information. Each instance of "Press OK" in our procedures  refers to a button in a different dialog box. Those buttons all have the same name, and thus the instruction to press them is an identical piece of text, but they are still different buttons. It is entirely possible that the redesign of one of those dialog boxes could result in OK button being renamed something more specific to the function of the dialog box, such as Print or Send. Thus each instance of "Press OK" is actually a different piece of information, though it is expressed with the same text. 
+
+        By contrast, the warning for a dangerous procedure is a single piece of information occurring in multiple contexts. It applies with equal force to all procedures that are dangerous. Of course, a procedure could go from being dangerous to not being dangerous. (A new version of the product may include a safer design.) In this case the warning should be removed. But the value of the warning remains the same for all procedures to which it applies, whereas the name of the make-it-go button for a dialog box can change independently of other dialog boxes, all of which still have make-it-go buttons. 
+
+        If this distinction seems a little hard to get your head round, that is a good indication of how difficult it can be to detect true duplication in content. And we should reflect that when we eliminate duplicated text that is not actually duplicated information, we are actually introducing complexity into our content set -- complexity that will either make {change management} more difficult down the road, or that will get missed and end up falling through to the customer. 
+
+        It is probably better, therefore, to stick to cases where you are very certain that the duplication you are detecting is genuinely duplication of information and not merely duplication of text. 
+
+    section: Duplication and the level of detail 
         
-        Content is not as granular as typical database data. Content is essentially narrative, and the same fact may be mentioned in many different narratives for many different purposes. It may be elaborated on in one place, explained briefly in another, and merely mentioned in a third. For examples, in most Wikipedia articles on countries, there is a section on the economy of that country, and at the beginning of that section there is a link to an entire article describing the economy of that country, followed by a summary coverage of that country's economy presumably much briefer and less detailed than that provided by the main article. There may also be a brief mention of the highlights of the country's economy in the four or five context-setting paragraphs that lead most Wikipedia articles. These different levels of detail serve different user needs, and so each is a valuable contribution to the content set. But how do you normalize the statement of any of the facts that appear in more than one of these places? They each present the same fact in a different way for a different purpose and audience. 
+        Another problem with eliminating duplication deals with the level of detail in which a subject is treated. For examples, in most Wikipedia articles on countries, there is a section on the economy of that country, and at the beginning of that section there is a link to an entire article describing the economy of that country, followed by a summary coverage of that country's economy presumably much briefer and less detailed than that provided by the main article. There may also be a brief mention of the highlights of the country's economy in the four or five context-setting paragraphs that lead most Wikipedia articles. These different levels of detail serve different user needs, and so each is a valuable contribution to the content set. 
+
+        Content is essentially narrative, and the same fact may be mentioned in many different narratives for many different purposes. It may be elaborated on in one place, explained briefly in another, and merely mentioned in a third. But how do you normalize the statement of any of the facts that appear in more than one of these places? They each present the same fact in a different way for a different purpose and audience. 
         
         Content is always designed for a particular audience, both to serve a particular need and to suit a particular background and level of knowledge. Everything we know about effective content tells us that we need to address different audiences and different tasks differently. Taking a piece of content designed for one audience and using it for all other audiences, or attempting to write generic content that takes no account of any audience's needs or tasks is certain to produce content that is significantly less effective. This is a classic case of dumping complexity on the user, though in this case it is more a case of doing it by deliberate action rather than failure to properly manage the natural complexity of content creation. 
         
-    section: Examples of content normalization
 
-        The way we achieve the normalization of a fact is by abstracting it out of all of the expressions of that fact. Abstracting variants from invariants is, of course, what {structured writing}(concept) is about. A simple case of abstracting out a fact is the replacement of certain pieces of text by variables. In technical communication, it is a frequent practice to replace things like company names and product names by variables:
-        
-        ```(sam)
-            Thank you for buying >($company-name)'s >($product-name). 
-            We hope you enjoy it for many years to come.
-            
-        There are a couple of reasons for doing this. One is that company names and product names often have a precise formal variant that the marketing department wants everyone to use, and one or more informal variants that people actually use. There is constraint here: use the formal name for company and product not the common name. But because authors are more used to using the common name (like everyone else) they are likely to slip it in without thinking. And if they do remember that they are supposed to use the formal name, they may not remember it correctly and so use the wrong form. Using the variable instead tries to ensure that the correct version of the name is used.
-        
-        The second reason is that products and companies are sometimes re-branded. The names change. If the names are written into the source in a hundred places, you will need to find those hundred instances and change them all. If a variable is used, you just need to change the definition of the variable and you don't have to touch the source content at all. For more on this approach and its pitfalls, see [#chapter.change].
-        
-        This is clearly a very tactical approach to normalization. We have a single source of truth for the name of the company and the name of the product. We don't have a single source of truth for every name of every subject we mention. We only do it for certain names we consider critical or subject to change.      
-        
-        Other examples of normalization concern the normalization of entire content units. Obvious and natural examples come from reference material. For example, an API reference entry is normalized based on the name of the library it belongs to and the name of the function it is describing. If you have an entry for the `hello()` function of the `greetings` library, then it should be easy to detect if someone tries to create another entry for that function. With some repository systems, it might be impossible to create the duplicate at all.   
-
-        A great deal of your ability to normalize your content comes down to your ability to clearly name the things you are writing about. API library and functions are clearly and unambiguously named. Is the set of your product's feature names as clear and unambiguous? Sometimes features correspond to buttons you can press on the interface, but sometimes they are more marketing terms that refer to business problems solved. Can you agree across the company on what such feature names are? Is that even desirable, or would one list of feature names market the product better to one consumer group and a different list to a different group?   
-
-        The ability to name things consistently is a compounding factor in any attempt to normalize content, or indeed to detect or limit duplication by any means. Duplication can be hidden by the same fact being referred to by different names. The elimination of duplication can be made more difficult when the same word refers to more than one truth. But merely standardizing terms is not a solution, because different readers frequently use different terms to refer to the same ideas, or use the same term to refer to different ideas. Structured writing techniques can help here by putting such ambiguous terms into contexts where their meaning may be easier to delineate. I will look at this in more detail in [#chapter.taxonomy].
-
-
-    section: Normalization and discovery
+    section: Duplication in less structured contexts
     
-        Since normalization rules define when a piece of content is unique, they make it easy to determine if a piece of content exists. If you know which fields of a proposed content item are use to normalize it in the content set, you can query for a topic that has the same values in those fields. If you find one, you are confident the content already exists; if you don't, you can be confident that it does not exist and needs to be written. 
+        Since duplication detection rules define when a piece of content is unique, they make it easy to determine if a piece of content exists. If you know which fields of a proposed content item are use to normalize it in the content set, you can query for a topic that has the same values in those fields. If you find one, you are confident the content already exists; if you don't, you can be confident that it does not exist and needs to be written. 
         
-        At least, in theory you can. The problem is that not all content can be normalized to the same degree. If you have a set of tightly-constrained subject-domain content types, you can be reasonably sure that if you don't find an existing item in the set of items of its type, you also won't find it in any of the other tightly-constrained types, because such content would not fit those type definitions. But what about your less constrained content? All content sets, even those that have been as tightly constrained as possible, will have some unconstrained or loosely constrained content. Some subjects just don't lend themselves to tightly constrained content types, while others might only occur once or twice in your content set, making it pointless, or, at least, expensive, to tightly constrain that information.   
+        At least, in theory you can. The problem is that not all content can be structured to the same degree. If you have a set of tightly-constrained subject-domain content types, you can be reasonably sure that if you don't find an existing item in the set of items of its type, you also won't find it in any of the other tightly-constrained types, because such content would not fit those type definitions. But what about your less constrained content? All content sets, even those that have been as tightly constrained as possible, will have some unconstrained or loosely constrained content. Some subjects just don't lend themselves to tightly constrained content types, while others might only occur once or twice in your content set, making it pointless, or, at least, expensive, to tightly constrain that information.   
         
         For example, while we know with a high degree of certainty that there is only one API reference entry on the `hello()` function of the `greetings` library, it is much harder to detect if a writer decides to insert a full description of the `hello()` function into a topic in the programmer's guide. Programmer's guides typically deal with the relationships between different APIs and other parts of the system, and on how to accomplish certain real world tasks with the system as a whole. This focus may lend itself to a reasonably strict content type for programming topics, but it does not lend itself to strict normalization through a few unambiguous fields like library name and function name. Detecting that the author of a programming topic has duplicated information provided by the API reference may therefore be difficult. 
         
         And it is also possible that while the programming guide author has indeed duplicated information from the API guide, it may also be the case that they needed to do so. If, for instance, they are explaining the reasons one might choose to use a function from the `salutations` library rather than the `greetings` library, then explaining the differences between the `hello()` function in each library is necessary, and necessarily involves repeating some of the information in each libraries API reference. Simply referring the reader to each API reference to compare and contrast for themselves would eliminate the duplication, but at the expense of dumping the complexity of detecting and understanding the differences onto the reader. 
+
+        Content, by its nature, deals with the complex and irregular aspects of the world, and we cannot expect to fully remove all duplication, or everything that might or might not be duplication, depending on how you look at it, from the overall content set without creating far more complexity in the content system than one has redirected. However good it looks on paper, such attempts are likely to leave you with more unhandled complexity than they remove.
+
+        But while this is a reason to be cautions, it is not a reason to throw up your hands an abandon the attempt to tackle duplication in your content set. There are certainly things that can be done effectively on a smaller scale. 
         
+    section: Localizing duplication detection
+
+        If detecting duplication in the general case is likely to introduce more unhandled complexity than it removes, most of the duplication that really matters occurs much more locally. The risk that your movie review collection will accidentally duplicate content in your recipe collection is pretty low. It is duplication within each collection you need to worry about, not duplication between them. The fact that that each collection has a very subject-specific content model is actually already a very effective way of avoiding duplication between collections. This allows you to focus on duplication within a collection. Although, as we have noted, there can always be ad hoc duplication outside of a structured content type, a disciplined approach to managing duplication inside of a structured content set goes a long way to minimizing the amount of duplication, leaving more human resources free to track down ad hoc duplication when it is needed. 
+
+        There are other ways to localize duplication. For instance, some organizations try to minimize duplication between the technical, training, and marketing content for each individual product. While these three types of content obviously don't all have the same content models, their individual content models can sometimes include the key fields that are part of your duplication detection rule.  
+
     section: Proximity detection
     
         A less rigorous approach to detecting potentially duplicate content is what we might call "proximity detection" -- pieces of content with several points of similarity which might indicate that they are covering the same subject, or at least that their coverage overlaps. 
@@ -154,7 +184,7 @@ chapter:(#chapter.normalization) Normalization
         
         Proximity detection is much easier when all of your content items are as constrained to subject-domain content types as is reasonable for their subject matter. Strongly defined content types tend to be more cohesive -- meaning they cover the same piece of ground and cover it more consistently for each instance of the subject matter. Without strong types, different authors may chunk up ideas and information differently, so that topics from two different authors may partially overlap each other. Not only is partial overlap harder to detect, since there will be fewer points of similarity between the items, it is also harder to fix because each item contains different information that the user needs. Eliminating one of the duplicates means find a place for all of the extra information it contains, a process that could potentially affect several other content items and perhaps raise other normalization questions. 
         
-    section: Normalization via aggregation
+    section: Reducing duplication by aggregating content
 
         One way to normalize content is to aggregate information at source that will be output to different documents. For instance, if you have a product with multiple versions, you can aggregate the information about all of the versions into a single source file and then publish only the blocks that apply to a particular version. (This is an applications of the common with conditions {reuse algorithm} that we looked at in [#chapter.reuse].) 
         
@@ -164,9 +194,32 @@ chapter:(#chapter.normalization) Normalization
 
         However, moving as much of your content as possible to the subject domain with give you a fair amount of useful normalization without any additional effort -- the subject domain tends to enable additional algorithms from the same structures and without additional effort or expense.         
 
+    section: Duplication and the structure of content
 
-        
-        
+        As we have seen, placing content in well defined structures help with duplication detection because it allows algorithms to compare values in a structure to determine if two items are duplicates or not. 
+
+        But using consistent well-defined structures has a far deeper importance for the detection and avoidance of duplication. By dividing content into consistent blocks, it makes items of content more comparable. It is very difficult to do anything about duplication that occurs when two differently structured pieces of content overlap in the subject matter they describe. You can't simply replace one with the other because they don't cover the same ground. Only units of the same size, shape, and scope can be effectively compared to see if they are duplicates. Using well defined content structures ensures that each piece of content on a particular subject -- each movie review, recipe, API reference, feature description, or configuration task -- has the same shape, size, and scope, meaning they are comparable.
+
+        But the effect is not simply that the units are comparable. If content is written in well defined structures, each of which has a specific job to do, the chances of creating duplicate content, even by accident, are greatly reduced. Authors and managers have a good sense of what has been created and what has not, and the structures ensure that different approaches to describing a subject don't result in partial overlaps (or omissions).  
+
+
+    section: Implementing duplication detection
+
+        Exactly where in the authoring process the detection of duplication should take place is an interesting question. 
+
+    section: Natural language detection
+
+        It is worth mentioning here that there are tools out there that claim to do the duplication of detection using natural language methods. I'm not going to comment on the specific capabilities of such tools, but there are a few obvious downsides to this method. The first is that it can only compare two completed texts to see if they are duplicates. They can't detect that the text you are thinking of creating already exists. The second is that they are looking for the same or similar texts, which is not the same a same or similar information.   
+       
+    section: Detecting duplication by linking
+
+        In [#chapter.linking] I described an approach to linking in which links are generated automatically based on {subject annotations} in the text and indexes applied to each topic in the content set. One of the features of this approach is that it can sometimes result in more than one topic matching the subject identified in a subject annotation.
+
+        #example
+
+        This is often a good thing, and there are various ways you can present multiple link targets to the reader in media that support them. But if the link algorithm is returning more than one link to content of the same type on the same subject, it is possible (though not certain) that the two topics have some duplication of subject matter. 
+
+        #could tell this from the indexes alone.
         
     
      
