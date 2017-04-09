@@ -6,18 +6,18 @@ chapter:(#modeling) Modeling
         algorithm, modeling
         structure, procedure
 
-	As noted in [#chapter.extract] it is possible to extract content from existing data sources. Some of these were not intended as sources of content, but in many cases you can turn them into content by using algorithms to wrap the data into sentences or field values in a document. Such sources essentially present a model of some object in the real world, and when we use them as a source of content, we are creating content from that model. 
+    As noted in [#chapter.extract] it is possible to extract content from existing data sources. Some of these were not intended as sources of content, but in many cases you can turn them into content by using algorithms to wrap the data into sentences or field values in a document. Such sources essentially present a model of some object in the real world, and when we use them as a source of content, we are creating content from that model. 
 
-	We can apply the same techniques to creating content even when an external data source does not exist by creating our own model of a real world object using structured writing techniques. We can then extract content from that model just as we would from an external data source. This can be an extremely powerful technique for managing complexity in cases where content frequently traverses the same ground, or in cases where content must express complex relationships that are easier to model and control in a formalized systems. 
+    We can apply the same techniques to creating content even when an external data source does not exist by creating our own model of a real world object using structured writing techniques. We can then extract content from that model just as we would from an external data source. This can be an extremely powerful technique for managing complexity in cases where content frequently traverses the same ground, or in cases where content must express complex relationships that are easier to model and control in a formalized systems. 
 
-	An entire book could be written about how to model various types of subjects and how to derive content from those models. Here I will confine myself to presenting one simplified model to demonstrate the principle at work and point to some of its key benefits. 
+    An entire book could be written about how to model various types of subjects and how to derive content from those models. Here I will confine myself to presenting one simplified model to demonstrate the principle at work and point to some of its key benefits. 
 
-	In [#chapter.duplication] I mentioned that while the sentence "Press OK." occurs repeatedly in many content sets, it makes little sense to try to factor it out as duplicate text since while the words are identical in many cases, they actually represent different pieces of information about different dialog boxes, any one of which could change independent of the others. However, we can actually go much further than factoring out individual instances of "Press OK" and factor out the entire navigational part of the procedure using a model. 
+    In [#chapter.duplication] I mentioned that while the sentence "Press OK." occurs repeatedly in many content sets, it makes little sense to try to factor it out as duplicate text since while the words are identical in many cases, they actually represent different pieces of information about different dialog boxes, any one of which could change independent of the others. However, we can actually go much further than factoring out individual instances of "Press OK" and factor out the entire navigational part of the procedure using a model. 
 
-	The navigational structure of a typical desktop application is essentially a tree consisting of a well defined set of objects: menus, menu items, dialog boxes, field values, buttons, and assorted other controls. The entire navigation system of an application can thus be modeled as a tree (and indeed, there are languages designed for modeling interfaces in just this way for programming purposes.[https://en.wikipedia.org/wiki/User_interface_modeling]). Rather than looking at any of these, however, I will develop a very simple model of a UI just complex enough to demonstrate the technique:
+    The navigational structure of a typical desktop application is essentially a tree consisting of a well defined set of objects: menus, menu items, dialog boxes, field values, buttons, and assorted other controls. The entire navigation system of an application can thus be modeled as a tree (and indeed, there are languages designed for modeling interfaces in just this way for programming purposes.[https://en.wikipedia.org/wiki/User_interface_modeling]). Rather than looking at any of these, however, I will develop a very simple model of a UI just complex enough to demonstrate the technique:
 
-	```(sam)
-	   application: MyApp
+    ```(sam)
+       application: MyApp
            menu-set:
                 menu: File
                     menu-item: New
