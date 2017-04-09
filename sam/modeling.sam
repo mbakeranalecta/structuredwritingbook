@@ -6,9 +6,9 @@ chapter:(#modeling) Modeling
         algorithm, modeling
         structure, procedure
 
-	As noted in [#chapter.extract] it is possible to extract content from existing data sources. Some of these were not intended as sources of content, but in many cases you can turn them into content by using algorithms to wrap the data into sentences of field values in a document. Such sources essentially present a model of some object in the real world, and when we use them as a source of content, we are creating content from that model. 
+	As noted in [#chapter.extract] it is possible to extract content from existing data sources. Some of these were not intended as sources of content, but in many cases you can turn them into content by using algorithms to wrap the data into sentences or field values in a document. Such sources essentially present a model of some object in the real world, and when we use them as a source of content, we are creating content from that model. 
 
-	We can apply the same techniques to creating content even when an external data source does not exist by creating a model of a real world object using structured writing techniques. We can then extract content from that model just as we would from an external data source. This can be an extremely powerful technique for managing complexity in cases where content frequently traverses the same ground, or in cases where content must express complex relationships that are easier to model and control in a formalized systems. 
+	We can apply the same techniques to creating content even when an external data source does not exist by creating our own model of a real world object using structured writing techniques. We can then extract content from that model just as we would from an external data source. This can be an extremely powerful technique for managing complexity in cases where content frequently traverses the same ground, or in cases where content must express complex relationships that are easier to model and control in a formalized systems. 
 
 	An entire book could be written about how to model various types of subjects and how to derive content from those models. Here I will confine myself to presenting one simplified model to demonstrate the principle at work and point to some of its key benefits. 
 
@@ -34,7 +34,7 @@ chapter:(#modeling) Modeling
 
     Most of what is contained in a procedure for using a GUI is entirely formulaic. With a map of the UI like this, we can write an algorithm to follow that formula for all procedures.
 
-    Thus rather than writing this:
+    Here is how a procedure for using this menu might be written using conventional techniques:
 
     ```(sam)
         procedure: Create a new document
@@ -44,7 +44,7 @@ chapter:(#modeling) Modeling
             step: Enter the type of the new document into the {Name}(field) field.
             step: Press {Create}(button) or {Cancel}(button) to cancel.
 
-    Writers can now write:
+    Using the model, however, we can reduce all of this to:
 
     ```(sam)
         procedure: Create a new document
@@ -52,7 +52,7 @@ chapter:(#modeling) Modeling
 
     Every piece of text that is used in the written-out procedure above can be derived from the model by an algorithm. The `use-dialog` field in the second example triggers the use of that algorithm in the {synthesis} stage to generate the full text of the procedure, as well as including the correct version of the screen shot.
 
-    Clearly you won't always want to generate the full procedure with a single line. There will be cases where you need to say something specific to a particular case in a procedure. For example, if this procedure were part of a tutorial, you might want to specify a particular file name. In this case, you could use the model to generate only part of the procedure:
+    Clearly you won't always want to generate the full procedure with a single line. There will be cases where you need to say something specific about  a particular case. For example, if this procedure were part of a tutorial, you might want to specify a particular file name. In this case, you could use the model to generate only part of the procedure:
 
     ```(sam)
         procedure: Create a document for testing
@@ -79,8 +79,8 @@ chapter:(#modeling) Modeling
 
     * The ability to change the way the subject is expressed simply by changing the algorithm gives you the ability to test different forms of expression to see which one works best. 
 
-    * This ability also allows you to personalize the content to different groups or even to allow individuals to choose how they want content such as procedures expressed. Using {active content} techniques, you can change how the content is expressed based on the information you have a about the user or allow they to select from verbose or terse forms of expression. 
+    * This ability also allows you to personalize the content to different groups or even to allow individuals to choose how they want content such as procedures expressed. Using {active content} techniques, you can change how the content is expressed based on the information you have a about the user or allow them to select from verbose or terse forms of expression. 
 
-    * The fully-written-out example of the procedure above uses {keys} to factor out the difference between screen shots for different platforms, a technique that we looked at in [#chapter.reuse]. But while keys are a powerful tool, they are also an abstract concept the authors have to learn to use them correctly. But in our model example, the choice of screenshots is moved from the content to the model. This factors out the complexity of using keys. It also allows us to make choices about how and where and if screen shots are displayed, including the ability to test which works best and to allow the user to select whether they prefer to see screen shots or not. 
+    * The fully-written-out example of the procedure above uses {keys} to factor out the difference between screen shots for different platforms, a technique that we looked at in [#chapter.reuse]. But while keys are a powerful tool, they are also an abstract concept and writers have to learn to use them correctly. But in the model example, the choice of screenshots is moved from the content to the model. This factors out the complexity of using keys. It also allows you to make choices about how and where and if screen shots are displayed, including the ability to test which works best or to allow the user to select whether they prefer to see screen shots or not. 
 
-    As with every other algorithm described in this book, it is important not to get carried away with enthusiasm of modeling in isolation. Although there is something very technically satisfying about building a model and deriving a variety of content from it, the model and its algorithms are both also sources of complexity. As we have noted, there is nothing wrong in principle with introducing new complexity into the content system. All tools do this. The point is to ensure that all of the complexity in the content system is handled by a person or process with the skills, time, and resources to handle it proper. Modeling Partitions and redistributes a lot of complexity, which means it can create substantial change to the overall content system. It is important to make sure that when you do it, the effect on the overall content system is positive. 
+    As with every other algorithm described in this book, it is important not to get carried away with enthusiasm of modeling in isolation. Although there is something very technically satisfying about building a model and deriving a variety of content from it, the model and its algorithms are both also sources of complexity. As we have noted, there is nothing wrong in principle with introducing new complexity into the content system. All tools do this. The point is to ensure that all of the complexity in the content system is handled by a person or process with the skills, time, and resources to handle it proper. Modeling partitions and redistributes a lot of complexity, which means it can create substantial change to the overall content system. It is important to make sure that when you do it, the effect on the overall content system is positive. 
