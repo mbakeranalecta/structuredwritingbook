@@ -97,6 +97,26 @@
         </xsl:element>
     </xsl:template>
     
+    <xsl:template match="remark">
+        <db:remark>
+            <xsl:if test="@id">
+                <xsl:attribute name="xml:id">
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@attribution">
+                <xsl:value-of select="@attribution"/>
+                <xsl:text> - </xsl:text>
+                <xsl:apply-templates/>
+            </xsl:if>
+        </db:remark>
+    </xsl:template>
+    
+    <xsl:template match="remark/p">
+        <!-- DocBook remarks don't allow paragraphs -->
+        <xsl:apply-templates/>
+    </xsl:template>
+    
     <xsl:template match="insert[@type='xml']">
         <xsl:element name="xi:include">
             <xsl:attribute name="href">
@@ -337,6 +357,10 @@
             <xsl:when test="//figure[@id=$idref]">
                 <db:xref linkend="{$idref}"/>
             </xsl:when>
+            <xsl:when test="//remark[@id=$idref]">
+                <db:xref linkend="{$idref}"/>
+            </xsl:when>
+            
             <xsl:otherwise>
                 <xsl:message>
                     <xsl:text>No element found with id </xsl:text>
