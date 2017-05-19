@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter name="chapter.document-domain">
+<chapter name ="chapter.document-domain">
 <title>Writing in the Document Domain</title>
 <annotations>
 <p>Concepts</p>
@@ -49,15 +49,15 @@ p{following-item-of-list}: Celery
 p{following-item-of-list}: Onions
 </codeblock>
 <p>An explicit list structure looks like this:</p>
-<codeblock language="SAM">
+<codeblock language ="SAM">
 list:
     list-item: Carrots
     list-item: Celery
     list-item: Onions
 </codeblock>
-<p>A list structure partitions the idea of a list from the physical formatting of a list by creating a container that did not exist before – the <phrase><annotation type="code">list</annotation></phrase> structure. That <phrase><annotation type="code">list</annotation></phrase> container has no media-domain analog. It is an abstraction created to instantiate the partitioning of the idea of a list from the formatting of list items. It is a document domain structure.</p>
-<p>Once we have a <phrase><annotation type="code">list</annotation></phrase> structure, we can create rules – in a separate file – about how lists are formatted. We are familiar with this from <phrase><annotation type="language">HTML</annotation></phrase> and <phrase>CSS</phrase>. Here’s that same structure in <phrase><annotation type="language">HTML</annotation></phrase> (actually, this is a slightly more specific structure, but we’ll get to that):</p>
-<codeblock language="HTML">
+<p>A list structure partitions the idea of a list from the physical formatting of a list by creating a container that did not exist before – the <code>list</code> structure. That <code>list</code> container has no media-domain analog. It is an abstraction created to instantiate the partitioning of the idea of a list from the formatting of list items. It is a document domain structure.</p>
+<p>Once we have a <code>list</code> structure, we can create rules – in a separate file – about how lists are formatted. We are familiar with this from <phrase><annotation type="language">HTML</annotation></phrase> and <phrase>CSS</phrase>. Here’s that same structure in <phrase><annotation type="language">HTML</annotation></phrase> (actually, this is a slightly more specific structure, but we’ll get to that):</p>
+<codeblock language ="HTML">
 &lt;ol&gt;
     &lt;li&gt;Carrots&lt;/li&gt;
     &lt;li&gt;Celery&lt;/li&gt;
@@ -65,7 +65,7 @@ list:
 &lt;/ol&gt;
 </codeblock>
 <p>Now that we have a distinct list object, we can factor out our invariant list formatting rule into a separate file. For HTML, this is usually done with a CSS stylesheet:</p>
-<codeblock language="CSS">
+<codeblock language ="CSS">
 li:first-child 
 {
     padding-top: 5pt;
@@ -87,7 +87,7 @@ li:first-child
 <title>Context and Structure</title>
 <p>Does the need for separate ordered and unordered list objects imply that we will need a separate document domain list structure for every possible way a list could be formatted in the media domain? No. In fact, that would really just be working in the media domain by proxy. When we work in the document domain we are specifically thinking in terms of document structures, not formatting, and so each document domain object we create needs to make sense in document domain terms, not media domain terms. Otherwise, the partitioning of the problem falls apart.</p>
 <p>For example, consider nested lists. Items in a nested list are formatted differently from the list that contains them. At minimum they are indented more and usually they have different number and bullet styles as well. In the <phrase><annotation type="concept">media domain</annotation></phrase>, we would need a different style for each level. However, we don’t need a separate nested list structure in the <phrase><annotation type="concept">document domain</annotation></phrase>. Instead, we express the fact that a list is nested by actually nesting it inside its parent list. For instance, we can nest one ordered list inside another ordered list:</p>
-<codeblock language="HTML">
+<codeblock language ="HTML">
 &lt;ol&gt;
     &lt;li&gt;
         &lt;p&gt;Dogs&lt;/p&gt;
@@ -107,11 +107,11 @@ li:first-child
     &lt;/li&gt;
 &lt;/ol&gt;
 </codeblock>
-<p>In the <phrase><annotation type="concept">document domain</annotation></phrase> the inner and outer list are both identical <phrase><annotation type="code">ol</annotation></phrase>/<phrase><annotation type="code">li</annotation></phrase> structures. In the <phrase><annotation type="concept">media domain</annotation></phrase>, one will be formatted with Arabic numerals and the other with letters.</p>
-<insert item="../graphics/nested-list.xml" type="image"/>
+<p>In the <phrase><annotation type="concept">document domain</annotation></phrase> the inner and outer list are both identical <code>ol</code>/<code>li</code> structures. In the <phrase><annotation type="concept">media domain</annotation></phrase>, one will be formatted with Arabic numerals and the other with letters.</p>
+<insert item ="../graphics/nested-list.xml" type ="image"/>
 <p>Both the inner and outer lists are ordered list items in the document domain, but in the media domain they are formatted differently based on context.</p>
 <p>In this case, the algorithm that formats the page distinguishes the inner and outer lists by looking at their parentage. For instance in CSS:</p>
-<codeblock language="css">
+<codeblock language ="css">
 ol&gt;li&gt;ol&gt;li
 {
     list-style-type: lower-alpha;
@@ -127,13 +127,13 @@ ol&gt;li&gt;ol&gt;li
 <title>Constraining document structure</title>
 <p>There are other reasons for working in the document domain beside partitioning out formatting rules. One of the main ones is to constrain how documents are structured. For example, lets say that you want to make sure that all graphics inserted into your documents have a figure number, a title, and a caption. This is a document domain constraint rather than a media domain constraint. The requirement for a graphic to have a figure number, title, and caption is one of document structure and organization and does not say anything about how the title or caption should be formatted.</p>
 <p>In the media domain, you can make styles available for figure-numbers, titles, and captions, but you can’t enforce a rule that says all graphics must have these elements (which is, by its very nature, a <phrase><annotation type="concept">document domain</annotation></phrase> rule). In the document domain, you can express these constraints. You can literally make sure that the only way to include a graphic is to make it a figure and give it a title and a caption by making it illegal to place an image element anywhere else in the document structure. A structure that implemented this constraint might look like this:</p>
-<codeblock language="SAM">
+<codeblock language ="SAM">
 figure:
     title: Cute kitty
     caption: This is a cute kitten.
     image: images/cute.jpg
 </codeblock>
-<p>If the only way to include an image is to use the image element, and the only place where the image element is allowed is inside the figure element, and if the title and the caption elements are required and must have content, then there is no way for a writer to add a graphic without a figure, title, and caption. A document that lacked these elements would be rejected by the <phrase><annotation type="algorithm">conformance algorithm</annotation></phrase> (see <citation type="nameref" value="chapter.conformance"/>).</p>
+<p>If the only way to include an image is to use the image element, and the only place where the image element is allowed is inside the figure element, and if the title and the caption elements are required and must have content, then there is no way for a writer to add a graphic without a figure, title, and caption. A document that lacked these elements would be rejected by the <phrase><annotation type="algorithm">conformance algorithm</annotation></phrase> (see <citation type = "nameref" value = "chapter.conformance"/>).</p>
 <p>This is an example of a constraint being enforced rather than factored out. But it is still a form of partitioning because we have created a partition for figures which is the only place images are allowed. This partitions off the design question about image handling. With the list formatting we could partition out the formatting constraint completely by separating the formatting information from the list structure. Here we enforce the image constraint by providing a specific structure that must be used to insert images.</p>
 <p>There are many ways in which you might want to constrain the structure of a document. In a typical <phrase><annotation type="concept">media domain</annotation></phrase> application, there is no restrictions on the order in which paragraph styles can be applied. If you want to put a level two heading between two steps in a procedure, nothing other than common sense will stand in the way of your doing so. In a document domain language, however, that kind of thing will usually not be allowed.</p>
 <p>Instead, the <phrase><annotation type="concept">document domain</annotation></phrase> language will have a set of constraints on how procedures are structured. Procedure structures will have step structures nested within them. Step structures will only be allowed to appear inside procedure structures. Only certain text elements – such as paragraphs, lists, or code blocks – will be allowed to occur inside a step. There will be no way to place a second level heading inside a procedure.</p>
@@ -148,7 +148,7 @@ figure:
 <p>In your media domain stylesheet, you may have some character styles for things like author-name or book-title. You may even have a specific paragraph style for bibliography entries, but it is unlikely to be more complicated than that.</p>
 <p>But these few styles don’t really cover all the rules for creating bibliographies that your organization or publisher is likely to insist on. There are rules for the presentation of a bibliography entry which go into detail about how each work and its authors are listed and how the listings are presented. These are constraints on the writing of the bibliography that the author has to follow, but which are not modeled by the media domain styles they are working with. The authors have to learn and follow these constraints for themselves, and when they have finished writing, these constraints will not be recorded in the content in a machine-readable way. If the constraints are not recorded, you won’t be able to write an algorithm to pull information out of bibliography entries because all the algorithm can see is a bunch of paragraphs with some bold and italic formatting.</p>
 <p>If your want to control how bibliographic information is presented, and enable algorithms to find and extract data from bibliographic entries, you need a document domain structure for a bibliography. <phrase><annotation type="language">DocBook</annotation></phrase> has one:</p>
-<codeblock language="docbook">
+<codeblock language ="docbook">
 &lt;biblioentry id="bib.xsltrec"&gt;
   &lt;abbrev id="bib.xsltrec.abbrev"&gt;REC-XSLT&lt;/abbrev&gt;   
   &lt;editor&gt;
@@ -164,7 +164,7 @@ figure:
 &lt;/biblioentry&gt;
 </codeblock>
 <p>The example is in XML, which can be hard to read, so here is the same structure the markup notation that I have used in earlier examples:</p>
-<codeblock language="SAM">
+<codeblock language ="SAM">
 biblioentry:(#bib.xslttrec)
     abbrev:(#bib.xsltrec.abbrev) REC-XSLT
     editor:

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter name="chapter.linking">
+<chapter name ="chapter.linking">
 <title>Linking</title>
 <annotations>
 <p>Concepts</p>
@@ -23,8 +23,8 @@
 <term>linking algorithm</term>
 </record>
 </index>
-<p>A large part of the complexity of content is that readers do not read in a straight line. Numerous studies<citation type="idref" value="1"/> have shown that readers often read opportunistically, looking for one piece of information or the answer to a particular question. Their behavior can best be described as information foraging. They are sniffing for the scent of the information they want and will follow its trail as long as the scent gets stronger and the trail is easy to follow.</p>
-<footnote id="1">
+<p>A large part of the complexity of content is that readers do not read in a straight line. Numerous studies<citation type = "idref" value = "1"/> have shown that readers often read opportunistically, looking for one piece of information or the answer to a particular question. Their behavior can best be described as information foraging. They are sniffing for the scent of the information they want and will follow its trail as long as the scent gets stronger and the trail is easy to follow.</p>
+<footnote id ="1">
 <p>For a discussion of these studies and their implications for how we write, see my book <phrase><annotation type="citetitle">Every Page is Page One: Topic-based Writing for Technical Communication and the Web</annotation></phrase>.</p>
 </footnote>
 <p>The trail a reader follows through an information set has certain junction points, places where the reader can decide to keep going straight through the current document or turn aside to look at a different document. While the reader’s decision to switch documents can occur at any point, especially if they are simply abandoning the current document as unfruitful, the most common reason for switching is because they want more information on, or a simply more interested in, a specific subject mentioned in the current document.</p>
@@ -41,7 +41,7 @@
 <section>
 <title>Subject affinities in the media domain</title>
 <p>In the <phrase><annotation type="concept">media domain</annotation></phrase>, we simply record the various devices used to express subject affinities, as such: cross references, tables, links, etc. For example, in HTML a link simply specifies a page to load:</p>
-<codeblock language="html">
+<codeblock language ="html">
 &lt;p&gt;In Rio Bravo, 
 &lt;a href="https://en.wikipedia.org/wiki/John_Wayne"&gt;the Duke&lt;/a&gt; 
 plays an ex-Union colonel out for revenge.&lt;/p&gt;
@@ -53,7 +53,7 @@ plays an ex-Union colonel out for revenge.&lt;/p&gt;
 <p>In Rio Bravo, the Duke (John Wayne) plays an ex-Union colonel out for revenge.</p>
 </blockquote>
 <p>Or it might be handled with a footnote:</p>
-<codeblock language="text">
+<codeblock language ="text">
 In Rio Bravo, the Duke* plays 
 an ex-Union colonel out for revenge.
         
@@ -66,62 +66,62 @@ an ex-Union colonel out for revenge.
 <section>
 <title>Subject affinities in the document domain</title>
 <p>Moving to the <phrase><annotation type="concept">document domain</annotation></phrase> is about factoring out the formatting specific structures of the media domain. But a link is not really a piece of formatting, so conventional refactoring into abstract document structures is not going to apply. For this reason, people working in the <phrase><annotation type="concept">document domain</annotation></phrase> often enter hypertext links exactly the way they would in the media domain: by specifying a URL. Thus in DITA you might enter a link as:</p>
-<codeblock language="DITA">
+<codeblock language ="DITA">
 &lt;p&gt;In Rio Bravo, 
 &lt;xref href="https://en.wikipedia.org/wiki/John_Wayne" 
  format="html"&gt;The Duke&lt;/xref&gt; 
 plays an ex-Union colonel out for revenge.&lt;/p&gt;
 </codeblock>
-<p>The difference from HTML is slight here. The link element is called <phrase><annotation type="code">xref</annotation></phrase> rather than <phrase><annotation type="code">a</annotation></phrase>. But the meaning of <phrase><annotation type="code">xref</annotation></phrase> is bit more general. The HTML <phrase><annotation type="code">a</annotation></phrase> element is saying, create a hypertext link to this address. The DITA <phrase><annotation type="code">xref</annotation></phrase> element is saying, create some sort of reference to this resource. (As we will see in a moment, it is capable of linking to things other than HTML pages, which is why it requires the <phrase><annotation type="code">format</annotation></phrase> attribute to specify that in this case the target is an HTML page.) This generality gives us a little more leeway in processing. We can legitimately create print output from this markup that looks like this:</p>
+<p>The difference from HTML is slight here. The link element is called <code>xref</code> rather than <code>a</code>. But the meaning of <code>xref</code> is bit more general. The HTML <code>a</code> element is saying, create a hypertext link to this address. The DITA <code>xref</code> element is saying, create some sort of reference to this resource. (As we will see in a moment, it is capable of linking to things other than HTML pages, which is why it requires the <code>format</code> attribute to specify that in this case the target is an HTML page.) This generality gives us a little more leeway in processing. We can legitimately create print output from this markup that looks like this:</p>
 <blockquote>
 <p>In Rio Bravo, the Duke (see: https://en.wikipedia.org/wiki/John_Wayne) plays an ex-Union colonel out for revenge.</p>
 </blockquote>
-<p>This is not the way we would handle the subject affinity if we were designing for paper, but it is a definite improvement from a <phrase><annotation type="algorithm">differential single sourcing</annotation></phrase> point of view. At least the link is now visible to the reader.<citation type="idref" value="2"/></p>
-<footnote id="2">
+<p>This is not the way we would handle the subject affinity if we were designing for paper, but it is a definite improvement from a <phrase><annotation type="algorithm">differential single sourcing</annotation></phrase> point of view. At least the link is now visible to the reader.<citation type = "idref" value = "2"/></p>
+<footnote id ="2">
 <p>Technically we could do this from the HTML markup as well, but that would be cheating. The HTML markup is not really giving us permission to do this. It is telling us to create a hypertext link and nothing else. The problem with cheating is that you are basing your algorithm on constraints that are not being promised or enforced, and this can fail in ways you may not expect or catch. Some cheats are more reliable than others, but you probably don’t want to get into the habit. Better to move your content creation to a format where cheating is not required to get the output you want.</p>
 </footnote>
 <p>Fundamentally, though, this is not a satisfactory <phrase><annotation type="algorithm">differential single sourcing</annotation></phrase> solution. Unless there were no alternative (such as when you are citing a specific source), you would not normally direct a reader of paper to the web for more information, nor vice versa. Linking to an already published file, such as an HTML page, means linking to the address where the published file resides. It commits us to a particular format for the link target. If instead of linking to the published address, we link to the address of the unpublished source file, or to an identifier for that file, we gain the freedom to link to any format of that content that we choose to publish.</p>
-<p>In DITA, you can link to another DITA file (the default format, so we don’t need the <phrase><annotation type="code">format</annotation></phrase> attribute):</p>
-<codeblock language="html">
+<p>In DITA, you can link to another DITA file (the default format, so we don’t need the <code>format</code> attribute):</p>
+<codeblock language ="html">
 &lt;p&gt;In Rio Bravo, &lt;xref href="John_Wayne.dita"&gt;The Duke&lt;/xref&gt; 
 plays an ex-Union colonel out for revenge.&lt;/p&gt;
 </codeblock>
 <p>We don’t yet know if that DITA file will be published to paper or the Web, what the address of the published topic will be, or if that topic will stand alone or be assembled into a larger page or document for publication. This means that the publishing system is taking on responsibility for both ends of the link. It has to make sure that the target page is published in a way the source page can link to, and that the source page links to the right address.  But transferring this responsibly to an algorithm gives us the leeway to publish this link as we see fit.</p>
-<p>If we publish as a book on paper and the target resource ends up as part of a chapter in the same book, we can render the <phrase><annotation type="code">xref</annotation></phrase> as a cross reference to the page that resource appears on. We could format that cross reference inline or as a footnote. These are all legitimate interpretations of the <phrase><annotation type="code">xref</annotation></phrase>’s instruction to create a reference to a resource.</p>
-<p>If we publish to a help system and the target resource ends up as a topic in the same help system, we could render the <phrase><annotation type="code">xref</annotation></phrase> as a hypertext link to that topic.</p>
+<p>If we publish as a book on paper and the target resource ends up as part of a chapter in the same book, we can render the <code>xref</code> as a cross reference to the page that resource appears on. We could format that cross reference inline or as a footnote. These are all legitimate interpretations of the <code>xref</code>’s instruction to create a reference to a resource.</p>
+<p>If we publish to a help system and the target resource ends up as a topic in the same help system, we could render the <code>xref</code> as a hypertext link to that topic.</p>
 <p>This is a big step forward, but it still does not let us do this:</p>
 <blockquote>
 <p>In Rio Bravo, the Duke (John Wayne) plays an ex-Union colonel out for revenge.</p>
 </blockquote>
-<p>In other words, we can render the <phrase><annotation type="code">xref</annotation></phrase> as a cross reference or a link or a footnote, but we can only handle the subject affinity as a reference to the specified resource. We can’t decide to link to a different resource or handle it by parenthetical clarification instead. To give ourselves the ability to link to different resources, we can turn to the <phrase><annotation type="concept">management domain</annotation></phrase>.</p>
+<p>In other words, we can render the <code>xref</code> as a cross reference or a link or a footnote, but we can only handle the subject affinity as a reference to the specified resource. We can’t decide to link to a different resource or handle it by parenthetical clarification instead. To give ourselves the ability to link to different resources, we can turn to the <phrase><annotation type="concept">management domain</annotation></phrase>.</p>
 </section>
 <section>
 <title>Subject affinities in the management domain</title>
 <p>Linking to a source file rather than to an address gives us more latitude about how the link or cross reference is published, but we are still always linking to the same resource. If we are doing <phrase><annotation type="algorithm">content reuse</annotation></phrase>, this is a problem because we do not know if the same resource will be available everywhere we reuse our topic. We need to be able to link to different resources when our topic is used in different places.</p>
-<p>To accommodate this, we can factor out the file name and replace it with an ID or a key. IDs and keys are <phrase><annotation type="concept">management domain</annotation></phrase> structures that we looked at in <citation type="nameref" value="chapter.reuse"/>. They allow us to refer to resources indirectly. Using IDs lets us use an abstract identifier rather than a file name to identify a resource. Using keys lets us remap the resources we point to. This makes keys the more efficient way to address this problem. So instead of referring to a specific resource on John Wayne, we refer to the key <phrase><annotation type="code">John_Wayne</annotation></phrase> using a reference to a key. In DITA this would look like this:</p>
-<codeblock language="DITA">
+<p>To accommodate this, we can factor out the file name and replace it with an ID or a key. IDs and keys are <phrase><annotation type="concept">management domain</annotation></phrase> structures that we looked at in <citation type = "nameref" value = "chapter.reuse"/>. They allow us to refer to resources indirectly. Using IDs lets us use an abstract identifier rather than a file name to identify a resource. Using keys lets us remap the resources we point to. This makes keys the more efficient way to address this problem. So instead of referring to a specific resource on John Wayne, we refer to the key <code>John_Wayne</code> using a reference to a key. In DITA this would look like this:</p>
+<codeblock language ="DITA">
 &lt;p&gt;In Rio Bravo, &lt;xref keyref="John_Wayne"&gt;The Duke&lt;/xref&gt; 
 plays an ex-Union colonel out for revenge.&lt;/p&gt;
 </codeblock>
-<p>Somewhere in the <phrase><annotation type="concept">DITA map</annotation></phrase> for each publication, the key <phrase><annotation type="code">John_Wayne</annotation></phrase> points to a topic. Publications link the <phrase><annotation type="code">keyref</annotation></phrase> to the resource pointed to by that key in each of their DITA maps. This allows you to link to different resources in each publication.</p>
+<p>Somewhere in the <phrase><annotation type="concept">DITA map</annotation></phrase> for each publication, the key <code>John_Wayne</code> points to a topic. Publications link the <code>keyref</code> to the resource pointed to by that key in each of their DITA maps. This allows you to link to different resources in each publication.</p>
 </section>
 <section>
 <title>The problem with IDs and Keys</title>
-<p>However, there is still a problem with linking based on IDs and keys. Keys will let you vary which resource a <phrase><annotation type="code">keyref</annotation></phrase> resolves to, but what happens when there is no resource to which that key can reasonably be assigned? The <phrase><annotation type="code">xref</annotation></phrase> demands that a reference to a resource be created, but there is no resource to link to. We are going to have a broken link, and fixing it is not easy. We can’t simply go in and remove the <phrase><annotation type="code">xref</annotation></phrase> from the source for one publication, because it defeats the purpose of <phrase><annotation type="algorithm">content reuse</annotation></phrase> if we have to edit the content every time we reuse it. Removing the key reference would fix our broken link in one publication, but that would result in the link being removed from all the publications, even where the resource does exist and the link ought to be created.</p>
+<p>However, there is still a problem with linking based on IDs and keys. Keys will let you vary which resource a <code>keyref</code> resolves to, but what happens when there is no resource to which that key can reasonably be assigned? The <code>xref</code> demands that a reference to a resource be created, but there is no resource to link to. We are going to have a broken link, and fixing it is not easy. We can’t simply go in and remove the <code>xref</code> from the source for one publication, because it defeats the purpose of <phrase><annotation type="algorithm">content reuse</annotation></phrase> if we have to edit the content every time we reuse it. Removing the key reference would fix our broken link in one publication, but that would result in the link being removed from all the publications, even where the resource does exist and the link ought to be created.</p>
 </section>
 <section>
 <title>Relationship tables</title>
 <p>One approach to the link-only-when-resource-available problem is to use a relationship table. In a conventional linking approach, the source page contains an embedded link structure pointing to the target page. The source  knows it is pointing to the target, but the target does not know it is being pointed to.</p>
-<insert item="../graphics/simplelink.xml" type="image"/>
+<insert item ="../graphics/simplelink.xml" type ="image"/>
 <p>The idea that the target resource does not know it is being pointed to is important because it means it does not have to do anything in order for other resources to point to it. The fact that only the source and not the target has to know about the link is fundamental to the rapid growth of the Web. If the target resource had to participate in the link process, every link would require negotiation between authors and the agreement of the author of the target resource to edit it to accept the link. It would be impossible for the Web to grow explosively and organically as it has under these conditions.</p>
 <p>A relationship table takes this one step further. When we create a link using a relationship table, we factor the link out of the source document and place it in a separate table. The relationship table says resource A links to resource B, but neither resource A nor resource B knows anything about it.</p>
-<insert item="../graphics/linktable.xml" type="image"/>
+<insert item ="../graphics/linktable.xml" type ="image"/>
 <p>Once the links are factored out of a piece of content, we can reuse it anywhere we like. If there is a suitable resource available to link to, we enter it in a relationship table for that build and have the presentation algorithm create the link at build time. If no suitable resource is available for a different publication, no entry is made in the relationship table for that publication, and the presentation algorithm does not create a link.</p>
 </section>
 <section>
 <title>The problem with relationship tables</title>
-<p>The problem with relationship tables is that they separate the link from the subject affinity it supports. The link that was created to serve the subject affinity in the content, the point at which the reader encountered something they might not understand, or might need more information on, or might find more appropriate to their needs that what they are reading now.  But the relationship table does not record the subject affinity, it says that there is some connection between topic A and topic B. It does not say where in topic A the subject affinity that creates the relationship is located. The subject affinity itself has not been marked up, so there is no way to put the link back where it belongs. Links generated by relationship tables end up in a block, usually at the end of the page.<citation type="idref" value="3"/></p>
-<footnote id="3">
+<p>The problem with relationship tables is that they separate the link from the subject affinity it supports. The link that was created to serve the subject affinity in the content, the point at which the reader encountered something they might not understand, or might need more information on, or might find more appropriate to their needs that what they are reading now.  But the relationship table does not record the subject affinity, it says that there is some connection between topic A and topic B. It does not say where in topic A the subject affinity that creates the relationship is located. The subject affinity itself has not been marked up, so there is no way to put the link back where it belongs. Links generated by relationship tables end up in a block, usually at the end of the page.<citation type = "idref" value = "3"/></p>
+<footnote id ="3">
 <p>It is not impossible to imagine a markup system in which you could markup the source of the subject affinity in topic A, and then have the relationship table reference that point by ID, thus allowing you to put the link at the subject affinity. But this is clearly cumbersome for writers to implement and would complicate the management task. I don’t know of any systems that work this way.</p>
 </footnote>
 <p>The fundamental problem here is that links exist as a way to service subject affinities in content. If we lose sight of this and think only in terms of managing links between resources, it makes sense to pull links out of the content and manage them separately. But this is to ignore the reason the links exist in the first place – which is to provide the reader with support at a point of subject affinity. Using relationship tables is a classic case of partitioning that focuses on one part of the problem without adequate regard for the complexity that is being redirected. By moving the link away from the subject affinity, we simplify link management, but in doing so we make finding supporting information harder for the reader, thus dumping that navigational complexity onto the reader, damaging content quality in the name of process efficiency.</p>
@@ -129,15 +129,15 @@ plays an ex-Union colonel out for revenge.&lt;/p&gt;
 </section>
 <section>
 <title>Conditional linking</title>
-<p>Before we leave the management domain, it is worth mentioning a management domain approach that we could use to address our differential single sourcing problem and get the appropriate handling of subject affinities for both online and paper publishing. We could use conditional structures to define both options in the source file. With a little <phrase><annotation type="concept" specifically="DITA specialization">specialization</annotation></phrase> to support <phrase><annotation type="code">media</annotation></phrase> as a conditional attribute, you could do this in DITA:</p>
-<codeblock language="DITA">
+<p>Before we leave the management domain, it is worth mentioning a management domain approach that we could use to address our differential single sourcing problem and get the appropriate handling of subject affinities for both online and paper publishing. We could use conditional structures to define both options in the source file. With a little <phrase><annotation type="concept" specifically="DITA specialization">specialization</annotation></phrase> to support <code>media</code> as a conditional attribute, you could do this in DITA:</p>
+<codeblock language ="DITA">
 &lt;p&gt;In Rio Bravo, 
 &lt;ph media="online"&gt;&lt;xref keyref="John_Wayne"&gt;The 
 Duke&lt;/xref&gt;&lt;/ph&gt;&lt;ph media="paper"&gt;The 
 Duke (John Wayne)&lt;/ph&gt; plays an ex-Union 
 colonel out for revenge.&lt;/p&gt;
 </codeblock>
-<p>In DITA, the <phrase><annotation type="code">ph</annotation></phrase> element is used to delineate an arbitrary phrase in the content that you want to apply management domain attributes to. Here we define two different versions of the phrase “the Duke”, each with different forms of support for additional information (parenthetical expression for paper, link for online), and each with a corresponding media condition. The <phrase><annotation type="algorithm">synthesis algorithm</annotation></phrase> would then choose the appropriate version of the phrase for each publication based on the conditions set for the build.</p>
+<p>In DITA, the <code>ph</code> element is used to delineate an arbitrary phrase in the content that you want to apply management domain attributes to. Here we define two different versions of the phrase “the Duke”, each with different forms of support for additional information (parenthetical expression for paper, link for online), and each with a corresponding media condition. The <phrase><annotation type="algorithm">synthesis algorithm</annotation></phrase> would then choose the appropriate version of the phrase for each publication based on the conditions set for the build.</p>
 <p>There are some pretty obvious problems with this approach. It is twice the work for authors to handle every subject affinity, and it doubles the maintenance cost of the content as well. It also flies in the face of the idea of creating formatting-independent content.</p>
 <p>Unfortunately, in a general purpose <phrase><annotation type="concept">document domain</annotation></phrase> markup language with <phrase><annotation type="concept">management domain</annotation></phrase> support, it is pretty much impossible to prevent writers from doing things like this in order to achieve the effects they want. And in practice writers do end up using conditional markup like this for all kinds of differential single sourcing and reuse problems that are not easy to solve in the document and management domains. In some cases this can lead to tangles of conditions that are hard to maintain and debug.</p>
 <p>The inescapable fact is that the <phrase><annotation type="concept">management domain</annotation></phrase> approach does not do a great job of partitioning the complexity of links, and of subject affinity handling in general.</p>
@@ -158,22 +158,22 @@ colonel out for revenge.&lt;/p&gt;
 </section>
 <section>
 <title>Subject affinities in the subject domain</title>
-<p><phrase><citation type="nameref" value="chapter.reuse">As we have seen before</citation></phrase>, we can often remove the need for management domain structures by moving content to the <phrase><annotation type="concept">subject domain</annotation></phrase>. The same is true with subject affinities. In the subject domain, we can mark up subject affinities as subject affinities. This means that we can move away from managing links as links and manage subject affinities instead. Here is what this looks like in <phrase><annotation type="language">XML</annotation></phrase>:</p>
-<codeblock language="xml">
+<p><phrase><citation type = "nameref" value = "chapter.reuse">As we have seen before</citation></phrase>, we can often remove the need for management domain structures by moving content to the <phrase><annotation type="concept">subject domain</annotation></phrase>. The same is true with subject affinities. In the subject domain, we can mark up subject affinities as subject affinities. This means that we can move away from managing links as links and manage subject affinities instead. Here is what this looks like in <phrase><annotation type="language">XML</annotation></phrase>:</p>
+<codeblock language ="xml">
 &lt;p&gt;In &lt;movie&gt;Rio Bravo&lt;/movie&gt;, 
 &lt;actor name="John Wayne"&gt;the Duke&lt;/actor&gt; 
 plays an ex-Union colonel out for revenge.&lt;/p&gt;
 </codeblock>
 <p>And in <phrase><annotation type="language">SAM</annotation></phrase>:</p>
-<codeblock language="sam">
+<codeblock language ="sam">
 In {Rio Bravo}(movie), 
 {the Duke}(actor "John Wayne") 
 plays an ex-Union colonel out for revenge.
 </codeblock>
 <p>This markup clarifies that the phrase “the Duke” (a subject affinity) refers to the actor named John Wayne (its subject). It specifies both the type of the subject (actor) and its value (John Wayne).</p>
-<p>This is subject annotation, not link markup. Unlike <phrase><annotation type="concept">document domain</annotation></phrase> <phrase><annotation type="code">xref</annotation></phrase> markup, it does not insist that a reference should be created nor does it specify any resource to link to. Instead, it simply specifies what the subject of the text is. Specifically, it clarifies that the phrase “the Duke” refers to the actor named John Wayne (and not the Duke of Wellington or the Duke of Earl) and that the phrase “Rio Bravo” refers to the movie (and not to <phrase><citation type="citation" value="https://en.wikipedia.org/wiki/R%C3%ADo_Bravo_\(disambiguation\)">the city in Texas or the nature reserve in Belize</citation></phrase>).</p>
-<p>Given this markup, we can easily create the paper-style handling of the subject affinity that we have been looking for. We simply have the <phrase><annotation type="concept">presentation algorithm</annotation></phrase> take the value of the <phrase><annotation type="code">name</annotation></phrase> attribute and output it between parentheses:</p>
-<codeblock language="html">
+<p>This is subject annotation, not link markup. Unlike <phrase><annotation type="concept">document domain</annotation></phrase> <code>xref</code> markup, it does not insist that a reference should be created nor does it specify any resource to link to. Instead, it simply specifies what the subject of the text is. Specifically, it clarifies that the phrase “the Duke” refers to the actor named John Wayne (and not the Duke of Wellington or the Duke of Earl) and that the phrase “Rio Bravo” refers to the movie (and not to <phrase><citation type = "citation" value = "https://en.wikipedia.org/wiki/R%C3%ADo_Bravo_\(disambiguation\)">the city in Texas or the nature reserve in Belize</citation></phrase>).</p>
+<p>Given this markup, we can easily create the paper-style handling of the subject affinity that we have been looking for. We simply have the <phrase><annotation type="concept">presentation algorithm</annotation></phrase> take the value of the <code>name</code> attribute and output it between parentheses:</p>
+<codeblock language ="html">
 &lt;p&gt;In Rio Bravo, The Duke (John Wayne) plays an 
 ex-Union colonel out for revenge.&lt;/p&gt;
 </codeblock>
@@ -182,14 +182,14 @@ ex-Union colonel out for revenge.&lt;/p&gt;
 <p>But there are additional reasons to annotate Rio Bravo as a subject, because that annotation can be used for other purposes as well.</p>
 <ol>
 <li>
-<p>The subject annotation says that “Rio Bravo” is the title of a movie. In the media domain, the titles of movies are commonly printed in italics. We can use the <phrase><annotation type="concept">subject domain</annotation></phrase> <phrase><annotation type="code">movie</annotation></phrase> tags to generate <phrase><annotation type="concept">media domain</annotation></phrase> italic styling.</p>
+<p>The subject annotation says that “Rio Bravo” is the title of a movie. In the media domain, the titles of movies are commonly printed in italics. We can use the <phrase><annotation type="concept">subject domain</annotation></phrase> <code>movie</code> tags to generate <phrase><annotation type="concept">media domain</annotation></phrase> italic styling.</p>
 </li>
 <li>
 <p>We could use this subject annotation to generate <phrase><annotation type="concept">document domain</annotation></phrase> index markers so that we can automatically build an index of all mentions of movies in a work.</p>
 </li>
 </ol>
 <p>Subject annotation thus serves multiple purposes, and correspondingly reduces the amount of markup that is required to support all these different publishing functions. This is a common feature of subject domain markup. None of it is directly tied to specific document domain or media domain structures which will be required to publish the content. Each piece of subject-domain markup may be used to generate multiple document domain and media domain structures. For example, we could generate the following document domain markup from from the subject domain markup above (the example is in DocBook):</p>
-<codeblock language="DocBook">
+<codeblock language ="DocBook">
 &lt;para&gt;
     In 
     &lt;indexterm&gt;
@@ -231,7 +231,7 @@ ex-Union colonel out for revenge.&lt;/p&gt;
 <title>Finding resources to link to</title>
 <p>The <phrase><annotation type="concept">subject domain</annotation></phrase> approach represents a radically different partitioning of the complexity of linking and subject affinity handling. Most notable, it partitions and redirects the responsibility for finding content to link to away from the writer. All partitioning introduces some new form or complexity to replace the one that has been partitioned out. In this case, it is the complexity of doing the subject domain annotations of the text. But this is a particularly effective piece of partitioning both because that annotation only requires knowledge the writer already has, but also because that same annotation is useful for so many other algorithms as well. This is one of the best features of the subject domain – its structures tend to serve multiple algorithms rather than just one, which is, in itself, a highly effective piece of partitioning of complexity.</p>
 <p>But since we have partitioned off the responsibility of finding resources to link to, we also have to look at how the people and processes in that partition go about locating appropriate resources.  They do this by looking up resources based on the subject information (type and value) captured by the subject annotation. For this we need content that is indexed using those types and values (or their semantic equivalents). So naturally this means that we need to index our content. If you have a page on John Wayne, you can index it like this:</p>
-<codeblock language="sam">
+<codeblock language ="sam">
 topic: 
     title: Biography of John Wayne
     index:
@@ -242,7 +242,7 @@ topic:
         John Wayne was an American actor known for westerns.
 </codeblock>
 <p>Now the linking algorithm looks like this:</p>
-<codeblock language="pseudo">
+<codeblock language ="pseudo">
 match actor
     $target = find href of topic 
                where type = actor 
@@ -252,7 +252,7 @@ match actor
         continue
 </codeblock>
 <p>However, content stored in the subject domain may already be indexed effectively enough by its inherent subject domain structures. Suppose your content collection includes this subject-domain actor bio:</p>
-<codeblock language="sam">
+<codeblock language ="sam">
 actor: 
     name: John Wayne
     bio: 
@@ -261,9 +261,9 @@ actor:
         film: Rio Bravo
         film: The Shootist
 </codeblock>
-<p>Here the topic type is actor, and the <phrase><annotation type="code">name</annotation></phrase> field specifies the name of the actor in question. This is all the information we need to identify this topic as a source of information on the actor John Wayne.</p>
+<p>Here the topic type is actor, and the <code>name</code> field specifies the name of the actor in question. This is all the information we need to identify this topic as a source of information on the actor John Wayne.</p>
 <p>Only very minor changes to the linking algorithm are required to use this:</p>
-<codeblock language="pseudo">
+<codeblock language ="pseudo">
 match actor
     $target = find href of actor topic where name = @name
     create xref

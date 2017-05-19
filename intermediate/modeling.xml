@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter name="modeling">
+<chapter name ="modeling">
 <title>Modeling</title>
 <annotations>
 <p>Concepts</p>
@@ -17,12 +17,12 @@
 <title>type, term</title>
 <p>algorithm, modeling structure, procedure</p>
 </index>
-<p>As noted in <citation type="nameref" value="chapter.extract"/> it is possible to extract content from existing data sources. Some of these were not intended as sources of content, but in many cases you can turn them into content by using algorithms to wrap the data into sentences or field values in a document. Such sources essentially present a model of some object in the real world, and when we use them as a source of content, we are creating content from that model.</p>
+<p>As noted in <citation type = "nameref" value = "chapter.extract"/> it is possible to extract content from existing data sources. Some of these were not intended as sources of content, but in many cases you can turn them into content by using algorithms to wrap the data into sentences or field values in a document. Such sources essentially present a model of some object in the real world, and when we use them as a source of content, we are creating content from that model.</p>
 <p>We can apply the same techniques to creating content even when an external data source does not exist by creating our own model of a real world object using structured writing techniques. We can then extract content from that model just as we would from an external data source. This can be an extremely powerful technique for managing complexity in cases where content frequently traverses the same ground, or in cases where content must express complex relationships that are easier to model and control in a formalized systems.</p>
 <p>An entire book could be written about how to model various types of subjects and how to derive content from those models. Here I will confine myself to presenting one simplified model to demonstrate the principle at work and point to some of its key benefits.</p>
-<p>In <citation type="nameref" value="chapter.duplication"/> I mentioned that while the sentence “Press OK.” occurs repeatedly in many content sets, it makes little sense to try to factor it out as duplicate text since while the words are identical in many cases, they actually represent different pieces of information about different dialog boxes, any one of which could change independent of the others. However, we can actually go much further than factoring out individual instances of “Press OK” and factor out the entire navigational part of the procedure using a model.</p>
-<p>The navigational structure of a typical desktop application is essentially a tree consisting of a well defined set of objects: menus, menu items, dialog boxes, field values, buttons, and assorted other controls. The entire navigation system of an application can thus be modeled as a tree (and indeed, there are languages designed for modeling interfaces in just this way for programming purposes.<citation type="citation" value="https://en.wikipedia.org/wiki/User_interface_modeling"/>). Rather than looking at any of these, however, I will develop a very simple model of a UI just complex enough to demonstrate the technique:</p>
-<codeblock language="sam">
+<p>In <citation type = "nameref" value = "chapter.duplication"/> I mentioned that while the sentence “Press OK.” occurs repeatedly in many content sets, it makes little sense to try to factor it out as duplicate text since while the words are identical in many cases, they actually represent different pieces of information about different dialog boxes, any one of which could change independent of the others. However, we can actually go much further than factoring out individual instances of “Press OK” and factor out the entire navigational part of the procedure using a model.</p>
+<p>The navigational structure of a typical desktop application is essentially a tree consisting of a well defined set of objects: menus, menu items, dialog boxes, field values, buttons, and assorted other controls. The entire navigation system of an application can thus be modeled as a tree (and indeed, there are languages designed for modeling interfaces in just this way for programming purposes.<citation type = "citation" value = "https://en.wikipedia.org/wiki/User_interface_modeling"/>). Rather than looking at any of these, however, I will develop a very simple model of a UI just complex enough to demonstrate the technique:</p>
+<codeblock language ="sam">
 application: MyApp
     menu-set:
          menu: File
@@ -40,7 +40,7 @@ application: MyApp
 </codeblock>
 <p>Most of what is contained in a procedure for using a GUI is entirely formulaic. With a map of the UI like this, we can write an algorithm to follow that formula for all procedures.</p>
 <p>Here is how a procedure for using this menu might be written using conventional techniques:</p>
-<codeblock language="sam">
+<codeblock language ="sam">
 procedure: Create a new document
     step: From the {File}(menu) menu, select {New}(menu-item). The {New document}(dialog) appears.
         &gt;&gt;&gt;(%image.new_dialog)
@@ -49,20 +49,20 @@ procedure: Create a new document
     step: Press {Create}(button) or {Cancel}(button) to cancel.
 </codeblock>
 <p>Using the model, however, we can reduce all of this to:</p>
-<codeblock language="sam">
+<codeblock language ="sam">
 procedure: Create a new document
     use-dialog: New document 
 </codeblock>
-<p>Every piece of text that is used in the written-out procedure above can be derived from the model by an algorithm. The <phrase><annotation type="code">use-dialog</annotation></phrase> field in the second example triggers the use of that algorithm in the <phrase><annotation type="algorithm">synthesis</annotation></phrase> stage to generate the full text of the procedure, as well as including the correct version of the screen shot.</p>
+<p>Every piece of text that is used in the written-out procedure above can be derived from the model by an algorithm. The <code>use-dialog</code> field in the second example triggers the use of that algorithm in the <phrase><annotation type="algorithm">synthesis</annotation></phrase> stage to generate the full text of the procedure, as well as including the correct version of the screen shot.</p>
 <p>Clearly you won’t always want to generate the full procedure with a single line. There will be cases where you need to say something specific about  a particular case. For example, if this procedure were part of a tutorial, you might want to specify a particular file name. In this case, you could use the model to generate only part of the procedure:</p>
-<codeblock language="sam">
+<codeblock language ="sam">
 procedure: Create a document for testing
     navigate-to: New document
     step: Enter "test.abc" into the {Name}(field) field.
     step: Enter "normal" into the {Name}(field) field.
     confirm: New document
 </codeblock>
-<p>Here the fields <phrase><annotation type="code">navigate-to</annotation></phrase> and <phrase><annotation type="code">confirm</annotation></phrase> tell an algorithm to generate parts of the procedure from the model (the navigation to the dialog box and the button presses to confirm the action) while allowing the writer to insert custom instructions in the middle.</p>
+<p>Here the fields <code>navigate-to</code> and <code>confirm</code> tell an algorithm to generate parts of the procedure from the model (the navigation to the dialog box and the button presses to confirm the action) while allowing the writer to insert custom instructions in the middle.</p>
 <p>Procedures contain huge amounts of repeated text, none of which can be effectively factored out by standard variable substitution techniques. But by creating a model of the interface, we can factor out most of the text of most procedures, leaving it to an algorithm to perform the tedious task of typing out all those instructions over and over again.</p>
 <p>There are a number of potential benefits to factoring out content into a model:</p>
 <ul>
@@ -88,7 +88,7 @@ procedure: Create a document for testing
 <p>This ability also allows you to personalize the content to different groups or even to allow individuals to choose how they want content such as procedures expressed. Using <phrase>active content</phrase> techniques, you can change how the content is expressed based on the information you have a about the user or allow them to select from verbose or terse forms of expression.</p>
 </li>
 <li>
-<p>The fully-written-out example of the procedure above uses <phrase>keys</phrase> to factor out the difference between screen shots for different platforms, a technique that we looked at in <citation type="nameref" value="chapter.reuse"/>. But while keys are a powerful tool, they are also an abstract concept and writers have to learn to use them correctly. But in the model example, the choice of screenshots is moved from the content to the model. This factors out the complexity of using keys. It also allows you to make choices about how and where and if screen shots are displayed, including the ability to test which works best or to allow the user to select whether they prefer to see screen shots or not.</p>
+<p>The fully-written-out example of the procedure above uses <phrase>keys</phrase> to factor out the difference between screen shots for different platforms, a technique that we looked at in <citation type = "nameref" value = "chapter.reuse"/>. But while keys are a powerful tool, they are also an abstract concept and writers have to learn to use them correctly. But in the model example, the choice of screenshots is moved from the content to the model. This factors out the complexity of using keys. It also allows you to make choices about how and where and if screen shots are displayed, including the ability to test which works best or to allow the user to select whether they prefer to see screen shots or not.</p>
 </li>
 </ul>
 <p>As with every other algorithm described in this book, it is important not to get carried away with enthusiasm of modeling in isolation. Although there is something very technically satisfying about building a model and deriving a variety of content from it, the model and its algorithms are both also sources of complexity. As we have noted, there is nothing wrong in principle with introducing new complexity into the content system. All tools do this. The point is to ensure that all of the complexity in the content system is handled by a person or process with the skills, time, and resources to handle it proper. Modeling partitions and redistributes a lot of complexity, which means it can create substantial change to the overall content system. It is important to make sure that when you do it, the effect on the overall content system is positive.</p>

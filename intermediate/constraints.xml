@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter name="chapter.constraints">
+<chapter name ="chapter.constraints">
 <title>Constraint Languages</title>
 <annotations>
 <p>Concepts</p>
@@ -39,8 +39,8 @@
 <p>For a <phrase><annotation type="concept">concrete markup languages</annotation></phrase> like MarkDown, the content constraints are established in the code of the MarkDown processor. They are validated when the processor parses the MarkDown file. (In practice, though, MarkDown does no meaningful validation. Anything it does not recognize as markup, it simply outputs as text.)</p>
 <p>For <phrase><annotation type="concept">abstract markup languages</annotation></phrase> like XML you define structures yourself. Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a “validator”.</p>
 <p>A schema language is a structured language for defining structured languages. The schema for a markup languages says what structures are allowed and in what order and relationship. A given document either conforms to those constraints or it does not.</p>
-<p>Here is an example of a schema in a schema language called <phrase><annotation type="tool">RelaxNG</annotation></phrase>, which is one of several schema languages available for defining <phrase><annotation type="language">XML</annotation></phrase>-based markup languages:<citation type="citation" value="https://en.wikipedia.org/wiki/RELAX_NG#XML_syntax"/></p>
-<codeblock language="RNG">
+<p>Here is an example of a schema in a schema language called <phrase><annotation type="tool">RelaxNG</annotation></phrase>, which is one of several schema languages available for defining <phrase><annotation type="language">XML</annotation></phrase>-based markup languages:<citation type = "citation" value = "https://en.wikipedia.org/wiki/RELAX_NG#XML_syntax"/></p>
+<codeblock language ="RNG">
 &lt;element name="book" xmlns="http://relaxng.org/ns/structure/1.0"&gt;
    &lt;oneOrMore&gt;
       &lt;element name="page"&gt;
@@ -49,20 +49,20 @@
    &lt;/oneOrMore&gt;
 &lt;/element&gt;
 </codeblock>
-<p>This example defines two elements and three constraints. The first element is called <phrase><annotation type="code">book</annotation></phrase> and the second is called <phrase><annotation type="code">page</annotation></phrase>. The constraints are:</p>
+<p>This example defines two elements and three constraints. The first element is called <code>book</code> and the second is called <code>page</code>. The constraints are:</p>
 <ul>
 <li>
-<p>The <phrase><annotation type="code">page</annotation></phrase> element must occur inside the <phrase><annotation type="code">book</annotation></phrase> element. (Because the <phrase><annotation type="code">page</annotation></phrase> element is defined inside the <phrase><annotation type="code">book</annotation></phrase> element structure.)</p>
+<p>The <code>page</code> element must occur inside the <code>book</code> element. (Because the <code>page</code> element is defined inside the <code>book</code> element structure.)</p>
 </li>
 <li>
-<p>There must be at least one <phrase><annotation type="code">page</annotation></phrase> element inside the <phrase><annotation type="code">book</annotation></phrase> element, and there can be more. (Because the <phrase><annotation type="code">page</annotation></phrase> element is defined inside an RNG <phrase><annotation type="code">oneOrMore</annotation></phrase> element.)</p>
+<p>There must be at least one <code>page</code> element inside the <code>book</code> element, and there can be more. (Because the <code>page</code> element is defined inside an RNG <code>oneOrMore</code> element.)</p>
 </li>
 <li>
-<p>Text can occur inside the <phrase><annotation type="code">page</annotation></phrase> element, but not directly inside the <phrase><annotation type="code">book</annotation></phrase> element. (Because the RNG <phrase><annotation type="code">text</annotation></phrase> element occurs inside the definition of the <phrase><annotation type="code">page</annotation></phrase> element, but not as a direct child of the <phrase><annotation type="code">book</annotation></phrase> element definition.)</p>
+<p>Text can occur inside the <code>page</code> element, but not directly inside the <code>book</code> element. (Because the RNG <code>text</code> element occurs inside the definition of the <code>page</code> element, but not as a direct child of the <code>book</code> element definition.)</p>
 </li>
 </ul>
 <p>Thus if an author wrote:</p>
-<codeblock language="xml">
+<codeblock language ="xml">
 &lt;book&gt;Moby Dick
     &lt;page&gt;Call me Ishmael. Some years ago- never mind how long 
     precisely- having little or no money in my purse, and nothing 
@@ -73,7 +73,7 @@
 <p>the validator would report an error because the words “Moby Dick” are directly inside the book element and text is not allowed in that position.</p>
 <p>There are several different schema languages for XML each of which is capable of expressing and enforcing different sets of constraints. It is not unusual to combine different schema languages to more completely constrain a markup language. In particular, it is not uncommon to use a schema language called <phrase><annotation type="tool">Schematron</annotation></phrase> in concert with other schema languages like <phrase><annotation type="tool" specifically="RelaxNG">RNG</annotation></phrase> or <phrase>XSD</phrase>. While most schema languages work by modeling the structure of a document, as in the <phrase><annotation type="tool" specifically="RelaxNG">RNG</annotation></phrase> example above, <phrase><annotation type="tool">Schematron</annotation></phrase> works by making assertions about the structure in a language called <phrase><annotation type="tool">XPath</annotation></phrase>. A <phrase><annotation type="tool">Schematron</annotation></phrase> schema would make a lousy guide for authoring, but it can test assertions, and therefore enforce constraints, that no other schema language can.</p>
 <p>Here is a simple <phrase><annotation type="tool">Schematron</annotation></phrase> example. It defines one of the constraints listed above, namely that a book element must contain at least one page element.</p>
-<codeblock language="schematron">
+<codeblock language ="schematron">
 &lt;schema xmlns="http://purl.oclc.org/dsdl/schematron"  
  queryBinding="xslt2"&gt;
     &lt;pattern&gt;
@@ -85,8 +85,8 @@
     &lt;/pattern&gt;
 &lt;/schema&gt;
 </codeblock>
-<p>The rule says that in the context of the element <phrase><annotation type="code">book</annotation></phrase> the assertion that there is an element <phrase><annotation type="code">page</annotation></phrase> must be true. If it is not, the message within the <phrase><annotation type="code">assert</annotation></phrase> element will be displayed.</p>
-<p>In the <phrase><annotation type="tool" specifically="RelaxNG">RNG</annotation></phrase> schema example, the schema is essentially a template that models the hierarchy of the document. The constraints are consequences of the structure of that hierarchy. (The <phrase><annotation type="code">book</annotation></phrase> element cannot contain text because there is no place for text in that part of the hierarchy.) Only documents that conform to the template are valid.</p>
+<p>The rule says that in the context of the element <code>book</code> the assertion that there is an element <code>page</code> must be true. If it is not, the message within the <code>assert</code> element will be displayed.</p>
+<p>In the <phrase><annotation type="tool" specifically="RelaxNG">RNG</annotation></phrase> schema example, the schema is essentially a template that models the hierarchy of the document. The constraints are consequences of the structure of that hierarchy. (The <code>book</code> element cannot contain text because there is no place for text in that part of the hierarchy.) Only documents that conform to the template are valid.</p>
 <p>In the <phrase><annotation type="tool">Schematron</annotation></phrase> example, the schema is a series of constraint statements. The hierarchy of the document is a consequence of meeting all the constraints. Any document is valid as long as it conforms to all the stated constraints.</p>
 <p>There are essentially two ways to describe constraints. One is to start from the basis that nothing is allowed unless there is a specific rule allows it. The other is to start from the basis that everything is allowed unless there is some specific rule that forbids it. Schematron is based on the latter doctrine. It says anything is valid as long as it passes a given set of tests. Other schema languages take the former approach. If you validate an XML document against an empty XSD schema, for instance, the validator will say it is invalid because it can’t find the definition of the root element. In essence, therefore, their constraints are described as a set of permissions. The writer is then constrained to stay within the boundaries of what is permitted.</p>
 <p>Starting on the basis that everything is allowed is not generally a good model for structured writing. You have to write algorithms that can handle everything that is included in a document, so you pretty much have to start with a definitive list of what is allowed and in what combinations. This is why Schematron is seldom used as a standalone schema language. But it can be very useful for qualifying the use of certain structures permitted by other in other schema languages, in particular the kinds of constraints that cannot be expressed in the main schema language.</p>

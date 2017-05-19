@@ -300,7 +300,7 @@
     <xsl:template match="bibliography"></xsl:template>
     
     
-    <xsl:template match="annotation[@type='code']">
+    <xsl:template match="code">
         <db:code>
             <xsl:apply-templates/>
         </db:code>

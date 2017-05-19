@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter name="chapter.relevance">
+<chapter name ="chapter.relevance">
 <title>Relevance</title>
 <annotations>
 <p>Concepts</p>
@@ -69,10 +69,10 @@
 </section>
 <section>
 <title>Showing relevance to algorithms</title>
-<p>Showing relevance to algorithms comes down to breaking information up into clearly labeled fields containing clearly unambiguous values. For example, to query a web service that generates stock charts, you would need to provide it with a clearly unambiguous identifier for the company whose chart you wanted. The best way to do that would not be the company name, since there can be duplicate or similar names in different industries (Apple Computer vs Apple Music, for example), but the company’s stock symbol, which is guaranteed to be unique by the exchange on which it is listed (though you do have to provide the exchange code as well to be globally unique: <phrase><annotation type="code">NASDAQ:AAPL</annotation></phrase>, not just <phrase><annotation type="code">AAPL</annotation></phrase>).</p>
+<p>Showing relevance to algorithms comes down to breaking information up into clearly labeled fields containing clearly unambiguous values. For example, to query a web service that generates stock charts, you would need to provide it with a clearly unambiguous identifier for the company whose chart you wanted. The best way to do that would not be the company name, since there can be duplicate or similar names in different industries (Apple Computer vs Apple Music, for example), but the company’s stock symbol, which is guaranteed to be unique by the exchange on which it is listed (though you do have to provide the exchange code as well to be globally unique: <code>NASDAQ:AAPL</code>, not just <code>AAPL</code>).</p>
 <p>This means that the web service needs to index its information on stock prices according to stock symbols (which is exactly what it does, of course). Actually, it is more than likely that the stock chart drawing service does not hold price information at all, but requests it as needed from yet another web service. The stock ticker symbol is the unambiguous key that identifies the company in each of these transactions.</p>
 <p>While humans and algorithms assess relevance in different ways, the foundations of relevance are the same for both: clear identification of the type and subject matter of the information. This means that you need to maintain <phrase><annotation type="concept">metadata</annotation></phrase> that clearly identifies the type and subject, and also present the content in a way that makes its type and subject evident at a glance.</p>
-<codeblock language="sam">
+<codeblock language ="sam">
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious.
@@ -93,7 +93,7 @@ recipe: Hard Boiled Egg
         serving: 1 large (50 g)
         calories: 78
 </codeblock>
-<p>This recipe example contains a number of structures that both humans and algorithms can use to assess relevance. The simple fact that this is specifically a document of type <phrase><annotation type="code">recipe</annotation></phrase> establishes basic relevance. The inclusion of a picture helps humans visually identify the recipe they are looking for. Information like the number of calories could be used by an algorithm to select recipes for a low-calorie cookbook.</p>
+<p>This recipe example contains a number of structures that both humans and algorithms can use to assess relevance. The simple fact that this is specifically a document of type <code>recipe</code> establishes basic relevance. The inclusion of a picture helps humans visually identify the recipe they are looking for. Information like the number of calories could be used by an algorithm to select recipes for a low-calorie cookbook.</p>
 <p>It is possible to maintain metadata on type and subject of content in a <phrase><annotation type="tool">content management system</annotation></phrase> that hosts content written in the document or subject domains. In this scenario, ensuring that the organization of the content makes the type and subject evident at a glance is a separate problem from correctly labeling the content in the CMS. While it is certainly possible, with the right authoring discipline, to make sure that the content demonstrates what the metadata claims about it, it is also possible for the content not to match what the metadata claims, or not to demonstrate its type and subject effectively.</p>
 <p>Moving content to the <phrase><annotation type="concept">subject domain</annotation></phrase> allows you to show relevance to both humans and machines with the same structures, assuring that the two do not get out of sync.</p>
 </section>
