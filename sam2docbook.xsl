@@ -51,6 +51,12 @@
         </db:part>
     </xsl:template>
     
+    <xsl:template match="partintro">
+        <db:partintro>
+            <xsl:apply-templates/>
+        </db:partintro>
+    </xsl:template>
+    
     <xsl:template match="book/index">
         <db:index>
             <xsl:apply-templates/>
