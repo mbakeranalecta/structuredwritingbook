@@ -18,8 +18,19 @@
 <db:para>There are a number of lightweight markup languages. Some of the more prominent include:</db:para>
 <db:section>
 <db:title>Markdown</db:title>
-<db:para>The most prominent of the lightweight languages, and arguably the lightest-weight, is Markdown. Invented in 2004 by John Gruber as a way to quickly write simple web pages using syntax similar to that of an text-format email, it has spread to all kind of systems and now exists is multiple variants that have been adapted for different purposes.</db:para>
-<db:para>“Adapted for different purposes” mostly means that people have created versions with specific syntax and semantics in addition to those of Gruber’s first version. For instance, the code sharing site GitHub has adopted “Git Hub flavored markdown” as the standard format for user-supplied information on the site, such as project descriptions and issues, and has added syntax specific to tracking issue numbers and code commits for projects, allowing the automatic generation of links between commits and the issues that relate to them.</db:para>
+<db:para>The most prominent of the lightweight languages, and arguably the lightest-weight, is Markdown. Invented in 2004 by John Gruber as a way to quickly write simple web pages using syntax similar to that of an text-format email, it has spread to all kind of systems and now exists is multiple variants that have been adapted for different purposes. I have used many examples of MarkDown in this book. Here is one of them:</db:para>
+<db:programlisting language="markdown">
+Wayne's best yet
+================
+
+After tiresome performances in _Rio Grande_ 
+and _Sands of Iwo Jima_, the Duke is brilliant 
+in _Rio Bravo_.
+</db:programlisting>
+<db:para>“Adapted for different purposes” mostly means that people have created versions with specific syntax and semantics in addition to those of Gruber’s first version. For instance, the code sharing site GitHub has adopted “Git Hub flavored markdown” as the standard format for user-supplied information on the site, such as project descriptions and issues, and has added syntax specific to tracking issue numbers and code commits for projects, allowing the automatic generation of links between commits and the issues that relate to them. For example:</db:para>
+<db:programlisting language="github_markdown">
+Issue #135 was fixed in commit 8e8c6a0b4c9c41bd72fab5fd53e3d967e9688110.
+</db:programlisting>
 <db:para>Markdown is a simple document-domain language. While its semantics are essentially a subset of HTML, it is more squarely in the document domain than HTML since it lacks any ability to specify formatting or even to create tables (though various MarkDown flavors have added support for tables).</db:para>
 <db:para>One of the recurring patterns of technology development, and certainly markup language development, is that when some simple format becomes popular because of its simplicity, people start to add “just one more thing” to it, with the result that it either becomes more complex (and thus less attractive) or more fragmented (and thus harder to build a tool chain for). Markdown is definitely going the route of fragmentation at the moment (though a standardization effort, in the form of CommonMark is also under way). There is even a project to add semantic annotation to MarkDown as part of the Lightweight DITA project.</db:para>
 <db:para>None of this is a reason not to use MarkDown where its structures and syntax make it an appropriate source. MarkDown provides useful constraints on the basic formatting of a web page both by factoring out direct formatting features and by providing a very limited set of document domain features. These constraints help keep all contributors to a site from indulging in extravagant non-standard formatting or overly elaborate text structures. It successfully partitions basic Web formatting, though not much else.</db:para>
@@ -30,6 +41,15 @@
 <db:section>
 <db:title>Wiki markup</db:title>
 <db:para>Another popular lightweight format is Wiki markup, introduced by Ward Cunningham in 1995 as the writing format for WikiWikiWeb, the first Wiki.<db:footnote><db:para>https://en.wikipedia.org/wiki/WikiWikiWeb</db:para></db:footnote> Wiki markup is similar to Markdown in many respects (most lightweight languages share the same basic syntax conventions, based on the imitation of formatted document features in plain text documents). What makes Wiki markup distinct is how it is tied into the operation of a Wiki. One of its most notable feature is how linking is handled. In the original WikiWikiWeb markup, and word with internal capitals was considered a “WikiWord” and instantly became a link to a page with that WikiWord as the title. Such a page was created automatically if it did not already exist. This was an extremely simple implementation of a linking algorithm based on annotation rather than the naming of resources.</db:para>
+<db:para>Different wikis have differences in the markup they support. Here is a small example of MediaWiki markup. (MediaWiki) is the system that runs Wikipedia):</db:para>
+<db:programlisting language="mediawiki">
+"Take some more [[tea]]," the March Hare said to Alice, very earnestly.
+
+"I've had '''nothing''' yet," Alice replied in an offended tone, "so I can't take more."
+
+"You mean you can't take ''less''?" said the Hatter. "It's very easy to take ''more'' than nothing."
+</db:programlisting>
+<db:para>This sample is from the Wikipedia article on Wikis<db:footnote><db:para>https://en.wikipedia.org/wiki/Wiki#Editing</db:para></db:footnote>. You can find the explanation there.</db:para>
 <db:para>A wiki is a type of simple content management system which allows people to create and edit pages directly from a web browser. A wiki, essentially, is a CMS which partitions and distributes the problem of web content management out to individual contributors, allowing anyone to edit and improve a site. Wikipedia is by far the largest and most well known Wiki. Wiki’s are a significant example of a bottom-up information architecture. Anyone can add a page and that page is integrated into the overall collection by Wiki word style linking and by including itself in categories (conventionally, by naming them on the page).</db:para>
 <db:para>Cunningham described WikiWikiWeb as “The simplest online database that could possibly work.”<db:footnote><db:para>http://www.wiki.org/wiki.cgi?WhatIsWiki</db:para></db:footnote> Like Markdown, its success has led to additional features, fragmentation, and growing complexity. Some commercial wikis are now complex content management systems. Indeed, it is somewhat difficult today to define the boundaries between Wikis, Blog platforms, and conventional CMSs.</db:para>
 <db:para>If Wikis have a defining characteristic today it is probably the bottom-up architecture rather than the original novelty of in-browser editing which is now found across many different kinds of CMS. Cunningham designed Wikis to be collaborative platforms – places where people could collaborate with people they did not even know to create something new without the requirement for central direction or control. The idea was not only architecturally bottom-up but editorially bottom-up. Most Wiki products today, however, include features for exercising a degree of central control. Question and answer sites like Stack Exchange with their distributed and democratic control systems may be closer today to Cunningham’s idea of a democratic creation space.</db:para>

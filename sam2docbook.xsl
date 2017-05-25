@@ -241,6 +241,10 @@
         <xsl:apply-templates/>
     </xsl:template>
     
+    <xsl:template match="annotation[@type='website']">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
     <xsl:template match="annotation[@type='tool']">
         <xsl:apply-templates/>
     </xsl:template>
