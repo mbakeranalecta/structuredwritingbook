@@ -21,9 +21,22 @@ chapter:(#chapter.lightweight) Lightweight Languages
     
     section: Markdown
     
-        The most prominent of the lightweight languages, and arguably the lightest-weight, is Markdown. Invented in 2004 by John Gruber as a way to quickly write simple web pages using syntax similar to that of an text-format email, it has spread to all kind of systems and now exists is multiple variants that have been adapted for different purposes. 
+        The most prominent of the lightweight languages, and arguably the lightest-weight, is Markdown. Invented in 2004 by John Gruber as a way to quickly write simple web pages using syntax similar to that of an text-format email, it has spread to all kind of systems and now exists is multiple variants that have been adapted for different purposes. I have used many examples of MarkDown in this book. Here is one of them:
 
-        "Adapted for different purposes" mostly means that people have created versions with specific syntax and semantics in addition to those of Gruber's first version. For instance, the code sharing site GitHub has adopted "Git Hub flavored markdown" as the standard format for user-supplied information on the site, such as project descriptions and issues, and has added syntax specific to tracking issue numbers and code commits for projects, allowing the automatic generation of links between commits and the issues that relate to them.
+        ```(markdown)
+            Wayne's best yet
+            ================
+            
+            After tiresome performances in _Rio Grande_ 
+            and _Sands of Iwo Jima_, the Duke is brilliant 
+            in _Rio Bravo_.
+
+
+        "Adapted for different purposes" mostly means that people have created versions with specific syntax and semantics in addition to those of Gruber's first version. For instance, the code sharing site GitHub has adopted "Git Hub flavored markdown" as the standard format for user-supplied information on the site, such as project descriptions and issues, and has added syntax specific to tracking issue numbers and code commits for projects, allowing the automatic generation of links between commits and the issues that relate to them. For example:
+
+        ```(github_markdown)
+            Issue #135 was fixed in commit 8e8c6a0b4c9c41bd72fab5fd53e3d967e9688110.
+
 
         Markdown is a simple {document-domain} language. While its semantics are essentially a subset of HTML, it is more squarely in the document domain than HTML since it lacks any ability to specify formatting or even to create tables (though various MarkDown flavors have added support for tables).  
 
@@ -40,6 +53,17 @@ chapter:(#chapter.lightweight) Lightweight Languages
     section: Wiki markup
     
         Another popular lightweight format is Wiki markup, introduced by Ward Cunningham in 1995 as the writing format for WikiWikiWeb, the first Wiki.[https://en.wikipedia.org/wiki/WikiWikiWeb] Wiki markup is similar to Markdown in many respects (most lightweight languages share the same basic syntax conventions, based on the imitation of formatted document features in plain text documents). What makes Wiki markup distinct is how it is tied into the operation of a Wiki. One of its most notable feature is how linking is handled. In the original WikiWikiWeb markup, and word with internal capitals was considered a "WikiWord" and instantly became a link to a page with that WikiWord as the title. Such a page was created automatically if it did not already exist. This was an extremely simple implementation of a {linking algorithm} based on annotation rather than the naming of resources. 
+
+        Different wikis have differences in the markup they support. Here is a small example of {MediaWiki}(tool) markup. ({MediaWiki}) is the system that runs {Wikipedia}(website "wikipedia.org")):
+
+        ```(mediawiki)
+            "Take some more [[tea]]," the March Hare said to Alice, very earnestly.
+
+            "I've had '''nothing''' yet," Alice replied in an offended tone, "so I can't take more."
+
+            "You mean you can't take ''less''?" said the Hatter. "It's very easy to take ''more'' than nothing."
+
+        This sample is from the {Wikipedia} {article on Wikis}[https://en.wikipedia.org/wiki/Wiki#Editing]. You can find the explanation there.
         
         A wiki is a type of simple {content management system}(tool) which allows people to create and edit pages directly from a web browser. A wiki, essentially, is a CMS which partitions and distributes the problem of web content management out to individual contributors, allowing anyone to edit and improve a site. Wikipedia is by far the largest and most well known Wiki. Wiki's are a significant example of a {bottom-up information architecture}. Anyone can add a page and that page is integrated into the overall collection by Wiki word style linking and by including itself in categories (conventionally, by naming them on the page).
         

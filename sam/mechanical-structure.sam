@@ -22,9 +22,9 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
     For our purposes, therefore, I am going to deal with the mechanical structure of content strictly in terms of nested non-overlapping blocks. 
 
          
-    section: Flat vs. nested structures
+    section: Flat vs. hierarchical structures
     
-        Even when we decided on the nested blocks approach we are still left with some fundamental choices about mechanical structure. The first is flat vs. nested structure.  
+        Even when we decided on the nested blocks approach we are still left with some fundamental choices about mechanical structure. The first is flat vs. hierarchical structure.  
         
         We noted in [#chapter.document-domain] that in HTML, you have six levels of heading (`h1` through `h6`) whereas in DocBook you have only `title`. In DocBook, you can divide a document up into sections and nest sections inside sections. You can then print the titles of sections inside sections in a smaller font that the titles of first level sections. You get to have differences in heading size without having six different heading tags. 
         
@@ -55,7 +55,7 @@ chapter:(#chapter.mechanical-structure) Mechanical Structure
         
         * Create a really flat document domain language. Examples are HTML and Markdown. The problem here is that they impose few constraints, and the lack of context-setting hierarchy makes it hard to model different types of document structures without creating hundred of tags -- which would negate any {functional lucidity} that you gained by keeping the language flat.
         
-        * Create a hierarchical language that has a really permissive structure, so that you can put boxes inside boxes in lots of different ways. An example of this is DocBook. The problem here is that the possible permutations make writing algorithms difficult and you often need to impose additional constraints on your authors that are not expressed or enforced by the markup itself. This again diminishes {functional lucidity}, and compromises {conformance}. (An interesting property of this approach is that the flexibility of the language means that authors can choose to create documents that are deeply nested or very flat. This is not really a virtue, however, as it is not clear how this choice contributes to improved content quality.)
+        * Create a hierarchical language that has a really permissive structure, so that you can put boxes inside boxes in lots of different ways. An example of this is DocBook. The problem here is that the possible permutations make writing algorithms difficult and you often need to impose additional constraints on your authors that are not expressed or enforced by the markup itself. This again diminishes {functional lucidity}, and compromises {conformance}. (An interesting property of this approach is that the flexibility of the language means that authors can choose to create documents that are very hierarchical or very flat. This is not really a virtue, however, as it is not clear how this choice contributes to improved content quality.)
         
         * Define a smaller, stricter document domain language that is appropriate to the particular types of documents you want to write, possibly as restricted subset of an existing language like DocBook. The main difficulty with this approach is that it involves you in having to do your own language design, which many organization try to avoid. In other words, it involves transferring complexity to an information architect or content engineer. Once you have decided to go this route, going to the {subject domain} instead may be no more expensive while providing better {functional lucidity} and {conformance}. 
         
