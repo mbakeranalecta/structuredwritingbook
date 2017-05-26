@@ -10,7 +10,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
     
         The term "single sourcing" gets used to mean different things, all of which involve a single source in one way or another, but which use different approaches and achieve different ends. I will look at a number of variation on this theme in subsequent chapters.
 
-    Single sourcing adds complexity to the notion of separating content from formatting because we are now separating the content from not one but two or more sets of formatting. If you do not get the partitioning of content and formatting correct, it will show up when your try to apply two different sets of formatting to the same content. 
+    Single sourcing adds complexity to the notion of separating content from formatting because we are now separating the content from not one but two or more sets of formatting. In other words, we are not simply separating content from a particular set of formatting but from a set of decisions about formatting so that we can decide differently for two different media. If you do not get the partitioning of content and formatting correct, it will show up when your try to apply two different sets of formatting to the same content. 
     
     This is an area in which many organizations have unhandled complexity which is falling through to their readers. Their authoring techniques do not allow them to sufficiently separate the content from all of the formatting that is appropriate in different media, resulting in their delivering one media's formatting to a different media. This means the content does not work as well in the media it was not designed for. By improving how we separate content from formatting, though, we can significantly reduce the amount of complexity that goes unhandled, resulting in a better experience for our readers.  
     
@@ -118,7 +118,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         This leads to a number of formatting problems, such as:
         
-        * Where do break each line of text so the margins look neat and the text is not cramped or spread out too much. 
+        * Where to break each line of text so the margins look neat and the text is not cramped or spread out too much. 
         * How to avoid a heading appearing at the bottom of a page or the last line of a paragraph appearing as the first line of a page? 
         * How do you handle a list or a table when you run out of space on the page for it?
         * How do you create a cross reference to the page on which a chapter starts or a figure appears when you don't know the page number yet? 
@@ -149,12 +149,12 @@ chapter:(#chapter.single-sourcing) Single Sourcing
                     output '</fo:wrapper>'
                 output '</fo:block>'
         
-        Here, as you can see, the rule simply wraps the XSL-FO formatting structures around the text of the title. It unpacks the text from a document domain structure and inserts it into a subject domain structure. 
+        Here, as you can see, the rule simply wraps the XSL-FO formatting structures around the text of the title. It unpacks the text from a {document domain} structure and inserts it into a {media domain} structure. 
         
         
     section: Differential single sourcing
     
-        Basic single sourcing outputs the same document presentation to different media. But each media is different, and what works well in one media does not always work as well in another. For example, online media generally support {hypertext}(concept) links, while paper does not. Let's suppose that we have a piece of content that includes a link.
+        Basic {single sourcing} outputs the same document presentation to different media. But each media is different, and what works well in one media does not always work as well in another. For example, online media generally support {hypertext}(concept) links, while paper does not. Let's suppose that we have a piece of content that includes a link.
         
         ```
             In Rio Bravo, {the Duke}(link "http://JohnWayne.com") 
@@ -216,7 +216,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
 
         This provides the reader with less information, in the sense that it does not give them access to all the information on JohnWayne.com, but it does the disambiguation better and in a more paper-like way. The loss of the reference to JohnWayne.com is probably not an issue here. Following that link by typing it into a browser is a lot more work than simply clicking on it on a Web page. If someone reading on paper wants more information on John Wayne they are far more likely to type "John Wayne" into Google than type "JohnWayne.com" into the address bar of their browser.   
         
-        With the source content written as it is, though, there is no easy way to produce this preferred form for paper. The content is in the {document domain}(concept) and the document domain specifies the presentation of the content. It is therefore not a neutral format between different media that require different forms of presentation. The choice to specify a link gives it a strong bias towards the Web and online media rather than paper. A document domain approach that favored paper would similarly lead to a poorer online presentation that omitted the link. 
+        With the source content written as it is, though, there is no easy way to produce this preferred form for paper. The content is in the {document domain}(concept) and the document domain specifies the presentation of the content. It is therefore not a neutral format between different media that require different forms of presentation. The choice to specify a link gives it a strong bias towards the Web and online media rather than paper. A {document domain} approach that favored paper would similarly lead to a poorer online presentation that omitted the link. 
         
         What we need to address the problem is a differential approach to single sourcing, one that allows us to differ not only the formatting but the presentation of the content for different media.
         
@@ -266,7 +266,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         # pix of timetable and routing widget ???
 
-        In this scenario, you are moving content to the subject domain to partition the presentation from the information so that you can produce a different information design in different media.
+        In this scenario, you are moving content to the {subject domain} to partition the presentation from the information so that you can produce a different information design in different media.
         
         >>>(image ../graphics/Differential.xml)
         
@@ -274,7 +274,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
     section: Conditional differential design
     
-        You can also do differential single sourcing by using conditional (management domain) structures in the document domain.
+        You can also do differential single sourcing by using conditional ({management domain}) structures in the document domain.
        
         For instance, if you are writing a manual that you intend to single source to a help system, you might want to add context setting information to the start of a section when it appears in the help system. The manual may be designed to be read sequentially, meaning that the context of individual sections is established by what came before. But help systems are always accessed randomly, meaning that the context of a particular help topic may not be clear if it was single sourced from a manual. To accommodate this, you could include a context setting paragraph that is conditionalized to appear only in help output:
         
@@ -313,13 +313,12 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         While there is a lot you can do in the way of differential single sourcing to successfully output documents that work well in multiple media, there are limits to how far this approach can take you. 
         
-        Books are a linear media in which one chapter follows another in order. The Web is a hypertext media in which Every Page is Page One. Readers arrive by search and navigate by following hypertext links. 
-        The linear and hypertext approaches are fundamentally different ways of writing which invite fundamentally different ways of navigating and using information.[*eppo] Even moving content to the subject domain as much as possible will not entirely factor out these fundamental differences of approach. 
+        Books are a linear media in which one chapter follows another in order. The Web is a {hypertext} media in which Every Page is Page One. Readers arrive by search and navigate by following hypertext links. The linear and hypertext approaches are fundamentally different ways of writing which invite fundamentally different ways of navigating and using information.[*eppo] Even moving content to the {subject domain} as much as possible will not entirely factor out these fundamental differences of approach. 
 
         footnote:(*eppo)
             For a full examination of the differences, see my book {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}(citetitle).
         
-        When single sourcing content to both linear paper-like media and hypertext web-like media, you will generally have to choose a primary media to write for. Single sourcing that content to the other media will be on a best-effort basis. It may be good enough for a particular purpose, but it will never be quite as good as it could have been had you designed for that media.
+        When single sourcing content to both linear paper-like media and {hypertext} web-like media, you will generally have to choose a primary media to write for. Single sourcing that content to the other media will be on a best-effort basis. It may be good enough for a particular purpose, but it will never be quite as good as it could have been had you designed for that media.
         
         Many of the tools used for single sourcing have a built in bias towards one media or another. Desktop-publishing tools like {FrameMaker}(tool), for instance, were designed for linear media. Online collaborative tools like {wikis}(tool) were designed for {hypertext} media. It is usually a good idea to pick a tool that was designed for the media you choose as your primary. Tools partition the complexity of content creation in a way that suits the primary media they are designed for. 
         
@@ -327,13 +326,13 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         Some organizations seem to feel that they should only switch to tools that are designed primarily for online content when they have entirely abandoned the production of paper and paper-like formats such as PDF. This certainly does not need to be the case. It is perfectly possible to switch to an online-primary tools and still produce linear media as a secondary output format. 
         
-        Changing your information design practices from linear paper based designs to hypertext designs is non-trivial, but such designs better suit the way many people use and access content today. I discuss these design differences in depth in my book, {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}(citetitle) Don't expect single sourcing to successfully turn document-oriented design into effective hypertext by themselves. To best serve modern readers it will usually be much more effective to adopt an {Every Page is Page One}(concept) approach to information design and use structured writing techniques to do a best-effort single sourcing to linear media for those of your readers who still need paper or paper-like formats -- or for those documents where linear organization still makes sense. 
+        Changing your information design practices from linear paper based designs to {hypertext} designs is non-trivial, but such designs better suit the way many people use and access content today. I discuss these design differences in depth in my book, {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}(citetitle) Don't expect single sourcing to successfully turn document-oriented design into effective hypertext by themselves. To best serve modern readers it will usually be much more effective to adopt an {Every Page is Page One}(concept) approach to information design and use structured writing techniques to do a best-effort single sourcing to linear media for those of your readers who still need paper or paper-like formats -- or for those documents where linear organization still makes sense. 
         
     section: Responsive Design
     
-        Responsive design, an approach to web design in which a page automatically adjusts to the viewport it is displayed on, is a form of differential single sourcing. Many attempts at responsive design are not as responsive as we would like them to be because the content is not stored in a source format that allows a sufficient degree of differential presentation. If you want to achieve effective and consistent responsive design in your output, you will find that the use of {subject domain} structures in your content will be enormously helpful. 
+        Responsive design, an approach to web design in which a page automatically adjusts to the viewport it is displayed on, is a form of differential single sourcing. Many attempts at responsive design are not as responsive as we would like them to be because the content is not stored in a source format that allows a sufficient degree of differential presentation. Effectively, responsive design allows an algorithm to decide on the fly how to organize and present content as the viewport changes, and like all deferred decisions, it is only as good as the information communicated to it. If you want to achieve effective and consistent responsive design in your output, you will find that the use of {subject domain} structures in your content will be enormously helpful in capturing and transferring the information required to make these decision on the fly. 
         
-        It is very difficult to expect writers to encode the presentation structures of a responsive design into their files as they write. Not only that, the very idea of responsive design should take into account the possibility of having to respond to new media in the future. Every sound responsive design decision is based on the appropriate organization of subject matter in a particular view port. Therefore, the rules of effective responsive design are going to be expressed in subject matter terms. The best way to create content that will presented using responsive design, therefore, is in the subject domain where the subject matter divisions on which responsive design rules are expressed are made fully explicit in the content. We will look at this in more depth in [#chapter.active].
+        It is very difficult to expect writers to encode the presentation structures of a responsive design into their files as they write. Not only that, the very idea of responsive design should take into account the possibility of having to respond to new media in the future. Every sound responsive design decision is based on the appropriate organization of subject matter in a particular view port. Therefore, the rules of effective responsive design are going to be expressed in subject matter terms. The best way to create content that will presented using responsive design, therefore, is in the {subject domain} where the subject matter divisions on which responsive design rules are expressed are made fully explicit in the content. We will look at this in more depth in [#chapter.active].
         
     
         
