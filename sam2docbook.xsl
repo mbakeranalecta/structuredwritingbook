@@ -65,6 +65,7 @@
     
     <xsl:template match="chapter/index"/>
     <xsl:template match="preface/index"/>
+    <xsl:template match="section/index"/>
     
     <xsl:template match="appendix">
         <db:appendix>
