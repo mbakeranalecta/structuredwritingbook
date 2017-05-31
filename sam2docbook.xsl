@@ -370,18 +370,20 @@
     </xsl:template>
     
     <xsl:template name="index-annotation">
-        <db:indexterm>
-            <db:primary>
-                <xsl:choose>
-                    <xsl:when test="@specifically">
-                        <xsl:value-of select="@specifically"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="descendant-or-self::text()"/>
-                    </xsl:otherwise>
-                </xsl:choose>                             
-            </db:primary>
-        </db:indexterm>
+        <xsl:if test="not(ancestor::footnote)">
+           <db:indexterm>
+               <db:primary>
+                   <xsl:choose>
+                       <xsl:when test="@specifically">
+                           <xsl:value-of select="@specifically"/>
+                       </xsl:when>
+                       <xsl:otherwise>
+                           <xsl:value-of select="descendant-or-self::text()"/>
+                       </xsl:otherwise>
+                   </xsl:choose>                             
+               </db:primary>
+           </db:indexterm>
+        </xsl:if>
     </xsl:template>
     
     <xsl:template match="bibliography"></xsl:template>
