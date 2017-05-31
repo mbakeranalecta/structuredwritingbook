@@ -19,7 +19,7 @@
 <term>separating content from formatting</term>
 </record>
 </index>
-<p>If there is one phrase that most people associate with structured writing, it is “separating content from formatting”. The is the most basic and well-known form of partitioning and redirecting of complexity that we do in structured writing, and it illustrates the basic method by which we do all the rest. But partitioning content from formatting is not as simple as it may seem. So let’s take a look at it one step at a time.</p>
+<p>If there is one phrase that most people associate with structured writing, it is “separating content from formatting”. The is the most basic and well-known form of partitioning and redirecting of complexity that we do in structured writing, and it illustrates the basic method by which we do all the rest. The basic premise of separating content from formatting is to separate decisions about the appearance of a document from decisions about its content. But partitioning content from formatting is not as simple as it may seem. So let’s take a look at it one step at a time.</p>
 <section>
 <title>Separate out style instructions</title>
 <p>Let’s start with a simple bit of content that includes a description of its format. I’m going to use CSS syntax to describe the format, but that is not significant. This is just to show what we are doing when we do the separation. I’m also going to represents certain characters by their names in square brackets, just so we can see exactly where everything is going:</p>
@@ -29,7 +29,7 @@
 {font: 10pt "Open Sans"}[bullet][tab]Eggs
 {font: 10pt "Open Sans"}[bullet][tab]Gold
 </codeblock>
-<p>This file contains content and formatting, so let’s separate the two. Of course, when we remove the formatting from the content we are going to have to add something in its place so we can add the formatting back later. The algorithm is not really “separate content from formatting” but “separate formatting from content and replace it with something else”.</p>
+<p>This file contains content and formatting, so let’s separate the two. Of course, when we remove the formatting from the content we are going to have to add something in its place so we can add the formatting back later (partitioning requires passing information between partitions, preferable in-band).</p>
 <p>The simplest thing to replace it with is a style:</p>
 <codeblock>
 {style: paragraph}The box contains:
@@ -77,13 +77,13 @@ bullet-paragraph = {font: 12pt "Century Schoolbook"}[bullet][tab]
 <codeblock>
 bullet-paragraph = {font: 12pt "Century Schoolbook"}[em dash][tab]
 </codeblock>
-<p>And then we maybe realize that “bullet-paragraph” is not the best name any more, because the style is now a dash, not a bullet. In other words we discover that we had not done as good a job as we thought of partitioning content and formatting, because the content actually still contains formatting information in the form of a style that is named for a particular piece of formatting.</p>
+<p>And then we maybe realize that “bullet-paragraph” is not the best name any more, because the style is now a dash, not a bullet. In other words we discover that we had not done as good a job as we thought of partitioning content and formatting, because the content actually still contains formatting information in the form of a style that is named for a particular piece of formatting. In other words, the writer is still making the formatting choice “bullet” when we want them to focus on the content choice “list”.</p>
 </section>
 <section>
 <title>Name your abstractions correctly</title>
 <p>When we separate formatting from content, we have to insert something in its place, and it matters what that something is and what it is called. If we call it the wrong thing we set up a false expectation, and that will lead to authors using it incorrectly, which will mean we can’t format it reliably. This is simply poor partitioning.</p>
-<p>So the first lesson about the algorithm of separating content from formatting is that it matters what you call things. When you do this, you are creating an abstraction, and you need to figure out what that abstraction is and name it appropriately.</p>
-<p>So what is the abstraction here? It is a list, of course. So maybe we do this:</p>
+<p>So the first lesson about separating content from formatting is that it matters what you call things. You are creating an abstraction, and you need to figure out what that abstraction is and name it appropriately.</p>
+<p>What is the abstraction here? Sand, Eggs, and Gold are list items. So maybe we do this:</p>
 <codeblock>
 {style: paragraph}The box contains:
 {style: list-item}Sand
@@ -151,7 +151,7 @@ list:
     ordered-list-item:Repeat
 </codeblock>
 <p>There are a number of significant changes here. First, our structure is no longer flat. We have introduce the idea of a container. A list is a container for list items. In creating this container we have added something to the content that was not there before. Previously it was a series of paragraphs with different styles attached. Now we have a container, which, as far as the formatting is concerned, simply never existed in the original. The writer and reader knew that the sequence of bulleted paragraphs formed a list, but that was an interpretation of the formatting. Now we have taken that interpretation and instantiated it in the content itself. Those lines starting with bullets constitute a list, and now we have made it explicit.</p>
-<p>By creating the idea of a list, we are able to further separate list formatting from the content of the list – because now an algorithm, one I will call the <phrase><annotation type="concept">formatting algorithm</annotation></phrase>,  can recognize it as a list and can make formatting decisions based on that knowledge.</p>
+<p>By creating the idea of a list, we are able to further separate list formatting from the content of the list – because now an algorithm can recognize it as a list and can make formatting decisions based on that knowledge.</p>
 <p>The second important thing that has happened here is that the content no longer contains references to style names. Instead we have structures. <code>list</code> is a structure and so are <code>paragraph</code> and <code>numbered-list-items</code>.</p>
 <p>We have replaced styles with structures because the same structure may get a different style depending on where it is in the document. The <phrase><annotation type="concept">formatting algorithm</annotation></phrase> is responsible for determining if an ordered-list-item is the first one inside a list and formatting it accordingly. (Which is just <phrase><citation type = "citation" value = "https://css-tricks.com/numbering-in-style/">how list formatting works in CSS</citation></phrase>.)</p>
 <p>Now authors no longer apply styles to content, even ones with abstract names. Rather they place content in structures and allow the formatting algorithm to apply styles appropriately. The content is  separated even more from the formatting.</p>
@@ -183,8 +183,8 @@ unordered-list:
     list-item:Gold
 </codeblock>
 <p>And, of course, the <code>list-item</code> structure can be used in either an unordered list or an ordered list, because it is a list item in either case, and the <phrase><annotation type="concept">formatting algorithm</annotation></phrase> can tell the difference based on which type of list it belongs to. The name <code>list-item</code> describes it role in the document in a way that is entirely separated from how it will be styled.</p>
-<p>Moving the abstraction out to the container is an important part of the algorithm of separating content from formatting. It partitions ordered and unordered lists making the construction of each simpler an more reliable. This helps keep things consistent and reduces the number of things authors have to remember.</p>
-<p>Creating containers and abstracting out the differences between their contents is an important piece of separating content for formatting. For example, HTML and Markdown both provide six different level of headings. But content under an <code>H2</code> or an <code>H5</code> heading is not in any container. The content simply comes after the heading. This means that is it perfectly possible and legal in these languages to place different heading elements in any order you want. Writers have to pay attention to which heading level they are creating and how it fits in the structure of the document they are creating.</p>
+<p>Moving the abstraction out to the container is an important part of the algorithm of separating content from formatting. It partitions ordered and unordered lists making the construction of each simpler and more reliable. This helps keep things consistent and reduces the number of things authors have to remember. (Notice that this requires the writer to make a decision about whether the list they are writing is ordered or unordered, but that this is a decision they had to make anyway in order to write the content at all – it is implicit in the rhetoric of the piece, we are just asking the writer to make it explicit.)</p>
+<p>Creating containers and abstracting out the differences between their contents is an important piece of separating content for formatting. For example, HTML and Markdown both provide six different level of headings. But content under an <code>H2</code> or an <code>H5</code> heading is not in any container. The content simply comes after the heading. This means that is it perfectly possible and legal in these languages to place different heading elements in any order you want. Writers have to make decisions about which heading level they want and how it fits in the structure of the document they are creating.</p>
 <p>By contrast, in <phrase><annotation type="language">DocBook</annotation></phrase>, we have a <phrase><annotation type="structure" namespace="DocBook">section</annotation></phrase> structure. Like a list, a section is part of the writer’s interpretation of what they are creating in the document, but it is only implied, not instantiated by the formatting. The <phrase><annotation type="structure" namespace="DocBook">section</annotation></phrase> structure  instantiates the concept of a section. And once we have the instantiation of a section, we don’t need six levels of heading. We can have one structure called <phrase><annotation type="structure" namespace="DocBook">title</annotation></phrase>. Sections can be nested inside other sections, and the formatting algorithm can apply the correct style to the title based on context:</p>
 <codeblock>
 section: 
@@ -193,12 +193,12 @@ section:
     section:
         title:
 </codeblock>
-<p>This will eliminate incorrect heading element choices, ensuring that the headings in the output consistently reflect the section and subsection structure of the document.</p>
+<p>This will eliminate heading element decisions and therefore incorrect choices, ensuring that the headings in the output consistently reflect the section and subsection structure of the document.</p>
 <p>(It must be said that not everyone holds to the view that headings in a text do or should reflect a hierarchy of sections. Sometimes they may be simply signposts along the way, and like any signpost, the size of the sign reflects the size of the town, not a strict hierarchy of sign sizes. So if that is how you look at document structures, you should choose a different way to separate content from formatting in your content.)</p>
 </section>
 <section>
 <title>Separate out abstract formatting</title>
-<p>We noted that in the case of ordered and unordered lists, separating content from formatting actually involves separating out some of the content as well. Or rather, that it involves separating out some of the characters. In other words, the distinction between content and formatting is not the same as the distinction between characters and the styles applied to them. Sometimes characters are part of the formatting rather than the content.</p>
+<p>I noted that in the case of ordered and unordered lists, separating content from formatting actually involves separating out some of the content as well. Or rather, it involves separating out some of the characters. In other words, the distinction between content and formatting is not the same as the distinction between characters and the styles applied to them. Sometimes characters are part of the formatting rather than the content.</p>
 <p>Consider a structure that we might call a labeled list:</p>
 <blockquote>
 <ll>
@@ -236,8 +236,8 @@ labeled-list:
         label: Code
         contents: 12345
 </codeblock>
-<p>But what if you have hundreds of addresses, all with the same labels. In this case, are the labels really content, or are they formatting? Since they don’t change from one list to another, we could look at them as being part of how the content is presented, rather than being part of the content itself. So we look for a way to separate them from the content.</p>
-<p>As always, when we separate something from our content, we have to replace it with something else, and that something is generally an appropriately named structure. So that gets us a structure like this:</p>
+<p>But what if you have hundreds of addresses, all with the same labels. In this case, are the labels really content, or are they presentation? Since they don’t change from one list to another, we could look at them as being part of how the content is presented, rather than being part of the content itself. So we look for a way to separate them from the content.</p>
+<p>As always, when we separate something from our content, we have to replace it with something else. In this case, it is named structures that reflect the actual subject matter of the entries:</p>
 <codeblock language ="sam">
 address:
     street: 123 Elm Street
@@ -245,10 +245,11 @@ address:
     country: USA
     code: 12345
 </codeblock>
-<p>Now, of course, we have moved our content into the <phrase><annotation type="concept">subject domain</annotation></phrase>. At this point we should make a distinction between formatting and presentation. Though these two words are often used interchangeably, we need to make a distinction between them for structured writing purposes. For purposes of this discussion, the formatting of text is the precise details of its appearance: the font chosen, the width of the text column, the size of the characters, the spacing between line, the size and shape of the bullet characters. Presentation, on the other hand, is about how we organize the content. Deciding to use a list to present a certain piece of information is a presentation decision, and it is independent of the formatting details we apply to lists. When we move content from the media domain to the document domain, we separate the formatting of the content from the presentation of the content. The decision to present the information as a list remains; the decision about what that list will look like has been separated out.</p>
-<p>When we move the content from the document domain to the subject domain, however, we separate the information from the presentation. The subject domain structure above is not a labeled list. It is a data record that could be turned into many different forms of presentation.</p>
+<p>Now, of course, we have moved our content into the <phrase><annotation type="concept">subject domain</annotation></phrase>. At this point we should make a distinction between formatting and presentation. Though these two words are often used interchangeably, we need to make a distinction between them for structured writing purposes. For purposes of this discussion, the formatting of text is the precise details of its appearance: the font chosen, the width of the text column, the size of the characters, the spacing between line, the size and shape of the bullet characters.</p>
+<p>Presentation, on the other hand, is about how we organize the content. Deciding to use a list to present a certain piece of information is a presentation decision, and it is independent of the formatting details we apply to lists. When we move content from the <phrase><annotation type="concept">media domain</annotation></phrase> to the <phrase><annotation type="concept">document domain</annotation></phrase>, we separate the formatting of the content from the presentation of the content. The decision to present the information as a list remains; the decision about what that list will look like has been separated out.</p>
+<p>When we move the content from the <phrase><annotation type="concept">document domain</annotation></phrase> to the <phrase><annotation type="concept">subject domain</annotation></phrase>, however, we separate the information from the presentation. The subject domain structure above is not a labeled list. It is a data record that could be turned into many different forms of presentation.</p>
 <p>The job of turning such structures into a specific form of presentation is the job of the presentation algorithm, which we will look at in more detail in <citation type = "nameref" value = "chapter.publishing"/>. The presentation algorithm could turn it into a labeled list, a table, a paragraph (with the fields separated by commas), or the address label for an envelope.</p>
-<p>In the subject domain, with the content separated from both formatting and presentation, we also gain the ability to query and reorganize the content in various interesting and useful ways (which we will explore in later chapters).</p>
+<p>In the <phrase><annotation type="concept">subject domain</annotation></phrase>, with the content separated from both formatting and presentation, we also gain the ability to query and reorganize the content in various interesting and useful ways (which we will explore in later chapters).</p>
 <p>This is as far as we can go in separating content from formatting, and we can’t separate all content from formatting to quite this extent. It should be clear at this point that separating content from format is not a binary thing. There are various stages of separation that we can achieve for various reasons. It is important to understand exactly which degree of separation will best serve your needs.</p>
 </section>
 </chapter>

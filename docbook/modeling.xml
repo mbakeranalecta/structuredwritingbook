@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="modeling">
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.modeling">
 <db:title>Modeling</db:title>
 
 
@@ -7,7 +7,7 @@
 <db:para>We can apply the same techniques to creating content even when an external data source does not exist by creating our own model of a real world object using structured writing techniques. We can then extract content from that model just as we would from an external data source. This can be an extremely powerful technique for managing complexity in cases where content frequently traverses the same ground, or in cases where content must express complex relationships that are easier to model and control in a formalized systems.</db:para>
 <db:para>An entire book could be written about how to model various types of subjects and how to derive content from those models. Here I will confine myself to presenting one simplified model to demonstrate the principle at work and point to some of its key benefits.</db:para>
 <db:para>In <db:xref linkend="chapter.duplication"/> I mentioned that while the sentence “Press OK.” occurs repeatedly in many content sets, it makes little sense to try to factor it out as duplicate text since while the words are identical in many cases, they actually represent different pieces of information about different dialog boxes, any one of which could change independent of the others. However, we can actually go much further than factoring out individual instances of “Press OK” and factor out the entire navigational part of the procedure using a model.</db:para>
-<db:para>The navigational structure of a typical desktop application is essentially a tree consisting of a well defined set of objects: menus, menu items, dialog boxes, field values, buttons, and assorted other controls. The entire navigation system of an application can thus be modeled as a tree (and indeed, there are languages designed for modeling interfaces in just this way for programming purposes.<db:footnote><db:para>https://en.wikipedia.org/wiki/User_interface_modeling</db:para></db:footnote>). Rather than looking at any of these, however, I will develop a very simple model of a UI just complex enough to demonstrate the technique:</db:para>
+<db:para>The navigational structure of a typical desktop application is essentially a tree consisting of a well-defined set of objects: menus, menu items, dialog boxes, field values, buttons, and assorted other controls. The entire navigation system of an application can thus be modeled as a tree (and indeed, there are languages designed for modeling interfaces in just this way for programming purposes.<db:footnote><db:para>https://en.wikipedia.org/wiki/User_interface_modeling</db:para></db:footnote>). Rather than looking at any of these, however, I will develop a very simple model of a UI just complex enough to demonstrate the technique:</db:para>
 <db:programlisting language="sam">
 application: MyApp
     menu-set:
@@ -39,7 +39,7 @@ procedure: Create a new document
 procedure: Create a new document
     use-dialog: New document 
 </db:programlisting>
-<db:para>Every piece of text that is used in the written-out procedure above can be derived from the model by an algorithm. The <db:code>use-dialog</db:code> field in the second example triggers the use of that algorithm in the synthesis stage to generate the full text of the procedure, as well as including the correct version of the screen shot.</db:para>
+<db:para>Every piece of text that is used in the written-out procedure above can be derived from the model by an algorithm. The <db:code>use-dialog</db:code> field in the second example triggers the use of that algorithm to generate the full text of the procedure, as well as including the correct version of the screen shot.</db:para>
 <db:para>Clearly you won’t always want to generate the full procedure with a single line. There will be cases where you need to say something specific about  a particular case. For example, if this procedure were part of a tutorial, you might want to specify a particular file name. In this case, you could use the model to generate only part of the procedure:</db:para>
 <db:programlisting language="sam">
 procedure: Create a document for testing
