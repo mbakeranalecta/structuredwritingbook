@@ -174,7 +174,7 @@
             </xsl:for-each>
             
             <xsl:apply-templates/>
-            <xsl:for-each select="index/record/term">
+<!--            <xsl:for-each select="index/record/term">
                 <db:indexterm  class='endofrange'>
                     <xsl:attribute name="startref">
                         <xsl:value-of select="generate-id()"/>
@@ -190,7 +190,7 @@
                     </xsl:attribute>
                 </db:indexterm>
             </xsl:for-each>
-            
+-->            
         </db:chapter>
     </xsl:template>
     
@@ -739,6 +739,25 @@
     <xsl:template match="section">
         <db:section>
             <xsl:apply-templates/>
+            <xsl:if test="not(following-sibling::section)">
+                <xsl:for-each select="../index/record/term">
+                    <db:indexterm  class='endofrange'>
+                        <xsl:attribute name="startref">
+                            <xsl:value-of select="generate-id()"/>
+                        </xsl:attribute>
+                    </db:indexterm>
+                </xsl:for-each>
+                
+                <xsl:for-each select="../index/record/term">
+                    <db:indexterm  class='endofrange'>
+                        <xsl:attribute name="startref">
+                            <xsl:value-of select="generate-id()"/>
+                            <xsl:text>x</xsl:text>
+                        </xsl:attribute>
+                    </db:indexterm>
+                </xsl:for-each>
+                
+            </xsl:if>
         </db:section>
     </xsl:template>
 
