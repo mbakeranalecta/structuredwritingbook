@@ -8,7 +8,7 @@
 <db:para>The primary appeal of lightweight markup languages rests on two related properties.</db:para>
 <db:itemizedlist>
 <db:listitem>
-<db:para>They have a high degree of functional lucidity at the syntactic level (easy to write) and often at the semantic level (what it means) as well. It is usually possible to read the raw markup of a lightweight language more or less as if it were a conventional text document.</db:para>
+<db:para>They have a high degree of <db:indexterm><db:primary>functional lucidity</db:primary></db:indexterm>functional lucidity at the syntactic level (easy to write) and often at the semantic level (what it means) as well. It is usually possible to read the raw markup of a lightweight language more or less as if it were a conventional text document.</db:para>
 </db:listitem>
 <db:listitem>
 <db:para>They can be written effectively using a plain text editor (as opposed to an elaborate structured editor with a graphical editing view). This means that the editing requirements are lightweight as well.</db:para>
@@ -50,7 +50,7 @@ Issue #135 was fixed in commit 8e8c6a0b4c9c41bd72fab5fd53e3d967e9688110.
 "You mean you can't take ''less''?" said the Hatter. "It's very easy to take ''more'' than nothing."
 </db:programlisting>
 <db:para>This sample is from the Wikipedia article on Wikis<db:footnote><db:para>https://en.wikipedia.org/wiki/Wiki#Editing</db:para></db:footnote>. You can find the explanation there.</db:para>
-<db:para>A wiki is a type of simple <db:indexterm><db:primary>content management system</db:primary></db:indexterm>content management system which allows people to create and edit pages directly from a web browser. A wiki, essentially, is a CMS which partitions and distributes the problem of web content management out to individual contributors, allowing anyone to edit and improve a site. Wikipedia is by far the largest and most well known Wiki. Wiki’s are a significant example of a bottom-up information architecture. Anyone can add a page and that page is integrated into the overall collection by Wiki word style linking and by including itself in categories (conventionally, by naming them on the page).</db:para>
+<db:para>A wiki is a type of simple <db:indexterm><db:primary>content management system</db:primary></db:indexterm>content management system which allows people to create and edit pages directly from a web browser. A wiki, essentially, is a CMS which partitions and distributes the problem of web content management out to individual contributors, allowing anyone to edit and improve a site. Wikipedia is by far the largest and most well known Wiki. Wiki’s are a significant example of a <db:indexterm><db:primary>bottom-up information architecture</db:primary></db:indexterm>bottom-up information architecture. Anyone can add a page and that page is integrated into the overall collection by Wiki word style linking and by including itself in categories (conventionally, by naming them on the page).</db:para>
 <db:para>Cunningham described WikiWikiWeb as “The simplest online database that could possibly work.”<db:footnote><db:para>http://www.wiki.org/wiki.cgi?WhatIsWiki</db:para></db:footnote> Like Markdown, its success has led to additional features, fragmentation, and growing complexity. Some commercial wikis are now complex content management systems. Indeed, it is somewhat difficult today to define the boundaries between Wikis, Blog platforms, and conventional CMSs.</db:para>
 <db:para>If Wikis have a defining characteristic today it is probably the bottom-up architecture rather than the original novelty of in-browser editing which is now found across many different kinds of CMS. Cunningham designed Wikis to be collaborative platforms – places where people could collaborate with people they did not even know to create something new without the requirement for central direction or control. The idea was not only architecturally bottom-up but editorially bottom-up. Most Wiki products today, however, include features for exercising a degree of central control. Question and answer sites like Stack Exchange with their distributed and democratic control systems may be closer today to Cunningham’s idea of a democratic creation space.</db:para>
 <db:para>What Wikis illustrate for structured writing is that very simple markup innovations like the WikiWord can have revolutionary effects on how content is created and organized. Most Wikis today use words between double square brackets for WikiWords, rather than internal capitals, but the principle is the same. You can link to a thing merely by naming it.</db:para>
@@ -58,7 +58,7 @@ Issue #135 was fixed in commit 8e8c6a0b4c9c41bd72fab5fd53e3d967e9688110.
 </db:section>
 <db:section>
 <db:title>reStructuredText</db:title>
-<db:para>reStrucutredText is a lightweight hybrid markup language most often associated with the Sphinx documentation framework which was developed for documenting the Python programming language. We looked at reStructuredText briefly as an example of a hybrid markup language in <db:xref linkend="chapter.markup"/>.</db:para>
+<db:para>reStrucutredText is a lightweight hybrid markup language most often associated with the <db:indexterm><db:primary>Sphinx</db:primary></db:indexterm>Sphinx documentation framework which was developed for documenting the Python programming language. We looked at reStructuredText briefly as an example of a hybrid markup language in <db:xref linkend="chapter.markup"/>.</db:para>
 <db:para>Similar to MarkDown, reStructuredText uses a plain text formatting approach to basic text structures. This part of the markup looks very natural because it uses characters and patterns that you might easily use to format a document if the only editor you had available were a plain text editor:</db:para>
 <db:programlisting language="reStructuredText">
 Hard Boiled Eggs
@@ -91,12 +91,12 @@ Preparation
    :scale: 50
    :alt: A hard boiled egg.
 </db:programlisting>
-<db:para>For this, reStructuredText takes the same approach as XML, using characters in a way that they are almost never used in a normal document. This approach simplifies parsing, because there is seldom any question about whether a particular pattern is intended to be markup or text, but it also makes it less natural to read and to write. reStructuredText is therefore something of a syntactic hybrid as well as being a hybrid in the sense that it has both fixed concrete parts and extensible parts.</db:para>
-<db:para>If you are looking for a lightweight <db:indexterm><db:primary>document domain</db:primary></db:indexterm>document domain markup language of moderate complexity and a degree of extensibility, or if you are interested in Sphinx as an authoring and publishing system, reStructuredText is an option to consider.</db:para>
+<db:para>For this, <db:indexterm><db:primary>reStructuredText</db:primary></db:indexterm>reStructuredText takes the same approach as XML, using characters in a way that they are almost never used in a normal document. This approach simplifies parsing, because there is seldom any question about whether a particular pattern is intended to be markup or text, but it also makes it less natural to read and to write. <db:indexterm><db:primary>reStructuredText</db:primary></db:indexterm>reStructuredText is therefore something of a syntactic hybrid as well as being a hybrid in the sense that it has both fixed concrete parts and extensible parts.</db:para>
+<db:para>If you are looking for a lightweight <db:indexterm><db:primary>document domain</db:primary></db:indexterm>document domain markup language of moderate complexity and a degree of extensibility, or if you are interested in <db:indexterm><db:primary>Sphinx</db:primary></db:indexterm>Sphinx as an authoring and publishing system, <db:indexterm><db:primary>reStructuredText</db:primary></db:indexterm>reStructuredText is an option to consider.</db:para>
 </db:section>
 <db:section>
 <db:title>ASCIIDoc</db:title>
-<db:para>ASCIIDoc is a lightweight markup language based on the structure of <db:indexterm><db:primary>DocBook</db:primary></db:indexterm>DocBook. It is intended for the same sort of document types for which you might choose DocBook, but allows you to use a lightweight syntax. In appearance it is very similar to MarkDown, as shown in this example from Wikipedia:</db:para>
+<db:para><db:indexterm><db:primary>ASCIIDoc</db:primary></db:indexterm>ASCIIDoc is a lightweight markup language based on the structure of <db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>DocBook</db:primary></db:indexterm>DocBook. It is intended for the same sort of document types for which you might choose DocBook, but allows you to use a lightweight syntax. In appearance it is very similar to MarkDown, as shown in this example from Wikipedia:</db:para>
 <db:programlisting language="ASCIIDoc">
 = My Article
 J. Smith
@@ -120,12 +120,12 @@ Metals commonly used include:
 * tin
 * lead
 </db:programlisting>
-<db:para>However, while MarkDown was designed for simple Web pages, ASCIIDoc was designed for complex publishing projects with support for a much wider array of document domain structures such as tables, definition lists, and tables of contents.</db:para>
-<db:para>If you are looking for a lightweight document domain markup language of medium complexity that is compatible with <db:indexterm><db:primary>DocBook</db:primary></db:indexterm>DocBook (meaning you are interested in creating books rather than web pages) then ASCIIDoc is something to consider.</db:para>
+<db:para>However, while <db:indexterm><db:primary>MarkDown</db:primary></db:indexterm>MarkDown was designed for simple Web pages, ASCIIDoc was designed for complex publishing projects with support for a much wider array of document domain structures such as tables, definition lists, and tables of contents.</db:para>
+<db:para>If you are looking for a lightweight document domain markup language of medium complexity that is compatible with <db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>DocBook</db:primary></db:indexterm>DocBook (meaning you are interested in creating books rather than web pages) then ASCIIDoc is something to consider.</db:para>
 </db:section>
 <db:section>
 <db:title>LaTeX</db:title>
-<db:para>LaTeX is a <db:indexterm><db:primary>document domain</db:primary></db:indexterm>document domain markup language used extensively in academia and scientific publishing. It is not based on XML syntax but on the syntax of TeX, a typesetting system developed by Donald Knuth in 1978.<db:footnote><db:para>https://en.wikipedia.org/wiki/LaTeX</db:para></db:footnote> Here is an example of LaTeX, from Wikipedia:</db:para>
+<db:para>LaTeX is a <db:indexterm><db:primary>document domain</db:primary></db:indexterm>document domain markup language used extensively in academia and scientific publishing. It is not based on XML syntax but on the syntax of <db:indexterm><db:primary>TeX</db:primary></db:indexterm>TeX, a typesetting system developed by Donald Knuth in 1978.<db:footnote><db:para>https://en.wikipedia.org/wiki/LaTeX</db:para></db:footnote> Here is an example of LaTeX, from Wikipedia:</db:para>
 <db:programlisting language="LaTex">
 \documentclass[12pt]{article}
 \usepackage{amsmath}
@@ -164,7 +164,7 @@ Metals commonly used include:
 <db:programlisting language="sam">
 x=\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 </db:programlisting>
-<db:para>Whereas the XML-based MathML version looks like this:</db:para>
+<db:para>Whereas the XML-based <db:indexterm><db:primary>MathML</db:primary></db:indexterm>MathML version looks like this:</db:para>
 <db:programlisting language="xml">
 &lt;math mode="display" xmlns="http://www.w3.org/1998/Math/MathML"&gt;
  &lt;semantics&gt;
@@ -203,7 +203,7 @@ x=\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 <db:para>Interestingly, MathML comes in two different flavors. Presentation MathML is a media domain language describing how an equation is presented. Content MathML is a subject domain language describing what it means.</db:para>
 </db:footnote> You might well choose to use a graphical equation editor to create LaTeX math markup as well, but it is certainly possible to write it and read it in raw LaTeX.</db:para>
 
-<db:para>LaTeX is not as lightweight a language as <db:indexterm><db:primary>Markdown</db:primary></db:indexterm>Markdown. It’s markup is almost entirely explicit (except for paragraphs, which are delineated by blank lines just in Markdown. But it is certainly lighter weight in its syntax compared to XML-based languages and has much greater functional lucidity.  Sufficient functional lucidity to be able to write in raw markup rather than needing a graphical editor is the hallmark of a lightweight markup language. But LaTeX is barely out of the <db:indexterm><db:primary>media domain</db:primary></db:indexterm>media domain in its structures, which limits it usefulness for structured writing.</db:para>
+<db:para>LaTeX is not as lightweight a language as <db:indexterm><db:primary>Markdown</db:primary></db:indexterm>Markdown. It’s markup is almost entirely explicit (except for paragraphs, which are delineated by blank lines just in Markdown. But it is certainly lighter weight in its syntax compared to XML-based languages and has much greater <db:indexterm><db:primary>functional lucidity</db:primary></db:indexterm>functional lucidity.  Sufficient functional lucidity to be able to write in raw markup rather than needing a graphical editor is the hallmark of a lightweight markup language. But LaTeX is barely out of the <db:indexterm><db:primary>media domain</db:primary></db:indexterm>media domain in its structures, which limits it usefulness for structured writing.</db:para>
 </db:section>
 <db:section>
 <db:title>Subject Domain Languages</db:title>
@@ -228,6 +228,6 @@ int theToFile, int theToRank) {
 </db:programlisting>
 <db:para>Not only does JavaDoc have <db:indexterm><db:primary>subject domain</db:primary></db:indexterm>subject domain tags for parameters and return values, it effectively incorporates the Java code itself (all computer programs are a kind of structured text). Thus the JavaDoc processor will pull information from the function header itself to incorporate into the output.</db:para>
 <db:para>There are a number of similar languages for documenting different programming languages, such as <db:indexterm><db:primary>Doxygen</db:primary></db:indexterm>Doxygen which is used for multiple languages. Wikipedia maintains an extensive list at: <db:link xlink:href="https://en.wikipedia.org/wiki/Comparison_of_documentation_generators">https://en.wikipedia.org/wiki/Comparison_of_documentation_generators</db:link>.</db:para>
-<db:para>It is difficult to find public <db:indexterm><db:primary>subject-domain</db:primary></db:indexterm>subject-domain lightweight markup languages outside the realm of programming language and API documentation. This is probably because only programmers are likely to write their own parser in order to create a markup language. Most other people are going to choose an extensible language as a base, which today usually means XML. Part of my motivation for creating <db:indexterm><db:primary>SAM</db:primary></db:indexterm>SAM is to provide a way to create <db:indexterm><db:primary>subject domain</db:primary></db:indexterm>subject domain languages with lightweight syntax.</db:para>
+<db:para>It is difficult to find public <db:indexterm><db:primary>subject-domain</db:primary></db:indexterm>subject-domain lightweight markup languages outside the realm of programming language and API documentation. This is probably because only programmers are likely to write their own parser in order to create a markup language. Most other people are going to choose an extensible language as a base, which today usually means <db:indexterm><db:primary>XML</db:primary></db:indexterm><db:indexterm><db:primary>XML</db:primary></db:indexterm>XML. Part of my motivation for creating <db:indexterm><db:primary>SAM</db:primary></db:indexterm>SAM is to provide a way to create <db:indexterm><db:primary>subject domain</db:primary></db:indexterm>subject domain languages with lightweight syntax.</db:para>
 </db:section>
 </db:chapter>
