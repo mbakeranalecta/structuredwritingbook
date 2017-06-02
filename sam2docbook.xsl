@@ -151,7 +151,7 @@
             </xsl:if>
             <xsl:apply-templates select="title" mode="chapter-title"/>
             <xsl:for-each select="index/record/term">
-                <db:indexterm class="startofrange">
+                <db:indexterm class="startofrange" significance="preferred">
                     <xsl:attribute name="xml:id">
                         <xsl:value-of select="generate-id()"/>
                     </xsl:attribute>
