@@ -34,6 +34,14 @@
         </db:title>
     </xsl:template>
     
+    <xsl:template match="chapter/title" mode="chapter-title">
+        <db:title>
+            <xsl:apply-templates/>
+        </db:title>
+    </xsl:template>
+    
+    <xsl:template match="chapter/title"/>
+    
     <xsl:template match="subtitle">
         <db:subtitle>
             <xsl:apply-templates/>
@@ -133,6 +141,7 @@
     </xsl:template>
     
     <xsl:template match="/chapter">
+        <xsl:variable name="chapter-id" select="@name"/>
         <db:chapter 
             version="5.0"> 
             <xsl:if test="@name">
@@ -140,7 +149,50 @@
                     <xsl:value-of select="@name"/>
                 </xsl:attribute>
             </xsl:if>
+            <xsl:apply-templates select="title" mode="chapter-title"/>
+            <xsl:for-each select="index/record/term">
+                <db:indexterm class="startofrange">
+                    <xsl:attribute name="xml:id">
+                        <xsl:value-of select="generate-id()"/>
+                    </xsl:attribute>
+                    <db:primary>
+                        <xsl:value-of select="."/>
+                    </db:primary>
+                </db:indexterm>
+                <db:indexterm class="startofrange">
+                    <xsl:attribute name="xml:id">
+                        <xsl:value-of select="generate-id()"/>
+                        <xsl:text>x</xsl:text>
+                    </xsl:attribute>
+                    <db:primary>
+                        <xsl:value-of select="../type"/>
+                    </db:primary>
+                    <db:secondary>
+                        <xsl:value-of select="."/>
+                    </db:secondary>
+                </db:indexterm>
+            </xsl:for-each>
+            
             <xsl:apply-templates/>
+            
+            <xsl:if test="not(section)">
+                <xsl:for-each select="index/record/term">
+                    <db:indexterm  class='endofrange'>
+                        <xsl:attribute name="startref">
+                            <xsl:value-of select="generate-id()"/>
+                        </xsl:attribute>
+                    </db:indexterm>
+                </xsl:for-each>
+                
+                <xsl:for-each select="index/record/term">
+                    <db:indexterm  class='endofrange'>
+                        <xsl:attribute name="startref">
+                            <xsl:value-of select="generate-id()"/>
+                            <xsl:text>x</xsl:text>
+                        </xsl:attribute>
+                    </db:indexterm>
+                </xsl:for-each>
+            </xsl:if>
         </db:chapter>
     </xsl:template>
     
@@ -239,6 +291,7 @@
     <xsl:template match="annotations"/>
     
     <xsl:template match="annotation[@type='standard']">
+        <xsl:call-template name="index-annotation"/>
         <xsl:apply-templates/>
     </xsl:template>
     
@@ -247,14 +300,17 @@
     </xsl:template>
     
     <xsl:template match="annotation[@type='tool']">
+        <xsl:call-template name="index-annotation"/>
         <xsl:apply-templates/>
     </xsl:template>
     
     <xsl:template match="annotation[@type='concept']">
+        <xsl:call-template name="index-annotation"/>
         <xsl:apply-templates/>
     </xsl:template>
     
     <xsl:template match="annotation[@type='language']">
+        <xsl:call-template name="index-annotation"/>
         <xsl:apply-templates/>
     </xsl:template>
     
@@ -265,18 +321,22 @@
     </xsl:template>
     
     <xsl:template match="annotation[@type='algorithm']">
+        <xsl:call-template name="index-annotation"/>
         <xsl:apply-templates/>
     </xsl:template>
 
     <xsl:template match="annotation[@type='system']">
+        <xsl:call-template name="index-annotation"/>
         <xsl:apply-templates/>
     </xsl:template>
     
     <xsl:template match="annotation[@type='role']">
+        <xsl:call-template name="index-annotation"/>
         <xsl:apply-templates/>
     </xsl:template>
 
     <xsl:template match="annotation[@type='method']">
+        <xsl:call-template name="index-annotation"/>
         <xsl:apply-templates/>
     </xsl:template>
     
@@ -289,14 +349,17 @@
     </xsl:template>
     
     <xsl:template match="annotation[@type='format']">
+        <xsl:call-template name="index-annotation"/>
         <xsl:apply-templates/>
     </xsl:template>
 
     <xsl:template match="annotation[@type='person']">
+        <xsl:call-template name="index-annotation"/>
         <xsl:apply-templates/>
     </xsl:template>
     
     <xsl:template match="annotation[@type='citetitle']">
+        <xsl:call-template name="index-annotation"/>
         <db:citetitle>
             <xsl:apply-templates/>
         </db:citetitle>
@@ -306,6 +369,38 @@
         <db:link xlink:href="{.}">
             <xsl:apply-templates/>
         </db:link>        
+    </xsl:template>
+    
+    <xsl:template name="index-annotation">
+        <xsl:if test="not(ancestor::footnote)">
+            <db:indexterm>
+                <db:primary>
+                    <xsl:choose>
+                        <xsl:when test="@specifically">
+                            <xsl:value-of select="@specifically"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="descendant-or-self::text()"/>
+                        </xsl:otherwise>
+                    </xsl:choose>                             
+                </db:primary>
+            </db:indexterm>
+            <db:indexterm>
+                <db:primary>
+                    <xsl:value-of select="@type"/>
+                </db:primary>
+                <db:secondary>
+                    <xsl:choose>
+                        <xsl:when test="@specifically">
+                            <xsl:value-of select="@specifically"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="descendant-or-self::text()"/>
+                        </xsl:otherwise>
+                    </xsl:choose>                             
+                </db:secondary>
+            </db:indexterm>
+        </xsl:if>
     </xsl:template>
     
     <xsl:template match="bibliography"></xsl:template>
@@ -663,6 +758,25 @@
     <xsl:template match="section">
         <db:section>
             <xsl:apply-templates/>
+            <xsl:if test="not(following-sibling::section)">
+                <xsl:for-each select="../index/record/term">
+                    <db:indexterm  class='endofrange'>
+                        <xsl:attribute name="startref">
+                            <xsl:value-of select="generate-id()"/>
+                        </xsl:attribute>
+                    </db:indexterm>
+                </xsl:for-each>
+                
+                <xsl:for-each select="../index/record/term">
+                    <db:indexterm  class='endofrange'>
+                        <xsl:attribute name="startref">
+                            <xsl:value-of select="generate-id()"/>
+                            <xsl:text>x</xsl:text>
+                        </xsl:attribute>
+                    </db:indexterm>
+                </xsl:for-each>
+                
+            </xsl:if>
         </db:section>
     </xsl:template>
 
