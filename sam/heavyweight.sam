@@ -66,10 +66,8 @@ chapter:(#chapter.heavyweight) Heavyweight markup languages
         Quality should be a serious concern with this model. If you assemble {rhetorical blocks} out of smaller reusable units without paying attention to the rhetorical integrity, completeness, and consistency of the result, quality can be seriously affected. It is difficult to maintain quality if authors no longer see, think, or work in the context of the {rhetorical block} and if the structure of the {rhetorical block} is not constrained. Because such a reuse solution does not consider where the rhetorical complexity of {composition} goes, complexity gets dumped on readers.
         
         DITA, as a technology, does not prevent you from working in whole {rhetorical blocks} or from constraining your blocks in any way you want &#x2013; DITA's information typing capabilities make this possible. However, the block-and-map model, whether implemented by DITA or any other system, creates an inherent tension between creating smaller {semantic blocks} to optimize for reuse and creating constrainable {rhetorical blocks} to optimize for content quality. And because it provides no facilities for imposing constraints above the topic level, DITA makes it difficult to partition and redirect this complexity away from the writer.
-        !!!(RLH)
-                I'm not sure what you mean when you say "either kind of constraint" in the paragraph below. What are the two kinds you're talking about?
                 
-        However, you do not require either kind of constraint to reuse content blocks. When used correctly, constraints may improve quality and reliability, but you don't need them to compose larger blocks out of smaller blocks. This has led many organizations to select DITA for its reuse capabilities without taking advantage of its constraint capabilities or its information typing roots. People taking this approach will sometimes write their content in the base `topic` topic type rather than a more constrained specialization. Quite simply, they don't find DITA's information typing to be useful, so they ignore it. Of course, this means that the responsibility for composability falls on the writers, but if DITA's information typing does not not fit the material, this does not necessarily make things worse.
+        However, you do not require either document-level or topic-level constraints to reuse content blocks. When used correctly, constraints may improve quality and reliability, but you don't need them to compose larger blocks out of smaller blocks. This has led many organizations to select DITA for its reuse capabilities without taking advantage of its constraint capabilities or its information typing roots. People taking this approach will sometimes write their content in the base `topic` topic type rather than a more constrained specialization. Quite simply, they don't find DITA's information typing to be useful, so they ignore it. Of course, this means that the responsibility for composability falls on the writers, but if DITA's information typing does not not fit the material, this does not necessarily make things worse.
         
         The growing popularity of this approach to reuse has led to the development of alternatives to DITA that provide the same reuse-management capabilities but remove the constraint mechanisms. One example of this trend is {Paligo}(tool), a reuse-focused component content management system that uses {DocBook} as its underlying content format, specifically for the purpose of minimizing constraints on the content.[http://idratherbewriting.com/2016/08/01/paligo-the-story-xml-ccms-in-the-cloud/] Such systems can reduce the up-front complexity of component-based {content reuse}, though possibly at the expense of costs down the road if the failure to apply constraints up front results in more unhandled complexity falling through to readers. 
          
@@ -100,14 +98,13 @@ chapter:(#chapter.heavyweight) Heavyweight markup languages
         
     section: Subject domain languages
     
-        There are hundreds of public subject domain languages written in XML. Most of these are more data oriented than content oriented, but you might be able to derive content from some of them using the {extract and merge} algorithms. Wikipedia maintains an extensive list at {https://en.wikipedia.org/wiki/List_of_markup_languages}(url). However, most subject domain languages used for content are developed in house to suit a particular subject matter and reader base.
-
-        !!!(RLH)
-                I think an example would be useful here, even if that example just names a few prominent languages.
-        
+        There are hundreds of public subject domain languages written in XML. Most of these are more data oriented than content oriented, but you might be able to derive content from some of them using the {extract and merge} algorithms. Wikipedia maintains an extensive list at {https://en.wikipedia.org/wiki/List_of_markup_languages}(url). However, most subject domain languages used for content are developed in house to suit a particular subject matter and reader base. Examples of XML-based subject-domain languages include the following:
 
         
-        
-        
-        
-        
+        * Auto-lead Data Format: for communicating consumer purchase requests to automotive dealerships.
+
+        * BeerXML: for exchanging brewing data
+
+        * Keyhole Markup Language: for geographic annotations
+
+        * RecipeML: for recipes
