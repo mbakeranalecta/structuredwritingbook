@@ -315,9 +315,23 @@
     </xsl:template>
     
     <xsl:template match="annotation[@type='structure']">
-        <db:code>
-            <xsl:apply-templates/>
-        </db:code>
+        <xsl:call-template name="index-annotation"/>
+        <xsl:apply-templates/>       
+    </xsl:template>
+    
+    <xsl:template match="annotation[@type='media']">
+        <xsl:call-template name="index-annotation"/>
+        <xsl:apply-templates/>       
+    </xsl:template>
+    
+    <xsl:template match="annotation[@type='programming-language']">
+        <xsl:call-template name="index-annotation"/>
+        <xsl:apply-templates/>       
+    </xsl:template>
+    
+    <xsl:template match="annotation[@type='company']">
+        <xsl:call-template name="index-annotation"/>
+        <xsl:apply-templates/>       
     </xsl:template>
     
     <xsl:template match="annotation[@type='algorithm']">
