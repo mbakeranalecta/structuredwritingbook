@@ -82,44 +82,85 @@
 <p>Clearly, though, one does not need an information typing architecture to define an information type. You can, as <phrase><annotation type="person">John Gruber</annotation></phrase> did with <phrase><annotation type="language">MarkDown</annotation></phrase>, sit down and sketch out a set of structures and a syntax to represent them, and then write a program to process them. With an <phrase><annotation type="concept">abstract language</annotation></phrase> like <phrase><annotation type="language"><annotation type="standard">XML</annotation></annotation></phrase> or <phrase><annotation type="language">SAM</annotation></phrase>, you can create a new information type by defining a set of named elements and attributes using a schema language. How does using a higher level information typing architecture like DITA change this process? How does it partition the design problem differently?</p>
 <p>First and foremost, it means that you don’t start from scratch. All topic types in DITA are derived from a base topic type called <code>topic</code> through specialization.</p>
 <p>What is specialization? XML syntax defines abstract structures that do not occur in documents: elements, attributes, etc. To create a markup language in XML, you define named elements and attributes for the structures you are creating. This is a type of specialization. For example, in <phrase><annotation type="language"><annotation type="standard">DocBook</annotation></annotation></phrase> <code>para</code> is a type of element. <code>para</code> has what is called an “is-a” relationship to elements: <code>para</code> “is-an” element, but it is a special type of element. An XML parser will process a <code>para</code> generically as an element, reporting its name to the application layer. The application layer must then supply a rule that processes just this specialized <code>para</code> element (and not the also specialized but different <code>title</code> element).</p>
-<p>In this case, the “is-a” relationship means that the <code>para</code> element must comply with the constraints of XML elements as defined in the XML standard specification.</p>
 <p>DITA specialization follows the same principle, but moves it up a level. The base <code>topic</code> topic type is the abstract structure. More specific types like <code>knitting-pattern</code> or <code>ingredients-list</code> are specializations of <code>topic</code> (or of other topic types that are specializations of <code>topic</code>). A generic DITA processor can process them as a instance of <code>topic</code>, but it requires additional code to process them specifically as <code>knitting-pattern</code> or <code>ingredient-list</code>. Each of these specialized types has an “is-a” relationship with the type it was specialized from. So <code>knitting-pattern</code> “is-a” topic.</p>
-<p>DITA specialization differs from simply creating new named elements in XML in the following ways:</p>
-<ul>
-<li>
-<p>The base DITA topic type is not an abstraction like an XML element. You cannot create an XML element without inventing a name for it. The base DITA topic type, on the other hand, is a fully implemented topic type that you can use directly. You can, and people do, write directly in the base topic type without inventing anything new. We noted in <citation type = "nameref" value = "chapter.rhetorical_structure"/> that it is sometimes easy to treat what is intended as a meta model as a generic model. This is the case here. All topic types in DITA are derived by specialization from the generic <code>topic</code> type. They all have an “is-a” relationship to this generic type.</p>
-</li>
-<li>
-<p>The “is-a” relationship requires the specialized element to follow the constraints of the base topic. If the base topic requires a particular ordering of child elements, the specialized element must follow that ordering. If the base topic includes optional child elements, the specialized element can omit them, but it cannot omit required elements. In general, a specialized element can be more constrained than the element it is specialized from, but not less constrained.</p>
-</li>
-</ul>
-<p>One consequence of this is that a processor can process a specialized element as though it were the base element without failure. The result may not reflect all aspects of the specialized element, but the processing will not fail.</p>
-<p>Another consequence of this is that while the set of topic types you can create from the generic DITA topic type may be unbounded, it is not universal. If a specialized topic has an is-a relationship to the generic topic, the structures in the specialized topic must have a corresponding is-a relationship to the parallel structures in the generic type. This means you can create information types that do not have an is-a relationship to a DITA generic topic.</p>
-<remark attribution ="RLH">
-<p>I significantly rewrote the section above because I had trouble understanding it. I think I know where you’re headed, so I rewrote and added a list item above, but please check to be sure I got things right.</p>
-</remark>
-<p>To specialize a topic type, you specialize the root element and any child elements or attributes that you need to define your new topic type. Each specialized element or attribute must have an is-a relationship to the element it specializes. Thus a procedure element might be a specialization of an ordered list element and its step elements might be specializations of a list item element. In this case, processing a procedure as an ordered list would produce meaningful output, which is what you would expect. However, you would probably want to specialize the output of steps in a procedure, perhaps by prefixing each step with “Step 1:" rather than just “1.”</p>
+<p>DITA specialization differs from simply creating new named elements in XML in that the base DITA topic type is not an abstraction like an XML element. You cannot create an XML element without inventing a name for it. The base DITA topic type, on the other hand, is a fully implemented topic type that you can use directly. You can, and people do, write directly in the base topic type without inventing anything new. We noted in <citation type = "nameref" value = "chapter.rhetorical_structure"/> that it is sometimes easy to treat what is intended as a meta model as a generic model. This is the case here. All topic types in DITA are derived by specialization from the generic <code>topic</code> type. They all have an “is-a” relationship to this generic type.</p>
+<p>One consequence of this is that a processor can process a specialized element as though it were the base element without failure. The result may not reflect all aspects of the specialized element, but the processing will not fail. This is an attractive quality because it is often easier to modify an existing piece of code than it is to write new code from scratch, particularly if most of the rules in the base code can remain unchanged.</p>
+<p>To specialize a topic type, you specialize the root element and any child elements or attributes that you need to define your new topic type. Each specialized element or attribute should have an is-a relationship to the element it specializes. Thus a procedure element might be a specialization of an ordered list element and its step elements might be specializations of a list item element. In this case, processing a procedure as an ordered list would produce meaningful output, which is what you would expect. However, you would probably want to specialize the output of steps in a procedure, perhaps by prefixing each step with “Step 1:" rather than just “1.” This would probably be less code to write than writing a procedure processing algorithms from scratch.</p>
 <p>The second way in which specialization differs from giving names to abstract elements is that specialization is recursive. That is, suppose you have a topic type <code>animal-description</code>, which is a specialization of <code>topic</code>. You want to impose additional constraints on the description of different types of animal, so you create more specialized types <code>fish-description</code> and <code>mammal-description</code>, which are specializations of <code>animal-description</code> (and could be processed like an <code>animal-description</code> if no other processing were specified for them). Then you might decide to impose still more constraints on the description of different kinds of mammals, so you create the type <code>horse-description</code>, which is a specialization of <code>mammal-description</code>. This type would be processed as a <code>mammal-description</code> if no specific processing is provided for <code>horse-description</code>; as <code>animal-description</code> if no specific <code>mammal-description</code> processing is provided; and as <code>topic</code> if no specific <code>animal-description</code> processing is provided.</p>
-<p>The third way in which information typing in DITA differs from creating a language from scratch is that DITA information types share a common approach to processing and to information architecture. In particular, they inherit a common set of <phrase><annotation type="concept">management-domain</annotation></phrase> structures and their associated management semantics. It is possible to ignore all of these things, but if you do so, the value of using DITA for information typing is reduced because you then have to invent your own ways of doing these things that are contrary to the partitioning provide by the architecture.</p>
-<p>Generally, the fewer pieces of an architecture you use, the less value there is to basing your work on that architecture, both because you have more work to do and because you take less advantage of the infrastructure or tools and expertise surrounding that architecture, creating a system that is less understandable to people versed in the architecture. All this betrays a poor fit between the system partitioning you are creating and the partitioning that the architecture provides. All architectures come with overheads and if you don’t use their features, you still have to live with their overhead, which adds cost and complexity to your system. Thus, while you can use DITA and depart from the default DITA way of doing things, the value of using DITA diminishes the further you depart from the DITA way. The same would be true of any other information typing architecture.</p>
-</section>
-<section>
-<title>Specializing between domains</title>
-<p>We have talked a lot about the benefits of moving content from the document domain to the subject domain as a means to factor out constraints in the document domain and as a way to enable multiple structured writing algorithms and improve functional lucidity.</p>
-<p>DITA’s base types clearly belong to the document domain. Clearly you can use specialization to create more specialized document domain structures. But can you use specialization to create subject-domain structures that factor out aspects of the document domain?</p>
-<p>In formal terms the answer is no. Subject domain information does not have an is-a relationship to document domain information precisely because it is the document domain structures that you factor out when you move to the subject domain.</p>
-<p>Take the list of ingredients in a recipe. In the document domain, they could be presented as a list or as a table. In subject domain terms they are actually more of a table (database sense) than a list. That is, a set of records with a defined semantic structure:</p>
+<p>The third way in which information typing in DITA differs from creating a language from scratch is that DITA information types share a common approach to processing and to information architecture. In particular, they inherit a common set of <phrase><annotation type="concept">management-domain</annotation></phrase> structures and their associated management semantics.</p>
+<p>A DITA topic, then, comes with a lot of build in functionality and structure that you don’t have to invent for yourself when you create a specialized version of that topic type. But the corollary is that not all content types are specialized instances of a DITA generic topic, nor are all the structures they contain instances of generic document domain structures.</p>
+<p>When we factored the ingredients of a recipe out of a <phrase><annotation type="concept">document domain</annotation></phrase> list into a <phrase><annotation type="concept">subject domain</annotation></phrase> record structure it was, in part, to make them independent of the decision of to format them as a <phrase><annotation type="structure">table</annotation></phrase> as a <phrase><annotation type="structure">list</annotation></phrase>.</p>
 <codeblock language ="sam">
 ingredients:: ingredient, quantity, unit
     eggs, 3, each
     salt, 1, tsp
     butter, .5, cup 
 </codeblock>
-<p>How do you create this record structure by specializing document domain elements? What is the best starting point to specialize from? A table is the most obvious candidate because it is structured like a set of records. However, the more common presentation of an ingredient list is as a list. But there is no structure in a list that supports dividing a list item into three named fields. The ingredient structure above is neither a list nor a table; it is a record set, a data structure whose contents could be presented in many different ways in the document domain, but is not a specialization of any of them.</p>
-<p>We can make a distinction between two main types of <phrase><annotation type="concept">subject domain</annotation></phrase> languages, the rhetorical subject domain, where the focus in on how to present information on a particular subject, and the data-oriented subject domain, where the focus in on capturing the various pieces of information that are required on a subject while factoring out the presentation. Both present problems for specialization.</p>
-<p>One of the elementary things that the rhetorical subject domain does is to factor out the titles of various sections of a topic, replacing the generic structure of sections and titles with specific names blocks whose titles can be supplied consistently by the <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase>. These named sections do have a kind of is-a relationship to generic sections, in that they are sections. But this is not a true is-a relationship because a generic section requires a title, and a rhetorical block cannot have on. It therefore does not have all the characteristics of the thing it is specialized from, and therefore it is not a section. It is a named block of text that, in the document domain, would be expressed as a section, but that is not the same things as falling back to being a section. Processing such a block as a section would result in the text following on from that of the previous section with no title, thus lacking the defining document and media domain characteristic of a section.</p>
-<p>For the data-oriented subject domain, which, let us remember, can include material recorded in databases and source code, there is no necessary relationship between the structure of content in the source and the presentation of content in the document domain. Information that is in separate fields in the subject domain may need to be combined to form sentences by the <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase> before it is even readable as a piece of content. Such structures clearly have no is-a relationship to a DITA generic topic.</p>
-<p>More generally, as we have seen, the <phrase><annotation type="concept">subject domain</annotation></phrase> changes the algorithm for each function so inheritance of the code is of little or no value. Subject domain algorithms work differently. And since all subject domain algorithms work on the same structures, rather than there being separate structures for each algorithm, as in the document and management domains, there is little scope for inheritance of processing code from the document domain to the subject domain. Rather, the document domain is semantically downstream from the subject domain. Subject domain algorithms essentially create document domain structures as part of the publication process, as we saw in <citation type = "nameref" value = "chapter.publishing"/>.</p>
+<p>The ingredient record set no longer has an is-a relationship to a <phrase><annotation type="structure">table</annotation></phrase> or a <phrase><annotation type="structure">list</annotation></phrase>. The whole point was to break that relationship so that we could present that content any way we wanted to.</p>
+<p>Labels are a big part of document domain content. When we created a subject domain structure for recording the nutritional information for a recipe, we factor out all of the labels by putting the content in named fields. In other words, the labels went from being data (in the content) to <phrase><annotation type="concept">metadata</annotation></phrase> (part of the structure):</p>
+<codeblock language ="sam">
+nutrition:
+    serving: 1 large (50 g)
+    calories: 78
+    total-fat: 5 g
+    saturated-fat: 0.7 g
+    polyunsaturated-fat: 0.7 g    
+    monounsaturated-fat: 2 g    
+    cholesterol: 186.5 mg    
+    sodium: 62 mg    
+    potassium: 63 mg    
+    total-carbohydrate: 0.6 g    
+    dietary-fiber: 0 g    
+    sugar: 0.6 g    
+    protein: 6 g    
+</codeblock>
+<p>Though this structure looks superficially like a list, it is really a data record. If this structure were created as a specialization of a list and then published using a generic list publishing algorithm, the result would be:</p>
+<blockquote>
+<ul>
+<li>
+<p>1 large (50 g)</p>
+</li>
+<li>
+<p>78</p>
+</li>
+<li>
+<p>5 g</p>
+</li>
+<li>
+<p>0.7 g</p>
+</li>
+<li>
+<p>0.7 g</p>
+</li>
+<li>
+<p>2 g</p>
+</li>
+<li>
+<p>186.5 mg</p>
+</li>
+<li>
+<p>62 mg</p>
+</li>
+<li>
+<p>63 mg</p>
+</li>
+<li>
+<p>0.6 g</p>
+</li>
+<li>
+<p>0 g</p>
+</li>
+<li>
+<p>0.6 g</p>
+</li>
+<li>
+<p>6 g</p>
+</li>
+</ul>
+</blockquote>
+<p>In short, there is no “is-a” relationship between generic <phrase><annotation type="concept">document domain</annotation></phrase> structure and the structures of the <phrase><annotation type="concept">subject domain</annotation></phrase>.</p>
+<p>Does this mean that you cannot create a <phrase><annotation type="concept">subject domain</annotation></phrase> structure using DITA’s <phrase><annotation type="concept">specialization</annotation></phrase> mechanism? No, you can usually create the structure you want, but it won’t be an actual <phrase><annotation type="concept">specialization</annotation></phrase> of its base type. By the very fact that it is a <phrase><annotation type="concept">subject domain</annotation></phrase> structure it has broken the “is-a” relationship with the <phrase><annotation type="concept">document domain</annotation></phrase>. As I noted at the end of <citation type = "nameref" value = "chapter.linking"/>, it is characteristic of the <phrase><annotation type="concept">subject domain</annotation></phrase> that its algorithms work completely different from those of the <phrase><annotation type="concept">document domain</annotation></phrase>, so inheriting some of the processing of a base <phrase><annotation type="concept">document domain</annotation></phrase> structure is moot once you move to the <phrase><annotation type="concept">subject domain</annotation></phrase>. You new <phrase><annotation type="concept">subject domain</annotation></phrase> structure will be a new and essentially unrelated structure for which you will have to create completely new processing algorithms, just as you would if you has started defining your structure from scratch.</p>
+<p>Generally, the fewer pieces of an architecture you use, the less value there is to basing your work on that architecture, both because you have more work to do and because you take less advantage of the infrastructure or tools and expertise surrounding that architecture, creating a system that is less understandable to people versed in the architecture. All this betrays a poor fit between the system partitioning you are creating and the partitioning that the architecture provides. All architectures come with overheads and if you don’t use their features, you still have to live with their overhead, which adds cost and complexity to your system. Thus, while you can use DITA and depart from the default DITA way of doing things, the value of using DITA diminishes the further you depart from the DITA way. The same would be true of any other information typing architecture.</p>
 </section>
 <section>
 <title>DocBook</title>
