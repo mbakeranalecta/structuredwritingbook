@@ -498,6 +498,18 @@
             <xsl:apply-templates/>
         </db:footnote>
     </xsl:template>
+
+    <xsl:template match="pullquote">
+      <db:sidebar role="pullquote">
+        <xsl:apply-templates/>
+      </db:sidebar>
+    </xsl:template>
+    
+    <xsl:template match="sidebar">
+      <db:sidebar>
+        <xsl:apply-templates/>
+      </db:sidebar>
+    </xsl:template>
     
     <xsl:template match="blockquote">
         <db:blockquote>

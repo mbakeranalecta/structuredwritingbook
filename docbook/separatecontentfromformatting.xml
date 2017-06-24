@@ -1,56 +1,55 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.separating"><db:title>Separating Content from Formatting</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idm196628524"><db:primary>separating content from formatting</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm196628524x"><db:primary>concept</db:primary><db:secondary>separating content from formatting</db:secondary></db:indexterm>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.separating"><db:title>Separating Content from Formatting</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp140444540533280"><db:primary>separating content from formatting</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp140444540533280x"><db:primary>concept</db:primary><db:secondary>separating content from formatting</db:secondary></db:indexterm>
 
 
 
-<db:para>If there is one phrase that most people associate with structured writing, it is “separating content from formatting”. The is the most basic and well-known form of partitioning and redirecting of complexity that we do in structured writing, and it illustrates the basic method by which we do all the rest. The basic premise of separating content from formatting is to separate decisions about the appearance of a document from decisions about its content. But partitioning content from formatting is not as simple as it may seem. So let’s take a look at it one step at a time.</db:para>
+<db:para>If there is one phrase that most people associate with structured writing, it is “separating content from formatting.” This is the most basic and well-known form of partitioning and redirecting of complexity that we do in structured writing, and it illustrates the basic method by which we do all the rest. The basic premise of separating content from formatting is to separate decisions about the appearance of a document from decisions about its content. But partitioning content from formatting is not as simple as it may seem. This chapter walks through this process.</db:para>
 <db:section>
 <db:title>Separate out style instructions</db:title>
-<db:para>Let’s start with a simple bit of content that includes a description of its format. I’m going to use CSS syntax to describe the format, but that is not significant. This is just to show what we are doing when we do the separation. I’m also going to represents certain characters by their names in square brackets, just so we can see exactly where everything is going:</db:para>
+<db:para>Let’s start with a fragment that includes a description of its format. I use CSS syntax to describe the format. I could use a variety of formats, but CSS is easy to understand and helps illustrate the separation. I also represent certain characters (bullets and tabs) by their names, so you can see exactly where everything is going:</db:para>
 <db:programlisting>
 {font: 10pt "Open Sans"}The box contains:
 {font: 10pt "Open Sans"}[bullet][tab]Sand
 {font: 10pt "Open Sans"}[bullet][tab]Eggs
 {font: 10pt "Open Sans"}[bullet][tab]Gold
 </db:programlisting>
-<db:para>This file contains content and formatting, so let’s separate the two. Of course, when we remove the formatting from the content we are going to have to add something in its place so we can add the formatting back later (partitioning requires passing information between partitions, preferable in-band).</db:para>
-<db:para>The simplest thing to replace it with is a style:</db:para>
+<db:para>This file contains content and formatting, so let’s separate the two. Of course, when you remove the formatting, you need to add something in its place so you can add the formatting back later. The simplest method is to replace it with a named style:</db:para>
 <db:programlisting>
 {style: paragraph}The box contains:
 {style: paragraph}[bullet][tab]Sand
 {style: paragraph}[bullet][tab]Eggs
 {style: paragraph}[bullet][tab]Gold
 </db:programlisting>
-<db:para>Then, of course, we need to record the style (we are separating it, not eliminating it altogether):</db:para>
+<db:para>Then, you need to record the style; it isn’t being removed, just separated from the text:</db:para>
 <db:programlisting>
 paragraph = {font: 10pt "Open Sans"}
 </db:programlisting>
-<db:para>Now that they are separated, we have the choice of substituting different formatting by changing the definition of the style, while leaving the content alone:</db:para>
+<db:para>Once the style information is separated, you can change the formatting without changing the text, for example, you could choose a different font:</db:para>
 <db:programlisting>
 paragraph = {font: 12pt "Century Schoolbook"}
 </db:programlisting>
 </db:section>
 <db:section>
 <db:title>Separate out formatting characters</db:title>
-<db:para>Cool, but suppose we would like to change the style of the bullet we use for lists. The style of bullet used is certainly part of what we would consider “formatting”, but bullets are text characters. To change them you don’t just have to change the font applied to the characters, you have to change the characters themselves.</db:para>
-<db:para>Sometimes the typed characters in your text are part of the content, and sometimes they are part of the formatting. So now we need to extend our idea of a style to include characters.</db:para>
+<db:para>Cool, but suppose you need to change the style of the bullets. The bullet style is certainly formatting, but bullets are text characters. To change them you can’t just change the font, you have to change the characters themselves.</db:para>
+<db:para>Some characters in your text are part of the content, and some are part of the formatting. Therefore, a style may include characters as well as formatting directives, as shown here:</db:para>
 <db:programlisting>
 paragraph = {font: 12pt "Century Schoolbook"}
 bullet-paragraph = {font: 12pt "Century Schoolbook"}[bullet]
 </db:programlisting>
-<db:para>Now our content looks like this:</db:para>
+<db:para>Now the content looks like this:</db:para>
 <db:programlisting>
 {style: paragraph}The box contains:
 {style: bullet-paragraph}[tab]Sand
 {style: bullet-paragraph}[tab]Eggs
 {style: bullet-paragraph}[tab]Gold
 </db:programlisting>
-<db:para>Except that now the writer will be starting the bulleted lines with a tab, which is awkward and probably error prone, so we move that character to the style as well.</db:para>
+<db:para>However, you still must begin the bulleted lines with a tab, which is awkward and error prone, so let’s move that character to the style as well:</db:para>
 <db:programlisting>
 paragraph = {font: 12pt "Century Schoolbook"}
 bullet-paragraph = {font: 12pt "Century Schoolbook"}[bullet][tab]
 </db:programlisting>
-<db:para>Now our content looks like this:</db:para>
+<db:para>Now the content looks like this:</db:para>
 <db:programlisting>
 {style: paragraph}The box contains:
 {style: bullet-paragraph}Sand
@@ -61,12 +60,11 @@ bullet-paragraph = {font: 12pt "Century Schoolbook"}[bullet][tab]
 <db:programlisting>
 bullet-paragraph = {font: 12pt "Century Schoolbook"}[em dash][tab]
 </db:programlisting>
-<db:para>And then we maybe realize that “bullet-paragraph” is not the best name any more, because the style is now a dash, not a bullet. In other words we discover that we had not done as good a job as we thought of partitioning content and formatting, because the content actually still contains formatting information in the form of a style that is named for a particular piece of formatting. In other words, the writer is still making the formatting choice “bullet” when we want them to focus on the content choice “list”.</db:para>
+<db:para>Because the style now uses an em-dash, rather than a bullet, the name bullet-paragraph may not be the best choice. The content still contains formatting information in the form of a style named for a particular piece of formatting, which means writers are still making the formatting choice “bullet” when it would be better for them to focus on the content choice “list.”</db:para>
 </db:section>
 <db:section>
 <db:title>Name your abstractions correctly</db:title>
-<db:para>When we separate formatting from content, we have to insert something in its place, and it matters what that something is and what it is called. If we call it the wrong thing we set up a false expectation, and that will lead to authors using it incorrectly, which will mean we can’t format it reliably. This is simply poor partitioning.</db:para>
-<db:para>So the first lesson about separating content from formatting is that it matters what you call things. You are creating an abstraction, and you need to figure out what that abstraction is and name it appropriately.</db:para>
+<db:para>The names you choose for styles and other abstractions matter. The wrong name sets up a false expectation, which can lead to authors using a style incorrectly. So the first lesson about separating content from formatting is that naming matters. You are creating an abstraction, and you need to figure out what that abstraction is and name it appropriately.</db:para>
 <db:para>What is the abstraction here? Sand, Eggs, and Gold are list items. So maybe we do this:</db:para>
 <db:programlisting>
 {style: paragraph}The box contains:
@@ -81,14 +79,14 @@ list-item = {font: 12pt "Century Schoolbook"}[em dash][tab]
 </db:section>
 <db:section>
 <db:title>Make sure you have the right set of abstractions</db:title>
-<db:para>But then, of course, we run into this problem:</db:para>
+<db:para>But then, of course, you run into lists like the following:</db:para>
 <db:programlisting>
 {style: paragraph}To wash hair:
 {style: list-item}Lather
 {style: list-item}Rinse
 {style: list-item}Repeat
 </db:programlisting>
-<db:para>Here our list should have numbers, not dashes or bullets. So we realize that the abstraction we are after is not so broad as all list items. We look at the differences between the different kinds of list items we use and try to group them into abstract types and come up with names for those types. Maybe we come up with “ordered-list-item” and “unordered-list-item”. Then we have:</db:para>
+<db:para>These list items should have numbers, not dashes or bullets. So the abstraction does not cover all list items. If you look at the different kinds of list items, group them into abstract types, and come up with names for those types, you probably come up with ordered-list-item and unordered-list-item. Then you have:</db:para>
 <db:programlisting>
 {style: paragraph}The box contains:
 {style: unordered-list-item}Sand
@@ -102,11 +100,11 @@ list-item = {font: 12pt "Century Schoolbook"}[em dash][tab]
 {style: ordered-list-item}Rinse
 {style: ordered-list-item}Repeat
 </db:programlisting>
-<db:para>And the style for ordered-list-items now looks something like this:</db:para>
+<db:para>The style for ordered-list-items now looks something like this:</db:para>
 <db:programlisting>
 ordered-list-item = {font: 12pt "Century Schoolbook"}&lt;count&gt;.[tab]
 </db:programlisting>
-<db:para>And then we realize that we need a way to increment the count and to reset it to 1 for a new list. So we have:</db:para>
+<db:para>But you need a way to increment the count and reset it to 1 for a new list, which leads to:</db:para>
 <db:programlisting>
 {style: paragraph}To wash hair:
 {style: first-ordered-list-item}Lather
@@ -121,12 +119,12 @@ ordered-list-item =
     {font: 12pt "Century Schoolbook"}&lt;++count&gt;.[tab]
 </db:programlisting>
 <db:para>(<db:code>++count</db:code> here means add one to <db:code>count</db:code> and then display it.)</db:para>
-<db:para>And this is pretty much how you do lists in <db:indexterm><db:primary>FrameMaker</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>FrameMaker</db:secondary></db:indexterm>FrameMaker or <db:indexterm><db:primary>Microsoft Word</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>Microsoft Word</db:secondary></db:indexterm>Microsoft Word today, as well as a number of other tools. But the reason for going through it in such detail is to point out what is involved in even this simple bit of partitioning. We began by simply removing formatting commands, but then started to remove characters as well, which forced us to include characters in our style definitions, and then to be able to actually calculate characters in our style definitions. And we saw that in performing these separations, we were creating abstractions, and that it was important to consider all the cases we might run into and create the appropriate abstractions to handle them.</db:para>
+<db:para>This is pretty much how <db:indexterm><db:primary>FrameMaker</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>FrameMaker</db:secondary></db:indexterm>FrameMaker, <db:indexterm><db:primary>Microsoft Word</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>Microsoft Word</db:secondary></db:indexterm>Microsoft Word, and many other tools handle lists. The reason for going through this example in such detail is to point out how much is involved in even this simple bit of partitioning. We began by removing formatting commands, followed by characters, which forced us to include characters in our style definitions. And then we had to calculate the value of characters. At each step, we created abstractions and had to consider all the cases we might run into and create abstractions to handle them.</db:para>
 </db:section>
 <db:section>
 <db:title>Create containers to provide context</db:title>
-<db:para>As we noted in <db:xref linkend="chapter.document-domain"/>, one problem with this approach is that the writer has to remember to apply a different style to the first item of a list. It would be better if they could use the same style for each list item and have the numbering just work. But this is hard to do because there is nothing in the content to say where one numbered list ends and the next begins. For this we need a new abstraction. So far we have abstractions for two kinds of list items: ordered and unordered list items. But we don’t have an abstraction for lists themselves.</db:para>
-<db:para>So far, we have been separating content from formatting purely in the <db:indexterm><db:primary>media domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media domain</db:secondary></db:indexterm>media domain. We have replaced direct formatting definitions with indirect definitions through styles. The only thing that abstracts any of this beyond the media domain is the names that we have given to the styles that we have created. But now we start to venture into the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain, creating the abstract idea of a list and inserting that abstract idea into our content.</db:para>
+<db:para>As noted in <db:xref linkend="chapter.document-domain"/>, one problem with this approach to creating lists is that you have to apply a different style to the first item of a list. It would be better if you could use the same style for each list item and have the numbering just work. However, this is hard to do because nothing in the content says where one numbered list ends and the next begins. For this we need a new abstraction. So far, we have abstractions for ordered and unordered list items, but we don’t have an abstraction for lists themselves.</db:para>
+<db:para>Up to this point, we have been separating content from formatting purely in the <db:indexterm><db:primary>media domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media domain</db:secondary></db:indexterm>media domain. We replaced direct formatting definitions with indirect definitions through styles. But now we start to venture into the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain, creating the abstract idea of a list and inserting that abstract idea into our content.</db:para>
 <db:programlisting>
 paragraph: To wash hair:
 list:
@@ -134,15 +132,15 @@ list:
     ordered-list-item:Rinse
     ordered-list-item:Repeat
 </db:programlisting>
-<db:para>There are a number of significant changes here. First, our structure is no longer flat. We have introduce the idea of a container. A list is a container for list items. In creating this container we have added something to the content that was not there before. Previously it was a series of paragraphs with different styles attached. Now we have a container, which, as far as the formatting is concerned, simply never existed in the original. The writer and reader knew that the sequence of bulleted paragraphs formed a list, but that was an interpretation of the formatting. Now we have taken that interpretation and instantiated it in the content itself. Those lines starting with bullets constitute a list, and now we have made it explicit.</db:para>
-<db:para>By creating the idea of a list, we are able to further separate list formatting from the content of the list – because now an algorithm can recognize it as a list and can make formatting decisions based on that knowledge.</db:para>
-<db:para>The second important thing that has happened here is that the content no longer contains references to style names. Instead we have structures. <db:code>list</db:code> is a structure and so are <db:code>paragraph</db:code> and <db:code>numbered-list-items</db:code>.</db:para>
-<db:para>We have replaced styles with structures because the same structure may get a different style depending on where it is in the document. The <db:indexterm><db:primary>formatting algorithm</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>formatting algorithm</db:secondary></db:indexterm>formatting algorithm is responsible for determining if an ordered-list-item is the first one inside a list and formatting it accordingly. (Which is just how list formatting works in CSS<db:footnote><db:para>https://css-tricks.com/numbering-in-style/</db:para></db:footnote>.)</db:para>
-<db:para>Now authors no longer apply styles to content, even ones with abstract names. Rather they place content in structures and allow the formatting algorithm to apply styles appropriately. The content is  separated even more from the formatting.</db:para>
+<db:para>There are a number of significant changes here. First, the structure is no longer flat. We have introduced a container. A list is a container for list items. Previously it was a series of paragraphs with different styles attached. Now we have a container, which, as far as the formatting is concerned, never existed in the original. The writer and reader knew that the sequence of bulleted paragraphs formed a list, but that was an interpretation of the formatting. Now we have taken that interpretation and recorded it explicitly in the content itself.</db:para>
+<db:para>By creating the idea of a list, we further separate list formatting from the list content – now an algorithm can recognize a list and can make formatting decisions based on that knowledge.</db:para>
+<db:para>The second important thing is that the content no longer refers to style names. Instead we have structures. <db:code>list</db:code> is a structure and so are <db:code>paragraph</db:code> and <db:code>ordered-list-item</db:code>.</db:para>
+<db:para>By replacing styles with structures, you can give the same structure a different style depending on where it is in the document. The <db:indexterm><db:primary>formatting algorithm</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>formatting algorithm</db:secondary></db:indexterm>formatting algorithm determines if an ordered-list-item is the first one inside a list and formats it accordingly. (Which is how list formatting works in CSS.<db:footnote><db:para>https://css-tricks.com/numbering-in-style/</db:para></db:footnote>)</db:para>
+<db:para>Now authors no longer apply styles to content, even styles with abstract names. Rather they place content in structures and allow the formatting algorithm to apply styles appropriately. This separates the content even more from the formatting.</db:para>
 </db:section>
 <db:section>
 <db:title>Move the abstractions to the containers</db:title>
-<db:para>But there is an obvious problem here. What if an author inadvertently does this:</db:para>
+<db:para>But there is a problem here. What if an author inadvertently does this:</db:para>
 <db:programlisting>
 paragraph: To wash hair:
 list:
@@ -150,7 +148,7 @@ list:
     unordered-list-item:Rinse
     ordered-list-item:Repeat
 </db:programlisting>
-<db:para>To avoid this, we move the abstraction outward. Instead of ordered and unordered list items, we create ordered and unordered lists:</db:para>
+<db:para>To avoid this, move the abstraction outward. Instead of ordered and unordered list items, you create ordered and unordered lists:</db:para>
 <db:programlisting>
 paragraph: To wash hair:
 ordered-list:
@@ -166,10 +164,10 @@ unordered-list:
     list-item:Eggs
     list-item:Gold
 </db:programlisting>
-<db:para>And, of course, the <db:code>list-item</db:code> structure can be used in either an unordered list or an ordered list, because it is a list item in either case, and the <db:indexterm><db:primary>formatting algorithm</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>formatting algorithm</db:secondary></db:indexterm>formatting algorithm can tell the difference based on which type of list it belongs to. The name <db:code>list-item</db:code> describes it role in the document in a way that is entirely separated from how it will be styled.</db:para>
-<db:para>Moving the abstraction out to the container is an important part of the algorithm of separating content from formatting. It partitions ordered and unordered lists making the construction of each simpler and more reliable. This helps keep things consistent and reduces the number of things authors have to remember. (Notice that this requires the writer to make a decision about whether the list they are writing is ordered or unordered, but that this is a decision they had to make anyway in order to write the content at all – it is implicit in the rhetoric of the piece, we are just asking the writer to make it explicit.)</db:para>
-<db:para>Creating containers and abstracting out the differences between their contents is an important piece of separating content for formatting. For example, HTML and Markdown both provide six different level of headings. But content under an <db:code>H2</db:code> or an <db:code>H5</db:code> heading is not in any container. The content simply comes after the heading. This means that is it perfectly possible and legal in these languages to place different heading elements in any order you want. Writers have to make decisions about which heading level they want and how it fits in the structure of the document they are creating.</db:para>
-<db:para>By contrast, in <db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DocBook</db:secondary></db:indexterm>DocBook, we have a <db:indexterm><db:primary>section</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>section</db:secondary></db:indexterm>section structure. Like a list, a section is part of the writer’s interpretation of what they are creating in the document, but it is only implied, not instantiated by the formatting. The <db:indexterm><db:primary>section</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>section</db:secondary></db:indexterm>section structure  instantiates the concept of a section. And once we have the instantiation of a section, we don’t need six levels of heading. We can have one structure called <db:indexterm><db:primary>title</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>title</db:secondary></db:indexterm>title. Sections can be nested inside other sections, and the formatting algorithm can apply the correct style to the title based on context:</db:para>
+<db:para>Now, you have a single <db:code>list-item</db:code> structure that you can use in either an unordered list or an ordered list; the <db:indexterm><db:primary>formatting algorithm</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>formatting algorithm</db:secondary></db:indexterm>formatting algorithm determines the formatting based on which type of list the list-item belongs to. The name <db:code>list-item</db:code> describes a role in the document that is entirely separate from formatting.</db:para>
+<db:para>Moving the abstraction out to the container is an important part of the algorithm of separating content from formatting. It partitions ordered and unordered lists, making the construction of each simpler and more reliable. This helps keep things consistent and reduces the number of things authors have to remember. (Notice that this requires writers to decide whether a list is ordered or unordered, but they had to decide this anyway; the decision is implicit in the rhetoric of the piece.)</db:para>
+<db:para>Some markup languages take better advantage of containers than others. For example, HTML and Markdown both provide six different heading levels. However, content under an <db:code>H2</db:code> or an <db:code>H5</db:code> heading is not in any container. The content simply comes after the heading. This means that is it perfectly possible and legal to use heading elements in any order you want. Writers must select the heading level and ensure that it fits the structure of their document.</db:para>
+<db:para>By contrast, <db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DocBook</db:secondary></db:indexterm>DocBook has a <db:indexterm><db:primary>section</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>section</db:secondary></db:indexterm>section structure. Like a list, a section records your interpretation of what you are creating in the document. The <db:indexterm><db:primary>section</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>section</db:secondary></db:indexterm>section structure instantiates the concept of a section. And once you have the instantiation of a section, you don’t need six levels of heading. You can have one structure called <db:indexterm><db:primary>title</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>title</db:secondary></db:indexterm>title. Sections can be nested inside other sections, and the formatting algorithm applies the correct style to the title based on context:</db:para>
 <db:programlisting>
 section: 
     title:
@@ -177,13 +175,15 @@ section:
     section:
         title:
 </db:programlisting>
-<db:para>This will eliminate heading element decisions and therefore incorrect choices, ensuring that the headings in the output consistently reflect the section and subsection structure of the document.</db:para>
-<db:para>(It must be said that not everyone holds to the view that headings in a text do or should reflect a hierarchy of sections. Sometimes they may be simply signposts along the way, and like any signpost, the size of the sign reflects the size of the town, not a strict hierarchy of sign sizes. So if that is how you look at document structures, you should choose a different way to separate content from formatting in your content.)</db:para>
+<db:para>This eliminates decisions about which heading element to use; there is just one: <db:code>title</db:code>. This ensures that the headings in the output consistently reflect the section and subsection structure of the document.<db:footnote>
+<db:para>Not everyone holds to the view that headings in a text must reflect a hierarchy of sections. Instead, headings may be simply signposts along the way, where the size of the sign reflects some quality – size of the town or the importance of the section – other than a strict hierarchy. If that is how you look at document structures, you should choose a different way to separate content from formatting.</db:para>
+</db:footnote></db:para>
+
 </db:section>
 <db:section>
 <db:title>Separate out abstract formatting</db:title>
 <db:para>I noted that in the case of ordered and unordered lists, separating content from formatting actually involves separating out some of the content as well. Or rather, it involves separating out some of the characters. In other words, the distinction between content and formatting is not the same as the distinction between characters and the styles applied to them. Sometimes characters are part of the formatting rather than the content.</db:para>
-<db:para>Consider a structure that we might call a labeled list:</db:para>
+<db:para>Consider a labeled-list structure:</db:para>
 <db:blockquote>
 <db:variablelist>
 <db:varlistentry>
@@ -220,20 +220,19 @@ labeled-list:
         label: Code
         contents: 12345
 </db:programlisting>
-<db:para>But what if you have hundreds of addresses, all with the same labels. In this case, are the labels really content, or are they presentation? Since they don’t change from one list to another, we could look at them as being part of how the content is presented, rather than being part of the content itself. So we look for a way to separate them from the content.</db:para>
-<db:para>As always, when we separate something from our content, we have to replace it with something else. In this case, it is named structures that reflect the actual subject matter of the entries:</db:para>
-<db:programlisting language="sam">
+<db:para>But what if you have hundreds of addresses, all with the same labels? Are the labels content or are they presentation? Since the labels don’t change from one list to another, you could look at them as being part of the presentation rather than the content. So let’s look for a way to separate them from the content.</db:para>
+<db:para>As always, when you separate something from your content, you have to replace it with something else. In this case, we use named structures that reflect the subject matter of the entries, which moves this content into the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain (see <db:xref linkend="ex.separate-1"/>):</db:para>
+<db:figure xml:id="ex.separate-1"><db:title>Address markup in the subject domain</db:title><db:programlisting language="sam">
 address:
     street: 123 Elm Street
     town: Smallville
     country: USA
     code: 12345
-</db:programlisting>
-<db:para>Now, of course, we have moved our content into the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain. At this point we should make a distinction between formatting and presentation. Though these two words are often used interchangeably, we need to make a distinction between them for structured writing purposes. For purposes of this discussion, the formatting of text is the precise details of its appearance: the font chosen, the width of the text column, the size of the characters, the spacing between line, the size and shape of the bullet characters.</db:para>
-<db:para>Presentation, on the other hand, is about how we organize the content. Deciding to use a list to present a certain piece of information is a presentation decision, and it is independent of the formatting details we apply to lists. When we move content from the <db:indexterm><db:primary>media domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media domain</db:secondary></db:indexterm>media domain to the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain, we separate the formatting of the content from the presentation of the content. The decision to present the information as a list remains; the decision about what that list will look like has been separated out.</db:para>
-<db:para>When we move the content from the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain to the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, however, we separate the information from the presentation. The subject domain structure above is not a labeled list. It is a data record that could be turned into many different forms of presentation.</db:para>
-<db:para>The job of turning such structures into a specific form of presentation is the job of the presentation algorithm, which we will look at in more detail in <db:xref linkend="chapter.publishing"/>. The presentation algorithm could turn it into a labeled list, a table, a paragraph (with the fields separated by commas), or the address label for an envelope.</db:para>
-<db:para>In the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, with the content separated from both formatting and presentation, we also gain the ability to query and reorganize the content in various interesting and useful ways (which we will explore in later chapters).</db:para>
-<db:para>This is as far as we can go in separating content from formatting, and we can’t separate all content from formatting to quite this extent. It should be clear at this point that separating content from format is not a binary thing. There are various stages of separation that we can achieve for various reasons. It is important to understand exactly which degree of separation will best serve your needs.</db:para>
-<db:indexterm class="endofrange" startref="idm196628524"/><db:indexterm class="endofrange" startref="idm196628524x"/></db:section>
+</db:programlisting></db:figure>
+<db:para>Here, once again, it is important to distinguish formatting and presentation. As discussed in <db:xref linkend="chapter.document-domain"/>, <db:emphasis>formatting</db:emphasis> refers to the precise details of a text’s appearance: the font chosen, the width of the text column, the size of the characters, the spacing between line, the size and shape of the bullet characters. <db:emphasis>Presentation</db:emphasis> refers to the organization of text. Deciding to use a list for a certain piece of information is a presentation decision, which is independent of the formatting details applied to lists. When you move content from the <db:indexterm><db:primary>media domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media domain</db:secondary></db:indexterm>media domain to the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain, you separate the formatting of the content from its presentation. The decision to present the information as a list remains; the decision about what that list will look like has been separated out.</db:para>
+<db:para>In contrast, moving content from the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain to the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain separates the <db:emphasis>information</db:emphasis> from the <db:emphasis>presentation</db:emphasis>. The subject-domain structure in <db:xref linkend="ex.separate-1"/> is not a labeled list. It is a data record that could be turned into many different forms of presentation.</db:para>
+<db:para>The job of turning such structures into a specific form of presentation is the job of the presentation algorithm (see <db:xref linkend="chapter.publishing"/>). The presentation algorithm could turn it into a labeled list, a table, a paragraph, or an address label.</db:para>
+<db:para>In the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, with the content separated from both formatting and presentation, you also gain the ability to query and reorganize the content in various interesting and useful ways (which I will explore in later chapters).</db:para>
+<db:para>This is as far as you can go in separating content from formatting, and you can’t separate all content from formatting to quite this extent. Separating content from format is not a binary operation. There are various degrees of separation that you can apply for various reasons. It is important to understand exactly which degree of separation best serves your needs.</db:para>
+<db:indexterm class="endofrange" startref="idp140444540533280"/><db:indexterm class="endofrange" startref="idp140444540533280x"/></db:section>
 </db:chapter>
