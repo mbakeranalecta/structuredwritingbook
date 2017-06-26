@@ -6,126 +6,136 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
         concept, management domain
         
 
-    So far I have talked about three domains that content passes through and in which it can be recorded: the {media domain}(concept), the {document domain}(concept), and the {subject domain}(concept). But there is a forth domain that intrudes into this picture: the {management domain}.
+    So far I have talked about three domains: the {document domain}(concept), and the {subject domain}(concept). But there is a fourth domain that intrudes into this picture: the {management domain}.
 
-    Why do I call the management domain an intrusion? Because while the subject, document, and media domains are all about recording the content itself, the management domain is not about the content, but about the process of managing it.         
+    Why do I call the management domain an intrusion? Because while the subject, document, and media domains are about recording the content itself, the management domain is not about the content itself; it's about the process of managing content.         
     
-    Let's suppose we run a publishing company that publishes a number of magazines. We want to create a common store of recipes for use in all the magazines. But different magazines have different requirements. _Wine Weenie_ magazine needs to have a wine match with every recipe. _The Teetotaler's Trumpet_, naturally, wants a non-alcoholic suggestion. 
+    Suppose you run a company that publishes magazines, and you want to create a common store of recipes for use in all the magazines. However, different magazines have different requirements. _Wine Weenie_ magazine needs to have a wine match with every recipe. _The Teetotaler's Trumpet_, naturally, wants a non-alcoholic suggestion. 
 
-    Here is how that might be handled in the document domain:
+    [*ex.md-1] shows how you could handle this in the document domain:
 
-    ```(xml)
-        <section publication="Wine Weenie">
-            <title>Wine match</title>
-            <p>Pinot Noir</p>
-        </section>
-        <section publication="The Teetotaler's Trumpet">
-            <title>Suggested beverage</title>
-            <p>Lemonade</p>
-        </section>
+    figure:(*ex.md-1) Condition text markup (XML)
+        ```(xml)
+            <section publication="Wine Weenie">
+                <title>Wine match</title>
+                <p>Pinot Noir</p>
+            </section>
+            <section publication="The Teetotaler's Trumpet">
+                <title>Suggested beverage</title>
+                <p>Lemonade</p>
+            </section>
     
 
-    This is an example of what we call {conditional text}(algorithm). The `publication` attribute on the `section` element says, display this text only in this publication. This makes it {management metadata}(concept), which means these structures are in the {management domain}.) It does not specify the formatting, organization, or subject matter of the document. It specifies which publication the content should appear in, which is a content management decision.
+    This is an example of {conditional text}(algorithm). The `publication` attribute on the `section` element says, display this text only in this publication. Conditional text structures are {management metadata}(concept), which means they are in the {management domain}. They do not specify the formatting, organization, or subject matter of the document. They specify which publication the content should appear in, which is a content management decision.
 
-    A content management decision is always, from the writer's point of view, an extended decisions, not a core decision. It is not a decision that the writer has to make in order to write their content. It is a decision imposed on the writer's task from elsewhere in the process. As such, the {management domain} is again an intrusion -- an intrusion not only into the content but into the writer's time and attention. In the overall scheme of things, this may sometimes be the best place to place the burden, but we should be very aware that when we do this we are increasing the complexity of the writing process and increasing both the knowledge and skills required to write successfully. We should certainly look for alternatives to the {management domain} wherever we can. 
+    Content management decisions are always, from the writer's point of view, {extended decisions}, not {core decisions}. You don't need to make management decisions to write your content; they are imposed on you from somewhere else in the process. As such, the {management domain} intrudes not only into your content but also into your time and attention. Sometimes, the writer is the correct person to make management-domain decisions, but be aware that when you do this, you increase the complexity of the writing process and increase the knowledge and skills required to write successfully. Wherever you can, look for alternatives to the {management domain}.
 
-    We have noted that a decision imposes two burdens: making the decision, which requires knowledge, and executing the decision, which requires skills. In the case of conditional text, we have a system that removes the execution of the decision (including or excluding the text at build time), but leaves the decision making (where and what to include) with the writer. Of course, it also require some execution skill as well, since the writer has to know how to apply conditions correctly, which is not always a simple matter. This is a common pattern with management domain structures. 
+    Any decision imposes two burdens: making the decision, which requires knowledge, and executing the decision, which requires skills. A conditional text system relieves you from the responsibility of executing the decision -- including or excluding the text at build time -- but it still requires you to decide what content to include/exclude and where that content should be placed. Of course, you also must know how to apply conditions correctly, which is not always a simple matter. This is a common pattern with management-domain structures. 
    
     section: Including boilerplate content
 
-        {Management domain} structures can be used to do a number of things. For example, let's say you have a standard warning statement that you are required to include in a document wherever you have a dangerous procedure. Structured writing partitions complexity by factoring out invariants, and the invariant here is that this warning statement must appear whenever you describe a dangerous procedure. 
+        Suppose you must include a standard warning statement with any content that describes a dangerous procedure. Structured writing partitions complexity by factoring out invariants, and the invariant here is that this warning statement must appear whenever you describe a dangerous procedure. 
         
-        Just as we extracted formatting information into a separate file when we moved content from the media domain to the document domain, we now extract the invariant warning from the document and place it in a separate file. Any place we want this warning to occur, we insert an instruction to include the contents of the file at that location.   
+        You could use the same strategy we used when we extracted formatting information into a separate file to move content from the media domain to the document domain: extract the invariant warning from the document and place it in a separate file. Then, insert an instruction wherever you need the warning to occur (see [*ex.md-2]).
 
-        ```(sam)
-            procedure: Blow stuff up
-                <<<(files/shared/admonitions/danger.sam)
-                step: Plant dynamite.
-                step: Insert detonator.
-                step: Run away.
-                step: Press the big red button.
+        figure:(*ex.md-2) Include a warning in a dangerous procedure (SAM markup)
+            ```(sam)
+                procedure: Blow stuff up
+                    <<<(files/shared/admonitions/danger.sam)
+                    step: Plant dynamite.
+                    step: Insert detonator.
+                    step: Run away.
+                    step: Press the big red button.
         
-        In the SAM markup above the `<<<` is an include command. It includes the content of the file located at `files/shared/admonitions/danger.sam` in the source file as it is read.
+        In the SAM markup in [*ex.md-2], `<<<` is a command that includes the content of the file located at `files/shared/admonitions/danger.sam` in the source file replacing the `<<<` command.
         
-        The equivalent in XML would look something like this:
+        The equivalent in XML would look something like [*ex.md-3].
+
+        figure:(*ex.md-3) Include a warning in a dangerous procedure (XML markup)
+            ```(XML)
+                <procedure>
+                    <title>Blow stuff up</title>
+                    <xi:include href="files/shared/admonitions/danger.xml"/>
+                    <step>Plant dynamite.</step>
+                    <step>Insert detonator.</step>
+                    <step>Run away.</step>
+                    <step>Press the big red button.</step>
+                </procedure>
         
-        ```(XML)
-            <procedure>
-                <title>Blow stuff up</title>
-                <xi:include href="files/shared/admonitions/danger.xml"/>
-                <step>Plant dynamite.</step>
-                <step>Insert detonator.</step>
-                <step>Run away.</step>
-                <step>Press the big red button.</step>
-            </procedure>
         
+        Why is this operation part of the {management domain}, rather than the {document domain}? Because it deals with a system operation: locating a file in the system and loading its contents. If we were purely in the document domain, the author would perform the following steps: find the file with the warning in it, open it, and copy the contents into the document. The include instruction is just that: an instruction. It is not a declaration about the subject matter or structure of a document, such as we find in {subject-domain} or document-domain markup. It is an instruction to a machine to perform an operation. The {management domain} consists of instructions, or the declaration of data, required to perform management functions. 
         
-        Why is this operation part of the {management domain}, rather than the {document domain}? Because it deals with a system operation: locating a file in the system and loading its contents. If we were purely in the document domain, the author would be the one performing this operation: finding the file with the warning in it, opening it, and copying the contents into the document. The include instruction is just that: an instruction. It is not a declaration about the subject matter or structure of a document, such as we find in {subject domain} or document domain markup. It is an instruction to a machine to perform an operation. The {management domain} consists of instructions or the declaration of data required to perform management functions. 
-        
-        Different structured writing systems have different instruction sets for handling the situation described above. In {DITA}, for instance, this use case is handled using something called a {conref}(structure (DITA)) or a {conkeyref}(structure (DITA)). In Docbook it can be handled using a generic XML facility called {XInclude}(tool), as in the XML example above. 
+        Different structured writing systems have different instruction sets for handling the situation described above. For example, {DITA} handles this use case using a facility called a {conref}(structure (DITA)) or {conkeyref}(structure (DITA)). DocBook uses a generic XML facility called {XInclude}(tool), as in [*ex.md-3]. 
         
     section: An alternative approach in the subject domain
 
-        The downside of the management domain include instruction is that it requires system knowledge to make the decision to to specify to the algorithm how to implement that decision. Adding decisions to the author's task is always a problem because the author's attention is a limited resource and everything that takes away their attention from writing has a direct impact on content quality. 
-
-        But the use of a conditional expression or an include instruction is not just a problem for the author, it also makes {change management} and {content management} more complicated by distributing management domain structures like conditions and file paths throughout the content. Management domain structures encode management decisions in the content itself. Changing those decisions later means changing management structures all over the content set. 
+        One downside of the management-domain include instruction is that authors must have system knowledge to use it correctly. However, the use of conditional expressions or include instructions is not just a problem for authors, it also complicates {change management} and {content management} by distributing management-domain structures such as conditions and file paths throughout your content. Management-domain structures encode management decisions in the content itself. Changing those decisions means changing management structures all over the content set. 
         
-        Is there a way to partition the management complexity from the authoring and keep management decisions out of the content? In many cases this can be accomplished using the {subject domain}.
+        Is there a way to partition management complexity from authoring and keep management decisions out of the content? In many cases this can be accomplished using the {subject domain}.
         
-        This is how we might approach the two magazines problem in the subject domain:
+        [*ex.md-4] shows how you might approach the two-magazines problem in the subject domain:
 
-        ```(xml)
-            <wine-match>Pinot Noir</wine-match>
-            <beverage-match>Lemonade</beverage-match>
+        figure:(*ex.md-4) Subject domain alternative for conditional content
+            ```(xml)
+                <wine-match>Pinot Noir</wine-match>
+                <beverage-match>Lemonade</beverage-match>
 
-        This markup says nothing about which documents should contain either of these pieces of information (a clear example of partitioning). Nor does it contain the subheadings what would introduce either of them in the appropriate publication. All these decisions are now left to algorithms (and the people who write them). This allows us to do far more things with this content without having to rewrite the source files in any way (a partitioning that significantly reduces the complexity of {change management}, an algorithms we will look at in [#chapter.change]). 
+        This markup says nothing about which documents should contain either of these pieces of information. Nor does it contain the subheadings what would introduce either of them in the appropriate publication. All these decisions are now left to algorithms. This allows you to do far more with this content without having to rewrite the source files in any way. This also significantly reduces the complexity of {change management}, which we will look at in [#chapter.change]. 
 
-        Every time you can move a decision out of the content and into an algorithm, you accomplish two things. You make the authoring task easier, and you preserve you ability to make different decisions later without changing content. Factoring out the management domain it thus a big win on two fronts. 
+        Every time you move a decision out of the content and into an algorithm, you accomplish two things: you make authoring easier, and you preserve the ability to make different decisions without changing content. Factoring out the management domain is a big win on both fronts. 
         
-        Can we factor out the decision involved in including the warning in dangerous procedures? As we saw in [#chapter.subject-domain], factoring out invariant text is a feature of the subject domain. Since we are dealing with invariant text here, the subject domain may provide the solution. To understand the subject domain approach to this problem, remember what the invariant rule is here: A dangerous procedure must have a standard warning. 
+        Let's see if we factor out the decision involved in including the warning in dangerous procedures. As we saw in [#chapter.subject-domain], factoring out invariant content is a feature of the subject domain. In this case, the invariant content comes from the rule: A dangerous procedure must have a standard warning. 
 
-        The management domain approach to this is to allow authors to insert the standard warning so that it is only stored once instead of being repeated in every procedure (something that is often called {content reuse}(concept)) an algorithms we will look at in [#chapter.reuse]. Notice that the management domain markup does not encapsulate our invariant rule that dangerous procedures must have a standard warning (a rhetorical rule). It just provides a generic mechanism for inserting content as a reference to a file. The requirement has not been partitioned, we have merely provided a mechanism for implementing each case of the requirement. It leaves it entirely up to the author to remember and enforce the rule about dangerous procedures.  
+        The management-domain approach gives authors a standard warning, stored in one place.[*fn.md-reuse] Notice that the management-domain markup does not encapsulate our invariant rhetorical rule that dangerous procedures must have a standard warning. It simply provides a generic mechanism for inserting content from an external file. The author must remember and enforce the rule about dangerous procedures.  
 
-        The subject domain approach, on the other hand, is all about the invariant rhetorical rule itself. Specifically, it expresses the aspect of the subject domain that triggers the rule: whether a procedure is dangerous or not:
+        footnote:(*fn.md-reuse)
+            This approach is a form of {content reuse}(concept), an algorithm we will look at in [#chapter.reuse].
+        
+        The subject-domain approach, on the other hand, is all about the invariant rhetorical rule itself. Specifically, it expresses the aspect of the subject domain that triggers the rule: whether a procedure is dangerous or not. [*ex.md-5] shows how you might mark up this information.
 
-        ```(sam)
-            procedure: Blow stuff up
-                is-it-dangerous: yes
-                step: Plant dynamite.
-                step: Insert detonator.
-                step: Run away.
-                step: Press the big red button.
+        figure:(*ex.md-5) Subject-domain markup for a warning notice
+            ```(sam)
+                procedure: Blow stuff up
+                    is-it-dangerous: yes
+                    step: Plant dynamite.
+                    step: Insert detonator.
+                    step: Run away.
+                    step: Press the big red button.
         
         
-        This markup simply records that this procedure is dangerous, a fact about the subject matter, and one that our rhetorical standards require us to mention. This partitions the requirement, by retaining the information on which our invariant rule is based, but factors out the action to be taken. Rather than asking authors to remember to include the file (and how to included it, and how to find it) we delegate those decisions to the {publication algorithm}(concept). It is now the algorithm, not the writer, that needs to remember to include the material in `files/shared/admonitions/danger` whenever the `is-it-dangerous` field of a `procedure` structure is set to "yes". This is the sort of task that algorithms are much better at than humans. 
+        This markup identifies the procedure as dangerous. This partitions the requirement, by retaining the information on which our invariant rule is based, but it factors out the action to be taken. Rather than making authors remember that a warning is required, locate the warning file, and include a reference to the file, we delegate those decisions to the {publication algorithm}(concept). The algorithm, not the writer, must remember to include the material in `files/shared/admonitions/danger` whenever the `is-it-dangerous` field of a `procedure` structure is set to `yes`. Algorithms are much better at this sort of task than humans are.
 
-        Of course, the human writer does still have a job to do here. They have to remember to set `is-it-dangerous` to "yes". But we can make remembering to do this much easier if we make `is-it-dangerous` a required field in the procedure structure. In other words, we set up our structured writing language in such a way that an error will occur if `is-it-dangerous` is not specified for a procedure. This transfers the complexity of remembering the requirement and fulfilling it from the writer and editor to the conformance algorithm and the {publication algorithm}. 
+        Of course, you still have to remember to set `is-it-dangerous` to `yes` when you write a procedure. But you can make remembering to do this much easier by making `is-it-dangerous` a required field in the procedure structure and raising an error if that field is not included. This transfers the complexity of remembering the requirement and fulfilling it from the writer to the conformance and publication algorithms. 
         
-        This approach makes the writer's job much easier because they not only get reminded of the need to address the question of danger with every procedure, they are also asked it in a way that does not require them to know anything about how the content management system works, what warning text is required, or were it is located. They are recording a fact about the subject, not giving an instruction or interpreting a style guide. This is a much more efficient partitioning of the requirement that does a better job of distributing complexity of this important rule to the person or process best able to handle it, thus minimizing the possibility that this complexity could get dumped on the reader, for whom there might be potentially painful consequences. 
+        This approach simplifies the writing job because you cannot complete a procedure without supplying the necessary information. In addition, you don't need to know anything about how the content management system works, what warning text is required, or where the text is located. You simply record a fact about the subject.
         
-        One the other hand, this approach only factors out the reuse of one particular piece of content -- the warning for dangerous procedures. If you had multiple such invariant rhetorical rules about different kinds of subject matter you would need separate subject domain structures for each of them, whereas a single management domain include instructions would let authors handle them all. 
+        One the other hand, this approach only factors out the reuse of one particular piece of content -- the warning for dangerous procedures. If you have multiple invariant rhetorical rules about different kinds of subject matter, you would need separate subject-domain structures for each of them, whereas a single management-domain include instruction would let you handle them all. 
         
-        On the other other hand, if you have many such invariant rules, and you expect all of them to be enforced by authors from memory, you are dumping an awful lot of complexity on your authors and you are going to limit your pool of authors to a few highly trained individuals. Even then they are still likely to miss some instances, dumping this dangerous complexity on the reader again. 
+        On the other other hand, if you have many invariant rules, and you expect authors to remember all of them, you are dumping an awful lot of complexity on your authors, and you are going to limit your pool of authors to a few highly trained individuals. And those individuals are still likely to miss some instances, dumping this dangerous complexity on the reader.
 
     section: Hybrid approaches
     
-        It is not always an either/or decision to use pure {management domain}(concept) or pure {subject domain} approaches. Management domain structures tend to be used in generic {document domain languages}, since such languages are not designed to be specific to any particular subject matter. Nonetheless, such languages often have roots in particular fields and sometimes include {subject-domain} structures from those fields. Both DocBook and DITA, for instance, originated in the field of software documentation and both include structures related to the subject of software, such as code blocks and structures for describing user interface elements. 
+        It is not always an either/or decision to use pure {management-domain}(concept) or pure {subject-domain} approaches. Management-domain structures tend to be used in generic {document-domain languages}, since such languages are not designed to be specific to any particular subject matter. Nonetheless, such languages often have roots in particular fields and sometimes include {subject-domain} structures from those fields. Both DocBook and DITA, for instance, originated in the field of software documentation, and both include structures, such as code blocks, that are related to the subject of software. 
         
-        In some cases, such languages can mix subject domain structures into their management structures. One example is the {product}(structure "@product" (DITA)) attribute, which is part of DITA's conditional text processing system. 
+        Some languages mix subject-domain structures into their management structures. One example is the {product}(structure "@product" (DITA)) attribute, which is part of DITA's conditional-text processing system. 
         
-        In DITA, you can add the {product} attribute to a wide variety of elements. You can then set a value for products in the build systems and any element with the {product} attribute will only be included in the final output if it matches one of the product values specified in the build. 
-        
-        ```(DITA)
-            <p>The car seats 
-            <ph product="CX-5">5</ph><ph product="CX-9">7</ph>
-            </p>
+        DITA lets you add the {product} attribute to a wide variety of elements. You can then have the build system include or exclude elements in a particular output based on the value of the product attribute. [*ex.md-7] shows an example of the DITA product attribute.
+
+        figure:(*ex.md-7) DITA product attribute example
+            ```(DITA)
+                <p>The car seats 
+                <ph product="CX-5">5</ph><ph product="CX-9">7</ph>
+                </p>
         
                 
-        DITA can afford to use this bit of subject domain markup for products because product variations are an extremely common reason for using conditional text processing in technical communication, the area for which DITA was created. (Through a process called "{specialization}(concept)", DITA can add other subject domain attributes for conditional processing in other subject areas.)
-        
-        The reason I call this a hybrid approach is that the DITA product attribute does not exist merely to declare that a piece of text applies to a particular product. It is specifically a conditional processing attribute. That is, it is an instruction, even though it is phrased as a subject domain declaration. 
+        DITA can afford to use this bit of subject-domain markup because product variations are a common reason for using conditional text processing in technical communication, the area for which DITA was created.[*fn.md-specialize]
 
-        To appreciate the difference, consider that there is another approach to documenting multiple versions of a product. Rather than generating a separate document for each product variant, you could create a single document that covered all product variants and highlighted the differences between them. A pure subject domain approach would support either approach by simply recording the data for each variant:
+        footnote:(*fn.md-specialize)
+            DITA can add other subject-domain attributes for conditional processing through a process called {specialization}(concept)+(italic). [#chapter.extensible] has additional information about DITA specialization.
+        
+        I call this a hybrid approach because the DITA product attribute does not exist merely to declare that a piece of text applies to a particular product. It is a conditional-processing attribute. That is, it is an instruction, even though it is phrased as a subject-domain declaration. 
+
+        To appreciate the difference, consider another approach to documenting multiple versions of a product. Rather than generating a separate document for each product variant, you could create a single document that covers all product variants and highlights the differences. Subject-domain markup would support either approach by simply recording the data for each variant:
         
         ```(sam)
             seats:
@@ -137,7 +147,7 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
         """
             The CX-5 seats 5 and the CX-9 seats 7.
         
-        That is not something that the product attribute supports:
+        The product attribute does not provide this flexibility:
         
         ```(DITA)
             <p>The car seats 
@@ -145,15 +155,15 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
             </p>
         
         
-        This markup is only designed to produce a CX-5 or CX-9 specific document. It is not designed to support the production of a document that covers both cars at once because it does not specify that the values 5 and 7 are numbers of seats. That information is in the text, but not in a form that a publishing algorithm could reliably locate and act on.  
+        With this markup, you can produce a CX-5 or CX-9 specific document, but you can't produce a document that covers both cars at once, because the markup does not specify that the values 5 and 7 are numbers of seats. That information is in the text, but not in a form that a publishing algorithm could reliably locate and act on.  
         
-        Also, creating a single document covering both cars is not the expectation that goes with creating the markup. It is not what the author is told the markup means. The markup is not a simple declaration of facts about each car, it is markup of a document intended to produce a document about one car or the other, not both. It is conditional text markup, and therefore an instruction. 
+        Also, no author would expect this document-domain markup to be used to create a single document covering both cars. Rather than simply declaring facts about each car, this markup was designed to produce a document about one car or the other, not both. It is conditional-text markup and, therefore, an instruction. 
         
         Really, is it a contraction of the more explicitly imperative form (not actually used in DITA):
         
         ```(xml)
             <ph condition="product=CX-5">5</ph>
         
-        While the introduction of subject domain names into {management domain} structures is an appropriate bit of semantic sugar for authors, this hybrid approach really remains firmly in the management domain.
+        While the introduction of subject-domain names into {management domain} structures provides an appropriate bit of semantic sugar for authors, this hybrid approach really remains firmly in the management domain.
             
-        We will see many more examples of the management domain, and the cases in which there is and is not a {subject domain} alternative, in the following chapters. 
+        We will see many more examples of the management domain, including cases where there is and is not a {subject domain} alternative, in the following chapters. 

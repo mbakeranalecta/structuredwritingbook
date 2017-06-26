@@ -5,18 +5,17 @@ chapter:(#chapter.subject-domain) Writing in the Subject Domain
     index: type, term
         concept, subject domain
 
-    The {subject domain} is concerned with the subject matter of a text. It includes both the rhetoric of a subject -- the particular way in which information on a subject is expressed and presented for a particular audience and purpose -- and with the identification of subjects expressed in the content. 
+    The {subject domain} is concerned with the subject matter of a text, including both the rhetoric of a subject -- the way information on a subject is expressed and presented for a particular audience and purpose -- and the identification of subjects expressed in the content. 
 
-    Some of the most important decisions that a writer makes when writing a text are the rhetorical ones: what to say and how to say it. A writer working in the {document domain} makes all those decisions, but does not explicitly record them. They only record the text that results from making those decisions. In the subject domain, however, the writer actually records what it is they are writing about in explicit terms.  
+    Some of the most important decisions you make when writing are rhetorical ones: what to say and how to say it. In the {document domain}, you make all these decisions, but you don't explicitly record them. You record only the text that results from making those decisions. In the subject domain, however, you record exactly what you are writing about.
    
-    A recipe is a useful example for illustrating the use of the subject domain. Here is a recipe written in {reStructuredText}(language), a lightweight general purpose {document domain} markup language:
+    A recipe is a useful example for illustrating the subject domain. [*ex.subj-restructured] is a recipe written in {reStructuredText}(language), a lightweight general purpose {document domain} markup language:
   
-    figure:
-        
+    figure:(*ex.subj-restructured) Recipe for hard-boiled eggs marked up in reStructuredText
         ```(reStructuredText)
-            Hard Boiled Eggs
+            Hard-Boiled Eggs
             ================
-            A hard boiled egg is simple and nutritious. 
+            A hard-boiled egg is simple and nutritious. 
             Prep time, 15 minutes. Serves 6.
 
             Ingredients
@@ -36,148 +35,89 @@ chapter:(#chapter.subject-domain) Writing in the Subject Domain
                 4. Place eggs in cold water to stop cooking.
                 5. Peel and serve.
     
-    In {reStructuredText}, a line underlined with equals signs is a major heading and one underlined with dashes is a minor heading. A table is created by using equals signs to mark the beginning and end of the table and the boundary between the table head and the table body. Rows are separated by new lines and columns by spaces in the rows of equals signs. Numbered lists are created by putting numbers in front of lines of text. The equivalent HTML document would look like this:
+    In {reStructuredText}, a line underlined with equals signs is a major heading and one underlined with dashes is a minor heading. You create a table by using equals signs to mark the beginning and end of the table and the boundary between the table head and the table body. You place each row on a new line and mark columns by putting spaces in the rows of equals signs. You create ordered lists by putting numbers in front of lines of text. The equivalent HTML document to [*ex.subj-restructured] would look like [*ex.subj-html].
 
-    ```(HTML)
-        <html>
-            <h1>Hard Boiled Eggs</h1>
-            
-            <p>A hard boiled egg is simple and nutritious. 
-            Prep time, 15 minutes. Serves 6.</p>
-            
-            <h2>Ingredients</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Quantity</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>eggs</td>
-                        <td>12</td>
-                    </tr>
-                    <tr>
-                        <td>water</td>
-                        <td>2qt</td>
-                    </tr>
-                </tbody>
-            </table>
-            <h2>Preparation</h2>
-            <ol>
-                <li>Place eggs in pan and cover with water.</li>
-                <li>Bring water to a boil.</li>
-                <li>Remove from heat and cover for 12 minutes.</li>
-                <li>Place eggs in cold water to stop cooking.</li>
-                <li>Peel and serve.</li>
-            </ol>
-        </html>
+    figure:(*ex.subj-html) Recipe for hard-boiled eggs marked up in HTML
+        ```(HTML)
+            <html>
+                <h1>Hard-Boiled Eggs</h1>
+                
+                <p>A hard-boiled egg is simple and nutritious. 
+                Prep time, 15 minutes. Serves 6.</p>
+                
+                <h2>Ingredients</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>eggs</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>water</td>
+                            <td>2qt</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h2>Preparation</h2>
+                <ol>
+                    <li>Place eggs in pan and cover with water.</li>
+                    <li>Bring water to a boil.</li>
+                    <li>Remove from heat and cover for 12 minutes.</li>
+                    <li>Place eggs in cold water to stop cooking.</li>
+                    <li>Peel and serve.</li>
+                </ol>
+            </html>
     
-    This document follows the normal rhetorical pattern of a recipe. That is, it has all the pieces of information a recipe normally has, in the order they normally occur in a recipe: introduction, list of ingredients, preparation steps. However, it does not record the fact that it follows this rhetorical pattern. There is nothing in the markup to say that this is not a novel, a car manual, or knitting pattern. Nor would the markup constrain an author to follow the normal rhetorical pattern of a recipe while writing.
+    The document shown in [*ex.subj-html] follows the normal rhetorical pattern of a recipe. That is, it has all the pieces of information a recipe normally has, in the order they normally occur in a recipe: introduction, list of ingredients, preparation steps. However, it does not record the fact that it follows this rhetorical pattern. There is nothing in the markup to say that this is not a novel, a car manual, or a knitting pattern. Nor does the markup constrain an author to follow the normal rhetorical pattern of a recipe while writing.
     
-    Moving this document to the subject domain would allow us to impose these rhetorical constraints, and to record that we have done so. Neither {reStructuredText} nor {HTML} give us a way to do that, so we will need a different markup language. Here's what that might look like:    
+    Moving this document to the subject domain allows you to impose these rhetorical constraints and to record that you have done so. Neither {reStructuredText} nor {HTML} gives you a way to do that, so you need a different markup language. [*ex.subj-sam] shows what that might look like:    
 
-    ```(sam)
-        recipe: Hard Boiled Egg
-            introduction:
-                A hard boiled egg is simple and nutritious. 
-                Prep time, 15 minutes. Serves 6.
-            ingredients:
-                * 12 eggs
-                * 2qt water
-            preparation:
-                1. Place eggs in pan and cover with water.
-                2. Bring water to a boil.
-                3. Remove from heat and cover for 12 minutes.
-                4. Place eggs in cold water to stop cooking.
-                5. Peel and serve.
+    figure:(*ex.subj-sam) Recipe for hard-boiled eggs marked up in a subject-domain language
+        ```(sam)
+            recipe: Hard-Boiled Egg
+                introduction:
+                    A hard-boiled egg is simple and nutritious. 
+                    Prep time, 15 minutes. Serves 6.
+                ingredients:
+                    * 12 eggs
+                    * 2qt water
+                preparation:
+                    1. Place eggs in pan and cover with water.
+                    2. Bring water to a boil.
+                    3. Remove from heat and cover for 12 minutes.
+                    4. Place eggs in cold water to stop cooking.
+                    5. Peel and serve.
 
-    This structure breaks the document up into a collection of named structures. Those structures are "introduction", "ingredients", and "preparation" and they are contained in an overall structures called "recipe". This is the basic rhetorical structure of a recipe. This markup make it explicit that this is a recipe (not a novel, a car manual, or a knitting pattern). The author is explicitly guided to follow this pattern. They are also constrained to present the ingredients as an unordered list and the preparation as a numbered list. ([#chapter.conformance] will look at how such constraints are expressed and enforced.)
+    This structure breaks the document into a collection of named structures -- introduction, ingredients, and preparation -- which are contained in an overall structure called recipe. This is the basic rhetorical structure of a recipe. This markup clearly identifies this as a recipe (not a novel, a car manual, or a knitting pattern), and you are explicitly guided to follow this pattern. You also must present the ingredients as an unordered list and the preparation as a numbered list. ([#chapter.conformance] looks at how to express and enforce such constraints.)
 
-    In other words, in this example, certain basic rhetorical decisions about how to write a recipe have been made by someone other than the writer -- we can call the person the information architect, though this is not always the responsibility of people with that title. By making this basic rhetorical structure explicit, the information architect communicates this requirement to the author. This simplifies the writer's task. (They no longer need to make this decision for each recipe they write.) It also ensures that all recipes in the collection follow this pattern. 
+    In other words, in this example, someone other than the writer has made certain basic rhetorical decisions about how to write a recipe -- let's call that person an {information architect}, though this is not always the responsibility of people with that title. By making this rhetorical structure explicit, the information architect communicates this requirement to writers, which simplifies their task because they no longer need to make this decision for each recipe they write. It also ensures that all recipes follow this pattern. 
 
-    This is not necessarily an all or nothing distinction. This recipe markup language enforces a couple of basic rhetorical decisions about recipes, but leaves plenty of others or the writer to make. Few markup languages are entirely in the {document domain} or entirely in the {subject domain}, though most can be fairly identified as predominantly document domain or predominantly subject domain. We'll see later how we can move this recipe markup further into the subject domain, capturing more rhetorical decisions in the markup language design as we do so.  
+    This is not necessarily an all-or-nothing distinction. This recipe markup language enforces a couple of basic rhetorical decisions about recipes, but leaves plenty of others to the writer. Few markup languages are entirely in one domain, though most are predominantly in the document domain or the subject domain. Later, you'll see how to move this recipe markup further into the subject domain, capturing more rhetorical decisions in the markup language design.
                   
-    But this markup does not merely enforce rhetorical decisions on the writer (meaning that the {information architect} makes the decision, but the writer has to implement it), it also factors out some rhetorical decisions altogether. This means that the writer neither makes nor implements the decision. The decision is made by the {information architect} and implemented by a algorithm (designed by the information architect).
+    But this markup does not just force you to follow a set of rhetorical decisions, it factors out some rhetorical decisions altogether. This means that you neither make nor implement those decisions. An {information architect} makes the decisions and then designs an algorithm to implement them.
 
-    Let's say that we have made a rhetorical decision that the ingredients and preparation sections of each recipe should be titled "Ingredients" and "Preparation". When the recipe was written in {markdown}, in the {document domain}, the writer had to remember and execute this decision each time. But in the {subject domain} version, the titles have been factored out. Instead we have markup structures called `ingredients` and `preparation`, but these don't contain titles. The titles will be added back into the content by the {publishing algorithm}. 
+    Suppose you decide that the ingredients and preparation sections of each recipe should be titled "Ingredients" and "Preparation." If you write recipes in the {document domain} using a language such as {markdown}, you have to remember to execute this decision each time. But in the {subject domain}, the titles are factored out. Instead you have markup structures called `ingredients` and `preparation` that don't contain titles. A {publishing algorithm} adds the titles.
     
-    Partitioning requires that we pass enough information to the partition to do its job. Here the presence of the `ingredients` and `presentation` sections in the recipe structure provide the information that the algorithm needs to insert the appropriate titles.
+    Partitioning requires you to pass enough information to the partition so the publishing algorithm can do its job. Here the presence of the `ingredients` and `presentation` sections in the recipe structure provides the information the algorithm needs to insert the appropriate titles.
     
-    By factoring out titles, we factor out the constraint on what those titles must be. An author no longer has to remember the standard titles to use, and a whimsical author can no longer decide to title these sections "Stuff you need" and "Stuff you do", or any other variant of the standard that the organization has chosen. If we want to change these titles across all the recipes, on the other hand, we only have to change the algorithm. By partitioning the titles out of the content, and out of the writer's task, we have gained the ability to make and to change the decision about the titles of these sections in all recipes, not only those we write in the future, but all those we have already written, without having to go back and edit the content file at all. 
+    By factoring out titles, you also factor out the constraint on what those titles must be. You don't need to remember the title text, and a whimsical author can no longer decide to re-title these sections "Stuff you need," "Stuff you do," or some other variant. And you can change these titles across all recipes, including those you have already written, by changing the algorithm. 
            
-    If your organization publishes a lot of recipes, you probably have a lot more constraints on the rhetorical structure of your recipes. For instance, you might have a constraint that every recipe must state its preparation time and the number of people it serves. In our subject domain markup, we can enforce and record that constraint by moving the information from the introduction section to separate fields:
+    If you publish a lot of recipes, you probably have many more constraints to consider. For instance, you might have a constraint that every recipe must state its preparation time and the number of people it serves. In our subject-domain markup, we can enforce and record that constraint by moving that information from the introduction section to separate fields (see [*ex.subj-add-constraint]).
 
-    ```(sam)
-        recipe: Hard Boiled Egg
-            introduction:
-                A hard boiled egg is simple and nutritious.
-            ingredients:
-                * 12 eggs
-                * 2qt water
-            preparation:
-                1. Place eggs in pan and cover with water.
-                2. Bring water to a boil.
-                3. Remove from heat and cover for 12 minutes.
-                4. Place eggs in cold water to stop cooking.
-                5. Peel and serve.
-            prep-time: 15 minutes
-            serves: 1
-
-    This approach changes the partitioning of the prep-time and serves information. Previously, writers had to remember the requirement to mention these facts in the text of the introduction. Now we have partitioned them off into simple fields that the writer is required to fill out. The writer no longer has to remember the presentation rules that dictate that this information is required and where it should appear. They are prompted for it directly and errors will be raised if they forget, and the decision about where to include it has been transferred to an algorithm. 
-
-    Does this mean that the preparation time will now be displayed as separate fields in the output, rather than in-line? Not necessarily. It might be a good idea to call it out in separate fields so that readers can find the information more easily, but if you really wanted that information at the end of the introduction in every recipe, it would be a simple matter for the {publish  algorithm} to construct the sentences "Prep time, 15 minutes. Serves 6." from the `prep-time` and `serves` field values. 
-    
-    So, something interesting has happened here. In order to enforce a rhetorical constraint -- that prep time and number of servings must be specified -- we have moved away from markup that specifies presentation to markup that merely records data. In other words, `prep-time` and `serves` are data-oriented {subject domain} structures that do not specify presentation at all. We are now partitioning the presentation of the recipe from the information the recipe must contain. This allows us to shift responsibility for conformance to our requirements from the author to a {conformance algorithm}. This makes our design more testable and more {repeatable} -- a welcome redistribution of complexity. 
-    
-    This is a recurring pattern in structured writing, and one of the most important things to understand about how structured writing works. It is almost always better to factor out a constraint than to enforce it. This can be a difficult idea to adjust to. If we have a particular form of presentation we want to achieve, our first instinct naturally is to specify it in detail. But this is not always easy to do, especially if you want to specify that a paragraph should always contain certain pieces of information. Nor is it flexible if you want to vary the presentation for any reason (we will look at some reasons why you might in [#chapter.single-sourcing]). It is important to condition yourself so that when you look at these kinds of problem the first question you ask yourself is, is there a way I can factor out this constraint. Only resort to trying to impose a constraint if it is not possible to factor it out. 
-
-    Note that when you enforce a constraint, that means that the information architect has made the decision, but that the writer is still required to execute it in the content. When you factor out a constraint, the information architect is still making the decision, but the writer is no longer require to execute it. It is executed by an algorithm and separate from the content. This not only means that the writer's job is simpler, and conformance to the constraint is more reliable, it also means that yo have the ability to change the decision independently of the content.  
-    
-    In addition, using data-oriented {subject-domain} markup like this also offers some interesting publishing possibilities. For instance, with this markup in place, you could easily create a cookbook of recipes you can make in 30 minutes or less because you can query your set of recipes and pull out just those in which the `prep-time` field has a value of 30 minutes or less.
-
-    Are there other elements of presentation that we can factor out of the recipe structure? As we noted, the reStructuredText version above uses a table presentation for the ingredients. Our recipe structure currently specifies a simple list. The block that contains it is labeled "ingredients", but the contents of the block is just an ordinary unordered list. 
-     
-    There is a constraint here about how ingredients are expressed, one which authors need to follow, but one that our markup does not yet impose or record. The specification of ingredients in a recipe generally requires three pieces of information, the name of the ingredient, the quantity, and the unit of measure used to express this quantity. These can be presented as a list or a table. To factor out the presentation choice, we can create an ingredient structure that calls out each piece of information separately:
-
-    ```(sam)
-        ingredients:
-            ingredient: 
-                name: eggs
-                quantity: 12
-                unit: each
-            ingredient:
-                name: water
-                quantity: 2
-                unit: qt
-
-
-    There are some shortcuts we can take to make this markup less verbose. (This is a markup syntax named {SAM} that I will talk about later):
-
-    ```(sam)
-        ingredients:: ingredient, quantity, unit
-            eggs, 12, each
-            water, 2, qt
-
-    This markup turns the ingredients into a set of records with named fields for ingredient, quantity, and unit. This enforces and records that the constraint on ingredients is followed. And because the way they are recorded is independent of any one form of presentation, we are now free to use an algorithm to present them either as a table or as a list. 
-    
-    By adding and recording these constraints, we get similar benefits as before. We can better enforce any constraints we have about how ingredient lists are structured and formatted, and we gain access to the specific data involved, meaning, for example, that we could write an algorithm to convert our units from imperial to metric for publication in markets where metric units are preferred.
-       
-
-    section: Using subjects to establish context
-
-        In [#chapter.document-domain], we noted that we can use context to identify the role that certain structures play in a document, which allows us to get away with fewer structures. For instance, we can use a single `title` tag for all titles because we can tell what kind of title each one is from the context in which it occurs. The same is true with subject domain structures. They can provide context that allows us to treat basic text structures differently. 
-            
-        Consider our markup language for recipes:
-
+    figure:(*ex.subj-add-constraint) Recipe with preparation time and servings added
         ```(sam)
             recipe: Hard Boiled Egg
                 introduction:
                     A hard boiled egg is simple and nutritious.
-                ingredients:: ingredient, quantity, unit
-                    eggs, 12, each
-                    water, 2, qt
+                ingredients:
+                    * 12 eggs
+                    * 2qt water
                 preparation:
                     1. Place eggs in pan and cover with water.
                     2. Bring water to a boil.
@@ -185,8 +125,71 @@ chapter:(#chapter.subject-domain) Writing in the Subject Domain
                     4. Place eggs in cold water to stop cooking.
                     5. Peel and serve.
                 prep-time: 15 minutes
-                serves: 6
+                serves: 1
+
+    Now, you no longer have to remember that this information is required and where it should appear. The information is partitioned off into separate fields. The system prompts you for those fields and will raise errors if you forget. And the decision about where to include this information in output formats has been transferred to an algorithm. 
+
+    This does not mean that the prep-time and serves information must be displayed as separate fields in the output. You could display this information in separate fields so that readers can find it more easily, but you could also have the {publish algorithm} construct sentences such as "Prep time, XX minutes. Serves YY." using the `prep-time` and `serves` field values for XX and YY. 
+    
+    So, something interesting has happened here. To enforce a rhetorical constraint -- that you must specify prep time and number of servings -- we have moved away from markup that specifies presentation to markup that merely records data. In other words, `prep-time` and `serves` are data-oriented {subject-domain} structures that do not specify presentation at all. Partitioning this required information from the presentation of the recipe shifts responsibility for conformance from the author to a {conformance algorithm}, making the design more testable and {repeatable} -- a welcome redistribution of complexity. 
+    
+    This is a recurring pattern in structured writing and one of the most important things to understand about how structured writing works. It is almost always better to factor out a constraint than to enforce it. This can be a difficult idea to adjust to. Our natural first instinct when trying to achieve a  particular presentation is to specify it in detail. But this can be difficult, especially for rhetorical constraints such as requiring a recipe to contain certain pieces of information. Nor is it flexible if you want to vary the presentation. When you look at these kinds of problems, the first question should be, "Is there any way to factor out this constraint"? Then, impose a constraint only if you cannot factor it out. 
+
+    When you _enforce_ a constraint, the information architect has made the decision, but the writer must execute that decision in the content. When you _factor out_ a constraint, the information architect has still made the decision, but an algorithm executes the decision, rather than the writer. Not only does this make the writer's job simpler, but it helps ensure conformance to the constraint and allows you to change the decision without changing the writer's content.
+    
+    Beyond factoring out constraints, using {subject-domain} markup enables some interesting publishing possibilities. For instance, you can easily create a cookbook of recipes that take 30 minutes or less, because you can query your recipes and select just those where the `prep-time` field has a value of 30 minutes or less.
+
+    There other elements of presentation that you can factor out of the recipe structure. For example, the reStructuredText version in [*ex.subj-restructured] presents ingredients in a table, and the recipe structure in [*ex.subj-sam] uses a simple list. The block that contains the list is labeled "ingredients," but the list is just an ordinary unordered list. The ingredient list in a recipe has constraints, but the markup doesn't impose or record those constraints.
+     
+    You generally define each ingredient in a recipe using three pieces of information: the name of the ingredient, the quantity, and the unit of measure used to express the quantity. These can be presented as a list or a table. To factor out the presentation choice, you can create an ingredient structure that calls out each piece of information separately (see [*ex.subj-ingredient-1]).
+
+    figure:(*ex.subj-ingredient-1) Subject-domain markup for ingredients
+        ```(sam)
+            ingredients:
+                ingredient: 
+                    name: eggs
+                    quantity: 12
+                    unit: each
+                ingredient:
+                    name: water
+                    quantity: 2
+                    unit: qt
+
+    [*ex.subj-ingredient-2] shows a shortcut that makes this markup less verbose. (This is a markup syntax named {SAM} that I will talk about later).
+
+    figure:(*ex.subj-ingredient-2) Subject-domain shortcut for ingredient markup
+        ```(sam)
+            ingredients:: ingredient, quantity, unit
+                eggs, 12, each
+                water, 2, qt
+
+    This markup turns the ingredients into a set of records with named fields: ingredient, quantity, and unit. Both markups enforce the constraint and record that you have followed it. And because the markup is independent of any one form of presentation, you are now free to use an algorithm to present them as a table, as a list, or in some other form. 
+    
+    By adding and recording these constraints, you get the same benefits as before, but now you also have access to the data, which means you can write algorithms to handle tasks such as converting units from imperial to metric for markets where metric units are preferred.
+
+    section: Using subjects to establish context
+
+        In [#chapter.document-domain], I noted that you can use context to identify the role that structures play in a document, which allows you to get away with fewer structures. For instance, you can use a single `title` tag for all titles because you can differentiate different types of titles from the context in which they occur. The same is true with subject-domain structures. They can provide context that allows you to treat basic text structures differently. 
+            
+        Consider our markup language for recipes ([*ex.subj-recipe-sam]).
+
+        figure:(*ex.subj-recipe-sam) Subject-domain markup for recipes
+            ```(sam)
+                recipe: Hard Boiled Egg
+                    introduction:
+                        A hard boiled egg is simple and nutritious.
+                    ingredients:: ingredient, quantity, unit
+                        eggs, 12, each
+                        water, 2, qt
+                    preparation:
+                        1. Place eggs in pan and cover with water.
+                        2. Bring water to a boil.
+                        3. Remove from heat and cover for 12 minutes.
+                        4. Place eggs in cold water to stop cooking.
+                        5. Peel and serve.
+                    prep-time: 15 minutes
+                    serves: 6
         
-        With the ingredients, we saw that we needed to add additional structure to factor out whether the ingredients would be presented as a list or a table. For the preparation, the steps are currently marked up as a numbered list.  Suppose we want to present the steps as steps, rather than just as a generic numbered list (for instance, by labeling them as *Step 1.*, etc, rather than just *1.*). Do we need to create an additional `step` structure to do this? Not necessarily. In this case we can can tell the difference between an ordinary ordered list and a set of preparation steps based on context. We can write a rule in the {publishing algorithm} that creates special formatting just for ordered lists that are the children of `preparation` elements that are children of `recipe` elements (just as we could create rules to format a nested list differently from its parent list based on its context in [#chapter.document-domain]). This is another example of how partitioning creates context which simplifies various publishing functions.
+        With the ingredients we saw that you need to add additional structure to factor out whether the ingredients would be presented as a list or a table. For the preparation, the steps are currently marked up as a numbered list.  Suppose you want to present the steps as steps, rather than just as a generic numbered list (for instance, by labeling them as *Step 1.*, etc, rather than just *1.*). Do you need to create an additional `step` structure to do this? Not necessarily. In this case, you can distinguish an ordinary ordered list from a set of preparation steps based on context and write a rule in the {publishing algorithm} that creates special formatting for ordered lists that are the children of `preparation` elements that are children of `recipe` elements. This uses the same method we used in [#chapter.document-domain] to format a nested list differently from its parent list based on context. This is another example of how partitioning creates context that you can use to simplify processing.
                 
             

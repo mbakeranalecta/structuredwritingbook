@@ -1,0 +1,79 @@
+chapter:(#chapter.intro-to-algorithms) Introduction to Algorithms
+
+    <<<(annotations.sam)
+
+    When you use structured writing to partition the complexity of the content system, you are partitioning much of that complexity to algorithms. Therefore, the study of structured writing is first and foremost the study of algorithms. The chapters in this section explore each of the main structured content algorithms, looking at each algorithm's function and the interfaces that supply it with information. However, these are not chapters on programming. Defining an algorithm and writing software to implement that algorithm are two separate tasks. This section introduces you to the design and capability of structured writing algorithms, not to the coding of software. 
+
+    Most of this part of the book deals with specific algorithms. However, it begins by considering {quality} ([#chapter.quality]). The design of algorithms always begins with quality. The purpose of an algorithm is to produce a quality product. However, it is all too easy to lose sight of quality when you are down in the nitty gritty of algorithm design and to end up doing things merely because they are efficient, ignoring their impact on quality.
+
+    Another issue to keep in mind while designing a content process or algorithm is {writing} ([#chapter.writing]). Writing is at the heart of any content process. An algorithm is not merely a program running on a computer system. An algorithm is an interaction -- a conversation -- between a human being and a machine. This is why interface design and user experience design are fundamental to system and application design. No algorithm can perform successfully if it is hobbled at the start by a poor interaction with the human. An algorithm that is designed solely for efficiency, at the expense of the user interface, is doomed to be neither efficient nor effective. [#chapter.writing] lays out the basic considerations that must be made for writers in the design of any structured writing algorithm. 
+
+    Following the chapters on quality and writing, the rest of this part of the book covers the following:
+
+    section: The basics      
+
+        [#chapter.separating] and [#chapter.processing] review the basics of structured writing: how to partition content elements and put them back together again. This includes a look at a classic example of content partitioning: {separating content from formatting}. These chapters discuss the basic techniques that lay the foundation for all the other algorithms, including how to use pseudocode to represent algorithms.
+
+    section: Single sourcing and reuse
+
+        The next four chapters look at {single sourcing} and content {reuse}. This includes the following topics:
+
+        * [#chapter.single-sourcing]: partitioning for single sourcing, including selecting the appropriate domain to get the most effective partitioning, and creating content for different audiences and media
+        * [#chapter.reuse]: techniques for content {reuse}
+        * [#chapter.composition]: techniques for creating content that can be assembled like building blocks
+        * [#chapter.duplication]: strategies for detecting and {avoiding duplication} of content
+
+    section: Linking and the connections between subjects
+
+        [#chapter.linking] looks at {linking}, which is a larger problem than managing links. Linking is actually about managing the relationship between content and its subject matter. In a {single-sourcing} environment you may need to handle relationships differently, depending on the media, for example, using links in some media and other mechanisms in others. This requires a step back from thinking about links to thinking about the relationships between subjects and the content that describes them.
+
+    section: Quality control
+
+        Structured writing plays a huge role in controlling content quality. The next two chapters look at two quality control algorithms that have a big impact on quality and efficiency: 
+
+        * [#chapter.conformance]: the {conformance} algorithm helps ensure that everyone who contributes to your content, including your writers, consistently produces work that meets your quality standards. I look at three fundamental components of conformance: factoring out constraints, enforcing constraints, and enabling and encouraging voluntary conformance. 
+        * [#chapter.audit]: the {auditing} algorithm gives you the ability to determine the current state of your content set, including what content you have, what content you need, and how conformant your content is.  
+
+    section: Finding content
+
+        The ability to find content is essential for writers, content managers, readers, and algorithms. The key to finding things is the {relevance algorithm} ([#chapter.relevance]). The relevance algorithm helps ensure that content is labeled correctly and that it is relevant to its intended audience.
+
+    section: Generating content
+
+        Not all content has to be written from scratch. Much commercial content is essentially the narration of company or product data, and algorithms can make the process of narrating that data much faster and more reliable. As a bonus, generated content can also be an enormously useful resource for auditing the rest of your content set. 
+
+        There are three algorithms used in generating content:
+
+        * [#chapter.extract]: the {extract algorithm} pulls content out of existing data sources and puts it into a format that can be published.
+        * [#chapter.merge]: the {merge algorithm} combines written and extracted content.
+        * [#chapter.modeling]: the {modeling algorithm} uses structured writing techniques to create a model of a real-world object that can be used as a data source for the extract and merge algorithms.
+
+    section: Information architecture
+
+        {Information architecture} is the overall arrangement of a content set so that readers can find information. It covers everything from the purpose and scope of individual documents to linking, search, and navigational aids. Maintaining a consistent and effective information architecture, especially on a large and constantly changing site, is dauntingly complex. Structured writing techniques can not only help you define and manage your information architecture, and audit its effectiveness, they can be used to generate and maintain architectural features that would not be possible by individual human effort. Again we will see that the choice of domain is crucial to both quality and efficiency in information architecture. 
+
+    section: Managing content and process
+
+        Content has to be manged, and the management of content introduces lot of complexity into the content process. As we will see in these chapters, the effective management of content cannot be separated from its structure. In fact, its structure is key to its manageability. 
+
+        One of the largest sources of complexity in the content system is dealing with {change}s in subject matter and business requirements, a problem that has become much more acute in the age of the Web where everyone expects all content to be constantly up to date. The structure of content deeply effects your ability to find content that needs to change, to change it quickly and effectively, and to deal with the ripple effects of change. 
+
+        In a large content organization, were the activities of many contributors have to be coordinated, the management of content assets themselves becomes a major source of complexity. {Content management} system are themselves highly structured, and the structure of the content management system and the structures of the content meet and may overlap. Matching your content management strategy to the structure of your content is key to distributing content management complexity effectively.
+
+        {Collaboration} has become an ever more important part of the content system as the Web forces us to deliver information in real time and to continually integrate the work of many different contributors. Without effective partitioning, the overhead of collaboration an overwhelm a system making it impossible to keep to schedule and maintain quality. Specific approaches to structured writing, particularly in the {subject domain} can greatly reduce collaboration overhead and allow diverse contributions from diverse contributors to be integrated smoothly into the content collection. 
+        
+        The immediacy of the Web and the speed of modern commerce make {timeliness} and indispensable aspect of modern content. Yet handling the complexities of the content process can significantly slow the pace at which content goes from requirement to writing to publishing. All of the structured writing algorithms can contribute to enhanced timeliness, but most important of all is using them together in a way that ensures the no complexity is neglected in the process of getting content rapidly to market. 
+
+        Finally, {repeatability} is the core goal of all management processes. Doing the right thing once is a work of craft. Ensuring that the right thing is done time after time is a work of management. But repeatability in content is about more than ensuring a efficient process. It is key to achieving consistent {quality}, and also the key to measuring the quality of your content and whether it is working effectively for your readers. 
+
+    section: Publishing
+
+        In the end, of course, all content must be published in order to be accessible to readers. Publishing in a structured writing environment is complex, largely because so many of the other structured writing algorithms are actually executed during the publishing process. To facilitate this, most structured writing system implement a multi-step publishing process that allows different algorithms to be plugged in at the appropriate points in the process. This chapter will outline the partitioning of a structure publishing system, indicating were each of the other algorithms are executed in the process. 
+
+        But publishing today is often about more than producing static outputs. In many cases, we publish {active content}, content that either shapes itself to the reader or allows the reader to manipulate it on the fly. All of the active content algorithms are actually the same structured writing algorithms we have already looked at, but publishing active content changes were they fit in the publishing process. And preparing for active content means structuring your content for the algorithms that will be used to generate the active content. This is another area in which the structured writing domain you have chosen, as well as the specific structures you have implemented will make a huge difference in what you are able to deliver to the reader.        
+
+    section: Translation
+        Finally, {translation} is a major source of complexity in many content systems. Translation deserves a book all to itself, but this chapter will show some of the basic ways in which structured writing, and the various structured writing algorithms, can make a big difference for translation quality and costs. 
+
+    As you go through these algorithms, be careful not to get too attached to any one domain or any one algorithm. Quality in a modern content system is produced by partitioning the complexity of the whole system so that every part of that complexity is handled by the person or process with the most appropriate skills, time, and resources to handle it completely. Implementing any one algorithm in isolation can result in complexity being distributed out to parts of the content system that are not well equipped to handle it. The aim is not to optimize any one function, but to ensure that complexity is being handled effectively across the whole content system.
+        
