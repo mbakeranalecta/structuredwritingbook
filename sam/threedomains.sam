@@ -12,7 +12,10 @@ chapter:(#chapter.three-domains) How ideas become content
     
     section: From ideas to dots
 
-        The process of creating and delivering content consists of translating ideas (stuff someone thinks or knows) into a form that can be read (ink on a page, or pixels on a screen).
+        The process of creating and delivering content consists of translating ideas (stuff someone thinks or knows) into a form that can be read (dots of ink on a page, or pixels on a screen).
+
+        !!!(MB) 
+            Added "dots of" to maintain the connection with the ideas to dots theme. 
 
         >>>(image ../graphics/ideas2dots.xml)
 
@@ -22,6 +25,9 @@ chapter:(#chapter.three-domains) How ideas become content
 
         footnote:(*fn.sentence)
             Copyright © 2012, Tjo3ya, CC BY-SA 3.0, [https://commons.wikimedia.org/w/index.php?curid=18312612]
+
+            !!!(MB)
+                I actually redrew this diagram so I am not entirely sure if the attribution still applies. It is the same design and words are the original from Wikipedia, but a different execution. 
         
         >>>(image ../graphics/sentence.xml)
         
@@ -38,44 +44,6 @@ chapter:(#chapter.three-domains) How ideas become content
         
         >>>(image ../graphics/ideas2dotsroles.xml)
         
-    section: Algorithms
-
-        I'm going to use the word {algorithm}(concept) a lot in this book. An algorithm is a formalized and consistent way to do something. If you give an algorithm the same inputs, it should always produce the same outputs every time you run it. A computer program is an encoding of an algorithm that a computer can execute. A program describes an algorithm to a computer, but you do not need to be a programmer to design an algorithm. 
-
-        !!!(RLH)
-            This point is critical, but it appears here out of the blue. You're getting started with domains, and then all of a sudden you're talking about algorithms. I think this introduction to algorithms should appear much earlier in the book, probably in the introduction. As a side note, There still isn't a section that says something like, "This book has five major sections: Domains: ... Algorithms ... Structures ... Languages ... and Design, along with a brief description of each section and how they fit together. That will help avoid having to insert a description of algorithms in this section, just as you should be getting to domains. Instead, you would already have introduced the term and you can refer to it as needed.
-
-        Algorithms are fundamental to structured writing. Algorithms and structures work together, and you can't design one without the other. The reason you add structure is to enable algorithms. The heart of this book describes the principal structured writing algorithms and the structures that support them. The structures support the algorithms by constraining the content. 
-
-        We also create structures to constrain the rhetoric of a document, but when we do so, we need algorithms to transform the rhetorically structured document into a form suitable for publication, so algorithm and structure still go hand in hand. 
-        
-        Algorithms apply rules to data that follows rules. If the data does not follow the rules, then the rules applied by the algorithms will not work. If you want algorithms to process your content, therefore, it has to follow the rules laid down for input to that Algorithm. If you want a browser to display your document, it needs to follow the rules of HTML. Structures constrain content to make sure it obeys the rules that the algorithms expect it to obey. But it is not sufficient to obey the rules, you also have to explicitly record that you have obeyed them. The algorithm uses that explicit recording to interpret the content so it can process it.  
-
-        !!!(RLH)
-            This is the second definition of structured writing in this book. You have another one back in the Preface.
-        
-        This leads us to a working definition of structured writing for purposes of this book:
-            
-        """
-            Writing that follows a set of constraints and records that it has done so. 
-            
-        For instance, let's say that you have a constraint that every section must start with a title. You can follow this constraint in just about any tool you choose. You could even follow it when writing by hand on paper. But if you choose a structured writing format, such as {DocBook}, you can both follow this constraint and record that you have followed it:
-
-        ```(xml)
-            <section>
-                <title>The quick brown fox</title>
-                <para>The quick brown fox jumps over the lazy dog.</para>
-            </section>
-            
-        This markup records that you have followed the constraint by identifying the title using the XML `title` element. This constrains the interpretation of the string "The quick brown fox" by algorithms. Algorithms can now do things such as:
-        
-        * Check that all sections start with titles (that is, check that the constraint has been followed)
-        * Format all section titles the same way
-        * Create a list of all the section titles in the document (perhaps to create a table of contents)
-               
-        Recording constraints is key because it allows information to be passed reliably from one person or process to another.
-            
-        Generally speaking, the more you constrain content with structure, the more accessible it becomes to algorithms and the more opportunities you gain to distribute complexity effectively. This means recording the content at a point nearer to ideas in your head and further from dots on a page. The nearer you are to ideas, the more you know about what the content says as opposed to what a page looks like and the more effectively you can constrain the creation and interpretation of the text. 
         
         We can describe this process of earlier recording in terms of three domains, each domain reflecting a stage in the progress from ideas to dots. The domains are the media domain (which is concerned with lines and dots on paper or screen), the document domain (which is concerned with the expression and organization of documents), and the subject domain (which is concerned with the subject matter that we write about). 
         
@@ -120,12 +88,12 @@ chapter:(#chapter.three-domains) How ideas become content
         
         >>>(image ../graphics/soup8.xml)
         
-        If you recorded it in the document domain, then it needs to be formatted for each target medium before it can be published.
+        If you recorded it in the document domain, then it needs to be formatted for each target medium before it can be published. This is done by an algorithm that translates the document domain structures and into the appropriate media domain structures for the target media.
         
         
         >>>(image ../graphics/soup9.xml)
         
-        If you recorded it in the subject domain, then it needs to be organized into a document before it can be published.
+        If you recorded it in the subject domain, then it needs to be organized into a document before it can be published. This is done by an algorithm that translates the subject domain structures into the appropriate document domain structures for the intended document.
                 
         >>>(image ../graphics/soup10.xml)
               
