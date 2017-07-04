@@ -42,12 +42,18 @@
 <p>To distribute complexity appropriately without overloading anybody or letting any of the complexity fall through to the reader, we must consider the content creation process as a whole. Let’s start by looking at how content gets from ideas in a head to dots on a page or screen.</p>
 <section>
 <title>From ideas to dots</title>
-<p>The process of creating and delivering content consists of translating ideas (stuff someone thinks or knows) into a form that can be read (ink on a page, or pixels on a screen).</p>
+<p>The process of creating and delivering content consists of translating ideas (stuff someone thinks or knows) into a form that can be read (dots of ink on a page, or pixels on a screen).</p>
+<remark attribution ="MB">
+<p>Added “dots of” to maintain the connection with the ideas to dots theme.</p>
+</remark>
 <insert item ="../graphics/ideas2dots.xml" type ="image"/>
 <p>Structured writing applies a structured methodology to that process. It is a long road from ideas to dots, and structured writing techniques can be applied at many points along that road. Almost all writing done today uses structured writing techniques to one extent or another. The principles of structured writing apply across the spectrum, from the tools and techniques used in most offices today to the most sophisticated structured writing systems.</p>
 <p>All writing has structure in the literary sense of the word. Every comprehensible sentence has a grammatical structure. You may even have learned to diagram that structure in school.<citation type = "idref" value = "fn.sentence"/></p>
 <footnote id ="fn.sentence">
 <p>Copyright © 2012, Tjo3ya, CC BY-SA 3.0, <citation type = "citation" value = "https://commons.wikimedia.org/w/index.php?curid=18312612"/></p>
+<remark attribution ="MB">
+<p>I actually redrew this diagram so I am not entirely sure if the attribution still applies. It is the same design and words are the original from Wikipedia, but a different execution.</p>
+</remark>
 </footnote>
 <insert item ="../graphics/sentence.xml" type ="image"/>
 <p>Just as all writing has at least a basic grammatical structure, all writing on a computer involves creating basic data structures. Thus, the only case in which no structured writing techniques are involved in the writing process is when an author writes down ideas with pen and paper and gives that paper directly to the reader. In this case, the entire writing process, from an idea to words on paper, takes place in the writer’s head and hands.</p>
@@ -56,44 +62,6 @@
 <insert item ="../graphics/ideas2dotsrecordmid.xml" type ="image"/>
 <p>Word processing, desktop publishing, and various approaches to structured writing all establish a point between ideas and dots where the content will be recorded and then provide algorithms to complete the journey from that point to dots on a page.</p>
 <insert item ="../graphics/ideas2dotsroles.xml" type ="image"/>
-</section>
-<section>
-<title>Algorithms</title>
-<p>I’m going to use the word <phrase><annotation type="concept">algorithm</annotation></phrase> a lot in this book. An algorithm is a formalized and consistent way to do something. If you give an algorithm the same inputs, it should always produce the same outputs every time you run it. A computer program is an encoding of an algorithm that a computer can execute. A program describes an algorithm to a computer, but you do not need to be a programmer to design an algorithm.</p>
-<remark attribution ="RLH">
-<p>This point is critical, but it appears here out of the blue. You’re getting started with domains, and then all of a sudden you’re talking about algorithms. I think this introduction to algorithms should appear much earlier in the book, probably in the introduction. As a side note, There still isn’t a section that says something like, “This book has five major sections: Domains: ... Algorithms ... Structures ... Languages ... and Design, along with a brief description of each section and how they fit together. That will help avoid having to insert a description of algorithms in this section, just as you should be getting to domains. Instead, you would already have introduced the term and you can refer to it as needed.</p>
-</remark>
-<p>Algorithms are fundamental to structured writing. Algorithms and structures work together, and you can’t design one without the other. The reason you add structure is to enable algorithms. The heart of this book describes the principal structured writing algorithms and the structures that support them. The structures support the algorithms by constraining the content.</p>
-<p>We also create structures to constrain the rhetoric of a document, but when we do so, we need algorithms to transform the rhetorically structured document into a form suitable for publication, so algorithm and structure still go hand in hand.</p>
-<p>Algorithms apply rules to data that follows rules. If the data does not follow the rules, then the rules applied by the algorithms will not work. If you want algorithms to process your content, therefore, it has to follow the rules laid down for input to that Algorithm. If you want a browser to display your document, it needs to follow the rules of HTML. Structures constrain content to make sure it obeys the rules that the algorithms expect it to obey. But it is not sufficient to obey the rules, you also have to explicitly record that you have obeyed them. The algorithm uses that explicit recording to interpret the content so it can process it.</p>
-<remark attribution ="RLH">
-<p>This is the second definition of structured writing in this book. You have another one back in the Preface.</p>
-</remark>
-<p>This leads us to a working definition of structured writing for purposes of this book:</p>
-<blockquote>
-<p>Writing that follows a set of constraints and records that it has done so.</p>
-</blockquote>
-<p>For instance, let’s say that you have a constraint that every section must start with a title. You can follow this constraint in just about any tool you choose. You could even follow it when writing by hand on paper. But if you choose a structured writing format, such as <phrase><annotation type="language"><annotation type="standard">DocBook</annotation></annotation></phrase>, you can both follow this constraint and record that you have followed it:</p>
-<codeblock language ="xml">
-&lt;section&gt;
-    &lt;title&gt;The quick brown fox&lt;/title&gt;
-    &lt;para&gt;The quick brown fox jumps over the lazy dog.&lt;/para&gt;
-&lt;/section&gt;
-</codeblock>
-<p>This markup records that you have followed the constraint by identifying the title using the XML <code>title</code> element. This constrains the interpretation of the string “The quick brown fox” by algorithms. Algorithms can now do things such as:</p>
-<ul>
-<li>
-<p>Check that all sections start with titles (that is, check that the constraint has been followed)</p>
-</li>
-<li>
-<p>Format all section titles the same way</p>
-</li>
-<li>
-<p>Create a list of all the section titles in the document (perhaps to create a table of contents)</p>
-</li>
-</ul>
-<p>Recording constraints is key because it allows information to be passed reliably from one person or process to another.</p>
-<p>Generally speaking, the more you constrain content with structure, the more accessible it becomes to algorithms and the more opportunities you gain to distribute complexity effectively. This means recording the content at a point nearer to ideas in your head and further from dots on a page. The nearer you are to ideas, the more you know about what the content says as opposed to what a page looks like and the more effectively you can constrain the creation and interpretation of the text.</p>
 <p>We can describe this process of earlier recording in terms of three domains, each domain reflecting a stage in the progress from ideas to dots. The domains are the media domain (which is concerned with lines and dots on paper or screen), the document domain (which is concerned with the expression and organization of documents), and the subject domain (which is concerned with the subject matter that we write about).</p>
 </section>
 <section>
@@ -115,9 +83,9 @@
 <insert item ="../graphics/soup7.xml" type ="image"/>
 <p>If you recorded your content in the media domain, it is ready to publish.</p>
 <insert item ="../graphics/soup8.xml" type ="image"/>
-<p>If you recorded it in the document domain, then it needs to be formatted for each target medium before it can be published.</p>
+<p>If you recorded it in the document domain, then it needs to be formatted for each target medium before it can be published. This is done by an algorithm that translates the document domain structures and into the appropriate media domain structures for the target media.</p>
 <insert item ="../graphics/soup9.xml" type ="image"/>
-<p>If you recorded it in the subject domain, then it needs to be organized into a document before it can be published.</p>
+<p>If you recorded it in the subject domain, then it needs to be organized into a document before it can be published. This is done by an algorithm that translates the subject domain structures into the appropriate document domain structures for the intended document.</p>
 <insert item ="../graphics/soup10.xml" type ="image"/>
 <p>At the beginning of this section I described the three domain in terms of the decisions that must be made in each domain. All of these decisions, from all three domains,  have to be made for every document that you produce. When you record content in the media domain, you make decisions in all three domain as you write. When you record content in the document domain, you make decisions in the subject and document domains and defer media-domain decisions to algorithms. When you record content in the subject domain, you make decisions in the subject domain and defer document- and media-domain decisions to algorithms.</p>
 <p>Recording content earlier in the process reduces the number of decisions you have to make while writing (reducing the complexity of the writing task), while preserving the ability to make different decisions later. This shift can have profound effects on the efficiency of your process and the usefulness of your content.</p>
