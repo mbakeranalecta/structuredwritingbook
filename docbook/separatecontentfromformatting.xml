@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.separating"><db:title>Separating Content from Formatting</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp1169037556"><db:primary>separating content from formatting</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp1169037556x"><db:primary>concept</db:primary><db:secondary>separating content from formatting</db:secondary></db:indexterm>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.separating"><db:title>Separating Content from Formatting</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp140222250631216"><db:primary>separating content from formatting</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp140222250631216x"><db:primary>concept</db:primary><db:secondary>separating content from formatting</db:secondary></db:indexterm>
 
 
 
-<db:para>If there is one phrase that most people associate with structured writing, it is “separating content from formatting.” This is the most basic and well-known form of partitioning and redirecting of complexity that we do in structured writing, and it illustrates the basic method by which we do all the rest. The basic premise of separating content from formatting is to separate decisions about the appearance of a document from decisions about its content. But partitioning content from formatting is not as simple as it may seem. This chapter walks through this process.</db:para>
+<db:para>If there is one phrase that most people associate with structured writing, it is “separating content from formatting.” This is the most basic and well-known method that we use to partition and redirect complexity, and it illustrates the method we use to do all the rest. Separating content from formatting separates decisions about the appearance of a document from decisions about its content. However, as we will see in this chapter, this is not as simple as it may seem.</db:para>
 <db:section>
 <db:title>Separate out style instructions</db:title>
 <db:para>Let’s start with a fragment that includes a description of its format. I use CSS syntax to describe the format. I could use a variety of formats, but CSS is easy to understand and helps illustrate the separation. I also represent certain characters (bullets and tabs) by their names, so you can see exactly where everything is going:</db:para>
@@ -24,7 +24,7 @@
 <db:programlisting>
 paragraph = {font: 10pt "Open Sans"}
 </db:programlisting>
-<db:para>Once the style information is separated, you can change the formatting without changing the text, for example, you could choose a different font:</db:para>
+<db:para>Once the style information is separated, you can change the formatting without changing the text; for example, you could choose a different font:</db:para>
 <db:programlisting>
 paragraph = {font: 12pt "Century Schoolbook"}
 </db:programlisting>
@@ -60,11 +60,11 @@ bullet-paragraph = {font: 12pt "Century Schoolbook"}[bullet][tab]
 <db:programlisting>
 bullet-paragraph = {font: 12pt "Century Schoolbook"}[em dash][tab]
 </db:programlisting>
-<db:para>Because the style now uses an em-dash, rather than a bullet, the name bullet-paragraph may not be the best choice. The content still contains formatting information in the form of a style named for a particular piece of formatting, which means writers are still making the formatting choice “bullet” when it would be better for them to focus on the content choice “list.”</db:para>
+<db:para>Because the style now uses an em-dash, rather than a bullet, the name bullet-paragraph may not be the best choice. The content still contains a style named for a particular piece of formatting, which means writers are still making the formatting choice “bullet” when it would be better for them to focus on the content choice “list.”</db:para>
 </db:section>
 <db:section>
 <db:title>Name your abstractions correctly</db:title>
-<db:para>The names you choose for styles and other abstractions matter. The wrong name sets up a false expectation, which can lead to authors using a style incorrectly. So the first lesson about separating content from formatting is that naming matters. You are creating an abstraction, and you need to figure out what that abstraction is and name it appropriately.</db:para>
+<db:para>The names you choose for styles and other abstractions matter. The wrong name sets up a false expectation, which can lead to authors using a style incorrectly. So the first lesson about separating content from formatting is that naming matters. You are creating an abstraction, so you need to figure out what that abstraction is and name it appropriately.</db:para>
 <db:para>What is the abstraction here? Sand, Eggs, and Gold are list items. So maybe we do this:</db:para>
 <db:programlisting>
 {style: paragraph}The box contains:
@@ -86,7 +86,7 @@ list-item = {font: 12pt "Century Schoolbook"}[em dash][tab]
 {style: list-item}Rinse
 {style: list-item}Repeat
 </db:programlisting>
-<db:para>These list items should have numbers, not dashes or bullets. So the abstraction does not cover all list items. If you look at the different kinds of list items, group them into abstract types, and come up with names for those types, you probably come up with ordered-list-item and unordered-list-item. Then you have:</db:para>
+<db:para>These list items should have numbers, not dashes or bullets. So the abstraction does not cover all list items. If you look at the different kinds of list items, group them into abstract types, and come up with names for those types, you probably come up with <db:code>ordered-list-item</db:code> and <db:code>unordered-list-item</db:code>. Then you have:</db:para>
 <db:programlisting>
 {style: paragraph}The box contains:
 {style: unordered-list-item}Sand
@@ -234,5 +234,5 @@ address:
 <db:para>The job of turning such structures into a specific form of presentation is the job of the presentation algorithm (see <db:xref linkend="chapter.publishing"/>). The presentation algorithm could turn it into a labeled list, a table, a paragraph, or an address label.</db:para>
 <db:para>In the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, with the content separated from both formatting and presentation, you also gain the ability to query and reorganize the content in various interesting and useful ways (which I will explore in later chapters).</db:para>
 <db:para>This is as far as you can go in separating content from formatting, and you can’t separate all content from formatting to quite this extent. Separating content from format is not a binary operation. There are various degrees of separation that you can apply for various reasons. It is important to understand exactly which degree of separation best serves your needs.</db:para>
-<db:indexterm class="endofrange" startref="idp1169037556"/><db:indexterm class="endofrange" startref="idp1169037556x"/></db:section>
+<db:indexterm class="endofrange" startref="idp140222250631216"/><db:indexterm class="endofrange" startref="idp140222250631216x"/></db:section>
 </db:chapter>

@@ -5,7 +5,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
     index:: type, term
         concept, separating content from formatting
 
-    If there is one phrase that most people associate with structured writing, it is "separating content from formatting." This is the most basic and well-known form of partitioning and redirecting of complexity that we do in structured writing, and it illustrates the basic method by which we do all the rest. The basic premise of separating content from formatting is to separate decisions about the appearance of a document from decisions about its content. But partitioning content from formatting is not as simple as it may seem. This chapter walks through this process.
+    If there is one phrase that most people associate with structured writing, it is "separating content from formatting." This is the most basic and well-known method that we use to partition and redirect complexity, and it illustrates the method we use to do all the rest. Separating content from formatting separates decisions about the appearance of a document from decisions about its content. However, as we will see in this chapter, this is not as simple as it may seem.
     
     section: Separate out style instructions
     
@@ -33,7 +33,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
             paragraph = {font: 10pt "Open Sans"}
         
         
-        Once the style information is separated, you can change the formatting without changing the text, for example, you could choose a different font:
+        Once the style information is separated, you can change the formatting without changing the text; for example, you could choose a different font:
         
         ```
             paragraph = {font: 12pt "Century Schoolbook"}
@@ -78,11 +78,11 @@ chapter:(#chapter.separating) Separating Content from Formatting
             bullet-paragraph = {font: 12pt "Century Schoolbook"}[em dash][tab]
         
                
-        Because the style now uses an em-dash, rather than a bullet, the name bullet-paragraph may not be the best choice. The content still contains formatting information in the form of a style named for a particular piece of formatting, which means writers are still making the formatting choice "bullet" when it would be better for them to focus on the content choice "list."
+        Because the style now uses an em-dash, rather than a bullet, the name bullet-paragraph may not be the best choice. The content still contains a style named for a particular piece of formatting, which means writers are still making the formatting choice "bullet" when it would be better for them to focus on the content choice "list."
         
     section: Name your abstractions correctly
         
-        The names you choose for styles and other abstractions matter. The wrong name sets up a false expectation, which can lead to authors using a style incorrectly. So the first lesson about separating content from formatting is that naming matters. You are creating an abstraction, and you need to figure out what that abstraction is and name it appropriately.
+        The names you choose for styles and other abstractions matter. The wrong name sets up a false expectation, which can lead to authors using a style incorrectly. So the first lesson about separating content from formatting is that naming matters. You are creating an abstraction, so you need to figure out what that abstraction is and name it appropriately.
         
         What is the abstraction here? Sand, Eggs, and Gold are list items. So maybe we do this:
         
@@ -110,7 +110,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
             {style: list-item}Repeat
         
         
-        These list items should have numbers, not dashes or bullets. So the abstraction does not cover all list items. If you look at the different kinds of list items, group them into abstract types, and come up with names for those types, you probably come up with ordered-list-item and unordered-list-item. Then you have:
+        These list items should have numbers, not dashes or bullets. So the abstraction does not cover all list items. If you look at the different kinds of list items, group them into abstract types, and come up with names for those types, you probably come up with `ordered-list-item` and `unordered-list-item`. Then you have:
         
         ```
             {style: paragraph}The box contains:

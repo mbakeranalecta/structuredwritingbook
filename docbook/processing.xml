@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.processing"><db:title>Processing Structured Text</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp1168914164"><db:primary>processing structured text</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp1168914164x"><db:primary>task</db:primary><db:secondary>processing structured text</db:secondary></db:indexterm>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.processing"><db:title>Processing Structured Text</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp140288021388512"><db:primary>processing structured text</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp140288021388512x"><db:primary>task</db:primary><db:secondary>processing structured text</db:secondary></db:indexterm>
 
 
 
@@ -7,7 +7,7 @@
 <db:section>
 <db:title>Two into one: reversing the factoring out of invariants</db:title>
 <db:para>Moving content from the <db:indexterm><db:primary>media domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media domain</db:secondary></db:indexterm>media domain to the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain or the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain involves progressively factoring out invariants in the content. Each step in this process creates two artifacts, the structured content and the invariant piece that was factored out.</db:para>
-<db:para>Processing structured text is about putting the pieces back together: combining the structured content with the invariants that were factored out. But processing structured text is also about making and/or executing the decisions that were partitioned away from the writer. These decisions may be invariant ones, like applying approved corporate style, or they may be variable ones, like presenting content differently in different media or to different audiences. When I talk about an invariant, then, what I mean is decisions that are always made the same way for a given purpose. They may be made differently for different purposes, but still all the same way for each purpose.</db:para>
+<db:para>Processing structured text is about putting the pieces back together: combining the structured content with the invariants that were factored out. But processing structured text is also about making and/or executing the decisions that were partitioned away from the writer. These decisions may be invariant, such as applying approved corporate style, or they may be variable, such as presenting content differently in different media or to different audiences. Invariant decisions are always made the same way for a given purpose. They may be made differently for different purposes, but still all the same way for each purpose.</db:para>
 <db:para>If factoring out the invariants moves content toward the document or subject domains, recombining the content with the invariants moves it in the opposite direction, toward the media domain. This could mean moving the content from the subject domain to the document domain or from the document domain to the media domain, or simply from a more abstract form in the media domain to a more concrete form, which will be our first example.</db:para>
 </db:section>
 <db:section>
@@ -39,7 +39,7 @@ find {style: paragraph}
 find {style: bullet-paragraph}
     replace {font: 10pt "Open Sans"}[bullet][tab]
 </db:programlisting>
-<db:para>I said at the beginning that the basic processing algorithm was to combine two sources of information to create a new one. Where are these two sources? The first source is the structured text. The second source is the style definitions, and they are embedded in the rules themselves. This is how it is usually done. In some cases, though, the rules may pull content from a separate file. We will see examples of this later.</db:para>
+<db:para>I said at the beginning that the basic processing algorithm combines two sources of information to create a new one. Where are these two sources? The first source is the structured text. The second source is the style definitions, and they are embedded in the rules themselves. This is how it is usually done. In some cases, though, the rules may pull content from a separate file. We will see examples of this later.</db:para>
 <db:para>The result of applying these rules is that we get back the original content:</db:para>
 <db:programlisting>
 {font: 10pt "Open Sans"}The box contains:
@@ -66,7 +66,7 @@ find {style: bullet-paragraph}
 <db:section>
 <db:title>Rules based on structures</db:title>
 <db:para>The tools that do this sort of processing do not literally use search and replace like this. Rather, they parse the source document to pull out the structures and allow you to specify your processing rules by referring to those structures.</db:para>
-<db:para>We are not concerned here with the actual mechanism by which a processing tool recognizes structures. We are concerned with what to do when a structure is found. So let’s rewrite our rules to match structures rather than find literal strings in the text:</db:para>
+<db:para>We are not concerned here with the actual mechanism by which a processing tool recognizes structures. We are concerned with what the processing tool does when it finds a structure. So let’s rewrite our rules to match structures rather than find literal strings in the text:</db:para>
 <db:programlisting>
 match paragraph
     apply style {font: 12pt "Century Schoolbook"}
@@ -75,22 +75,22 @@ match bullet-paragraph
     apply style {font: 12pt "Century Schoolbook"}
     output "[em dash][tab]"
 </db:programlisting>
-<db:para>The result of applying these rules is just the same as before:</db:para>
+<db:para>The result of applying these rules is the same as before:</db:para>
 <db:programlisting>
 {font: 12pt "Century Schoolbook"}The box contains:
 {font: 12pt "Century Schoolbook"}[em dash][tab]Sand
 {font: 12pt "Century Schoolbook"}[em dash][tab]Eggs
 {font: 12pt "Century Schoolbook"}[em dash][tab]Gold
 </db:programlisting>
-<db:para>The way I have written these rules is an example of what is called <db:indexterm><db:primary>pseudocode</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>pseudocode</db:secondary></db:indexterm>pseudocode. It is a way for human being to sketch out an algorithm to make sure that they understand what they are trying to do before they write actual code. There is no formal grammar or syntax to pseudocode. It is intended for humans, not computers, and you can use whatever approach you like as long as it is clear to your intended audience. But pseudocode should clearly lay out a set of logical steps for accomplishing something. It should make clear exactly how the pieces go together.</db:para>
-<db:para>Writing algorithms in pseudocode is a great way to make sure that we understand the algorithms we are creating without worrying about the details of code – or even learning how to code. They are also a great way to communicate to actual coders about what we need a program to do.</db:para>
+<db:para>The way I have written these rules is an example of <db:indexterm><db:primary>pseudocode</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>pseudocode</db:secondary></db:indexterm>pseudocode. Pseudocode is a means for sketching out an algorithm so you understand what you are trying to do before you write actual code. There is no formal syntax for pseudocode. It is intended for humans, not computers, and you can use whatever approach you like as long as it is clear to your intended audience. However, pseudocode should lay out a set of logical steps for accomplishing something, make it clear how the steps go together.</db:para>
+<db:para>Writing algorithms in pseudocode is a great way to make sure you understand the algorithms you are creating without worrying about the details of code – or even learning how to code. They are also a great way to communicate to actual coders about what you need a program to do.</db:para>
 </db:section>
 <db:section>
 <db:title>The order of the rules does not matter</db:title>
-<db:para>You may have noticed that what these rules are doing is pretty much exactly what style sheets do in an application like <db:indexterm><db:primary>Microsoft Word</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>Microsoft Word</db:secondary></db:indexterm>Word or <db:indexterm><db:primary>FrameMaker</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>FrameMaker</db:secondary></db:indexterm>FrameMaker. In fact, it is exactly what a style sheet does. If you understand stylesheets, you understand a good deal of how structured writing algorithms work.</db:para>
-<db:para>One important thing to notice is that when you create a stylesheet in <db:indexterm><db:primary>Microsoft Word</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>Microsoft Word</db:secondary></db:indexterm>Word or <db:indexterm><db:primary>FrameMaker</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>FrameMaker</db:secondary></db:indexterm>FrameMaker, you don’t specify the order in which styles will be applied to the document. The same is true when you create a CSS stylesheet for the Web. The stylesheet is just a flat list of rules. The order in which the rules are applied to the document depends entirely on the order in which the various structures occur in the document. To put it another way, rather than being a set of steps to follow, they are a set of decisions to be made when certain events occur. If you see X, do Y. It is the order of the events that determines the order in which things happen, not the order of the rules.</db:para>
-<db:para>This may seem very obvious, but it is key to understanding how structured text is usually processed. It is a subject that is sometimes quite confusing to people who have been trained to write procedural computer programs, which is why I am making a point of calling it out.</db:para>
-<db:para>Things get a tiny bit more complex when we move into processing the nested structures of the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain and <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, but the basic pattern of a set of unordered rules to describe a transformation algorithm still applies.</db:para>
+<db:para>You may have noticed that these rules do pretty much exactly what style sheets do in applications such as <db:indexterm><db:primary>Microsoft Word</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>Microsoft Word</db:secondary></db:indexterm>Word or <db:indexterm><db:primary>FrameMaker</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>FrameMaker</db:secondary></db:indexterm>FrameMaker. If you understand stylesheets, you understand a good deal of how structured writing algorithms work.</db:para>
+<db:para>One important thing to notice is that when you create a stylesheet in <db:indexterm><db:primary>Microsoft Word</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>Microsoft Word</db:secondary></db:indexterm>Word or <db:indexterm><db:primary>FrameMaker</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>FrameMaker</db:secondary></db:indexterm>FrameMaker, you don’t specify the order in which styles will be applied to the document. The same is true when you create a CSS stylesheet. The stylesheet is just a flat list of rules. The order in which the rules are applied to the document depends entirely on the order in which the various structures occur in the document. To put it another way, rather than being a set of steps to follow, they are a set of decisions to be made when certain events occur. If you see X, do Y. It is the order of the events that determines the order in which things happen, not the order of the rules.</db:para>
+<db:para>This may seem obvious, but it is key to understanding how structured text is usually processed. Also, the way style sheets are processed differs from the way most people learn to write computer programs, which can make it confusing even to skilled programmers.</db:para>
+<db:para>Things get a bit more complex when we move into processing the nested structures of the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain and <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, but the basic pattern of a set of unordered rules to describe a transformation algorithm still applies.</db:para>
 </db:section>
 <db:section>
 <db:title>Applying rules in the document domain</db:title>
@@ -104,7 +104,7 @@ match title
     create h1 
         continue
 </db:programlisting>
-<db:para>This says, when you see a <db:code>title</db:code> structure in the source, create an <db:code>h1</db:code> structure in the output, and then continue applying rules to the content of the title structure.</db:para>
+<db:para>This says, when you see a <db:code>title</db:code> structure in the source, create an <db:code>h1</db:code> structure in the output and then continue applying rules to the content of the title structure.</db:para>
 <db:para>The <db:code>continue</db:code> instruction is indented under the <db:code>create h1</db:code> instruction to indicate that the results of continuing will appear inside the <db:code>h1</db:code> structure. Another way of expressing this would be:</db:para>
 <db:programlisting language="pseudo">
 match title
@@ -112,16 +112,16 @@ match title
         continue
     &lt;/h1&gt;
 </db:programlisting>
-<db:para>Again, it does not matter what form you use for your pseudocode as long as it clearly expresses the decision to make when the event in question occurs.</db:para>
-<db:para>In our pseudocode, we are assuming that the text content of each structure will be output automatically (as is the case in many tools), so the output of this rule (expressed in HTML) is:</db:para>
+<db:para>Again, it does not matter what form you use for your pseudocode as long as you clearly express the decision to make when the event in question occurs.</db:para>
+<db:para>In our pseudocode, we assume that the processor will output the text content of each structure automatically (as is the case in many tools), so the output of this rule (expressed in HTML) is:</db:para>
 <db:programlisting language="html">
 &lt;h1&gt;Moby Dick&lt;/h1&gt;
 </db:programlisting>
-<db:para>But suppose that there is another structure inside the title in our source. In this case it is an <db:indexterm><db:primary>annotation</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>annotation</db:secondary></db:indexterm>annotation of part of the title text:</db:para>
+<db:para>But suppose that there is another structure inside the title? In this case that structure is an <db:indexterm><db:primary>annotation</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>annotation</db:secondary></db:indexterm>annotation of part of the title text:</db:para>
 <db:programlisting language="sam">
 title: Review of {Rio Bravo}(movie)
 </db:programlisting>
-<db:para>Here the annotated text is set off with curly braces and the annotation itself in in parentheses immediately after it. (This is a feature of the <db:indexterm><db:primary>SAM</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>SAM</db:secondary></db:indexterm>SAM markup syntax that I am using for most of the examples in this book.) So the annotation says that the words “Rio Bravo” refer to a movie. The annotation is a content structure, just like the title structure, and is nested inside the text of the title.</db:para>
+<db:para>Here the annotated text is set off with curly braces and the annotation itself is in parentheses immediately after it. (This is a feature of the <db:indexterm><db:primary>SAM</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>SAM</db:secondary></db:indexterm>SAM markup syntax that I use for most of the examples in this book.) This annotation says that the words “Rio Bravo” refer to a movie. The annotation is a content structure, just like the title structure, and is nested inside the text of the title.</db:para>
 <db:para>So what do we do with our rule for processing titles to make it deal with <db:code>movie</db:code> annotations embedded in the title text? Absolutely nothing. Instead, we write a separate rule for handling <db:code>movie</db:code> annotations no matter where they occur:</db:para>
 <db:programlisting language="pseudo">
 match movie
@@ -132,7 +132,7 @@ match movie
 <db:programlisting language="html">
 &lt;h1&gt;Review of &lt;i&gt;Rio Bravo&lt;/i&gt;&lt;/h1&gt;
 </db:programlisting>
-<db:para>The <db:code>continue</db:code> instruction is really all we need to add to our rules to allow them to deal with nested structures. They remain an unordered collection of rules, just like a stylesheet. (In fact, <db:indexterm><db:primary>XSLT</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>XSLT</db:secondary></db:indexterm>XSLT, a language that implements this model, calls a set of processing rules a “stylesheet”.)</db:para>
+<db:para>The <db:code>continue</db:code> instruction is all we need to add to our rules to allow them to deal with nested structures. The rules remain an unordered collection, just like a stylesheet. (In fact, <db:indexterm><db:primary>XSLT</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>XSLT</db:secondary></db:indexterm>XSLT, a language that implements this model, calls a set of processing rules a “stylesheet”.)</db:para>
 </db:section>
 <db:section>
 <db:title>Processing based on context</db:title>
@@ -178,22 +178,22 @@ section:
 <db:para>If you want a different rule for a structure occurring in different contexts, write a separate rule for each context.</db:para>
 </db:listitem>
 </db:itemizedlist>
-<db:para>Why is it important for you to understand this? Because when you are going through the process of abstracting out invariants to move content to the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain or <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, it is really useful to understand how those invariants will be factored back in. In fact, understanding how this works can help you recognize invariants in your source and give you the confidence to factor them out. Writing down the pseudocode for processing the structures you are creating can help you validate that you have factored things out correctly and that the structures you are creating will be easy to process and that the processing rules will be clear, consistent, and reliable.</db:para>
-<db:para>Obviously there is more involved in a complete processing system, and we are not going to get into the gritty details here, but let’s look at few a cases that come up frequently.</db:para>
+<db:para>Why is it important for you to understand this? Because when you abstract out invariants to move content to the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain or <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, it is really useful to understand how those invariants will be factored back in. In fact, understanding how this works can help you recognize invariants in your source and give you the confidence to factor them out. Writing down the pseudocode for processing the structures you create helps you validate that you have factored things out correctly, that the structures will be easy to process, and that the processing rules will be clear, consistent, and reliable.</db:para>
+<db:para>Obviously, building a complete processing system is much more complex, and I won’t go into the gritty details here, but let’s look at a few common cases.</db:para>
 </db:section>
 <db:section>
 <db:title>Processing container structures</db:title>
-<db:para>When we move content to the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain or the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, we often create container structures to provide context. These container structures don’t have any analog in the media domain, so what do we do with them when it is time to publish? We obviously use them to provide context for the rest of our processing rules, but what to we do with the containers themselves?</db:para>
+<db:para>When we move content to the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain or the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, we often create container structures to provide context. These container structures have no media-domain analog, so what do we do with them when we publish? The containers provide context for the rest of our processing rules, but what do we do with the containers themselves?</db:para>
 <db:para>In the previous example the content was contained in a <db:code>section</db:code> structure. So how does the <db:code>section</db:code> structure get processed?</db:para>
 <db:programlisting language="pseudo">
 match section
     continue
 </db:programlisting>
-<db:para>Yes, it’s that simple. Just don’t output any new structure in its place. The section container has done its work at this point so we simple discard it. We still want the stuff inside it though, so we use the <db:code>continue</db:code> instruction to make sure the contents get processed. In short, the container is a box. We unpack the contents and discard the box.</db:para>
+<db:para>Yes, it’s that simple. Just don’t output any new structure in its place. The section container has done its work at this point so we simple discard it. We still want the stuff inside it, so we use the <db:code>continue</db:code> instruction to make sure the contents get processed. In short, the container is a box. We unpack the contents and discard the box.</db:para>
 </db:section>
 <db:section>
 <db:title>Restoring factored-out text</db:title>
-<db:para>Sometimes when we factor out the invariants in content, we are not only factoring out styles, we are also factoring out text. To process the content we need to put the text back (obviously we can put back different text depending on our needs – which was why we factored it out in the first place).</db:para>
+<db:para>Sometimes when we factor out invariants, we not only factor out styles, we also factor out text. To process the content, we need to put the text back (obviously we can put back different text depending on our needs – which was why we factored it out in the first place).</db:para>
 <db:para>As we saw, a simple example of factoring out text is numbered and bulleted lists, where we factor out the text of the numbers and bullets. Let’s look at how we create rules to put them back.</db:para>
 <db:para>Suppose we have a document that contain these two different kinds of lists:</db:para>
 <db:programlisting>
@@ -329,5 +329,5 @@ match code
 <db:para>This chapter does not by any means describe the full range of available content processing techniques or all the ways in which algorithms can recognize and manipulate structures in content. The point of introducing you to structured writing algorithms and the basics of how content processing works is to enable you to think about structures with an eye to how they can be processed. Often when you look at structures in this way you can see how a simpler structure could be used and how that simpler structure can be processed to achieve the same result as a more complex structure.</db:para>
 <db:para>Don’t be afraid to write out your algorithms in pseudocode to make sure you have a clear idea of the processing you intend for your structures, and don’t feel confined by the algorithms shown in this book, or the annotation I have used for pseudocode examples. You own your pseudocode. Choose a format that is clear to you and that communicates clearly to whoever will be implementing the actual code. Working together with that person can help you improve your appreciation of algorithms and your ability to write useful pseudocode.</db:para>
 <db:para>Can learning to write real code help with this to? Absolutely it can. Is it necessary? No. What is essential is to think in terms of distributing certain parts of your content system to algorithms and the ability to describe those algorithms well enough that you have a clear idea of what you are asking them to do, and a reasonable certainty that you are passing them the structures and information they need to do it.</db:para>
-<db:indexterm class="endofrange" startref="idp1168914164"/><db:indexterm class="endofrange" startref="idp1168914164x"/></db:section>
+<db:indexterm class="endofrange" startref="idp140288021388512"/><db:indexterm class="endofrange" startref="idp140288021388512x"/></db:section>
 </db:chapter>

@@ -9,7 +9,7 @@ chapter:(#chapter.processing) Processing Structured Text
     
         Moving content from the {media domain}(concept) to the {document domain}(concept) or the {subject domain}(concept) involves progressively factoring out invariants in the content. Each step in this process creates two artifacts, the structured content and the invariant piece that was factored out. 
         
-        Processing structured text is about putting the pieces back together: combining the structured content with the invariants that were factored out. But processing structured text is also about making and/or executing the decisions that were partitioned away from the writer. These decisions may be invariant ones, like applying approved corporate style, or they may be variable ones, like presenting content differently in different media or to different audiences. When I talk about an invariant, then, what I mean is decisions that are always made the same way for a given purpose. They may be made differently for different purposes, but still all the same way for each purpose. 
+        Processing structured text is about putting the pieces back together: combining the structured content with the invariants that were factored out. But processing structured text is also about making and/or executing the decisions that were partitioned away from the writer. These decisions may be invariant, such as applying approved corporate style, or they may be variable, such as presenting content differently in different media or to different audiences. Invariant decisions are always made the same way for a given purpose. They may be made differently for different purposes, but still all the same way for each purpose. 
 
         If factoring out the invariants moves content toward the document or subject domains, recombining the content with the invariants moves it in the opposite direction, toward the media domain. This could mean moving the content from the subject domain to the document domain or from the document domain to the media domain, or simply from a more abstract form in the media domain to a more concrete form, which will be our first example.
             
@@ -50,7 +50,7 @@ chapter:(#chapter.processing) Processing Structured Text
                 replace {font: 10pt "Open Sans"}[bullet][tab]
         
         
-        I said at the beginning that the basic processing algorithm was to combine two sources of information to create a new one. Where are these two sources? The first source is the structured text. The second source is the style definitions, and they are embedded in the rules themselves. This is how it is usually done. In some cases, though, the rules may pull content from a separate file. We will see examples of this later. 
+        I said at the beginning that the basic processing algorithm combines two sources of information to create a new one. Where are these two sources? The first source is the structured text. The second source is the style definitions, and they are embedded in the rules themselves. This is how it is usually done. In some cases, though, the rules may pull content from a separate file. We will see examples of this later. 
         
         The result of applying these rules is that we get back the original content:
         
@@ -84,7 +84,7 @@ chapter:(#chapter.processing) Processing Structured Text
     
         The tools that do this sort of processing do not literally use search and replace like this. Rather, they parse the source document to pull out the structures and allow you to specify your processing rules by referring to those structures.  
         
-        We are not concerned here with the actual mechanism by which a processing tool recognizes structures. We are concerned with what to do when a structure is found. So let's rewrite our rules to match structures rather than find literal strings in the text:
+        We are not concerned here with the actual mechanism by which a processing tool recognizes structures. We are concerned with what the processing tool does when it finds a structure. So let's rewrite our rules to match structures rather than find literal strings in the text:
         
         ```
             match paragraph
@@ -94,7 +94,7 @@ chapter:(#chapter.processing) Processing Structured Text
                 apply style {font: 12pt "Century Schoolbook"}
                 output "[em dash][tab]"
 
-        The result of applying these rules is just the same as before:
+        The result of applying these rules is the same as before:
                 
         ```
             {font: 12pt "Century Schoolbook"}The box contains:
@@ -104,19 +104,19 @@ chapter:(#chapter.processing) Processing Structured Text
                 
         
         
-        The way I have written these rules is an example of what is called {pseudocode}(concept). It is a way for human being to sketch out an algorithm to make sure that they understand what they are trying to do before they write actual code. There is no formal grammar or syntax to pseudocode. It is intended for humans, not computers, and you can use whatever approach you like as long as it is clear to your intended audience. But pseudocode should clearly lay out a set of logical steps for accomplishing something. It should make clear exactly how the pieces go together.  
+        The way I have written these rules is an example of {pseudocode}(concept). Pseudocode is a means for sketching out an algorithm so you understand what you are trying to do before you write actual code. There is no formal syntax for pseudocode. It is intended for humans, not computers, and you can use whatever approach you like as long as it is clear to your intended audience. However, pseudocode should lay out a set of logical steps for accomplishing something, make it clear how the steps go together.  
 
-        Writing algorithms in pseudocode is a great way to make sure that we understand the algorithms we are creating without worrying about the details of code -- or even learning how to code. They are also a great way to communicate to actual coders about what we need a program to do.  
+        Writing algorithms in pseudocode is a great way to make sure you understand the algorithms you are creating without worrying about the details of code -- or even learning how to code. They are also a great way to communicate to actual coders about what you need a program to do.  
         
     section: The order of the rules does not matter
         
-        You may have noticed that what these rules are doing is pretty much exactly what style sheets do in an application like {Word}(tool "Microsoft Word") or {FrameMaker}(tool). In fact, it is exactly what a style sheet does. If you understand stylesheets, you understand a good deal of how structured writing algorithms work. 
+        You may have noticed that these rules do pretty much exactly what style sheets do in applications such as {Word}(tool "Microsoft Word") or {FrameMaker}(tool). If you understand stylesheets, you understand a good deal of how structured writing algorithms work. 
         
-        One important thing to notice is that when you create a stylesheet in {Word} or {FrameMaker}, you don't specify the order in which styles will be applied to the document. The same is true when you create a CSS stylesheet for the Web. The stylesheet is just a flat list of rules. The order in which the rules are applied to the document depends entirely on the order in which the various structures occur in the document. To put it another way, rather than being a set of steps to follow, they are a set of decisions to be made when certain events occur. If you see X, do Y. It is the order of the events that determines the order in which things happen, not the order of the rules.
+        One important thing to notice is that when you create a stylesheet in {Word} or {FrameMaker}, you don't specify the order in which styles will be applied to the document. The same is true when you create a CSS stylesheet. The stylesheet is just a flat list of rules. The order in which the rules are applied to the document depends entirely on the order in which the various structures occur in the document. To put it another way, rather than being a set of steps to follow, they are a set of decisions to be made when certain events occur. If you see X, do Y. It is the order of the events that determines the order in which things happen, not the order of the rules.
         
-        This may seem very obvious, but it is key to understanding how structured text is usually processed. It is a subject that is sometimes quite confusing to people who have been trained to write procedural computer programs, which is why I am making a point of calling it out.     
+        This may seem obvious, but it is key to understanding how structured text is usually processed. Also, the way style sheets are processed differs from the way most people learn to write computer programs, which can make it confusing even to skilled programmers.     
         
-        Things get a tiny bit more complex when we move into processing the nested structures of the {document domain} and {subject domain}, but the basic pattern of a set of unordered rules to describe a transformation algorithm still applies.
+        Things get a bit more complex when we move into processing the nested structures of the {document domain} and {subject domain}, but the basic pattern of a set of unordered rules to describe a transformation algorithm still applies.
         
     section: Applying rules in the document domain
 
@@ -134,7 +134,7 @@ chapter:(#chapter.processing) Processing Structured Text
                     continue
         
         
-        This says, when you see a `title` structure in the source, create an `h1` structure in the output, and then continue applying rules to the content of the title structure.
+        This says, when you see a `title` structure in the source, create an `h1` structure in the output and then continue applying rules to the content of the title structure.
         
         The `continue` instruction is indented under the `create h1` instruction to indicate that the results of continuing will appear inside the `h1` structure. Another way of expressing this would be:
 
@@ -144,21 +144,21 @@ chapter:(#chapter.processing) Processing Structured Text
                     continue
                 </h1>
 
-        Again, it does not matter what form you use for your pseudocode as long as it clearly expresses the decision to make when the event in question occurs. 
+        Again, it does not matter what form you use for your pseudocode as long as you clearly express the decision to make when the event in question occurs. 
 
-        In our pseudocode, we are assuming that the text content of each structure will be output automatically (as is the case in many tools), so the output of this rule (expressed in HTML) is:
+        In our pseudocode, we assume that the processor will output the text content of each structure automatically (as is the case in many tools), so the output of this rule (expressed in HTML) is:
         
         ```(html)
             <h1>Moby Dick</h1>
         
         
-        But suppose that there is another structure inside the title in our source. In this case it is an {annotation}(concept) of part of the title text:
+        But suppose that there is another structure inside the title? In this case that structure is an {annotation}(concept) of part of the title text:
         
         ```(sam)
             title: Review of {Rio Bravo}(movie)
         
         
-        Here the annotated text is set off with curly braces and the annotation itself in in parentheses immediately after it. (This is a feature of the {SAM} markup syntax that I am using for most of the examples in this book.) So the annotation says that the words "Rio Bravo" refer to a movie. The annotation is a content structure, just like the title structure, and is nested inside the text of the title. 
+        Here the annotated text is set off with curly braces and the annotation itself is in parentheses immediately after it. (This is a feature of the {SAM} markup syntax that I use for most of the examples in this book.) This annotation says that the words "Rio Bravo" refer to a movie. The annotation is a content structure, just like the title structure, and is nested inside the text of the title. 
         
         So what do we do with our rule for processing titles to make it deal with `movie` annotations embedded in the title text? Absolutely nothing. Instead, we write a separate rule for handling `movie` annotations no matter where they occur:
         
@@ -173,7 +173,7 @@ chapter:(#chapter.processing) Processing Structured Text
         ```(html)
             <h1>Review of <i>Rio Bravo</i></h1>
               
-        The `continue` instruction is really all we need to add to our rules to allow them to deal with nested structures. They remain an unordered collection of rules, just like a stylesheet. (In fact, {XSLT}(tool), a language that implements this model, calls a set of processing rules a "stylesheet".)
+        The `continue` instruction is all we need to add to our rules to allow them to deal with nested structures. The rules remain an unordered collection, just like a stylesheet. (In fact, {XSLT}(tool), a language that implements this model, calls a set of processing rules a "stylesheet".)
         
     section: Processing based on context
         
@@ -220,13 +220,13 @@ chapter:(#chapter.processing) Processing Structured Text
         
         * If you want a different rule for a structure occurring in different contexts, write a separate rule for each context.
         
-        Why is it important for you to understand this? Because when you are going through the process of abstracting out invariants to move content to the {document domain} or {subject domain}, it is really useful to understand how those invariants will be factored back in. In fact, understanding how this works can help you recognize invariants in your source and give you the confidence to factor them out. Writing down the pseudocode for processing the structures you are creating can help you validate that you have factored things out correctly and that the structures you are creating will be easy to process and that the processing rules will be clear, consistent, and reliable. 
+        Why is it important for you to understand this? Because when you abstract out invariants to move content to the {document domain} or {subject domain}, it is really useful to understand how those invariants will be factored back in. In fact, understanding how this works can help you recognize invariants in your source and give you the confidence to factor them out. Writing down the pseudocode for processing the structures you create helps you validate that you have factored things out correctly, that the structures will be easy to process, and that the processing rules will be clear, consistent, and reliable. 
         
-        Obviously there is more involved in a complete processing system, and we are not going to get into the gritty details here, but let's look at few a cases that come up frequently.
+        Obviously, building a complete processing system is much more complex, and I won't go into the gritty details here, but let's look at a few common cases.
         
     section: Processing container structures
         
-        When we move content to the {document domain} or the {subject domain}, we often create container structures to provide context. These container structures don't have any analog in the media domain, so what do we do with them when it is time to publish? We obviously use them to provide context for the rest of our processing rules, but what to we do with the containers themselves?
+        When we move content to the {document domain} or the {subject domain}, we often create container structures to provide context. These container structures have no media-domain analog, so what do we do with them when we publish? The containers provide context for the rest of our processing rules, but what do we do with the containers themselves?
         
         In the previous example the content was contained in a `section` structure. So how does the `section` structure get processed? 
                 
@@ -234,11 +234,11 @@ chapter:(#chapter.processing) Processing Structured Text
             match section
                 continue
             
-        Yes, it's that simple. Just don't output any new structure in its place. The section container has done its work at this point so we simple discard it. We still want the stuff inside it though, so we use the `continue` instruction to make sure the contents get processed. In short, the container is a box. We unpack the contents and discard the box.  
+        Yes, it's that simple. Just don't output any new structure in its place. The section container has done its work at this point so we simple discard it. We still want the stuff inside it, so we use the `continue` instruction to make sure the contents get processed. In short, the container is a box. We unpack the contents and discard the box.  
         
     section: Restoring factored-out text
 
-        Sometimes when we factor out the invariants in content, we are not only factoring out styles, we are also factoring out text. To process the content we need to put the text back (obviously we can put back different text depending on our needs -- which was why we factored it out in the first place). 
+        Sometimes when we factor out invariants, we not only factor out styles, we also factor out text. To process the content, we need to put the text back (obviously we can put back different text depending on our needs -- which was why we factored it out in the first place). 
         
         As we saw, a simple example of factoring out text is numbered and bulleted lists, where we factor out the text of the numbers and bullets. Let's look at how we create rules to put them back. 
         
