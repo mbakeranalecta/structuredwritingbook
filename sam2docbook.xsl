@@ -838,5 +838,32 @@
 
     </xsl:template>
 
+    <!-- templates added to process dbfo and dbfo-need processing instructions -->
+    <xsl:template match="pagination-tweak">
+      <xsl:apply-templates/>
+    </xsl:template>
+
+    <xsl:template match="pagination-tweak/min-space">
+      	<xsl:processing-instruction name="dbfo-need">
+	  <xsl:text>height="</xsl:text>
+	  <xsl:value-of select="."/>
+	  <xsl:text>"</xsl:text>
+	</xsl:processing-instruction>
+    </xsl:template>
+    
+    <xsl:template match="pagination-tweak/keep-together">
+      	<xsl:processing-instruction name="dbfo">
+	  <xsl:text>keep-together="</xsl:text>
+	  <xsl:value-of select="."/>
+	  <xsl:text>"</xsl:text>
+	</xsl:processing-instruction>
+    </xsl:template>
+
+    <xsl:template match="pagination-tweak/p">
+      <db:para>
+	<xsl:apply-templates/>
+      </db:para>
+    </xsl:template>
+
 </xsl:stylesheet>
 
