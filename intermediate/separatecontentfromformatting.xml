@@ -27,7 +27,7 @@
 <term>separating content from formatting</term>
 </record>
 </index>
-<p>If there is one phrase that most people associate with structured writing, it is “separating content from formatting.” This is the most basic and well-known form of partitioning and redirecting of complexity that we do in structured writing, and it illustrates the basic method by which we do all the rest. The basic premise of separating content from formatting is to separate decisions about the appearance of a document from decisions about its content. But partitioning content from formatting is not as simple as it may seem. This chapter walks through this process.</p>
+<p>If there is one phrase that most people associate with structured writing, it is “separating content from formatting.” This is the most basic and well-known method that we use to partition and redirect complexity, and it illustrates the method we use to do all the rest. Separating content from formatting separates decisions about the appearance of a document from decisions about its content. However, as we will see in this chapter, this is not as simple as it may seem.</p>
 <section>
 <title>Separate out style instructions</title>
 <p>Let’s start with a fragment that includes a description of its format. I use CSS syntax to describe the format. I could use a variety of formats, but CSS is easy to understand and helps illustrate the separation. I also represent certain characters (bullets and tabs) by their names, so you can see exactly where everything is going:</p>
@@ -48,7 +48,7 @@
 <codeblock>
 paragraph = {font: 10pt "Open Sans"}
 </codeblock>
-<p>Once the style information is separated, you can change the formatting without changing the text, for example, you could choose a different font:</p>
+<p>Once the style information is separated, you can change the formatting without changing the text; for example, you could choose a different font:</p>
 <codeblock>
 paragraph = {font: 12pt "Century Schoolbook"}
 </codeblock>
@@ -84,11 +84,11 @@ bullet-paragraph = {font: 12pt "Century Schoolbook"}[bullet][tab]
 <codeblock>
 bullet-paragraph = {font: 12pt "Century Schoolbook"}[em dash][tab]
 </codeblock>
-<p>Because the style now uses an em-dash, rather than a bullet, the name bullet-paragraph may not be the best choice. The content still contains formatting information in the form of a style named for a particular piece of formatting, which means writers are still making the formatting choice “bullet” when it would be better for them to focus on the content choice “list.”</p>
+<p>Because the style now uses an em-dash, rather than a bullet, the name bullet-paragraph may not be the best choice. The content still contains a style named for a particular piece of formatting, which means writers are still making the formatting choice “bullet” when it would be better for them to focus on the content choice “list.”</p>
 </section>
 <section>
 <title>Name your abstractions correctly</title>
-<p>The names you choose for styles and other abstractions matter. The wrong name sets up a false expectation, which can lead to authors using a style incorrectly. So the first lesson about separating content from formatting is that naming matters. You are creating an abstraction, and you need to figure out what that abstraction is and name it appropriately.</p>
+<p>The names you choose for styles and other abstractions matter. The wrong name sets up a false expectation, which can lead to authors using a style incorrectly. So the first lesson about separating content from formatting is that naming matters. You are creating an abstraction, so you need to figure out what that abstraction is and name it appropriately.</p>
 <p>What is the abstraction here? Sand, Eggs, and Gold are list items. So maybe we do this:</p>
 <codeblock>
 {style: paragraph}The box contains:
@@ -110,7 +110,7 @@ list-item = {font: 12pt "Century Schoolbook"}[em dash][tab]
 {style: list-item}Rinse
 {style: list-item}Repeat
 </codeblock>
-<p>These list items should have numbers, not dashes or bullets. So the abstraction does not cover all list items. If you look at the different kinds of list items, group them into abstract types, and come up with names for those types, you probably come up with ordered-list-item and unordered-list-item. Then you have:</p>
+<p>These list items should have numbers, not dashes or bullets. So the abstraction does not cover all list items. If you look at the different kinds of list items, group them into abstract types, and come up with names for those types, you probably come up with <code>ordered-list-item</code> and <code>unordered-list-item</code>. Then you have:</p>
 <codeblock>
 {style: paragraph}The box contains:
 {style: unordered-list-item}Sand
