@@ -295,6 +295,11 @@
         <xsl:apply-templates/>
     </xsl:template>
     
+    <xsl:template match="annotation[@type='process']">
+        <xsl:call-template name="index-annotation"/>
+        <xsl:apply-templates/>
+    </xsl:template>
+    
     <xsl:template match="annotation[@type='website']">
         <xsl:apply-templates/>
     </xsl:template>
@@ -784,8 +789,8 @@
     <xsl:template match="section">
         <db:section>
             <xsl:apply-templates/>
-            <xsl:if test="not(following-sibling::section)">
-                <xsl:for-each select="../index/record/term">
+            <xsl:if test="not(following::section) and not(section)">
+                <xsl:for-each select="/chapter/index/record/term">
                     <db:indexterm  class='endofrange'>
                         <xsl:attribute name="startref">
                             <xsl:value-of select="generate-id()"/>
@@ -793,7 +798,7 @@
                     </db:indexterm>
                 </xsl:for-each>
                 
-                <xsl:for-each select="../index/record/term">
+                <xsl:for-each select="/chapter/index/record/term">
                     <db:indexterm  class='endofrange'>
                         <xsl:attribute name="startref">
                             <xsl:value-of select="generate-id()"/>
@@ -805,7 +810,8 @@
             </xsl:if>
         </db:section>
     </xsl:template>
-
+    
+    
     <!-- Section from the book file that is just text -->
     <xsl:template match="book/chapter/section/text()[normalize-space() != '']">
         <db:title>
