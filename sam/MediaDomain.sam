@@ -21,9 +21,6 @@ chapter:(#chapter.media-domain) Writing in the Media Domain
     
     >>>(image ../graphics/handwritten-bitmap.xml)
 
-    !!!(MB)
-        This is currently printing too small to really see the dots. Can we bump it up a little?
-
     There is little structure here. There's just a pattern of dots, which represents text characters only in the sense that humans can recognize the pattern as text. The computer records the effect of your decisions about letter shapes, but it has no idea that they are letters. 
     
     This is an inefficient way to write. You can work faster if you use the paint program's text tool.   
@@ -42,7 +39,7 @@ chapter:(#chapter.media-domain) Writing in the Media Domain
     One type of program that records text with formatting attached is a vector graphics program. A vector graphics program creates graphics as a collection of objects. For example, to represent a circle, a vector graphics program records an abstraction: a mathematical formula that encodes the essential properties of a circle -- the center, diameter, line weight, etc. -- rather than a set of dots. The program partitions the complexity of circle drawing into the circle object. The computer then lets you manipulate that abstraction as an object, only rendering it as actual dots when the graphic is displayed on screen or paper.
 
     figure:(*objects-vs-dots) Objects vs. dots
-        >>>(image ../graphics/object-vs-dots.xml)
+        >>>(image ../graphics/Object-vs-dots.xml)
 
     In [*objects-vs-dots] you see a circle as an object displayed in a vector graphics program (Inkscape) on the left and a circle as a set of dots in a graphics program (Microsoft Paint) on the right.
 
@@ -57,21 +54,18 @@ chapter:(#chapter.media-domain) Writing in the Media Domain
         figure:(*text-object) A vector graphics text object
             >>>(image ../graphics/text-object.xml)
 
-        !!!(MB)
-            This is currently rendering too small to read. It is important that the reader sees where the various characteristics are displayed as properties of the object, rather then as a set of dots. 
-
-        A vector graphics program displays text in a chosen font. If you change the value of the text object's font attribute, it will immediately redraw the text in the new font. Not only has the drawing of letter shapes been partitioned, but the partitioning has been recorded in the source file, meaning you can change the font and font attributes as much as you like without editing the text itself.    
+        A vector graphics program displays text in a chosen font. If you change the value of the text object's font attribute, it immediately redraws the text in the new font. Not only has the drawing of letter shapes been partitioned, but the partitioning has been recorded in the source file, meaning you can change the font and font attributes as much as you like without editing the text itself.
         
-        The shape of each character in the font is required to render the text object in the media domain. However, that information is not stored as part of the text object. The representation of the text in the paint program includes the shape of the letters but in the vector graphics program it does not. That information has been partitioned out into a font file. 
+        The vector graphics program needs to know the shape of each character to render a text object in the media domain. However, that information is not stored as part of the text object. The representation of the text in the paint program includes the shape of the letters but in the vector graphics program it does not. That information has been partitioned out into a font file. 
 
         figure:(*merge_text_and_font) Merging text and font information
             >>>(image ../graphics/TextPlusFont.xml)
 
-        The shapes of the letters (technically, {glyphs}+(italic)) that make up the font are stored separately in font files. Font files consist of a set of shape objects that describe each glyph, together with metadata such as the name of the font and the name of each glyph. To actually display the text, the graphics program uses information in the text object to identify the correct font file, locate the right glyph in that font file, and then draw the appropriate glyph on the current medium (see [*merge_text_and_font]). 
+        The shapes of the letters (technically, {glyphs}+(italic)) that make up the font are stored in font files. Font files consist of a set of shape objects that describe each glyph together with metadata such as the name of the font and the name of each glyph. To display the text, the graphics program uses information in the text object to identify the correct font file, locate the right glyph in that font file, and then draw the appropriate glyph on the current medium (see [*merge_text_and_font]). 
 
-        Every modern operating system partitions the rendering of fonts into a separate font system that it makes available to all applications. By transferring font rendering complexity to the font system, the OS designers make it easier for developers to create applications that work with formatted text. Rather than programming font handling themselves, programmers call operating system APIs ({Application Programming Interfaces}(concept)) to do it for them. It also makes things easier for font designers, since it partitions off the problems of installing fonts and making them available to applications.
+        Every modern operating system partitions the rendering of fonts into a separate font system that any application can use. By transferring font rendering complexity to the font system, the OS designers make it easier for developers to create applications that work with formatted text. Rather than programming font handling themselves, programmers call operating system APIs ({Application Programming Interfaces}(concept)) to do it for them. It also makes things easier for font designers, since it partitions off the problems of installing fonts and making them available to applications.
 
-        Font handling is a particularly powerful example of partitioning complexity because it means that professionals working in the content domain -- font-designers, tool-developers, and writers -- no longer need to communicate or coordinate to contribute to the content delivery process. 
+        Font handling is a particularly powerful example of partitioning complexity, because it means that professionals working in the content domain -- font-designers, tool-developers, and writers -- no longer need to communicate or coordinate to contribute to the content delivery process. 
         
         This is a recurring pattern. We partition information that is constant for a particular application into a separate file -- the shape of the capital letter C is consistent, no matter how many times it occurs in a text -- so we can keep that information separate from the text. This simplifies the format of the information and keeps the downstream presentation more consistent. 
 
