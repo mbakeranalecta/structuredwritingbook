@@ -320,8 +320,17 @@
     </xsl:template>
     
     <xsl:template match="annotation[@type='structure']">
-        <xsl:call-template name="index-annotation"/>
-        <xsl:apply-templates/>       
+      <xsl:call-template name="index-annotation"/>
+      <xsl:choose>
+        <xsl:when test="@namespace = 'HTML' or @namespace='DocBook' or @namespace='DITA'">
+          <db:code>
+          <xsl:apply-templates/>            
+          </db:code>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:apply-templates/>
+        </xsl:otherwise>
+      </xsl:choose>
     </xsl:template>
     
     <xsl:template match="annotation[@type='media']">

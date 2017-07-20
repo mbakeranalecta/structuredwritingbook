@@ -151,7 +151,7 @@ chapter:(#chapter.markup) Markup
             
         None of these abstract structures describes document structures in any of the structured writing domains. Instead, specific markup languages based on XML (or its cousin, SGML) indicate {subject}, {document}, {management}, or {media domain} structures as named instances of elements and attributes. 
         
-        Here is the {Moby Dick} passage again, this time in {XML} (more specifically, in {Docbook}):
+        Here is the {Moby Dick} passage again, this time in {XML} (more specifically, in {DocBook}):
         
         ```(DocBook)
             <section>
@@ -213,7 +213,7 @@ chapter:(#chapter.markup) Markup
                 // ...body
             }
         
-        In this sample, `@param` and `@return` are named blocks. But in JavaDoc, there is a fixed set of named blocks that are defined as part of the language. You can't create a new language by defining your own block names. By contrast, {XML} itself defines absolutely no element names. Only instances of XML, like {Docbook}(language), define element names. 
+        In this sample, `@param` and `@return` are named blocks. But in JavaDoc, there is a fixed set of named blocks that are defined as part of the language. You can't create a new language by defining your own block names. By contrast, {XML} itself defines absolutely no element names. Only instances of XML, like {DocBook}(language), define element names. 
         
         A particularly notable example of a concrete language in abstract clothing is {HTML}. HTML looks a lot like an instance of XML, but it is not. An XML parser cannot parse most HTML. HTML is nominally an instance of SGML but never did quite conform to it. HTML generally requires a specific HTML parser, such as is found in all browsers. XHTML is a version of HTML that is an instance of XML. {HTML5}(language) actually supports two different syntaxes, one of which is an instance of XML and one of which is not, meaning that it has both a concrete syntax and a syntax which is a instance of an abstract language. (This is consequence of having made a mess early on and having to live with it for evermore. A lesson for all markup language designers.)
                        
