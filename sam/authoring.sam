@@ -32,7 +32,7 @@ chapter:(#chapter.writing) Writing
 
         How do we design structures that are easy to use but still provide the constraints we need for quality and efficiency? As we have seen, moving from the {media domain} to the {document domain} allows us to factor out or impose certain structural constraints, but to do so, we often must introduce the management domain to impose content management constraints. This added complexity detracts from ease of writing. However, we have also seen that moving to the subject domain allows us to factor out many of the document-domain and management-domain structures. Designing structures for writing, therefore, often consists of factoring out complex publishing and content management structures using subject-domain structures that are lucid for writers.
 
-        One of the most important consequences of this, both for ease of writing and reliability of data, is that in the subject domain you don't ask writers to think, decide, and structure content, in terms of algorithms. In this sense, the move to the subject domain not only factors out specific constraints from writers, it factors out the need to think in algorithms at all, leaving writers free to think and decide in terms of subject matter. This freedom to focus on content is a property I call _functional lucidity_.
+        One of the most important consequences of this, both for ease of writing and reliability of data, is that in the subject domain you don't ask writers to think, decide, and structure content in terms of algorithms. In this sense, the move to the subject domain not only factors out specific constraints from writers, it factors out the need to think in algorithms at all, leaving writers free to think and decide in terms of subject matter. This freedom to focus on content is a property I call _functional lucidity_.
     
     section: Functional lucidity
     
@@ -48,13 +48,13 @@ chapter:(#chapter.writing) Writing
                
     section: Simplicity and Clarity
 
-        One of the biggest benefits of subject-domain markup for writers is a much higher degree of functional lucidity compared with a typical document domain language. 
+        One of the biggest benefits of subject-domain markup for writers is a much higher degree of functional lucidity compared with a typical document-domain language. 
         
         While a document domain-language such as {DocBook}(language) must have a wide range of document structures, a recipe markup language such as we developed in [#chapter.subject-domain], has only a few simple structures. Better still, there are very few permutations of those structures. The decisions it requires writers to make align closely with the core task of writing a recipe.
         
         Because subject-domain structures describe the subject matter they contain, they are also much clearer to writers, who may not understand complex document structures (or, more often, the subtle distinctions between several similar document structures), but who do (we hope) understand their subject matter. 
         
-        The combination of simplicity and clarity means that writers can often create subject-domain structured content with little or no training. For instance, even if we add some additional fields to our recipe markup, you could still hand a writer a sample like the one in [*ex.authoring-recipe] to use as a template without any training or special tools.
+        The combination of simplicity and clarity means that writers can often create subject-domain structured content with little or no training. For instance, even if we add some additional fields to our recipe markup, a writer could easily use a sample like the one in [*ex.authoring-recipe] as a template without any training or special tools.
         
         figure:(*ex.authoring-recipe) Expanded recipe for hard-boiled eggs
             ```(sam)
@@ -90,7 +90,7 @@ chapter:(#chapter.writing) Writing
                         protein: 6 g    
         
         
-        Of course, the downside is that recipe markup is only good for one thing: recipes. Complexity is never destroyed, only moved somewhere else. So this approach moves complexity away from the writer to the person who has to design and maintain these structures and the algorithms that process them. ({Information Architect} and {Content Engineer} are both titles sometimes used for the person with this responsibility.)
+        Of course, the downside is that recipe markup is good for only one thing: recipes. Complexity is never destroyed, only moved somewhere else. So this approach moves complexity away from the writer to the person who has to design and maintain these structures and the algorithms that process them. ({Information Architect} and {Content Engineer} are both titles sometimes used for the person with this responsibility.)
         
-        This can seem scary because we are not used to partitioning complexity in this way. But then, we also recognize that the way we have partitioned complexity in the past has not been as successful as we would like -- it has, in fact, left much of the complexity of content creation unhandled, resulting in that complexity being dumped on our readers. If we need a new partitioning of the complexity of the content creation process, we must accept that some of these new methods of partitioning will be unfamiliar. They are the places where previously unhandled complexity, which used to get dumped on the reader, is now being handled. 
+        This can seem scary because we are not used to partitioning complexity in this way. But then, the way we have partitioned complexity in the past has not been as successful as we would like -- it has, in fact, left much of the complexity of content creation unhandled, resulting in that complexity being dumped on our readers. A new partitioning of the content creation process requires us to accept that some of these new methods of partitioning will be unfamiliar.
 
