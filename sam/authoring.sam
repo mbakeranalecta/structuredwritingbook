@@ -6,86 +6,91 @@ chapter:(#chapter.writing) Writing
         algorithm, writing
         concept, functional lucidity
 
-    Most of the complexity of the content process flows through the writer. Before computers, the writer prepared a typescript which was handed off to other people to manipulate before the work was eventually set in type and printed. Today, we generally expect that the writer will be the last person to manually change or manipulate content. Everything after that will be handled by an algorithm. The content the writer writes has to contain everything the publishing process needs to complete successfully. Making that manageable for writers is key to successfully partitioning your content system.
+    Most of the complexity of the content process flows through the writer. Before computers, the writer prepared a typescript that was handed off to other people to manipulate before the work was eventually set in type and printed. Today, we generally expect that the writer will be the last person to manipulate content. Everything after that will be handled by an algorithm. The writer must supply everything the publishing process needs. Making that task manageable for writers is key to successfully partitioning your content system.
 
-    But the complexity imposed by publishing and content management functions is not the only source of complexity that writers must deal with. Developing the best rhetorical strategy for a given subject matter and applying it consistently, as well as working effectively with other writers to achieve the overall content strategy of the organization are also major sources of complexity, and all that complexity flows through the writer as well.  
-    
-    If we are going to partition the content system to relieve writers of as many extended decisions as possible, we will need to create structures that effectively direct those decisions away from them. But we can't do this by creating a loose unconstrained environment for writers. If we don't get a high level of conformance to specific content structures, our algorithms will not be reliable, the partitioning will break down, and the complexity will fall back on the writers or down to the readers. The structures we present to writers must combine strict conformance with ease of use. In all our planning of structures and algorithms, therefore, we have to keep the question of how easy this is going to be for the writer squarely in the forefront.  
-    
-    In media-domain systems like word processors and desktop publishing systems, the writer is asked to decide about formatting structures while writing. One of the traditional arguments for structured writing is to relieve the writer of the burden of making and executing formatting decisions so they can focus on writing. This means moving to the document domain. But in the document domain, the writer has a new set of structures to think about. Is it easier on the writer to think about and manipulate document domain structures rather than media domain structures? In some cases, yes. For instance, writing a blog post or a web page in {MarkDown} may be less cumbersome for some writers than using a {WYSIWYG} {HTML} editor.
-    
-    However, {Markdown} does not contain enough structure, or enough constraints on its structure, to enable many of the structured writing algorithms we will be looking at. If we want to support these algorithms, we will need something more structured. 
+    But the complexity imposed by publishing and content management functions is not the only source of complexity that writers must deal with. They must also develop the best rhetorical strategy for a given subject matter, apply that strategy consistently, and work effectively with other writers to achieve the overall content strategy of the organization. These factors are major sources of complexity, and all that complexity flows through the writer as well.  
 
-    If we are proposing to implement management-intensive algorithms, such as {content reuse}, writers may need to learn and manipulate an entire management system and the management policies that the organization puts in place around it. Depending on how complex these policies are and how foreign they are to the writer's experience, this can create a burden far greater than that of creating and manipulating formatting according to a style guide. 
+    section: Constraints versus usability
     
-    We could look at this and say, okay, yes, writing is now more difficult and more complex than it was before because of all this additional structure, but we are getting additional advantages as well, such as reuse and content management. The problem is, attention is a finite resource. Writing is a task that takes full attention, so any decision making added to the task takes attention away from writing, as well as requiring more knowledge and skill on the part of the writer. As writing get more difficult, writers do all of the component tasks less well, and the fewer writers can contribute at all. The more of the writer's attention is required on structure, the less is available for writing, and the quality of the writing suffers.  
+        If we are going to partition the content system to relieve writers of as many extended decisions as possible, we need to create structures that effectively direct those decisions away from them. But we can't do this by creating a loose unconstrained environment for writers. If we don't get a high level of conformance to specific content structures, our algorithms will not be reliable, the partitioning will break down, and the complexity will fall back on the writers or down to the readers. The structures we present to writers must combine strict conformance with ease of use. 
     
-    As the quality of the writing suffers, the writer becomes frustrated with the system, and becomes more interested in getting their ideas down than in obeying the onerous structural rules that are getting in their way. When that happens, the quality of the structure suffers as well. And if both the quality of the writing and the quality of the structures decline, all of your algorithms become less reliable, compromising all of benefits you hoped to obtain. Too much complexity dumped on any one person or process compromises all downstream persons and processes. 
+        In media-domain systems, such as word processors and desktop publishing systems, writers must make decisions about formatting while writing. One of the traditional arguments for structured writing is that it relieves writers of the burden of making and executing formatting decisions, so they can focus on writing. This means moving to the document domain. But in the document domain, writers have a new set of structures to think about. Is it easier for writers to think about and manipulate document-domain structures rather than media-domain structures? In some cases, yes. For instance, writing a blog post or a web page in {Markdown} may be less cumbersome for some writers than using a {WYSIWYG} {HTML} editor.
     
-    Conformance is fundamentally a human activity. It is that writer who must conform. Good conformance results from creating structures that are easy to conform to. It all begins with writing. Unfortunately, writing is often the last thing people think about in designing content management and structured writing systems. It is the place that complexity get dumped before it eventually gets dumped on readers.  
-    
-    One of the most familiar tropes of the content management industry is that problems with content management systems are not technology problems, they are human problems. The solution, this trope suggests, lies in better change management and more training. The presumption here is that the tools work fine if only you give them correct input. If the input is not correct, that is the fault of the humans who created the input. But this is an argument we would not accept for any other kind of system. For any other kind of system we would say, "this system is too hard to use", not "the problem is everybody needs to be better trained and more accepting of change". The real fault here is poor system design. If humans cannot conform to the structures that the system requires, the fault is in the system design. It is not partitioning and distributing complexity correctly. The structures should be redesigned to be easier to conform to. (We will look at this in more detail in [#chapter.conformance].)
-    
-    How is designing structures for ease of writing consistent with designing them to match the specific constraints that we want to impose for the sake of quality and efficient processing? As we have seen, moving from the {media domain} to the {document domain} allows us to factor out or impose certain structural constraints, but often requires the introduction of the management domain to impose content management constraints. These complexities detract from ease of writing. But we have also seen that by moving to the subject domain we can factor out many of the document domain and management domain structures. Designing structures for writing, therefore, often consists of factoring out complex publishing and content management structures using subject-domain structures that are lucid for writers.
+        However, {Markdown} does not contain enough structure -- or enough constraints on its structure -- to enable many of the structured writing algorithms we will be looking at. If we want to support these algorithms, we need something more structured. 
 
-    One of the most important consequences of this, both for ease of writing and reliability of data, is that in the subject domain you are not asking the writer to think, to decide, and to structure content, in terms of algorithms. In this sense, the move to the subject domain not only factors out specific constraints from the writer, it factors out the need to think in algorithms at all, leaving the writer free to think and decide in terms of subject matter. This freedom to focus on content is a property I call functional lucidity.
+        If we want to implement management-intensive algorithms such as {content reuse}, writers may need to learn how to manipulate a content management system and the management policies that go with one. Depending on how complex these policies are and how foreign they are to the writer's experience, this can create a far greater burden than formatting content according to a style guide. 
+    
+        We could look at this and say, yes, this additional structure has made writing more difficult and complex than it was before. However, we are gaining advantages as well, such as reuse and content management. The problem is, attention is a finite resource. Writing takes full attention, and added decision making takes attention away from writing and requires more knowledge and skill from the writer. As writing get more difficult, writers handle each component task less well. In addition, it becomes harder to find writers who have the necessary skills to work in a more complex environment. The more attention writers must spend on structure, the less they have available for writing, and the quality of their writing suffers.  
+    
+        As writing quality suffers, writers become frustrated with the system, and, in order to focus their attention on content, they start to ignore the onerous structural rules that are getting in their way. When that happens, the quality of the structure suffers as well. And if the quality of both the writing and the structure declines, your algorithms become less reliable, compromising all of benefits you hoped to obtain. Too much complexity dumped on any one person or process compromises all downstream persons and processes. 
+    
+        Conformance is fundamentally a human activity. It is writers who must conform, and they conform best when you create structures that are easy to conform to. It all begins with writing. Unfortunately, writing is often the last thing people think about when designing content management and structured writing systems. Yet, writing is where complexity gets dumped before it eventually gets dumped on readers.  
+    
+        One of the most familiar tropes of the content management industry is that problems with content management systems are not technology problems, they are human problems. The solution, this trope suggests, lies in better change management and more training. The presumption here is that the tools work fine if you give them correct input. If the input is not correct, that is the fault of the humans who created the input.
+
+        We would not accept this argument for any other kind of system. For any other kind of system we would say, "this system is too hard to use,", not "the problem is that everybody needs to be better trained and more accepting of change." The real fault here is poor system design. If humans cannot conform to the structures the system requires, the fault is in the system design. If the system doesn't partition and distribute complexity correctly, the structures need to be redesigned so humans can conform to them. (We look at this in more detail in [#chapter.conformance].)
+
+        How do we design structures that are easy to use but still provide the constraints we need for quality and efficiency? As we have seen, moving from the {media domain} to the {document domain} allows us to factor out or impose certain structural constraints, but to do so, we often must introduce the management domain to impose content management constraints. This added complexity detracts from ease of writing. However, we have also seen that moving to the subject domain allows us to factor out many of the document-domain and management-domain structures. Designing structures for writing, therefore, often consists of factoring out complex publishing and content management structures using subject-domain structures that are lucid for writers.
+
+        One of the most important consequences of this, both for ease of writing and reliability of data, is that in the subject domain you don't ask writers to think, decide, and structure content, in terms of algorithms. In this sense, the move to the subject domain not only factors out specific constraints from writers, it factors out the need to think in algorithms at all, leaving writers free to think and decide in terms of subject matter. This freedom to focus on content is a property I call _functional lucidity_.
     
     section: Functional lucidity
     
-        Functional lucidity refers to the total intellectual burden that a system imposes on a writer when they are in the actual process of composition. How clearly do they understand all that is being asked of them, and how fluidly and naturally can they create all the structures and content that are required. The functional lucidity of a markup language is not a matter of its size or its complexity. It is a matter of how natural and obvious it seems to the writer as they are using it. It is a matter, also, of how much it aligns with their core decisions, the decisions that are essential to the task, as opposed to extended decisions, which are external to it. 
+        Functional lucidity refers to the total intellectual burden that a system imposes on writers when they are in the actual process of composition. How clearly do they understand what the system requires of them, and how fluidly and naturally can they create structures and content in that system? The functional lucidity of a markup language is not a matter of its size or its complexity. It is a matter of how natural and obvious it is for writers to use it. It is a matter, also, of how well the markup language aligns with the writers' core decisions, the decisions that are essential to the task, as opposed to extended decisions, which are external to it. 
 
-        If you are asked to add markup to your content as you write, if you are asked to shape your content according to the constraints that a structured writing language dictates, then the lucidity of that markup and the structures it defines are vital to your success. The names of the structures, the order in which they occur should spring into your mind as readily (if not more so) that the words and phrases and ideas you are trying to record. They should come to you are a consequence of your core decisions, the decisions you have to make anyway. 
+        If writers must add markup to their content as they write and if they must shape their content according to the constraints that a structured writing language dictates, then the lucidity of that markup and the structures it defines are vital to their success. The names of the structures and the order in which they occur should spring to mind as readily (if not more so) as the words, phrases, and ideas writers are trying to record. 
         
         If you have ever tried to learn a language, you know how painful it is to write even a paragraph in a language you are not fluent in. The effort of finding words and correct grammatical structures takes all of the attention that should be reserved for what you are trying to say. Writing in a markup language where the structures don't make intuitive sense, where they don't seem to fit the thoughts you are trying to express, where they require knowledge and skills external to your core task, is very much like this. Lucidity is essential to avoid having the markup absorb all of the attention that should be focused on the content. 
         
-        Functional lucidity is not an absolute property, of course. What is lucid for one writer may be opaque to another. In particular, professional technical writers who have been used to writing in structured {document domain} templates in applications like FrameMaker may find a markup language like {DocBook} functionally lucid, whereas someone not used to thinking in these terms would find it difficult and distracting. On the other hand, those writers used to FrameMaker often find DITA's structure difficult to get used to because they do not find its approach to topics lucid. To still others it seems very natural. Often this is a matter of how the extended decisions required by the new tool align with those required by the old tool, decisions that the writer is already accustomed to making. 
+        Functional lucidity is not an absolute property, of course. What is lucid for one writer may be opaque to another. In particular, professional technical writers who are used to writing using structured {document-domain} templates in applications such as FrameMaker may find a markup language like {DocBook} functionally lucid, whereas someone not used to thinking in those terms would find it difficult and distracting. On the other hand, writers used to FrameMaker often find DITA's structure difficult to learn because they do not find DITA's approach to topics lucid. To still others, it seems very natural. Often this is a matter of how the extended decisions required by the new tool align with those required by the old tool; the better the alignment, the easier it is to use the new tool. 
         
-        But while different writers may have different degrees of experience and familiarity with abstract document structures, all writers should have familiarity with the subject matter they are writing about. Thus a well-designed {subject domain} language tends to naturally have functional lucidity for everyone who is likely to use it. 
+        But while different writers may have different degrees of experience and familiarity with abstract document structures, all writers should have familiarity with the subject matter they are writing about. Thus a well-designed {subject-domain} language tends to naturally have functional lucidity for anyone who is likely to use it. 
                
     section: Simplicity and Clarity
 
-        One of the biggest benefits of subject domain markup for writers is a much higher degree of functional lucidity compared with a typical document domain language. 
+        One of the biggest benefits of subject-domain markup for writers is a much higher degree of functional lucidity compared with a typical document domain language. 
         
-        While a general document domain language like {DocBook}(language) needs to have a wide range of document structures, a recipe markup language such as we developed in [#chapter.subject-domain], has only a few simple structures. Better still, there are very few permutations of those structures. The decisions it requires the writer to make align closely with the core task of expressing the method for preparing a dish.
+        While a document domain-language such as {DocBook}(language) must have a wide range of document structures, a recipe markup language such as we developed in [#chapter.subject-domain], has only a few simple structures. Better still, there are very few permutations of those structures. The decisions it requires writers to make align closely with the core task of writing a recipe.
         
-        Because subject domain structures describe the subject matter they contain, they are also much clearer to writers, who may not understand complex document structures (or, more often, the subtle distinctions between several similar document structures), but who do (we hope) understand their subject matter. 
+        Because subject-domain structures describe the subject matter they contain, they are also much clearer to writers, who may not understand complex document structures (or, more often, the subtle distinctions between several similar document structures), but who do (we hope) understand their subject matter. 
         
-        The combination of simplicity and clarity mean that in many cases you can get writers to create subject-domain structured content with little or no training. For instance, even if we add some additional fields to our recipe markup, you could still hand a sample like the one below to an writer and ask them to follow it as a template, without giving them any training or any special tools.
+        The combination of simplicity and clarity means that writers can often create subject-domain structured content with little or no training. For instance, even if we add some additional fields to our recipe markup, you could still hand a writer a sample like the one in [*ex.authoring-recipe] to use as a template without any training or special tools.
         
-        ```(sam)
-            recipe: Hard Boiled Egg
-                introduction:
-                    A hard boiled egg is simple and nutritious.
-                ingredients:: ingredient, quantity
-                    eggs, 12
-                    water, 2qt
-                preparation:
-                    1. Place eggs in pan and cover with water.
-                    2. Bring water to a boil.
-                    3. Remove from heat and cover for 12 minutes.
-                    4. Place eggs in cold water to stop cooking.
-                    5. Peel and serve.
-                prep-time: 15 minutes
-                serves: 6
-                wine-match: champagne and orange juice
-                beverage-match: orange juice
-                nutrition:
-                    serving: 1 large (50 g)
-                    calories: 78
-                    total-fat: 5 g
-                    saturated-fat: 0.7 g
-                    polyunsaturated-fat: 0.7 g    
-                    monounsaturated-fat: 2 g    
-                    cholesterol: 186.5 mg    
-                    sodium: 62 mg    
-                    potassium: 63 mg    
-                    total-carbohydrate: 0.6 g    
-                    dietary-fiber: 0 g    
-                    sugar: 0.6 g    
-                    protein: 6 g    
+        figure:(*ex.authoring-recipe) Expanded recipe for hard-boiled eggs
+            ```(sam)
+                recipe: Hard Boiled Egg
+                    introduction:
+                        A hard boiled egg is simple and nutritious.
+                    ingredients:: ingredient, quantity
+                        eggs, 12
+                        water, 2qt
+                    preparation:
+                        1. Place eggs in pan and cover with water.
+                        2. Bring water to a boil.
+                        3. Remove from heat and cover for 12 minutes.
+                        4. Place eggs in cold water to stop cooking.
+                        5. Peel and serve.
+                    prep-time: 15 minutes
+                    serves: 6
+                    wine-match: champagne and orange juice
+                    beverage-match: orange juice
+                    nutrition:
+                        serving: 1 large (50 g)
+                        calories: 78
+                        total-fat: 5 g
+                        saturated-fat: 0.7 g
+                        polyunsaturated-fat: 0.7 g    
+                        monounsaturated-fat: 2 g    
+                        cholesterol: 186.5 mg    
+                        sodium: 62 mg    
+                        potassium: 63 mg    
+                        total-carbohydrate: 0.6 g    
+                        dietary-fiber: 0 g    
+                        sugar: 0.6 g    
+                        protein: 6 g    
         
         
         Of course, the downside is that recipe markup is only good for one thing: recipes. Complexity is never destroyed, only moved somewhere else. So this approach moves complexity away from the writer to the person who has to design and maintain these structures and the algorithms that process them. ({Information Architect} and {Content Engineer} are both titles sometimes used for the person with this responsibility.)
         
-        This can seen scary because we are not used to partitioning complexity in this way. But then, we also recognize that the way we have partitioned complexity in the past has not been as successful as we would like -- that it has, in fact, left much of the complexity of content creation unhandled, resulting in that complexity being dumped on our readers. If a new partitioning of the complexity of the content creation process is required, we have to accept that some of these new methods of partitioning will be unfamiliar. They are the place where previously unhandled complexity that used to get dumped on the reader is now being handled. 
+        This can seem scary because we are not used to partitioning complexity in this way. But then, we also recognize that the way we have partitioned complexity in the past has not been as successful as we would like -- it has, in fact, left much of the complexity of content creation unhandled, resulting in that complexity being dumped on our readers. If we need a new partitioning of the complexity of the content creation process, we must accept that some of these new methods of partitioning will be unfamiliar. They are the places where previously unhandled complexity, which used to get dumped on the reader, is now being handled. 
 
