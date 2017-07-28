@@ -391,6 +391,11 @@
         <db:citetitle>
             <xsl:apply-templates/>
         </db:citetitle>
+        <xsl:if test="@specifically">
+          [<db:biblioref>
+            <xsl:attribute name="linkend"><xsl:value-of select="@specifically"/></xsl:attribute>
+          </db:biblioref>]
+        </xsl:if>
     </xsl:template>
     
     <xsl:template match="annotation[@type='url']">
