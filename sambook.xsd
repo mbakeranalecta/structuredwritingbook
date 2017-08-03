@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="book">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="string" type="string-type"/>
+        <xs:element name="title" type="title-type"/>
+        <xs:element name="subtitle" type="subtitle-type"/>
+        <xs:element name="by">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="inline-insert" type="inline-insert-type"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="index" type="index-type"/>
+          <xs:element name="insert" type="insert-type"/>
+          <xs:element name="part" type="part-type"/>
+        </xs:choice>
+        <xs:element ref="appendix"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="appendix">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="title" type="title-type"/>
+        <xs:element name="subtitle" type="subtitle-type"/>
+        <xs:element name="insert" type="insert-type"/>
+      </xs:sequence>
+      <xs:attribute name="conditions" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="chapter">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="title" type="title-type"/>
+        <xs:element minOccurs="0" ref="annotations"/>
+        <xs:element minOccurs="0" name="index" type="index-type"/>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="blockquote" type="blockquote-type"/>
+          <xs:element name="codeblock" type="codeblock-type"/>
+          <xs:element name="figure" type="figure-type"/>
+          <xs:element name="footnote" type="footnote-type"/>
+          <xs:element name="formatted-code" type="formatted-code-type"/>
+          <xs:element name="insert" type="insert-type"/>
+          <xs:element name="ll" type="ll-type"/>
+          <xs:element name="ol" type="ol-type"/>
+          <xs:element name="p" type="p-type"/>
+          <xs:element name="ul" type="ul-type"/>
+          <xs:element name="grid" type="grid-type"/>
+          <xs:element name="pullquote" type="pullquote-type"/>
+          <xs:element name="sidebar" type="sidebar-type"/>
+        </xs:choice>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="section" type="section-type"/>
+          <xs:element name="bibliography" type="bibliography-type"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="name" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="preface">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="title" type="title-type"/>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="footnote" type="footnote-type"/>
+          <xs:element name="p" type="p-type"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="name" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="partintro">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+          <xs:element ref="annotations"/>
+          <xs:element name="title" type="title-type"/>
+        </xs:choice>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="p" type="p-type"/>
+          <xs:element name="ul" type="ul-type"/>
+        </xs:choice>
+        <xs:element minOccurs="0" name="blockquote" type="blockquote-type"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="annotations">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="p" type="p-type"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <!-- Complex types -->
+  
+
+    <xs:complexType mixed="true" name="string-type">
+      <xs:attribute name="name" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  
+  
+
+    <xs:complexType name="part-type">
+      <xs:sequence>
+        <xs:element name="title" type="title-type"/>
+        <xs:element maxOccurs="unbounded" name="insert" type="insert-type"/>
+      </xs:sequence>
+      <xs:attribute name="name" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  
+  
+
+    <xs:complexType name="grid-type">
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="row" type="row-type"/>
+      </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="row-type">
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="cell" type="cell-type"/>
+      </xs:sequence>
+    </xs:complexType>
+  
+    <xs:complexType mixed="true" name="cell-type">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="phrase" type="phrase-type"/>
+      </xs:sequence>
+    </xs:complexType>
+  
+    <xs:complexType name="pullquote-type">
+      <xs:sequence>
+        <xs:element name="p" type="p-type"/>
+      </xs:sequence>
+    </xs:complexType>
+  
+    <xs:complexType name="sidebar-type">
+      <xs:sequence>
+        <xs:element name="title" type="title-type"/>
+        <xs:element name="p" type="p-type"/>
+      </xs:sequence>
+    </xs:complexType>
+  
+
+    <xs:complexType name="bibliography-type">
+      <xs:sequence>
+        <xs:element name="entry">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="p" type="p-type"/>
+            </xs:sequence>
+            <xs:attribute name="name" use="required" type="xs:NCName"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  
+    <xs:complexType  name="title-type" mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="citation" type="citation-type"/>
+        <xs:element name="code" type="xs:string"/>
+        <xs:element name="inline-insert" type="inline-insert-type"/>
+        <xs:element name="phrase" type="phrase-type"/>
+      </xs:choice>
+    </xs:complexType>
+  
+    <xs:complexType name="index-type">
+      <xs:choice>
+        <xs:sequence>
+          <xs:element name="title" type="title-type"/>
+          <xs:element name="p" type="p-type"/>
+        </xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="record" type="record-type"/>
+      </xs:choice>
+    </xs:complexType>
+  
+    <xs:complexType name="record-type">
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="term" type="xs:string"/>
+        <xs:element name="type" type="xs:string"/>
+      </xs:choice>
+    </xs:complexType>
+  
+    <xs:complexType name="p-type" mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="citation" type="citation-type"/>
+        <xs:element name="code" type="xs:string"/>
+        <xs:element name="inline-insert" type="inline-insert-type"/>
+        <xs:element name="phrase" type="phrase-type"/>
+      </xs:choice>
+    </xs:complexType>
+  
+    <xs:complexType name="codeblock-type" mixed="true">
+      <xs:attribute name="language" type="xs:NCName"/>
+    </xs:complexType>
+  
+    <xs:complexType name="insert-type">
+      <xs:sequence>
+        <xs:element minOccurs="0" name="p" type="p-type"/>
+      </xs:sequence>
+      <xs:attribute name="item" use="required"/>
+      <xs:attribute name="type" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  
+    <xs:complexType name="figure-type">
+      <xs:sequence>
+        <xs:element name="title" type="title-type"/>
+        <xs:choice minOccurs="0">
+          <xs:element name="insert" type="insert-type"/>
+          <xs:element name="ol" type="ol-type"/>
+        </xs:choice>
+        <xs:element minOccurs="0" name="pagination-tweak" type="pagination-tweak-type"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="codeblock" type="codeblock-type"/>
+          <xs:element name="p" type="p-type"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:NCName"/>
+      <xs:attribute name="name" type="xs:NCName"/>
+    </xs:complexType>
+  
+    <xs:complexType name="ll-type">
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="li" type="li-type"/>
+      </xs:sequence>
+    </xs:complexType>
+  
+    <xs:complexType name="formatted-code-type">
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="line" type="line-type"/>
+      </xs:sequence>
+    </xs:complexType>
+  
+    <xs:complexType name="line-type" mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="phrase" type="phrase-type"/>
+      </xs:sequence>
+    </xs:complexType>
+  
+    <xs:complexType name="ul-type">
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="li" type="li-type"/>
+      </xs:sequence>
+    </xs:complexType>
+  
+    <xs:complexType name="footnote-type">
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="blockquote" type="blockquote-type"/>
+        <xs:element name="p" type="p-type"/>
+      </xs:choice>
+      <xs:attribute name="id" type="xs:NMTOKEN"/>
+      <xs:attribute name="name" type="xs:NCName"/>
+    </xs:complexType>
+  
+    <xs:complexType mixed="true" name="phrase-type">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="annotation" type="annotation-type"/>
+        <xs:element name="citation" type="citation-type"/>
+      </xs:choice>
+    </xs:complexType>
+  
+    <xs:complexType name="ol-type">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="li" type="li-type"/>
+      </xs:sequence>
+    </xs:complexType>
+  
+    <xs:complexType name="blockquote-type">
+      <xs:sequence>
+        <xs:element minOccurs="0" name="citation" type="citation-type"/>
+        <xs:choice>
+          <xs:element name="ll" type="ll-type"/>
+          <xs:element name="ul" type="ul-type"/>
+          <xs:element maxOccurs="unbounded" name="p" type="p-type"/>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="section-type">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="blockquote" type="blockquote-type"/>
+        <xs:element name="codeblock" type="codeblock-type"/>
+        <xs:element name="figure" type="figure-type"/>
+        <xs:element name="footnote" type="footnote-type"/>
+        <xs:element name="formatted-code" type="formatted-code-type"/>
+        <xs:element name="index" type="index-type"/>
+        <xs:element name="insert" type="insert-type"/>
+        <xs:element name="ll" type="ll-type"/>
+        <xs:element name="ol" type="ol-type"/>
+        <xs:element name="p" type="p-type"/>
+        <xs:element name="pagination-tweak" type="pagination-tweak-type"/>
+        <xs:element name="section" type="section-type"/>
+        <xs:element name="title" type="title-type"/>
+        <xs:element name="ul" type="ul-type"/>
+      </xs:choice>
+    </xs:complexType>
+  
+    <xs:complexType name="subtitle-type">
+      <xs:sequence>
+        <xs:element name="inline-insert" type="inline-insert-type"/>
+      </xs:sequence>
+    </xs:complexType>
+  
+    <xs:complexType name="inline-insert-type">
+      <xs:attribute name="item" use="required"/>
+      <xs:attribute name="type" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  
+    <xs:complexType mixed="true" name="citation-type">
+      <xs:attribute name="type" use="required" type="xs:NCName"/>
+      <xs:attribute name="value" use="required"/>
+    </xs:complexType>
+  
+    <xs:complexType name="pagination-tweak-type">
+      <xs:choice>
+        <xs:element name="keep-together" type="xs:NCName"/>
+        <xs:element name="min-space" type="xs:NMTOKEN"/>
+      </xs:choice>
+    </xs:complexType>
+ 
+    <xs:complexType name="li-type">
+      <xs:sequence>
+        <xs:element minOccurs="0" name="label" type="label-type"/>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="ol" type="ol-type"/>
+          <xs:element name="p" type="p-type"/>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  
+    <xs:complexType mixed="true" name="label-type">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="phrase" type="phrase-type"/>
+      </xs:sequence>
+    </xs:complexType>
+  
+    <xs:complexType mixed="true" name="annotation-type">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="annotation" type="annotation-type"/>
+      </xs:sequence>
+      <xs:attribute name="namespace" type="xs:NCName"/>
+      <xs:attribute name="specifically" type="xs:anyURI"/>
+      <xs:attribute name="type" use="required" type="xs:NCName"/>
+    </xs:complexType>
+ 
+</xs:schema>
