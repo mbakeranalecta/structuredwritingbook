@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter name ="chapter.extensible">
+<chapter name="chapter.extensible">
 <title>Extensible and Constrainable Languages</title>
 <annotations>
 <p>Concepts</p>
@@ -62,12 +62,13 @@
 <p>As with any other architecture, DITA’s usefulness depends on how well the predefined structures, semantics, and operations suit your needs; how easy the extension mechanism is to use; and how reliable the available implementations are.</p>
 <p>It is common in the software world for there to be many competing architectures with different sweet spots. Because an architecture is essentially a series of guesses about what a variety of systems may have in common, different architectures may be constructed differently to cover different sets of commonalities among diverse projects, and you may not see equivalent architectural features from one system to another.</p>
 <p>There are not a lot of information typing architectures. The only other one I am aware of is the one I am developing myself, which is called <phrase><annotation type="tool">SPFE</annotation></phrase>. <phrase><annotation type="tool">SPFE</annotation></phrase>, however, has a very different architecture from <phrase><annotation type="language"><annotation type="standard">DITA</annotation></annotation></phrase>. <phrase><annotation type="language"><annotation type="standard">DITA</annotation></annotation></phrase> has grown into a very large and complex architecture over the years, and it is out of scope for this book to describe its architecture in full.<citation type = "idref" value = "1"/> All I shall attempt to do here is to do a basic mapping of some key features of the DITA architecture to the structured writing concepts explored in this book.</p>
-<footnote id ="1">
+<footnote id="1">
 <p>Obviously I am not a fan of the DITA architecture or I would not be developing my own architecture in <phrase><annotation type="tool">SPFE</annotation></phrase>. For a much fuller and more sympathetic treatment of the DITA architecture, see <phrase><annotation type="citetitle">DITA for Practitioners Volume 1: Architecture and Technology</annotation></phrase> by Elliot Kimber, <phrase><annotation type="url">http://xmlpress.net/publications/dita/practitioners-1/</annotation></phrase></p>
 </footnote>
 <p>Inherent in the process of constructing an architecture is that you partition the field in certain ways. Architectures move functionality to a higher level by choosing some options and rejecting others. An XML schema is an information typing language that can define a markup language for any purpose at all. However, some applications of XML, such as recording transfers between banks or storing the configuration options of an editor, are not within the scope of the information typing that the DITA architecture was designed for. Therefore, DITA has a more restricted definition of information typing. The DITA specification defines information typing this way:</p>
 <blockquote>
-<citation type = "citation" value = "http://docs.oasis-open.org/dita/dita/v1.3/csd01/part3-all-inclusive/archSpec/base/information-typing.html"/><p>Information typing is the practice of identifying types of topics, such as concept, reference, and task, to clearly distinguish between different types of information.</p>
+<citation type = "citation" value = "http://docs.oasis-open.org/dita/dita/v1.3/csd01/part3-all-inclusive/archSpec/base/information-typing.html"/>
+<p>Information typing is the practice of identifying types of topics, such as concept, reference, and task, to clearly distinguish between different types of information.</p>
 </blockquote>
 <p>Unfortunately this definition is largely circular – information typing defines information types. But it does help establish a scale. Information typing is about defining topic types. The spec goes on to define the purpose of information typing:</p>
 <blockquote>
@@ -90,7 +91,8 @@
 <p>The third way in which information typing in DITA differs from creating a language from scratch is that DITA information types share a common approach to processing and to information architecture. In particular, they inherit a common set of <phrase><annotation type="concept">management-domain</annotation></phrase> structures and their associated management semantics.</p>
 <p>A DITA topic, then, comes with a lot of build in functionality and structure that you don’t have to invent for yourself when you create a specialized version of that topic type. But the corollary is that not all content types are specialized instances of a DITA generic topic, nor are all the structures they contain instances of generic document domain structures.</p>
 <p>When we factored the ingredients of a recipe out of a <phrase><annotation type="concept">document domain</annotation></phrase> list into a <phrase><annotation type="concept">subject domain</annotation></phrase> record structure it was, in part, to make them independent of the decision of to format them as a <phrase><annotation type="structure">table</annotation></phrase> as a <phrase><annotation type="structure">list</annotation></phrase>.</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 ingredients:: ingredient, quantity, unit
     eggs, 3, each
     salt, 1, tsp
@@ -98,7 +100,8 @@ ingredients:: ingredient, quantity, unit
 </codeblock>
 <p>The ingredient record set no longer has an is-a relationship to a <phrase><annotation type="structure">table</annotation></phrase> or a <phrase><annotation type="structure">list</annotation></phrase>. The whole point was to break that relationship so that we could present that content any way we wanted to.</p>
 <p>Labels are a big part of document domain content. When we created a subject domain structure for recording the nutritional information for a recipe, we factor out all of the labels by putting the content in named fields. In other words, the labels went from being data (in the content) to <phrase><annotation type="concept">metadata</annotation></phrase> (part of the structure):</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 nutrition:
     serving: 1 large (50 g)
     calories: 78
@@ -174,7 +177,8 @@ nutrition:
 <section>
 <title>RestructuredText</title>
 <p>RestructuredText has a number of blocks for things like paragraphs, titles, and lists that are defined with a concrete syntax. It defines other blocks using directives:</p>
-<codeblock language ="reStructuredText">
+<codeblock language="reStructuredText">
+
 .. image:: images/biohazard.png
    :height: 100
    :width: 200
@@ -202,7 +206,8 @@ nutrition:
 <p>I use SAM for the majority of the examples in this book because SAM is designed to make structure clear and that is all I have needed to do in most examples. All the examples could be expressed in XML as well. Using XML would just have made them harder to follow. Naturally, to write in SAM you would need to know more about the rules of the language, but you should be able to read a typical SAM document and understand its structure with little or no instruction.</p>
 <p>This is similar, but not identical, to the aim of mainstream concrete and hybrid languages such as <phrase><annotation type="language">Markdown</annotation></phrase> and <phrase><annotation type="language">Restructured Text</annotation></phrase>, which is to have the source file be readable as a document. In other words, they strive to make the document structure clear from the markup. They are document domain languages, and they strive to make sure that the markup expresses the document structure they create in a way that is readable. SAM has the same goal, except that SAM was designed primarily for creating subject domain languages. As such, it is designed to make the subject domain structure of the document clear to the reader.</p>
 <p>A SAM document may not look as much like a finished document as a <phrase><annotation type="language">Markdown</annotation></phrase> or <phrase><annotation type="language">reStructuredText</annotation></phrase> document. For example, it does not use underlines to visually denote different levels of header. Instead, it focuses on creating a hierarchy of named blocks and fields. In doing so, it uses the kind of markup people commonly use to create named blocks of text and to express a hierarchical relationship between them. Blocks are introduced with a name followed by a colon, and hierarchy is expressed through indentation.</p>
-<codeblock language ="SAM">
+<codeblock language="SAM">
+
 examples: Basic SAM structures
 
     example: Paragraphs

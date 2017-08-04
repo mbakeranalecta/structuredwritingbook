@@ -57,38 +57,45 @@
 <p>In the <phrase><citation type = "nameref" value = "chapter.structure-and-annotation">chapter on structure and annotation</citation></phrase> we looked at an example in which HTML microformats used attributes to create subject-domain annotations that overlayed a subject domain structure on an existing document domain structure. In many ways, DITA specialization does the same thing, but using the exact opposite approach to markup. Rather than document domain elements with subject domain structured captured in attributes, specialization creates subject domain structures, or more specialized document domain structures, as elements and overlays a basic document domain structured using attributes.</p>
 <p>Specialization aware processing algorithms then match structures based on the attributes that define it place in the specialization hierarchy.</p>
 <p>Specialization takes advantage of a feature of several of the XML schemas languages, the ability to declare default attributes for an element. A default attribute is one that is added to all instance of the element by the parser. In other words, if an element <code>foo</code> has a default attribute <code>bar</code> with a default value of “bat” then when the author types”</p>
-<codeblock language ="xml">
+<codeblock language="xml">
+
 &lt;foo&gt;
 </codeblock>
 <p>The parser reports this to the application as if they had typed:</p>
-<codeblock language ="xml">
+<codeblock language="xml">
+
 &lt;foo bar="bat"&gt;
 </codeblock>
 <p>Which in turn allows you to write an algorithm that matches the element when the attribute has a certain value:</p>
-<codeblock language ="pseudo">
+<codeblock language="pseudo">
+
 match foo when attribute bar = "bat"
 </codeblock>
 <p>The usual reason for this using this facility is to provide a default value for an attribute that the author may sometimes override. But DITA uses it for something different. DITA uses it to show that an element is a specialization of another element.</p>
 <p>For instance, the <code>step</code> attribute of the <code>task</code> topic type is a specialization of the <code>li</code> element in the <code>topic</code> topic type so it has a default <code>class</code> attribute with the value <code>- topic/li task/step</code>. So when an author writes:</p>
-<codeblock language ="DITA">
+<codeblock language="DITA">
+
 &lt;task&gt;
     ...
     &lt;step&gt;
 </codeblock>
 <p>The processing algorithm sees:</p>
-<codeblock language ="DITA">
+<codeblock language="DITA">
+
 &lt;task class="- topic task"&gt;
     ...
     &lt;step class="- topic/li task/step"&gt;
 </codeblock>
 <p>This means that if you have a publishing algorithm like this:</p>
-<codeblock language ="pseudo">
+<codeblock language="pseudo">
+
 match * when attribute class contains "topic/li"
 create li
 </codeblock>
 <p>This rule will match either the li element in a topic topic or the step element in a task topic. Thus the specialized topic type is matched by the algorithm for the base topic type. This means you don’t necessarily have to write a new algorithm to publish a specialized topic type. In an algorithm where this rule is present, steps and list items will be formatted the same way.</p>
 <p>You may want a new algorithm, of course, in which case you could write this rule:</p>
-<codeblock language ="pseudo">
+<codeblock language="pseudo">
+
 match * when attribute class contains "task/step"
     output "Step: " + position
 </codeblock>
@@ -111,6 +118,7 @@ match * when attribute class contains "task/step"
 <p>DITA takes it name from its information typing mechanism, called specialization (a reference to Darwin’s description of the evolution through the specialization of species to adapt to their environments). As we saw, a schema allows you to define a document type by specifying the structures that it contains. A schema starts from scratch and defines all the structures. Specialization, by contrast, starts with an existing schema and adds new structures as specialized version of existing ones.</p>
 <p>For example, if you have an existing structure that defines a list structure consisting of list items, you can specialize this to create a procedure structure consisting of steps.</p>
 <codeblock>
+
 ol --&gt; procedure
     li --&gt; step
 </codeblock>

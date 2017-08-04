@@ -7,6 +7,7 @@
 <db:para>Some of the most important decisions a writer makes are rhetorical ones: what to say and how to say it. In the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain, the writer makes all these decisions, but they don’t explicitly record them. They record only the text that results from making those decisions. In the subject domain, however, the writer record exactly what they are writing about.</db:para>
 <db:para>A recipe is a useful example for illustrating the subject domain. <db:xref linkend="ex.subj-restructured"/> is a recipe written in <db:indexterm><db:primary>reStructuredText</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>reStructuredText</db:secondary></db:indexterm>reStructuredText, a lightweight general purpose <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain markup language:</db:para>
 <db:figure xml:id="ex.subj-restructured"><db:title>Recipe for hard-boiled eggs marked up in reStructuredText</db:title><db:programlisting language="reStructuredText">
+
 Hard-Boiled Eggs
 ================
 A hard-boiled egg is simple and nutritious. 
@@ -31,6 +32,7 @@ Preparation
 </db:programlisting></db:figure>
 <db:para>In <db:indexterm><db:primary>reStructuredText</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>reStructuredText</db:secondary></db:indexterm>reStructuredText, text underlined with equals signs is a major heading and text underlined with dashes is a minor heading. You create a table by using equals signs to mark the beginning and end of the table and the boundary between the table head and the table body. You place each row on a new line and mark columns by putting spaces in the rows of equals signs. You create ordered lists by putting numbers in front of lines of text. The equivalent HTML document to <db:xref linkend="ex.subj-restructured"/> would look like <db:xref linkend="ex.subj-html"/>.</db:para>
 <db:figure xml:id="ex.subj-html"><db:title>Recipe for hard-boiled eggs marked up in HTML</db:title><db:programlisting language="HTML">
+
 &lt;html&gt;
     &lt;h1&gt;Hard-Boiled Eggs&lt;/h1&gt;
     
@@ -69,6 +71,7 @@ Preparation
 <db:para>The document shown in <db:xref linkend="ex.subj-html"/> follows the normal rhetorical pattern of a recipe. That is, it has all the pieces of information a recipe normally has, in the order they normally occur in a recipe: introduction, list of ingredients, preparation steps. However, it does not record the fact that it follows this rhetorical pattern. There is nothing in the markup to say that this is not a novel, a car manual, or a knitting pattern. Nor does the markup constrain a writer to follow the normal rhetorical pattern of a recipe while writing.</db:para>
 <db:para>Moving this document to the subject domain allows you to impose these rhetorical constraints and requires the writer to record that they have followed them. Neither <db:indexterm><db:primary>reStructuredText</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>reStructuredText</db:secondary></db:indexterm>reStructuredText nor <db:indexterm><db:primary>HTML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>HTML</db:secondary></db:indexterm><db:indexterm><db:primary>HTML</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>HTML</db:secondary></db:indexterm>HTML gives you a way to do that, so you need a different markup language. <db:xref linkend="ex.subj-sam"/> shows what that might look like:</db:para>
 <db:figure xml:id="ex.subj-sam"><db:title>Recipe for hard-boiled eggs marked up in a subject-domain language</db:title><db:programlisting language="sam">
+
 recipe: Hard-Boiled Egg
     introduction:
         A hard-boiled egg is simple and nutritious. 
@@ -92,6 +95,7 @@ recipe: Hard-Boiled Egg
 <db:para>By factoring out titles, you also factor out the constraint on what those titles must be. You don’t need to remember the title text, and a whimsical writer can no longer decide to re-title these sections “Stuff you need,” “Stuff you do,” or some other variant. And you can change these titles across all recipes, including those that are already written, by changing the algorithm.</db:para>
 <db:para>If you publish a lot of recipes, you probably have many more constraints to impose. For instance, you might have a constraint that every recipe must state its preparation time and the number of people it serves. In our subject-domain markup, we can enforce and record that constraint by moving that information from the introduction section to separate fields (see <db:xref linkend="ex.subj-add-constraint"/>).</db:para>
 <db:figure xml:id="ex.subj-add-constraint"><db:title>Recipe with preparation time and servings added</db:title><db:programlisting language="sam">
+
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious.
@@ -116,6 +120,7 @@ recipe: Hard Boiled Egg
 <db:para>There other elements of presentation that you can factor out of the recipe structure. For example, the reStructuredText version in <db:xref linkend="ex.subj-restructured"/> presents ingredients in a table, and the recipe structure in <db:xref linkend="ex.subj-sam"/> uses a simple list. The block that contains the list is labeled “ingredients,” but the list is just an ordinary unordered list. The ingredient list in a recipe has constraints, but the markup doesn’t impose or record those constraints.</db:para>
 <db:para>You generally define each ingredient in a recipe using three pieces of information: the name of the ingredient, the quantity, and the unit of measure used to express the quantity. These can be presented as a list or a table. To factor out the presentation choice, you can create an ingredient structure that calls out each piece of information separately (see <db:xref linkend="ex.subj-ingredient-1"/>).</db:para>
 <db:figure xml:id="ex.subj-ingredient-1"><db:title>Subject-domain markup for ingredients</db:title><db:programlisting language="sam">
+
 ingredients:
     ingredient: 
         name: eggs
@@ -128,6 +133,7 @@ ingredients:
 </db:programlisting></db:figure>
 <db:para><db:xref linkend="ex.subj-ingredient-2"/> shows a shortcut that makes this markup less verbose. (This is a markup syntax named <db:indexterm><db:primary>SAM</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>SAM</db:secondary></db:indexterm>SAM that I will talk about later).</db:para>
 <db:figure xml:id="ex.subj-ingredient-2"><db:title>Subject-domain shortcut for ingredient markup</db:title><db:programlisting language="sam">
+
 ingredients:: ingredient, quantity, unit
     eggs, 12, each
     water, 2, qt
@@ -139,6 +145,7 @@ ingredients:: ingredient, quantity, unit
 <db:para>In <db:xref linkend="chapter.document-domain"/>, I noted that you can use context to identify the role that structures play in a document, which allows you to get away with fewer structures. For instance, you can use a single <db:code>title</db:code> tag for all titles because you can differentiate different types of titles from the context in which they occur. The same is true with subject-domain structures. They can provide context that allows you to treat basic text structures differently.</db:para>
 <db:para>Consider our markup language for recipes (<db:xref linkend="ex.subj-recipe-sam"/>).</db:para>
 <db:figure xml:id="ex.subj-recipe-sam"><db:title>Subject-domain markup for recipes</db:title><db:programlisting language="sam">
+
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious.

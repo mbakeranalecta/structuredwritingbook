@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter name ="chapter.processing">
+<chapter name="chapter.processing">
 <title>Processing Structured Text</title>
 <annotations>
 <p>Concepts</p>
@@ -38,6 +38,7 @@
 <title>Adding back style information</title>
 <p>The first example of <phrase><annotation type="concept">separating content from formatting</annotation></phrase> that we looked at involved factoring out the style information from this structure:</p>
 <codeblock>
+
 {font: 10pt "Open Sans"}The box contains:
 {font: 10pt "Open Sans"}[bullet][tab]Sand
 {font: 10pt "Open Sans"}[bullet][tab]Eggs
@@ -45,6 +46,7 @@
 </codeblock>
 <p>We replaced the style information with style names:</p>
 <codeblock>
+
 {style: paragraph}The box contains:
 {style: bullet-paragraph}Sand
 {style: bullet-paragraph}Eggs
@@ -52,11 +54,13 @@
 </codeblock>
 <p>And then we defined the styles:</p>
 <codeblock>
+
 paragraph = {font: 10pt "Open Sans"}
 bullet-paragraph = {font: 10pt "Open Sans"}[bullet][tab]
 </codeblock>
 <p>To unite the styles with the appropriate paragraphs, we can write as set of  simple search and replace rules:</p>
 <codeblock>
+
 find {style: paragraph}
     replace {font: 10pt "Open Sans"}
 
@@ -66,6 +70,7 @@ find {style: bullet-paragraph}
 <p>I said at the beginning that the basic processing algorithm combines two sources of information to create a new one. Where are these two sources? The first source is the structured text. The second source is the style definitions, and they are embedded in the rules themselves. This is how it is usually done. In some cases, though, the rules may pull content from a separate file. We will see examples of this later.</p>
 <p>The result of applying these rules is that we get back the original content:</p>
 <codeblock>
+
 {font: 10pt "Open Sans"}The box contains:
 {font: 10pt "Open Sans"}[bullet][tab]Sand
 {font: 10pt "Open Sans"}[bullet][tab]Eggs
@@ -73,6 +78,7 @@ find {style: bullet-paragraph}
 </codeblock>
 <p>If we want to change the styles, we can apply a different set of rules (in other words, make a different set of decisions):</p>
 <codeblock>
+
 find {style: paragraph}
     replace {font: 12pt "Century Schoolbook"}
 
@@ -81,6 +87,7 @@ find {style: bullet-paragraph}
 </codeblock>
 <p>Applying these rules will result in the a change in the formatting of the original content:</p>
 <codeblock>
+
 {font: 12pt "Century Schoolbook"}The box contains:
 {font: 12pt "Century Schoolbook"}[em dash][tab]Sand
 {font: 12pt "Century Schoolbook"}[em dash][tab]Eggs
@@ -92,6 +99,7 @@ find {style: bullet-paragraph}
 <p>The tools that do this sort of processing do not literally use search and replace like this. Rather, they parse the source document to pull out the structures and allow you to specify your processing rules by referring to those structures.</p>
 <p>We are not concerned here with the actual mechanism by which a processing tool recognizes structures. We are concerned with what the processing tool does when it finds a structure. So let’s rewrite our rules to match structures rather than find literal strings in the text:</p>
 <codeblock>
+
 match paragraph
     apply style {font: 12pt "Century Schoolbook"}
 
@@ -101,6 +109,7 @@ match bullet-paragraph
 </codeblock>
 <p>The result of applying these rules is the same as before:</p>
 <codeblock>
+
 {font: 12pt "Century Schoolbook"}The box contains:
 {font: 12pt "Century Schoolbook"}[em dash][tab]Sand
 {font: 12pt "Century Schoolbook"}[em dash][tab]Eggs
@@ -119,18 +128,21 @@ match bullet-paragraph
 <section>
 <title>Applying rules in the document domain</title>
 <p>Suppose we have a piece of document domain structured text that contains this <code>title</code> structure:</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 title: Moby Dick
 </codeblock>
 <p>We want to transform this document into HTML. When our rule matches a structure in the source document, it outputs the equivalent HTML structure. Here is the pseudocode for this rule (it is in a slightly different format from the pseudocode above):</p>
-<codeblock language ="pseudo">
+<codeblock language="pseudo">
+
 match title
     create h1 
         continue
 </codeblock>
 <p>This says, when you see a <code>title</code> structure in the source, create an <code>h1</code> structure in the output and then continue applying rules to the content of the title structure.</p>
 <p>The <code>continue</code> instruction is indented under the <code>create h1</code> instruction to indicate that the results of continuing will appear inside the <code>h1</code> structure. Another way of expressing this would be:</p>
-<codeblock language ="pseudo">
+<codeblock language="pseudo">
+
 match title
     &lt;h1&gt;
         continue
@@ -138,22 +150,26 @@ match title
 </codeblock>
 <p>Again, it does not matter what form you use for your pseudocode as long as you clearly express the decision to make when the event in question occurs.</p>
 <p>In our pseudocode, we assume that the processor will output the text content of each structure automatically (as is the case in many tools), so the output of this rule (expressed in HTML) is:</p>
-<codeblock language ="html">
+<codeblock language="html">
+
 &lt;h1&gt;Moby Dick&lt;/h1&gt;
 </codeblock>
 <p>But suppose that there is another structure inside the title? In this case that structure is an <phrase><annotation type="concept">annotation</annotation></phrase> of part of the title text:</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 title: Review of {Rio Bravo}(movie)
 </codeblock>
 <p>Here the annotated text is set off with curly braces and the annotation itself is in parentheses immediately after it. (This is a feature of the <phrase><annotation type="language">SAM</annotation></phrase> markup syntax that I use for most of the examples in this book.) This annotation says that the words “Rio Bravo” refer to a movie. The annotation is a content structure, just like the title structure, and is nested inside the text of the title.</p>
 <p>So what do we do with our rule for processing titles to make it deal with <code>movie</code> annotations embedded in the title text? Absolutely nothing. Instead, we write a separate rule for handling <code>movie</code> annotations no matter where they occur:</p>
-<codeblock language ="pseudo">
+<codeblock language="pseudo">
+
 match movie
     create i
         continue
 </codeblock>
 <p>When the processor hits <code>continue</code> in the <code>title</code> rule, it processes the content of the title structure. In doing so, it encounters the <code>movie</code> structure and executes the <code>movie</code> rule. The result is output that looks like this:</p>
-<codeblock language ="html">
+<codeblock language="html">
+
 &lt;h1&gt;Review of &lt;i&gt;Rio Bravo&lt;/i&gt;&lt;/h1&gt;
 </codeblock>
 <p>The <code>continue</code> instruction is all we need to add to our rules to allow them to deal with nested structures. The rules remain an unordered collection, just like a stylesheet. (In fact, <phrase><annotation type="tool">XSLT</annotation></phrase>, a language that implements this model, calls a set of processing rules a “stylesheet”.)</p>
@@ -161,7 +177,8 @@ match movie
 <section>
 <title>Processing based on context</title>
 <p>When we move to the <phrase><annotation type="concept">document domain</annotation></phrase>, we use context to reduce the number of structures that we need. For example, where <phrase><annotation type="language">HTML</annotation></phrase> has six different heading structures, <code>H1</code> through <code>H6</code>), <phrase><annotation type="language">DocBook</annotation></phrase> has only one: <code>title</code>, which can occur in many different contexts. So how do we apply the right formatting to a title based on its context? We create different rules for the <code>title</code> structure in each of its contexts. We express the context by listing the parent structure names separated by slashes:</p>
-<codeblock language ="pseudo">
+<codeblock language="pseudo">
+
 match book/title
     create h1 
         continue
@@ -179,12 +196,14 @@ match figure/title
         continue
 </codeblock>
 <p>Now here is the clever bit. You don’t have to change the <code>movie</code> rule to work with any of these versions of the <code>title</code> rule. Suppose our title is the title of a section, like this:</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 section:
     title: Review of {Rio Bravo}(movie)
 </codeblock>
 <p>When we process this with our rules, the <code>section/title</code> rule will be executed to deal with the title structure, and the <code>movie</code> rule will be executed when the <code>movie</code> structure occurs in the course of processing the content of the <code>title</code> structure, with the following result:</p>
-<codeblock language ="html">
+<codeblock language="html">
+
 &lt;h3&gt;Review of &lt;i&gt;Rio Bravo&lt;/i&gt;&lt;/h3&gt;
 </codeblock>
 <p>This is the basic pattern for most structured writing algorithms. An algorithm consists of a set of rules.</p>
@@ -209,7 +228,8 @@ section:
 <title>Processing container structures</title>
 <p>When we move content to the <phrase><annotation type="concept">document domain</annotation></phrase> or the <phrase><annotation type="concept">subject domain</annotation></phrase>, we often create container structures to provide context. These container structures have no media-domain analog, so what do we do with them when we publish? The containers provide context for the rest of our processing rules, but what do we do with the containers themselves?</p>
 <p>In the previous example the content was contained in a <code>section</code> structure. So how does the <code>section</code> structure get processed?</p>
-<codeblock language ="pseudo">
+<codeblock language="pseudo">
+
 match section
     continue
 </codeblock>
@@ -221,6 +241,7 @@ match section
 <p>As we saw, a simple example of factoring out text is numbered and bulleted lists, where we factor out the text of the numbers and bullets. Let’s look at how we create rules to put them back.</p>
 <p>Suppose we have a document that contain these two different kinds of lists:</p>
 <codeblock>
+
 paragraph: To wash hair:
 ordered-list:
     list-item:Lather
@@ -235,18 +256,21 @@ unordered-list:
 </codeblock>
 <p>Let’s write a set of rules to deal with this document. Converting this to HTML lists won’t tell us much, since HTML handles list numbering and bullets itself, so we’ll create instructions for printing on paper. We won’t use real printing instructions (they get tediously detailed). Instead we will use the same style specification shorthand we used above. The <code>paragraph</code> rule is simple enough:</p>
 <codeblock>
+
 match paragraph
     apply style {font: 10pt "Century Schoolbook"}
     continue
 </codeblock>
 <p>Now let’s deal with the <code>ordered-list</code>. The ordered list structure is just a container, so we don’t need to create an output structure for it. But because this is an ordered list, we need to start a count to number the items in the list. That means we need a variable to store the current count. We will use a <code>$</code> prefix to indicate that we are creating a variable:</p>
 <codeblock>
+
 match ordered-list
     $count=1
     continue
 </codeblock>
 <p>Then the rule for each ordered list item will output the value of the variable and increment it by one:</p>
 <codeblock>
+
 match ordered-list/list-item
     apply style {font: 12pt "Century Schoolbook"}
     output $count
@@ -257,7 +281,8 @@ match ordered-list/list-item
 <p>Every time the <code>ordered-list/list-item</code> rule is fired, the count will increase by one, resulting in the list items being numbered sequentially.</p>
 <p>If a new numbered list in encountered, the <code>ordered-list</code> rule will be fired, resetting the count to 1.</p>
 <p>This rule will not match <code>list-item</code> elements that are children of an <code>unordered-list</code> element, so we need a separate set of rules for unordered lists:</p>
-<codeblock language ="pseudocode">
+<codeblock language="pseudocode">
+
 match unordered-list
     continue
     
@@ -268,6 +293,7 @@ match ordered-list/list-item
 </codeblock>
 <p>Applying the combined set of rules will produce output like this:</p>
 <codeblock>
+
 {font: 10pt "Century Schoolbook"}To wash hair:
 {font: 10pt "Century Schoolbook"}1.[tab]Lather
 {font: 10pt "Century Schoolbook"}2.[tab]Rinse
@@ -283,7 +309,8 @@ match ordered-list/list-item
 <title>Processing in multiple steps</title>
 <p>We do not always want to apply final formatting to our content in a single step. When we separated content from formatting, we did the separation in several stages. It is often desirable to put them back together in several stages. Not only are the algorithms involved easier to write and maintain if they only do one step of the process, we can often reuse some of the downstream steps (nearer the media domain) for many different types of document domain and subject domain content.</p>
 <p>So far we have looked at examples from the <phrase><annotation type="concept">media domain</annotation></phrase> and the <phrase><annotation type="concept">document domain</annotation></phrase>. Let’s look at one from the <phrase><annotation type="concept">subject domain</annotation></phrase>. We used an example of completing the separation of content from formatting by moving a labeled list from the document domain to the subject domain.</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 address:
     street: 123 Elm Street
     town: Smallville
@@ -291,7 +318,8 @@ address:
     code: 12345
 </codeblock>
 <p>Now let’s look at the algorithm (the set of rules) for getting it back to the document domain, where it should look like this:</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 labeled-list:
     list-item:
         label: Street
@@ -308,6 +336,7 @@ labeled-list:
 </codeblock>
 <p>Here is the set of rules to accomplish this transformation:</p>
 <codeblock>
+
 match address
     create labeled-list
         continue
@@ -347,7 +376,7 @@ match code
 <title>Query-based processing</title>
 <p>The rule-based approach shown here is not the only way to process structured writing. There is another approach which we could call the query-based approach.<citation type = "idref" value = "1"/> In this approach, you write a query expression that reaches into the structure of a document and pulls out a structure or a set of structures from the middle of the document.</p>
 <p>This is a useful technique if you want to radically rearrange the content of a document or if you want to pull content out of one document to use in another. Any reference in these pages to using an algorithm to go through a content set an pull out certain pieces of data is an example of the query based approach. We will see more examples of this in future chapters.</p>
-<footnote id ="1">
+<footnote id="1">
 <p>The rule-based and query-based approaches are often called “push” and “pull” methods respectively, but I sometimes find it hard to remember which is which. I find rule-based and query-based more descriptive.</p>
 </footnote>
 <p>This chapter does not by any means describe the full range of available content processing techniques or all the ways in which algorithms can recognize and manipulate structures in content. The point of introducing you to structured writing algorithms and the basics of how content processing works is to enable you to think about structures with an eye to how they can be processed. Often when you look at structures in this way you can see how a simpler structure could be used and how that simpler structure can be processed to achieve the same result as a more complex structure.</p>

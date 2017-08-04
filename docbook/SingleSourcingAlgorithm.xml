@@ -1,20 +1,20 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.single-sourcing"><db:title>Single Sourcing</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp1757424308"><db:primary>single sourcing</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp1757424308x"><db:primary>concept</db:primary><db:secondary>single sourcing</db:secondary></db:indexterm>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.single-sourcing"><db:title>Single Sourcing</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp1601492260"><db:primary>single sourcing</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp1601492260x"><db:primary>concept</db:primary><db:secondary>single sourcing</db:secondary></db:indexterm>
 
 
 
-<db:para>One of the sources of complexity in content creation and delivery is that you sometimes want to publish the same document in more than one media. These days that usually means on paper and on the Web. Publishing the same document to more than one media is generally called single sourcing.<db:footnote>
-<db:para>The term “single sourcing” gets used to mean different things, all of which involve a single source in one way or another, but which use different approaches and achieve different ends. I will look at a number of variation on this theme in subsequent chapters.</db:para>
-</db:footnote></db:para>
-
-<db:para>Single sourcing adds complexity to the notion of separating content from formatting because we are now separating the content from not one but two or more sets of formatting. In other words, we are not simply separating content from a particular set of formatting but from a set of decisions about formatting so that we can decide differently for two different media. If you do not get the partitioning of content and formatting correct, it will show up when your try to apply two different sets of formatting to the same content.</db:para>
-<db:para>This is an area in which many organizations have unhandled complexity which is falling through to their readers. Their authoring techniques do not allow them to sufficiently separate the content from all of the formatting that is appropriate in different media, resulting in their delivering one media’s formatting to a different media. This means the content does not work as well in the media it was not designed for. By improving how we separate content from formatting, though, we can significantly reduce the amount of complexity that goes unhandled, resulting in a better experience for our readers.</db:para>
+<db:para>The need to publish the same document in more than one medium – for example, print and Web – is a common source of complexity. We use the term <db:emphasis>single sourcing</db:emphasis> to describe a variety of different ways to address this need, all of which involve using a single body of content to create output in more than one medium. I look at variations on this theme in this and subsequent chapters.</db:para>
+<db:para>Single sourcing adds complexity to the job of separating content from formatting because we are now separating content from not one but two or more sets of formatting. In other words, we are not simply separating content from formatting, we are separating a set of decisions about formatting from our content so that we can make different decisions for each medium. If you don’t get the partitioning correct, problems will show up when you try to apply two different sets of formatting to the same content.</db:para>
+<db:para>Many organizations have unhandled complexity in this area – complexity that falls through to readers. Often, their authoring techniques do not allow writers to sufficiently separate media-specific formatting from content. As a result, formatting for one medium gets applied to another medium, which means the content in that medium does not work as well as it could. By improving how we separate content from formatting,  we can significantly reduce the amount of complexity that goes unhandled, resulting in a better experience for our readers.</db:para>
 <db:section>
 <db:title>Basic single sourcing</db:title>
-<db:para>The basic single sourcing algorithm is straightforward and we have covered most of it already in <db:xref linkend="chapter.processing"/>.</db:para>
-<db:para>Basic single sourcing involves taking a piece of content in the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain and processing its document domain structures into different <db:indexterm><db:primary>media domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media domain</db:secondary></db:indexterm>media domain structures for each of the target media.</db:para>
-<db:para>Suppose we have a recipe recorded in the document domain:</db:para>
-<db:programlisting language="sam">
+<db:para>The basic single-sourcing algorithm is straightforward; we covered most of it in <db:xref linkend="chapter.processing"/>. Basic single sourcing involves taking a piece of content in the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain and processing its document-domain structures into different <db:indexterm><db:primary>media-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media-domain</db:secondary></db:indexterm>media-domain structures for each target medium.</db:para>
+<db:para>Suppose we have recorded a recipe in the document domain (see <db:xref linkend="fig.ssa-eggs-1"/>).</db:para>
+
+<?dbfo-need height="3in"?>
+
+<db:figure xml:id="fig.ssa-eggs-1"><db:title>Document-domain recipe for hard-boiled eggs</db:title><db:programlisting language="sam">
+
 page: 
     title: Hard Boiled Eggs
     
@@ -33,9 +33,12 @@ page:
             li: Remove from heat and cover for 12 minutes.
             li: Place eggs in cold water to stop cooking.
             li: Peel and serve.
-</db:programlisting>
-<db:para>We can output this recipe to two different media by applying two different formatting algorithms. First we output to the Web by creating <db:indexterm><db:primary>HTML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>HTML</db:secondary></db:indexterm><db:indexterm><db:primary>HTML</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>HTML</db:secondary></db:indexterm>HTML:</db:para>
+</db:programlisting></db:figure>
+<db:para>We can output this recipe to two different media by applying two different formatting algorithms. First we output to the Web by creating <db:indexterm><db:primary>HTML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>HTML</db:secondary></db:indexterm><db:indexterm><db:primary>HTML</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>HTML</db:secondary></db:indexterm>HTML (see <db:xref linkend="fig.ssa-recipe2html"/>).</db:para>
+<db:figure xml:id="fig.ssa-recipe2html"><db:title>Pseudocode to convert document-domain recipe to HTML output</db:title>
+<?dbfo keep-together="auto"?>
 <db:programlisting language="pseudo">
+
 match page
     create html
         stylesheet www.example.com/style.css
@@ -67,10 +70,11 @@ match ol
 match li
     copy
         continue
-</db:programlisting>
-<db:para>In the code above, paragraph and list structures have the same names in the source format as they do in the output format (HTML) so we just copy the structures rather than recreating them. This is a common pattern in structured writing algorithms.</db:para>
-<db:para>The above algorithm transforms our source into HTML that looks like the following:</db:para>
-<db:programlisting language="html">
+</db:programlisting></db:figure>
+<db:para>In <db:xref linkend="fig.ssa-recipe2html"/>, paragraph and list structures have the same names in the source format as they do in the output format (HTML) so we just copy the structures rather than recreating them. This is a common pattern in structured writing algorithms.</db:para>
+<db:para>The algorithm in <db:xref linkend="fig.ssa-recipe2html"/> transforms our source into HTML that looks like <db:xref linkend="fig.ssa-html-recipe-output"/>.</db:para>
+<db:figure xml:id="fig.ssa-html-recipe-output"><db:title>Result of running the algorithm in <db:xref linkend="fig.ssa-recipe2html"/></db:title><db:programlisting language="html">
+
 &lt;html&gt;
     &lt;head&gt;
         &lt;link rel="stylesheet" type="text/css"
@@ -99,55 +103,59 @@ match li
         &lt;li&gt;Peel and serve.&lt;/li&gt;
     &lt;/ol&gt;
 &lt;/html&gt;
-</db:programlisting>
-<db:para>Outputting to paper (or to PDF, which is a kind of virtual paper) is more complex. On the Web, you output to a screen which is of flexible width and infinite length. The browser generally takes care of wrapping lines of text to the screen size (unless formatting commands tell it to do otherwise) and there is no issue with breaking text from one page to another. For paper, though, you have to format for a fixed size page. This means that formatting for paper involves fitting the content into a set of fixed size pages.</db:para>
-<db:para>This leads to a number of formatting problems, such as:</db:para>
+</db:programlisting></db:figure>
+<db:para>Outputting to paper (or to PDF, which is a kind of virtual paper) is more complex. On the Web, you output to a screen which is of flexible width and infinite length. The browser wraps lines of text to the screen width (unless formatting commands tell it to do otherwise), and there is no issue with breaking text from one page to another. For paper, however, you have to fit content into a set of fixed-size pages.</db:para>
+<db:para>This introduces a number of formatting issues, including the following:</db:para>
 <db:itemizedlist>
 <db:listitem>
 <db:para>Where to break each line of text so the margins look neat and the text is not cramped or spread out too much.</db:para>
 </db:listitem>
 <db:listitem>
-<db:para>How to avoid a heading appearing at the bottom of a page or the last line of a paragraph appearing as the first line of a page?</db:para>
+<db:para>How to avoid placing a heading at the bottom of a page or the last line of a paragraph as the first line of a page.</db:para>
 </db:listitem>
 <db:listitem>
-<db:para>How do you handle a list or a table when you run out of space on the page for it?</db:para>
+<db:para>How to handle a list or a table when you run out of space on the page.</db:para>
 </db:listitem>
 <db:listitem>
-<db:para>How do you create a cross reference to the page on which a chapter starts or a figure appears when you don’t know the page number yet?</db:para>
+<db:para>How to create a cross reference to another page when you don’t know the page number yet.</db:para>
 </db:listitem>
 </db:itemizedlist>
-<db:para>Because of issues like this, you don’t write a formatting algorithm for paper directly, the way you would write an algorithm to output HTML. Rather, you use an intermediate typesetting system which already knows how to handle things like inserting page number references and handling line and page breaks. Rather than handling these things yourself, you tell the typesetting system how you would like it to handle them and then let it do its job.</db:para>
-<db:para>One such typesetting system is <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO (Extensible Stylesheet Language - Formatting Objects). Other typesetting systems you can use for print output include <db:indexterm><db:primary>TeX</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>TeX</db:secondary></db:indexterm>TeX and later versions of <db:indexterm><db:primary>CSS</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>CSS</db:secondary></db:indexterm>CSS. XSL-FO is a typesetting language written in <db:indexterm><db:primary>XML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XML</db:secondary></db:indexterm>XML. To format your content using <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO, you transform your source content into <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO markup, just the way you transform it into <db:indexterm><db:primary>HTML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>HTML</db:secondary></db:indexterm>HTML for the Web. But then you run the <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO markup through an <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO processor to produce your final output, such as <db:indexterm><db:primary>PDF</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>PDF</db:secondary></db:indexterm>PDF.</db:para>
+<db:para>Because of issues like this, you don’t write a formatting algorithm for paper directly, the way you would write an algorithm to output HTML. Instead, you use an intermediate typesetting system that already knows how to handle tasks such as inserting page-number references and handling line and page breaks. Rather than handling these things yourself, you give the typesetting system general guidance and then let it do its job.</db:para>
+<db:para>One such typesetting system is <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO (Extensible Stylesheet Language - Formatting Objects). Other typesetting systems include <db:indexterm><db:primary>TeX</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>TeX</db:secondary></db:indexterm>TeX and newer versions of <db:indexterm><db:primary>CSS</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>CSS</db:secondary></db:indexterm>CSS. XSL-FO is a typesetting language written in <db:indexterm><db:primary>XML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XML</db:secondary></db:indexterm>XML. To format your content using <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO, you transform your source content into <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO markup, just the way you transform it into <db:indexterm><db:primary>HTML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>HTML</db:secondary></db:indexterm>HTML for the Web. But then you run the <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO markup through an <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO processor to produce your final output, typically <db:indexterm><db:primary>PDF</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>PDF</db:secondary></db:indexterm>PDF.</db:para>
 <db:para>Here is a small example of XSL-FO markup:</db:para>
 <db:programlisting language="XSL-FO">
+
 &lt;fo:block space-after="4pt"&gt;
    &lt;fo:wrapper font-size="14pt" font-weight="bold"&gt;
      Hard Boiled Eggs
    &lt;/fo:wrapper&gt;
 &lt;/fo:block&gt;
 </db:programlisting>
-<db:para>As you can see, the <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO code contains a lot of specific <db:indexterm><db:primary>media domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media domain</db:secondary></db:indexterm>media domain instructions for spacing and font choices. The division between <db:indexterm><db:primary>HTML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>HTML</db:secondary></db:indexterm>HTML for basic structures and <db:indexterm><db:primary>CSS</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>CSS</db:secondary></db:indexterm>CSS for specific formatting does not exist here. Also note that as a pure media-domain language, XSL-FO does not have document domain structures like paragraphs and titles. From its point of view, a document consists simply of a set of blocks with specific formatting properties attached to them.</db:para>
-<db:para>Because of all this detail, I am going to show the literal <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO markup in the pseudocode of the algorithm, and I am not going to show the algorithm for the entire recipe. (The point is not for you to learn <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO here, but to understand how the single-sourcing algorithm works.)</db:para>
-<db:programlisting language="pseudo">
+<db:para>The <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO code contains <db:indexterm><db:primary>media-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media-domain</db:secondary></db:indexterm>media-domain instructions for spacing and font choices. There is no division between content structures and formatting structures as there is with <db:indexterm><db:primary>HTML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>HTML</db:secondary></db:indexterm>HTML and <db:indexterm><db:primary>CSS</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>CSS</db:secondary></db:indexterm>CSS. Also, as a pure media-domain language, XSL-FO does not have document-domain structures such as paragraphs and titles. To XSL-FO, a document is simply a set of blocks with specific formatting properties attached to them.</db:para>
+<db:para>To limit the amount of detail, the algorithm in <db:xref linkend="fig.ssa-fo-algorithm"/> shows only a portion of the pseudocode for handling recipe markup (The point here is not to teach <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO, but to show how the algorithm works).</db:para>
+<db:figure xml:id="fig.ssa-fo-algorithm"><db:title>Portion of the algorithm to generate XSL-FO from a recipe</db:title><db:programlisting language="pseudo">
+
 match title
     output '&lt;fo:block space-after="4pt"&gt;'
         output '&lt;fo:wrapper font-size="14pt" font-weight="bold"&gt;'
             continue
         output '&lt;/fo:wrapper&gt;'
     output '&lt;/fo:block&gt;'
-</db:programlisting>
-<db:para>Here, as you can see, the rule simply wraps the XSL-FO formatting structures around the text of the title. It unpacks the text from a <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain structure and inserts it into a <db:indexterm><db:primary>media domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media domain</db:secondary></db:indexterm>media domain structure.</db:para>
+</db:programlisting></db:figure>
+<db:para>The rule shown in <db:xref linkend="fig.ssa-fo-algorithm"/> simply wraps the XSL-FO formatting structures around the text of the title. It unpacks the text from a <db:indexterm><db:primary>document-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document-domain</db:secondary></db:indexterm>document-domain structure and inserts it into a <db:indexterm><db:primary>media-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media-domain</db:secondary></db:indexterm>media-domain structure.</db:para>
 </db:section>
 <db:section>
 <db:title>Differential single sourcing</db:title>
-<db:para>Basic <db:indexterm><db:primary>single sourcing</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>single sourcing</db:secondary></db:indexterm>single sourcing outputs the same document presentation to different media. But each media is different, and what works well in one media does not always work as well in another. For example, online media generally support <db:indexterm><db:primary>hypertext</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>hypertext</db:secondary></db:indexterm>hypertext links, while paper does not. Let’s suppose that we have a piece of content that includes a link.</db:para>
+<db:para>Basic <db:emphasis>single sourcing</db:emphasis> outputs the same document presentation to different media. However, each medium is different, and what works well in one medium does not always work as well in another. For example, online media generally support <db:indexterm><db:primary>hypertext</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>hypertext</db:secondary></db:indexterm>hypertext links, while paper does not. Let’s suppose that we have a piece of content that includes a link:</db:para>
 <db:programlisting>
-In Rio Bravo, {the Duke}(link "http://JohnWayne.com") 
+
+In Rio Bravo, {the Duke}(link "http://JohnWayne.com")
 plays an ex-Union colonel out for revenge.
 </db:programlisting>
-<db:para>In SAM syntax, the piece of markup represented by <db:code>"http://JohnWayne.com"</db:code> specifies the address to link to. In the algorithm examples below, this markup is referred to as the “specifically” attribute using the notation <db:code>@specifically</db:code>.</db:para>
-<db:para>In HTML we want this output as a link using the HTML <db:code>a</db:code> element, so we write the algorithm like this:</db:para>
-<db:programlisting>
+<db:para>In SAM syntax, the link markup (<db:code>link "http://JohnWayne.com</db:code>) specifies the address to link to. In the algorithm examples below, I refer to this markup as the <db:emphasis>specifically</db:emphasis> attribute using the notation <db:code>@specifically</db:code>.</db:para>
+<db:para>In HTML, we output this as a link using the HTML <db:code>a</db:code> element, so the algorithm looks like <db:xref linkend="fig.ssa-specifically-1"/>.</db:para>
+<db:figure xml:id="fig.ssa-specifically-1"><db:title>Algorithm to generate HTML link from the <db:code>@specifically</db:code> attribute</db:title><db:programlisting>
+
 match p
     copy
         continue
@@ -156,16 +164,18 @@ match link
     create a
         attribute href = @specifically 
         continue
-</db:programlisting>
-<db:para>The result of this algorithm is:</db:para>
-<db:programlisting language="html">
+</db:programlisting></db:figure>
+<db:para>The result of this algorithm is shown in <db:xref linkend="fig.ssa-specifically-1-output"/>.</db:para>
+<db:figure xml:id="fig.ssa-specifically-1-output"><db:title>Output of the algorithm in <db:xref linkend="fig.ssa-specifically-1"/></db:title><db:programlisting language="html">
+
 &lt;p&gt;In Rio Bravo, &lt;a href="http://JohnWayne.com"&gt;The Duke&lt;/a&gt;
 plays and ex-Union colonel out for revenge.
 &lt;/p&gt;
-</db:programlisting>
-<db:para>But suppose we want to output this same content to paper. If we output it to PDF, we could still create a link just like we do in HTML, but if that PDF is printed, all that will be left of the link will be a slight color change in the text and maybe an underline. It will not be possible for the reader to follow the link or see where it leads.</db:para>
-<db:para>Paper can’t have active links but it can print the value of a URL so that reader can type it into a browser if they want to. An algorithm could do this by printing the link inline or as a footnote. Here is the algorithm for doing it inline. (We’ll dispense with the complexity of XSL-FO syntax this time.)</db:para>
-<db:programlisting language="pseudo">
+</db:programlisting></db:figure>
+<db:para>But suppose we want to output this same content to paper. If we output it to PDF, we can still create a link as with HTML, but when that PDF is printed, all that’s left is a slight color change in the text and maybe an underline. Readers cannot follow the link.</db:para>
+<db:para>You can’t print an active link on paper, but you can print the URL, so the reader can type it into a browser. Your algorithm can print the link inline or as a footnote. <db:xref linkend="fig.ssa-specifically-2"/> shows the algorithm for printing the URL inline. (I dispense with the detailed XSL-FO syntax this time.)</db:para>
+<db:figure xml:id="fig.ssa-specifically-2"><db:title>Algorithm to display the URL for a link in print</db:title><db:programlisting language="pseudo">
+
 match p
     create fo:block
         continue
@@ -175,62 +185,63 @@ match link
     output " (see: "
     output @specifically
     output ") "
-</db:programlisting>
-<db:para>This will produce:</db:para>
-<db:programlisting language="xml">
+</db:programlisting></db:figure>
+<db:para>This will produce the output in <db:xref linkend="fig.ssa-specifically-out"/>:</db:para>
+<db:figure xml:id="fig.ssa-specifically-out"><db:title>Output of <db:xref linkend="fig.ssa-specifically-out"/></db:title><db:programlisting language="xml">
+
 &lt;fo:block&gt;
 In Rio Bravo, the Duke (see: http://JohnWayne.com) 
 plays an ex-Union colonel out for revenge.
 &lt;/fo:block&gt;
-</db:programlisting>
-<db:para>This works, but we should note that the effect is not exactly the same in each media. Online, the link to JohnWayne.com serves to disambiguate the phrase “The Duke” for those readers who do not recognize it. A simple click on the link will explain who “the Duke” is. But in the paper example, such disambiguation exists only incidentally, because the words “JohnWayne” happen to appear in the URL. This is not how we would disambiguate “The Duke” if we were writing for paper. We would be more likely to do something like this:</db:para>
+</db:programlisting></db:figure>
+<db:para>This works, but note that the effect is not the same in each medium. Online, the link to JohnWayne.com disambiguates the phrase “The Duke” for those readers who do not recognize it. A simple click on the link will explain who “the Duke” is. But in the paper example, such disambiguation exists only incidentally, because the words “JohnWayne” happen to appear in the URL. This is not how we would disambiguate “The Duke” if we were writing for paper. We would be more likely to do something like this:</db:para>
 <db:blockquote>
 <db:para>The Duke (John Wayne) plays an ex-Union colonel.</db:para>
 </db:blockquote>
-<db:para>This provides the reader with less information, in the sense that it does not give them access to all the information on JohnWayne.com, but it does the disambiguation better and in a more paper-like way. The loss of the reference to JohnWayne.com is probably not an issue here. Following that link by typing it into a browser is a lot more work than simply clicking on it on a Web page. If someone reading on paper wants more information on John Wayne they are far more likely to type “John Wayne” into Google than type “JohnWayne.com” into the address bar of their browser.</db:para>
-<db:para>With the source content written as it is, though, there is no easy way to produce this preferred form for paper. The content is in the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain and the document domain specifies the presentation of the content. It is therefore not a neutral format between different media that require different forms of presentation. The choice to specify a link gives it a strong bias towards the Web and online media rather than paper. A <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain approach that favored paper would similarly lead to a poorer online presentation that omitted the link.</db:para>
-<db:para>What we need to address the problem is a differential approach to single sourcing, one that allows us to differ not only the formatting but the presentation of the content for different media.</db:para>
-<db:para>One way to accomplish this differential single sourcing is to record the content in the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, thus removing the prejudice of the document domain presentation for one class of media or another. Here is how this might look:</db:para>
+<db:para>This provides readers with less information, in the sense that it does not give them access to all the information on JohnWayne.com, but it does a better job of disambiguation and in a more paper-like way. The loss of the reference to JohnWayne.com is probably not an issue here. Following that link by typing it into a browser is a lot more work than simply clicking on a Web link. Someone who wants more information on John Wayne is far more likely to type “John Wayne” into Google than type “JohnWayne.com” into the browser address bar.</db:para>
+<db:para>As written, the source content provides no easy way to produce this preferred form for paper. The content is in the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain, which specifies the presentation of the content. Therefore, it is not a neutral format between media that require different forms of presentation. The choice to specify a link directly in the markup gives it a strong bias towards the Web and online media rather than paper. A <db:indexterm><db:primary>document-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document-domain</db:secondary></db:indexterm>document-domain approach that favored paper would similarly lead to a poorer online presentation by omitting the link.</db:para>
+<db:para>We need a <db:emphasis>differential</db:emphasis> approach to single sourcing, one that allows us to differ not only the formatting but the presentation of the content for different media.</db:para>
+<db:para>One way to accomplish differential single sourcing is to record the content in the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, thus removing the prejudice of the document-domain presentation for one class of media or another. Here is how this markup might look:</db:para>
 <db:programlisting language="sam">
+
 {The Duke}(actor "John Wayne") plays an ex-Union colonel.
 </db:programlisting>
-<db:para>In this example, the phrase “The Duke” is annotated with a subject domain annotation that clarifies exactly what the text refers to. That annotation says that “the Duke” is the name of an actor, specifically “John Wayne”.</db:para>
-<db:para>Our document domain examples attempted to clarify “the Duke” for readers, but did so in media-dependent ways. This subject domain example clarifies the meaning of “The Duke” in a presentation-neutral way by explicitly marking up what the phrase refers to in a formal and unambiguous way. This disambiguation is not written for readers, however. It is written for algorithms.  This allows an algorithm to generate a media-appropriate clarification for the reader in the target media.</db:para>
-<db:para>For paper:</db:para>
-<db:programlisting>
+<db:para>In this example, the phrase “The Duke” is annotated with subject-domain markup that clarifies exactly what the text refers to. That annotation says that “the Duke” is the name of an actor, specifically John Wayne.</db:para>
+<db:para>Our document-domain examples attempted to clarify “the Duke” for readers, but they did so in media-dependent ways. This subject-domain example clarifies the meaning of “The Duke” in a presentation-neutral way; it explicitly, formally, and unambigously marks up what the phrase refers to. This markup is written for algorithms, not readers. It allows an algorithm to generate an appropriate clarification for the reader in any target medium (see <db:xref linkend="fig.ssa-specifically-3-paper"/> and <db:xref linkend="fig.ssa-specifically-3-web"/>).</db:para>
+<db:figure xml:id="fig.ssa-specifically-3-paper"><db:title>Algorithm to render paper from subject-domain markup</db:title><db:programlisting>
+
 match actor
     continue
     output " ("
     output @specifically
     output ") "
-</db:programlisting>
-<db:para>For the Web:</db:para>
-<db:programlisting>
+</db:programlisting></db:figure>
+<db:figure xml:id="fig.ssa-specifically-3-web"><db:title>Algorithm to Web links from subject-domain markup</db:title><db:programlisting>
+
 match actor
     create link
         $href = get link for actor named @specifically
         attribute href = $href
         continue
-</db:programlisting>
-<db:para>This supposes the existence of a system that can respond to the <db:code>get link</db:code> instruction and look up pages to link to based on the type and a name of a subject. We will look at how a system like that works in <db:xref linkend="chapter.linking"/>, which will revisit this example in more detail.</db:para>
+</db:programlisting></db:figure>
+<db:para>This assumes the existence of a system that can respond to the <db:code>get link</db:code> instruction and look up pages to link to based on the type and a name of a subject. I look at such a system in <db:xref linkend="chapter.linking"/>, which revisits this example in more detail.</db:para>
 </db:section>
 <db:section>
 <db:title>Differential organization and presentation</db:title>
-<db:para>Differences in presentation between media can be broader than this. Paper documents sometimes use complex tables and elaborate page layouts that often don’t translate well to online media. Effective table layout depends on knowing the width of the page you have available, and online you don’t now that. A table that looks great on paper may be unreadable on a mobile device, for instance.</db:para>
-<db:para>And this is more than a layout issue. Sometimes the things that paper does in a static way should be done in a dynamic way in online media. For example, airline or train schedules have traditionally been printed as timetables on paper, but you will virtually never see them presented that way online. Rather, there will be an interactive travel planner that lets you choose your starting point, destination, and desired travel times and then presents you with the best schedule, including when and where to make connections.</db:para>
-<db:para>Single sourcing your timetable to print and PDF will not produce the kind of online presentation of your schedule that people expect, and that can have a direct impact on your business.</db:para>
-<db:para>To single source schedule information to paper and online, you can’t maintain that content in a document domain table structure. You need to maintain it in a timetable database structure (which is <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, but really looks like a database, not a document at all).</db:para>
-<db:para>An algorithm can then read the database to generate a document domain table for print publication. For the Web, however, you will create a web application that queries the database dynamically to calculate routes and schedules for individual travelers.</db:para>
+<db:para>Differences in presentation between media can be broader than this. Paper documents sometimes use complex tables and elaborate layouts that don’t translate well to online media. Effective table layout depends on knowing the width of the page you have available, and online you don’t know that. A table that looks great on paper may be unreadable on a mobile device, for instance.</db:para>
+<db:para>And this is more than a layout issue. Sometimes the things that paper does in a static way should be done dynamically in online media. For example, airline and train schedules have traditionally been printed as timetables on paper, but you rarely see them presented that way online. Rather, you see an interactive travel planner that lets you choose your starting point, destination, and desired travel times and then presents you with the best schedule, including when and where to make connections. If your single source is a timetable designed for print and PDF, you can’t produce the kind of online presentation of your schedule that people expect, and that can have a direct impact on your business.</db:para>
+<db:para>To single source schedule information for both paper and online media, you can’t maintain that content in a document-domain table structure. You need to maintain it in a timetable database structure (which is in the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, even though it looks like a database, not a document).</db:para>
+<db:para>An algorithm can read such a database to generate a document-domain table for print publication. For the Web, however, you can create a web application that queries the same database dynamically to calculate routes and schedules for individual travelers.</db:para>
 <!--  pix of timetable and routing widget ??? -->
-<db:para>In this scenario, you are moving content to the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain to partition the presentation from the information so that you can produce a different information design in different media.</db:para>
-<db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/Differential.svg" contentwidth="5.25in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/Differential.png"/></db:imageobject><db:textobject><db:para>A diagram showing differential single sourcing.</db:para></db:textobject></db:mediaobject>
-<db:para>We will examine these scenarios in more depth in <db:xref linkend="chapter.wide"/>.</db:para>
+<db:para>In this scenario, you move content to the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain to partition the presentation from the information, which allows you to produce a different information design for different media (see <db:xref linkend="ex.ssa-differential"/>). I examine these scenarios in more depth in <db:xref linkend="chapter.wide"/>.</db:para>
+<db:figure xml:id="ex.ssa-differential"><db:title>Information design for single sourcing</db:title><db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/Differential.svg" contentwidth="3.5in" align="center"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/Differential.png"/></db:imageobject><db:textobject><db:para>A diagram showing differential single sourcing.</db:para></db:textobject></db:mediaobject></db:figure>
 </db:section>
 <db:section>
 <db:title>Conditional differential design</db:title>
-<db:para>You can also do differential single sourcing by using conditional (<db:indexterm><db:primary>management domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>management domain</db:secondary></db:indexterm>management domain) structures in the document domain.</db:para>
-<db:para>For instance, if you are writing a manual that you intend to single source to a help system, you might want to add context setting information to the start of a section when it appears in the help system. The manual may be designed to be read sequentially, meaning that the context of individual sections is established by what came before. But help systems are always accessed randomly, meaning that the context of a particular help topic may not be clear if it was single sourced from a manual. To accommodate this, you could include a context setting paragraph that is conditionalized to appear only in help output:</db:para>
-<db:programlisting language="sam">
+<db:para>You can also do differential single sourcing by using conditional <db:indexterm><db:primary>management-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>management-domain</db:secondary></db:indexterm>management-domain structures in the document domain.</db:para>
+<db:para>For instance, if you are writing a manual that you intend to single source to a help system, you might want to add context setting information to the start of a section when it appears in the help system. The manual may be designed to be read sequentially, meaning that the context of individual sections is established by what came before. But help systems are always accessed randomly, meaning that the context of a particular help topic may not be clear if it was single sourced from a manual. To accommodate this, you could include a context-setting paragraph that is conditionalized to appear only in help output (see <db:xref linkend="ex.ssa-conditional-1"/>):</db:para>
+<db:figure xml:id="ex.ssa-conditional-1"><db:title>Differential single source example using management-domain structures</db:title><db:programlisting language="sam">
+
 section: Wrangling left-handed widgets
 
     ~~~(?help-only)
@@ -243,35 +254,34 @@ section: Wrangling left-handed widgets
     1. Loosen the doohickey using a medium thingamabob.
     2. Spin three times around under a full moon.
     3. Touch the sky.            
-</db:programlisting>
-<db:para>In the SAM markup above, the <db:code>~~~</db:code> creates a “fragment” structure to which conditional tokens can be applied. Content indented under the fragment marker is part of the fragment.</db:para>
+</db:programlisting></db:figure>
+<db:para>In <db:xref linkend="ex.ssa-conditional-1"/>, the SAM markup <db:code>~~~</db:code> creates a fragment structure to which conditional tokens can be applied. Content indented under the fragment marker is part of the fragment.</db:para>
 <db:para>To output a manual, we suppress the help-only content:</db:para>
 <db:programlisting language="pseudo">
+
 match fragment where conditions = help-only
     ignore
 </db:programlisting>
 <db:para>To output help, we include it:</db:para>
 <db:programlisting language="pseudo">
+
 match fragment where conditions = help-only
     continue
 </db:programlisting>
 </db:section>
 <db:section>
 <db:title>Primary and secondary media</db:title>
-<db:para>While there is a lot you can do in the way of differential single sourcing to successfully output documents that work well in multiple media, there are limits to how far this approach can take you.</db:para>
-<db:para>Books are a linear media in which one chapter follows another in order. The Web is a <db:indexterm><db:primary>hypertext</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>hypertext</db:secondary></db:indexterm>hypertext media in which Every Page is Page One. Readers arrive by search and navigate by following hypertext links. The linear and hypertext approaches are fundamentally different ways of writing which invite fundamentally different ways of navigating and using information.<db:footnote>
-<db:para>For a full examination of the differences, see my book <db:citetitle>Every Page is Page One: Topic-based Writing for Technical Communication and the Web</db:citetitle>.</db:para>
-</db:footnote> Even moving content to the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain as much as possible will not entirely factor out these fundamental differences of approach.</db:para>
+<db:para>While differential single sourcing can help you output documents that work well in multiple media, there are limits to how far this approach can take you.</db:para>
+<db:para>Books are a linear medium in which one chapter follows another in order. The Web is a <db:indexterm><db:primary>hypertext</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>hypertext</db:secondary></db:indexterm>hypertext medium in which every page is page one. Readers arrive at a page via search, and they navigate by following hypertext links. The linear and hypertext approaches are fundamentally different ways of writing that invite fundamentally different ways of navigating and using information.<db:footnote>
+<db:para>For a full examination of the differences, see my book <db:citetitle>Every Page is Page One: Topic-based Writing for Technical Communication and the Web</db:citetitle>
+          [<db:biblioref linkend="Baker2013"/>]
+        .</db:para>
+</db:footnote> Even moving content to the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain as much as possible will not entirely factor out these fundamental differences in approach.</db:para>
 
-<db:para>When single sourcing content to both linear paper-like media and <db:indexterm><db:primary>hypertext</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>hypertext</db:secondary></db:indexterm>hypertext web-like media, you will generally have to choose a primary media to write for. Single sourcing that content to the other media will be on a best-effort basis. It may be good enough for a particular purpose, but it will never be quite as good as it could have been had you designed for that media.</db:para>
-<db:para>Many of the tools used for single sourcing have a built in bias towards one media or another. Desktop-publishing tools like <db:indexterm><db:primary>FrameMaker</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>FrameMaker</db:secondary></db:indexterm>FrameMaker, for instance, were designed for linear media. Online collaborative tools like <db:indexterm><db:primary>wikis</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>wikis</db:secondary></db:indexterm>wikis were designed for <db:indexterm><db:primary>hypertext</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>hypertext</db:secondary></db:indexterm>hypertext media. It is usually a good idea to pick a tool that was designed for the media you choose as your primary. Tools partition the complexity of content creation in a way that suits the primary media they are designed for.</db:para>
-<db:para>In many cases, the choice of primary media is made implicitly based on the tools a group has traditionally been using. This usually means that the primary media is paper, and it often continues to be so even after the organization had stopped producing paper and their readers are primarily using online formats.</db:para>
-<db:para>Some organizations seem to feel that they should only switch to tools that are designed primarily for online content when they have entirely abandoned the production of paper and paper-like formats such as PDF. This certainly does not need to be the case. It is perfectly possible to switch to an online-primary tools and still produce linear media as a secondary output format.</db:para>
-<db:para>Changing your information design practices from linear paper based designs to <db:indexterm><db:primary>hypertext</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>hypertext</db:secondary></db:indexterm>hypertext designs is non-trivial, but such designs better suit the way many people use and access content today. I discuss these design differences in depth in my book, <db:indexterm><db:primary>Every Page is Page One: Topic-based Writing for Technical Communication and the Web</db:primary></db:indexterm><db:indexterm><db:primary>citetitle</db:primary><db:secondary>Every Page is Page One: Topic-based Writing for Technical Communication and the Web</db:secondary></db:indexterm><db:citetitle>Every Page is Page One: Topic-based Writing for Technical Communication and the Web</db:citetitle> Don’t expect single sourcing to successfully turn document-oriented design into effective hypertext by themselves. To best serve modern readers it will usually be much more effective to adopt an <db:indexterm><db:primary>Every Page is Page One</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>Every Page is Page One</db:secondary></db:indexterm>Every Page is Page One approach to information design and use structured writing techniques to do a best-effort single sourcing to linear media for those of your readers who still need paper or paper-like formats – or for those documents where linear organization still makes sense.</db:para>
-</db:section>
-<db:section>
-<db:title>Responsive Design</db:title>
-<db:para>Responsive design, an approach to web design in which a page automatically adjusts to the viewport it is displayed on, is a form of differential single sourcing. Many attempts at responsive design are not as responsive as we would like them to be because the content is not stored in a source format that allows a sufficient degree of differential presentation. Effectively, responsive design allows an algorithm to decide on the fly how to organize and present content as the viewport changes, and like all deferred decisions, it is only as good as the information communicated to it. If you want to achieve effective and consistent responsive design in your output, you will find that the use of <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain structures in your content will be enormously helpful in capturing and transferring the information required to make these decision on the fly.</db:para>
-<db:para>It is very difficult to expect writers to encode the presentation structures of a responsive design into their files as they write. Not only that, the very idea of responsive design should take into account the possibility of having to respond to new media in the future. Every sound responsive design decision is based on the appropriate organization of subject matter in a particular view port. Therefore, the rules of effective responsive design are going to be expressed in subject matter terms. The best way to create content that will presented using responsive design, therefore, is in the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain where the subject matter divisions on which responsive design rules are expressed are made fully explicit in the content. We will look at this in more depth in <db:xref linkend="chapter.active"/>.</db:para>
-<db:indexterm class="endofrange" startref="idp1757424308"/><db:indexterm class="endofrange" startref="idp1757424308x"/></db:section>
+<db:para>When single sourcing content to both linear paper-like media and <db:indexterm><db:primary>hypertext</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>hypertext</db:secondary></db:indexterm>hypertext web-like media, you generally have to choose a primary medium. Single sourcing that content to other media will be on a best-effort basis. It may be good enough for a particular purpose, but it will never be as good as it could have been had you designed exclusively for that medium.</db:para>
+<db:para>Many of the tools used for single sourcing have a built-in bias towards one medium or another. Desktop-publishing tools such as <db:indexterm><db:primary>FrameMaker</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>FrameMaker</db:secondary></db:indexterm>FrameMaker, for instance, were designed for linear media. Online collaborative tools such as <db:indexterm><db:primary>wikis</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>wikis</db:secondary></db:indexterm>wikis were designed for <db:indexterm><db:primary>hypertext</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>hypertext</db:secondary></db:indexterm>hypertext media. It is usually a good idea to pick a tool that was designed for the medium you choose as primary. Tools partition the complexity of content creation to best suit the primary medium they were designed for.</db:para>
+<db:para>Often, the tools a group uses implicitly determine the primary medium. This usually means that the primary medium is paper, and paper often continues to be primary even after the organization stops producing paper, and their readers have moved to online formats.</db:para>
+<db:para>Some organizations think they should not switch to tools that are designed primarily for online content until they have entirely abandoned paper and paper-like formats such as PDF. This certainly does not need to be the case. It is perfectly possible to switch to online-primary tools and still produce linear media as a secondary output format.</db:para>
+<db:para>Changing your information design practices from linear, paper-based designs to <db:indexterm><db:primary>hypertext</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>hypertext</db:secondary></db:indexterm>hypertext designs is not trivial, but such designs better suit the way many people use and access content today. I discuss these design differences in depth in my book, <db:indexterm><db:primary>Every Page is Page One: Topic-based Writing for Technical Communication and the Web</db:primary></db:indexterm><db:indexterm><db:primary>citetitle</db:primary><db:secondary>Every Page is Page One: Topic-based Writing for Technical Communication and the Web</db:secondary></db:indexterm><db:citetitle>Every Page is Page One: Topic-based Writing for Technical Communication and the Web</db:citetitle> Don’t expect single sourcing, by itself, to successfully turn document-oriented design into effective hypertext. It is usually more effective to adopt an <db:indexterm><db:primary>Every Page is Page One</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>Every Page is Page One</db:secondary></db:indexterm>Every Page is Page One approach to information design and use structured writing and single-sourcing techniques as a best-effort method to create linear media for those of your readers who still need paper or paper-like formats – or for those documents where linear organization still makes sense.</db:para>
+<db:indexterm class="endofrange" startref="idp1601492260"/><db:indexterm class="endofrange" startref="idp1601492260x"/></db:section>
 </db:chapter>

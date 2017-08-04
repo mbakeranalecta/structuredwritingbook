@@ -7,6 +7,7 @@
 <db:para>But as we noted in <db:xref linkend="chapter.blocks"/>, you can move a lot of your content into the subject domain, even if it does not currently obey a closely defined rhetorical type, and you can move your content into smaller <db:indexterm><db:primary>rhetorical blocks</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>rhetorical blocks</db:secondary></db:indexterm>rhetorical blocks that are easier to apply a repeatable rhetorical structure to. In this chapter we will walk through the steps of defining a repeatable rhetorical type using the recipe example we have been looking at throughout the book.</db:para>
 <db:para>To begin with, lets take a step back and look at what a recipe might look like if it were not presented in its familiar rhetorical pattern:</db:para>
 <db:programlisting language="reStructuredText">
+
 Hard Boiled Eggs
 ================
 A hard boiled egg is simple and nutritious. 
@@ -18,6 +19,7 @@ serve. Prep time, 15 minutes. Serves 6.
 </db:programlisting>
 <db:para>If were were discerning the rhetorical structure of a recipe for the first time we might then look at several examples and try making dishes ourselves, or observe others doing so, and conclude that it was easier to find and follow a recipe if the ingredients were listed separately and the preparation steps were presented one at a time, and we would come up with a structure that looked something like this:</db:para>
 <db:programlisting language="reStructuredText">
+
 Hard Boiled Eggs
 ================
 A hard boiled egg is simple and nutritious. 
@@ -42,6 +44,7 @@ Preparation
 </db:programlisting>
 <db:para>At this point we have discovered the basic rhetorical pattern of a recipe, but we have not done anything to provide formal constraints for authors to make the format repeatable, so we create a rhetorical block that we name <db:code>recipe</db:code> and require that it consist of three semantic blocks called <db:code>introduction</db:code>, <db:code>ingredients</db:code>, and <db:code>preparation</db:code>, factoring out the titles of those sections in the process. We also define that the ingredients will be presented as a bulleted list and the preparation as a numbered lists (both document domain semantic blocks, composed of structural blocks that we need not delve into here).</db:para>
 <db:programlisting language="sam">
+
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious. 
@@ -59,6 +62,7 @@ recipe: Hard Boiled Egg
 <db:para>So far what we have is a basic presentation-oriented subject domain content type. It specifies how to present a recipe.  This structure provide guidance for authors, which helps with repeatability, at the top level, but when we look closer we realize that there are some other things we would like to make repeatable in the rhetorical model, so that we make sure they are included every time.</db:para>
 <db:para>Two obvious items are prep time and the number of servings. They are important information that we think should be in every recipe, but currently they are only in the introduction, where writers could forget them. Also, algorithms can’t access them, so if we wanted to make a collection of recipes that took less than 30 minutes to make, we would not be able to find them algorithmically. So we pull those items out into separate fields. Now we can verify that they are included and algorithms can find the information (in other words, we have constrained the interpretation of this information).</db:para>
 <db:programlisting language="sam">
+
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious. 
@@ -76,6 +80,7 @@ recipe: Hard Boiled Egg
 </db:programlisting>
 <db:para>But if we look a little closer we can find other information that we might want to make sure is provided consistently and repeatable, and made accessible to algorithms, and that we might need to differentially single source in different media: the list of ingredients. There are actually three elements to a ingredient listing, the name and quantity of the ingredient, and the unit of measurement for that quantity. Different units of measure are used for different types of ingredients and for large and small quantities in cooking, so we have to specify the unit of measure each time. So we use metadata to turn the list of ingredients into a piece of data:</db:para>
 <db:programlisting language="sam">
+
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious.
@@ -96,6 +101,7 @@ recipe: Hard Boiled Egg
 <db:para>Also, it is at this stage that you think about differential single sourcing, where you might want to capture content that might be presented differently in different domains, and about reuse scenarios in which you night want to capture information that might presented in one publication but not another.</db:para>
 <db:para>So at this point we add in wine and beverage matches and nutritional information to the model:</db:para>
 <db:programlisting language="sam">
+
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious.
@@ -129,6 +135,7 @@ recipe: Hard Boiled Egg
 </db:programlisting>
 <db:para>Once we are satisfied that we have got the overall structure of the <db:indexterm><db:primary>rhetorical block</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>rhetorical block</db:secondary></db:indexterm>rhetorical block correct, it is time to think about subject annotation. We know that there are a number of algorithms, from linking and information architecture to validation and terminology control that depend on the clear annotation of significant subjects mentioned in the text. So we go through the text looking for mentions of subjects related to cooking. We find that there are mentions of food, utensils, and common cooking tasks, so we add annotation markup for them to our model:</db:para>
 <db:programlisting language="sam">
+
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled {egg}(food) is simple and nutritious.
@@ -166,6 +173,7 @@ recipe: Hard Boiled Egg
 <db:para>This metadata may not be part of any current content examples you are looking at. This should be the last step because once you have formalized the rest of the model as you may find that the subject domain data you have delineated is usable for management and tracking purposes as well, so you won’t need to add additional fields just for management purposes. For instance, lots of the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain information that is already formalized in the model can be used for managing which recipes you include in particular publications, such as quick and easy meals (less than 20 minutes prep time, fewer than 6 ingredients, fewer than 5 steps) or a low-cal vegetarian cookbook (fewer than 160 calories, no meat ingredients).</db:para>
 <db:para>This example adds some basic tracking metadata:</db:para>
 <db:programlisting language="sam">
+
 recipe: Hard Boiled Egg
     author: bcrocker
     rights: full

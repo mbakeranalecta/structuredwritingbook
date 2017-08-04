@@ -10,6 +10,7 @@
 <db:para>This is pretty much exactly what we do today when we create an HTML page and specify a CSS stylesheet to supply the formatting instructions. Those instructions are then executed by the browser to render the content on screen or paper.</db:para>
 <db:para>Actually, we are getting ahead of ourselves here. A better analogy to old style typesetter’s marks is an HTML page with the styles specified inline.</db:para>
 <db:programlisting language="HTML">
+
 &lt;p style="{font-family: serif; font-weight: bold; 
  font-size: 12pt}"&gt;
 </db:programlisting>
@@ -37,6 +38,7 @@ book about a big whale.<db:emphasis role="bold">&lt;/p&gt;</db:emphasis>
 <db:para>Actually the recognition of markup in HTML is a little more complicated than that, but that is more detail than we need to get into here. The point here is simply that there are certain sequences in the text which trigger a processing program (generally called a “parser”) to recognize when markup starts and when it ends.</db:para>
 <db:para>What if you want to enter these “markup start” characters into the text of your document? You can’t just type them in because the parser will think they are markup. To fix this, markup languages either define “escape” characters, that signal the parser to treat the following character as text, or they include markup for inserting individual characters in a way that won’t be confused with markup characters. HTML takes the second approach. To include a <db:code>&lt;</db:code> character in HTML, you use what is called a “character entity.” A character entity is a code for a character. It begins with <db:code>&amp;</db:code> (another markup start character), followed by a character code and ending with a semicolon. The character entity for <db:code>&lt;</db:code> in HTML and XML is <db:code>&amp;lt;</db:code>. (“lt” is short for “less than”, the name of the <db:code>&lt;</db:code> character.)</db:para>
 <db:programlisting language="html">
+
 &lt;p&gt;In HTML, tags start with the &amp;lt; character.&lt;/p&gt;
 </db:programlisting>
 <db:para>This will display as:</db:para>
@@ -45,6 +47,7 @@ book about a big whale.<db:emphasis role="bold">&lt;/p&gt;</db:emphasis>
 </db:blockquote>
 <db:para>Since <db:code>&amp;</db:code> is also a markup start character, we need to replace it with a character entity as well if we want to include it literally. To include a literal <db:code>&amp;</db:code> you use the character entity <db:code>&amp;amp;</db:code>.</db:para>
 <db:programlisting language="html">
+
 &lt;p&gt;In HTML, character entities start 
 with the &amp;amp; character.&lt;/p&gt;
 </db:programlisting>
@@ -54,6 +57,7 @@ with the &amp;amp; character.&lt;/p&gt;
 </db:blockquote>
 <db:para>To include the literal sting <db:code>&amp;amp;</db:code> therefore, you would write <db:code>&amp;amp;amp;</db:code>.</db:para>
 <db:programlisting language="html">
+
 &lt;p&gt;The character entity for an ampersand is &amp;amp;amp;.&lt;/p&gt;
 </db:programlisting>
 <db:para>This will display as:</db:para>
@@ -62,12 +66,14 @@ with the &amp;amp; character.&lt;/p&gt;
 </db:blockquote>
 <db:para>Other markup languages do not make such an explicit distinction between text and markup. For example, in Markdown a numbered list is created by putting numbers in front of list items:</db:para>
 <db:programlisting language="markdown">
+
 1. First
 2. Second
 3. Third
 </db:programlisting>
 <db:para>Here the numbers are markup. That is, the Markdown processor recognizes them as indicating a list and will translate them into a structure in HTML like this:</db:para>
 <db:programlisting language="html">
+
 &lt;ol&gt;
     &lt;li&gt;First&lt;/li&gt;
     &lt;li&gt;Second&lt;/li&gt;
@@ -76,12 +82,14 @@ with the &amp;amp; character.&lt;/p&gt;
 </db:programlisting>
 <db:para>But numbers followed by a period are only markup a certain context – the beginning of a line. Elsewhere, they are plain text. There is no need to escape numbers followed by periods when they occur elsewhere in the text. Thus the following markdown file:</db:para>
 <db:programlisting language="markdown">
+
 1. First comes 1.
 2. Second comes 2.
 3. Third comes 3.
 </db:programlisting>
 <db:para>will translate to HTML as:</db:para>
 <db:programlisting language="html">
+
 &lt;ol&gt;
     &lt;li&gt;First comes 1.&lt;/li&gt;
     &lt;li&gt;Second comes 2.&lt;/li&gt;
@@ -99,6 +107,7 @@ with the &amp;amp; character.&lt;/p&gt;
 <db:title>Concrete markup languages</db:title>
 <db:para>A concrete markup language has a fixed set of markup patterns that describes a fixed set of content structures. For example, <db:indexterm><db:primary>Markdown</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>Markdown</db:secondary></db:indexterm>Markdown is a concrete markup language that uses a markup that is designed to mimic the way people write plain text emails. Here is the passage about <db:indexterm><db:primary>Moby Dick</db:primary></db:indexterm><db:indexterm><db:primary>citetitle</db:primary><db:secondary>Moby Dick</db:secondary></db:indexterm><db:citetitle>Moby Dick</db:citetitle> written in Markdown:</db:para>
 <db:programlisting language="markdown">
+
 Moby Dick
 =========
 
@@ -115,8 +124,9 @@ Herman Melville's _Moby Dick_ is a long book about a big whale.
 </db:footnote> The markup in an XML file does not directly indicates things like headings or paragraphs. Instead, it indicates a set of abstract structures called elements, attributes, entities, processing instructions, marked sections, and comments.</db:para>
 
 <db:para>None of these abstract structures describes document structures in any of the structured writing domains. Instead, specific markup languages based on XML (or its cousin, SGML) indicate subject, document, management, or <db:indexterm><db:primary>media domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media domain</db:secondary></db:indexterm>media domain structures as named instances of elements and attributes.</db:para>
-<db:para>Here is the <db:indexterm><db:primary>Moby Dick</db:primary></db:indexterm><db:indexterm><db:primary>citetitle</db:primary><db:secondary>Moby Dick</db:secondary></db:indexterm><db:citetitle>Moby Dick</db:citetitle> passage again, this time in <db:indexterm><db:primary>XML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XML</db:secondary></db:indexterm>XML (more specifically, in <db:indexterm><db:primary>Docbook</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>Docbook</db:secondary></db:indexterm>Docbook):</db:para>
+<db:para>Here is the <db:indexterm><db:primary>Moby Dick</db:primary></db:indexterm><db:indexterm><db:primary>citetitle</db:primary><db:secondary>Moby Dick</db:secondary></db:indexterm><db:citetitle>Moby Dick</db:citetitle> passage again, this time in <db:indexterm><db:primary>XML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XML</db:secondary></db:indexterm>XML (more specifically, in <db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DocBook</db:secondary></db:indexterm>DocBook):</db:para>
 <db:programlisting language="DocBook">
+
 &lt;section&gt;
     &lt;title&gt;Moby Dick&lt;/title&gt;
     &lt;para&gt;Herman Melville's &lt;citetitle&gt;Moby Dick&lt;/citetitle&gt; 
@@ -167,6 +177,7 @@ Herman Melville's _Moby Dick_ is a long book about a big whale.
 <db:title>Concrete languages in abstract clothing</db:title>
 <db:para>The key defining characteristic of an abstract language is the use of abstract named structures like XML elements. All XML elements share a common markup start sequence followed by the element name. This creates a named block of content.  But concrete languages can use named blocks too. For example, <db:indexterm><db:primary>JavaDoc</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>JavaDoc</db:secondary></db:indexterm>JavaDoc, a concrete language for describing Java APIs, uses named blocks using <db:code>@</db:code> as a markup start character:</db:para>
 <db:programlisting language="Java">
+
 /**
  * Validates a chess move.
  *
@@ -184,7 +195,7 @@ int theToFile, int theToRank) {
     // ...body
 }
 </db:programlisting>
-<db:para>In this sample, <db:code>@param</db:code> and <db:code>@return</db:code> are named blocks. But in JavaDoc, there is a fixed set of named blocks that are defined as part of the language. You can’t create a new language by defining your own block names. By contrast, <db:indexterm><db:primary>XML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XML</db:secondary></db:indexterm>XML itself defines absolutely no element names. Only instances of XML, like <db:indexterm><db:primary>Docbook</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>Docbook</db:secondary></db:indexterm>Docbook, define element names.</db:para>
+<db:para>In this sample, <db:code>@param</db:code> and <db:code>@return</db:code> are named blocks. But in JavaDoc, there is a fixed set of named blocks that are defined as part of the language. You can’t create a new language by defining your own block names. By contrast, <db:indexterm><db:primary>XML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XML</db:secondary></db:indexterm>XML itself defines absolutely no element names. Only instances of XML, like <db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DocBook</db:secondary></db:indexterm>DocBook, define element names.</db:para>
 <db:para>A particularly notable example of a concrete language in abstract clothing is <db:indexterm><db:primary>HTML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>HTML</db:secondary></db:indexterm>HTML. HTML looks a lot like an instance of XML, but it is not. An XML parser cannot parse most HTML. HTML is nominally an instance of SGML but never did quite conform to it. HTML generally requires a specific HTML parser, such as is found in all browsers. XHTML is a version of HTML that is an instance of XML. <db:indexterm><db:primary>HTML5</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>HTML5</db:secondary></db:indexterm>HTML5 actually supports two different syntaxes, one of which is an instance of XML and one of which is not, meaning that it has both a concrete syntax and a syntax which is a instance of an abstract language. (This is consequence of having made a mess early on and having to live with it for evermore. A lesson for all markup language designers.)</db:para>
 </db:section>
 <db:section>
@@ -212,6 +223,7 @@ int theToFile, int theToRank) {
 <db:para>By hybrid, I mean a language that combines both abstract and concrete markup in one language. A hybrid language has a base set of concrete syntax describing basic text structures but it also has abstract structures such as XML’s elements and attributes that can be the basis of extensibility and constraint.</db:para>
 <db:para>An example of a hybrid markup language is <db:indexterm><db:primary>reStructuredText</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>reStructuredText</db:secondary></db:indexterm>reStructuredText. Like <db:indexterm><db:primary>Markdown</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>Markdown</db:secondary></db:indexterm>Markdown, it has a basic concrete syntax for things like lists and paragraphs. But it also supports what it calls “directives”, which are essentially named block structures. For example, a codeblock in reStructuredText looks like this:</db:para>
 <db:programlisting language="reST">
+
 .. code-block:: html
     :linenos:
 
@@ -224,6 +236,7 @@ int theToFile, int theToRank) {
 <db:para>I have developed a hybrid markup language which is designed to be both extensible and constrainable. I call it SAM (which stands either for Semantic Authoring Markdown or Semantic Authoring Markup, as you please). SAM is the language I have been using for most of the examples in this book.</db:para>
 <db:para>Here is the <db:indexterm><db:primary>Moby Dick</db:primary></db:indexterm><db:indexterm><db:primary>citetitle</db:primary><db:secondary>Moby Dick</db:secondary></db:indexterm><db:citetitle>Moby Dick</db:citetitle> passage written in SAM:</db:para>
 <db:programlisting language="sam">
+
 section: Moby Dick
 
     Herman Melville's {Moby Dick}(novel) is a long 
@@ -236,6 +249,7 @@ section: Moby Dick
 <db:para>SAM is not intended to be nearly as general in scope as a purely abstract markup language like XML. It is meant for semantic authoring (which is to say, structured writing). As such it incorporates a number of shortcuts to make writing typical structured documents easier.</db:para>
 <db:para>In a typical document, a block of text (larger than a paragraph) typically has a title. So in SAM, a string after a block tag is considered to be a title. That means that the markup above is equivalent to:</db:para>
 <db:programlisting language="sam">
+
 section: 
     title: Moby Dick
 
@@ -248,6 +262,7 @@ section:
 <db:para>Most concrete markup languages, at least those designed for documents, try to make their marked-up documents look and read as much as possible like a formatted document. SAM is designed to be easy and natural to read, like a concrete markup language, but it is also designed to make the structure of the content as clear and explicit as possible while requiring the minimum of markup. This is why it uses indentation to express structure. Indentation shows structure clearly with a minimum of markup noise to distract the reader’s eye.</db:para>
 <db:para>Because it is meant specifically for authoring, a SAM parser outputs XML, which can then be processed by the standard XML tool chain. Below is how the SAM markup above would be output by a SAM parser:</db:para>
 <db:programlisting language="XML">
+
 &lt;section&gt;
     &lt;title&gt;Moby Dick&lt;/title&gt;
 

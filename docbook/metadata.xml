@@ -6,12 +6,14 @@
 <db:para>The standard definition of metadata is data that describes data, but that definition misses the central point. Metadata does not merely describe data, metadata creates data. Metadata turns an undifferentiated set of values into useful data by constraining the interpretation of those values.</db:para>
 <db:para>In the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain, the ingredients of a recipe are just list items. The content of those list items are just strings of characters.</db:para>
 <db:programlisting language="sam">
+
 section: Ingredients
     * 12 eggs
     * 2 qt water
 </db:programlisting>
 <db:para>Adding <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain markup allows us to specify to algorithms exactly what these strings mean.</db:para>
 <db:programlisting language="sam">
+
 ingredients:: ingredient, quantity, unit
     eggs, 12, each
     water, 2, qt
@@ -29,6 +31,7 @@ ingredients:: ingredient, quantity, unit
 <db:title>The recursive nature of metadata</db:title>
 <db:para>Metadata is a confusing concept because metadata is recursive. If metadata is the data that describes (and thereby creates) data, it is also data itself. And since data is created by metadata, this means that metadata is itself created by metadata. In other words, if the line <db:code>ingredients:: ingredient, quantity, unit</db:code> turns the ingredient lines into metadata in this markup:</db:para>
 <db:programlisting language="sam">
+
 ingredients:: ingredient, quantity, unit
     eggs, 12, each
     water, 2, qt
@@ -58,6 +61,7 @@ ingredients:: ingredient, quantity, unit
 <db:para>In some sense, therefore, ontology is the ultimate in <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain markup. Indeed, one should also be able to generate human-readable content from an ontology, given a sufficiently sophisticated algorithm and a sufficiently sophisticated ontology.</db:para>
 <db:para>All of this is very much outside our scope in this book. <db:indexterm><db:primary>Subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>Subject domain</db:secondary></db:indexterm>Subject domain markup is an attempt to capture certain aspects of the subject matter of a work. But it is not an attempt to model the argument of a work. Consider the passage:</db:para>
 <db:programlisting language="sam">
+
 In {Rio Bravo}(movie), {the Duke}(actor "John Wayne") 
 plays an ex-Union colonel.
 </db:programlisting>
