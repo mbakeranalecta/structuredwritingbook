@@ -271,9 +271,9 @@ chapter:(#chapter.separating) Separating Content from Formatting
         
         But what if you have hundreds of addresses, all with the same labels? Are the labels content or are they presentation? Since the labels don't change from one list to another, you could look at them as being part of the presentation rather than the content. So let's look for a way to separate them from the content. 
         
-        As always, when you separate something from your content, you have to replace it with something else. In [*ex.separate-1], named structures reflect the subject matter of the entries, which moves this content into the {subject domain}(concept).
+        As always, when you separate something from your content, you have to replace it with something else. In [#ex.separate-1], named structures reflect the subject matter of the entries, which moves this content into the {subject domain}(concept).
 
-        figure:(*ex.separate-1) Address markup in the subject domain
+        figure:(#ex.separate-1) Address markup in the subject domain
             ```(sam)
                 address:
                     street: 123 Elm Street
@@ -286,7 +286,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
 
         Deciding to use a list for a certain piece of information is a presentation decision, which is independent of the formatting details applied to lists. When you move content from the {media domain} to the {document domain}, you separate the formatting of the content from its presentation. The decision to present the information as a list remains; the decision about what that list looks like is separated out. 
 
-        In contrast, moving content from the {document domain} to the {subject domain} separates the _information_ from the _presentation_. The subject-domain structure in [*ex.separate-1] is not a labeled list. It is a data record that can be turned into many different forms of presentation. 
+        In contrast, moving content from the {document domain} to the {subject domain} separates the _information_ from the _presentation_. The subject-domain structure in [#ex.separate-1] is not a labeled list. It is a data record that can be turned into many different forms of presentation. 
         
         Turning such structures into a specific form of presentation is the job of the presentation algorithm (see [#chapter.publishing]). The presentation algorithm could turn it into a labeled list, a table, a paragraph, or an address label.
         
