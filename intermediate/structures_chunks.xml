@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter name ="chapter.blocks">
+<chapter name="chapter.blocks">
 <title>Blocks, fragments, paragraphs, and phrases</title>
 <annotations>
 <p>Concepts</p>
@@ -31,7 +31,8 @@
 <p>Don’t think of the distinction between a semantic block and a structural block as being hard and fast. The distinction has more to do with design intent that any concrete characteristic. The main point of making the distinction is to encourage you to think of markup design first in terms of semantic blocks. Blocks, with whatever internal structure you require, that will capture the structure of something that is real and meaningful to you. Don’t get bogged down in the precise internal structure of semantic blocks until you figure out which semantic blocks you need.</p>
 <p>Different markup languages often construct the same semantic block differently. <phrase><annotation type="language"><annotation type="standard">DITA</annotation></annotation></phrase>, <phrase><annotation type="language"><annotation type="standard">DocBook</annotation></annotation></phrase>, and <phrase><annotation type="language"><annotation type="standard">HTML</annotation></annotation></phrase> all define lists, and each of them defines the internals of a list differently. Nonetheless we recognize that each of them is an implementation of the idea of a list and for most purposes you could markup your content with any one of them without any loss of functionality.</p>
 <p>A list is made up of structural blocks that build the shape of a list. I’ll illustrate this with XML since it makes the blocks explicit:</p>
-<codeblock language ="xml">
+<codeblock language="xml">
+
 &lt;ol&gt;
     &lt;li&gt;
         &lt;p&gt;This is the first item.&lt;/p&gt;
@@ -44,21 +45,24 @@
 <p>Here the semantic block is the ordered list bounded by the <code>ol</code> tags. The <code>li</code> and <code>p</code> tags inside are structural blocks that together implement the structure of an ordered list. (Since we would tend to regard paragraphs as semantic blocks, albeit relatively simple ones, this illustrates that a semantic block can also be a structural block for a larger semantic structure.)</p>
 <p>Other <phrase><annotation type="concept">document domain</annotation></phrase> examples of semantic blocks include <phrase><annotation type="structure">tables</annotation></phrase> and <phrase><annotation type="structure">procedures</annotation></phrase>. (Again you will find that DocBook, DITA, and HTML, not to mention S1000D, and <phrase><annotation type="language">reStructuredtext</annotation></phrase>, all have tables, all with different internal structures, and that both DocBook and DITA have procedures, again internally different. It is possible to disagree greatly about how to structure a semantic block while still recognizing different implementations as examples of the same semantic block.)</p>
 <p>In the subject domain, examples of semantic blocks would include the ingredients list from the recipe example we have been using:</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 ingredients:: ingredient, quantity, unit
     eggs, 3, each
     salt, 1, tsp
     butter, .5, cup
 </codeblock>
 <p>and the parameter description from an API reference:</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 parameter: string
     required: yes
     description:
         The string to print.
 </codeblock>
 <p>One characteristic of semantic blocks is that they often tend to repeat as a unit, as this example does in an API reference entry:</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 function: print
     return-value: none
     parameters:
@@ -90,10 +94,11 @@ function: print
 <p>Which structured writing domain do information typing blocks belong to? Clearly they are not <phrase>media</phrase>, <phrase>subject</phrase>, or <phrase><annotation type="concept">management domain</annotation></phrase> structures. Are they a kind of <phrase><annotation type="concept">document domain</annotation></phrase> structure or something else again? I believe it is more useful to regard them as document domain structures than to invent another domain. Information mapping is a theory about the construction of documents to make them more effective. It regards a document as a mapping of information typing blocks, so Information Mapping’s information typing blocks are components of documents, and therefore in the document domain.</p>
 <p><phrase><annotation type="language"><annotation type="standard">DITA</annotation></annotation></phrase> also adopted this idea of documents being made up of information typing blocks. In DITA’s case, these blocks are named topics, which leads to some confusion since the word topic can be used to refer to both information typing block, and also to a complete document (as in a “help topic” for instance).</p>
 <p>DITA has popularized the idea that all content (or all technical content, at least) is made up of just three information typing blocks: concept, task, and reference.<citation type = "idref" value = "1"/> (DITA actually defines more topic types than this today.) This idea is appealing because it is simple and it is easy to see a correspondence between these three types and the reader activities of learning (concept), doing (task), and looking stuff up (reference). The question is whether it provides adequate or appropriate constraints for your content, and whether it is useful for partitioning the complexity of your content system.</p>
-<footnote id ="1">
+<footnote id="1">
 <p>There is evidence that DITA is moving away from this vision of information typing. In DITA 1.3, the technical committee puts the emphasis on topic and map as the core types, rather than concept, task and reference.</p>
 <blockquote>
-<citation type = "citation" value = "http://docs.oasis-open.org/dita/dita-1.3-why-three-editions/v1.0/cn01/dita-1.3-why-three-editions-v1.0-cn01.html#focus-of-dita"/><p>The DITA Technical Committee wants to emphasize that topic and map are the base document types in the architecture.</p>
+<citation type = "citation" value = "http://docs.oasis-open.org/dita/dita-1.3-why-three-editions/v1.0/cn01/dita-1.3-why-three-editions-v1.0-cn01.html#focus-of-dita"/>
+<p>The DITA Technical Committee wants to emphasize that topic and map are the base document types in the architecture.</p>
 <p>Because DITA was originally developed within IBM as a solution for technical documentation, early information about DITA stressed the importance of the concept, task, and reference topics.</p>
 <p>Many regarded the topic document type as nothing more than a specialization base for concept, task, and reference.</p>
 <p>While this perspective might still be valid for technical content, times have changed. DITA now is used in many other contexts, and people developing content for these other contexts need new specializations. For example, nurses who develop evidence-based care sheets might need a topic specialization that has sections for evidence, impact on current practices, and bibliographic references.</p>
@@ -113,7 +118,7 @@ function: print
 <p>But not all physical books constitute a single rhetorical block. Many books, such as cookbooks, are collections of related rhetorical blocks, such as recipes. Not only can you define a repeatable rhetorical block for a recipe, doing so provides significant benefits for most of the structured writing algorithms and allows you to effectively partition and direct the content complexity of a cookbook publisher or a magazine publisher that inserts recipes into many different publications.</p>
 <p>Where you can reasonably define repeatably structured rhetorical blocks in your content, there are good reasons to do so. This can mean one of two things. It can mean taking the rhetorical blocks that you produce now, identifying those that could be repeatably structured, and developing a structured to contain and constrain them. This may involve moving some content around, since the applications of a repeatable structure will inevitably reveal that some content is in the wrong place, some is missing, and some is superfluous. But overall, this is reasonably straightforward process.</p>
 <p>On the other hand, it can mean taking material that is currently in long discursive rhetorical blocks (like text books) and moving it to much shorter and more structured rhetorical blocks (like recipes or encyclopedia articles). Breaking material into smaller rhetorical units is not a new idea. It has been practiced in encyclopedias and periodicals for centuries and it has greatly accelerated in the age of the Web, which has not only improved our access to information, it has radically changed how we seek and use information, creating a style called <phrase><citation type = "citation" value = "https://www.nngroup.com/articles/information-scent/">information snacking</citation></phrase> in which we reach for discrete pieces of information as and when we need them, confident that we will always be able to rapidly find and read what we need when the time arises.<citation type = "idref" value = "2"/> In other words, people prefer to consume content in shorter rhetorical blocks (not because they need to know less, but because they need to know less at a time), so it makes sense to refactor your content and its architecture into a collection of smaller rhetorical blocks.</p>
-<footnote id ="2">
+<footnote id="2">
 <p>I discuss this change of information seeking and consuming habits in my book, <phrase><annotation type="citetitle">Every Page is Page One: Topic-based Writing for Technical Communication and the Web</annotation></phrase>.</p>
 </footnote>
 <p>This transformation to shorter rhetorical blocks is often called “topic-based writing” but that term has become quite confusing because it is also used to mean a system in which instead of writing in long rhetorical blocks, individual writers write independent information typing blocks which are then compiled into long rhetorical blocks, often by somebody else. The confusion caused by giving these two very different approach the same name is that some people have started to think that topic-based writing means writing information typing blocks and then publishing them separately as if they were rhetorical blocks. This confusions is compounded by <phrase><annotation type="language"><annotation type="standard">DITA</annotation></annotation></phrase>’s decision to call their information typing blocks “topics” (Information Mapping calls them “blocks”) and by the fact publishing each information typing block separately is the default behavior when you publish a DITA map to the web.</p>
@@ -140,12 +145,14 @@ function: print
 <section>
 <title>Paragraphs and phrases</title>
 <p>Paragraphs are the thing that make structured content the most different from other computable data sets. This is not really because of the paragraph structure per se, but because of the phrases within the paragraphs that we want to annotate. It is rare in any other data set to see a structure floating within the value of another structure. But that is exactly what happens when we annotate phrases in a paragraph.</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 In {Rio Bravo}(movie), {the Duke}(actor "John Wayne") 
 plays an ex-Union colonel.
 </codeblock>
 <p>In this examples, the annotation on the phrases “Rio Bravo” and “the Duke” float in the middle of the paragraph block. Here is the same thing in XML:</p>
-<codeblock language ="xml">
+<codeblock language="xml">
+
 &lt;p&gt;In &lt;movie&gt;Rio Bravo&lt;/movie&gt;, 
 &lt;actor name="John Wayne"&gt;the Duke&lt;/actor&gt; 
 plays an ex-Union colonel.&lt;/p&gt;
@@ -167,7 +174,8 @@ plays an ex-Union colonel.&lt;/p&gt;
 </ll>
 <p>Mixed content is the reason that most traditional data format are not a good fit for content. They may be able to model element content and data content, but they lack an elegant way to model mixed content.</p>
 <p>Even conventional programming languages have trouble with mixed content. In fact most libraries for XML processing invent an additional wrapper around each string of characters in a mixed content element, effectively representing it as if it were written like this (without mixed content):</p>
-<codeblock language ="xml">
+<codeblock language="xml">
+
 &lt;p&gt;&lt;text&gt;In &lt;/text&gt;&lt;movie&gt;Rio Bravo&lt;/movie&gt;&lt;text&gt;, 
 &lt;/text&gt;&lt;actor name="John Wayne"&gt;the Duke&lt;/actor&gt;&lt;text&gt; 
 plays an ex-Union colonel.&lt;/text&gt;&lt;/p&gt;
@@ -179,6 +187,7 @@ plays an ex-Union colonel.&lt;/text&gt;&lt;/p&gt;
 </blockquote>
 <p>You solve it by first extracting the data from the narrative:</p>
 <codeblock>
+
 4 + 5 - 2 =
 </codeblock>
 <p>But in content processing, we cannot extract the data from the narrative because narrative is the output we are creating. Thus we have to call out the data (to make it processable by structured writing algorithms) while leaving the narrative intact.</p>

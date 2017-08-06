@@ -51,6 +51,7 @@
 <db:para>In a media domain editor, which shows the formatting of the content as it will appear on paper, writers can create the table at a fixed width of their choice and then drag the column widths around to get the aesthetics of column boundaries right by eye. But tables created like this are not likely to format correctly on other devices, as <db:xref linkend="broken-table-formatting"/> shows. And if you move the content creation out of the media domain and into the document domain, it is no longer possible to present the writer with a WYSIWYG page width for them to adjust column widths by eye. (You can fake it, but the adjustments made on screen will have no relationship to how the table is actually formatted on any output page.) At this point you have to leave column width calculation to the rendering algorithm. The best you can do it to give it some hints about how to do its job.</db:para>
 <db:para>This need to give the rendering algorithm hints about how to fit tables to pages has resulted in the creation of some very complicated table markup languages. Here is an example using the <db:indexterm><db:primary>CALS table model</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>CALS table model</db:secondary></db:indexterm>CALS table model, courtesy of Wikipedia:</db:para>
 <db:programlisting language="xml">
+
 &lt;table&gt;
   &lt;title&gt;Table title&lt;/title&gt;
 
@@ -97,6 +98,7 @@
 <db:para>The problem with this is that while the view of the table in the editor looks just like the view of a table in a world processor like <db:indexterm><db:primary>Microsoft Word</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>Microsoft Word</db:secondary></db:indexterm>Microsoft Word, Word’s graphical display is based on the actual page currently set up in printer settings and on the actual font that the document will be printed in. It can therefore show how things will fit in the table on an actual page (allowing the author to make <db:indexterm><db:primary>media-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media-domain</db:secondary></db:indexterm>media-domain adjustments to the table). An XML editor cannot know what page size will be chosen or what font will be used when a document is printed. So while the display looks like it allows the same <db:indexterm><db:primary>media domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media domain</db:secondary></db:indexterm>media domain adjustments to be made, this is an illusion and the table will not print as shown on screen. This gives a false impression of the real complexity of the table problem, and hiding complexity from the person who is supposed to deal with it is another way of dumping it on the reader.</db:para>
 <db:para>Other markup languages take a different approach to tables. For instance, <db:indexterm><db:primary>reStructuredText</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>reStructuredText</db:secondary></db:indexterm>reStructuredText allows you to create a table like this:</db:para>
 <db:programlisting language="reST">
+
 +------------+------------+-----------+ 
 | Header 1   | Header 2   | Header 3  | 
 +============+============+===========+ 
@@ -123,6 +125,7 @@
 <db:title>Subject domain structure</db:title>
 <db:para>One way to present the list of ingredients in a recipe is to create a table with the ingredient name aligned left and the quantity aligned right. But as we have seen in our recipe examples, you can create a subject-specific ingredient list structure to capture your ingredient information, which you can then format any way you like for output.</db:para>
 <db:programlisting language="sam">
+
 ingredients:: ingredient, quantity, unit
     eggs, 3, each
     salt, 1, tsp
@@ -166,6 +169,7 @@ ingredients:: ingredient, quantity, unit
 
 <db:para>The simplest way to supply this information is to include it in the markup that inserts the graphic. Thus HTML lets you specify the height and width of a graphic.</db:para>
 <db:programlisting language="html">
+
 &lt;img 
     src="http://www.example.com/images/example.png" 
     height="150" 
@@ -182,6 +186,7 @@ ingredients:: ingredient, quantity, unit
 <db:para>In these cases, how do we include the image in our source content? It is not enough to include the source file and scale it, since there are now several source files. You have to go back to the idea of the image – the image that was in the artist’s head, rather than any of the individual renderings of that image. How do we go about it?</db:para>
 <db:para>In <db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DocBook</db:secondary></db:indexterm><db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>DocBook</db:secondary></db:indexterm>DocBook we can use conditional processing to include a different image file under different conditions:</db:para>
 <db:programlisting language="DocBook">
+
 &lt;mediaobject&gt;
   &lt;imageobject condition="epub"&gt;
     &lt;imagedata 
@@ -199,6 +204,7 @@ ingredients:: ingredient, quantity, unit
 <db:para>But this approach not only involves the use of <db:indexterm><db:primary>media domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media domain</db:secondary></db:indexterm>media domain markup, it combines it with <db:indexterm><db:primary>management domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>management domain</db:secondary></db:indexterm>management domain markup. Is it possible to factor all of this out of the authored format?</db:para>
 <db:para>To do so we can have the author include the idea of the image rather than a rendering of the image. There are several ways to do this. In fact, this is really the same idea as we saw in the <db:indexterm><db:primary>reuse algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>reuse algorithm</db:secondary></db:indexterm>reuse algorithm were we factored out the filename of the content to be included and replace it with a semantic representation of the reason for the content. There we factored out an explicit filename from this example:</db:para>
 <db:programlisting language="sam">
+
 procedure: Blow stuff up
     &gt;&gt;&gt;(files/shared/admonitions/danger)
     step: Plant dynamite.
@@ -208,6 +214,7 @@ procedure: Blow stuff up
 </db:programlisting>
 <db:para>and replaced it with a management domain <db:indexterm><db:primary>key</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>key</db:secondary></db:indexterm>key in this example:</db:para>
 <db:programlisting language="sam">
+
 procedure: Blow stuff up
     &gt;&gt;&gt;(%warn_danger)
     step: Plant dynamite.
@@ -217,6 +224,7 @@ procedure: Blow stuff up
 </db:programlisting>
 <db:para>Then we refactored that into a <db:indexterm><db:primary>subject-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject-domain</db:secondary></db:indexterm>subject-domain assertion of fact in this example:</db:para>
 <db:programlisting language="sam">
+
 procedure: Blow stuff up
     is-it-dangerous: yes
     step: Plant dynamite.
@@ -228,6 +236,7 @@ procedure: Blow stuff up
 <db:para>For instance, suppose you have a constraint that whenever a procedure mentions a dialog box you should have a picture of that dialog box, but your software is delivered on three different platforms and the dialog boxes look different on each.</db:para>
 <db:para>We can factor out the platform specific version of the image by using a key to insert the image:</db:para>
 <db:programlisting language="sam">
+
 procedure: Save a file
     step: 
         From the File menu, choose 
@@ -239,6 +248,7 @@ procedure: Save a file
 <db:para>Now the presentation algorithm can use a key lookup table for the appropriate platform to select the right version of the Save As dialog box for the version of the documentation you are building. If you port the product to a new platform, all you need is a new set of screen shots and a new key lookup table. You don’t have to change the content at all.</db:para>
 <db:para>There is a pretty simple rhetorical pattern at work in this passage, though. When a step mentions a dialog box, a picture of that dialog box is shown. We can exploit this pattern to factor the insert command out of the content altogether by annotating the mentions of UI components in the text:</db:para>
 <db:programlisting language="sam">
+
 procedure: Save a file
     step: 
         From the {File}(menu) menu, choose 
@@ -247,6 +257,7 @@ procedure: Save a file
 </db:programlisting>
 <db:para>Now you can insert the correct screen-shot graphic for the current platform with an algorithm:</db:para>
 <db:programlisting language="pseudo">
+
 match procedure/step/dialog-box
     $dialog-box-name = contents
     $graphic = find graphic where type = dialog box 
@@ -276,10 +287,12 @@ match procedure/step/dialog-box
 <db:para>However, when factoring out graphics, there is the added issue of the metadata that describes the various properties of the image and it renderings. One way to handle this is to create a metadata file for each image which provides the needed data for multiple renderings of the image and provides the path to each of the renderings.</db:para>
 <db:para>The simplest way to implement this is to use an image include instruction that points to the metadata file instead of to an image file. This is what I did in writing this book. I noted above that the DocBook example, which conditionally includes two different versions of the graphics for epub and print was from this book. But this book is not written in <db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DocBook</db:secondary></db:indexterm><db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>DocBook</db:secondary></db:indexterm>DocBook, it is written in <db:indexterm><db:primary>SAM</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>SAM</db:secondary></db:indexterm>SAM. In the SAM source file, the image insertion looks like this:</db:para>
 <db:programlisting language="sam">
+
 &gt;&gt;&gt;(image ../graphics/assemble.xml)
 </db:programlisting>
 <db:para>This is not the full factoring out of the graphics as described in the previous example. But note that the file that is being included is not a graphics file. Instead it is an XML file. That file looks like this:</db:para>
 <db:programlisting language="xml">
+
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;image&gt;
     &lt;source&gt;assemble.svg&lt;/source&gt;
@@ -309,10 +322,12 @@ match procedure/step/dialog-box
 <db:para>There are two techniques you can use to minimize problems with inline graphics. The first is to avoid their use altogether, where that is practical. If there is another way to present the same material just as effectively, it is better to choose that option.</db:para>
 <db:para>The other is to factor out the graphic by using a structure to record its semantics. For instance, instead of including an Enter key graphic like this:</db:para>
 <db:programlisting language="sam">
+
 3. Press &gt;(image enter_key.png) to confirm the selection. 
 </db:programlisting>
 <db:para>Do this:</db:para>
 <db:programlisting language="sam">
+
 3. Press {Enter}(key) to confirm the selection. 
 </db:programlisting>
 <db:para>This leaves open the choice of how to represent the key in the output, and allows for <db:indexterm><db:primary>differential single sourcing</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>differential single sourcing</db:secondary></db:indexterm>differential single sourcing. For example, on a display that did not support graphics, or where graphics would be too fussy, the <db:indexterm><db:primary>presentation algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>presentation algorithm</db:secondary></db:indexterm>presentation algorithm could render this as:</db:para>
@@ -325,6 +340,7 @@ match procedure/step/dialog-box
 </db:blockquote>
 <db:para>This approach allows the document designer to switch out the graphics used for keyboard keys to find ones that work best on different displays or at different scales. This partitions the graphic maintenance problem to the most qualified person. It is also much easier for the author who does not have to stop to think about which graphic to use. The same approach could be used in another common case, which is describing tool bar icons in a GUI application.</db:para>
 <db:programlisting language="sam">
+
 4. Press {Save}(button) to save your changes.
 </db:programlisting>
 <db:para>This has all the same advantages as mentioned for keys, with the additional benefit that if the interface designer decides to change an icon or to redefine the whole set of icons, you only have to update the lookup table used by the <db:indexterm><db:primary>presentation</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>presentation</db:secondary></db:indexterm>presentation algorithm. This could also be used to sub in different icons for different platforms if your application is run on more than one operating system. This is much more efficient than using conditional text to import different graphics for different configurations.</db:para>

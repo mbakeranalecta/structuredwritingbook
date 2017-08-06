@@ -182,7 +182,9 @@ chapter:(#chapter.single-sourcing) Single Sourcing
                         continue
         
            
-            The result of this algorithm is:
+        The result of this algorithm is shown in [*fig.ssa-specifically-1-output].
+
+        figure:(*fig.ssa-specifically-1-output) Output of the algorithm in [*fig.ssa-specifically-1]
             
             ```(html)
                 <p>In Rio Bravo, <a href="http://JohnWayne.com">The Duke</a>
@@ -207,8 +209,10 @@ chapter:(#chapter.single-sourcing) Single Sourcing
                     output @specifically
                     output ") "
             
-            This will produce:
-            
+        This will produce the output in [*fig.ssa-specifically-out]:
+
+        figure:(*fig.ssa-specifically-out) Output of [*fig.ssa-specifically-out]
+        
             ```(xml)
                 <fo:block>
                 In Rio Bravo, the Duke (see: http://JohnWayne.com) 
@@ -235,11 +239,11 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         In this example, you annotate the phrase "The Duke" with subject-domain markup that clarifies exactly what the text refers to. That annotation says that "the Duke" is the name of an actor, specifically John Wayne.
              
-        Our document-domain examples attempted to clarify "the Duke" for readers, but they did so in media-dependent ways. This subject-domain example clarifies the meaning of "The Duke" in a presentation-neutral way; it explicitly, formally, and unambiguously marks up what the phrase refers to. This markup is written for algorithms, not readers. It allows an algorithm to generate an appropriate clarification for the reader in any target medium (see [*fig.ssa-specifically-3]). 
 
-        figure:(*fig.ssa-specifically-3) Algorithm to render paper and Web links from subject-domain markup
-      
-            For paper:
+        Our document-domain examples attempted to clarify "the Duke" for readers, but they did so in media-dependent ways. This subject-domain example clarifies the meaning of "The Duke" in a presentation-neutral way; it explicitly, formally, and unambiguously marks up what the phrase refers to. This markup is written for algorithms, not readers. It allows an algorithm to generate an appropriate clarification for the reader in any target medium (see [*fig.ssa-specifically-3-paper] and [*fig.ssa-specifically-3-web]). 
+
+
+        figure:(*fig.ssa-specifically-3-paper) Algorithm to render paper from subject-domain markup
             
             ```
                 match actor
@@ -248,8 +252,8 @@ chapter:(#chapter.single-sourcing) Single Sourcing
                     output @specifically
                     output ") "
                         
-            For the Web:
-            
+        figure:(*fig.ssa-specifically-3-web) Algorithm to Web links from subject-domain markup
+
             ```
                 match actor
                     create link

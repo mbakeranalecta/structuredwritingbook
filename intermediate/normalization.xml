@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter name ="chapter.duplication">
+<chapter name="chapter.duplication">
 <title>Avoiding duplication</title>
 <annotations>
 <p>Concepts</p>
@@ -37,7 +37,8 @@
 <p>Where no such formal constraints exist, writers also have the option of using a search engine to look for existing content. A search engine can certainly turn up existing content on a subject, but search engines are not precise enough to detect duplication reliably. They may miss an actual duplicate because of a variation in <phrase><annotation type="concept">terminology</annotation></phrase> while returning several possible matches that are not duplicates. To eliminate the possibility that a duplicate exists in those results, the writer has to assess each one of them. That takes a lot of time, and, as we have noted, this task has to be performed before writing any piece of content, if the possibility of duplication is to be eliminated. This is a tremendous amount of overhead to impose on the content system.</p>
 <p>How exactly do you construct a set of constraints for detecting duplicate content? First you need to begin with a definition of duplicate content. A reasonable general definition is this: duplicate content is content that describes the same subject matter to the same audience for the same purpose. All three aspects of this definition matter. We communicate to achieve an objective, so purpose matters. We communicate with a variety of people, so audience matters. Ignoring these things in our definition of duplication could result in serious quality problems.</p>
 <p>So let’s examine a case of potentially duplicate content and look at how we can establish a formal system for deciding if another piece of content is a duplicate or not. Consider two movie reviews, written in markdown:</p>
-<codeblock language ="markdown">
+<codeblock language="markdown">
+
 Disappointing outing for the Duke
 ================================
 
@@ -47,7 +48,8 @@ turns in an pedestrian performance
 in _Rio Bravo_.
 </codeblock>
 <p>and:</p>
-<codeblock language ="markdown">
+<codeblock language="markdown">
+
 Wayne's best yet
 ================
 
@@ -56,11 +58,12 @@ and _Sands of Iwo Jima_, the Duke is brilliant
 in _Rio Bravo_.
 </codeblock>
 <p>Lets examine these according to our three criteria: First, do we have two pieces on the same subject? The subject of each is a movie. But is it the same movie? A human reading the text can tell easily enough that the subject of both pieces is the movie <phrase><annotation type="italic">Rio Bravo</annotation></phrase>, but an algorithms would have no way to tell, since nothing in the markup of either review directly identifies which movie is being reviewed.<citation type = "idref" value = "algorithm"/> Even if it could recognize the names of movies in the text, it would have no way to tell which one of those titles was the subject of the review.</p>
-<footnote id ="algorithm">
+<footnote id="algorithm">
 <p>I am talking here, and throughout this book, about conventional algorithms. The question of whether an AI algorithm could tell the difference is out of scope here. When and if AIs become sophisticated enough to read and write content effectively in human language, the partitioning of the content system, and the role of structured writing in that system, will become very different. So, algorithm here means the kind of algorithm that a <phrase><annotation type="role">content engineer</annotation></phrase> or <phrase><annotation type="role">information architect</annotation></phrase> with the appropriate skill set could design and code in a reasonable amount of time with ordinary programming tools.</p>
 </footnote>
 <p>But suppose these same reviews were written in <phrase><annotation type="language">SAM</annotation></phrase> in a subject domain movie review language:</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 movie-review: Disappointing outing for the Duke
     movie-title: Rio Bravo
     review-text:
@@ -71,7 +74,8 @@ movie-review: Disappointing outing for the Duke
         in {Rio Bravo}(movie).
 </codeblock>
 <p>and:</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 movie-review: Wayne's best yet
     movie-title: Rio Bravo
     review-text:
@@ -81,7 +85,7 @@ movie-review: Wayne's best yet
         in {Rio Bravo}(movie).
 </codeblock>
 <p>Now it is very easy for an algorithm to tell that these two pieces of content are both movie reviews and that they are both reviews of <phrase><annotation type="italic">Rio Bravo</annotation></phrase>.<citation type = "idref" value = "1"/></p>
-<footnote id ="1">
+<footnote id="1">
 <p>If the two markdown examples were stored in a CMS that kept movie-review specific <phrase><annotation type="concept">metadata</annotation></phrase>, including the name of the movie reviewed, an algorithm could do the same check using the CMS metadata. For more on the choice between locating subject domain metadata in the document vs. in a CSM, see <citation type = "nameref" value = "chapter.content-management"/> and <citation type = "nameref" value = "chapter.metadata"/>.</p>
 </footnote>
 <p>What about audience? There are multiple audiences for movie criticism. There are moviegoers and Netflix subscribers who simply want to decide what movie to watch on a Saturday night, but there are also academic film students who may want a detailed analysis of <phrase><annotation type="italic">Rio Bravo</annotation></phrase> according to some school of film criticism.</p>
@@ -90,7 +94,8 @@ movie-review: Wayne's best yet
 <p>But what about purpose? While they review the same movie, the two reviews express two very different opinions about it. Does that constitute a difference in purpose? One could argue that one is encouraging readers to see the movie and the other is encouraging them not to. Or one could argue that the two together serve the purpose of giving the reader a more complete picture, or more options to inform their viewing choices. Ultimately, though it comes down to a question of whether keeping both versions serves a purpose for the organization that is publishing them. Does the organization wish to present itself as having a single firm opinion on every movie, for instance, or does it want to present itself as a neutral arbiter?</p>
 <p>The question of whether we want to keep both reviews is therefore a business decision. You will seldom find two independently written pieces of content that are word for word identical. You will seldom find reusable content that is word for word what you would have written yourself. The definition of duplicate content is not based on identical text, but on whether or not the content serves an identical business purpose. The constraints that determine if two pieces of content are duplicates of each other, therefore, are business rules.</p>
 <p>Let’s say you are willing to have multiple reviews of the same movie in your collection as long as they gave different opinions. To accommodate this you can change your business rule for detecting duplicate movie reviews by adding a grading system to your review structure:</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 movie-review: Disappointing outing for the Duke
     movie-title: Rio Bravo
     5-star-rating: 2
@@ -102,7 +107,8 @@ movie-review: Disappointing outing for the Duke
         in {Rio Bravo}(movie).
 </codeblock>
 <p>and:</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 movie-review: Wayne's best yet
     movie-title: Rio Bravo
     5-star-rating: 5

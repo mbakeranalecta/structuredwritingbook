@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.conformance"><db:title>Conformance</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp1756559204"><db:primary>conformance</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp1756559204x"><db:primary>concept</db:primary><db:secondary>conformance</db:secondary></db:indexterm><db:indexterm class="startofrange" significance="preferred" xml:id="idp1756563300"><db:primary>schema language</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp1756563300x"><db:primary>tool</db:primary><db:secondary>schema language</db:secondary></db:indexterm>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.conformance"><db:title>Conformance</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp1597600404"><db:primary>conformance</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp1597600404x"><db:primary>concept</db:primary><db:secondary>conformance</db:secondary></db:indexterm><db:indexterm class="startofrange" significance="preferred" xml:id="idp1597601684"><db:primary>schema language</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp1597601684x"><db:primary>tool</db:primary><db:secondary>schema language</db:secondary></db:indexterm>
 
 
 
@@ -18,6 +18,7 @@
 <db:para>Inevitably, writers have to make some concessions to the needs of algorithms, but we don’t want algorithms to impose such a burden on writers that we distract them from doing good research and quality writing. Any complexity that writers can’t handle gets dumped on the reader. So if the structures you create for the sake of algorithms prove too complex for writers to conform to, or too difficult to validate, you should ask if you could refactor those constraints again, perhaps to the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, so that you get both the precision and detail that the algorithm needs and the ease of use and validation that the writer needs. In other words, don’t address one source of complexity in isolation. Keep moving complexity until every piece of it is handled by a person or process with skills, bandwidth, and resources to handle it.</db:para>
 <db:para>The recipe examples we have been using shows how a subject-domain structure can transfer complexity away from writers while providing for a high level of conformance checking.</db:para>
 <db:programlisting language="sam">
+
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious.
@@ -40,6 +41,7 @@ recipe: Hard Boiled Egg
 <db:para>But this is not the only way that <db:indexterm><db:primary>subject-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject-domain</db:secondary></db:indexterm>subject-domain structured writing helps ensure completeness. Every <db:indexterm><db:primary>subject-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject-domain</db:secondary></db:indexterm>subject-domain annotation highlights a subject that is important to your business. You can use an algorithm to scan those annotation and build a list of subjects that are important to your business. You can use this list to make sure that all the subjects you need to cover are actually covered.</db:para>
 <db:para>For example, structured writing allows you to annotate your text to call out the types of certain phrases such as function names, feature names, or stock symbols.</db:para>
 <db:programlisting language="sam">
+
 When installing widgets, use a {left-handed widget wrench}(tool) 
 to tighten them to the recommended torque for your device.
 </db:programlisting>
@@ -51,6 +53,7 @@ to tighten them to the recommended torque for your device.
 <db:para>Being consistent simply means abiding by constraints. As we have seen, this can take the form of either enforcing the constraint through required structure or, preferably, factoring out the constraint so that it is handled by algorithms rather than people. We have looked at how you can factor out constraints in both the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain and the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain.</db:para>
 <db:para>If you annotate the important things in your content set, such as tools in the example above, you can use the annotations to check for consistency of names. Suppose a writer accidentally writes “spanner” rather than “wrench” in the name of the tool:</db:para>
 <db:programlisting language="sam">
+
 When installing widgets, use a {left-handed widget spanner}(tool) 
 to tighten them to the recommended torque for your device.
 </db:programlisting>
@@ -62,6 +65,7 @@ to tighten them to the recommended torque for your device.
 <db:para>Accuracy problems are often hard to spot. Typos, using old names for things, or giving deprecated examples are all hard for writers and reviewers to see. But there are structured writing techniques than can catch many of these kinds of problems.</db:para>
 <db:para>For example, if you were documenting an API, you could annotate each mention of a function.</db:para>
 <db:programlisting language="sam">
+
 Always check the return value of {rotateWidget()}(function) 
 to ensure the correct orientation was achieved. 
 </db:programlisting>
@@ -72,6 +76,7 @@ to ensure the correct orientation was achieved.
 <db:para>We can usefully divide constraints into two types: structural constraints and semantic constraints. Structural constraints deal with the the relationship of various text structures. Semantic constraints deal with the meaning of the content.</db:para>
 <db:para>For instance, consider this structure:</db:para>
 <db:programlisting language="xml">
+
 &lt;person&gt;
     &lt;name&gt;John Smith&lt;/name&gt;
     &lt;age&gt;middle&lt;/age&gt;
@@ -80,6 +85,7 @@ to ensure the correct orientation was achieved.
 </db:programlisting>
 <db:para>Some people certainly describe themselves as middle aged, and Christmas Day is certainly a date of birth, if an incomplete one. The author has complied with the structure of the document. But the creator of this markup language was probably looking for more precise information, probably in a format that an algorithm could read. What they wanted was:</db:para>
 <db:programlisting language="xml">
+
 &lt;person&gt;
     &lt;name&gt;John Smith&lt;/name&gt;
     &lt;age&gt;46&lt;/age&gt;
@@ -91,6 +97,7 @@ to ensure the correct orientation was achieved.
 </db:footnote> of an element. You could specify that the type of the age field must be a whole number between 0 and 150 and that the date-of-birth field must be a recognizable date format. Here’s what the XML schema for these constraints might look like:</db:para>
 
 <db:programlisting language="xsd">
+
 &lt;xs:schema 
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     elementFormDefault="qualified"&gt;
@@ -119,6 +126,7 @@ to ensure the correct orientation was achieved.
 <db:para>This can be particularly effective when you are creating content in the subject domain since you don’t have to specify information in sentences, even if you intend to publish it that way. You can break the content out into separate structures and define the data type of those structures to ensure you get complete and accurate information, and to ensure that you can operate on that information using algorithms.</db:para>
 <db:para>The recipe text that we have used before is a good example of how content that could be expressed entirely in free-form paragraphs can be broken down in a fine-grained way that allows us to impose a variety of structural and semantic constraints.</db:para>
 <db:programlisting language="sam">
+
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious.
@@ -158,6 +166,7 @@ recipe: Hard Boiled Egg
 <!--  Come up with another example? The difficulties of data arithmetic make -->
 <!--  this example confusing. -->
 <db:programlisting language="schematron">
+
 &lt;schema xmlns="http://purl.oclc.org/dsdl/schematron"
 queryBinding="xslt2"&gt;
     &lt;pattern&gt;
@@ -204,6 +213,7 @@ queryBinding="xslt2"&gt;
 <db:para>As part of the conformance audit for the programmer’s guide, we added a check that looked up each reference to an API call, including those in code blocks, in the source files for the API reference and reported an error if they did not match. None of the errors listed above would have been detected without this check.</db:para>
 <db:para>Of course, for this check to be possible, the algorithm that did the checking had to be able to identify every time the programmer’s guide mentioned an API call, and it had to be able to find all the API call names in the API reference. For this to be possible, both documents had to be written in a structured format that made the function names accessible to the algorithm. Here is a simplified example. First, a code sample from a programmer’s guide:</db:para>
 <db:programlisting language="sam">
+
 code-sample: Hello World
     
     The Hello World sample uses the {print}(function) to 
@@ -214,6 +224,7 @@ code-sample: Hello World
 </db:programlisting>
 <db:para>Next, a function reference listing from the API reference:</db:para>
 <db:programlisting language="sam">
+
 function: 
     name: print
     return-value: none
@@ -263,5 +274,5 @@ function:
 <db:para>For example, suppose we have a set of cooks contributing to a common recipe information set. Everyone gets on board with the principle that every recipe should include the preparation time and the number of servings. At that point, creating a recipe structure that explicitly calls out those fields helps all the cooks to remember, and therefore comply with, the agreement they have made. This will significantly improve compliance compared to merely stating the requirement in the style guide. (And, of course, it will make that information available to other algorithms as well, reducing the complexity of assembling various documents from a common set of recipes.)</db:para>
 <db:para><db:indexterm><db:primary>Auditing</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>Auditing</db:secondary></db:indexterm>Auditing and enforcement still have a role to play, not because writers are hostile to the system, but because they a human. But auditing and enforcement are secondary to the main aim of conformance-friendly design. And in that spirit, auditing and conformance should be seen as part of a feedback loop that is constantly seeking to improve the design. If you keep finding the same mistakes over and over again, that is not a training problem or a human resources problem, it is a design problem.</db:para>
 <db:para>Finally, be aware of how your authoring interface affects conformance. How do you know if you are meeting constraints – in any activity? Feedback. With any activity, we need a way to know when we are done and when the work is correct. In the <db:indexterm><db:primary>media domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media domain</db:secondary></db:indexterm>media domain, there is one form of feedback: how the document looks. With a true WYSIWYG display, if it looks right on the screen, it will render correctly on paper, or whatever media you are targeting as you write. That is the writer’s signal that they are done, and done correctly. That’s fine in the <db:indexterm><db:primary>media domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media domain</db:secondary></db:indexterm>media domain. But if you are trying to create content in the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain but giving your writers a media domain display (thanks to a structured editor that is trying to look as much as possible like Microsoft Word) then the feedback they receive will be media domain feedback, and the conformance you will get will be media domain conformance. There is a very real risk that content created this way will not work as intended when output to other media, or reused, or processed with any of the other structured writing domains. Don’t expect to get real conformance to any structure that is hidden from the author. No one can conform to a structure they can’t see.</db:para>
-<db:indexterm class="endofrange" startref="idp1756559204"/><db:indexterm class="endofrange" startref="idp1756563300"/><db:indexterm class="endofrange" startref="idp1756559204x"/><db:indexterm class="endofrange" startref="idp1756563300x"/></db:section>
+<db:indexterm class="endofrange" startref="idp1597600404"/><db:indexterm class="endofrange" startref="idp1597601684"/><db:indexterm class="endofrange" startref="idp1597600404x"/><db:indexterm class="endofrange" startref="idp1597601684x"/></db:section>
 </db:chapter>

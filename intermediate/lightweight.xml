@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter name ="chapter.lightweight">
+<chapter name="chapter.lightweight">
 <title>Lightweight Languages</title>
 <annotations>
 <p>Concepts</p>
@@ -38,7 +38,8 @@
 <section>
 <title>Markdown</title>
 <p>The most prominent of the lightweight languages, and arguably the lightest-weight, is Markdown. Invented in 2004 by John Gruber as a way to quickly write simple web pages using syntax similar to that of an text-format email, it has spread to all kind of systems and now exists is multiple variants that have been adapted for different purposes. I have used many examples of MarkDown in this book. Here is one of them:</p>
-<codeblock language ="markdown">
+<codeblock language="markdown">
+
 Wayne's best yet
 ================
 
@@ -47,7 +48,8 @@ and _Sands of Iwo Jima_, the Duke is brilliant
 in _Rio Bravo_.
 </codeblock>
 <p>“Adapted for different purposes” mostly means that people have created versions with specific syntax and semantics in addition to those of Gruber’s first version. For instance, the code sharing site GitHub has adopted “Git Hub flavored markdown” as the standard format for user-supplied information on the site, such as project descriptions and issues, and has added syntax specific to tracking issue numbers and code commits for projects, allowing the automatic generation of links between commits and the issues that relate to them. For example:</p>
-<codeblock language ="github_markdown">
+<codeblock language="github_markdown">
+
 Issue #135 was fixed in commit 8e8c6a0b4c9c41bd72fab5fd53e3d967e9688110.
 </codeblock>
 <p>Markdown is a simple <phrase><annotation type="concept">document-domain</annotation></phrase> language. While its semantics are essentially a subset of HTML, it is more squarely in the document domain than HTML since it lacks any ability to specify formatting or even to create tables (though various MarkDown flavors have added support for tables).</p>
@@ -61,7 +63,8 @@ Issue #135 was fixed in commit 8e8c6a0b4c9c41bd72fab5fd53e3d967e9688110.
 <title>Wiki markup</title>
 <p>Another popular lightweight format is Wiki markup, introduced by Ward Cunningham in 1995 as the writing format for WikiWikiWeb, the first Wiki.<citation type = "citation" value = "https://en.wikipedia.org/wiki/WikiWikiWeb"/> Wiki markup is similar to Markdown in many respects (most lightweight languages share the same basic syntax conventions, based on the imitation of formatted document features in plain text documents). What makes Wiki markup distinct is how it is tied into the operation of a Wiki. One of its most notable feature is how linking is handled. In the original WikiWikiWeb markup, and word with internal capitals was considered a “WikiWord” and instantly became a link to a page with that WikiWord as the title. Such a page was created automatically if it did not already exist. This was an extremely simple implementation of a <phrase><annotation type="algorithm">linking algorithm</annotation></phrase> based on annotation rather than the naming of resources.</p>
 <p>Different wikis have differences in the markup they support. Here is a small example of <phrase><annotation type="tool">MediaWiki</annotation></phrase> markup. (<phrase><annotation type="tool">MediaWiki</annotation></phrase>) is the system that runs <phrase><annotation type="website" specifically="wikipedia.org">Wikipedia</annotation></phrase>):</p>
-<codeblock language ="mediawiki">
+<codeblock language="mediawiki">
+
 "Take some more [[tea]]," the March Hare said to Alice, very earnestly.
 
 "I've had '''nothing''' yet," Alice replied in an offended tone, "so I can't take more."
@@ -79,7 +82,8 @@ Issue #135 was fixed in commit 8e8c6a0b4c9c41bd72fab5fd53e3d967e9688110.
 <title>reStructuredText</title>
 <p><phrase>reStrucutredText</phrase> is a lightweight hybrid markup language most often associated with the <phrase><annotation type="tool">Sphinx</annotation></phrase> documentation framework which was developed for documenting the Python programming language. We looked at reStructuredText briefly as an example of a hybrid markup language in <citation type = "nameref" value = "chapter.markup"/>.</p>
 <p>Similar to MarkDown, reStructuredText uses a plain text formatting approach to basic text structures. This part of the markup looks very natural because it uses characters and patterns that you might easily use to format a document if the only editor you had available were a plain text editor:</p>
-<codeblock language ="reStructuredText">
+<codeblock language="reStructuredText">
+
 Hard Boiled Eggs
 ================
 A hard boiled egg is simple and nutritious. 
@@ -103,7 +107,8 @@ Preparation
     5. Peel and serve.
 </codeblock>
 <p>But reStructuredText also has a feature called directives which is used to create markup with more complex semantics. Here, for example, is a directive for inserting an image:</p>
-<codeblock language ="reStructuredText">
+<codeblock language="reStructuredText">
+
 .. image:: images/harcboiledegg.png
    :height: 100
    :width: 200
@@ -116,7 +121,8 @@ Preparation
 <section>
 <title>ASCIIDoc</title>
 <p><phrase><annotation type="language">ASCIIDoc</annotation></phrase> is a lightweight markup language based on the structure of <phrase><annotation type="language"><annotation type="standard">DocBook</annotation></annotation></phrase>. It is intended for the same sort of document types for which you might choose DocBook, but allows you to use a lightweight syntax. In appearance it is very similar to MarkDown, as shown in this example from Wikipedia:</p>
-<codeblock language ="ASCIIDoc">
+<codeblock language="ASCIIDoc">
+
 = My Article
 J. Smith
 
@@ -145,7 +151,8 @@ Metals commonly used include:
 <section>
 <title>LaTeX</title>
 <p>LaTeX is a <phrase><annotation type="concept">document domain</annotation></phrase> markup language used extensively in academia and scientific publishing. It is not based on XML syntax but on the syntax of <phrase><annotation type="language">TeX</annotation></phrase>, a typesetting system developed by Donald Knuth in 1978.<citation type = "citation" value = "https://en.wikipedia.org/wiki/LaTeX"/> Here is an example of LaTeX, from Wikipedia:</p>
-<codeblock language ="LaTex">
+<codeblock language="LaTex">
+
 \documentclass[12pt]{article}
 \usepackage{amsmath}
 \title{\LaTeX}
@@ -174,17 +181,19 @@ Metals commonly used include:
 \end{document}
 </codeblock>
 <p>Here is how that markup is rendered:<citation type = "citation" value = "By The original uploader was Bakkedal at English Wikipedia - Own work, CC BY-SA 2.5, https://commons.wikimedia.org/w/index.php?curid=30044147"/></p>
-<insert item ="../graphics/Latex_example.xml" type ="image"/>
+<insert item="../graphics/Latex_example.xml" type="image"/>
 <p>It is the markup for the equation that shows why LaTeX is popular for academic and scientific publishing. While not exactly transparent, the markup is compact and functionally lucid for anyone with a little experience with it.</p>
 <p>Wikipedia offers a comparison of various math markup formats which shows how big a difference syntax can make to the lucidity of markup language in some cases.</p>
 <p>For the equation:</p>
-<insert item ="../graphics/Quadratic_formula.xml" type ="image"/>
+<insert item="../graphics/Quadratic_formula.xml" type="image"/>
 <p>The LaTeX markup is:</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 x=\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 </codeblock>
 <p>Whereas the XML-based <phrase><annotation type="language">MathML</annotation></phrase> version looks like this:</p>
-<codeblock language ="xml">
+<codeblock language="xml">
+
 &lt;math mode="display" xmlns="http://www.w3.org/1998/Math/MathML"&gt;
  &lt;semantics&gt;
   &lt;mrow&gt;
@@ -219,7 +228,7 @@ x=\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 &lt;/math&gt;
 </codeblock>
 <p>Clearly MathML was not designed with the idea that anyone would ever try to write it raw. It is intended to be the output of a graphical equation editor.<citation type = "idref" value = "1"/> You might well choose to use a graphical equation editor to create LaTeX math markup as well, but it is certainly possible to write it and read it in raw LaTeX.</p>
-<footnote id ="1">
+<footnote id="1">
 <p>Interestingly, MathML comes in two different flavors. Presentation MathML is a <phrase><annotation type="concept">media domain</annotation></phrase> language describing how an equation is presented. Content MathML is a <phrase><annotation type="concept">subject domain</annotation></phrase> language describing what it means.</p>
 </footnote>
 <p>LaTeX is not as lightweight a language as <phrase><annotation type="language">Markdown</annotation></phrase>. It’s markup is almost entirely explicit (except for paragraphs, which are delineated by blank lines just in Markdown. But it is certainly lighter weight in its syntax compared to XML-based languages and has much greater <phrase><annotation type="concept">functional lucidity</annotation></phrase>.  Sufficient functional lucidity to be able to write in raw markup rather than needing a graphical editor is the hallmark of a lightweight markup language. But LaTeX is barely out of the <phrase><annotation type="concept">media domain</annotation></phrase> in its structures, which limits it usefulness for structured writing.</p>
@@ -227,7 +236,8 @@ x=\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 <section>
 <title>Subject Domain Languages</title>
 <p>So far we have looked at languages that are primarily <phrase><annotation type="concept">document domain</annotation></phrase> oriented. The <phrase><annotation type="concept">document domain</annotation></phrase> is an obvious choice for a public language since the use of common document types like books and articles is widespread. But there are a number of public <phrase><annotation type="concept">subject domain</annotation></phrase> languages as well. One example that we have looked at before (<citation type = "nameref" value = "chapter.merge"/>) is JavaDoc. Here is the example we looked at there:</p>
-<codeblock language ="Java">
+<codeblock language="Java">
+
 /**
  * Validates a chess move.
  *

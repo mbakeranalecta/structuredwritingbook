@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter name ="chapter.management-domain">
+<chapter name="chapter.management-domain">
 <title>The Management Domain: an Intrusion</title>
 <annotations>
 <p>Concepts</p>
@@ -31,9 +31,10 @@
 <p>Why do I call the management domain an intrusion? Because while the subject, document, and media domains are about recording the content itself, the management domain is not about the content itself; it’s about the process of managing content.</p>
 <p>Suppose you run a company that publishes magazines, and you want to create a common store of recipes for use in all the magazines. However, different magazines have different requirements. <phrase><annotation type="italic">Wine Weenie</annotation></phrase> magazine needs to have a wine match with every recipe. <phrase><annotation type="italic">The Teetotaler's Trumpet</annotation></phrase>, naturally, wants a non-alcoholic suggestion.</p>
 <p><citation type = "idref" value = "ex.md-1"/> shows how you could handle this in the document domain:</p>
-<figure id ="ex.md-1">
+<figure id="ex.md-1">
 <title>Condition text markup (XML)</title>
-<codeblock language ="xml">
+<codeblock language="xml">
+
 &lt;section publication="Wine Weenie"&gt;
     &lt;title&gt;Wine match&lt;/title&gt;
     &lt;p&gt;Pinot Noir&lt;/p&gt;
@@ -45,19 +46,17 @@
 </codeblock>
 </figure>
 <p>This is an example of <phrase><annotation type="algorithm">conditional text</annotation></phrase>. The <code>publication</code> attribute on the <code>section</code> element says, display this text only in this publication. Conditional text structures are <phrase><annotation type="concept">management metadata</annotation></phrase>, which means they are in the <phrase><annotation type="concept">management domain</annotation></phrase>. They do not specify the formatting, organization, or subject matter of the document. They specify which publication the content should appear in, which is a content management decision.</p>
-<p>Content management decisions are always, from the writer’s point of view, <phrase>extended decisions</phrase>, not <phrase>core decisions</phrase>. It is not a decision that the writer has to make in order to write their content. It is a decision imposed on the writer’s task from elsewhere in the process. As such, the <phrase><annotation type="concept">management domain</annotation></phrase> is again an intrusion – an intrusion not only into the content but into the writer’s time and attention. Sometimes, the writer is the correct person to make management-domain decisions, but be aware that when you place the burden on them, you increase the complexity of the writing process and increasing the knowledge and skills required to write successfully. Wherever you can, look for alternatives to the <phrase><annotation type="concept">management domain</annotation></phrase>.</p>
+<p>Content management decisions are always, from the writer’s point of view, <phrase>extended decisions</phrase>, not <phrase>core decisions</phrase>. They are not decisions that writers have to make in order to write their content. They are decisions imposed on writers from elsewhere in the process. As such, the <phrase><annotation type="concept">management domain</annotation></phrase> is an intrusion not only into the content but also into the writer’s time and attention. Some management-domain decisions should be made by writers, but putting the burden on writers increases the complexity of the writing process and the knowledge and skills required to write successfully. Wherever you can, look for alternatives to the <phrase><annotation type="concept">management domain</annotation></phrase>.</p>
 <p>Any decision imposes two burdens: making the decision, which requires knowledge, and executing the decision, which requires skills. A conditional text system removes the execution of the decision (including or excluding the text at build time), but leaves the decision making (where and what to include) with the writer. But it also introduces new knowledge and skill requirements, since the writer has to know how to apply conditions and apply them correctly, which is not always a simple matter.</p>
-<p>This is a common pattern with management domain structures; the knowledge requirement they introduce is often greater then the one they factor out. When we factored out list formatting in the <phrase><annotation type="concept">document domain</annotation></phrase>, leaving the writer to record the fact that they were creating a list, this was a simple reduction of requirements, since the writer always had to make the decision to create a list. But here we are introducing something brand new to learn: conditional markup and its logic and behavior.</p>
+<p>This is a common pattern with management-domain structures; the knowledge requirement they introduce is often greater then the one they factor out. When we factored out list formatting in the <phrase><annotation type="concept">document domain</annotation></phrase>, leaving the writer to record the fact that they were creating a list, this was a simple reduction of requirements, since the writer always had to make the decision to create a list. But here we are introducing something brand new to learn: conditional markup and its logic and behavior.</p>
 <section>
 <title>Including boilerplate content</title>
 <p>Suppose you must include a standard warning statement with any content that describes a dangerous procedure. Structured writing partitions complexity by factoring out invariants, and the invariant here is that this warning statement must appear whenever you describe a dangerous procedure.</p>
 <p>Just as we extracted formatting information into a separate file when we moved content from the media domain to the document domain, we now extract the invariant warning from the document and place it in a separate file. Any place we want this warning to occur, we insert an instruction to include the contents of the file at that location. (see <citation type = "idref" value = "ex.md-2"/>).</p>
-<remark attribution ="MB">
-<p>I restored the original here because the revision did not seem clear and did not emphasize the parallelism of the basic techniques.</p>
-</remark>
-<figure id ="ex.md-2">
+<figure id="ex.md-2">
 <title>Include a warning in a dangerous procedure (SAM markup)</title>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 procedure: Blow stuff up
     &lt;&lt;&lt;(files/shared/admonitions/danger.sam)
     step: Plant dynamite.
@@ -68,9 +67,10 @@ procedure: Blow stuff up
 </figure>
 <p>In the SAM markup in <citation type = "idref" value = "ex.md-2"/>, <code>&lt;&lt;&lt;</code> is a command that includes the content of the file located at <code>files/shared/admonitions/danger.sam</code> in the source file replacing the <code>&lt;&lt;&lt;</code> command.</p>
 <p>The equivalent in XML would look something like <citation type = "idref" value = "ex.md-3"/>.</p>
-<figure id ="ex.md-3">
+<figure id="ex.md-3">
 <title>Include a warning in a dangerous procedure (XML markup)</title>
-<codeblock language ="XML">
+<codeblock language="XML">
+
 &lt;procedure&gt;
     &lt;title&gt;Blow stuff up&lt;/title&gt;
     &lt;xi:include href="files/shared/admonitions/danger.xml"/&gt;
@@ -82,22 +82,17 @@ procedure: Blow stuff up
 </codeblock>
 </figure>
 <p>Why is this operation part of the <phrase><annotation type="concept">management domain</annotation></phrase>, rather than the <phrase><annotation type="concept">document domain</annotation></phrase>? Because it deals with a system operation: locating a file in the system and loading its contents. If we were purely in the document domain, the writer would be the one performing this operation: finding the file with the warning in it, opening it, and copying the contents into the document. The include instruction is just that: an instruction. It is not a declaration about the subject matter or structure of a document, such as we find in <phrase><annotation type="concept">subject-domain</annotation></phrase> or document-domain markup. It is an instruction to a machine to perform an operation. The <phrase><annotation type="concept">management domain</annotation></phrase> consists of instructions, or the declaration of data, required to perform management functions.</p>
-<remark attribution ="MB">
-<p>Restored the third sentence above because the revision did not stress the transfer of responsibilities that is taking place from writer to algorithm.</p>
-</remark>
-<p>Different structured writing systems have different instruction sets for handling the situation described above. In <phrase><annotation type="language"><annotation type="standard">DITA</annotation></annotation></phrase>, for instance, this use case is handled using something called a <phrase><annotation type="structure" namespace="DITA">conref</annotation></phrase> or a <phrase><annotation type="structure" namespace="DITA">conkeyref</annotation></phrase>. DocBook uses a generic XML facility called <phrase><annotation type="tool">XInclude</annotation></phrase>, as in <citation type = "idref" value = "ex.md-3"/>.</p>
-<remark attribution ="MB">
-<p>In this case I restored the original second sentence simply because the original has rhythm and the revision did not. I know many of my sentences can be shortened slightly but they sometimes are the way they are because I hear the prose rhythm in my head and it throws me off when it is missing. I know not everyone hears prose rhythm or cares about it, but I often have to read a sentence twice if the rhythm is not right.</p>
-</remark>
+<p>Different structured writing systems have different instruction sets for handling the situation described above. In <phrase><annotation type="language"><annotation type="standard">DITA</annotation></annotation></phrase>, for instance, this use case is handled using something called a <phrase><annotation type="structure" namespace="DITA">conref</annotation></phrase> or a <phrase><annotation type="structure" namespace="DITA">conkeyref</annotation></phrase>. DocBook uses a generic XML facility called <phrase><annotation type="tool">XInclude</annotation></phrase>, which is shown in <citation type = "idref" value = "ex.md-3"/>.</p>
 </section>
 <section>
 <title>An alternative approach in the subject domain</title>
 <p>One downside of the management-domain include instruction is that writers must have system knowledge to use it correctly. However, the use of conditional expressions or include instructions is not just a problem for writers, it also complicates <phrase><annotation type="algorithm">change management</annotation></phrase> and <phrase><annotation type="process">content management</annotation></phrase> by distributing management-domain structures such as conditions and file paths throughout your content. Management-domain structures encode management decisions in the content itself. Changing those decisions means changing management structures all over the content set.</p>
 <p>Is there a way to partition management complexity from authoring and keep management decisions out of the content? In many cases this can be accomplished using the <phrase><annotation type="concept">subject domain</annotation></phrase>.</p>
 <p><citation type = "idref" value = "ex.md-4"/> shows how you might approach the two-magazines problem in the subject domain:</p>
-<figure id ="ex.md-4">
+<figure id="ex.md-4">
 <title>Subject domain alternative for conditional content</title>
-<codeblock language ="xml">
+<codeblock language="xml">
+
 &lt;wine-match&gt;Pinot Noir&lt;/wine-match&gt;
 &lt;beverage-match&gt;Lemonade&lt;/beverage-match&gt;
 </codeblock>
@@ -106,13 +101,14 @@ procedure: Blow stuff up
 <p>Every time you move a decision out of the content and into an algorithm, you accomplish two things: you make authoring easier, and you preserve the ability to make different decisions without changing content. Factoring out the management domain is a big win on both fronts.</p>
 <p>Let’s see if we factor out the decision involved in including the warning in dangerous procedures. As we saw in <citation type = "nameref" value = "chapter.subject-domain"/>, factoring out invariant content is a feature of the subject domain. In this case, the invariant content comes from the rule: A dangerous procedure must have a standard warning.</p>
 <p>The management-domain approach allow writers to insert a standard warning that is stored in one place.<citation type = "idref" value = "fn.md-reuse"/> Notice that the management-domain markup does not encapsulate our invariant rhetorical rule that dangerous procedures must have a standard warning. It simply provides a generic mechanism for inserting content from an external file. The writer must still remember and execute the rule about dangerous procedures.</p>
-<footnote id ="fn.md-reuse">
-<p>This approach is a form of <phrase><annotation type="concept">content reuse</annotation></phrase>, an algorithm we will look at in <citation type = "nameref" value = "chapter.reuse"/>.</p>
+<footnote id="fn.md-reuse">
+<p>This approach is a form of <phrase><annotation type="concept">content reuse</annotation></phrase>, an algorithm discussed in <citation type = "nameref" value = "chapter.reuse"/>.</p>
 </footnote>
 <p>The subject-domain approach, on the other hand, is all about the invariant rhetorical rule itself. Specifically, it expresses the aspect of the subject domain that triggers the rule: whether a procedure is dangerous or not. <citation type = "idref" value = "ex.md-5"/> shows how you might mark up this information.</p>
-<figure id ="ex.md-5">
+<figure id="ex.md-5">
 <title>Subject-domain markup for a warning notice</title>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 procedure: Blow stuff up
     is-it-dangerous: yes
     step: Plant dynamite.
@@ -121,38 +117,34 @@ procedure: Blow stuff up
     step: Press the big red button.
 </codeblock>
 </figure>
-<p>This markup identifies the procedure as dangerous, a fact about the subject matter, and one that our rhetorical standards require us to mention. This partitions the requirement, by retaining the information on which our invariant rule is based, but it factors out the action to be taken. Rather than making authors remember that a warning is required, locate the warning file, and include a reference to the file, we delegate those decisions to the <phrase><annotation type="concept">publication algorithm</annotation></phrase>. The algorithm, not the writer, must remember to include the material in <code>files/shared/admonitions/danger</code> whenever the <code>is-it-dangerous</code> field of a <code>procedure</code> structure is set to <code>yes</code>. Algorithms are much better at this sort of task than humans are.</p>
-<remark attribution ="MB">
-<p>Edited the first sentence of the above para because it is important to emphasize the the subject domain records facts about the subject matter (including ones that are not always printed) and that subject domain structured model rhetorical requirements.</p>
-</remark>
-<p>Of course, the writer still has to remember to set <code>is-it-dangerous</code> to <code>yes</code> when they write a procedure. But you can make it much easier for the them to remember this by making <code>is-it-dangerous</code> a required field in the procedure structure and raising an error if that field is not included. This transfers the complexity of remembering the requirement and fulfilling it from the writer to the <phrase><annotation type="process">conformance</annotation></phrase> and <phrase><annotation type="algorithm">publication</annotation></phrase> algorithms.</p>
-<p>This approach simplifies the writers job because they cannot complete a procedure without supplying the required information. In addition, they don’t need to know anything about how the content management system works, what warning text is required, or where the text is located. They are recording a fact about the subject, not giving an instruction or interpreting a style guide. This is a much more efficient partitioning of the requirement that does a better job of distributing complexity of this important rule to the person or process best able to handle it, thus minimizing the possibility that this complexity could get dumped on the reader, for whom there might be potentially painful consequences.</p>
-<remark attribution ="MB">
-<p>The emphasis on the contrast of responsibilities and the potential consequences of error is important here so I have restored it. Yes, the point about the danger to the reader is repeated below, but that is deliberate. The emphasis is important.</p>
-</remark>
-<p>One the other hand, this approach only factors out the reuse of one particular piece of content – the warning for dangerous procedures. If you have multiple invariant rhetorical rules about different kinds of subject matter, you would need separate subject-domain structures for each of them, whereas a single management-domain include instruction would let the writer handle them all.</p>
+<p>This markup identifies the procedure as dangerous, a fact about the subject matter that our rhetorical standards require us to mention. This partitions the requirement, by retaining the information on which our invariant rule is based, but it factors out the action to be taken. Rather than making authors remember that a warning is required, locate the warning file, and include a reference to the file, we delegate those decisions to the <phrase><annotation type="concept">publication algorithm</annotation></phrase>. The algorithm, not the writer, must remember to include the material in <code>files/shared/admonitions/danger</code> whenever the <code>is-it-dangerous</code> field of a <code>procedure</code> structure is set to <code>yes</code>. Algorithms are much better at this sort of task than humans are.</p>
+<p>Of course, writers still must remember to set <code>is-it-dangerous</code> to <code>yes</code> when they write a procedure. But you can make it much easier for them to remember this requirement by making <code>is-it-dangerous</code> a mandatory field in the procedure structure and raising an error if the field is not included. This transfers the complexity of remembering the requirement and fulfilling it from the writer to the <phrase><annotation type="process">conformance</annotation></phrase> and <phrase><annotation type="algorithm">publication</annotation></phrase> algorithms.</p>
+<p>With this approach, the writers cannot complete a procedure without supplying the required information. This removes a decision, simplifying the writer’s job. In addition writers don’t need to know how the content management system works, what warning text is required, or where the text is located. They simply record a fact about the subject but they don’t need to give an instruction or interpret a style guide. This partitioning is more efficient and does a better job of distributing the complexity of this important rule to the person or process best able to handle it, thus minimizing the possibility that this complexity could get dumped on the reader, for whom there might be painful consequences.</p>
+<p>One the other hand, this approach only factors out the reuse of one particular piece of content – the warning for dangerous procedures. If you have multiple invariant rhetorical rules about different kinds of subject matter, you need a separate subject-domain structure for each of them, whereas a single management-domain include instruction would let the writer handle them all.</p>
 <p>On the other other hand, if you have many invariant rules, and you expect writers to remember all of them, you are dumping an awful lot of complexity on your writers, and you are going to limit your pool of writers to a few highly trained individuals. And those individuals are still likely to miss some instances, dumping this dangerous complexity on the reader.</p>
 </section>
 <section>
 <title>Hybrid approaches</title>
 <p>It is not always an either/or decision to use pure <phrase><annotation type="concept">management-domain</annotation></phrase> or pure <phrase><annotation type="concept">subject-domain</annotation></phrase> approaches. Management-domain structures tend to be used in generic <phrase>document-domain languages</phrase>, since such languages are not designed to be specific to any particular subject matter. Nonetheless, such languages often have roots in particular fields and sometimes include <phrase><annotation type="concept">subject-domain</annotation></phrase> structures from those fields. Both DocBook and DITA, for instance, originated in the field of software documentation, and both include structures, such as code blocks, that are related to the subject of software.</p>
 <p>Some languages mix subject-domain structures into their management structures. One example is the <phrase><annotation type="structure" specifically="@product" namespace="DITA">product</annotation></phrase> attribute, which is part of DITA’s conditional-text processing system.</p>
-<p>DITA lets you add the <phrase><annotation type="structure" specifically="@product" namespace="DITA">product</annotation></phrase> attribute to a wide variety of elements. You can then have the build system include or exclude elements in a particular output based on the value of the product attribute. <citation type = "idref" value = "ex.md-7"/> shows an example of the DITA product attribute.</p>
-<figure id ="ex.md-7">
+<p>DITA lets you add the <phrase><annotation type="structure" specifically="@product" namespace="DITA">product</annotation></phrase> attribute to a wide variety of elements. Your build system can then include or exclude elements in a particular output based on the value of that attribute. <citation type = "idref" value = "ex.md-7"/> shows an example of the DITA <phrase><annotation type="structure" specifically="@product" namespace="DITA">product</annotation></phrase> attribute.</p>
+<figure id="ex.md-7">
 <title>DITA product attribute example</title>
-<codeblock language ="DITA">
-&lt;p&gt;The car seats 
-&lt;ph product="CX-5"&gt;5&lt;/ph&gt;&lt;ph product="CX-9"&gt;7&lt;/ph&gt;
+<codeblock language="DITA">
+
+&lt;p&gt;
+the car seats &lt;ph product="CX-5"&gt;5&lt;/ph&gt;&lt;ph product="CX-9"&gt;7&lt;/ph&gt;
 &lt;/p&gt;
 </codeblock>
 </figure>
 <p>DITA can afford to use this bit of subject-domain markup because product variations are a common reason for using conditional text processing in technical communication, the area for which DITA was created.<citation type = "idref" value = "fn.md-specialize"/></p>
-<footnote id ="fn.md-specialize">
+<footnote id="fn.md-specialize">
 <p>DITA can add other subject-domain attributes for conditional processing through a process called <phrase><annotation type="concept"><annotation type="italic">specialization</annotation></annotation></phrase>. <citation type = "nameref" value = "chapter.extensible"/> has additional information about DITA specialization.</p>
 </footnote>
-<p>I call this a hybrid approach because the DITA product attribute does not exist merely to declare that a piece of text applies to a particular product. It is a conditional-processing attribute. That is, it is an instruction, even though it is phrased as a subject-domain declaration.</p>
+<p>I call this a hybrid approach because the DITA <phrase><annotation type="structure" specifically="@product" namespace="DITA">product</annotation></phrase> attribute does not exist merely to declare that a piece of text applies to a particular product. It is a conditional-processing attribute. That is, it is an instruction, even though it is phrased as a subject-domain declaration.</p>
 <p>To appreciate the difference, consider another approach to documenting multiple versions of a product. Rather than generating a separate document for each product variant, you could create a single document that covers all product variants and highlights the differences. Pure subject-domain markup would support either approach by simply recording the data for each variant:</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 seats:
     CX-5: 5
     CX-9: 7
@@ -162,20 +154,15 @@ seats:
 <p>The CX-5 seats 5 and the CX-9 seats 7.</p>
 </blockquote>
 <p>The product attribute does not provide this flexibility:</p>
-<codeblock language ="DITA">
+<codeblock language="DITA">
+
 &lt;p&gt;The car seats 
 &lt;ph product="CX-5"&gt;5&lt;/ph&gt;&lt;ph product="CX-9"&gt;7&lt;/ph&gt;
 &lt;/p&gt;
 </codeblock>
-<p>This markup is only designed to produce a CX-5 or CX-9 specific document. It is not designed to support the production of a document that covers both cars at once because it does not specify that the values 5 and 7 are numbers of seats. That information is in the text, but not in a form that a publishing algorithm could reliably locate and act on.</p>
-<remark attribution ="MB">
-<p>The emphasis on the design intent of the markup is important here so I have restored the original text.</p>
-</remark>
-<p>Also, no writer would expect this document-domain markup to be used to create a single document covering both cars.  It is not what the author is told the markup means. Rather than simply declaring facts about each car, this markup was designed to produce a document about one car or the other, not both. It is conditional-text markup and, therefore, an instruction. Really, is it a contraction of the more explicitly imperative form (not actually used in DITA):</p>
-<codeblock language ="xml">
-&lt;ph condition="product=CX-5"&gt;5&lt;/ph&gt;
-</codeblock>
+<p>This markup is designed to produce only a CX-5 or a CX-9 specific document. It is not designed to produce a document that covers both cars at once, because it does not specify that the values 5 and 7 are numbers of seats. That information is in the text, but not in a form that a publishing algorithm could reliably locate and act on.</p>
+<p>Also, no writer would expect this document-domain markup to be used to create a single document covering both cars. No writer would interpret the markup to mean this. Rather than declaring facts about each car, this markup was designed to produce a document about one car or the other, not both. It is conditional-text markup and, therefore, an instruction.</p>
 <p>While the introduction of subject-domain names into <phrase><annotation type="concept">management domain</annotation></phrase> structures provides an appropriate bit of semantic sugar for authors, this hybrid approach really remains firmly in the management domain.</p>
-<p>We will see many more examples of the management domain, including cases where there is and is not a <phrase><annotation type="concept">subject domain</annotation></phrase> alternative, in the following chapters.</p>
+<p>In the following chapters we will see many more examples of the management domain, including cases where there is and is not a <phrase><annotation type="concept">subject-domain</annotation></phrase> alternative.</p>
 </section>
 </chapter>

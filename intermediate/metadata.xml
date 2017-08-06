@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter name ="chapter.metadata">
+<chapter name="chapter.metadata">
 <title>Metadata</title>
 <annotations>
 <p>Concepts</p>
@@ -24,19 +24,21 @@
 <p>We live in the age of metadata, so much so that the word metadata has almost come to replace the word data itself and has come to be applied to almost any form of data that describes a resource. For example, we hear a lot about law enforcement getting access to metadata related to phone calls, which simply means the data about which number called which number and for how long.</p>
 <p>The standard definition of metadata is data that describes data, but that definition misses the central point. Metadata does not merely describe data, metadata creates data. Metadata turns an undifferentiated set of values into useful data by constraining the interpretation of those values.</p>
 <p>In the <phrase><annotation type="concept">document domain</annotation></phrase>, the ingredients of a recipe are just list items. The content of those list items are just strings of characters.</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 section: Ingredients
     * 12 eggs
     * 2 qt water
 </codeblock>
 <p>Adding <phrase><annotation type="concept">subject domain</annotation></phrase> markup allows us to specify to algorithms exactly what these strings mean.</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 ingredients:: ingredient, quantity, unit
     eggs, 12, each
     water, 2, qt
 </codeblock>
 <p>This subject domain markup is metadata, and it turns what were just list items into a set of ingredient data. It is not that the data existed and the metadata came along afterward to describe it. It is that the data exists as data only because the metadata is there to describe it. While a human reader can recognize that the values in the list are ingredients, based on their familiarity with the recipe format, an algorithm sees only strings of characters until we apply the metadata that lets it recognize them as ingredients.<citation type = "idref" value = "1"/></p>
-<footnote id ="1">
+<footnote id="1">
 <p>I am talking here about ordinary algorithms: simple rules written by humans to govern the processing of well defined data. As I noted in <citation type = "nameref" value = "chapter.quality"/>, advances in AI are making inroads on enabling robots to read the way humans do. An AI is an algorithm, and a sufficiently advanced AI algorithm might not need this level of explicit metadata to recognized list items are ingredients. Technically, though, such an AI would still be depending on metadata to interpret this data. It would just be using the same metadata that humans use, which we might fairly, if briefly, characterize as a combination of grammar and memory. Until such AIs are available to us, though, structured writing allows us to add more explicit metadata to content to make it accessible to simpler algorithms.</p>
 </footnote>
 <p>Structured writing is writing that obeys constraints and that records the constraints it obeys, so as to create an interface between partitions in your content system. In other words, structured writing is the application of metadata to content which turns content into data by constraining the interpretation of the content. If structured writing is writing that obeys constraints and records the constraints it obeys,  Metadata is the means by which those constraints are recorded. Metadata constrains the interpretation of values in content, making them accessible as data.</p>
@@ -47,7 +49,8 @@ ingredients:: ingredient, quantity, unit
 <section>
 <title>The recursive nature of metadata</title>
 <p>Metadata is a confusing concept because metadata is recursive. If metadata is the data that describes (and thereby creates) data, it is also data itself. And since data is created by metadata, this means that metadata is itself created by metadata. In other words, if the line <code>ingredients:: ingredient, quantity, unit</code> turns the ingredient lines into metadata in this markup:</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 ingredients:: ingredient, quantity, unit
     eggs, 12, each
     water, 2, qt
@@ -76,7 +79,8 @@ ingredients:: ingredient, quantity, unit
 <p>In many way, therefore, an ontology is an attempt to do for algorithms what content does for humans. After all, one of the main reasons that we read is so that we can understand the world better, understand what various objects and institutions are and how they relate to each other, statically and in action, so that we can decide what to do.</p>
 <p>In some sense, therefore, ontology is the ultimate in <phrase><annotation type="concept">subject domain</annotation></phrase> markup. Indeed, one should also be able to generate human-readable content from an ontology, given a sufficiently sophisticated algorithm and a sufficiently sophisticated ontology.</p>
 <p>All of this is very much outside our scope in this book. <phrase><annotation type="concept">Subject domain</annotation></phrase> markup is an attempt to capture certain aspects of the subject matter of a work. But it is not an attempt to model the argument of a work. Consider the passage:</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 In {Rio Bravo}(movie), {the Duke}(actor "John Wayne") 
 plays an ex-Union colonel.
 </codeblock>

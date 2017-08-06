@@ -28,7 +28,8 @@
 <p>Not all content can be meaningfully moved into the subject domain. The subject domain require a repeatable rhetorical structure. Sometimes the nature of your content, or your subject matter, or your argument does not lend itself to a repeatable structure. In those cases, the best you can do is work in the document domain. However, you can add subject domain annotations and indexing – marking up significant subjects in your content by their type and value – across all your subject domain and document domain content, allowing you to apply the conformance, change management, linking, and information architecture algorithms across your entire body of content.</p>
 <p>But as we noted in <citation type = "nameref" value = "chapter.blocks"/>, you can move a lot of your content into the subject domain, even if it does not currently obey a closely defined rhetorical type, and you can move your content into smaller <phrase><annotation type="structure">rhetorical blocks</annotation></phrase> that are easier to apply a repeatable rhetorical structure to. In this chapter we will walk through the steps of defining a repeatable rhetorical type using the recipe example we have been looking at throughout the book.</p>
 <p>To begin with, lets take a step back and look at what a recipe might look like if it were not presented in its familiar rhetorical pattern:</p>
-<codeblock language ="reStructuredText">
+<codeblock language="reStructuredText">
+
 Hard Boiled Eggs
 ================
 A hard boiled egg is simple and nutritious. 
@@ -39,7 +40,8 @@ in cold water to stop cooking. Peel and
 serve. Prep time, 15 minutes. Serves 6.
 </codeblock>
 <p>If were were discerning the rhetorical structure of a recipe for the first time we might then look at several examples and try making dishes ourselves, or observe others doing so, and conclude that it was easier to find and follow a recipe if the ingredients were listed separately and the preparation steps were presented one at a time, and we would come up with a structure that looked something like this:</p>
-<codeblock language ="reStructuredText">
+<codeblock language="reStructuredText">
+
 Hard Boiled Eggs
 ================
 A hard boiled egg is simple and nutritious. 
@@ -63,7 +65,8 @@ Preparation
     5. Peel and serve.
 </codeblock>
 <p>At this point we have discovered the basic rhetorical pattern of a recipe, but we have not done anything to provide formal constraints for authors to make the format repeatable, so we create a rhetorical block that we name <code>recipe</code> and require that it consist of three semantic blocks called <code>introduction</code>, <code>ingredients</code>, and <code>preparation</code>, factoring out the titles of those sections in the process. We also define that the ingredients will be presented as a bulleted list and the preparation as a numbered lists (both document domain semantic blocks, composed of structural blocks that we need not delve into here).</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious. 
@@ -80,7 +83,8 @@ recipe: Hard Boiled Egg
 </codeblock>
 <p>So far what we have is a basic presentation-oriented subject domain content type. It specifies how to present a recipe.  This structure provide guidance for authors, which helps with repeatability, at the top level, but when we look closer we realize that there are some other things we would like to make repeatable in the rhetorical model, so that we make sure they are included every time.</p>
 <p>Two obvious items are prep time and the number of servings. They are important information that we think should be in every recipe, but currently they are only in the introduction, where writers could forget them. Also, algorithms can’t access them, so if we wanted to make a collection of recipes that took less than 30 minutes to make, we would not be able to find them algorithmically. So we pull those items out into separate fields. Now we can verify that they are included and algorithms can find the information (in other words, we have constrained the interpretation of this information).</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious. 
@@ -97,7 +101,8 @@ recipe: Hard Boiled Egg
     serves: 6
 </codeblock>
 <p>But if we look a little closer we can find other information that we might want to make sure is provided consistently and repeatable, and made accessible to algorithms, and that we might need to differentially single source in different media: the list of ingredients. There are actually three elements to a ingredient listing, the name and quantity of the ingredient, and the unit of measurement for that quantity. Different units of measure are used for different types of ingredients and for large and small quantities in cooking, so we have to specify the unit of measure each time. So we use metadata to turn the list of ingredients into a piece of data:</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious.
@@ -117,7 +122,8 @@ recipe: Hard Boiled Egg
 <p>Usually during this process, people start to say things like “Wait, shouldn’t we tell them X?” Sometimes X is included in one or two of the examples that you are looking at and you realize it would be useful in all of them. Sometimes it occurs to people for the first time that X might be valuable. The process of formalizing the information you are proposing to offer often produces the realization that there is valuable information that you have not been providing or not providing consistently in your current content.</p>
 <p>Also, it is at this stage that you think about differential single sourcing, where you might want to capture content that might be presented differently in different domains, and about reuse scenarios in which you night want to capture information that might presented in one publication but not another.</p>
 <p>So at this point we add in wine and beverage matches and nutritional information to the model:</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious.
@@ -150,7 +156,8 @@ recipe: Hard Boiled Egg
         protein: 6 g               
 </codeblock>
 <p>Once we are satisfied that we have got the overall structure of the <phrase><annotation type="structure">rhetorical block</annotation></phrase> correct, it is time to think about subject annotation. We know that there are a number of algorithms, from linking and information architecture to validation and terminology control that depend on the clear annotation of significant subjects mentioned in the text. So we go through the text looking for mentions of subjects related to cooking. We find that there are mentions of food, utensils, and common cooking tasks, so we add annotation markup for them to our model:</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled {egg}(food) is simple and nutritious.
@@ -187,7 +194,8 @@ recipe: Hard Boiled Egg
 <p>Finally, you may want to think about whether there is any management domain metadata that you need to add to the model. Usually this will be for management or tracking purposes, and it depends on what decisions you have made about where this type of metadata belongs in your system, in order to best partition the complexity of content management in your system.</p>
 <p>This metadata may not be part of any current content examples you are looking at. This should be the last step because once you have formalized the rest of the model as you may find that the subject domain data you have delineated is usable for management and tracking purposes as well, so you won’t need to add additional fields just for management purposes. For instance, lots of the <phrase><annotation type="concept">subject domain</annotation></phrase> information that is already formalized in the model can be used for managing which recipes you include in particular publications, such as quick and easy meals (less than 20 minutes prep time, fewer than 6 ingredients, fewer than 5 steps) or a low-cal vegetarian cookbook (fewer than 160 calories, no meat ingredients).</p>
 <p>This example adds some basic tracking metadata:</p>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 recipe: Hard Boiled Egg
     author: bcrocker
     rights: full

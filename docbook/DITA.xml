@@ -58,37 +58,44 @@
 <db:para>Specialization aware processing algorithms then match structures based on the attributes that define it place in the specialization hierarchy.</db:para>
 <db:para>Specialization takes advantage of a feature of several of the XML schemas languages, the ability to declare default attributes for an element. A default attribute is one that is added to all instance of the element by the parser. In other words, if an element <db:code>foo</db:code> has a default attribute <db:code>bar</db:code> with a default value of “bat” then when the author types”</db:para>
 <db:programlisting language="xml">
+
 &lt;foo&gt;
 </db:programlisting>
 <db:para>The parser reports this to the application as if they had typed:</db:para>
 <db:programlisting language="xml">
+
 &lt;foo bar="bat"&gt;
 </db:programlisting>
 <db:para>Which in turn allows you to write an algorithm that matches the element when the attribute has a certain value:</db:para>
 <db:programlisting language="pseudo">
+
 match foo when attribute bar = "bat"
 </db:programlisting>
 <db:para>The usual reason for this using this facility is to provide a default value for an attribute that the author may sometimes override. But DITA uses it for something different. DITA uses it to show that an element is a specialization of another element.</db:para>
 <db:para>For instance, the <db:code>step</db:code> attribute of the <db:code>task</db:code> topic type is a specialization of the <db:code>li</db:code> element in the <db:code>topic</db:code> topic type so it has a default <db:code>class</db:code> attribute with the value <db:code>- topic/li task/step</db:code>. So when an author writes:</db:para>
 <db:programlisting language="DITA">
+
 &lt;task&gt;
     ...
     &lt;step&gt;
 </db:programlisting>
 <db:para>The processing algorithm sees:</db:para>
 <db:programlisting language="DITA">
+
 &lt;task class="- topic task"&gt;
     ...
     &lt;step class="- topic/li task/step"&gt;
 </db:programlisting>
 <db:para>This means that if you have a publishing algorithm like this:</db:para>
 <db:programlisting language="pseudo">
+
 match * when attribute class contains "topic/li"
 create li
 </db:programlisting>
 <db:para>This rule will match either the li element in a topic topic or the step element in a task topic. Thus the specialized topic type is matched by the algorithm for the base topic type. This means you don’t necessarily have to write a new algorithm to publish a specialized topic type. In an algorithm where this rule is present, steps and list items will be formatted the same way.</db:para>
 <db:para>You may want a new algorithm, of course, in which case you could write this rule:</db:para>
 <db:programlisting language="pseudo">
+
 match * when attribute class contains "task/step"
     output "Step: " + position
 </db:programlisting>
@@ -111,6 +118,7 @@ match * when attribute class contains "task/step"
 <db:para>DITA takes it name from its information typing mechanism, called specialization (a reference to Darwin’s description of the evolution through the specialization of species to adapt to their environments). As we saw, a schema allows you to define a document type by specifying the structures that it contains. A schema starts from scratch and defines all the structures. Specialization, by contrast, starts with an existing schema and adds new structures as specialized version of existing ones.</db:para>
 <db:para>For example, if you have an existing structure that defines a list structure consisting of list items, you can specialize this to create a procedure structure consisting of steps.</db:para>
 <db:programlisting>
+
 ol --&gt; procedure
     li --&gt; step
 </db:programlisting>

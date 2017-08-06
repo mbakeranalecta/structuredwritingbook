@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter name ="chapter.subject-domain">
+<chapter name="chapter.subject-domain">
 <title>Writing in the Subject Domain</title>
 <annotations>
 <p>Concepts</p>
@@ -28,9 +28,10 @@
 <p>The <phrase><annotation type="concept">subject domain</annotation></phrase> is concerned with the subject matter of a text, including both the rhetoric of a subject – the way information on a subject is expressed and presented for a particular audience and purpose – and the identification of subjects expressed in the content.</p>
 <p>Some of the most important decisions a writer makes are rhetorical ones: what to say and how to say it. In the <phrase><annotation type="concept">document domain</annotation></phrase>, the writer makes all these decisions, but they don’t explicitly record them. They record only the text that results from making those decisions. In the subject domain, however, the writer record exactly what they are writing about.</p>
 <p>A recipe is a useful example for illustrating the subject domain. <citation type = "idref" value = "ex.subj-restructured"/> is a recipe written in <phrase><annotation type="language">reStructuredText</annotation></phrase>, a lightweight general purpose <phrase><annotation type="concept">document domain</annotation></phrase> markup language:</p>
-<figure id ="ex.subj-restructured">
+<figure id="ex.subj-restructured">
 <title>Recipe for hard-boiled eggs marked up in reStructuredText</title>
-<codeblock language ="reStructuredText">
+<codeblock language="reStructuredText">
+
 Hard-Boiled Eggs
 ================
 A hard-boiled egg is simple and nutritious. 
@@ -55,9 +56,10 @@ Preparation
 </codeblock>
 </figure>
 <p>In <phrase><annotation type="language">reStructuredText</annotation></phrase>, text underlined with equals signs is a major heading and text underlined with dashes is a minor heading. You create a table by using equals signs to mark the beginning and end of the table and the boundary between the table head and the table body. You place each row on a new line and mark columns by putting spaces in the rows of equals signs. You create ordered lists by putting numbers in front of lines of text. The equivalent HTML document to <citation type = "idref" value = "ex.subj-restructured"/> would look like <citation type = "idref" value = "ex.subj-html"/>.</p>
-<figure id ="ex.subj-html">
+<figure id="ex.subj-html">
 <title>Recipe for hard-boiled eggs marked up in HTML</title>
-<codeblock language ="HTML">
+<codeblock language="HTML">
+
 &lt;html&gt;
     &lt;h1&gt;Hard-Boiled Eggs&lt;/h1&gt;
     
@@ -96,9 +98,10 @@ Preparation
 </figure>
 <p>The document shown in <citation type = "idref" value = "ex.subj-html"/> follows the normal rhetorical pattern of a recipe. That is, it has all the pieces of information a recipe normally has, in the order they normally occur in a recipe: introduction, list of ingredients, preparation steps. However, it does not record the fact that it follows this rhetorical pattern. There is nothing in the markup to say that this is not a novel, a car manual, or a knitting pattern. Nor does the markup constrain a writer to follow the normal rhetorical pattern of a recipe while writing.</p>
 <p>Moving this document to the subject domain allows you to impose these rhetorical constraints and requires the writer to record that they have followed them. Neither <phrase><annotation type="language">reStructuredText</annotation></phrase> nor <phrase><annotation type="language"><annotation type="standard">HTML</annotation></annotation></phrase> gives you a way to do that, so you need a different markup language. <citation type = "idref" value = "ex.subj-sam"/> shows what that might look like:</p>
-<figure id ="ex.subj-sam">
+<figure id="ex.subj-sam">
 <title>Recipe for hard-boiled eggs marked up in a subject-domain language</title>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 recipe: Hard-Boiled Egg
     introduction:
         A hard-boiled egg is simple and nutritious. 
@@ -122,9 +125,10 @@ recipe: Hard-Boiled Egg
 <p>This partitioning of tasks requires the writer to record enough information for the publishing algorithm to do its job. Here the presence of the <code>ingredients</code> and <code>presentation</code> sections in the recipe structure provides the information the algorithm needs to insert the appropriate titles.</p>
 <p>By factoring out titles, you also factor out the constraint on what those titles must be. You don’t need to remember the title text, and a whimsical writer can no longer decide to re-title these sections “Stuff you need,” “Stuff you do,” or some other variant. And you can change these titles across all recipes, including those that are already written, by changing the algorithm.</p>
 <p>If you publish a lot of recipes, you probably have many more constraints to impose. For instance, you might have a constraint that every recipe must state its preparation time and the number of people it serves. In our subject-domain markup, we can enforce and record that constraint by moving that information from the introduction section to separate fields (see <citation type = "idref" value = "ex.subj-add-constraint"/>).</p>
-<figure id ="ex.subj-add-constraint">
+<figure id="ex.subj-add-constraint">
 <title>Recipe with preparation time and servings added</title>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious.
@@ -149,9 +153,10 @@ recipe: Hard Boiled Egg
 <p>Beyond factoring out constraints, using <phrase><annotation type="concept">subject-domain</annotation></phrase> markup enables some interesting publishing possibilities. For instance, you can easily create a cookbook of recipes that take 30 minutes or less, because you can query your recipes and select just those where the <code>prep-time</code> field has a value of 30 minutes or less.</p>
 <p>There other elements of presentation that you can factor out of the recipe structure. For example, the reStructuredText version in <citation type = "idref" value = "ex.subj-restructured"/> presents ingredients in a table, and the recipe structure in <citation type = "idref" value = "ex.subj-sam"/> uses a simple list. The block that contains the list is labeled “ingredients,” but the list is just an ordinary unordered list. The ingredient list in a recipe has constraints, but the markup doesn’t impose or record those constraints.</p>
 <p>You generally define each ingredient in a recipe using three pieces of information: the name of the ingredient, the quantity, and the unit of measure used to express the quantity. These can be presented as a list or a table. To factor out the presentation choice, you can create an ingredient structure that calls out each piece of information separately (see <citation type = "idref" value = "ex.subj-ingredient-1"/>).</p>
-<figure id ="ex.subj-ingredient-1">
+<figure id="ex.subj-ingredient-1">
 <title>Subject-domain markup for ingredients</title>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 ingredients:
     ingredient: 
         name: eggs
@@ -164,9 +169,10 @@ ingredients:
 </codeblock>
 </figure>
 <p><citation type = "idref" value = "ex.subj-ingredient-2"/> shows a shortcut that makes this markup less verbose. (This is a markup syntax named <phrase><annotation type="language">SAM</annotation></phrase> that I will talk about later).</p>
-<figure id ="ex.subj-ingredient-2">
+<figure id="ex.subj-ingredient-2">
 <title>Subject-domain shortcut for ingredient markup</title>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 ingredients:: ingredient, quantity, unit
     eggs, 12, each
     water, 2, qt
@@ -178,9 +184,10 @@ ingredients:: ingredient, quantity, unit
 <title>Using subjects to establish context</title>
 <p>In <citation type = "nameref" value = "chapter.document-domain"/>, I noted that you can use context to identify the role that structures play in a document, which allows you to get away with fewer structures. For instance, you can use a single <code>title</code> tag for all titles because you can differentiate different types of titles from the context in which they occur. The same is true with subject-domain structures. They can provide context that allows you to treat basic text structures differently.</p>
 <p>Consider our markup language for recipes (<citation type = "idref" value = "ex.subj-recipe-sam"/>).</p>
-<figure id ="ex.subj-recipe-sam">
+<figure id="ex.subj-recipe-sam">
 <title>Subject-domain markup for recipes</title>
-<codeblock language ="sam">
+<codeblock language="sam">
+
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious.

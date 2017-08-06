@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter name ="chapter.publishing">
+<chapter name="chapter.publishing">
 <title>Publishing</title>
 <annotations>
 <p>Concepts</p>
@@ -61,9 +61,10 @@
 </index>
 <p>There is actually a fifth algorithm in the publishing chain, which we can call the <phrase><annotation type="algorithm">rendering algorithm</annotation></phrase>. The rendering algorithm is the one responsible for actually placing the right dots on the right surface, be that paper, screen, or a printing plate. But this is a low-level device-specific algorithm and no one in the structured writing business is likely to be involved in writing rendering algorithms. The closest we ever get is the next step up, the <phrase><annotation type="algorithm">encoding algorithm</annotation></phrase>.</p>
 <p>The rendering algorithm requires some form of input to tell it where to place the dots. In writing, this usually comes in the form of something called a <phrase><annotation type="tool">page description language</annotation></phrase>. Like it sounds, this is a language for describing what goes where on a page, but in higher level terms than describing where each dot of ink or pixel of light is placed. A page description language deals in things like lines, circles, gradients, margins, and fonts.</p>
-<insert item ="../graphics/rendering.xml" type ="image"/>
+<insert item="../graphics/rendering.xml" type="image"/>
 <p>One example of a page description language is <phrase><annotation type="language">PostScript</annotation></phrase>. Here is the PostScript code for drawing a circle:</p>
-<codeblock language ="PostScript">
+<codeblock language="PostScript">
+
 100 100 50 0 360 arc closepath
 stroke
 </codeblock>
@@ -80,9 +81,10 @@ stroke
 <p>Since most writers are not going to write directly in a page description language, the page descriptions for your publication are almost certainly going to be created by an algorithm. I call this the encoding algorithm since it encodes your content in the page description language.</p>
 <p>While it is possible that someone responsible for a highly specialized publishing tool chain may end up writing a specialized encoding algorithm, most encoding algorithms are going to be implemented by existing tools that translate <phrase><annotation type="tool">formatting languages</annotation></phrase> into <phrase><annotation type="tool">page descriptions languages</annotation></phrase>.</p>
 <p>There are several <phrase><annotation type="tool">formatting languages</annotation></phrase> that are used in content processing. They are often called <phrase><annotation type="tool">typesetting languages</annotation></phrase> as well. <phrase><annotation type="language">XSL-FO</annotation></phrase> (XSL - Formatting Objects) is one of the more commonly used in structured writing projects. <phrase><annotation type="language">TeX</annotation></phrase> is another.</p>
-<insert item ="../graphics/encoding.xml" type ="image"/>
+<insert item="../graphics/encoding.xml" type="image"/>
 <p>Here is an example of <phrase><annotation type="language">XSL-FO</annotation></phrase> that we looked at in <citation type = "nameref" value = "chapter.single-sourcing"/>:</p>
-<codeblock language ="XSL-FO">
+<codeblock language="XSL-FO">
+
 &lt;fo:block space-after="4pt"&gt;
    &lt;fo:wrapper font-size="14pt" font-weight="bold"&gt;
      Hard Boiled Eggs
@@ -90,6 +92,7 @@ stroke
 &lt;/fo:block&gt;
 </codeblock>
 <codeblock>
+
 </codeblock>
 <p>You process <phrase><annotation type="language">XSL-FO</annotation></phrase> using an <phrase><annotation type="language">XSL-FO</annotation></phrase> processor such as <phrase><annotation type="tool">Apache FOP</annotation></phrase>. Thus the <phrase><annotation type="language">XSL-FO</annotation></phrase> processor runs the encoding algorithm, producing a page description language such as <phrase><annotation type="language">PostScript</annotation></phrase> or <phrase><annotation type="media">PDF</annotation></phrase> as an output.</p>
 <p>Writers are not likely to write in XSL-FO directly, though it is not entirely impossible to do so. In fact some boilerplate content such as front matter for a book does sometimes get written and recorded directly in <phrase><annotation type="language">XSL-FO</annotation></phrase>. (I did this myself on one project.) But when you are constructing a publishing tool chain, you will need to select and integrate the appropriate encoding tools as part of your process.</p>
@@ -109,7 +112,7 @@ stroke
 </record>
 </index>
 <p>The job of the formatting algorithm it to generate the <phrase><annotation type="tool">formatting language</annotation></phrase> that drives the <phrase><annotation type="algorithm" specifically="encoding algorithm">encoding</annotation></phrase> and <phrase><annotation type="algorithm">pagination</annotation></phrase> process. The formatting algorithm produces the <phrase><annotation type="concept">media domain</annotation></phrase> representation of the content from content in the <phrase><annotation type="concept">document domain</annotation></phrase> or a more abstract <phrase><annotation type="concept">media domain</annotation></phrase> format.</p>
-<insert item ="../graphics/formattingpub.xml" type ="image"/>
+<insert item="../graphics/formattingpub.xml" type="image"/>
 <p>In the case of <phrase><annotation type="language"><annotation type="standard">HTML</annotation></annotation></phrase> output, the formatting algorithm generates HTML (with connections to the relevant <phrase><annotation type="language" specifically="cascading style sheets">CSS</annotation></phrase>, <phrase><annotation type="programming-language">JavaScript</annotation></phrase>, and other formatting resources). This is the end of the publishing process for the Web, since the browser will perform the encoding algorithm internally and the computer operating system will likely take care of the rendering. In the case of paper output, the formatting algorithm generates a formatting language such as <phrase><annotation type="language">TeX</annotation></phrase> or <phrase><annotation type="language">XSL-FO</annotation></phrase> which is then fed to the <phrase><annotation type="algorithm">encoding algorithm</annotation></phrase> as implemented by a <phrase><annotation type="language">TeX</annotation></phrase> or <phrase><annotation type="language">XSL-FO</annotation></phrase> processor.</p>
 <p>In some cases, organizations use word processing or desktop publishing applications to tweak the formatting of the output by having the formatting algorithm generate the input format of those applications (typically <phrase><annotation type="language">RTF</annotation></phrase> for Word and <phrase><annotation type="language">MIF</annotation></phrase> for FrameMaker). This allows them to exercise manual control over pagination, but with an obvious loss in process efficiency. In particular, any tweaks made in these applications are not routed back to the source content, so they will have to be done again by hand the next time the content is published.</p>
 <p>This algorithm is usually the province of <phrase><annotation type="role">publication designers</annotation></phrase>. One of the most elementary structured writing algorithms is to <phrase><annotation type="algorithm">separate content from formatting</annotation></phrase> (<citation type = "nameref" value = "chapter.separating"/>) which means removing formatting as one of the writer’s concerns. Almost every structured writing implementation will involve writing formatting algorithms, however. Even if you use off-the-shelf languages like <phrase><annotation type="language"><annotation type="standard">DITA</annotation></annotation></phrase> or <phrase><annotation type="language"><annotation type="standard">DocBook</annotation></annotation></phrase>, you will have to write or modify formatting algorithms to get the specific formatting you want. We looked at some examples of basic formatting algorithms in <citation type = "nameref" value = "chapter.processing"/>.</p>
@@ -123,7 +126,7 @@ stroke
 </record>
 </index>
 <p>The job of the presentation algorithm is to determine exactly how the content is going to be organized as a document. A pure <phrase><annotation type="concept">document domain</annotation></phrase> document is a representation of the presentation of the content. The job of the <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase> is to produce a pure <phrase><annotation type="concept">document domain</annotation></phrase> version of the content. This may mean producing the entire presentation from purely <phrase><annotation type="concept">subject domain</annotation></phrase> content, or simply handling the occasional <phrase><annotation type="concept">subject domain</annotation></phrase> structure in a largely <phrase><annotation type="concept">document domain</annotation></phrase> file.</p>
-<insert item ="../graphics/presentation.xml" type ="image"/>
+<insert item="../graphics/presentation.xml" type="image"/>
 <p>The organization of content involves several things:</p>
 <ll>
 <li>
@@ -151,7 +154,7 @@ stroke
 <section>
 <title>Differential presentation algorithms</title>
 <p>As we saw in <citation type = "nameref" value = "chapter.single-sourcing"/>, the organization of content is an area where the <phrase><annotation type="concept">document domain</annotation></phrase> cannot ignore the differences between different media. Although the fact that a relationship exists is a pure document domain issue, how that relationship is expressed, and even whether it is expressed or not, is affected by the media and its capabilities. Following <phrase><annotation type="structure">links</annotation></phrase> in online media is very cheap. Following references to other works in the <phrase><annotation type="media">paper</annotation></phrase> world is expensive, so document design for paper tends to favor linear relationships where document design for the <phrase><annotation type="media">Web</annotation></phrase> favors <phrase><annotation type="media">hypertext</annotation></phrase> relationships. This is an area, therefore, in which you should expect to implement <phrase><annotation type="algorithm">differential single sourcing</annotation></phrase> and use different <phrase><annotation type="algorithm">presentation algorithms</annotation></phrase> for different media.</p>
-<insert item ="../graphics/differentialpub.xml" type ="image"/>
+<insert item="../graphics/differentialpub.xml" type="image"/>
 </section>
 <section>
 <title>Presentation sub-algorithms</title>
@@ -177,12 +180,12 @@ stroke
 <p>Among other things, the synthesis algorithm resolves all management domain structures in the content (unless some are to be retained for downstream post-publication algorithms to work with). This means that it processes all inclusions and evaluates all conditions. The result is <phrase><annotation type="concept">document domain</annotation></phrase> or <phrase><annotation type="concept">subject domain</annotation></phrase> content with all of the <phrase>management</phrase> structures removed and replaced with the appropriate document or subject domain structures and content.</p>
 <p>In the case of <phrase><annotation type="concept">document domain</annotation></phrase> content, processing the <phrase><annotation type="concept">management domain</annotation></phrase> structures yields a document-domain structure which may then be a pass-through for the <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase> (that is, the document domain markup may already express the desired presentation).</p>
 <p>In the case of the <phrase><annotation type="concept">subject domain</annotation></phrase> content, processing <phrase><annotation type="concept">management domain</annotation></phrase> structures yields a definitive set of subject domain structures which can be passed to the <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase> for processing to the document domain.</p>
-<insert item ="../graphics/synthesis.xml" type ="image"/>
+<insert item="../graphics/synthesis.xml" type="image"/>
 </section>
 <section>
 <title><phrase><annotation type="algorithm">Differential synthesis</annotation></phrase></title>
 <p>We noted above that you can use <phrase><annotation type="algorithm">differential presentation</annotation></phrase> to do <phrase><annotation type="algorithm">differential single sourcing</annotation></phrase> were two publications contain the same content but organized differently. If you want two publications in different media to have differences in their content, you can do this by doing differential synthesis and including different content in each publication.</p>
-<insert item ="../graphics/differential-synthesis.xml" type ="image"/>
+<insert item="../graphics/differential-synthesis.xml" type="image"/>
 </section>
 <section>
 <title>Synthesis sub-algorithms</title>
