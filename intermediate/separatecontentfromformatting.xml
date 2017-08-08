@@ -27,7 +27,7 @@
 <term>separating content from formatting</term>
 </record>
 </index>
-<p>If there is one phrase that most people associate with structured writing, it is “separating content from formatting.” This is the most basic and well-known method that we use to partition and redirect complexity, and it illustrates the method we use to do all the rest. Separating content from formatting separates decisions about the appearance of a document from decisions about its content. However, as we will see in this chapter, this is not as simple as it may seem.</p>
+<p>If there is one phrase that most people associate with structured writing, it is “separating content from formatting.” This is the most basic and well-known method used to partition and redirect complexity, and it illustrates the strategies used for all the other methods. Separating content from formatting separates decisions about the appearance of a document from decisions about its content. However, as you will see in this chapter, doing this is not as simple as it may seem.</p>
 <section>
 <title>Separate out style instructions</title>
 <p>Let’s start with a fragment that includes a description of its format. I use CSS syntax to describe the format. I could use a variety of formats, but CSS is easy to understand and helps illustrate the separation. I also represent certain characters (bullets and tabs) by their names, so you can see exactly where everything is going:</p>
@@ -38,7 +38,7 @@
 {font: 10pt "Open Sans"}[bullet][tab]Eggs
 {font: 10pt "Open Sans"}[bullet][tab]Gold
 </codeblock>
-<p>This file contains content and formatting, so let’s separate the two. Of course, when you remove the formatting, you need to add something in its place so you can add the formatting back later. The simplest method is to replace it with a named style:</p>
+<p>This file contains content and formatting, so let’s separate the two. Of course, when you remove the formatting, you need to add something in its place so you can add the formatting back later. The simplest method is to replace the formatting with a named style:</p>
 <codeblock>
 
 {style: paragraph}The box contains:
@@ -46,12 +46,12 @@
 {style: paragraph}[bullet][tab]Eggs
 {style: paragraph}[bullet][tab]Gold
 </codeblock>
-<p>Then, you need to record the style; it isn’t being removed, just separated from the text:</p>
+<p>Then, you need to record the style information. You aren’t removing that information; you’re just separating it from the text:</p>
 <codeblock>
 
 paragraph = {font: 10pt "Open Sans"}
 </codeblock>
-<p>Once the style information is separated, you can change the formatting without changing the text; for example, you could choose a different font:</p>
+<p>Once you separate the style information, you can change the formatting without changing the text; for example, you could choose a different font:</p>
 <codeblock>
 
 paragraph = {font: 12pt "Century Schoolbook"}
@@ -97,8 +97,8 @@ bullet-paragraph = {font: 12pt "Century Schoolbook"}[em dash][tab]
 </section>
 <section>
 <title>Name your abstractions correctly</title>
-<p>The names you choose for styles and other abstractions matter. The wrong name sets up a false expectation, which can lead to authors using a style incorrectly. So the first lesson about separating content from formatting is that naming matters. You are creating an abstraction, so you need to figure out what that abstraction is and name it appropriately.</p>
-<p>What is the abstraction here? Sand, Eggs, and Gold are list items. So maybe we do this:</p>
+<p>The names you choose for styles and other abstractions matter. The wrong name sets up a false expectation, which can lead to writers using a style incorrectly. So the first lesson about separating content from formatting is that naming matters. You are creating an abstraction, so you need to figure out what that abstraction is and name it appropriately.</p>
+<p>What is the abstraction here? Sand, Eggs, and Gold are list items. So maybe you do this:</p>
 <codeblock>
 
 {style: paragraph}The box contains:
@@ -160,12 +160,12 @@ ordered-list-item =
     {font: 12pt "Century Schoolbook"}&lt;++count&gt;.[tab]
 </codeblock>
 <p>(<code>++count</code> here means add one to <code>count</code> and then display it.)</p>
-<p>This is pretty much how <phrase><annotation type="tool">FrameMaker</annotation></phrase>, <phrase><annotation type="tool">Microsoft Word</annotation></phrase>, and many other tools handle lists. The reason for going through this example in such detail is to point out how much is involved in even this simple bit of partitioning. We began by removing formatting commands, followed by characters, which forced us to include characters in our style definitions. And then we had to calculate the value of characters. At each step, we created abstractions and had to consider all the cases we might run into and create abstractions to handle them.</p>
+<p>This is pretty much how <phrase><annotation type="tool">FrameMaker</annotation></phrase>, <phrase><annotation type="tool">Microsoft Word</annotation></phrase>, and many other tools handle lists. The reason for going through this example in such detail is to point out how much is involved in even this simple bit of partitioning. You began by removing formatting commands, followed by characters, which forced you to include characters in the style definitions. And then you had to calculate the value of characters. At each step, you had to consider all possible cases and create abstractions to handle them.</p>
 </section>
 <section>
 <title>Create containers to provide context</title>
-<p>As noted in <citation type = "nameref" value = "chapter.document-domain"/>, one problem with this approach to creating lists is that you have to apply a different style to the first item of a list. It would be better if you could use the same style for each list item and have the numbering just work. However, this is hard to do because nothing in the content says where one numbered list ends and the next begins. For this we need a new abstraction. So far, we have abstractions for ordered and unordered list items, but we don’t have an abstraction for lists themselves.</p>
-<p>Up to this point, we have been separating content from formatting purely in the <phrase><annotation type="concept">media domain</annotation></phrase>. We replaced direct formatting definitions with indirect definitions through styles. But now we start to venture into the <phrase><annotation type="concept">document domain</annotation></phrase>, creating the abstract idea of a list and inserting that abstract idea into our content.</p>
+<p>As noted in <citation type = "nameref" value = "chapter.document-domain"/>, one problem with this approach to creating lists is that you have to apply a different style to the first item of a list. It would be better if you could use the same style for each list item and have the numbering just work. However, this is hard to do because nothing in the content says where one numbered list ends and the next begins. For this you need a new abstraction. So far, you have abstractions for ordered and unordered list items, but you don’t have an abstraction for lists themselves.</p>
+<p>Up to this point, everything has been purely in the <phrase><annotation type="concept">media domain</annotation></phrase>. You replaced direct formatting definitions with indirect definitions through styles. But now it’s necessary to venture into the <phrase><annotation type="concept">document domain</annotation></phrase>, creating the abstract idea of a list and inserting that abstract idea into your content.</p>
 <codeblock>
 
 paragraph: To wash hair:
@@ -174,15 +174,18 @@ list:
     ordered-list-item:Rinse
     ordered-list-item:Repeat
 </codeblock>
-<p>There are a number of significant changes here. First, the structure is no longer flat. We have introduced a container. A list is a container for list items. Previously it was a series of paragraphs with different styles attached. Now we have a container, which, as far as the formatting is concerned, never existed in the original. The writer and reader knew that the sequence of bulleted paragraphs formed a list, but that was an interpretation of the formatting. Now we have taken that interpretation and recorded it explicitly in the content itself.</p>
-<p>By creating the idea of a list, we further separate list formatting from the list content – now an algorithm can recognize a list and can make formatting decisions based on that knowledge.</p>
-<p>The second important thing is that the content no longer refers to style names. Instead we have structures. <code>list</code> is a structure and so are <code>paragraph</code> and <code>ordered-list-item</code>.</p>
-<p>By replacing styles with structures, you can give the same structure a different style depending on where it is in the document. The <phrase><annotation type="concept">formatting algorithm</annotation></phrase> determines if an ordered-list-item is the first one inside a list and formats it accordingly. (Which is <phrase><citation type = "citation" value = "https://css-tricks.com/numbering-in-style/">how list formatting works in CSS.</citation></phrase>)</p>
-<p>Now authors no longer apply styles to content, even styles with abstract names. Rather they place content in structures and allow the formatting algorithm to apply styles appropriately. This separates the content even more from the formatting.</p>
+<p>There are two significant changes here. First, the structure is no longer flat. Previously a list was a series of paragraphs with different styles attached. Now there is a container, <code>list</code>, that, as far as the formatting is concerned, never existed in the original.<citation type = "idref" value = "fn.indentation"/> The writer and reader knew that the sequence of bulleted paragraphs formed a list, but that was an interpretation of the formatting. Now that interpretation is recorded explicitly in the content itself.</p>
+<footnote id="fn.indentation">
+<p>The SAM markup in this example uses indentation to identify hierarchy. The <code>list</code> container contains three instances of <code>ordered-list-item</code>.</p>
+</footnote>
+<p>By creating the idea of a list, you further separate list formatting from the list content. Now, an algorithm can recognize a list and make formatting decisions based on that knowledge.</p>
+<p>The second important thing is that the content no longer refers to style names. Instead you have structures. <code>list</code> is a structure and so are <code>paragraph</code> and <code>ordered-list-item</code>.</p>
+<p>By replacing styles with structures, you can give the same structure a different style depending on where it is in the document. The <phrase><annotation type="concept">formatting algorithm</annotation></phrase> can determine which <code>ordered-list-item</code> is first and format it accordingly; this is <phrase><citation type = "citation" value = "https://css-tricks.com/numbering-in-style/">how list formatting works in CSS.</citation></phrase></p>
+<p>Now, writers no longer apply styles directly to content, even styles with abstract names. Rather they place content in structures and allow the formatting algorithm to apply styles appropriately. This separates the content even more from the formatting.</p>
 </section>
 <section>
 <title>Move the abstractions to the containers</title>
-<p>But there is a problem here. What if an author inadvertently does this:</p>
+<p>But what if a writer inadvertently does this:</p>
 <codeblock>
 
 paragraph: To wash hair:
@@ -191,7 +194,7 @@ list:
     unordered-list-item:Rinse
     ordered-list-item:Repeat
 </codeblock>
-<p>To avoid this, move the abstraction outward. Instead of ordered and unordered list items, you create ordered and unordered lists:</p>
+<p>To avoid this type of error, move the abstraction outward. Instead of creating ordered and unordered list items, create ordered and unordered lists:</p>
 <codeblock>
 
 paragraph: To wash hair:
@@ -210,7 +213,7 @@ unordered-list:
     list-item:Gold
 </codeblock>
 <p>Now, you have a single <code>list-item</code> structure that you can use in either an unordered list or an ordered list; the <phrase><annotation type="concept">formatting algorithm</annotation></phrase> determines the formatting based on which type of list the list-item belongs to. The name <code>list-item</code> describes a role in the document that is entirely separate from formatting.</p>
-<p>Moving the abstraction out to the container is an important part of the algorithm of separating content from formatting. It partitions ordered and unordered lists, making the construction of each simpler and more reliable. This helps keep things consistent and reduces the number of things authors have to remember. (Notice that this requires writers to decide whether a list is ordered or unordered, but they had to decide this anyway; the decision is implicit in the rhetoric of the piece.)</p>
+<p>Moving the abstraction out to the container is an important part of the algorithm for separating content from formatting. It partitions ordered and unordered lists, making the construction of each simpler and more reliable. This helps keep things consistent and reduces the number of things writers have to remember. (Notice that this requires writers to decide whether a list is ordered or unordered, but they had to decide this anyway; the decision is implicit in the rhetoric of the piece.)</p>
 <p>Some markup languages take better advantage of containers than others. For example, HTML and Markdown both provide six different heading levels. However, content under an <code>H2</code> or an <code>H5</code> heading is not in any container. The content simply comes after the heading. This means that is it perfectly possible and legal to use heading elements in any order you want. Writers must select the heading level and ensure that it fits the structure of their document.</p>
 <p>By contrast, <phrase><annotation type="language">DocBook</annotation></phrase> has a <phrase><annotation type="structure" namespace="DocBook">section</annotation></phrase> structure. Like a list, a section records your interpretation of what you are creating in the document. The <phrase><annotation type="structure" namespace="DocBook">section</annotation></phrase> structure instantiates the concept of a section. And once you have the instantiation of a section, you don’t need six levels of heading. You can have one structure called <phrase><annotation type="structure" namespace="DocBook">title</annotation></phrase>. Sections can be nested inside other sections, and the formatting algorithm applies the correct style to the title based on context:</p>
 <codeblock>
@@ -228,7 +231,7 @@ section:
 </section>
 <section>
 <title>Separate out abstract formatting</title>
-<p>I noted that in the case of ordered and unordered lists, separating content from formatting actually involves separating out some of the content as well. Or rather, it involves separating out some of the characters. In other words, the distinction between content and formatting is not the same as the distinction between characters and the styles applied to them. Sometimes characters are part of the formatting rather than the content.</p>
+<p>To separate content from formatting for ordered and unordered lists, you must separate out some of the content as well. Specifically, you must separate out some of the characters. The distinction between content and formatting is not the same as the distinction between characters and the styles applied to them. Sometimes characters are part of the formatting rather than the content.</p>
 <p>Consider a labeled-list structure:</p>
 <blockquote>
 <ll>
@@ -268,8 +271,8 @@ labeled-list:
         contents: 12345
 </codeblock>
 <p>But what if you have hundreds of addresses, all with the same labels? Are the labels content or are they presentation? Since the labels don’t change from one list to another, you could look at them as being part of the presentation rather than the content. So let’s look for a way to separate them from the content.</p>
-<p>As always, when you separate something from your content, you have to replace it with something else. In this case, we use named structures that reflect the subject matter of the entries, which moves this content into the <phrase><annotation type="concept">subject domain</annotation></phrase> (see <citation type = "idref" value = "ex.separate-1"/>):</p>
-<figure id="ex.separate-1">
+<p>As always, when you separate something from your content, you have to replace it with something else. In <citation type = "nameref" value = "ex.separate-1"/>, named structures reflect the subject matter of the entries, which moves this content into the <phrase><annotation type="concept">subject domain</annotation></phrase>.</p>
+<figure name="ex.separate-1">
 <title>Address markup in the subject domain</title>
 <codeblock language="sam">
 
@@ -280,10 +283,11 @@ address:
     code: 12345
 </codeblock>
 </figure>
-<p>Here, once again, it is important to distinguish formatting and presentation. As discussed in <citation type = "nameref" value = "chapter.document-domain"/>, <phrase><annotation type="italic">formatting</annotation></phrase> refers to the precise details of a text’s appearance: the font chosen, the width of the text column, the size of the characters, the spacing between line, the size and shape of the bullet characters. <phrase><annotation type="italic">Presentation</annotation></phrase> refers to the organization of text. Deciding to use a list for a certain piece of information is a presentation decision, which is independent of the formatting details applied to lists. When you move content from the <phrase><annotation type="concept">media domain</annotation></phrase> to the <phrase><annotation type="concept">document domain</annotation></phrase>, you separate the formatting of the content from its presentation. The decision to present the information as a list remains; the decision about what that list will look like has been separated out.</p>
-<p>In contrast, moving content from the <phrase><annotation type="concept">document domain</annotation></phrase> to the <phrase><annotation type="concept">subject domain</annotation></phrase> separates the <phrase><annotation type="italic">information</annotation></phrase> from the <phrase><annotation type="italic">presentation</annotation></phrase>. The subject-domain structure in <citation type = "idref" value = "ex.separate-1"/> is not a labeled list. It is a data record that could be turned into many different forms of presentation.</p>
-<p>The job of turning such structures into a specific form of presentation is the job of the presentation algorithm (see <citation type = "nameref" value = "chapter.publishing"/>). The presentation algorithm could turn it into a labeled list, a table, a paragraph, or an address label.</p>
-<p>In the <phrase><annotation type="concept">subject domain</annotation></phrase>, with the content separated from both formatting and presentation, you also gain the ability to query and reorganize the content in various interesting and useful ways (which I will explore in later chapters).</p>
+<p>Here, once again, it is important to distinguish formatting and presentation. <phrase><annotation type="italic">Formatting</annotation></phrase> refers to the precise details of a text’s appearance: the font chosen, the width of the text column, the size of the characters, the spacing between line, the size and shape of the bullet characters, and so forth. <phrase><annotation type="italic">Presentation</annotation></phrase> refers to the organization of text.</p>
+<p>Deciding to use a list for a certain piece of information is a presentation decision, which is independent of the formatting details applied to lists. When you move content from the <phrase><annotation type="concept">media domain</annotation></phrase> to the <phrase><annotation type="concept">document domain</annotation></phrase>, you separate the formatting of the content from its presentation. The decision to present the information as a list remains; the decision about what that list looks like is separated out.</p>
+<p>In contrast, moving content from the <phrase><annotation type="concept">document domain</annotation></phrase> to the <phrase><annotation type="concept">subject domain</annotation></phrase> separates the <phrase><annotation type="italic">information</annotation></phrase> from the <phrase><annotation type="italic">presentation</annotation></phrase>. The subject-domain structure in <citation type = "nameref" value = "ex.separate-1"/> is not a labeled list. It is a data record that can be turned into many different forms of presentation.</p>
+<p>Turning such structures into a specific form of presentation is the job of the presentation algorithm (see <citation type = "nameref" value = "chapter.publishing"/>). The presentation algorithm could turn it into a labeled list, a table, a paragraph, or an address label.</p>
+<p>In the <phrase><annotation type="concept">subject domain</annotation></phrase>, with the content separated from both formatting and presentation, you also gain the ability to query and reorganize the content in various interesting and useful ways (which I explore in later chapters).</p>
 <p>This is as far as you can go in separating content from formatting, and you can’t separate all content from formatting to quite this extent. Separating content from format is not a binary operation. There are various degrees of separation that you can apply for various reasons. It is important to understand exactly which degree of separation best serves your needs.</p>
 </section>
 </chapter>

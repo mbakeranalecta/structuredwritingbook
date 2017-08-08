@@ -27,16 +27,20 @@
 <term>processing structured text</term>
 </record>
 </index>
-<p>In the last chapter we looked at separating content from formatting. But of course they cannot stay separated. Content must be formatted before it is presented to the reader. So let’s look at the algorithm for putting them back together again. Understanding the basics of algorithms is important to understanding structured writing even if you don’t intend to code the algorithms yourself. Understanding how things can be put back together is a big part of understanding how to separate them. Indeed, it is only by describing how you would put them back together that you know for certain that you did not lose anything when you did the separation. This is essential to ensuring a clean partitioning that does not allow any complexity to fall through to the reader.</p>
+<p><citation type = "nameref" value = "chapter.separating"/> looked at separating content from formatting. But of course they cannot stay separated. Content must be formatted before you present it to the reader. So let’s look at the algorithm for putting them back together again.</p>
+<p>Understanding how to put things back together is a big part of understanding how to separate them. Indeed, describing how you would put them back together is the only way to know for certain that you didn’t lose anything when you did the separation. This is essential to ensuring a clean partitioning that does not allow any complexity to fall through to the reader.</p>
 <section>
 <title>Two into one: reversing the factoring out of invariants</title>
-<p>Moving content from the <phrase><annotation type="concept">media domain</annotation></phrase> to the <phrase><annotation type="concept">document domain</annotation></phrase> or the <phrase><annotation type="concept">subject domain</annotation></phrase> involves progressively factoring out invariants in the content. Each step in this process creates two artifacts, the structured content and the invariant piece that was factored out.</p>
-<p>Processing structured text is about putting the pieces back together: combining the structured content with the invariants that were factored out. But processing structured text is also about making and/or executing the decisions that were partitioned away from the writer. These decisions may be invariant, such as applying approved corporate style, or they may be variable, such as presenting content differently in different media or to different audiences. Invariant decisions are always made the same way for a given purpose. They may be made differently for different purposes, but still all the same way for each purpose.</p>
-<p>If factoring out the invariants moves content toward the document or subject domains, recombining the content with the invariants moves it in the opposite direction, toward the media domain. This could mean moving the content from the subject domain to the document domain or from the document domain to the media domain, or simply from a more abstract form in the media domain to a more concrete form, which will be our first example.</p>
+<p>Moving content from the <phrase><annotation type="concept">media domain</annotation></phrase> to the <phrase><annotation type="concept">document domain</annotation></phrase> or the <phrase><annotation type="concept">subject domain</annotation></phrase> involves progressively factoring out invariants in the content. Each step in this process creates two artifacts: the structured content and the invariant piece that was factored out.</p>
+<p>Processing structured text is about putting the pieces back together – combining the structured content with the invariants that were factored out. But processing structured text is also about making and/or executing the decisions that were partitioned away from the writer. These decisions may be invariant, such as applying approved corporate style, or they may be variable, such as presenting content differently in different media or for different audiences. Invariant decisions are always made the same way for a given purpose. They may be made differently for different purposes but still the same way for each purpose.</p>
+<p>If factoring out the invariants moves content toward the document or subject domains, recombining the content with the invariants moves it in the opposite direction, toward the media domain. This could mean moving the content from the subject domain to the document domain or from the document domain to the media domain, or simply from a more abstract form in the media domain to a more concrete form, which is our first example.</p>
+<pagination-tweak>
+<min-space>1.5in</min-space>
+</pagination-tweak>
 </section>
 <section>
-<title>Adding back style information</title>
-<p>The first example of <phrase><annotation type="concept">separating content from formatting</annotation></phrase> that we looked at involved factoring out the style information from this structure:</p>
+<title>Restoring style information</title>
+<p>In <citation type = "nameref" value = "chapter.separating"/>, the first example of <phrase><annotation type="concept">separating content from formatting</annotation></phrase> factored out the style information from this structure:</p>
 <codeblock>
 
 {font: 10pt "Open Sans"}The box contains:
@@ -44,7 +48,7 @@
 {font: 10pt "Open Sans"}[bullet][tab]Eggs
 {font: 10pt "Open Sans"}[bullet][tab]Gold
 </codeblock>
-<p>We replaced the style information with style names:</p>
+<p>The style information was replaced with style names:</p>
 <codeblock>
 
 {style: paragraph}The box contains:
@@ -52,13 +56,13 @@
 {style: bullet-paragraph}Eggs
 {style: bullet-paragraph}Gold
 </codeblock>
-<p>And then we defined the styles:</p>
+<p>And then the styles were defined as follows:</p>
 <codeblock>
 
 paragraph = {font: 10pt "Open Sans"}
 bullet-paragraph = {font: 10pt "Open Sans"}[bullet][tab]
 </codeblock>
-<p>To unite the styles with the appropriate paragraphs, we can write as set of  simple search and replace rules:</p>
+<p>To unite each paragraph with the correct style, you can write a set of search-and-replace rules:</p>
 <codeblock>
 
 find {style: paragraph}
@@ -67,8 +71,8 @@ find {style: paragraph}
 find {style: bullet-paragraph}
     replace {font: 10pt "Open Sans"}[bullet][tab]
 </codeblock>
-<p>I said at the beginning that the basic processing algorithm combines two sources of information to create a new one. Where are these two sources? The first source is the structured text. The second source is the style definitions, and they are embedded in the rules themselves. This is how it is usually done. In some cases, though, the rules may pull content from a separate file. We will see examples of this later.</p>
-<p>The result of applying these rules is that we get back the original content:</p>
+<p>This algorithm combines two sources of information: the structured text and the style definitions. Usually, the style definitions are embedded in the rules, as in this example. In some cases, however, the rules may pull content from a separate file. I show examples of this later.</p>
+<p>Applying these rules brings back the original content:</p>
 <codeblock>
 
 {font: 10pt "Open Sans"}The box contains:
@@ -76,7 +80,10 @@ find {style: bullet-paragraph}
 {font: 10pt "Open Sans"}[bullet][tab]Eggs
 {font: 10pt "Open Sans"}[bullet][tab]Gold
 </codeblock>
-<p>If we want to change the styles, we can apply a different set of rules (in other words, make a different set of decisions):</p>
+<pagination-tweak>
+<min-space>1in</min-space>
+</pagination-tweak>
+<p>If you want to change the styles, you can apply a different set of rules (in other words, make a different set of decisions):</p>
 <codeblock>
 
 find {style: paragraph}
@@ -85,7 +92,7 @@ find {style: paragraph}
 find {style: bullet-paragraph}
     replace {font: 12pt "Century Schoolbook"}[em dash][tab]
 </codeblock>
-<p>Applying these rules will result in the a change in the formatting of the original content:</p>
+<p>Applying these new rules gives you the following:</p>
 <codeblock>
 
 {font: 12pt "Century Schoolbook"}The box contains:
@@ -97,7 +104,7 @@ find {style: bullet-paragraph}
 <section>
 <title>Rules based on structures</title>
 <p>The tools that do this sort of processing do not literally use search and replace like this. Rather, they parse the source document to pull out the structures and allow you to specify your processing rules by referring to those structures.</p>
-<p>We are not concerned here with the actual mechanism by which a processing tool recognizes structures. We are concerned with what the processing tool does when it finds a structure. So let’s rewrite our rules to match structures rather than find literal strings in the text:</p>
+<p>The mechanism by which a processing tool recognizes structure is less important then what the tool does once it finds a structure. So, the next set of rules matches structures rather than looking for literal strings in the text:</p>
 <codeblock>
 
 match paragraph
@@ -115,32 +122,36 @@ match bullet-paragraph
 {font: 12pt "Century Schoolbook"}[em dash][tab]Eggs
 {font: 12pt "Century Schoolbook"}[em dash][tab]Gold
 </codeblock>
-<p>The way I have written these rules is an example of <phrase><annotation type="concept">pseudocode</annotation></phrase>. Pseudocode is a means for sketching out an algorithm so you understand what you are trying to do before you write actual code. There is no formal syntax for pseudocode. It is intended for humans, not computers, and you can use whatever approach you like as long as it is clear to your intended audience. However, pseudocode should lay out a set of logical steps for accomplishing something, make it clear how the steps go together.</p>
-<p>Writing algorithms in pseudocode is a great way to make sure you understand the algorithms you are creating without worrying about the details of code – or even learning how to code. They are also a great way to communicate to actual coders about what you need a program to do.</p>
+<p>The way I have written these rules is an example of <phrase><annotation type="concept">pseudocode</annotation></phrase>. Pseudocode is a means for sketching out an algorithm so you understand what you are trying to do before you write actual code. There is no formal syntax for pseudocode. It is intended for humans, not computers, and you can use whatever approach you like as long as it is clear to your intended audience. However, pseudocode should lay out a set of logical steps for accomplishing something and make it clear how the steps go together.</p>
+<p>Writing an algorithm in pseudocode is a great way to make sure you understand the algorithm without worrying about the details of code – or even learning how to code. And algorithms are a great way to tell programmers what you need a program to do.</p>
 </section>
 <section>
 <title>The order of the rules does not matter</title>
-<p>You may have noticed that these rules do pretty much exactly what style sheets do in applications such as <phrase><annotation type="tool" specifically="Microsoft Word">Word</annotation></phrase> or <phrase><annotation type="tool">FrameMaker</annotation></phrase>. If you understand stylesheets, you understand a good deal of how structured writing algorithms work.</p>
-<p>One important thing to notice is that when you create a stylesheet in <phrase><annotation type="tool" specifically="Microsoft Word">Word</annotation></phrase> or <phrase><annotation type="tool">FrameMaker</annotation></phrase>, you don’t specify the order in which styles will be applied to the document. The same is true when you create a CSS stylesheet. The stylesheet is just a flat list of rules. The order in which the rules are applied to the document depends entirely on the order in which the various structures occur in the document. To put it another way, rather than being a set of steps to follow, they are a set of decisions to be made when certain events occur. If you see X, do Y. It is the order of the events that determines the order in which things happen, not the order of the rules.</p>
-<p>This may seem obvious, but it is key to understanding how structured text is usually processed. Also, the way style sheets are processed differs from the way most people learn to write computer programs, which can make it confusing even to skilled programmers.</p>
-<p>Things get a bit more complex when we move into processing the nested structures of the <phrase><annotation type="concept">document domain</annotation></phrase> and <phrase><annotation type="concept">subject domain</annotation></phrase>, but the basic pattern of a set of unordered rules to describe a transformation algorithm still applies.</p>
+<p>You may have noticed that these rules do pretty much exactly what style sheets do in applications such as <phrase><annotation type="tool" specifically="Microsoft Word">Word</annotation></phrase> or <phrase><annotation type="tool">FrameMaker</annotation></phrase>. If you understand style sheets, you understand a good deal of how structured writing algorithms work.</p>
+<p>One important thing to notice is that when you create a style sheet in <phrase><annotation type="tool" specifically="Microsoft Word">Word</annotation></phrase> or <phrase><annotation type="tool">FrameMaker</annotation></phrase>, you don’t specify the order in which styles are applied to the document. The same is true when you create a CSS style sheet. The style sheet is just a flat list of rules. The order in which the rules are applied to the document depends entirely on the order in which the various structures occur in the document.</p>
+<p>To put it another way, rather than being a set of steps to follow, style-sheet rules define a set of decisions to be made when certain events occur. If you see X, do Y. The structure of the source document determines the order in which the processor applies the rules; the order of the rules in the style sheet doesn’t matter.</p>
+<p>This may seem obvious, but it is key to understanding how structured text is usually processed. This can be confusing even to skilled programmers, because style sheets are processed differently from the way most programmers learn to write computer programs.</p>
+<p>Things get more complex when you move into processing the nested structures of the <phrase><annotation type="concept">document domain</annotation></phrase> and <phrase><annotation type="concept">subject domain</annotation></phrase>, but the basic pattern of a set of unordered rules to describe a transformation algorithm still applies.</p>
 </section>
+<pagination-tweak>
+<min-space>1.5in</min-space>
+</pagination-tweak>
 <section>
 <title>Applying rules in the document domain</title>
-<p>Suppose we have a piece of document domain structured text that contains this <code>title</code> structure:</p>
+<p>Suppose you have a piece of document-domain structured text that contains this <code>title</code> structure:</p>
 <codeblock language="sam">
 
 title: Moby Dick
 </codeblock>
-<p>We want to transform this document into HTML. When our rule matches a structure in the source document, it outputs the equivalent HTML structure. Here is the pseudocode for this rule (it is in a slightly different format from the pseudocode above):</p>
+<p>You want to transform this document into HTML. When a rule matches a structure in the source document, the processor outputs the equivalent HTML structure. Here is the pseudocode for this rule (it is in a slightly different format from the pseudocode above):</p>
 <codeblock language="pseudo">
 
 match title
     create h1 
         continue
 </codeblock>
-<p>This says, when you see a <code>title</code> structure in the source, create an <code>h1</code> structure in the output and then continue applying rules to the content of the title structure.</p>
-<p>The <code>continue</code> instruction is indented under the <code>create h1</code> instruction to indicate that the results of continuing will appear inside the <code>h1</code> structure. Another way of expressing this would be:</p>
+<p>This says, when the processor sees a <code>title</code> structure in the source, it creates an <code>h1</code> structure in the output and then continues applying rules to the content of the title structure.</p>
+<p>The <code>continue</code> instruction is indented under the <code>create h1</code> instruction to indicate that the results will appear inside the <code>h1</code> structure. Another way of expressing this would be:</p>
 <codeblock language="pseudo">
 
 match title
@@ -149,18 +160,18 @@ match title
     &lt;/h1&gt;
 </codeblock>
 <p>Again, it does not matter what form you use for your pseudocode as long as you clearly express the decision to make when the event in question occurs.</p>
-<p>In our pseudocode, we assume that the processor will output the text content of each structure automatically (as is the case in many tools), so the output of this rule (expressed in HTML) is:</p>
+<p>In this example, the processor outputs the text content of the structure automatically (as is the case in many tools), so the output of this rule (expressed in HTML) is:</p>
 <codeblock language="html">
 
 &lt;h1&gt;Moby Dick&lt;/h1&gt;
 </codeblock>
-<p>But suppose that there is another structure inside the title? In this case that structure is an <phrase><annotation type="concept">annotation</annotation></phrase> of part of the title text:</p>
+<p>But suppose there is another structure inside the title? In this case that structure is an <phrase><annotation type="concept">annotation</annotation></phrase> of part of the title text:</p>
 <codeblock language="sam">
 
 title: Review of {Rio Bravo}(movie)
 </codeblock>
 <p>Here the annotated text is set off with curly braces and the annotation itself is in parentheses immediately after it. (This is a feature of the <phrase><annotation type="language">SAM</annotation></phrase> markup syntax that I use for most of the examples in this book.) This annotation says that the words “Rio Bravo” refer to a movie. The annotation is a content structure, just like the title structure, and is nested inside the text of the title.</p>
-<p>So what do we do with our rule for processing titles to make it deal with <code>movie</code> annotations embedded in the title text? Absolutely nothing. Instead, we write a separate rule for handling <code>movie</code> annotations no matter where they occur:</p>
+<p>So what do you need to do to your <code>title</code> rule to make it handle <code>movie</code> annotations embedded in the title text? Absolutely nothing. Instead, you write a separate rule for handling <code>movie</code> annotations no matter where they occur:</p>
 <codeblock language="pseudo">
 
 match movie
@@ -172,11 +183,11 @@ match movie
 
 &lt;h1&gt;Review of &lt;i&gt;Rio Bravo&lt;/i&gt;&lt;/h1&gt;
 </codeblock>
-<p>The <code>continue</code> instruction is all we need to add to our rules to allow them to deal with nested structures. The rules remain an unordered collection, just like a stylesheet. (In fact, <phrase><annotation type="tool">XSLT</annotation></phrase>, a language that implements this model, calls a set of processing rules a “stylesheet”.)</p>
+<p>The <code>continue</code> instruction is all you need to add to your rules to allow them to deal with nested structures. The rules remain an unordered collection, just like a style sheet. (In fact, <phrase><annotation type="tool">XSLT</annotation></phrase>, a language that implements this model, calls a set of processing rules a “stylesheet.”)</p>
 </section>
 <section>
 <title>Processing based on context</title>
-<p>When we move to the <phrase><annotation type="concept">document domain</annotation></phrase>, we use context to reduce the number of structures that we need. For example, where <phrase><annotation type="language">HTML</annotation></phrase> has six different heading structures, <code>H1</code> through <code>H6</code>), <phrase><annotation type="language">DocBook</annotation></phrase> has only one: <code>title</code>, which can occur in many different contexts. So how do we apply the right formatting to a title based on its context? We create different rules for the <code>title</code> structure in each of its contexts. We express the context by listing the parent structure names separated by slashes:</p>
+<p>When you move to the <phrase><annotation type="concept">document domain</annotation></phrase>, you use context to reduce the number of structures you need. For example, where <phrase><annotation type="language">HTML</annotation></phrase> has six different heading structures (<code>H1</code> through <code>H6</code>), <phrase><annotation type="language">DocBook</annotation></phrase> has only one (<code>title</code>), which can occur in many different contexts. So how do you apply the right formatting to a title based on its context? You create a different rule for the <code>title</code> structure in each context. You express the context by listing the parent structure names separated by slashes:</p>
 <codeblock language="pseudo">
 
 match book/title
@@ -195,51 +206,51 @@ match figure/title
     create h4
         continue
 </codeblock>
-<p>Now here is the clever bit. You don’t have to change the <code>movie</code> rule to work with any of these versions of the <code>title</code> rule. Suppose our title is the title of a section, like this:</p>
+<p>Now here is the clever bit. You don’t have to change the <code>movie</code> rule to work with any of these versions of the <code>title</code> rule. Suppose your title is the title of a section, like this:</p>
 <codeblock language="sam">
 
 section:
     title: Review of {Rio Bravo}(movie)
 </codeblock>
-<p>When we process this with our rules, the <code>section/title</code> rule will be executed to deal with the title structure, and the <code>movie</code> rule will be executed when the <code>movie</code> structure occurs in the course of processing the content of the <code>title</code> structure, with the following result:</p>
+<p>When you process, the processor will execute the <code>section/title</code> rule to deal with the title structure and the <code>movie</code> rule when the <code>movie</code> structure occurs in the course of processing the content of the <code>title</code> structure. The results are as follows:</p>
 <codeblock language="html">
 
 &lt;h3&gt;Review of &lt;i&gt;Rio Bravo&lt;/i&gt;&lt;/h3&gt;
 </codeblock>
-<p>This is the basic pattern for most structured writing algorithms. An algorithm consists of a set of rules.</p>
+<p>Here is the basic pattern for most structured writing algorithms:</p>
 <ul>
 <li>
-<p>For each structure, you create a rule that says how to transform that structure into the structure you want.</p>
+<p>For each input structure, create a rule that says how to transform that structure into the new structure you want.</p>
 </li>
 <li>
-<p>Each rule specifies the new structures to create and where to place the content and any nested structures.</p>
+<p>For each rule, specify the new structure(s) and where to place the content in the new structure(s).</p>
 </li>
 <li>
-<p>In each rule, you specify where the processor should process any nested structures and apply any rules that apply to them.</p>
+<p>For each rule, specify where to process any nested structures. I use the term <code>continue</code> for this function.</p>
 </li>
 <li>
-<p>If you want a different rule for a structure occurring in different contexts, write a separate rule for each context.</p>
+<p>If you want a different rule for a structure that occurs in different contexts, write a separate rule for each context.</p>
 </li>
 </ul>
-<p>Why is it important for you to understand this? Because when you abstract out invariants to move content to the <phrase><annotation type="concept">document domain</annotation></phrase> or <phrase><annotation type="concept">subject domain</annotation></phrase>, it is really useful to understand how those invariants will be factored back in. In fact, understanding how this works can help you recognize invariants in your source and give you the confidence to factor them out. Writing down the pseudocode for processing the structures you create helps you validate that you have factored things out correctly, that the structures will be easy to process, and that the processing rules will be clear, consistent, and reliable.</p>
-<p>Obviously, building a complete processing system is much more complex, and I won’t go into the gritty details here, but let’s look at a few common cases.</p>
+<p>Why is it important to understand this pattern? Because when you abstract out invariants to move content to the <phrase><annotation type="concept">document domain</annotation></phrase> or <phrase><annotation type="concept">subject domain</annotation></phrase>, understanding how those invariants will be factored back in can help you recognize them in your source and give you the confidence to factor them out. Writing pseudocode helps you validate that you have factored out invariants correctly, that the structures are easy to process, and that the processing rules are clear, consistent, and reliable.</p>
+<p>Obviously, building a complete processing system is much more complex, and I won’t go into all the details here, but let’s look at a few common cases.</p>
 </section>
 <section>
 <title>Processing container structures</title>
-<p>When we move content to the <phrase><annotation type="concept">document domain</annotation></phrase> or the <phrase><annotation type="concept">subject domain</annotation></phrase>, we often create container structures to provide context. These container structures have no media-domain analog, so what do we do with them when we publish? The containers provide context for the rest of our processing rules, but what do we do with the containers themselves?</p>
+<p>When you move content to the <phrase><annotation type="concept">document domain</annotation></phrase> or the <phrase><annotation type="concept">subject domain</annotation></phrase>, you often create container structures to provide context. These container structures have no media-domain analog, so what do you do with them when you publish? The containers provide context for the rest of your processing rules, but what do you do with the containers themselves?</p>
 <p>In the previous example the content was contained in a <code>section</code> structure. So how does the <code>section</code> structure get processed?</p>
 <codeblock language="pseudo">
 
 match section
     continue
 </codeblock>
-<p>Yes, it’s that simple. Just don’t output any new structure in its place. The section container has done its work at this point so we simple discard it. We still want the stuff inside it, so we use the <code>continue</code> instruction to make sure the contents get processed. In short, the container is a box. We unpack the contents and discard the box.</p>
+<p>Yes, it’s that simple. You don’t output any new structure in its place. The section container has done its work at this point so you simply discard it. You still want what’s inside it, so you use the <code>continue</code> instruction to make sure the contents get processed. But the container is just a box; you unpack the contents and discard the box.</p>
 </section>
 <section>
 <title>Restoring factored-out text</title>
-<p>Sometimes when we factor out invariants, we not only factor out styles, we also factor out text. To process the content, we need to put the text back (obviously we can put back different text depending on our needs – which was why we factored it out in the first place).</p>
-<p>As we saw, a simple example of factoring out text is numbered and bulleted lists, where we factor out the text of the numbers and bullets. Let’s look at how we create rules to put them back.</p>
-<p>Suppose we have a document that contain these two different kinds of lists:</p>
+<p>Sometimes when you factor out invariants, you not only factor out styles, you also factor out text. To process the content, you need to restore the text (obviously you can restore different text if you need to, which is why you factored it out in the first place).</p>
+<p>As we saw in <citation type = "nameref" value = "chapter.separating"/>, a simple example of factoring out text is numbered and bulleted lists, where you factor out the text of the numbers and bullets. Let’s look at how you create rules to put them back.</p>
+<p>Suppose you have a document that contains these two different kinds of lists:</p>
 <codeblock>
 
 paragraph: To wash hair:
@@ -254,21 +265,21 @@ unordered-list:
     list-item:Eggs
     list-item:Gold
 </codeblock>
-<p>Let’s write a set of rules to deal with this document. Converting this to HTML lists won’t tell us much, since HTML handles list numbering and bullets itself, so we’ll create instructions for printing on paper. We won’t use real printing instructions (they get tediously detailed). Instead we will use the same style specification shorthand we used above. The <code>paragraph</code> rule is simple enough:</p>
+<p>Let’s write a set of rules to deal with this document. Converting this to HTML lists isn’t very interesting, since HTML handles list numbering and bullets itself. Instead, let’s create instructions for printing on paper. Real printing instructions get tediously detailed, so let’s use the same style specification shorthand used earlier. The <code>paragraph</code> rule is simple enough:</p>
 <codeblock>
 
 match paragraph
     apply style {font: 10pt "Century Schoolbook"}
     continue
 </codeblock>
-<p>Now let’s deal with the <code>ordered-list</code>. The ordered list structure is just a container, so we don’t need to create an output structure for it. But because this is an ordered list, we need to start a count to number the items in the list. That means we need a variable to store the current count. We will use a <code>$</code> prefix to indicate that we are creating a variable:</p>
+<p>Now let’s deal with the <code>ordered-list</code>. The ordered list structure is just a container, so you don’t need to create an output structure for it. But because this is an ordered list, you need to start a count to number the items in the list. That means you need a variable to store the current count. The <code>$</code> prefix indicates that you are creating a variable:</p>
 <codeblock>
 
 match ordered-list
     $count=1
     continue
 </codeblock>
-<p>Then the rule for each ordered list item will output the value of the variable and increment it by one:</p>
+<p>Then, the rule for each ordered list item outputs the value of the variable <code>$count</code> and increments it by one:</p>
 <codeblock>
 
 match ordered-list/list-item
@@ -278,9 +289,9 @@ match ordered-list/list-item
     $count=$count+1
     continue
 </codeblock>
-<p>Every time the <code>ordered-list/list-item</code> rule is fired, the count will increase by one, resulting in the list items being numbered sequentially.</p>
-<p>If a new numbered list in encountered, the <code>ordered-list</code> rule will be fired, resetting the count to 1.</p>
-<p>This rule will not match <code>list-item</code> elements that are children of an <code>unordered-list</code> element, so we need a separate set of rules for unordered lists:</p>
+<p>Every time the <code>ordered-list/list-item</code> rule is executed, the count increases by one, numbering the list items sequentially.</p>
+<p>When the processor encounters a new numbered list, it executes the <code>ordered-list</code> rule, which resets <code>$count</code> to 1.</p>
+<p>This rule does not match <code>list-item</code> elements that are children of an <code>unordered-list</code> element, so you need a separate set of rules for unordered lists:</p>
 <codeblock language="pseudocode">
 
 match unordered-list
@@ -291,7 +302,7 @@ match ordered-list/list-item
     output "[em dash][tab]"
     continue
 </codeblock>
-<p>Applying the combined set of rules will produce output like this:</p>
+<p>Applying the combined set of rules produces output like this:</p>
 <codeblock>
 
 {font: 10pt "Century Schoolbook"}To wash hair:
@@ -303,12 +314,12 @@ match ordered-list/list-item
 {font: 10pt "Century Schoolbook"}[em dash][tab]Eggs
 {font: 10pt "Century Schoolbook"}[em dash][tab]Gold
 </codeblock>
-<p>Note how the structure has been flattened and all of the abstractions of document structure have been removed. We are back in the media domain, with a flat structure that specifies formatting and text.</p>
+<p>This process flattens the structure and removes the document-domain containers. You are back in the media domain, with a flat structure that specifies formatting and text.</p>
 </section>
 <section>
 <title>Processing in multiple steps</title>
-<p>We do not always want to apply final formatting to our content in a single step. When we separated content from formatting, we did the separation in several stages. It is often desirable to put them back together in several stages. Not only are the algorithms involved easier to write and maintain if they only do one step of the process, we can often reuse some of the downstream steps (nearer the media domain) for many different types of document domain and subject domain content.</p>
-<p>So far we have looked at examples from the <phrase><annotation type="concept">media domain</annotation></phrase> and the <phrase><annotation type="concept">document domain</annotation></phrase>. Let’s look at one from the <phrase><annotation type="concept">subject domain</annotation></phrase>. We used an example of completing the separation of content from formatting by moving a labeled list from the document domain to the subject domain.</p>
+<p>You may not always want to apply final formatting to your content in a single step. When you separated content from formatting, you did the separation in several stages. You may want to put them back together in several stages. This not only results in simpler, easier-to-maintain algorithms, it can make it possible for you to reuse some of the downstream steps (nearer the media domain) for different types of document-domain and subject-domain content.</p>
+<p>So far the examples have come from the <phrase><annotation type="concept">media domain</annotation></phrase> and the <phrase><annotation type="concept">document domain</annotation></phrase>. Here is a <phrase><annotation type="concept">subject-domain</annotation></phrase> example that builds on <citation type = "nameref" value = "ex.separate-1"/>, which moved a labeled list from the document domain to the subject domain.</p>
 <codeblock language="sam">
 
 address:
@@ -317,7 +328,7 @@ address:
     country: USA
     code: 12345
 </codeblock>
-<p>Now let’s look at the algorithm (the set of rules) for getting it back to the document domain, where it should look like this:</p>
+<p>Moving this content back to the document domain should make it look like this:</p>
 <codeblock language="sam">
 
 labeled-list:
@@ -369,18 +380,18 @@ match code
         create contents
             continue
 </codeblock>
-<p>Notice that the text of the labels, which we factored out when we moved to the subject domain, are being factored back in here, and are specified in the processing rules. As we moved the content from the media domain to the document domain to the subject domain, we first factored out invariant formatting and then invariant text. In the algorithms, we put back the text and the formatting, each at a different processing stage. (Or different label text, of course, if we want to change our presentation decisions.)</p>
-<p>Processing content in multiple steps can save us a lot of time. The <phrase><annotation type="concept">subject domain</annotation></phrase> <code>address</code> structure is specific to a single subject and we might have many similar structures in our subject domain markup. But it is presented as a <code>labeled-list</code> structure. A labeled list is a <phrase><annotation type="concept">document domain</annotation></phrase> structure that can be used to present all kinds of information, and that can be formatted for many different media. By transforming the address structure into a <code>labeled-list</code> structure, we avoid having to write any code to format the <code>address</code> structure directly. We can format the address correctly for multiple media using the existing <code>labeled-list</code> formatting rules.</p>
+<p>Notice that the label text, which you factored out when you moved to the subject domain, is being factored back in and is specified in the processing rules. As you moved the content from the media domain to the document domain to the subject domain, you first factored out invariant formatting and then invariant text. In the algorithms, you put back the text and the formatting, each at a different processing stage. (Or different label text, of course, if you want to change the presentation decisions.)</p>
+<p>Processing content in multiple steps can save you a lot of time. The <phrase><annotation type="concept">subject-domain</annotation></phrase> <code>address</code> structure is specific to a single subject, and you might have similar structures for different subjects in your subject-domain markup. However, you might choose to present those different subjects using the same <code>labeled-list</code> structure. Since a labeled list is a <phrase><annotation type="concept">document-domain</annotation></phrase> structure that can be used to present all kinds of information and formatted for many different media, you don’t have to write any code to format the <code>address</code> structure – or any of the similar structures – directly. You can format them all correctly for multiple media using the existing <code>labeled-list</code> formatting rules.</p>
 </section>
 <section>
 <title>Query-based processing</title>
-<p>The rule-based approach shown here is not the only way to process structured writing. There is another approach which we could call the query-based approach.<citation type = "idref" value = "1"/> In this approach, you write a query expression that reaches into the structure of a document and pulls out a structure or a set of structures from the middle of the document.</p>
-<p>This is a useful technique if you want to radically rearrange the content of a document or if you want to pull content out of one document to use in another. Any reference in these pages to using an algorithm to go through a content set an pull out certain pieces of data is an example of the query based approach. We will see more examples of this in future chapters.</p>
+<p>The rule-based approach shown here is not the only way to process structured writing. There is another approach that I call the query-based approach.<citation type = "idref" value = "1"/> In this approach, you write a query expression that reaches into the structure of a document and pulls out a structure or a set of structures from the middle of the document.</p>
+<p>This is a useful technique if you want to radically rearrange the content of a document or if you want to pull content out of one document to use in another. Any reference in these pages to using an algorithm to go through a content set and pull out certain pieces of data is an example of the query-based approach. You will see more examples of this in future chapters.</p>
 <footnote id="1">
 <p>The rule-based and query-based approaches are often called “push” and “pull” methods respectively, but I sometimes find it hard to remember which is which. I find rule-based and query-based more descriptive.</p>
 </footnote>
-<p>This chapter does not by any means describe the full range of available content processing techniques or all the ways in which algorithms can recognize and manipulate structures in content. The point of introducing you to structured writing algorithms and the basics of how content processing works is to enable you to think about structures with an eye to how they can be processed. Often when you look at structures in this way you can see how a simpler structure could be used and how that simpler structure can be processed to achieve the same result as a more complex structure.</p>
-<p>Don’t be afraid to write out your algorithms in pseudocode to make sure you have a clear idea of the processing you intend for your structures, and don’t feel confined by the algorithms shown in this book, or the annotation I have used for pseudocode examples. You own your pseudocode. Choose a format that is clear to you and that communicates clearly to whoever will be implementing the actual code. Working together with that person can help you improve your appreciation of algorithms and your ability to write useful pseudocode.</p>
-<p>Can learning to write real code help with this to? Absolutely it can. Is it necessary? No. What is essential is to think in terms of distributing certain parts of your content system to algorithms and the ability to describe those algorithms well enough that you have a clear idea of what you are asking them to do, and a reasonable certainty that you are passing them the structures and information they need to do it.</p>
+<p>This chapter does not by any means describe the full range of available content processing techniques or all the ways in which algorithms can recognize and manipulate structures in content. The point of introducing structured writing algorithms and the basics of content processing is to enable you to think about structures with an eye to how they can be processed. Often when you look at structures in this way you can see how you can use a simpler structure and how that simpler structure can be processed to achieve the same result as a more complex structure.</p>
+<p>Don’t be afraid to write out your algorithms in pseudocode to make sure you have a clear idea of the processing you intend for your structures, and don’t feel confined by the algorithms shown in this book or the annotation I use for pseudocode. You own your pseudocode. Choose a format that is clear to you and that communicates clearly to whoever will be implementing the actual code. Working together with that person can help you improve your appreciation of algorithms and your ability to write useful pseudocode.</p>
+<p>Can learning to write real code help with this to? Absolutely it can. Is it necessary? No. What is essential is to think in terms of distributing certain parts of your content system to algorithms and to develop the ability to describe those algorithms and structures well enough that a programmer can implement them.</p>
 </section>
 </chapter>
