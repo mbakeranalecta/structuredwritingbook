@@ -7,7 +7,7 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
         concept, document domain
         concept, subject domain
         
-    As soon as you start to create documents that run across more than one page, working purely in the media domain presents complex pagination issues. Pagination is a complex process that requires a lot of decisions about how and where to place page breaks. It is tedious and time consuming to execute those decisions by hand. An algorithms can make all of these decisions, but to partition them off to an algorithm, we need to move our content into the document domain. 
+    As soon as you start to create documents that run across more than one page, working purely in the media domain presents pagination issues. Pagination is a complex process that requires a lot of decisions about how and where to place page breaks. It is tedious and time consuming to execute those decisions by hand. An algorithms can make all of these decisions, but to partition them off to an algorithm, we need to move our content into the document domain. 
 
     The {document domain} is concerned with the presentation of information as a document. In the document domain you use structures such as title, list, and table, without specifying how they will be formatted. You make document-domain decisions and defer media-domain decisions to someone else. In all likelihood, you defer those decisions to a designer who creates an algorithm to execute the decision.
 
@@ -52,6 +52,8 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
                 list-item: Onions
 
     A list structure partitions the idea of a list from the physical formatting of a list by creating a container that did not exist before -- the `list` structure. By creating a `list` structure, the writer tells the formatting algorithm that this is a list. Since a list is a feature of a document, it is a document-domain structure. The `list` container has no media-domain analog.
+
+    Here we begin to see specifically rheorical structures enter the picture. There is no expression of rhetorical decisions in the media domain. If a piece of text is styled italic in the media domain, that style is applied for a rhetorical reason, the the media domain markup does not record the reason, only the decision to make it italic. In creating a list structure the writer is recording something of their rhetorical intent -- not all of it by any means -- but something of it: the intent to express their information as a list. 
     
     Once you have a `list` structure, you can create rules -- in a separate file -- about how lists are formatted. We are familiar with this from {HTML} and {CSS}. [*ex.html-list] shows a list structure in {HTML} (actually, this is a slightly more specific structure, but we'll get to that):
 
@@ -80,17 +82,19 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
 
     A word processor or desktop publishing application addresses this problem using styles. You can create a style for each type of list formatting you want. A document-domain environment must make similar provision for different types of lists. However, the document domain deals with presentation (this is a list), not formatting (this paragraph starts with a bullet and a tab and is in 12pt New Century Schoolbook). So the question becomes, how may different kinds of list presentations do we need to support.  
         
-    One obvious presentation difference between lists is that some express an ordered sequence of items while others present a collection of items with no necessary order to them. We generally format these as numbered and bulleted lists, respectively, but here we want to express the presentation difference, not the formatting difference.   
+    One obvious presentation difference between lists is that some express an ordered sequence of items while others present a collection of items with no necessary order to them (a rhetorical distinction). We generally format these as numbered and bulleted lists, respectively, but here we want to express the presentation difference -- the rhetorical difference -- not the formatting difference.   
 
     The common way to handle this is to create two different list structures, the ordered list and the unordered list. Different markup languages call them by different names -- {ol}(structure (HTML)) and {ul}(structure (HTML)) in HTML, {orderedlist}(structure (DocBook)) and {itemizedlist}(structure (DocBook)) in DocBook, for example -- but they are conceptually the same thing. (Thus the HTML example above is a little more specific than just being a list structure. It is an ordered list structure.)
 
-    The choice of the terms "unordered" and "ordered" is important, because those terms focus on the {document-domain} properties of a list -- whether the order of list items matters -- rather than on its {media-domain} properties -- bullets or numbers. Whether an ordered list should be formatted with numbers, letters, or Roman numerals belongs entirely to the {media domain}. That decision has been partitioned out of the {document-domain} structures.
+    The choice of the terms "unordered" and "ordered" is important, because those terms focus on the {document-domain} properties of a list -- whether the order of list items matters -- rather than on its {media-domain} properties -- bullets or numbers. Whether an ordered list should be formatted with numbers, letters, or Roman numerals belongs entirely to the {media domain}. That decision has been partitioned out of the {document-domain} structures. 
+
+    Note that both the decision to create a list and the decision to use numbers, letters, or Roman numerals, have rhetorical aspects to them. It is not that rhetoric is absent from the media domain, but that the rhetorical intent is not recorded in the media domain, whereas some part of the rhetorical intent is recorded in the document domain, which allows us to factor rhetorically significant decisions about list numbering styles into the algorithm that processes document domain content into the media domain. 
         
     section: Context and structure
         
         Does the need for separate ordered and unordered list objects imply that you need a separate document-domain list structure for every possible way you might format a list? No. In fact, that would be working in the media domain by proxy. When you work in the document domain, you think in terms of document structures, not formatting, which means that each document-domain object must make sense in the document domain, not the media domain. Otherwise, the partitioning falls apart. 
         
-        For example, consider nested lists. Items in a nested list are formatted differently from the list that contains them. At a minimum, they are indented more, and they usually have different number or bullet styles. In the {media domain}, you would need a different style for each level. However, you don't need a separate nested-list structure in the {document domain}. Instead, you express nesting by actually nesting one list inside another. For instance, in [*ex.nested-list] one ordered list is nested inside another ordered list:
+        For example, consider nested lists. Items in a nested list are formatted differently from the list that contains them. At a minimum, they are indented more, and they usually have different number or bullet styles. In the {media domain}, you would need a different style for each level. However, you don't need a separate nested-list structure in the {document domain}. Instead, you express nesting by actually nesting one list inside another (expressing the rhetoical intent that they should be nested). For instance, in [*ex.nested-list] one ordered list is nested inside another ordered list:
 
         figure:(*ex.nested-list) Nested list structure in HTML
             ```(HTML)
@@ -137,7 +141,7 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
                     list-style-type: lower-alpha;
                 }
 
-        The ability to distinguish structures by context enables you to reduce the number of structures you need to define, particularly in the document and subject domains. It also allows you to name structures more logically and intuitively, since you can name them for what they are, not how they are to be formatted or for where they reside in the hierarchy of the document.
+        The ability to distinguish structures by context enables you to reduce the number of structures you need to define, particularly in the document and subject domains. It also allows you to name structures more logically and intuitively, since you can name them for what they are, what rhetorical role they play, not how they are to be formatted or for where they reside in the hierarchy of the document.
 
         It also points out another important difference between the way media-domain and document-domain writing is usually implemented. The media domain almost always uses a flat structure with paragraphs, tables, etc., following each other in sequence. For instance, Microsoft Word constructs a nested list as a flat sequence of paragraphs with different styles. Inner and outer lists are expressed purely by the indent applied to the paragraphs. (Word tries to maintain auto-numbering across nested list structures, but it does not always get it right.)
 
@@ -149,7 +153,7 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
               
     section: Constraining document structure
 
-        In addition to factoring out {media-domain} constraints, another important reason for working in the {document domain} is to constrain how documents are structured. For example, suppose you want to make sure that all graphics have a figure number, a title, and a caption. In the {media domain}, you can make styles available for figure numbers, titles, and captions, but you can't enforce a rule that says all graphics must have these elements. In the document domain, you can express these constraints. You can make it illegal to place an image element anywhere in the document structure except within a figure that has a title and caption. A structure to implement this constraint might look like [*ex.figure-image]:
+        In addition to factoring out {media-domain} constraints, another important reason for working in the {document domain} is to constrain how documents are structured (the rhetoric they use). For example, suppose you want to make sure that all graphics have a figure number, a title, and a caption. In the {media domain}, you can make styles available for figure numbers, titles, and captions, but you can't enforce a rule that says all graphics must have these elements. In the document domain, you can express these constraints. You can make it illegal to place an image element anywhere in the document structure except within a figure that has a title and caption. A structure to implement this constraint might look like [*ex.figure-image]:
 
         figure:(*ex.figure-image) Document-domain structure for a figure
             ```(SAM)
@@ -159,15 +163,20 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
                     image: images/cute.jpg
 
         If the only way to include an image is to use the image element, and you only allow the image element inside the figure element, and you require the figure element to contain the title and the caption elements, then you can't add a graphic without a figure, title, and caption. A document without these elements would be rejected by the {conformance} checks (see [#chapter.conformance]).
+
+        In the case of `list` structures we saw that the {docuemnt domain} allows the writer to capture something of their rhetorical intent. Here we takes things a step further. This markup is not merely allowing the writer to express their rhetorical intent, it is constraining their rhetorical choices. 
+
+        These are the two basic ways you can partition tasks using structured writing: you can factor out decisions, such as type of numbers to use in a numbered list, or your can constrain decisions, such as forcing writers to provide a title and caption for every figure. 
+
+        Factoring out decisions altogether give you a much more complete partitioning of roles and responsibilities, and provides greater simplicity for writers who don't have to think about the factored-out decisions at all. In many cases, however, factoring out a decision altogether is difficult, or may require you to move your content to a different domain, so constraints are an important part of structured writing design. 
         
-        This is an example of enforcing a constraint rather than factoring it out. However, it is still a form of partitioning because it constrains where images are allowed, which partitions off design questions about image handling. You still have to decide to use an image, but you only need to make that one decision, after which you have a specific structure that enforces the image constraint.
 
-        section: HTML and the document domain
-            You can see that constraints are important to document-domain languages. Without constraints, it is easy for a language to slip back into the media domain, something that has happened to HTML. Today, structured writing advocates often dismiss HTML as an unstructured language. They compare HTML, unfavorably, to languages such as DocBook or DITA, even though all three are document-domain languages at heart with many similar structures. 
+    section: HTML and the document domain
+        You can see that constraints are important to document-domain languages. Without constraints, it is easy for a language to slip back into the media domain, something that has happened to HTML. Today, structured writing advocates often dismiss HTML as an unstructured language. They compare HTML, unfavorably, to languages such as DocBook or DITA, even though all three are document-domain languages at heart with many similar structures. 
 
-            With the advent of CSS, HTML has largely become a set of basic document-domain structures that you can hang styles on. In other words, it is now used much like traditional media-domain word processing and desktop publishing applications, with writers taking back into their own hands formatting decisions that were supposed to have been removed from them. 
+        With the advent of CSS, HTML has largely become a set of basic document-domain structures that you can hang styles on. In other words, it is now used much like traditional media-domain word processing and desktop publishing applications, with writers taking back into their own hands formatting decisions that were supposed to have been removed from them. 
 
-            Why did this happen? When people write in HTML, they largely do so in WYSIWYG environments, using style-oriented tools that closely mimic traditional word processing. In other words, HTML may be a document-domain language, but people commonly create HTML using media-domain tools. The result is often an HTML document that formats more or less correctly but is coded inconsistently, which makes it hard to edit by hand or manipulate with algorithms. 
+        Why did this happen? When people write in HTML, they largely do so in WYSIWYG environments, using style-oriented tools that closely mimic traditional word processing. In other words, HTML may be a document-domain language, but people commonly create HTML using media-domain tools. The result is often an HTML document that formats more or less correctly but is coded inconsistently, which makes it hard to edit by hand or manipulate with algorithms. 
 
     section: The size of the document domain
 
@@ -179,7 +188,7 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
 
         In your media-domain stylesheet, you may have some character styles for things like `author-name` or `book-title`. You may even have a paragraph style for bibliography entries, but you typically don't have much more specific support.
 
-        But these few styles can't cover all the rules your publisher or organization places on bibliographies. You probably have to follow rules that detail how to handle titles, author names, and so forth. These constraints are not enforced by media-domain styles. You have to learn and follow these constraints for yourself. If you want to remove these decisions from the writer, you need a document-domain structure for a bibliography. {DocBook} has one (see [*ex.bib-docbook]). 
+        But these few styles can't cover all the rules your publisher or organization places on the rhetoric of bibliographies. You probably have to follow rules that detail how to handle titles, author names, and so forth. These constraints are not enforced by media-domain styles. You have to learn and follow these constraints for yourself. If you want to remove these decisions from the writer (and thus achieve consistency among all writers), you need a document-domain structure for a bibliography. {DocBook} has one (see [*ex.bib-docbook]). 
 
         figure:(*ex.bib-docbook) DocBook bibliography entry
             ```(docbook)
@@ -212,4 +221,4 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
 
         This structure does not just constrain how bibliography entries are presented and formatted, it also factors out many of those constraints by breaking down the components of a bibliography entry into separate labeled fields. Given a {biblioentry}(structure (DocBook)) structure like this, you could create an algorithm to present and format a bibliography entry almost any way you wanted to. This structure not only partitions the formatting of the bibliography from the presentation of the bibliography, it also partitions the presentation from the underlying bibliographical data. This means you could write an algorithm to extract bibliography information from a document by looking for {biblioentry} structures and extracting the desired information from them. For instance, if you want to build a list of authors cited in the document, you could do so by searching the {biblioentry} records and extracting the name of the authors from the structures that record them in the bibliography structure.  
 
-        This is very useful, but at the same time there are many such structured in documents and a document-domain language that incorporated all of them would be very large and complex -- a problem when our aim is to reduce complexity. To see how we can avoid introducing this level of complexity (and also factor out many document-domain constraints), it is time to turn to the subject domain.  
+        This is very useful, but at the same time there are many such structures in documents and a document-domain language that incorporated all of them would be very large and complex -- a problem when our aim is to reduce complexity. To see how we can avoid introducing this level of complexity (and also factor out many document-domain constraints), it is time to turn to the subject domain.  
