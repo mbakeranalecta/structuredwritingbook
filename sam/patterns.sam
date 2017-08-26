@@ -66,7 +66,7 @@ chapter:(#chapter.patterns) Patterns
                 eggs 12
                 water 2qt
         
-        Ingredient name, quantity, and unit of measure are still clearly distinct here. Any human reader can see them instantly. The trick is to get an algorithm to read them the same way. This trick can be accomplished fairly easily using a regular expression:[*2}
+        Ingredient name, quantity, and unit of measure are still clearly distinct here. Any human reader can see them instantly. The trick is to get an algorithm to read them the same way. This trick can be accomplished fairly easily using a regular expression:
         
         ```(re)
             (?P<ingredient>.+?)(?P<quantity>\d+)(?P<unit>qt|tsp|tbsp)?

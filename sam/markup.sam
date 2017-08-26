@@ -2,7 +2,7 @@ chapter:(#chapter.markup) Markup
 
     <<<(annotations.sam)
 
-    If structures in structured writing consist of nested blocks, the way those blocks are expressed in text and created by writers is (most of the time) markup. Markup is, essentially, the insertion of metadata into a text to constrain the interpretation of that text. The trick is to design markup that is both precise enough and complete enough to provide and constrain the information needed by the next partition in the content system while still being lucid enough for authors to create without imposing on their attention so much that ti affects the quality of their content. We have been looking at structured writing examples expressed in markup all through this book. Now let's take a look at markup itself.   
+    If structures in structured writing consist of nested blocks, the way those blocks are expressed in text and created by writers is (most of the time) markup. Markup is, essentially, the insertion of metadata into a text to constrain the creation and interpretation of that text. We have been looking at structured writing examples expressed in markup all through this book. Now let's take a look at markup itself.   
     
     Markup has long been part of how we partitioned and distributed content creation tasks. For centuries, scribes worked directly in the media domain, using pen and ink to inscribe words and pictures on papyrus or velum. With the printing press, however, came a fundamental partitioning of the publishing process. Authors no longer worked directly in the media domain. While authors were still directly placing ink on paper, at first by pen and then by typewriter, they were no longer preparing the final visual form of the content. That task has been partitioned off and directed to the typesetter.  
 
@@ -18,8 +18,8 @@ chapter:(#chapter.markup) Markup
     Actually, we are getting ahead of ourselves here. A better analogy to old style typesetter's marks is an HTML page with the styles specified inline. 
 
     ```(HTML)
-        <p style="{font-family: serif; font-weight: bold; 
-         font-size: 12pt}">
+        <p style="font-family: serif; font-weight: bold; 
+         font-size: 12pt">
     
 
     You can see that this markup is very very similar to the old typesetters marks in [*typesetter].
@@ -240,7 +240,7 @@ chapter:(#chapter.markup) Markup
         
         To remove that clutter, many authors use XML editors that provide a graphical view of the content similar to that of a word processor. But while graphical XML editors removes visual clutter, they also hide the structure. Even if the author is supposed to be working in the document domain or the subject domain, the editor is now displaying content in the media domain. This greatly reduces the functional lucidity of the {document domain} or {subject domain} language and encourages backsliding into the {media domain}. 
         
-        And then there are the problems that arise when you try to edit the graphical view of an XML document. Underneath is a hierarchical XML structure, but all you can see is the flat media-domain view of the graphical editor. Editing or cutting and pasting structures you can't see can be frustrating and time consuming. You can learn to do it, but even when you learn, the process is still more complicated than it should be. This is a case of unmanaged complexity being dumped on the author.
+        And then there are the problems that arise when you try to edit the graphical view of an XML document. Underneath is a hierarchical XML structure, but all you can see is the flat media-domain view of the graphical editor. Editing or cutting and pasting structures you can't see can be frustrating and time consuming. You can learn to do it, but even when you learn, the process is still more complicated than it should be. Most editors will let you turn on kind of hybrid view where you see a graphical representation of the XML tags in the WYSIWYG view, allowing you to manipulate the tags in this view, but this is a highly complex interface that requires a lot of attention to us and a lot of study to learn and get used to.
         
         Concrete markup languages like Markdown, on the other hand, show you the structure you are creating and are simple to edit. 
         

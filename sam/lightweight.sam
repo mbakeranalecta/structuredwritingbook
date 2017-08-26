@@ -35,7 +35,8 @@ chapter:(#chapter.lightweight) Lightweight Languages
         "Adapted for different purposes" mostly means that people have created versions with specific syntax and semantics in addition to those of Gruber's first version. For instance, the code sharing site GitHub has adopted "Git Hub flavored markdown" as the standard format for user-supplied information on the site, such as project descriptions and issues, and has added syntax specific to tracking issue numbers and code commits for projects, allowing the automatic generation of links between commits and the issues that relate to them. For example:
 
         ```(github_markdown)
-            Issue #135 was fixed in commit 8e8c6a0b4c9c41bd72fab5fd53e3d967e9688110.
+            Issue #135 was fixed in commit 
+            8e8c6a0b4c9c41bd72fab5fd53e3d967e9688110.
 
 
         Markdown is a simple {document-domain} language. While its semantics are essentially a subset of HTML, it is more squarely in the document domain than HTML since it lacks any ability to specify formatting or even to create tables (though various MarkDown flavors have added support for tables).  
@@ -57,11 +58,14 @@ chapter:(#chapter.lightweight) Lightweight Languages
         Different wikis have differences in the markup they support. Here is a small example of {MediaWiki}(tool) markup. ({MediaWiki}) is the system that runs {Wikipedia}(website "wikipedia.org")):
 
         ```(mediawiki)
-            "Take some more [[tea]]," the March Hare said to Alice, very earnestly.
+            "Take some more [[tea]]," the March Hare said 
+            to Alice, very earnestly.
 
-            "I've had '''nothing''' yet," Alice replied in an offended tone, "so I can't take more."
+            "I've had '''nothing''' yet," Alice replied in 
+            an offended tone, "so I can't take more."
 
-            "You mean you can't take ''less''?" said the Hatter. "It's very easy to take ''more'' than nothing."
+            "You mean you can't take ''less''?" said the Hatter. 
+            "It's very easy to take ''more'' than nothing."
 
         This sample is from the {Wikipedia} {article on Wikis}[https://en.wikipedia.org/wiki/Wiki#Editing]. You can find the explanation there.
         
@@ -73,7 +77,7 @@ chapter:(#chapter.lightweight) Lightweight Languages
         
         What Wikis illustrate for structured writing is that very simple markup innovations like the WikiWord can have revolutionary effects on how content is created and organized. Most Wikis today use words between double square brackets for WikiWords, rather than internal capitals, but the principle is the same. You can link to a thing merely by naming it. 
         
-        Wiki words are also a case of {subject domain} annotation. Marking a phrase as a WikiWord says, "this is a significant subject". It does not provide type information like the subject domain annotation examples shown in this book, but merely denoting a phrase as significant says that it names some subject of importance that deserves a page of its own. This illustrates the point about bottom-up information architectures, that structured writing, even in very simple form, can create texts that are capable of self-organization, that can be assembled into meaningful collections without the imposition of any external structures. However, the wiki process leaves much of the complexity of content creation and management unhandled. The slack has to be taken up by human effort, which has worked well in the case of Wikipedia's army of volunteer contributors and editor, but is harder to reproduce on a corporate scale. 
+        Wiki words are also a case of {subject domain} annotation. Marking a phrase as a WikiWord says, "this is a significant subject". It does not provide type information like the subject  annotation examples shown in this book, but merely denoting a phrase as significant says that it names some subject of importance that deserves a page of its own. This illustrates the point about bottom-up information architectures, that structured writing, even in very simple form, can create texts that are capable of self-organization, that can be assembled into meaningful collections without the imposition of any external structures. However, the wiki process leaves much of the complexity of content creation and management unhandled. The slack has to be taken up by human effort, which has worked well in the case of Wikipedia's army of volunteer contributors and editor, but is harder to reproduce on a corporate scale. 
     
     section: reStructuredText
     
