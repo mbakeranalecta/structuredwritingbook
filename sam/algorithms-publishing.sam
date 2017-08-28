@@ -127,9 +127,9 @@ chapter:(#chapter.publishing) Publishing
        
             How content is linked or cross-referenced is a key part of how it is organized in different media, and a key part of {differential single sourcing}. We looked at the {linking algorithm}(algorithm) in detail in [#chapter.linking].
        
-        section: The {information architecture algorithm}
+        section: The {content generation algorithm}
        
-            Part of the {presentation} of a document or document set is creating the {table of contents}, {index}, and other {navigation} aids. Creating these is part of the presentation process. Because these algorithms create new resources by extracting information from the rest of the content, it is often easier to run these algorithm in serial after the main {presentation algorithm} has run. This also makes it easier to change the way a {TOC} or {index} is generated without affecting your other algorithms. For more on the information architecture algorithm, see [#chapter.architecture].
+            Part of the {presentation} of a document or document set is generating the {table of contents}, {index}, and other {navigation} aids. Generating these is part of the presentation process. Because these algorithms create new resources by extracting information from the rest of the content, it is often easier to run these algorithm in serial after the main {presentation algorithm} has run. This also makes it easier to change the way a {TOC} or {index} is generated without affecting your other algorithms. For more on the content generation algorithm, see [#chapter.generate]. (Note that the content generation algorithm can be use in both the {synthesis} and {presentation} stages, since ti can be used to generate either synthesis of presentation artifacts.)
        
            
     section: The {Synthesis Algorithm}
@@ -162,6 +162,10 @@ chapter:(#chapter.publishing) Publishing
         section: The {reuse algorithm}
         
             Pulling in reused content is part of the synthesis process. We looked at the reuse algorithm in [#chapter.reuse].
+
+        section: The {content generation algorithm}
+
+            As I noted in [#chapter.generate] the content generation algorithm presents an alternative approach to the creation of different forms of output from a single source of data. It is run as part of the synthesis algorithm when creating raw content, and as part of the presentation algorithm when creating presentation artifacts such as a table of contents. 
 
 
         section: The {extract algorithm}
