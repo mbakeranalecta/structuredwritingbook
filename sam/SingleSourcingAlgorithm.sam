@@ -4,11 +4,11 @@ chapter:(#chapter.single-sourcing) Single Sourcing
     index:: type, term
         concept, single sourcing
 
-    The need to publish the same document in more than one medium -- for example, print and Web -- is a common process problem and source of complexity. You might not suspect that it is also a rhetoric problem, but as I will show, it actually a significant and difficult rhetoric problem as well. The term _single sourcing_ is used to describe a variety of different ways to address this need, all of which involve using a single body of content to create output in more than one medium. I look at variations on this theme in this and subsequent chapters.
+    The need to publish the same document in more than one medium -- for example, print and Web -- is a common process problem and source of complexity. You might not suspect that it is also a rhetoric problem, but as I will show, it actually a significant and difficult rhetoric problem as well. The term _single sourcing_ is used to describe a variety of different ways to address this need, all of which involve using a single body of content to create output in more than one medium.
 
     Single sourcing adds complexity to the job of separating content from formatting because you are now separating content from not one but two or more sets of formatting. In other words, you are not simply separating content from formatting, you are separating a set of decisions about formatting from your content so you can make different decisions for each medium. If you don't get the partitioning correct, problems will show up when you try to apply two different sets of formatting to the same content. 
     
-    Many organizations have unhandled complexity in this area -- complexity that falls through to readers. Often, their authoring techniques do not allow writers to sufficiently separate media-specific formatting from content. As a result, formatting for one medium gets applied to another medium, which means the content in that medium does not work as well as it could. By improving how you separate content from formatting, you can significantly reduce the amount of complexity that goes unhandled, resulting in a better experience for your readers.  
+    Many organizations have unhandled complexity in this area -- complexity that can result in rhetorical problems. Often, their authoring techniques do not allow writers to sufficiently separate media-specific formatting from content. As a result, formatting for one medium gets applied to another medium, which means the content in that medium does not work as well as it could. By improving how you separate content from formatting, you can significantly reduce the amount of complexity that goes unhandled, resulting in a better experience for your readers.  
     
     section: Basic single sourcing 
     
@@ -167,7 +167,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
             plays an ex-Union colonel out for revenge.
         
         
-        In SAM syntax, the link markup (`link "http://JohnWayne.com`) specifies the address to link to. In the algorithm examples below, I refer to this markup as the _specifically_ attribute using the notation `@specifically`.
+        In SAM syntax, the link markup (`link "http://JohnWayne.com"`) specifies the address to link to. In the algorithm examples below, I refer to this markup as the _specifically_ attribute using the notation `@specifically`.
         
         In HTML, you output this as a link using the HTML `a` element, so the algorithm looks like [*fig.ssa-specifically-1].
 
@@ -272,7 +272,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         And this is more than a layout issue. Sometimes the things that paper does in a static way should be done dynamically in online media. For example, airline and train schedules have traditionally been printed as timetables on paper, but you rarely see them presented that way online. Rather, you see an interactive travel planner that lets you choose your starting point, destination, and desired travel times and then presents you with the best schedule, including when and where to make connections. If your single source is a timetable designed for print and PDF, you can't produce the kind of online presentation of your schedule that people expect, and that can have a direct impact on your business.
         
-        To single source schedule information for both paper and online media, you can't maintain that content in a document-domain table structure. You need to maintain it in a timetable database structure (which is in the {subject domain}, even though it looks like a database, not a document). 
+        To single-source schedule information for both paper and online media, you can't maintain that content in a document-domain table structure. You need to maintain it in a timetable database structure (which is in the {subject domain}, even though it looks like a database, not a document). 
         
         An algorithm can read such a database to generate a document-domain table for print publication. For the Web, however, you can create a web application that queries the same database dynamically to calculate routes and schedules for individual travelers. 
         
@@ -337,7 +337,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         Often, the tools a group uses implicitly determine the primary medium. This usually means that the primary medium is paper, and paper often continues to be primary even after the organization stops producing paper, and their readers have moved to online formats. 
         
-        Some organizations think they should not switch to tools that are designed primarily for online content until they have entirely abandoned paper and paper-like formats such as PDF. But once online becomes your primary media, your rhetoric should change to a rhetoric appropriate to online media (potentially a very large change, as discussed in [#chapter.architecture]. Thus it is appropriate to switch to a rhetoric and tool set that is optimized for online but that can still produce linear media as a secondary output format. 
+        Some organizations think they should not switch to tools that are designed primarily for online content until they have entirely abandoned paper and paper-like formats such as PDF. But once online becomes your primary media, your rhetoric should change to a rhetoric appropriate to online media (potentially a very large change, as discussed in [#chapter.architecture]). Thus it is appropriate to switch to a rhetoric and tool set that is optimized for online but that can still produce linear media as a secondary output format. 
         
         Changing your information design practices from linear, paper-based designs to {hypertext} designs is not trivial, but such designs better suit the way many people use and access content today. I discuss these design differences in depth in my book, {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}(citetitle). Don't expect single sourcing, by itself, to successfully turn document-oriented design into effective hypertext. It is usually more effective to adopt an {Every Page is Page One}(concept) approach to information design and use structured writing and single-sourcing techniques as a best-effort method to create linear media for those of your readers who still need paper or paper-like formats -- or for those documents where linear organization still makes sense. 
 

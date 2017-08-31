@@ -6,15 +6,15 @@ chapter:(#chapter.reuse) Reuse
         algorithm, reuse 
         concept, content reuse
 
-    Another source of complexity in content creation occurs when you want the same information to occur in more than one publication. If there is no coordination between authors, each author who want to include the piece of information will research and write it for themselves. Individual writers who want to use the same information in more than on publication they are writing, will copy the information from one publication to another. However it happens, you now have two or more instances of the same information that have to be maintain and edited whenever the subject matter changes. If some instances do not get updated, or some of them get updated incorrectly, that is content maintenance complexity that is not being handled, and, as always, it falls through to the reader in the form of inconsistent or incorrect information. 
+    Another source of complexity in content creation occurs when you want the same information to occur in more than one publication. If there is no coordination between authors, each author who wants to include the piece of information will research and write it for themselves. Individual writers who want to use the same information in more than one publication they are writing, will copy the information from one publication to another. However it happens, you now have two or more instances of the same information that have to be maintain and edited whenever the subject matter changes. If some instances do not get updated, or some of them get updated incorrectly, that is content maintenance complexity that is not being handled, and, as always, it falls through to the reader in the form of inconsistent or incorrect information. 
     
-    Content reuse is an attempt to handle the complexity associated with using the same information in more than one place. Reuse has become one of the main drivers of structured writing, particularly in the form of widespread adoption of {DITA}(tool). Unfortunately, most reuse techniques also introduce a lot of {management domain} complexity. A single-minded focus on reuse has sometimes led to the implementation of systems that dump large amounts of complexity on authors (and thus, eventually, on readers). It is an area in which, if you are not careful, you can easily end up with more unhandled complexity in the system than when you began, resulting in both process problems and significant damage to rhetoric. Reuse is also an area in which process and rhetorical goals can easily be at odds since using the same content for multiple purposes may deliver process benefits but may not be the best rhetorical strategy. 
+    Content reuse is an attempt to handle the complexity associated with using the same information in more than one place. Reuse has become one of the main drivers of structured writing, particularly in the form of widespread adoption of {DITA}. Unfortunately, most reuse techniques also introduce a lot of {management domain} complexity. A single-minded focus on reuse has sometimes led to the implementation of systems that dump large amounts of complexity on writers. It is an area in which, if you are not careful, you can easily end up with more unhandled complexity in the system than when you began, resulting in both process problems and significant damage to rhetoric. Reuse is also an area in which process and rhetorical goals can easily be at odds since using the same content for multiple purposes may deliver process benefits but may not be the best rhetorical strategy. 
     
     It is important to remember that content reuse is a means for creating duplication in content. It eliminates duplication on the authoring side, but it creates duplication on the output side. It is important to think about why you want that duplication at all, or if there are viable alternatives, such as publishing the information once and linking to it from various places. There are a number of different scenarios in which you might want to duplicate information in more than one place. For example: 
     
     * You are writing about different products in a product line that share common technology. You want to duplicate information on the common features in a document on each individual product. 
     
-    * You are writing about several different releases of a product. You want information on features that have not changed to be duplicated in all documents. 
+    * You are writing about several different releases of a product. You want information on features that have not changed to be duplicated in documents for the next release. 
     
     * You are writing documents for different audiences (marketing material, technical documentation for various roles, training material) and you want to  duplicate product descriptions in all these documents. 
     
@@ -44,7 +44,7 @@ chapter:(#chapter.reuse) Reuse
         
         >>>(image ../graphics/common2variable.xml)
         
-         We looked at an example of this in [#chapter.management-domain], where we had a set of dangerous procedures which each required a standard warning. Each individual procedure is the variable part and the standard warning is the common part.:  
+        We looked at an example of this in [#chapter.management-domain], where we had a set of dangerous procedures which each required a standard warning. Each individual procedure is the variable part and the standard warning is the common part.:  
         
         ```(sam)
             procedure: Blow stuff up
@@ -113,7 +113,7 @@ chapter:(#chapter.reuse) Reuse
         
         Here we need to talk about how we identify the content to be inserted. In the common into variable example, we inserted the content of a file that contains a standard warning.  
     
-        But for variable into variable this approach simply does not work. Variable into variable requires loading a different file, which is difficult when the content specifies a particular file name to import.
+        But for variable into variable this approach does not work. Variable into variable requires loading a different file, which is difficult when the content specifies a particular file name to import.
     
         As always in structured writing, we look for a way to factor out the problematic content. So here we look for a way to factor out the file name and replace it with something else.
         
@@ -218,7 +218,7 @@ chapter:(#chapter.reuse) Reuse
             
             Using keys is not necessarily better than using IDs. What it comes down to is that you need some kind of bridge between the citation of an identifier in the source file and the location of a resource with that identifier in the content store. This bridge can be created by a key lookup table, by remapping file URLs, or by modifying a query to a content repository. 
             
-            One feature of the key approach is that, because it does not attach the key directly to the content, it can be use to identify resources that do not have IDs, which may include resources that you do not control. 
+            One feature of the key approach is that, because it does not attach the key directly to the content, it can be used to identify resources that do not have IDs, which may include resources that you do not control. 
                       
             One downside of keys is that by themselves they can only point to a whole resource. This could force you to keep all your reusable units in separate files. To avoid this, you can combine keys with IDs.        
             The following example combines the foreign and domestic danger warnings into one file and gives each an ID:
@@ -313,7 +313,7 @@ chapter:(#chapter.reuse) Reuse
         
         * The current tools don't support variable into common.
         
-        How successful a common with conditions approach will be also depends on what you choose for your conditional expressions. Generally, subject domain conditions will be much more stable and manageable than document domain conditions. For instance, conditions that relate to different vehicles (subject domain) are based in the real world and are therefore objectively true as long as the subject matter remains the same. Conditions that relate to different publications or different media, on the other hand, are not objectively true and can't be verified independently. They only way to verify them is to build the different documents or media and see if you got the content you expected. This makes maintaining such conditions cumbersome and error prone -- an indications that complexity is not being distributed in an optimal way. 
+        How successful a common-with-conditions approach will be also depends on what you choose for your conditional expressions. Generally, subject domain conditions will be much more stable and manageable than document domain conditions. For instance, conditions that relate to different vehicles (subject domain) are based in the real world and are therefore objectively true as long as the subject matter remains the same. Conditions that relate to different publications or different media, on the other hand, are not objectively true and can't be verified independently. They only way to verify them is to build the different documents or media and see if you got the content you expected. This makes maintaining such conditions cumbersome and error prone -- an indications that complexity is not being distributed in an optimal way. 
         
     section: Factor out the common
     
@@ -356,7 +356,7 @@ chapter:(#chapter.reuse) Reuse
         
         This is very important from both a complexity point of view and a cost point of view. Where a writer is asked to consciously reuse content they have to go looking for that content every time the potential for reuse occurs. This cost is incurred whether or not they find reusable content, whereas any savings from reuse are realized only when reusable content is found. But with this approach, the writer is relieved of all responsibility for the reusable content. Locating that content is the job of an algorithm. If it does not exist, the algorithm will report that it is missing and it will be somebody's job to create it, after which the algorithm will locate it automatically every time it is needed. This is far more efficient than writers looking for reusable content over and over and over. 
         
-        The downside of this approach is that it is not as general. The `is-it-dangerous` metadata is applies only to dangerous procedures. It does not address the inclusion of reusable content in other places. You would need to factor out other interesting reuse cases in a similar way to create a complete subject-domain solution. Again we see that complexity always has to go somewhere. But as we have also seen, if writers cannot fully handle the complexity thrust on them, that complexity ultimately gets dumped on the reader.
+        The downside of this approach is that it is not as general. The `is-it-dangerous` metadata applies only to dangerous procedures. It does not address the inclusion of reusable content in other places. You would need to factor out other interesting reuse cases in a similar way to create a complete subject-domain solution. Again we see that complexity always has to go somewhere. But as we have also seen, if writers cannot fully handle the complexity thrust on them, that complexity goes unhandled, with consequences for both process and rhetoric.
         
     section: Factor out the variable
     
@@ -477,7 +477,7 @@ chapter:(#chapter.reuse) Reuse
             * Losing the narrative flow
             * Failure to address the audience appropriately
     
-            Many works on content reuse casually recommend making content more generic or more abstract as a means to making it more reusable, without saying anything about the potential downside. This is very dangerous and can do serious harm to the quality of your content. Statements that are specific and concrete are easier to understand and communicate better than statements that are generic and abstract. Replacing specific and concrete statements with generic or abstract statements will reduce the effectiveness of your content significantly. This is a classic case of dumping complexity onto the reader.
+            Many works on content reuse casually recommend making content more generic or more abstract as a means to making it more reusable, without saying anything about the potential downside. This is very dangerous and can do serious harm to the rhetorical quality of your content. Statements that are specific and concrete are easier to understand and communicate better than statements that are generic and abstract. Replacing specific and concrete statements with generic or abstract statements will reduce the effectiveness of your content significantly. This is a classic case of one process directing complexity away from itself without regard for the affect on the whole.
             
             Unfortunately, as noted in [#chapter.writing], human beings suffer from {the curse of knowledge}(concept). The curse of knowledge is a cognitive bias that makes it very hard for people who understand an idea to appreciate the difficulties that idea presents to people who do not understand it. The curse of knowledge makes the generic or abstract statement of an idea appear equally communicative, and perhaps more succinct and precise, than the concrete and specific statement of it. This is a problem for writers at all times, pulling them away from the kind of specific and concrete statement that make ideas easier to comprehend. The desire to make content reusable reinforces this temptation. 
             
@@ -485,7 +485,7 @@ chapter:(#chapter.reuse) Reuse
             
             Another potential quality problem comes with the loss of narrative flow. Not all content has or needs a lengthy narrative flow, but if you start breaking your content into reusable units and putting them back together in different ways, the narrative flow can easily be lost. In some cases you can avoid this problem by making the topics you present to your audience more self contained using an {Every Page is Page One}(concept) information design. But don't assume that you have an effective Every Page is Page One design just because you have broken your content into reusable units. If that content was written in a way that assumed a narrative flow, it is not going to work when reused in a way that breaks that flow. 
             
-            Finally, reuse can encourage you to come up with one way of telling our story that you present to all your audiences. But not all audiences are alike, and the way you tell your story to one audience may not work for another audience. Good content tells a good story to a particular audience. Two different tellings of the same story do not constitute redundant content if they address different audiences. 
+            Finally, reuse can encourage you to come up with one way of telling our story that you present to all your audiences. But not all audiences are alike, and the way you tell your story to one audience may not work for another audience. Good rhetoric tells a good story to a particular audience. Two different tellings of the same story do not constitute redundant content if they address different audiences. 
         
         section: Cost traps
         
