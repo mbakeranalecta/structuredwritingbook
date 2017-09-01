@@ -6,10 +6,51 @@ chapter:(#chapter.generate) Generated Content
         concept, generated content 
         task, generating content
 
-    I have mentioned at several times already that one of the advantages of the subject domain is that it allows you to generate different types of rhetoric from a base of subject domain data. Here I will look at the content generation algorithm in greater depth. 
+    I have mentioned at several times already that one of the advantages of the {subject domain} is that it allows you to generate different types of rhetoric from a base of subject domain data. Here I will look at the content generation algorithm in greater depth. 
 
     There is nothing new about generating content. {Word processors} and {desktop publishing programs} can generate indexes and tables of contents, for instance, and the {content reuse} algorithms that we looked at in [#chapter.reuse] are all forms of content generation because they combine smaller pieces of content or data to form larger units of content. 
 
+    The fundamental of content generation are pretty simple. It is just a matter of taking separate pieces of content and data and combining them to form new content. Thus when I spoke earlier about storing the ingredients of a recipe as a data structure and using an algorithm to present them as either a table or a list, that was an example of content generation.
+    
+    Here is what the algorithm to turn that data into a list might look like (again, in pseudocode):
+    
+    ```(pseudo)
+    
+        match ingredients
+            create ul
+                continue
+                
+        match ingredients/record
+            create li
+                output name
+                output [tab]
+                output quantity
+                if unit is not 'each'
+                    output [space]
+                    output unit
+                    
+    Here is what the algorithm for interpolating separate serving and preptime fields into the introduction of a recipe might look like:
+    
+    ```(pseudo)
+        match description
+            continue
+            output 'Preparation time is '
+            output /recipe/preptime
+            output '. Serves '
+            output /recipe/serves
+            output '.'
+            
+        match preptime
+            ignore
+            
+        match serves
+            ignore
+            
+    But this kind of content gereration does not have to confine itself to working within a single document. It can also involve pulling content from several files or in assembling different collections of content to serve a common rhetorical purpose, such as compiling a low calorie cook book based on nutrition information in a collection of recipes.
+    
+    It can also involve the generation of many of the elements required to build a top-down or bottom-up information architecture. 
+            
+    
     section: Categorization
         One of the key elements of top-down information architecture is {categorization}. An {information architect} develops categories of content and develops an organizational schema (such as a table of contents) based on those categories. This may include levels of subcategories forming a hierarchical categorization scheme.  
         
@@ -19,17 +60,17 @@ chapter:(#chapter.generate) Generated Content
         
         For content in the {subject domain}, therefore, the {metadata} required to assign a piece of content to a category may be inherent in its subject domain markup. It is the nature of the subject domain to describe the subject matter and any markup that describes the subject matter may already contain the fields that you need for categorization. This is one of the attractions of the subject domain: the markup can serve many purposes, which simplifies both markup design and content authoring and often means that you don't need to create additional structures to support a new algorithm.
         
-        Relying on the {subject domain} {metadata} already in the content, rather than creating a separate metadata record, can be a tremendous advantage, because it makes submission of content to a {repository} so much easier for authors. But in some cases it can also avoid the need for a costly {content management system}, since it allows the {publishing algorithm} to categorize content at build time without the need of a separate metadata store or a separate system to manage categorization. I will look more at the role of the content management system in [#chapter.management-domain].
+        Relying on the {subject domain} {metadata} already in the content, rather than creating a separate metadata record, can be a tremendous advantage, because it makes submission of content to a {repository} so much easier for writers. But in some cases it can also avoid the need for a costly {content management system}, since it allows the {publishing algorithm} to categorize content at build time without the need of a separate metadata store or a separate system to manage categorization. I will look more at the role of the content management system in [#chapter.content-management].
             
     section: Tables of Contents
     
-        If you are creating a top-down information architecture, your structured writing system need to be able to generate {tables of contents} just as a {word processor} or {desktop publishing application} does. 
+        If you are creating a top-down information architecture, your structured writing system needs to be able to generate {tables of contents} just as a {word processor} or {desktop publishing application} does. 
 
         Tables of contents can serve various purposes depending on the nature of the work. Some describe a linear reading order for a work, some provide a {classification} scheme for random access to the content, some are simply a list of chapters that does not necessarily imply an intended reading order. 
         
         A {table of contents} may seem like a {document domain} structure, but it is really more of a {media domain} structure, for two reasons. First, it contains specific links to specific resources at specific addresses, or specific page numbers in a paper or a virtual paper format such as {PDF}. Secondly, it is virtually always factored out in {document domain} {markup languages}. Tables of contents are not written, they are generated. 
         
-        From an {information architecture} point of view, what matters is how they are generated. In {DocBook}, for instance, it is typical to write each chapter of a book in a separate `chapter` file and then pull them together into a book using a `book` file. The order of the table of contents is then determined by the order in which the chapters are listed in the `book` file. The TOC itself is generated by extracting chapter and section headings from the `chapter` files in the order they appear in the `book` file. 
+        From a structured writing point of view, what matters is how they are generated. In {DocBook}, for instance, it is typical to write each chapter of a book in a separate `chapter` file and then pull them together into a book using a `book` file. The order of the table of contents is then determined by the order in which the chapters are listed in the `book` file. The TOC itself is generated by extracting chapter and section headings from the `chapter` files in the order they appear in the `book` file. 
         
         In {DITA}, the normal process is to assemble a book using a `map` file. A map file may assemble a book out of {DITA} topics or other maps, and this may include assembling the chapters from topics as well. In the end, though, the {table of contents} is generated in the same way, by traversing the document assembled by the `map`.
         
@@ -85,30 +126,27 @@ chapter:(#chapter.generate) Generated Content
                              = address of movie-review
                                 output movie-name
             
-        Note the close relationship between rhetoric and navigation here. The generated filmography is both content and navigation, both part of the individual topic and part of the overall navigation scheme -- and example of how information architecture unites rhetoric and navigation.  
-
-        It is also worth noting this kind of thing is a sophisticated example of the {reuse algorithm}. It takes a set of movies, each with a list of actors, and uses it to generate a list of movies for each actor, reusing existing information to create new content. This happens without any explicit reuse markup.  
+        Note the close relationship between rhetoric and navigation here. The generated filmography is both content and {navigation}, both part of the individual topic and part of the overall navigation scheme -- an example of how {information architecture} unites rhetoric and navigation.  
+ 
 
     section: Collections and selections
 
         One of the applications of {subject domain} markup that I have already mentioned in the recipe example is that it can be used to select content for a collection. Thus if you capture calorie and prep time information in your recipe markup, you can use that information to assemble a cookbook with a title like, "Diet-Friendly Dishes You Can Make in 30 Minutes or Less". If you store seasonal information in your markup, you can do "Diet-Friendly Christmas Treats" or "Summer Suppers in 20 Minutes".
 
-        One of the most important aspect of making these collections based on subject domain markup is that you did not have to think of them at the time the recipes were written. There is nothing that ties the recipes to these publications. The recipes simple record certain significant facts about the dishes that may matter to readers. An {content strategist} can then dream up all kinds of collections they would like to do, and because the recipes record significant truths about the dishes in an explicit form that is accessible to algorithms, chances are that you will be able to assemble the collection that the content strategist has dreamed up and get it right out to press while the market demand is hot. 
+        One of the most important aspect of making these collections based on subject domain markup is that you did not have to think of them at the time the recipes were written. There is nothing that ties the recipes to these publications. The recipes simple record certain significant facts about the dishes that may matter to readers. A {content strategist} can then dream up all kinds of collections they would like to do, and because the recipes record significant truths about the dishes in an explicit form that is accessible to algorithms, chances are that you will be able to assemble the collection that the content strategist has dreamed up and get it right out to press while the market demand is hot. 
 
         The subject domain is the gift that keeps on giving. You don't have to have anticipated all of the uses you will put subject domain data to, and collecting it is relatively inexpensive since it is simply asking writers to enter information they already know in fields with concrete specific names that are easy to understand. 
     
     section: Content queries
 
-        If you know what subjects phrases in your content are referring to, you can use that information to form queries to pull in additional information from other sources. (This is really the flip side of {linking} based on {subject annotation}, using the same information to find information to pull in rather than to link to.)
-
-        For instance, let's say that you are writing about novels and you annotate mentions of novels in your text:
+        If you know what subjects the phrases in your content are referring to, you can use that information to form queries to pull in additional information from other sources. For instance, let's say that you are writing about novels and you annotate the titles of novels that are mentioned in your text:
 
         ```(xml)
             {War and Peace}(book "ISBN:1400079985") is a very long book.
 
-        Here the title is markup up as the title for a book and, to make things more precise, an ISBN number is provided as well. An ISBN number is the key to a large amount of data about a published book. If we have the ISBN number, we can look up all sorts of other information. For instance, we can use the ISBN to look up publication details using a web service like ISBNdb (http://isbndb.com). 
+        Here the title is marked up as the title for a book and, to make things more precise, an ISBN number is provided as well. An ISBN number is the key to a large amount of data about a published book. If we have the ISBN number, we can look up all sorts of other information. For instance, we can use the ISBN to look up publication details using a web service like ISBNdb (http://isbndb.com). 
 
-        Most web services return information in XML, which is perfect for us, since our content is in XML. A hypothetical ISBN web service might return an XML document that looked like this (this is not what ISBNdb returns, just a simplified example):
+        Most web services return information in XML. A hypothetical ISBN web service might return an XML document that looked like this (this is not what ISBNdb returns, just a simplified example):
 
         ```(xml)
             <book>
@@ -147,7 +185,7 @@ chapter:(#chapter.generate) Generated Content
                     output " pages"
                     output )
 
-        This basic technique opens all kinds of doors. The power of semantic markup to enable the merging of information from different sources is enormous. Here are just a few of the tricks we could pull using information retrieved using the ISBN number:
+        This basic technique opens all kinds of doors. The power of structured writing to enable the merging of information from different sources is enormous. Here are just a few of the tricks we could pull using information retrieved using the ISBN number:
 
         * Pull in a picture of the book cover.
 
@@ -155,19 +193,19 @@ chapter:(#chapter.generate) Generated Content
 
         * Create a link to an online bookstore, where the the reader could buy the book. If you  belonged to an affiliate program for an online bookstore, you could pick up some cash every time a reader followed your link and bought a book. 
 
-        There are also some major process efficiencies to be realized by capturing this kind of metadata in your XML content. If you can use metadata keys to pull information from external sources, authors don’t have to look up all that information themselves when they write. Authors don’t have to decide which of the book details are going to appear in the final output. That decision is made by editing the XSLT stylesheet, and it can be changed, for all your existing content, simply by changing the stylesheet.
+        There are also some major process efficiencies to be realized by capturing this kind of metadata in your content. If you can use metadata keys to pull information from external sources, authors don’t have to look up all that information themselves when they write. Authors don’t have to decide which of the book details are going to appear in the final output. That decision is made by editing the XSLT stylesheet, and it can be changed, for all your existing content, simply by changing the stylesheet.
 
-        Having writers enter the ISBN number in the content makes writing the algorithm straightforward, and sometimes it is appropriate because you are referring to a particular edition of a book and the ISBN number is the most reliable identifier of a specific edition. But in many case it is actually too specific, and it complicates life for the author to have to look up an ISBN when all they really want to refer to is the novel itself, regardless of which edition it is. This distinction can be important. There are many other editions of War and Peace, in many languages. War and Peace is a very long book in all those editions and all those languages. The paragraph is not referring specifically to the the Vintage Edition of 2008. It is referring to War and Peace as a novel generally.         
+        Having writers enter the ISBN number in the content makes writing the algorithm straightforward, and sometimes it is appropriate because you are referring to a particular edition of a book and the ISBN number is the most reliable identifier of a specific edition. But in many case it is actually too specific, and it complicates life for the author to have to look up an ISBN when all they really want to refer to is the novel itself, regardless of which edition it is. This distinction can be important. There are many other editions of War and Peace, in many languages. War and Peace is a very long book in all those editions and all those languages. The paragraph is not referring specifically to the the Vintage Edition of 2008. It is referring to _War and Peace_ as a novel generally.         
 
         ```(sam)
             {War and Peace}(novel) is a very long book.
 
-        Here, we have replaced the `book` tag with the more specific `novel` annotation. If you are concerned that you might have references to other novels named _War and Peace_ by other writers, you could make it more specific:
+        Here, we have replaced the `book` annotation with the more specific `novel` annotation. If you are concerned that you might have references to other novels named _War and Peace_ by other writers, you could make it more specific:
 
         ```(sam)
             {War and Peace}(novel (Leo Tolstoy)) is a very long book.
 
-        This markup is obviously easier for writers to create. It only asks them for the things they already know, so they won’t have to stop to look anything up. That is an important part of {functional lucidity}
+        In SAM, a phrase in parentheses inside an annotation is a namespace identifier. A namespace is a context in which a set of names is guaranteed to be unique. No author publishes more than one novel with the same name, so the name of the author is generally an adequate namespace identifier for the name of a novel. This markup is obviously easier for writers to create compared to asking for an ISBN. It only asks them for the things they already know, so they won’t have to stop to look anything up. That is an important part of {functional lucidity}
 
         But without an ISBN number, can we still get the book data we want? We still can, but we have to use a different query to extract it. Our original code did the lookup like this:
 
@@ -179,21 +217,23 @@ chapter:(#chapter.generate) Generated Content
 
                 $book-info = get 'http://example.com/isbn/lookup?category=novel&title=' + $title + '&author=' + $author
 
-        The only thing different about the results we will get from this query is that it may return records for more than one book (actually, there will certainly be, since there are many editions of War and Peace in print). So the code that adds the book info to the content will need to pick one of the alternatives based on some relevant pieces of publication data (such as the most recent publication date). 
+        The only thing different about the results we will get from this query is that it may return records for more than one book (actually, there will certainly be, since there are many editions of _War and Peace_ in print). So the code that adds the book info to the content will need to pick one of the alternatives based on some relevant pieces of publication data (such as the most recent publication date). 
 
-        I could have chosen an example that did not have this kind of ambiguity in its data to illustrate this type of content generation, but the fact is that you will often come across this kind of issue in the real world. This is one of those issues that forces you to make decision about how to correctly partition complexity in your system. Here we have a choice between an approach to markup that makes for a simple algorithm that is easy to write, but which requires effort and research from the writer, vs an approach that requires more thought and effort to write the algorithm, but provides greater functional lucidity for the writers. Stated like this it seems obvious which choice you should make, but in practice these decisions are often made by the people developing the algorithms, and they often choose to make their lives easier at the expense of the writers. It may seem like a detail, but this is an area in which the correct partitioning and distribution is at stake, and such decisions should not be left to one partition to make. They require input from all sides and the attention of the project owners.  
+        I could have chosen an example that did not have this kind of ambiguity in its data (title vs. ISBN as identifier of a novel) to illustrate this type of content generation, but the fact is that you will often come across this kind of issue in the real world. This is one of those issues that forces you to make decision about how to correctly partition complexity in your system. 
+        
+        Here you have a choice between an approach to markup that makes for a simple algorithm that is easy to write, but which requires effort and research from the writer, versus an approach that requires more thought and effort to write the algorithm, but provides greater {functional lucidity} for the writers. Stated like this it seems obvious which choice you should make, but in practice these decisions are often made by the people developing the algorithms, and they often choose to make their lives easier at the expense of the writers. It may seem like a detail, but this is an area in which the correct partitioning and distribution is at stake, and such decisions should not be left to one partition to make. They require input from all sides and the attention of the project owners.  
 
     section: Personalized content 
     
-        Another key feature of modern web architecture is personalized content, which means content that is generated in response either to what the site already knows about you (from your account information, or a transaction token such as a {cookie}(tool), or the  selections or entries that you make on the page). For example, when you log into Amazon, the first page you see is crafted for you based on everything Amazon knows about your browsing and purchasing history. As you make selections, such as adding an item to your shopping cart or wish list, that information is used to shape the next page you see. 
+        A key feature of modern web architecture is personalized content, which means content that is generated in response either to what the site already knows about you (from your account information, or a transaction token such as a {cookie}(tool), or the  selections or entries that you make on the page). For example, when you log into Amazon, the first page you see is crafted for you based on everything Amazon knows about your browsing and purchasing history. As you make selections, such as adding an item to your shopping cart or wish list, that information is used to generate the next page you see. 
         
-        If you browse a used car site like Autotrader.com, you can select those features of a car that you are interested in (red convertibles with manual transmission under $20000, for instance) and the next page will be built based on that input.
+        If you browse a used car site like Autotrader.com, you can select those features of a car that you are interested in (red convertibles with manual transmission under $20000, for instance) and the next page will be generated based on that input.
         
-        The ability of a site to personalize pages depends on its ability to identify content that is {relevant}(algorithm "relevance"), based on everything it knows about the reader, and to assemble those pieces to form a page. For this to work, the content has to be easy to identify unambiguously, and it needs to be highly {composable}(algorithm "composability").  
+        The ability of a site to personalize pages depends on its ability to identify content that is {relevant}(algorithm "relevance"), based on everything it knows about the reader, and to assemble those pieces to form a page. For this to work, the content has to be easy to identify unambiguously, and it needs to fit together easily.  
         
         As we have seen, these properties are maximized when content is stored in the {subject domain}, both because the {subject domain} makes the relevant {metadata} available, and because working in the {subject domain} helps authors produce more consistent content that works better with these algorithms. 
         
-        The consistency of the content is most important in any personalized content application. There is no possibility for an author or editor to inspect the output of a personalized content publication before the reader sees it, since it is assembled in real time based on the unique things we know about each reader. This requires total confidence that:
+        The consistency of the content is most important in any personalized content application. There is no possibility for a writer or editor to inspect the output of a personalized content publication before the reader sees it, since it is assembled in real time based on the unique things we know about each reader. This requires total confidence that:
 
         * the content {conforms} to its {constraints} 
         * those constraints are completely and correctly expressed by its {markup} 
@@ -205,11 +245,11 @@ chapter:(#chapter.generate) Generated Content
 
     section: Audit reports
 
-        Finally, we can use content generation to generate things other than content to be published. You can use it to generate reports about your content itself which we can use to help us audit and manage your collection. We will look at this in more detail in [#chapter.audit], but it is worth looking at the basis here because it is just another application of the capacity for content generation that we gain when we move content into the subject domain. 
+        Finally, we can use content generation to generate things other than content to be published. You can use it to generate reports about your content itself which we can use to help us audit and manage your collection. We will look at this in more detail in [#chapter.audit], but it is worth looking at the basics here because it is just another application of the capacity for content generation that we gain when we move content into the subject domain. 
 
         For instance, let us say that your content strategist establishes an editorial calendar that says that you are going to put out a Christmas-themed Diet Cookbook every October as people are starting to think about the Christmas preparations. Do you have enough Christmas seasonal recipes under 300 calories? An algorithm can quickly go through your subject-domain recipes and create a list of all the recipes that meet that criteria. 
 
-        Or suppose that your book-related site wants to know all the books that have been mentioned in articles this year so that you can make sure you have reviews (and shopping links) for each of those books. An algorithm can go through your content collection looking for the `book` or `novel` annotations in your articles, compile a list, sort it, eliminate duplicates, and compare it to the list of reviews you currently have, to give you a list of every book that is mentioned by not reviewed. 
+        Or suppose that your book-related site wants to know all the books that have been mentioned in articles this year so that you can make sure you have reviews (and shopping links) for each of those books. An algorithm can go through your content collection looking for the `book` or `novel` annotations in your articles, compile a list, sort it, eliminate duplicates, and compare it to the list of reviews you currently have, to give you a list of every book that is mentioned but not reviewed. 
 
     section: Reuse vs Generation
 
