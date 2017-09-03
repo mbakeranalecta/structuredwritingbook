@@ -1,13 +1,18 @@
 chapter:(#chapter.wide) Wide Structures
 
     <<<(annotations.sam)
+    
+    index:: type, term
+        structure, tables
+        structure, graphics
+        structure, code blocks
+        concept, preformatted text
 
-    The notion of separating content from formatting works quite well when the content is a string of words. A string of words has only one dimension: length. A printed string, of course, has two dimensions: length and height, since each letter has a height and a width. But the height and the width of letters is a pure {media-domain} concern. Fitting a one-dimensional string of characters into a two dimensional font on a two dimensional page is one of the first things that gets factored out as we begin to structure content. When we separate content from formatting, we separate the font from the character and are left with a string of characters whose length is measured not in inches but in character count.  
-        
+    The notion of separating content from formatting works quite well when the content is a string of words. A string of words has only one dimension: length. A printed string, of course, has two dimensions: length and height, since each letter has a height and a width. But the height and the width of letters is a pure {media-domain} concern. Fitting a one-dimensional string of characters into a two dimensional font on a two dimensional page is one of the first things that gets factored out as we begin to structure content. When we separate content from formatting, we separate the font from the character and are left with a string of characters whose length is measured not in inches or centimeters but in character count.  
     
     Once these formatting dimensions are factored out, it becomes easy to create and manage text in the {document}(concept "document domain") and {subject}(concept "subject domain") domains without thinking about how it will eventually flow onto a page or screen.
     
-    But when it comes to content that has dimensions that cannot be factored out,  things get more difficult. The main problem cases are:
+    But when it comes to content that has dimensions that cannot be factored out, things get more difficult. The main problem cases are:
     
     * tables
     * graphics and other media
@@ -36,7 +41,7 @@ chapter:(#chapter.wide) Wide Structures
         
         * make the table into a graphic so that the reader can pan and zoom on it like they do with a large picture. (Some e-books seem to take this approach.)
         
-        If you are thinking that there is not one good option in the bunch, you are appreciating the extent of the problem. For existing books being transferred to e-readers, of course, there is not much that can be done to salvage the situation. Those books were probably prepared in a word processor on the more abstract edge of the media domain and the tables were prepared for a known page width in the printed book. 
+        If you are thinking that there is not one good option in the bunch, you are appreciating the extent of the problem. For existing books being transferred to e-readers, of course, there is not much that can be done to salvage the situation, short of a complete restructuring  of the file. Those books were probably prepared in a word processor on the more abstract edge of the media domain and the tables were prepared for a known page width in the printed book. 
         
         The tendency of readers to use small devices, such as tablets, e-readers, and phones for reading means that wide tables are problematic for new content. On a phone, the amount of a table that is visible on screen at any one time may be so small as to make the table essentially unnavigable, and to make it useless for such common table tasks as looking up values or presenting an overview of a subject at a glance.
 
@@ -94,7 +99,7 @@ chapter:(#chapter.wide) Wide Structures
         
         # >>> screen shot
 
-        The problem with this is that while the view of the table in the editor looks just like the view of a table in a world processor like {Microsoft Word}, Word's graphical display is based on the actual page currently set up in printer settings and on the actual font that the document will be printed in. It can therefore show how things will fit in the table on an actual page (allowing the author to make {media-domain} adjustments to the table). An XML editor cannot know what page size will be chosen or what font will be used when a document is printed. So while the display looks like it allows the same {media domain} adjustments to be made, this is an illusion and the table will not print as shown on screen. This gives a false impression of the real complexity of the table problem, and hiding complexity from the person who is supposed to deal with it is another way of dumping it on the reader.
+        The problem with this is that while the view of the table in the editor looks just like the view of a table in a world processor like {Microsoft Word}, Word's graphical display is based on the actual page currently set up in printer settings and on the actual font that the document will be printed in. It can therefore show how things will fit in the table on an actual page (allowing the author to make {media-domain} adjustments to the table). An XML editor cannot know what page size will be chosen or what font will be used when a document is printed. So while the display looks like it allows the same {media domain} adjustments to be made, this is an illusion and the table will not print as shown on screen. This gives a false impression of the real complexity of the table problem, hiding complexity from the person who is supposed to deal with it.
         
         Other markup languages take a different approach to tables. For instance, {reStructuredText} allows you to create a table like this:
         
@@ -142,7 +147,7 @@ chapter:(#chapter.wide) Wide Structures
         
             Many reference works have traditionally been presented as tables on paper. But most such works are really databases. They are not designed to be read but to be queried. That is, they are used to look up individual pieces of data in a large set. For a database of this sort, {differential single sourcing} requires that you provide the best method of querying the data that is available on each media (which includes the method whose interface fits best in the available viewport). In these cases, the data should not be recorded in tables, at least, not in {media domain} tables. It should be recorded in whatever database format is most suited to the data and to the kinds of queries that the reader wants to make. 
             
-            If one of the query mechanisms you want to support for this is printed tables on paper, then the content for those tables should be {extracted}(algorithm "extract and merge") from the database to create the printed table. Again, the additional semantic information available from the database structure allows the {formatting algorithm} to supply the appropriate rendering hints to the {rendering algorithm}.       
+            If one of the query mechanisms you want to support for this is printed tables on paper, then the content for those tables should be {extracted}(algorithm "extract") from the database to create the printed table. Again, the additional semantic information available from the database structure allows the {formatting algorithm} to supply the appropriate rendering hints to the {rendering algorithm}.       
 
             When you have done all of that, you will probably be left with two kinds of tables that you still have to deal with: Small ad-hoc grid layouts, and table which are database tables, but which are one of a kind, rather than something like ingredients, where the same table structure occurs in every recipe. For these, you will need some form of document-domain table markup. Which markup you choose will come down to how much fancy formatting of tables you want to be able to do, and how willing you are to let the rendering algorithm format your tables without extensive hinting from you.
 
@@ -220,7 +225,7 @@ chapter:(#chapter.wide) Wide Structures
         
         But this approach not only involves the use of {media domain} markup, it combines it with {management domain} markup. Is it possible to factor all of this out of the authored format? 
         
-        To do so we can have the author include the idea of the image rather than a rendering of the image. There are several ways to do this. In fact, this is really the same idea as we saw in the {reuse algorithm} were we factored out the filename of the content to be included and replace it with a semantic representation of the reason for the content. There we factored out an explicit filename from this example:
+        To do so we can have the writer include the idea of the image rather than a rendering of the image. There are several ways to do this. In fact, this is really the same idea as we saw in the {reuse algorithm} were we factored out the filename of the content to be included and replace it with a semantic representation of the reason for the content. There we factored out an explicit filename from this example:
         
         ```(sam)
             procedure: Blow stuff up
@@ -334,11 +339,11 @@ chapter:(#chapter.wide) Wide Structures
         
         Could I have factored out the filename `assemble.xml` as well? Certainly. There are a number of other ways that I could have chosen to represent the idea of the graphic in the content. There are times when it makes a lot of sense to do that. If you are including screen shots in a procedure, for instance, the name of a dialog box is a good way of representing the idea of a graphic that is semantically relevant to the procedure itself. 
                 
-        But in the case of the images in this book, their relationship to the text is a little more arbitrary than the relationship of a screen shot to a step in a procedure, so factoring out the filename would have created an abstraction that was actually more difficult to remember as an author. The point is not to be as abstract as possible, but to combine the highest degree of functional lucidity with the constraints that improve content quality, and that will be different for different kinds of material and for different circumstances. 
+        But in the case of the images in this book, their relationship to the text is a little more arbitrary than the relationship of a screen shot to a step in a procedure, so factoring out the filename would have created an abstraction that was actually more difficult to remember as an author. The point is not to be as abstract as possible, but to combine the highest degree of {functional lucidity} with the constraints that improve content quality, and that will be different for different kinds of material and for different circumstances. 
                        
         section: Inline graphics
         
-            One further wrinkle with graphics is that authors sometimes want to place small graphics in the flow of a sentence, rather that as a separate block object. For instance, if giving instructions that involve the use of a keypad or keyboard, some authors may want to use graphics of the keys rather than simply print the character names. Under certain circumstances, this may make the content easier for a reader to follow. 
+            One further wrinkle with graphics is that writers sometimes want to place small graphics in the flow of a sentence, rather that as a separate block object. For instance, if giving instructions that involve the use of a keypad or keyboard, some writers may want to use graphics of the keys rather than simply print the character names. Under certain circumstances, this may make the content easier for a reader to follow. 
             
             Inline graphics can cause {rendering problems}. For instance, they may cause line spacing to be thrown off if the height of the graphics is greater than that of the font used. Inline graphics are something a writer can control and make judgments about when writing in the {media domain} but which may have unexpected and unwelcome consequences when formatted by algorithms from content created in the document or subject domains. 
             
@@ -359,7 +364,7 @@ chapter:(#chapter.wide) Wide Structures
             """
                 3\. Press \[Enter] to confirm the selection.
                 
-            But in for media where the use of a graphic is appropriate, the presentation routine could use a lookup table of key names and graphics to select the graphic file to represent they *Enter* key. 
+            But for media where the use of a graphic is appropriate, the presentation routine could use a lookup table of key names and graphics to select the graphic file to represent they *Enter* key. 
             
             """
                 3\. Press >(image ../graphics/computer_key_Enter.xml) to confirm the selection. 
