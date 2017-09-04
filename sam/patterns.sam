@@ -5,7 +5,7 @@ chapter:(#chapter.patterns) Patterns
     index::type, term
         concept, patterns
 
-    We noted that lightweight markup languages like {Markdown} rely on patterns in the text rather than explicit markup characters to delineate basic structures like paragraphs and lists. XML, on the other hand, makes a strict distinction between what is markup and what is text. Markup is always recognized explicitly by markup sequences that cannot occur as normal text in any part of the document. 
+    I noted that lightweight markup languages like {Markdown} rely on patterns in the text rather than explicit markup characters to delineate basic structures like paragraphs and lists. XML, on the other hand, makes a strict distinction between what is markup and what is text. Markup is always recognized explicitly by markup sequences that cannot occur as normal text in any part of the document. 
     
     All the same, even XML markup is defined by patterns. If you look at the {XML spec}(standard) you will see that XML is defined by a series of patterns which are described using a pattern notation called {EBNF}(language). The difference between XML syntax and Markdown syntax is that in XML, patterns are defined absolutely, so that a markup start character is a markup start character no matter where is occurs, whereas in Markdown, the patterns are defined in context, so that a `*` character starts a list item only at the beginning of a line, not the end. 
     
@@ -26,7 +26,7 @@ chapter:(#chapter.patterns) Patterns
             month: 08
             day: 25
         
-    This is fully explicit markup. It places every piece of the data in its own explicit structure. However, it lacks {functional lucidity}(concept). 
+    This is fully explicit markup. It places every piece of the data in its own explicit structure. However, it lacks {functional lucidity}. 
     
     A date in the format `2016-08-25` is already a piece of structured markup. In fact, it is a standardized piece of structured markup defined by the international standard {ISO 8601}(standard). The only problem in identifying a date as such is that in another context `2016-08-25` could be a mathematical expression that resolves to `1983`. But we can eliminate this potential confusion if we isolate the context so that we can recognize when an {ISO 8601} date is being used, and then use the {ISO 8601} format specification to isolate the year month and day components of that data. In other words, all we need to do is this:
     
@@ -113,10 +113,8 @@ chapter:(#chapter.patterns) Patterns
             Group `ingredient`    41-52    `pork chops `
             Group `quantity`    52-53    `4`
             
-        footnote:(#rx101)
-            This output was generated using the regular expression builder and tester found at Regular Expression 101 (https://regex101.com/). The site is an excellent place to explore what you can do with regular expressions.  
-            
-        As you can see, the regular expression has broken each ingredient down into ingredient, quantity, and unit fields, just like our explicit markup did. The conventional way of writing ingredients, in other words, is just as structured as our formal way. It just takes a line of code to pull them out of the string. Once again we are partitioning and transferring a bit of complexity from the author to the information architect or content engineer.
+                
+        As you can see, the regular expression has broken each ingredient down into ingredient, quantity, and unit fields, just like our explicit markup did. The conventional way of writing ingredients, in other words, is just as structured as our formal way. It just takes a line of code to pull them out of the string. Once again we are partitioning and transferring a bit of complexity from the writer to the {information architect} or {content engineer}.
         
         Essentially, any expression that we commonly use in text which follows a well defined pattern is already structured text, and we don't need to structured it again to treat it as structured. All we need to do is to use structure to place it into context so that we can recognize it reliably. For example, our regular expression for breaking down the components of an ingredient listing will only work when applied to text that we know for sure is supposed to be an ingredient listing. Thus we use normal structured text structures to delineate the ingredients list and each list item. This provides the necessary context to use the ingredient list pattern to pull out the ingredient, quantity, and unit fields that we want without forcing the author to make them explicit in the text. 
         
