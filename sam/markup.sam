@@ -1,17 +1,20 @@
 chapter:(#chapter.markup) Markup
 
     <<<(annotations.sam)
+    
+    index:: type, term
+        concept, markup
 
     If structures in structured writing consist of nested blocks, the way those blocks are expressed in text and created by writers is (most of the time) markup. Markup is, essentially, the insertion of metadata into a text to constrain the creation and interpretation of that text. We have been looking at structured writing examples expressed in markup all through this book. Now let's take a look at markup itself.   
     
-    Markup has long been part of how we partitioned and distributed content creation tasks. For centuries, scribes worked directly in the media domain, using pen and ink to inscribe words and pictures on papyrus or velum. With the printing press, however, came a fundamental partitioning of the publishing process. Authors no longer worked directly in the media domain. While authors were still directly placing ink on paper, at first by pen and then by typewriter, they were no longer preparing the final visual form of the content. That task has been partitioned off and directed to the typesetter.  
+    Markup has long been part of how we partitioned and distributed content creation tasks. For centuries, scribes worked directly in the media domain, using pen and ink to inscribe words and pictures on papyrus or velum. With the printing press, however, came a fundamental partitioning of the publishing process. Writers no longer worked directly in the media domain. While writers were still directly placing ink on paper, at first by pen and then by typewriter, they were no longer preparing the final visual form of the content. That task has been partitioned off and directed to the typesetter.  
 
-    To tell the typesetter how to create the final visual form, document designers had to add additional instructions (metadata) to the author's manuscript. The designers did this using typesetter's marks, and the process was called "marking up" the document. We still use "marking up" to describe how structured writing is done today and the term "markup language" to describe the languages used for most structured writing. 
+    To tell the typesetter how to create the final visual form, document designers had to add additional instructions (metadata) to the writer's manuscript. The designers did this using typesetter's marks, and the process was called "marking up" the document. We still use "marking up" to describe how structured writing is done today and the term "markup language" to describe the languages used for most structured writing. 
 
     figure:(*typesetter) Printer's markup
         >>>(image ../graphics/printermarkup.png)
 
-    The writer preparing a manuscript for typesetting was working in the document domain, indicating basic document structures like paragraphs, lists, and titles, without any indication of how they should look in print. The designer then wrote a set of instructions for applying formatting to those structures -- a {formatting algorithm}(concept). Then the typesetter executed that algorithm by setting the type which the printer then used to print final output. 
+    The writer preparing a manuscript for typesetting was working in the {document domain}, indicating basic document structures like paragraphs, lists, and titles, without any indication of how they should look in print. The designer then wrote a set of instructions for applying formatting to those structures -- a {formatting algorithm}(concept). Then the typesetter executed that algorithm by setting the type which the printer then used to print final output. 
 
     This is pretty much exactly what we do today when we create an HTML page and specify a CSS stylesheet to supply the formatting instructions. Those instructions are then executed by the browser to render the content on screen or paper.
 
@@ -142,9 +145,9 @@ chapter:(#chapter.markup) Markup
         
     section: Abstract markup languages
     
-        An abstract markup languages does not describe specific concrete document structures directly. It describes abstract concrete structures which can be named to represent structures in any domain. 
+        An abstract markup languages does not describe specific concrete document structures directly. It describes abstract markup structures which can be named to represent structures in any domain. 
     
-        XML is an example of an abstract markup language.[*1] The markup in an XML file does not directly indicates things like headings or paragraphs. Instead, it indicates a set of abstract structures called elements, attributes, entities, processing instructions, marked sections, and comments. 
+        XML is an example of an abstract markup language.[*1] The markup in an XML file does not directly indicate things like headings or paragraphs. Instead, it indicates a set of abstract structures called elements, attributes, entities, processing instructions, marked sections, and comments. 
         
         footnote:(*1)
             The formal term for a language like XML is "meta language", a language for describing other languages. In calling XML an "abstract" language, I am focusing on a different property, its use of structures that are not parts of a document but generic containers. A meta language needs such abstract containers. But I find that the term "meta language" is not helpful to most readers, so I have chosen instead to focus on this property of using abstract structures as opposed to the concrete structures of a language like Markdown. 
@@ -162,7 +165,7 @@ chapter:(#chapter.markup) Markup
 
         The structure described by the XML syntax here is that of an element (`section`) which contains two other elements (`title` and `para`), one of which contains text (`title`), and one of which (`para`) contains a mix of text and another element (`citetitle`). There is no separate syntax for titles or paragraphs as there is in Markdown. Everything is an element and every element has a name. To define specific document domain structures, you use named elements. This allows you to create any set of named elements you like to represent any structure you need. 
         
-        Unlike a Markdown parser, an XML parser does not see paragraphs or titles. It sees elements. It passes the elements it finds, along with their names, down to a processing application which is responsible for knowing what "section", "title", and "para" elements mean in a particular markup language like DocBook. The parser is common to all XML-based languages, but the processing application is specific to DocBook. Thus while processing a concrete language like Markdown is generally a one step operation, processing an abstract language like XML is a two step operation, with the first step being to parse the file to discover the structures defined by elements and the second step to process those structures according to a specific set of rules applicable to a particular markup language. 
+        Unlike a {Markdown} parser, an XML parser does not see paragraphs or titles. It sees elements. It passes the elements it finds, along with their names, down to a processing application which is responsible for knowing what "section", "title", and "para" elements mean in a particular markup language like DocBook. The parser is common to all XML-based languages, but the processing application is specific to {DocBook}. Thus while processing a concrete language like Markdown is generally a one step operation, processing an abstract language like XML is a two step operation, with the first step being to parse the file to discover the structures defined by elements and the second step to process those structures according to a specific set of rules applicable to a particular markup language. 
         
     section: Instances of abstract markup languages
     
@@ -215,22 +218,22 @@ chapter:(#chapter.markup) Markup
         
         In this sample, `@param` and `@return` are named blocks. But in JavaDoc, there is a fixed set of named blocks that are defined as part of the language. You can't create a new language by defining your own block names. By contrast, {XML} itself defines absolutely no element names. Only instances of XML, like {DocBook}(language), define element names. 
         
-        A particularly notable example of a concrete language in abstract clothing is {HTML}. HTML looks a lot like an instance of XML, but it is not. An XML parser cannot parse most HTML. HTML is nominally an instance of SGML but never did quite conform to it. HTML generally requires a specific HTML parser, such as is found in all browsers. XHTML is a version of HTML that is an instance of XML. {HTML5}(language) actually supports two different syntaxes, one of which is an instance of XML and one of which is not, meaning that it has both a concrete syntax and a syntax which is a instance of an abstract language. (This is consequence of having made a mess early on and having to live with it for evermore. A lesson for all markup language designers.)
+        A particularly notable example of a concrete language in abstract clothing is {HTML}. HTML looks a lot like an instance of {XML}, but it is not. An XML parser cannot parse most HTML. HTML is nominally an instance of SGML but never did quite conform to it. HTML generally requires a specific HTML parser, such as is found in all browsers. XHTML is a version of HTML that is an instance of XML. {HTML5} actually supports two different syntaxes, one of which is an instance of XML and one of which is not, meaning that it has both a concrete syntax and a syntax which is a instance of an abstract language. (This is consequence of having made a mess early on and having to live with it for evermore. A lesson for all markup language designers.)
                        
     section: The ability to extend
     
-        The downside of concrete languages is that their concrete syntax defines a fixed set of structures. If you want other structures, there is no way to create them short of inventing your own concrete language, or a variant of an existing one, and coding the parser and all the other tools to interpret that language. Designing new concrete languages is non-trivial because you need to make sure that any combination of characters that the writer may type is interpreted in an unambiguous way. Some versions of Markdown, including the original, contain ambiguities about how certain sequences of characters should be interpreted, which obviously detracts from its reliability and functional lucidity. 
+        The downside of concrete languages is that their concrete syntax defines a fixed set of structures. If you want other structures, there is no way to create them short of inventing your own concrete language, or a variant of an existing one, and coding the parser and all the other tools to interpret that language. Designing new concrete languages is non-trivial because you need to make sure that any combination of characters that the writer may type is interpreted in an unambiguous way. Some versions of {Markdown}, including the original, contain ambiguities about how certain sequences of characters should be interpreted, which obviously detracts from its reliability and {functional lucidity}. 
         
         If you want to define your own structures to express the constraints that matter to your business, you need an easier way to do it. Abstract languages like XML make this much easier. You just write a {schema}(tool) describing the structures you want, and any algorithms you need to process those structures. (I'll talk about schemas in [#chapter.constraints].)
         
         
     section: The ability to constrain
     
-        Extensibility allows you to add structures to a language but does not place restrictions on where they can occur. 
+        Extensibility allows you to add structures to a language but does not place restrictions on where they can occur. Constraints lets you limit where structures can be used.
         
-        Extensibility allows you to have elements called `ingredient` and `wine-match`. Constraints allow you to require that `ingredient` only occurs inside an `ingredients` structure and that the content of the `ingredients` structure must be a sequence of `ingredient` elements and nothing else. Constraints lets you say that writers can't put `wine-match` in the `introduction` or as a `step` in the `preparation`, they can only put it as a child of `recipe` after the `servings` field and before the `prep-time` field. Constraints allow, you to require that every recipe have the full list of nutritional information.
+        Extensibility allows you to have elements called `ingredient` and `wine-match`. Constraints allow you to require that `ingredient` only occurs inside an `ingredients` structure and that the content of the `ingredients` structure must be a sequence of `ingredient` elements and nothing else. Constraints let you say that writers can't put `wine-match` in the `introduction` or as a `step` in the `preparation`, they can only put it as a child of `recipe` after the `servings` field and before the `prep-time` field. Constraints allow, you to require that every recipe have the full list of nutritional information.
         
-        Constraints are what allow you to partition the content system by creating reliable interfaces between different people and processes. All markup languages have constraints. With a concrete language, you get the constraints that are built into the language. Abstract languages allow you to define your own structures, and your own constraints. However, as we shall see in [#chapter.extensible], not all languages that are extensible are also constrainable. 
+        Constraints allow you to partition the content system by creating reliable interfaces between different people and processes. All markup languages have constraints. With a concrete language, you get the constraints that are built into the language. Abstract languages allow you to define your own structures, and your own constraints. However, as we shall see in [#chapter.extensible], not all languages that are extensible are also constrainable. 
                
     section: Showing and hiding structure
     
@@ -262,7 +265,7 @@ chapter:(#chapter.markup) Markup
         
         {reStructuredText} provides an extension mechanism that allows you to add new directives. But while reStructuredText directives are similar to XML elements, reStructuredText predefines a core set of directives for common document structures. The `code-block` directive above is not an extension of reStructuredText, it is part of the core language.  
         
-        Because it defines a large set of document-domain directives, reStructuredText is inherently a document domain language. You could, of course, add subject-domain directives to it. Most document-domain languages in use today include some subject-domain structures, reflecting the purpose they were originally designed to serve. Nonetheless, reStructuredText is inherently document domain. 
+        Because it defines a large set of document-domain directives, reStructuredText is inherently a {document domain} language. You could, of course, add subject-domain directives to it. Most document-domain languages in use today include some subject-domain structures, reflecting the purpose they were originally designed to serve. Nonetheless, reStructuredText is inherently document domain. 
         
         Another important note about reStructuredText is that it has no constraint mechanism. You can add new directives, but you can't constrain their use, or the use of the predefined directives. 
 
@@ -279,7 +282,7 @@ chapter:(#chapter.markup) Markup
         
         In SAM, as in Markdown and most other concrete markup languages, a paragraph is just a block of text set off by whitespace. Thus there is no explicit  structure named `p` or `para`.
         
-        At the beginning of a line, a single word without spaces and followed by a colon creates an abstract structure called a block. The word before the colon is the name of the block. Thus `section:` above creates a block structure named "section" just as in XML an element named `<section>` would create a structure named "section". Blocks can contain blocks or text structures such as paragraphs and lists. 
+        At the beginning of a line, a single word without spaces and followed by a colon creates an abstract structure called a block. The word before the colon is the name of the block. Thus `section:` above creates a block structure named "section" just as in XML an element named `<section>` would create a block structure named "section". Blocks can contain blocks or text structures such as paragraphs and lists. 
         
         The hierarchy of a SAM document is indicated by indentation. Thus the paragraph in the sample is contained in the `section` block. Using indentation to indicate containers helps make the structure of the document visually clear and removes the need for end tags, which reduces verbosity, making the text easier to read. 
         
@@ -309,8 +312,7 @@ chapter:(#chapter.markup) Markup
         
         ```(XML)
             <section>
-                <title>Moby Dick</title>
-            
+                <title>Moby Dick</title>        
                 <p>Herman Melville's <phrase>
                 <annotation type="novel"/>Moby Dick</annotation>
                 </phrase> is a long book about a big whale.</p>
