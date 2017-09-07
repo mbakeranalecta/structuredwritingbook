@@ -31,6 +31,10 @@
 <term>constraint languages</term>
 </record>
 <record>
+<type>concept</type>
+<term>schema language</term>
+</record>
+<record>
 <type>language</type>
 <term>XML Schema</term>
 </record>
@@ -44,8 +48,8 @@
 </record>
 </index>
 <p>Structured writing is about applying constraints to content and recording the constraints that the content follows, both to constrain what writers write and to constrain how algorithms interpret the content. This requires some way to express constraints in a formal and machine readable way. Schema languages partition this problem and redirect it to a common validation algorithm expressed by a standard piece of software that everyone can use. Schema languages are, quite simply, languages for expressing constraints.</p>
-<p>For a <phrase><annotation type="concept">concrete markup languages</annotation></phrase> like MarkDown, the content constraints are established in the code of the MarkDown processor. They are validated when the processor parses the MarkDown file. (In practice, though, MarkDown does no meaningful validation. Anything it does not recognize as markup, it simply outputs as text.)</p>
-<p>For <phrase><annotation type="concept">abstract markup languages</annotation></phrase> like XML you define structures yourself. Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a “validator”.</p>
+<p>For a <phrase><annotation type="concept">concrete markup languages</annotation></phrase> like <phrase><annotation type="language">MarkDown</annotation></phrase>, the content constraints are established in the code of the MarkDown processor. They are validated when the processor parses the MarkDown file. (In practice, though, MarkDown does no meaningful validation. Anything it does not recognize as markup, it simply outputs as text.)</p>
+<p>For <phrase><annotation type="concept">abstract markup languages</annotation></phrase> like <phrase><annotation type="language"><annotation type="standard">XML</annotation></annotation></phrase> you define structures yourself. Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a “validator”.</p>
 <p>A schema language is a structured language for defining structured languages. The schema for a markup languages says what structures are allowed and in what order and relationship. A given document either conforms to those constraints or it does not.</p>
 <p>Here is an example of a schema in a schema language called <phrase><annotation type="tool">RelaxNG</annotation></phrase>, which is one of several schema languages available for defining <phrase><annotation type="language">XML</annotation></phrase>-based markup languages:<citation value="https://en.wikipedia.org/wiki/RELAX_NG#XML_syntax"/></p>
 <codeblock language="RNG">
@@ -81,7 +85,7 @@
 &lt;/book&gt;
 </codeblock>
 <p>the validator would report an error because the words “Moby Dick” are directly inside the book element and text is not allowed in that position.</p>
-<p>There are several different schema languages for XML each of which is capable of expressing and enforcing different sets of constraints. It is not unusual to combine different schema languages to more completely constrain a markup language. In particular, it is not uncommon to use a schema language called <phrase><annotation type="tool">Schematron</annotation></phrase> in concert with other schema languages like <phrase><annotation type="tool" specifically="RelaxNG">RNG</annotation></phrase> or <phrase><annotation type="language">XSD</annotation></phrase>. While most schema languages work by modeling the structure of a document, as in the <phrase><annotation type="tool" specifically="RelaxNG">RNG</annotation></phrase> example above, <phrase><annotation type="tool">Schematron</annotation></phrase> works by making assertions about the structure in a language called <phrase><annotation type="tool">XPath</annotation></phrase>. A <phrase><annotation type="tool">Schematron</annotation></phrase> schema would make a lousy guide for authoring, but it can test assertions, and therefore enforce constraints, that no other schema language can.</p>
+<p>There are several different schema languages for <phrase><annotation type="language">XML</annotation></phrase> each of which is capable of expressing and enforcing different sets of constraints. It is not unusual to combine different schema languages to more completely constrain a markup language. In particular, it is not uncommon to use a schema language called <phrase><annotation type="tool">Schematron</annotation></phrase> in concert with other schema languages like <phrase><annotation type="tool" specifically="RelaxNG">RNG</annotation></phrase> or <phrase><annotation type="language">XSD</annotation></phrase>. While most schema languages work by modeling the structure of a document, as in the <phrase><annotation type="tool" specifically="RelaxNG">RNG</annotation></phrase> example above, <phrase><annotation type="tool">Schematron</annotation></phrase> works by making assertions about the structure in a language called <phrase><annotation type="tool">XPath</annotation></phrase>. A <phrase><annotation type="tool">Schematron</annotation></phrase> schema would make a lousy guide for authoring, but it can test assertions, and therefore enforce constraints, that no other schema language can.</p>
 <p>Here is a simple <phrase><annotation type="tool">Schematron</annotation></phrase> example. It defines one of the constraints listed above, namely that a book element must contain at least one page element.</p>
 <codeblock language="schematron">
 

@@ -30,7 +30,7 @@
 <p>If there is one phrase that most people associate with structured writing, it is “separating content from formatting.” This is the most basic and well-known structured writing algorithm and it can be used to achieve a number of process and rhetorical goals. It is a useful place to start the study of algorithms because it illustrates the strategies used for all the other algorithms. Separating content from formatting separates decisions about the appearance of a document from decisions about its content. However, as you will see in this chapter, doing this is not as simple as it may seem.</p>
 <section>
 <title>Separate out style instructions</title>
-<p>Let’s start with a fragment that includes a description of its format. I use CSS syntax to describe the format. I could use a variety of formats, but CSS is easy to understand and helps illustrate the separation. I also represent certain characters (bullets and tabs) by their names, so you can see exactly where everything is going:</p>
+<p>Let’s start with a piece of text that includes a description of its format. I use CSS syntax to describe the format because but CSS is easy to understand and helps illustrate the separation, but don’t focus on the syntax, it is just there to illustrate the principle. I also represent certain characters (bullets and tabs) by their names, so you can see exactly where everything is going:</p>
 <codeblock>
 
 {font: 10pt "Open Sans"}The box contains:
@@ -164,7 +164,7 @@ ordered-list-item =
 </section>
 <section>
 <title>Create containers to provide context</title>
-<p>As noted in <citation nameref="chapter.document-domain"/>, one problem with this approach to creating lists is that you have to apply a different style to the first item of a list. It would be better if you could use the same style for each list item and have the numbering just work. However, this is hard to do because nothing in the content says where one numbered list ends and the next begins. For this you need a new abstraction. So far, you have abstractions for ordered and unordered list items, but you don’t have an abstraction for lists themselves.</p>
+<p>One problem with this approach to creating lists is that you have to apply a different style to the first item of a list. It would be better if you could use the same style for each list item and have the numbering just work. However, this is hard to do because nothing in the content says where one numbered list ends and the next begins. For this you need a new abstraction. So far, you have abstractions for ordered and unordered list items, but you don’t have an abstraction for lists themselves.</p>
 <p>Up to this point, everything has been purely in the <phrase><annotation type="concept">media domain</annotation></phrase>. You replaced direct formatting definitions with indirect definitions through styles. But now it’s necessary to venture into the <phrase><annotation type="concept">document domain</annotation></phrase>, creating the abstract idea of a list and inserting that abstract idea into your content.</p>
 <codeblock>
 
@@ -179,8 +179,7 @@ list:
 <p>The SAM markup in this example uses indentation to identify hierarchy. The <code>list</code> container contains three instances of <code>ordered-list-item</code>.</p>
 </footnote>
 <p>By creating the idea of a list, you further separate list formatting from the list content. Now, an algorithm can recognize a list and make formatting decisions based on that knowledge.</p>
-<p>The second important thing is that the content no longer refers to style names. Instead you have structures. <code>list</code> is a structure and so are <code>paragraph</code> and <code>ordered-list-item</code>.</p>
-<p>By replacing styles with structures, you can give the same structure a different style depending on where it is in the document. The <phrase><annotation type="concept">formatting algorithm</annotation></phrase> can determine which <code>ordered-list-item</code> is first and format it accordingly; this is <phrase><citation value="https://css-tricks.com/numbering-in-style/">how list formatting works in CSS.</citation></phrase></p>
+<p>The second important thing is that the content no longer refers to style names. Instead you have structures. <code>list</code> is a structure and so are <code>paragraph</code> and <code>ordered-list-item</code>. You can give the same structure a different style depending on where it is in the document. The <phrase><annotation type="concept">formatting algorithm</annotation></phrase> can determine which <code>ordered-list-item</code> is first and format it accordingly; this is <phrase><citation value="https://css-tricks.com/numbering-in-style/">how list formatting works in CSS.</citation></phrase></p>
 <p>Now, writers no longer apply styles directly to content, even styles with abstract names. Rather they place content in structures and allow the formatting algorithm to apply styles appropriately. This separates the content even more from the formatting.</p>
 </section>
 <section>

@@ -27,13 +27,13 @@
 <term>single sourcing</term>
 </record>
 </index>
-<p>The need to publish the same document in more than one medium – for example, print and Web – is a common process problem and source of complexity. You might not suspect that it is also a rhetoric problem, but as I will show, it actually a significant and difficult rhetoric problem as well. The term <phrase><annotation type="italic">single sourcing</annotation></phrase> is used to describe a variety of different ways to address this need, all of which involve using a single body of content to create output in more than one medium. I look at variations on this theme in this and subsequent chapters.</p>
+<p>The need to publish the same document in more than one medium – for example, print and Web – is a common process problem and source of complexity. You might not suspect that it is also a rhetoric problem, but as I will show, it actually a significant and difficult rhetoric problem as well. The term <phrase><annotation type="italic">single sourcing</annotation></phrase> is used to describe a variety of different ways to address this need, all of which involve using a single body of content to create output in more than one medium.</p>
 <p>Single sourcing adds complexity to the job of separating content from formatting because you are now separating content from not one but two or more sets of formatting. In other words, you are not simply separating content from formatting, you are separating a set of decisions about formatting from your content so you can make different decisions for each medium. If you don’t get the partitioning correct, problems will show up when you try to apply two different sets of formatting to the same content.</p>
-<p>Many organizations have unhandled complexity in this area – complexity that falls through to readers. Often, their authoring techniques do not allow writers to sufficiently separate media-specific formatting from content. As a result, formatting for one medium gets applied to another medium, which means the content in that medium does not work as well as it could. By improving how you separate content from formatting, you can significantly reduce the amount of complexity that goes unhandled, resulting in a better experience for your readers.</p>
+<p>Many organizations have unhandled complexity in this area – complexity that can result in rhetorical problems. Often, their authoring techniques do not allow writers to sufficiently separate media-specific formatting from content. As a result, formatting for one medium gets applied to another medium, which means the content in that medium does not work as well as it could. By improving how you separate content from formatting, you can significantly reduce the amount of complexity that goes unhandled, resulting in a better experience for your readers.</p>
 <section>
 <title>Basic single sourcing</title>
-<p>The basic single-sourcing algorithm is straightforward (see <citation type = "nameref" value = "chapter.processing"/>). Basic single sourcing involves taking a piece of content in the <phrase><annotation type="concept">document domain</annotation></phrase> and processing its document-domain structures into different <phrase><annotation type="concept">media-domain</annotation></phrase> structures for each target medium.</p>
-<p>Suppose you have recorded a recipe in the document domain (see <citation type = "idref" value = "fig.ssa-eggs-1"/>).</p>
+<p>The basic single-sourcing algorithm is straightforward (see <citation nameref="chapter.processing"/>). Basic single sourcing involves taking a piece of content in the <phrase><annotation type="concept">document domain</annotation></phrase> and processing its document-domain structures into different <phrase><annotation type="concept">media-domain</annotation></phrase> structures for each target medium.</p>
+<p>Suppose you have recorded a recipe in the document domain (see <citation idref="fig.ssa-eggs-1"/>).</p>
 <pagination-tweak>
 <min-space>3in</min-space>
 </pagination-tweak>
@@ -61,7 +61,7 @@ page:
             li: Peel and serve.
 </codeblock>
 </figure>
-<p>You can output this recipe to two different media by applying two different formatting algorithms. First you output to the Web by creating <phrase><annotation type="language"><annotation type="standard">HTML</annotation></annotation></phrase> (see <citation type = "idref" value = "fig.ssa-recipe2html"/>).</p>
+<p>You can output this recipe to two different media by applying two different formatting algorithms. First you output to the Web by creating <phrase><annotation type="language"><annotation type="standard">HTML</annotation></annotation></phrase> (see <citation idref="fig.ssa-recipe2html"/>).</p>
 <figure id="fig.ssa-recipe2html">
 <title>Pseudocode to convert document-domain recipe to HTML output</title>
 <pagination-tweak>
@@ -102,10 +102,10 @@ match li
         continue
 </codeblock>
 </figure>
-<p>In <citation type = "idref" value = "fig.ssa-recipe2html"/>, paragraph and list structures have the same names in the source format as they do in the output format (HTML) so you just copy the structures rather than recreating them. This is a common pattern in structured writing algorithms.</p>
-<p>The algorithm in <citation type = "idref" value = "fig.ssa-recipe2html"/> transforms our source into HTML that looks like <citation type = "idref" value = "fig.ssa-html-recipe-output"/>.</p>
+<p>In <citation idref="fig.ssa-recipe2html"/>, paragraph and list structures have the same names in the source format as they do in the output format (HTML) so you just copy the structures rather than recreating them. This is a common pattern in structured writing algorithms.</p>
+<p>The algorithm in <citation idref="fig.ssa-recipe2html"/> transforms our source into HTML that looks like <citation idref="fig.ssa-html-recipe-output"/>.</p>
 <figure id="fig.ssa-html-recipe-output">
-<title>Result of running the algorithm in <citation type = "idref" value = "fig.ssa-recipe2html"/></title>
+<title>Result of running the algorithm in <citation idref="fig.ssa-recipe2html"/></title>
 <codeblock language="html">
 
 &lt;html&gt;
@@ -166,7 +166,7 @@ match li
 &lt;/fo:block&gt;
 </codeblock>
 <p>The <phrase><annotation type="language">XSL-FO</annotation></phrase> code contains <phrase><annotation type="concept">media-domain</annotation></phrase> instructions for spacing and font choices. There is no division between content structures and formatting structures as there is with <phrase><annotation type="language">HTML</annotation></phrase> and <phrase><annotation type="language">CSS</annotation></phrase>. Also, as a pure media-domain language, XSL-FO does not have document-domain structures such as paragraphs and titles. To XSL-FO, a document is simply a set of blocks with specific formatting properties attached to them.</p>
-<p>To limit the amount of detail, the algorithm in <citation type = "idref" value = "fig.ssa-fo-algorithm"/> shows only a portion of the pseudocode for handling recipe markup (The point here is not to teach <phrase><annotation type="language">XSL-FO</annotation></phrase>, but to show how the algorithm works).</p>
+<p>To limit the amount of detail, the algorithm in <citation idref="fig.ssa-fo-algorithm"/> shows only a portion of the pseudocode for handling recipe markup (The point here is not to teach <phrase><annotation type="language">XSL-FO</annotation></phrase>, but to show how the algorithm works).</p>
 <figure id="fig.ssa-fo-algorithm">
 <title>Portion of the algorithm to generate XSL-FO from a recipe</title>
 <codeblock language="pseudo">
@@ -179,7 +179,7 @@ match title
     output '&lt;/fo:block&gt;'
 </codeblock>
 </figure>
-<p>The rule shown in <citation type = "idref" value = "fig.ssa-fo-algorithm"/> simply wraps the XSL-FO formatting structures around the text of the title. It unpacks the text from a <phrase><annotation type="concept">document-domain</annotation></phrase> structure and inserts it into a <phrase><annotation type="concept">media-domain</annotation></phrase> structure.</p>
+<p>The rule shown in <citation idref="fig.ssa-fo-algorithm"/> simply wraps the XSL-FO formatting structures around the text of the title. It unpacks the text from a <phrase><annotation type="concept">document-domain</annotation></phrase> structure and inserts it into a <phrase><annotation type="concept">media-domain</annotation></phrase> structure.</p>
 </section>
 <section>
 <title>Differential single sourcing</title>
@@ -190,8 +190,8 @@ match title
 In Rio Bravo, {the Duke}(link "http://JohnWayne.com")
 plays an ex-Union colonel out for revenge.
 </codeblock>
-<p>In SAM syntax, the link markup (<code>link "http://JohnWayne.com</code>) specifies the address to link to. In the algorithm examples below, I refer to this markup as the <phrase><annotation type="italic">specifically</annotation></phrase> attribute using the notation <code>@specifically</code>.</p>
-<p>In HTML, you output this as a link using the HTML <code>a</code> element, so the algorithm looks like <citation type = "idref" value = "fig.ssa-specifically-1"/>.</p>
+<p>In SAM syntax, the link markup (<code>link "http://JohnWayne.com"</code>) specifies the address to link to. In the algorithm examples below, I refer to this markup as the <phrase><annotation type="italic">specifically</annotation></phrase> attribute using the notation <code>@specifically</code>.</p>
+<p>In HTML, you output this as a link using the HTML <code>a</code> element, so the algorithm looks like <citation idref="fig.ssa-specifically-1"/>.</p>
 <figure id="fig.ssa-specifically-1">
 <title>Algorithm to generate HTML link from the <code>@specifically</code> attribute</title>
 <codeblock>
@@ -206,9 +206,9 @@ match link
         continue
 </codeblock>
 </figure>
-<p>The result of this algorithm is shown in <citation type = "idref" value = "fig.ssa-specifically-1-output"/>.</p>
+<p>The result of this algorithm is shown in <citation idref="fig.ssa-specifically-1-output"/>.</p>
 <figure id="fig.ssa-specifically-1-output">
-<title>Output of the algorithm in <citation type = "idref" value = "fig.ssa-specifically-1"/></title>
+<title>Output of the algorithm in <citation idref="fig.ssa-specifically-1"/></title>
 <codeblock language="html">
 
 &lt;p&gt;In Rio Bravo, &lt;a href="http://JohnWayne.com"&gt;The Duke&lt;/a&gt;
@@ -217,7 +217,7 @@ plays and ex-Union colonel out for revenge.
 </codeblock>
 </figure>
 <p>But suppose you want to output this same content to paper. If you output it to PDF, you can still create a link as with HTML, but when that PDF is printed, all that’s left is a slight color change in the text and maybe an underline. Readers cannot follow the link.</p>
-<p>You can’t print an active link on paper, but you can print the URL, so the reader can type it into a browser. Your algorithm can print the link inline or as a footnote. <citation type = "idref" value = "fig.ssa-specifically-2"/> shows the algorithm for printing the URL inline. (I dispense with the detailed XSL-FO syntax this time.)</p>
+<p>You can’t print an active link on paper, but you can print the URL, so the reader can type it into a browser. Your algorithm can print the link inline or as a footnote. <citation idref="fig.ssa-specifically-2"/> shows the algorithm for printing the URL inline. (I dispense with the detailed XSL-FO syntax this time.)</p>
 <figure id="fig.ssa-specifically-2">
 <title>Algorithm to display the URL for a link in print</title>
 <codeblock language="pseudo">
@@ -233,9 +233,9 @@ match link
     output ") "
 </codeblock>
 </figure>
-<p>This will produce the output in <citation type = "idref" value = "fig.ssa-specifically-out"/>:</p>
+<p>This will produce the output in <citation idref="fig.ssa-specifically-out"/>:</p>
 <figure id="fig.ssa-specifically-out">
-<title>Output of <citation type = "idref" value = "fig.ssa-specifically-out"/></title>
+<title>Output of <citation idref="fig.ssa-specifically-out"/></title>
 <codeblock language="xml">
 
 &lt;fo:block&gt;
@@ -257,7 +257,7 @@ plays an ex-Union colonel out for revenge.
 {The Duke}(actor "John Wayne") plays an ex-Union colonel.
 </codeblock>
 <p>In this example, you annotate the phrase “The Duke” with subject-domain markup that clarifies exactly what the text refers to. That annotation says that “the Duke” is the name of an actor, specifically John Wayne.</p>
-<p>Our document-domain examples attempted to clarify “the Duke” for readers, but they did so in media-dependent ways. This subject-domain example clarifies the meaning of “The Duke” in a presentation-neutral way; it explicitly, formally, and unambiguously marks up what the phrase refers to. This markup is written for algorithms, not readers. It allows an algorithm to generate an appropriate clarification for the reader in any target medium (see <citation type = "idref" value = "fig.ssa-specifically-3-paper"/> and <citation type = "idref" value = "fig.ssa-specifically-3-web"/>).</p>
+<p>Our document-domain examples attempted to clarify “the Duke” for readers, but they did so in media-dependent ways. This subject-domain example clarifies the meaning of “The Duke” in a presentation-neutral way; it explicitly, formally, and unambiguously marks up what the phrase refers to. This markup is written for algorithms, not readers. It allows an algorithm to generate an appropriate clarification for the reader in any target medium (see <citation idref="fig.ssa-specifically-3-paper"/> and <citation idref="fig.ssa-specifically-3-web"/>).</p>
 <figure id="fig.ssa-specifically-3-paper">
 <title>Algorithm to render paper from subject-domain markup</title>
 <codeblock>
@@ -280,16 +280,16 @@ match actor
         continue
 </codeblock>
 </figure>
-<p>This assumes the existence of a system that can respond to the <code>get link</code> instruction and look up pages to link to based on the type and a name of a subject. I look at such a system in <citation type = "nameref" value = "chapter.linking"/>, which revisits this example in more detail.</p>
+<p>This assumes the existence of a system that can respond to the <code>get link</code> instruction and look up pages to link to based on the type and a name of a subject. I look at such a system in <citation nameref="chapter.linking"/>, which revisits this example in more detail.</p>
 </section>
 <section>
 <title>Differential organization and presentation</title>
 <p>Differences in presentation between media can be broader than this. Paper documents sometimes use complex tables and elaborate layouts that don’t translate well to online media. Effective table layout depends on knowing the width of the page you have available, and online you don’t know that. A table that looks great on paper may be unreadable on a mobile device, for instance.</p>
 <p>And this is more than a layout issue. Sometimes the things that paper does in a static way should be done dynamically in online media. For example, airline and train schedules have traditionally been printed as timetables on paper, but you rarely see them presented that way online. Rather, you see an interactive travel planner that lets you choose your starting point, destination, and desired travel times and then presents you with the best schedule, including when and where to make connections. If your single source is a timetable designed for print and PDF, you can’t produce the kind of online presentation of your schedule that people expect, and that can have a direct impact on your business.</p>
-<p>To single source schedule information for both paper and online media, you can’t maintain that content in a document-domain table structure. You need to maintain it in a timetable database structure (which is in the <phrase><annotation type="concept">subject domain</annotation></phrase>, even though it looks like a database, not a document).</p>
+<p>To single-source schedule information for both paper and online media, you can’t maintain that content in a document-domain table structure. You need to maintain it in a timetable database structure (which is in the <phrase><annotation type="concept">subject domain</annotation></phrase>, even though it looks like a database, not a document).</p>
 <p>An algorithm can read such a database to generate a document-domain table for print publication. For the Web, however, you can create a web application that queries the same database dynamically to calculate routes and schedules for individual travelers.</p>
 <!--  pix of timetable and routing widget ??? -->
-<p>In this scenario, you move content to the <phrase><annotation type="concept">subject domain</annotation></phrase> to partition the presentation from the information, which allows you to produce a different information design for different media (see <citation type = "idref" value = "ex.ssa-differential"/>). I examine these scenarios in more depth in <citation type = "nameref" value = "chapter.wide"/>.</p>
+<p>In this scenario, you move content to the <phrase><annotation type="concept">subject domain</annotation></phrase> to partition the presentation from the information, which allows you to produce a different information design for different media (see <citation idref="ex.ssa-differential"/>). I examine these scenarios in more depth in <citation nameref="chapter.wide"/>.</p>
 <figure id="ex.ssa-differential">
 <title>Information design for single sourcing</title>
 <insert item="../graphics/Differential.xml" type="image"/>
@@ -298,7 +298,7 @@ match actor
 <section>
 <title>Conditional differential design</title>
 <p>You can also do differential single sourcing by using conditional <phrase><annotation type="concept">management-domain</annotation></phrase> structures in the document domain.</p>
-<p>For instance, if you are writing a manual that you intend to single source to a help system, you might want to add context setting information to the start of a section when it appears in the help system. The manual may be designed to be read sequentially, meaning that the context of individual sections is established by what came before. But help systems are always accessed randomly, meaning that the context of a particular help topic may not be clear if it was single sourced from a manual. To accommodate this, you could include a context-setting paragraph that is conditionalized to appear only in help output (see <citation type = "idref" value = "ex.ssa-conditional-1"/>):</p>
+<p>For instance, if you are writing a manual that you intend to single source to a help system, you might want to add context setting information to the start of a section when it appears in the help system. The manual may be designed to be read sequentially, meaning that the context of individual sections is established by what came before. But help systems are always accessed randomly, meaning that the context of a particular help topic may not be clear if it was single sourced from a manual. To accommodate this, you could include a context-setting paragraph that is conditionalized to appear only in help output (see <citation idref="ex.ssa-conditional-1"/>):</p>
 <figure id="ex.ssa-conditional-1">
 <title>Differential single source example using management-domain structures</title>
 <codeblock language="sam">
@@ -317,7 +317,7 @@ section: Wrangling left-handed widgets
     3. Touch the sky.            
 </codeblock>
 </figure>
-<p>In <citation type = "idref" value = "ex.ssa-conditional-1"/>, the SAM markup <code>~~~</code> creates a fragment structure to which conditional tokens can be applied. Content indented under the fragment marker is part of the fragment.</p>
+<p>In <citation idref="ex.ssa-conditional-1"/>, the SAM markup <code>~~~</code> creates a fragment structure to which conditional tokens can be applied. Content indented under the fragment marker is part of the fragment.</p>
 <p>To output a manual, you suppress the help-only content:</p>
 <codeblock language="pseudo">
 
@@ -334,14 +334,14 @@ match fragment where conditions = help-only
 <section>
 <title>Primary and secondary media</title>
 <p>While differential single sourcing can help you output documents with the appropriate rhetoric in multiple media, there are limits to how far this approach can take you.</p>
-<p>Books are a linear medium in which one chapter follows another in order. The Web is a <phrase><annotation type="concept">hypertext</annotation></phrase> medium in which every page is page one. Readers arrive at a page via search, and they navigate by following hypertext links. The linear and hypertext approaches are fundamentally different ways of writing that invite fundamentally different ways of navigating and using information.<citation type = "idref" value = "eppo"/> Even moving content to the <phrase><annotation type="concept">subject domain</annotation></phrase> as much as possible does not entirely factor out these fundamental differences in approach.</p>
+<p>Books are a linear medium in which one chapter follows another in order. The Web is a <phrase><annotation type="concept">hypertext</annotation></phrase> medium in which every page is page one. Readers arrive at a page via search, and they navigate by following hypertext links. The linear and hypertext approaches are fundamentally different ways of writing that invite fundamentally different ways of navigating and using information.<citation idref="eppo"/> Even moving content to the <phrase><annotation type="concept">subject domain</annotation></phrase> as much as possible does not entirely factor out these fundamental differences in approach.</p>
 <footnote id="eppo">
 <p>For a full examination of the differences, see my book <phrase><annotation type="citetitle" specifically="Baker2013">Every Page is Page One: Topic-based Writing for Technical Communication and the Web</annotation></phrase>.</p>
 </footnote>
 <p>When single sourcing content to both linear paper-like media and <phrase><annotation type="concept">hypertext</annotation></phrase> web-like media, you generally have to choose a primary medium. Single sourcing that content to other media will be on a best-effort basis. It may be good enough for a particular purpose, but it will never be as good as it could have been had you designed exclusively for that medium.</p>
 <p>Many of the tools used for single sourcing have a built-in bias towards one medium or another. Desktop-publishing tools such as <phrase><annotation type="tool">FrameMaker</annotation></phrase>, for instance, were designed for linear media. Online collaborative tools such as <phrase><annotation type="tool">wikis</annotation></phrase> were designed for <phrase><annotation type="concept">hypertext</annotation></phrase> media. It is usually a good idea to pick a tool that was designed for the medium you choose as primary. Tools partition the complexity of content creation to best suit the primary medium they were designed for.</p>
 <p>Often, the tools a group uses implicitly determine the primary medium. This usually means that the primary medium is paper, and paper often continues to be primary even after the organization stops producing paper, and their readers have moved to online formats.</p>
-<p>Some organizations think they should not switch to tools that are designed primarily for online content until they have entirely abandoned paper and paper-like formats such as PDF. But once online becomes your primary media, your rhetoric should change to a rhetoric appropriate to online media (potentially a very large change, as discussed in <citation type = "nameref" value = "chapter.architecture"/>. Thus it is appropriate to switch to a rhetoric and tool set that is optimized for online but that can still produce linear media as a secondary output format.</p>
+<p>Some organizations think they should not switch to tools that are designed primarily for online content until they have entirely abandoned paper and paper-like formats such as PDF. But once online becomes your primary media, your rhetoric should change to a rhetoric appropriate to online media (potentially a very large change, as discussed in <citation nameref="chapter.architecture"/>). Thus it is appropriate to switch to a rhetoric and tool set that is optimized for online but that can still produce linear media as a secondary output format.</p>
 <p>Changing your information design practices from linear, paper-based designs to <phrase><annotation type="concept">hypertext</annotation></phrase> designs is not trivial, but such designs better suit the way many people use and access content today. I discuss these design differences in depth in my book, <phrase><annotation type="citetitle">Every Page is Page One: Topic-based Writing for Technical Communication and the Web</annotation></phrase>. Don’t expect single sourcing, by itself, to successfully turn document-oriented design into effective hypertext. It is usually more effective to adopt an <phrase><annotation type="concept">Every Page is Page One</annotation></phrase> approach to information design and use structured writing and single-sourcing techniques as a best-effort method to create linear media for those of your readers who still need paper or paper-like formats – or for those documents where linear organization still makes sense.</p>
 </section>
 </chapter>
