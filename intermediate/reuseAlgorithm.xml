@@ -52,7 +52,7 @@
 <section>
 <title>Fitting pieces of content together</title>
 <p>If you are going to create one piece of content that can be used in many outputs, you have to make sure it fits in each of those outputs (in other words, partition it appropriately for reuse.)</p>
-<p>If you cut and paste, this is not a concern. You can cut any text you like, paste it in anywhere, and edit it to fit if you need to. But if the content you want to use is used in other places, you can’t edit it to fit because that might cause it to no longer fit in the other places. For reuse to work, the content must be written to fit in multiple places. In other words, it has to meet a set of constraints that will ensure that it will fit in multiple places. We will look at this in more detail in <citation type = "nameref" value = "chapter.composition"/>. In this chapter we will focus on the algorithms for fitting the pieces together.</p>
+<p>If you cut and paste, this is not a concern. You can cut any text you like, paste it in anywhere, and edit it to fit if you need to. But if the content you want to use is used in other places, you can’t edit it to fit because that might cause it to no longer fit in the other places. For reuse to work, the content must be written to fit in multiple places. In other words, it has to meet a set of constraints that will ensure that it will fit in multiple places. We will look at this in more detail in <citation nameref="chapter.composition"/>. In this chapter we will focus on the algorithms for fitting the pieces together.</p>
 <p>There are seven basic models for fitting pieces of content together:</p>
 <ul>
 <li>
@@ -82,7 +82,7 @@
 <title>Common into variable</title>
 <p>In the common into variable case, you have a common piece of content that occurs in many places. This could mean it occurs in many documents or in many places in the same document, or both.</p>
 <insert item="../graphics/common2variable.xml" type="image">
-<p>We looked at an example of this in <citation type = "nameref" value = "chapter.management-domain"/>, where we had a set of dangerous procedures which each required a standard warning. Each individual procedure is the variable part and the standard warning is the common part.:</p>
+<p>We looked at an example of this in <citation nameref="chapter.management-domain"/>, where we had a set of dangerous procedures which each required a standard warning. Each individual procedure is the variable part and the standard warning is the common part.:</p>
 </insert><codeblock language="sam">
 
 procedure: Blow stuff up
@@ -93,7 +93,7 @@ procedure: Blow stuff up
     step: Press the big red button.
 </codeblock>
 <p>To ensure that the included content will always fit, you need to make sure that there is a clear partitioning of responsibilities between the common content and each place it will be inserted into. In this example, the inserted content should give the safety warning, the whole safety warning, and nothing but the safety warning. The procedure structure should describe the steps and only the steps and should insert the reusable warning at the right place.</p>
-<p>Of course, you can also use the subject-domain approach to common into variable that we looked at in <citation type = "nameref" value = "chapter.management-domain"/>. I will go into more detail on that approach later in this chapter.</p>
+<p>Of course, you can also use the subject-domain approach to common into variable that we looked at in <citation nameref="chapter.management-domain"/>. I will go into more detail on that approach later in this chapter.</p>
 </section>
 <section>
 <title>Variable into common</title>
@@ -325,7 +325,7 @@ ol:
 </section>
 <section>
 <title>Factor out the common</title>
-<p>In <citation type = "nameref" value = "chapter.management-domain"/>, I noted that the subject domain alternative to using an insertion instruction for the warning text was to specify which procedures were dangerous, thus factoring out the constraint that the warning must appear.</p>
+<p>In <citation nameref="chapter.management-domain"/>, I noted that the subject domain alternative to using an insertion instruction for the warning text was to specify which procedures were dangerous, thus factoring out the constraint that the warning must appear.</p>
 <codeblock language="sam">
 
 procedure: Blow stuff up
@@ -485,7 +485,7 @@ unit: Installing the &gt;($product_name)
 <p>While reuse is supposed to reduce the cost of modifying content when the subject matter changes, there are hidden cost traps here as well. It is often not until the subject matter changes that you find out if the content we have treated as common is really common. If not, you may have a complex management task to sort out what is really common and what isn’t. This can involve complex edits that then have to be tested and verified. If you get everything right, you can realize major savings when it comes time to modify your content, but if you get it wrong, it can multiply costs. Not only that, it also means that the money you spent factoring duplicate content out in anticipation a change that did not happen is wasted as well. Reacting to changes that actually happen is sometimes cheaper than preparing for multiple changes that never happen.</p>
 <p>If your content collection and its web of reuse relationships is not audited and validated regularly, it can become chaotic over time and lose cohesion. This can make adding new content or changing existing content increasingly difficult and expensive.</p>
 <p>Depending of the techniques you use, content reuse strategies can complicate the lives of writers, which may reduce the pool of writers you can use or reduce their productivity.</p>
-<p>With many reuse techniques, the writer has to find the content to be reused each time. Not only does this take time and impose a piece of complexity on the writer, it is a cost that has to be paid every time the writer looks for content to reuse, whether they find any or not. Indeed, if a writer is expected to look for reusable content before they write anything at all, much of their time may be taken up with unsuccessful content queries. Reducing the expense of content queries, therefore, has to be a major component of any general reuse strategy. We will look more at this in <citation type = "nameref" value = "chapter.duplication"/>.</p>
+<p>With many reuse techniques, the writer has to find the content to be reused each time. Not only does this take time and impose a piece of complexity on the writer, it is a cost that has to be paid every time the writer looks for content to reuse, whether they find any or not. Indeed, if a writer is expected to look for reusable content before they write anything at all, much of their time may be taken up with unsuccessful content queries. Reducing the expense of content queries, therefore, has to be a major component of any general reuse strategy. We will look more at this in <citation nameref="chapter.duplication"/>.</p>
 <p>Localized and constrained forms of reuse can avoid this cost trap. For instance, reuse that is focused on producing different versions of a manual for different versions of a product, is doing reuse in constrained places for constrained reasons does not require frequent broad-based content queries to find reusable content. It merely requires that the writers on the project be aware of the specific reuse strategies being used in that project (unless the reuse has been factored out altogether).</p>
 <p>Some content reuse techniques are easy to use in non-structured ways and early in a project it may seem like a non-structured approach to reuse speeds things up by allowing writers to reuse content wherever they find it. Over time, however, this approach can lead to a rat’s nest of dependencies and relationships between bits of content that makes it hard to update or edit the content with any confidence.</p>
 <p>Once the cohesion and discipline of a content set starts to break down, the decline tends to accelerate. As it becomes harder to find content to reuse, more duplication occurs, which further complicates the search for reusable content, creating a vicious circle. As links and other content relationships break down, people tend to form ad hoc links and relationships to get a job finished, further tangling the existing rat’s nest. Under the gun, it is almost always easier to get the next document out by ignoring the discipline of the content set structure, but the effects of this are corrosive. Without consistent discipline, even in the face of deadlines, a reuse system can fail over time.</p>
@@ -503,7 +503,7 @@ unit: Installing the &gt;($product_name)
 </li>
 <li>
 <label>Reduce duplication</label>
-<p>Content reuse is always content duplication. Reuse is predicated on the idea that you actually want to duplicate information in multiple publications. This is actually a somewhat out of date idea. In the paper world, it was important to give each customer a book with all the information they needed in it, even if the same information occurred in many different books. But in an online environment, you don’t need to duplicate information to make it available to every user who needs it. Maintaining the information once and linking to it whenever it is needed is a much less complex solution for a number of cases. To do this efficiently may require some of the techniques described in <citation type = "nameref" value = "chapter.linking"/>.</p>
+<p>Content reuse is always content duplication. Reuse is predicated on the idea that you actually want to duplicate information in multiple publications. This is actually a somewhat out of date idea. In the paper world, it was important to give each customer a book with all the information they needed in it, even if the same information occurred in many different books. But in an online environment, you don’t need to duplicate information to make it available to every user who needs it. Maintaining the information once and linking to it whenever it is needed is a much less complex solution for a number of cases. To do this efficiently may require some of the techniques described in <citation nameref="chapter.linking"/>.</p>
 </li>
 <li>
 <label>Combine and differentiate</label>

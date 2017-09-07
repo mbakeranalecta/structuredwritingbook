@@ -27,7 +27,7 @@
 <term>processing structured text</term>
 </record>
 </index>
-<p><citation type = "nameref" value = "chapter.separating"/> looked at separating content from formatting. But of course they cannot stay separated. Content must be formatted before you present it to the reader. So let’s look at the algorithm for putting them back together again.</p>
+<p><citation nameref="chapter.separating"/> looked at separating content from formatting. But of course they cannot stay separated. Content must be formatted before you present it to the reader. So let’s look at the algorithm for putting them back together again.</p>
 <p>Understanding how to put things back together is a big part of understanding how to separate them. Indeed, describing how you would put them back together is the only way to know for certain that you didn’t lose anything when you did the separation. This is essential to ensuring a clean partitioning that does not allow any complexity to fall through to the reader.</p>
 <section>
 <title>Two into one: reversing the factoring out of invariants</title>
@@ -40,7 +40,7 @@
 </section>
 <section>
 <title>Restoring style information</title>
-<p>In <citation type = "nameref" value = "chapter.separating"/>, the first example of <phrase><annotation type="concept">separating content from formatting</annotation></phrase> factored out the style information from this structure:</p>
+<p>In <citation nameref="chapter.separating"/>, the first example of <phrase><annotation type="concept">separating content from formatting</annotation></phrase> factored out the style information from this structure:</p>
 <codeblock>
 
 {font: 10pt "Open Sans"}The box contains:
@@ -132,10 +132,10 @@ match bullet-paragraph
 <p>To put it another way, rather than being a set of steps to follow, style-sheet rules define a set of decisions to be made when certain events occur. If you see X, do Y. The structure of the source document determines the order in which the processor applies the rules; the order of the rules in the style sheet doesn’t matter.</p>
 <p>This may seem obvious, but it is key to understanding how structured text is usually processed. This can be confusing even to skilled programmers, because style sheets are processed differently from the way most programmers learn to write computer programs.</p>
 <p>Things get more complex when you move into processing the nested structures of the <phrase><annotation type="concept">document domain</annotation></phrase> and <phrase><annotation type="concept">subject domain</annotation></phrase>, but the basic pattern of a set of unordered rules to describe a transformation algorithm still applies.</p>
-</section>
 <pagination-tweak>
 <min-space>1.5in</min-space>
 </pagination-tweak>
+</section>
 <section>
 <title>Applying rules in the document domain</title>
 <p>Suppose you have a piece of document-domain structured text that contains this <code>title</code> structure:</p>
@@ -249,7 +249,7 @@ match section
 <section>
 <title>Restoring factored-out text</title>
 <p>Sometimes when you factor out invariants, you not only factor out styles, you also factor out text. To process the content, you need to restore the text (obviously you can restore different text if you need to, which is why you factored it out in the first place).</p>
-<p>As we saw in <citation type = "nameref" value = "chapter.separating"/>, a simple example of factoring out text is numbered and bulleted lists, where you factor out the text of the numbers and bullets. Let’s look at how you create rules to put them back.</p>
+<p>As we saw in <citation nameref="chapter.separating"/>, a simple example of factoring out text is numbered and bulleted lists, where you factor out the text of the numbers and bullets. Let’s look at how you create rules to put them back.</p>
 <p>Suppose you have a document that contains these two different kinds of lists:</p>
 <codeblock>
 
@@ -319,7 +319,7 @@ match ordered-list/list-item
 <section>
 <title>Processing in multiple steps</title>
 <p>You may not always want to apply final formatting to your content in a single step. When you separated content from formatting, you did the separation in several stages. You may want to put them back together in several stages. This not only results in simpler, easier-to-maintain algorithms, it can make it possible for you to reuse some of the downstream steps (nearer the media domain) for different types of document-domain and subject-domain content.</p>
-<p>So far the examples have come from the <phrase><annotation type="concept">media domain</annotation></phrase> and the <phrase><annotation type="concept">document domain</annotation></phrase>. Here is a <phrase><annotation type="concept">subject-domain</annotation></phrase> example that builds on <citation type = "nameref" value = "ex.separate-1"/>, which moved a labeled list from the document domain to the subject domain.</p>
+<p>So far the examples have come from the <phrase><annotation type="concept">media domain</annotation></phrase> and the <phrase><annotation type="concept">document domain</annotation></phrase>. Here is a <phrase><annotation type="concept">subject-domain</annotation></phrase> example that builds on <citation nameref="ex.separate-1"/>, which moved a labeled list from the document domain to the subject domain.</p>
 <codeblock language="sam">
 
 address:
@@ -385,7 +385,7 @@ match code
 </section>
 <section>
 <title>Query-based processing</title>
-<p>The rule-based approach shown here is not the only way to process structured writing. There is another approach that I call the query-based approach.<citation type = "idref" value = "1"/> In this approach, you write a query expression that reaches into the structure of a document and pulls out a structure or a set of structures from the middle of the document.</p>
+<p>The rule-based approach shown here is not the only way to process structured writing. There is another approach that I call the query-based approach.<citation idref="1"/> In this approach, you write a query expression that reaches into the structure of a document and pulls out a structure or a set of structures from the middle of the document.</p>
 <p>This is a useful technique if you want to radically rearrange the content of a document or if you want to pull content out of one document to use in another. Any reference in these pages to using an algorithm to go through a content set and pull out certain pieces of data is an example of the query-based approach. You will see more examples of this in future chapters.</p>
 <footnote id="1">
 <p>The rule-based and query-based approaches are often called “push” and “pull” methods respectively, but I sometimes find it hard to remember which is which. I find rule-based and query-based more descriptive.</p>

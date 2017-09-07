@@ -469,7 +469,7 @@
         </db:citetitle>
     </xsl:template>
     
-    <xsl:template match="citation[@type='citation']">
+    <xsl:template match="citation[@value]">
         <xsl:apply-templates/>    
         <xsl:choose>
             <xsl:when test="ancestor::footnote">
@@ -487,8 +487,8 @@
         </xsl:choose>
     </xsl:template>
     
-    <xsl:template match="citation[@type='idref']">
-        <xsl:variable name="idref" select="@value"/>
+    <xsl:template match="citation[@idref]">
+        <xsl:variable name="idref" select="@idref"/>
         <xsl:choose>
             <xsl:when test="//footnote[@id=$idref]">
                 <xsl:apply-templates select="//footnote[@id=$idref]" mode="resolve-footnote"/>
@@ -546,27 +546,27 @@
         </db:bridgehead>
     </xsl:template>
     
-    <xsl:template match="blockquote/citation[@type='citation']">   
+    <xsl:template match="blockquote/citation[@value]">   
         <db:attribution>
             <xsl:value-of select="@value"/>
         </db:attribution>
     </xsl:template>
     
-    <xsl:template match="blockquote/citation[@type='nameref']">
-        <xsl:variable name="nameref" select="@value"/>
+    <xsl:template match="blockquote/citation[@nameref]">
+        <xsl:variable name="nameref" select="@nameref"/>
         <db:attribution>
             <xsl:value-of select="$nameref"/>
         </db:attribution>
     </xsl:template>
     
-    <xsl:template match="citation[@type='nameref']" priority="-.1">
-        <db:xref linkend="{@value}"/>
+    <xsl:template match="citation[@nameref]" priority="-.1">
+        <db:xref linkend="{@nameref}"/>
     </xsl:template>
 
-    <xsl:template match="phrase/citation[@type='nameref']">
+    <xsl:template match="phrase/citation[@nameref]">
         <xsl:apply-templates/>
         <xsl:text> (</xsl:text>
-        <db:xref linkend="{@value}"/>
+        <db:xref linkend="{@nameref}"/>
         <xsl:text>)</xsl:text>
     </xsl:template>
     

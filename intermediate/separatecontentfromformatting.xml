@@ -164,7 +164,7 @@ ordered-list-item =
 </section>
 <section>
 <title>Create containers to provide context</title>
-<p>As noted in <citation type = "nameref" value = "chapter.document-domain"/>, one problem with this approach to creating lists is that you have to apply a different style to the first item of a list. It would be better if you could use the same style for each list item and have the numbering just work. However, this is hard to do because nothing in the content says where one numbered list ends and the next begins. For this you need a new abstraction. So far, you have abstractions for ordered and unordered list items, but you don’t have an abstraction for lists themselves.</p>
+<p>As noted in <citation nameref="chapter.document-domain"/>, one problem with this approach to creating lists is that you have to apply a different style to the first item of a list. It would be better if you could use the same style for each list item and have the numbering just work. However, this is hard to do because nothing in the content says where one numbered list ends and the next begins. For this you need a new abstraction. So far, you have abstractions for ordered and unordered list items, but you don’t have an abstraction for lists themselves.</p>
 <p>Up to this point, everything has been purely in the <phrase><annotation type="concept">media domain</annotation></phrase>. You replaced direct formatting definitions with indirect definitions through styles. But now it’s necessary to venture into the <phrase><annotation type="concept">document domain</annotation></phrase>, creating the abstract idea of a list and inserting that abstract idea into your content.</p>
 <codeblock>
 
@@ -174,13 +174,13 @@ list:
     ordered-list-item:Rinse
     ordered-list-item:Repeat
 </codeblock>
-<p>There are two significant changes here. First, the structure is no longer flat. Previously a list was a series of paragraphs with different styles attached. Now there is a container, <code>list</code>, that, as far as the formatting is concerned, never existed in the original.<citation type = "idref" value = "fn.indentation"/> The writer and reader knew that the sequence of bulleted paragraphs formed a list, but that was an interpretation of the formatting. Now that interpretation is recorded explicitly in the content itself.</p>
+<p>There are two significant changes here. First, the structure is no longer flat. Previously a list was a series of paragraphs with different styles attached. Now there is a container, <code>list</code>, that, as far as the formatting is concerned, never existed in the original.<citation idref="fn.indentation"/> The writer and reader knew that the sequence of bulleted paragraphs formed a list, but that was an interpretation of the formatting. Now that interpretation is recorded explicitly in the content itself.</p>
 <footnote id="fn.indentation">
 <p>The SAM markup in this example uses indentation to identify hierarchy. The <code>list</code> container contains three instances of <code>ordered-list-item</code>.</p>
 </footnote>
 <p>By creating the idea of a list, you further separate list formatting from the list content. Now, an algorithm can recognize a list and make formatting decisions based on that knowledge.</p>
 <p>The second important thing is that the content no longer refers to style names. Instead you have structures. <code>list</code> is a structure and so are <code>paragraph</code> and <code>ordered-list-item</code>.</p>
-<p>By replacing styles with structures, you can give the same structure a different style depending on where it is in the document. The <phrase><annotation type="concept">formatting algorithm</annotation></phrase> can determine which <code>ordered-list-item</code> is first and format it accordingly; this is <phrase><citation type = "citation" value = "https://css-tricks.com/numbering-in-style/">how list formatting works in CSS.</citation></phrase></p>
+<p>By replacing styles with structures, you can give the same structure a different style depending on where it is in the document. The <phrase><annotation type="concept">formatting algorithm</annotation></phrase> can determine which <code>ordered-list-item</code> is first and format it accordingly; this is <phrase><citation value="https://css-tricks.com/numbering-in-style/">how list formatting works in CSS.</citation></phrase></p>
 <p>Now, writers no longer apply styles directly to content, even styles with abstract names. Rather they place content in structures and allow the formatting algorithm to apply styles appropriately. This separates the content even more from the formatting.</p>
 </section>
 <section>
@@ -224,7 +224,7 @@ section:
     section:
         title:
 </codeblock>
-<p>This eliminates decisions about which heading element to use; there is just one: <code>title</code>. This ensures that the headings in the output consistently reflect the section and subsection structure of the document.<citation type = "idref" value = "fn.signposts"/></p>
+<p>This eliminates decisions about which heading element to use; there is just one: <code>title</code>. This ensures that the headings in the output consistently reflect the section and subsection structure of the document.<citation idref="fn.signposts"/></p>
 <footnote id="fn.signposts">
 <p>Not everyone holds to the view that headings in a text must reflect a hierarchy of sections. Instead, headings may be simply signposts along the way, where the size of the sign reflects some quality – size of the town or the importance of the section – other than a strict hierarchy. If that is how you look at document structures, you should choose a different way to separate content from formatting.</p>
 </footnote>
@@ -271,7 +271,7 @@ labeled-list:
         contents: 12345
 </codeblock>
 <p>But what if you have hundreds of addresses, all with the same labels? Are the labels content or are they presentation? Since the labels don’t change from one list to another, you could look at them as being part of the presentation rather than the content. So let’s look for a way to separate them from the content.</p>
-<p>As always, when you separate something from your content, you have to replace it with something else. In <citation type = "nameref" value = "ex.separate-1"/>, named structures reflect the subject matter of the entries, which moves this content into the <phrase><annotation type="concept">subject domain</annotation></phrase>.</p>
+<p>As always, when you separate something from your content, you have to replace it with something else. In <citation nameref="ex.separate-1"/>, named structures reflect the subject matter of the entries, which moves this content into the <phrase><annotation type="concept">subject domain</annotation></phrase>.</p>
 <figure name="ex.separate-1">
 <title>Address markup in the subject domain</title>
 <codeblock language="sam">
@@ -285,8 +285,8 @@ address:
 </figure>
 <p>Here, once again, it is important to distinguish formatting and presentation. <phrase><annotation type="italic">Formatting</annotation></phrase> refers to the precise details of a text’s appearance: the font chosen, the width of the text column, the size of the characters, the spacing between line, the size and shape of the bullet characters, and so forth. <phrase><annotation type="italic">Presentation</annotation></phrase> refers to the organization of text.</p>
 <p>Deciding to use a list for a certain piece of information is a presentation decision, which is independent of the formatting details applied to lists. When you move content from the <phrase><annotation type="concept">media domain</annotation></phrase> to the <phrase><annotation type="concept">document domain</annotation></phrase>, you separate the formatting of the content from its presentation. The decision to present the information as a list remains; the decision about what that list looks like is separated out.</p>
-<p>In contrast, moving content from the <phrase><annotation type="concept">document domain</annotation></phrase> to the <phrase><annotation type="concept">subject domain</annotation></phrase> separates the <phrase><annotation type="italic">information</annotation></phrase> from the <phrase><annotation type="italic">presentation</annotation></phrase>. The subject-domain structure in <citation type = "nameref" value = "ex.separate-1"/> is not a labeled list. It is a data record that can be turned into many different forms of presentation.</p>
-<p>Turning such structures into a specific form of presentation is the job of the presentation algorithm (see <citation type = "nameref" value = "chapter.publishing"/>). The presentation algorithm could turn it into a labeled list, a table, a paragraph, or an address label.</p>
+<p>In contrast, moving content from the <phrase><annotation type="concept">document domain</annotation></phrase> to the <phrase><annotation type="concept">subject domain</annotation></phrase> separates the <phrase><annotation type="italic">information</annotation></phrase> from the <phrase><annotation type="italic">presentation</annotation></phrase>. The subject-domain structure in <citation nameref="ex.separate-1"/> is not a labeled list. It is a data record that can be turned into many different forms of presentation.</p>
+<p>Turning such structures into a specific form of presentation is the job of the presentation algorithm (see <citation nameref="chapter.publishing"/>). The presentation algorithm could turn it into a labeled list, a table, a paragraph, or an address label.</p>
 <p>In the <phrase><annotation type="concept">subject domain</annotation></phrase>, with the content separated from both formatting and presentation, you also gain the ability to query and reorganize the content in various interesting and useful ways (which I explore in later chapters).</p>
 <p>This is as far as you can go in separating content from formatting, and you can’t separate all content from formatting to quite this extent. Separating content from format is not a binary operation. There are various degrees of separation that you can apply for various reasons. It is important to understand exactly which degree of separation best serves your needs.</p>
 </section>

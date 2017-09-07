@@ -36,7 +36,7 @@
 &lt;p style="{font-family: serif; font-weight: bold; 
  font-size: 12pt}"&gt;
 </codeblock>
-<p>You can see that this markup is very very similar to the old typesetters marks in <citation type = "idref" value = "typesetter"/>.</p>
+<p>You can see that this markup is very very similar to the old typesetters marks in <citation idref="typesetter"/>.</p>
 <p>All writing programs have to store the writing in files. There are two possible file types they can use: binary and text.</p>
 <p>For all intents and purposes, a binary file is one that can only be read or written by a computer program, usually the program that created it. Open up a binary file in a text editor and you won’t be able to make heads or tails of it. And even if parts of it look like plain text, editing those sections and saving the file is likely to result in a corrupt file that the original application can no longer open.</p>
 <p>A text file, by contrast, is one that you can open in a text editor and actually be able to read and write without breaking it. But to express structure in a text file, you need a way to interpolate information about structure into the text. The way we interpolate structure is with markup – special sequences of text characters that are recognized as defining structure rather than  expressing text.</p>
@@ -46,7 +46,7 @@
 <line><phrase><annotation type="bold">&lt;p&gt;</annotation></phrase>Herman Melville’s <phrase><annotation type="bold">&lt;i&gt;</annotation></phrase>Moby Dick<phrase><annotation type="bold">&lt;/i&gt;</annotation></phrase> is a long </line>
 <line>book about a big whale.<phrase><annotation type="bold">&lt;/p&gt;</annotation></phrase>      </line>
 </formatted-code>
-<p>A markup parser recognizes the markup characters and builds a structure that has the text and nested structures as content. A processing application then access that data, applying rules to the structures define by the markup, as we saw in <citation type = "nameref" value = "chapter.processing"/>.</p>
+<p>A markup parser recognizes the markup characters and builds a structure that has the text and nested structures as content. A processing application then access that data, applying rules to the structures define by the markup, as we saw in <citation nameref="chapter.processing"/>.</p>
 <section>
 <title>Markup vs. regular text</title>
 <p>Some markup languages make the distinction between markup and regular text completely explicit. An example of explicit markup is an HTML tag. Tags are set off by opening and closing angle brackets:</p>
@@ -141,7 +141,7 @@ Herman Melville's _Moby Dick_ is a long book about a big whale.
 <section>
 <title>Abstract markup languages</title>
 <p>An abstract markup languages does not describe specific concrete document structures directly. It describes abstract concrete structures which can be named to represent structures in any domain.</p>
-<p>XML is an example of an abstract markup language.<citation type = "idref" value = "1"/> The markup in an XML file does not directly indicates things like headings or paragraphs. Instead, it indicates a set of abstract structures called elements, attributes, entities, processing instructions, marked sections, and comments.</p>
+<p>XML is an example of an abstract markup language.<citation idref="1"/> The markup in an XML file does not directly indicates things like headings or paragraphs. Instead, it indicates a set of abstract structures called elements, attributes, entities, processing instructions, marked sections, and comments.</p>
 <footnote id="1">
 <p>The formal term for a language like XML is “meta language”, a language for describing other languages. In calling XML an “abstract” language, I am focusing on a different property, its use of structures that are not parts of a document but generic containers. A meta language needs such abstract containers. But I find that the term “meta language” is not helpful to most readers, so I have chosen instead to focus on this property of using abstract structures as opposed to the concrete structures of a language like Markdown.</p>
 </footnote>
@@ -160,7 +160,7 @@ Herman Melville's _Moby Dick_ is a long book about a big whale.
 </section>
 <section>
 <title>Instances of abstract markup languages</title>
-<p>This means that <phrase><annotation type="language">DocBook</annotation></phrase> is a instance of the abstract language <phrase><annotation type="language">XML</annotation></phrase>. XML defines abstract structures. DocBook defines concrete structures by giving names to XML elements. Many common markup languages are instances of XML<citation type = "idref" value = "2"/>. XML is virtually the only abstract language used for content these days, so it is the only abstract language I am going to talk about.</p>
+<p>This means that <phrase><annotation type="language">DocBook</annotation></phrase> is a instance of the abstract language <phrase><annotation type="language">XML</annotation></phrase>. XML defines abstract structures. DocBook defines concrete structures by giving names to XML elements. Many common markup languages are instances of XML<citation idref="2"/>. XML is virtually the only abstract language used for content these days, so it is the only abstract language I am going to talk about.</p>
 <footnote id="2">
 <p>Sometimes also referred to as “applications” of XML, though this usage was far more common in the days of <phrase><annotation type="language">SGML</annotation></phrase>.</p>
 </footnote>
@@ -225,13 +225,13 @@ int theToFile, int theToRank) {
 <section>
 <title>The ability to extend</title>
 <p>The downside of concrete languages is that their concrete syntax defines a fixed set of structures. If you want other structures, there is no way to create them short of inventing your own concrete language, or a variant of an existing one, and coding the parser and all the other tools to interpret that language. Designing new concrete languages is non-trivial because you need to make sure that any combination of characters that the writer may type is interpreted in an unambiguous way. Some versions of Markdown, including the original, contain ambiguities about how certain sequences of characters should be interpreted, which obviously detracts from its reliability and functional lucidity.</p>
-<p>If you want to define your own structures to express the constraints that matter to your business, you need an easier way to do it. Abstract languages like XML make this much easier. You just write a <phrase><annotation type="tool">schema</annotation></phrase> describing the structures you want, and any algorithms you need to process those structures. (I’ll talk about schemas in <citation type = "nameref" value = "chapter.constraints"/>.)</p>
+<p>If you want to define your own structures to express the constraints that matter to your business, you need an easier way to do it. Abstract languages like XML make this much easier. You just write a <phrase><annotation type="tool">schema</annotation></phrase> describing the structures you want, and any algorithms you need to process those structures. (I’ll talk about schemas in <citation nameref="chapter.constraints"/>.)</p>
 </section>
 <section>
 <title>The ability to constrain</title>
 <p>Extensibility allows you to add structures to a language but does not place restrictions on where they can occur.</p>
 <p>Extensibility allows you to have elements called <code>ingredient</code> and <code>wine-match</code>. Constraints allow you to require that <code>ingredient</code> only occurs inside an <code>ingredients</code> structure and that the content of the <code>ingredients</code> structure must be a sequence of <code>ingredient</code> elements and nothing else. Constraints lets you say that writers can’t put <code>wine-match</code> in the <code>introduction</code> or as a <code>step</code> in the <code>preparation</code>, they can only put it as a child of <code>recipe</code> after the <code>servings</code> field and before the <code>prep-time</code> field. Constraints allow, you to require that every recipe have the full list of nutritional information.</p>
-<p>Constraints are what allow you to partition the content system by creating reliable interfaces between different people and processes. All markup languages have constraints. With a concrete language, you get the constraints that are built into the language. Abstract languages allow you to define your own structures, and your own constraints. However, as we shall see in <citation type = "nameref" value = "chapter.extensible"/>, not all languages that are extensible are also constrainable.</p>
+<p>Constraints are what allow you to partition the content system by creating reliable interfaces between different people and processes. All markup languages have constraints. With a concrete language, you get the constraints that are built into the language. Abstract languages allow you to define your own structures, and your own constraints. However, as we shall see in <citation nameref="chapter.extensible"/>, not all languages that are extensible are also constrainable.</p>
 </section>
 <section>
 <title>Showing and hiding structure</title>
