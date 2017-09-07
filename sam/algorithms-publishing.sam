@@ -12,7 +12,7 @@ chapter:(#chapter.publishing) Publishing
 
     All structured writing must eventually be published. Publishing structured content means transforming it from the domain in which it was created ({subject domain}, {document domain}, or the abstract end of the {media domain}) to the most concrete end of the media domain spectrum: dots on paper or screen.
     
-    Publishing is a complex process, particularly in an environment where you may be practicing {single sourcing}, {content reuse}, or many of the other structured writing algorithms we have looked at. The best way to handle that complexity is to partition and distribute it to appropriate people and processes.  
+    Publishing is a complex process, particularly in an environment where you may be practicing {single sourcing}, {content generation}, or many of the other structured writing algorithms we have looked at. The best way to handle that complexity is to partition and distribute it to appropriate people and processes.  
     
     In this chapter, I am going to describe a partitioning of the publishing process into four basic algorithms: the {synthesis}, {presentation}, {formatting}, and {encoding} algorithms. These four stages are formalized in the {SPFE architecture}(tool), which I will talk about later, but I think they are a fair representation of what goes on in most publishing tool chains, even if those tool chains don't divide responsibilities exactly as I describe them here, or make such clear separation between them as I do.
     
@@ -22,6 +22,7 @@ chapter:(#chapter.publishing) Publishing
     
         index:: type, term
             algorithm, rendering
+            concept, page description language 
 
         There is actually a fifth algorithm in the publishing chain, which we can call the {rendering algorithm}. The rendering algorithm is the one responsible for actually placing the right dots on the right surface, be that paper, screen, or a printing plate. But this is a low-level device-specific algorithm and no one in the structured writing business is likely to be involved in writing rendering algorithms. The closest we ever get is the next step up, the {encoding algorithm}. 
 
@@ -43,7 +44,7 @@ chapter:(#chapter.publishing) Publishing
         index:: type, term
             algorithm, encoding
     
-        Since most writers are not going to write directly in a page description language, the page descriptions for your publication are almost certainly going to be created by an algorithm. I call this the encoding algorithm since it encodes your content in the page description language.
+        Since most writers are not going to write directly in a {page description language}, the page descriptions for your publication are almost certainly going to be created by an algorithm. I call this the encoding algorithm since it encodes your content in the page description language.
 
         While it is possible that someone responsible for a highly specialized publishing tool chain may end up writing a specialized encoding algorithm, most encoding algorithms are going to be implemented by existing tools that translate {formatting languages} into {page descriptions languages}. 
         
@@ -127,9 +128,9 @@ chapter:(#chapter.publishing) Publishing
        
             How content is linked or cross-referenced is a key part of how it is organized in different media, and a key part of {differential single sourcing}. We looked at the {linking algorithm}(algorithm) in detail in [#chapter.linking].
        
-        section: The {information architecture algorithm}
+        section: The {content generation algorithm}
        
-            Part of the {presentation} of a document or document set is creating the {table of contents}, {index}, and other {navigation} aids. Creating these is part of the presentation process. Because these algorithms create new resources by extracting information from the rest of the content, it is often easier to run these algorithm in serial after the main {presentation algorithm} has run. This also makes it easier to change the way a {TOC} or {index} is generated without affecting your other algorithms. For more on the information architecture algorithm, see [#chapter.architecture].
+            Part of the {presentation} of a document or document set is generating the {table of contents}, {index}, and other {navigation} aids. Generating these is part of the presentation process. Because these algorithms create new resources by extracting information from the rest of the content, it is often easier to run these algorithm in serial after the main {presentation algorithm} has run. This also makes it easier to change the way a {TOC} or {index} is generated without affecting your other algorithms. For more on the content generation algorithm, see [#chapter.generate].
        
            
     section: The {Synthesis Algorithm}
@@ -163,6 +164,10 @@ chapter:(#chapter.publishing) Publishing
         
             Pulling in reused content is part of the synthesis process. We looked at the reuse algorithm in [#chapter.reuse].
 
+        section: The {content generation algorithm}
+
+            As I noted in [#chapter.generate] the content generation algorithm presents an alternative approach to the creation of different forms of output from a single source of data. It is run as part of the synthesis algorithm when creating raw content, and as part of the presentation algorithm when creating presentation artifacts such as a table of contents.  (Note that the content generation algorithm can be use in both the {synthesis} and {presentation} stages, since it  can be used to generate either synthesis or  presentation artifacts.)
+
 
         section: The {extract algorithm}
         
@@ -177,7 +182,7 @@ chapter:(#chapter.publishing) Publishing
             
     section: {Deferred synthesis}
         
-        For static presentation, all synthesis happens before the material is presented. But if you are presenting content on the web, you can defer parts of the synthesis algorithm to the browser, which can synthesize and present content by making calls to web services or other back-end data source, or by making a request to code running on the server to synthesize and present part of the page. We looked at this in [#chapter.active].
+        For static presentation, all synthesis happens before the material is presented. But if you are presenting content on the web, you can defer parts of the synthesis algorithm to the browser, which can synthesize and present content by making calls to web services or other back-end data source, or by making a request to code running on the server to synthesize and present part of the page. We will look at this in [#chapter.active].
     
     section: Combining algorithms
             
@@ -191,7 +196,7 @@ chapter:(#chapter.publishing) Publishing
         
     section: Architecture of a publishing tool chain
     
-        Overall the architecture of a publishing tool chain should be designed to facilitate the partitioning and distribution of complexity in the content system. Almost all of the structured writing algorithms we have talked about are executed at some point in the publishing process. (The exceptions are those that are concerned with aspects of {conformance} and {auditing}, which operate on the content store independent of any publishing events.)
+        Overall the architecture of a publishing tool chain should be designed to facilitate the partitioning and distribution of complexity in the content system. The structured writing algorithms we have looked at in this part are executed at some point in the publishing process. (The management algorithms that we will look at in [#part.management] are generally executed separately.)
         
         The partitioning of the system needs to make sure that information is passed from one partition to another (whether the task of that partition is executed by a person or an algorithm). This means that the execution of that partition needs to happen at the right time and place -- the time and place in which the information it needs is available, and before the time and place where the information it produces is needed. 
 

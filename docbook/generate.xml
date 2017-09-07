@@ -1,0 +1,199 @@
+<?xml version="1.0"?>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.generate"><db:title>Generated Content</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idm2117896476"><db:primary>generated content</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm2117896476x"><db:primary>concept</db:primary><db:secondary>generated content</db:secondary></db:indexterm><db:indexterm class="startofrange" significance="preferred" xml:id="idm2117898780"><db:primary>generating content</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm2117898780x"><db:primary>task</db:primary><db:secondary>generating content</db:secondary></db:indexterm>
+
+
+
+<db:para>I have mentioned at several times already that one of the advantages of the subject domain is that it allows you to generate different types of rhetoric from a base of subject domain data. Here I will look at the content generation algorithm in greater depth.</db:para>
+<db:para>There is nothing new about generating content. Word processors and desktop publishing programs can generate indexes and tables of contents, for instance, and the <db:indexterm><db:primary>content reuse algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>content reuse algorithm</db:secondary></db:indexterm>content reuse algorithms that we looked at in <db:xref linkend="chapter.reuse"/> are all forms of content generation because they combine smaller pieces of content or data to form larger units of content.</db:para>
+<db:section>
+<db:title>Categorization</db:title>
+<db:para>One of the key elements of top-down information architecture is <db:indexterm><db:primary>categorization</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>categorization</db:secondary></db:indexterm>categorization. An <db:indexterm><db:primary>information architect</db:primary></db:indexterm><db:indexterm><db:primary>role</db:primary><db:secondary>information architect</db:secondary></db:indexterm>information architect develops categories of content and develops an organizational schema (such as a table of contents) based on those categories. This may include levels of subcategories forming a hierarchical categorization scheme.</db:para>
+<db:para>Not all categorization is hierarchical, though. In some cases content can be classified on several independent axes, allowing for the development of what is called <db:indexterm><db:primary>faceted navigation</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>faceted navigation</db:secondary></db:indexterm>faceted navigation. The easiest place to see faceted navigation in action is on a used-car site where you can narrow down your selection using any set of criteria that matter to you, such as selecting blue convertibles or all-wheel drive vehicles with manual transmissions.</db:para>
+<db:para>Categorization of content require metadata to identify which category it belongs to. (Even if you just sort papers into piles, as soon as you put a label on each pile, you are adding metadata, and if you don’t add a label, you will soon forget which pile is which.) Categorization may involve the addition of new metadata or it may rely on existing metadata that is already attached to the content. This effectively means that your categories are expressed as query statements, and those queries do not have to operate on a single piece of metadata. They can create a category out of the conjunction of several pieces of metadata. For example, they can create a category of heart healthy recipes by looking at the salt, fat, and calorie metadata of a collection of recipes.</db:para>
+<db:para>For content in the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, therefore, the <db:indexterm><db:primary>metadata</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>metadata</db:secondary></db:indexterm>metadata required to assign a piece of content to a category may be inherent in its subject domain markup. It is the nature of the subject domain to describe the subject matter and any markup that describes the subject matter may already contain the fields that you need for categorization. This is one of the attractions of the subject domain: the markup can serve many purposes, which simplifies both markup design and content authoring and often means that you don’t need to create additional structures to support a new algorithm.</db:para>
+<db:para>Relying on the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain <db:indexterm><db:primary>metadata</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>metadata</db:secondary></db:indexterm>metadata already in the content, rather than creating a separate metadata record, can be a tremendous advantage, because it makes submission of content to a <db:indexterm><db:primary>repository</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>repository</db:secondary></db:indexterm>repository so much easier for authors. But in some cases it can also avoid the need for a costly <db:indexterm><db:primary>content management system</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>content management system</db:secondary></db:indexterm>content management system, since it allows the <db:indexterm><db:primary>publishing algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>publishing algorithm</db:secondary></db:indexterm>publishing algorithm to categorize content at build time without the need of a separate metadata store or a separate system to manage categorization. I will look more at the role of the content management system in <db:xref linkend="chapter.management-domain"/>.</db:para>
+</db:section>
+<db:section>
+<db:title>Tables of Contents</db:title>
+<db:para>If you are creating a top-down information architecture, your structured writing system need to be able to generate <db:indexterm><db:primary>tables of contents</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>tables of contents</db:secondary></db:indexterm>tables of contents just as a word processor or desktop publishing application does.</db:para>
+<db:para>Tables of contents can serve various purposes depending on the nature of the work. Some describe a linear reading order for a work, some provide a <db:indexterm><db:primary>classification</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>classification</db:secondary></db:indexterm>classification scheme for random access to the content, some are simply a list of chapters that does not necessarily imply an intended reading order.</db:para>
+<db:para>A <db:indexterm><db:primary>table of contents</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>table of contents</db:secondary></db:indexterm>table of contents may seem like a <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain structure, but it is really more of a <db:indexterm><db:primary>media domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media domain</db:secondary></db:indexterm>media domain structure, for two reasons. First, it contains specific links to specific resources at specific addresses, or specific page numbers in a paper or a virtual paper format such as <db:indexterm><db:primary>PDF</db:primary></db:indexterm><db:indexterm><db:primary>media</db:primary><db:secondary>PDF</db:secondary></db:indexterm>PDF. Secondly, it is virtually always factored out in <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain <db:indexterm><db:primary>markup languages</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>markup languages</db:secondary></db:indexterm>markup languages. Tables of contents are not written, they are generated.</db:para>
+<db:para>From an <db:indexterm><db:primary>information architecture algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>information architecture algorithm</db:secondary></db:indexterm>information architecture point of view, what matters is how they are generated. In <db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DocBook</db:secondary></db:indexterm><db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>DocBook</db:secondary></db:indexterm>DocBook, for instance, it is typical to write each chapter of a book in a separate <db:code>chapter</db:code> file and then pull them together into a book using a <db:code>book</db:code> file. The order of the table of contents is then determined by the order in which the chapters are listed in the <db:code>book</db:code> file. The TOC itself is generated by extracting chapter and section headings from the <db:code>chapter</db:code> files in the order they appear in the <db:code>book</db:code> file.</db:para>
+<db:para>In <db:indexterm><db:primary>DITA</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DITA</db:secondary></db:indexterm><db:indexterm><db:primary>DITA</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>DITA</db:secondary></db:indexterm>DITA, the normal process is to assemble a book using a <db:code>map</db:code> file. A map file may assemble a book out of <db:indexterm><db:primary>DITA</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DITA</db:secondary></db:indexterm><db:indexterm><db:primary>DITA</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>DITA</db:secondary></db:indexterm>DITA topics or other maps, and this may include assembling the chapters from topics as well. In the end, though, the <db:indexterm><db:primary>table of contents</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>table of contents</db:secondary></db:indexterm>table of contents is generated in the same way, by traversing the document assembled by the <db:code>map</db:code>.</db:para>
+<db:para>In both these cases, the order of the TOC is specified by hand by the person who creates the <db:code>book</db:code> or <db:code>map</db:code> file. But there are other ways to determine the order of content in a TOC. For instance, a reference work such as an API reference may be organized by listing each library in order by name, and each function in alphabetical order by name within its library, creating a table of content with two levels. There is no need to write a map or book file to create this table of contents. There is an algorithm for creating this table of contents. In fact, it is the algorithm stated in the first sentence of this paragraph, “listing each library in order by name, and each function in alphabetical order by name within its library”. Here is that algorithm expressed in pseudo code:</db:para>
+<db:programlisting language="pseudo">
+
+create toc
+    for each library sorted alphabetically
+        create toc-entry library name
+        for each function in library sorted alphabetically
+            create toc-entry function name
+</db:programlisting>
+<db:para><db:indexterm><db:primary>Tables of contents</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>Tables of contents</db:secondary></db:indexterm>Tables of contents serve different purposes. Some describe a curriculum, a designed reading order. Others are simply a means of navigation, a way to select one topic out of a collection of many. If your content is written in the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, the chances are that it already contains the structures on which such a classification could be based, and again the <db:indexterm><db:primary>table of contents</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>table of contents</db:secondary></db:indexterm>TOC can be generated based on the <db:indexterm><db:primary>metadata</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>metadata</db:secondary></db:indexterm>metadata already in the content.</db:para>
+<db:para>One advantage of this approach is that if a <db:indexterm><db:primary>table of contents</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>table of contents</db:secondary></db:indexterm>TOC is assembled based on <db:indexterm><db:primary>metadata</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>metadata</db:secondary></db:indexterm>metadata in the content, that means that when new content is added, it is automatically included in the TOC the next time output is generated. This simplifies the task of adding new content to a collection by avoiding the need to update multiple files or systems when a update occurs. This makes life easier for authors as they do not need to know how the TOC is constructed. They only have to create an individual piece of <db:indexterm><db:primary>conformance</db:primary></db:indexterm><db:indexterm><db:primary>process</db:primary><db:secondary>conformance</db:secondary></db:indexterm>conforming content and submit it to the right location. This also constitutes yet another example of the <db:indexterm><db:primary>avoiding duplication</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>avoiding duplication</db:secondary></db:indexterm>avoiding duplication, since the basis for the content’s inclusion at a particular point in the TOC is stored only in one place.</db:para>
+</db:section>
+<db:section>
+<db:title>Lists</db:title>
+<db:para>A major feature of a <db:indexterm><db:primary>bottom-up information architecture</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>bottom-up information architecture</db:secondary></db:indexterm>bottom-up information architecture is the <db:indexterm><db:primary>list</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>list</db:secondary></db:indexterm>list. Like <db:indexterm><db:primary>tables of contents</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>tables of contents</db:secondary></db:indexterm>tables of contents, lists are a catalog of resources. But while a TOC is a list of resources defined by their container (contents = things in a container) a list may have any principle of organization or inclusion.</db:para>
+<db:para>For instance, you might want to have a list of all the movies starring each actor in a collection of movie reviews. Such a list is not only a useful piece of information, they are also an important aid for navigating around a site. Maintaining such a list by hand would be laborious and error prone, especially with new movies being added to the collection all the time.</db:para>
+<db:para>If you have your movie reviews in a structured format that lists the actors in the movie in a format accessible to algorithms, like this:</db:para>
+<db:programlisting language="sam">
+
+movie: Rio Bravo
+    starring:: actor
+        John Wayne
+        Dean Martin    
+        Ricky Nelson    
+        Angie Dickinson
+        Walter Brennan
+</db:programlisting>
+<db:para>you can generate the filmographies for all your actors, like this:</db:para>
+<db:programlisting language="pseudo">
+
+create-filmographies
+    for each unique actor in movie/starring/actor 
+        create filmography named actor with link to actor
+        for each movie where starring/actor = actor
+            create entry named movie with link to movie
+</db:programlisting>
+<db:para>Tables of contents are a <db:indexterm><db:primary>top-down information architecture</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>top-down information architecture</db:secondary></db:indexterm>top-down information architecture device. You expect to find them at the top of the information set. List are a <db:indexterm><db:primary>bottom-up information architecture</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>bottom-up information architecture</db:secondary></db:indexterm>bottom-up information architecture device. You expect to find them as independent pages or as elements within a page. Thus if our collection includes the biographies of actors, and we want each biography to include the filmography, we can omit the filmography from the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain version of the biography and add it to the output in the <db:indexterm><db:primary>publishing algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>publishing algorithm</db:secondary></db:indexterm>publishing algorithm.</db:para>
+<db:programlisting language="pseudo">
+
+match actor-bio
+    create html
+        create h1 "Biography: " + actor-name
+        continue
+        create h2 "Filmography"
+        for each movie-review where starring/actor = actor-name
+            create li 
+                create a with attribute href 
+                 = address of movie-review
+                    output movie-name
+</db:programlisting>
+<db:para>Note the close relationship between rhetoric and navigation here. The generated filmography is both content and navigation, both part of the individual topic and part of the overall navigation scheme – and example of how information architecture unites rhetoric and navigation.</db:para>
+<db:para>It is also worth noting this kind of thing is a sophisticated example of the <db:indexterm><db:primary>reuse algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>reuse algorithm</db:secondary></db:indexterm>reuse algorithm. It takes a set of movies, each with a list of actors, and uses it to generate a list of movies for each actor, reusing existing information to create new content. This happens without any explicit reuse markup.</db:para>
+</db:section>
+<db:section>
+<db:title>Collections and selections</db:title>
+<db:para>One of the applications of <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain markup that I have already mentioned in the recipe example is that it can be used to select content for a collection. Thus if you capture calorie and prep time information in your recipe markup, you can use that information to assemble a cookbook with a title like, “Diet-Friendly Dishes You Can Make in 30 Minutes or Less”. If you store seasonal information in your markup, you can do “Diet-Friendly Christmas Treats” or “Summer Suppers in 20 Minutes”.</db:para>
+<db:para>One of the most important aspect of making these collections based on subject domain markup is that you did not have to think of them at the time the recipes were written. There is nothing that ties the recipes to these publications. The recipes simple record certain significant facts about the dishes that may matter to readers. An content strategist can then dream up all kinds of collections they would like to do, and because the recipes record significant truths about the dishes in an explicit form that is accessible to algorithms, chances are that you will be able to assemble the collection that the content strategist has dreamed up and get it right out to press while the market demand is hot.</db:para>
+<db:para>The subject domain is the gift that keeps on giving. You don’t have to have anticipated all of the uses you will put subject domain data to, and collecting it is relatively inexpensive since it is simply asking writers to enter information they already know in fields with concrete specific names that are easy to understand.</db:para>
+</db:section>
+<db:section>
+<db:title>Content queries</db:title>
+<db:para>If you know what subjects phrases in your content are referring to, you can use that information to form queries to pull in additional information from other sources. (This is really the flip side of <db:indexterm><db:primary>linking algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>linking algorithm</db:secondary></db:indexterm>linking based on <db:indexterm><db:primary>subject annotation</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>subject annotation</db:secondary></db:indexterm>subject annotation, using the same information to find information to pull in rather than to link to.)</db:para>
+<db:para>For instance, let’s say that you are writing about novels and you annotate mentions of novels in your text:</db:para>
+<db:programlisting language="xml">
+
+{War and Peace}(book "ISBN:1400079985") is a very long book.
+</db:programlisting>
+<db:para>Here the title is markup up as the title for a book and, to make things more precise, an ISBN number is provided as well. An ISBN number is the key to a large amount of data about a published book. If we have the ISBN number, we can look up all sorts of other information. For instance, we can use the ISBN to look up publication details using a web service like ISBNdb (http://isbndb.com).</db:para>
+<db:para>Most web services return information in XML, which is perfect for us, since our content is in XML. A hypothetical ISBN web service might return an XML document that looked like this (this is not what ISBNdb returns, just a simplified example):</db:para>
+<db:programlisting language="xml">
+
+&lt;book&gt;
+    &lt;isbn&gt;1400079985&lt;/isbn&gt;
+    &lt;title&gt;War and Peace&lt;/title&gt;
+    &lt;author&gt;Leo Tolstoy&lt;/author&gt;
+    &lt;publisher&gt;Vintage&lt;/publisher&gt;
+    &lt;publication-year&gt;2008&lt;/publication-year&gt;
+    &lt;page-count&gt;1296&lt;/page-count&gt;
+    …
+&lt;/book&gt;
+</db:programlisting>
+<db:para>We could then pull pieces from that XML document to add to our own content, thus allowing us to produce output like this:</db:para>
+<db:blockquote>
+<db:para>War and Peace (Leo Tolstoy, Vintage, 2008, 1296 pages) is a very long book.</db:para>
+</db:blockquote>
+<db:para>The algorithm to do this looks something like this:</db:para>
+<db:programlisting language="pseudo">
+
+match p/title
+    $isbn = @specifically 
+
+    $book-info = get 'http://example.com/isbn/lookup?' + $isbn
+
+    create i
+        continue
+        output " ("
+        output $book-info/book/author
+        output ", "
+        output $book-info/book/publisher"/&gt;
+        output ", " 
+        output $book-info/book/publication-year"/&gt;
+        output ", "
+        output $book-info/book/page-count"/&gt;
+        output " pages"
+        output )
+</db:programlisting>
+<db:para>This basic technique opens all kinds of doors. The power of semantic markup to enable the merging of information from different sources is enormous. Here are just a few of the tricks we could pull using information retrieved using the ISBN number:</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>Pull in a picture of the book cover.</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Create a link to an article on War and Peace on your website.</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>Create a link to an online bookstore, where the the reader could buy the book. If you  belonged to an affiliate program for an online bookstore, you could pick up some cash every time a reader followed your link and bought a book.</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>There are also some major process efficiencies to be realized by capturing this kind of metadata in your XML content. If you can use metadata keys to pull information from external sources, authors don’t have to look up all that information themselves when they write. Authors don’t have to decide which of the book details are going to appear in the final output. That decision is made by editing the XSLT stylesheet, and it can be changed, for all your existing content, simply by changing the stylesheet.</db:para>
+<db:para>Having writers enter the ISBN number in the content makes writing the algorithm straightforward, and sometimes it is appropriate because you are referring to a particular edition of a book and the ISBN number is the most reliable identifier of a specific edition. But in many case it is actually too specific, and it complicates life for the author to have to look up an ISBN when all they really want to refer to is the novel itself, regardless of which edition it is. This distinction can be important. There are many other editions of War and Peace, in many languages. War and Peace is a very long book in all those editions and all those languages. The paragraph is not referring specifically to the the Vintage Edition of 2008. It is referring to War and Peace as a novel generally.</db:para>
+<db:programlisting language="sam">
+
+{War and Peace}(novel) is a very long book.
+</db:programlisting>
+<db:para>Here, we have replaced the <db:code>book</db:code> tag with the more specific <db:code>novel</db:code> annotation. If you are concerned that you might have references to other novels named <db:emphasis>War and Peace</db:emphasis> by other writers, you could make it more specific:</db:para>
+<db:programlisting language="sam">
+
+{War and Peace}(novel (Leo Tolstoy)) is a very long book.
+</db:programlisting>
+<db:para>This markup is obviously easier for writers to create. It only asks them for the things they already know, so they won’t have to stop to look anything up. That is an important part of <db:indexterm><db:primary>functional lucidity</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>functional lucidity</db:secondary></db:indexterm>functional lucidity</db:para>
+<db:para>But without an ISBN number, can we still get the book data we want? We still can, but we have to use a different query to extract it. Our original code did the lookup like this:</db:para>
+<db:programlisting language="pseudo">
+
+match p/novel
+
+    $title = #content
+    $author = @namespace 
+
+    $book-info = get 'http://example.com/isbn/lookup?category=novel&amp;title=' + $title + '&amp;author=' + $author
+</db:programlisting>
+<db:para>The only thing different about the results we will get from this query is that it may return records for more than one book (actually, there will certainly be, since there are many editions of War and Peace in print). So the code that adds the book info to the content will need to pick one of the alternatives based on some relevant pieces of publication data (such as the most recent publication date).</db:para>
+<db:para>I could have chosen an example that did not have this kind of ambiguity in its data to illustrate this type of content generation, but the fact is that you will often come across this kind of issue in the real world. This is one of those issues that forces you to make decision about how to correctly partition complexity in your system. Here we have a choice between an approach to markup that makes for a simple algorithm that is easy to write, but which requires effort and research from the writer, vs an approach that requires more thought and effort to write the algorithm, but provides greater functional lucidity for the writers. Stated like this it seems obvious which choice you should make, but in practice these decisions are often made by the people developing the algorithms, and they often choose to make their lives easier at the expense of the writers. It may seem like a detail, but this is an area in which the correct partitioning and distribution is at stake, and such decisions should not be left to one partition to make. They require input from all sides and the attention of the project owners.</db:para>
+</db:section>
+<db:section>
+<db:title>Personalized content</db:title>
+<db:para>Another key feature of modern web architecture is personalized content, which means content that is generated in response either to what the site already knows about you (from your account information, or a transaction token such as a <db:indexterm><db:primary>cookie</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>cookie</db:secondary></db:indexterm>cookie, or the  selections or entries that you make on the page). For example, when you log into Amazon, the first page you see is crafted for you based on everything Amazon knows about your browsing and purchasing history. As you make selections, such as adding an item to your shopping cart or wish list, that information is used to shape the next page you see.</db:para>
+<db:para>If you browse a used car site like Autotrader.com, you can select those features of a car that you are interested in (red convertibles with manual transmission under $20000, for instance) and the next page will be built based on that input.</db:para>
+<db:para>The ability of a site to personalize pages depends on its ability to identify content that is <db:indexterm><db:primary>relevance</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>relevance</db:secondary></db:indexterm>relevant, based on everything it knows about the reader, and to assemble those pieces to form a page. For this to work, the content has to be easy to identify unambiguously, and it needs to be highly <db:indexterm><db:primary>composability</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>composability</db:secondary></db:indexterm>composable.</db:para>
+<db:para>As we have seen, these properties are maximized when content is stored in the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, both because the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain makes the relevant <db:indexterm><db:primary>metadata</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>metadata</db:secondary></db:indexterm>metadata available, and because working in the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain helps authors produce more consistent content that works better with these algorithms.</db:para>
+<db:para>The consistency of the content is most important in any personalized content application. There is no possibility for an author or editor to inspect the output of a personalized content publication before the reader sees it, since it is assembled in real time based on the unique things we know about each reader. This requires total confidence that:</db:para>
+<db:itemizedlist>
+<db:listitem>
+<db:para>the content <db:indexterm><db:primary>conformance</db:primary></db:indexterm><db:indexterm><db:primary>process</db:primary><db:secondary>conformance</db:secondary></db:indexterm>conforms to its <db:indexterm><db:primary>constraints</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>constraints</db:secondary></db:indexterm>constraints</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>those constraints are completely and correctly expressed by its <db:indexterm><db:primary>markup</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>markup</db:secondary></db:indexterm>markup</db:para>
+</db:listitem>
+<db:listitem>
+<db:para>the algorithm correctly processes and delivers the content</db:para>
+</db:listitem>
+</db:itemizedlist>
+<db:para>All three of these requirements depend on the soundness and simplicity of the <db:indexterm><db:primary>markup</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>markup</db:secondary></db:indexterm>markup design. They require precise content structures with few alternatives, clear guidance for writers, and good <db:indexterm><db:primary>audit</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>audit</db:secondary></db:indexterm>audit capability. Without these properties, content and its markup will be inconsistent and reliable algorithms will be hard to write and test because of the wide variety of markup combination they may encounter.</db:para>
+<db:para>Most personalized content applications model their content in relational database tables for these very reasons. However, with the correct markup design, almost certainly in the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, there is no reason why you cannot use markup-based tools alone or in concert with database tools and solutions to achieve the same kind of thing.</db:para>
+</db:section>
+<db:section>
+<db:title>Audit reports</db:title>
+<db:para>Finally, we can use content generation to generate things other than content to be published. You can use it to generate reports about your content itself which we can use to help us audit and manage your collection. We will look at this in more detail in <db:xref linkend="chapter.audit"/>, but it is worth looking at the basis here because it is just another application of the capacity for content generation that we gain when we move content into the subject domain.</db:para>
+<db:para>For instance, let us say that your content strategist establishes an editorial calendar that says that you are going to put out a Christmas-themed Diet Cookbook every October as people are starting to think about the Christmas preparations. Do you have enough Christmas seasonal recipes under 300 calories? An algorithm can quickly go through your subject-domain recipes and create a list of all the recipes that meet that criteria.</db:para>
+<db:para>Or suppose that your book-related site wants to know all the books that have been mentioned in articles this year so that you can make sure you have reviews (and shopping links) for each of those books. An algorithm can go through your content collection looking for the <db:code>book</db:code> or <db:code>novel</db:code> annotations in your articles, compile a list, sort it, eliminate duplicates, and compare it to the list of reviews you currently have, to give you a list of every book that is mentioned by not reviewed.</db:para>
+</db:section>
+<db:section>
+<db:title>Reuse vs Generation</db:title>
+<db:para>As you have probably noticed, the methods used to generate content have a lot in common with those used to reuse content. That is because content reuse is just a form of content generation. Content reuse means generating more than one form or output content from the same collection of output content. Technically, the mechanisms and algorithms are the same; the differences have more to do with how you think about the problem.</db:para>
+<db:para>The biggest difference is that when you think in terms of content generation, you are automatically thinking in <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain terms. Content generation starts by treating content as data, and then generating content from that data. When people think of <db:indexterm><db:primary>content reuse algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>content reuse algorithm</db:secondary></db:indexterm>Content reuse, however, their thoughts often go straight to the <db:indexterm><db:primary>management domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>management domain</db:secondary></db:indexterm>management domain, to conditional content and pulling in content by reference. There can also be a tendency in content reuse to think of the first use as having a kind of primacy over the secondary uses. The first instance is not created as data with many potential uses, but as content designed for a specific use, which is then serendipitously reused when another potential use for the content is discovered.</db:para>
+<db:para>As I noted in <db:xref linkend="chapter.reuse"/>, there are certain kinds of reuse that are only feasible using <db:indexterm><db:primary>management domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>management domain</db:secondary></db:indexterm>management domain constructs, but a great deal can be accomplished using the subject domain approach. Creating conditional markup in your recipe to provide a different beverage match for <db:emphasis>Wine Weenie</db:emphasis> and <db:emphasis>The Teetotaler's Trumpet</db:emphasis> is a case of <db:indexterm><db:primary>reuse</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>reuse</db:secondary></db:indexterm>reuse thinking. Creating structure for alcoholic and non-alcoholic beverage matches to achieve the same goal (and potentially many more) is a case of content generation thinking. In many cases you will create a far more valuable content resource that is is far easier to write for and is far easier to maintain by thinking of your content set as a data source from which many kinds of content can be generated, rather than as a collection of reusable content components.</db:para>
+<db:indexterm class="endofrange" startref="idm2117896476"/><db:indexterm class="endofrange" startref="idm2117898780"/><db:indexterm class="endofrange" startref="idm2117896476x"/><db:indexterm class="endofrange" startref="idm2117898780x"/></db:section>
+</db:chapter>

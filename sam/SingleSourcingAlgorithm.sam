@@ -4,11 +4,11 @@ chapter:(#chapter.single-sourcing) Single Sourcing
     index:: type, term
         concept, single sourcing
 
-    The need to publish the same document in more than one medium -- for example, print and Web -- is a common source of complexity. The term _single sourcing_ is used to describe a variety of different ways to address this need, all of which involve using a single body of content to create output in more than one medium. I look at variations on this theme in this and subsequent chapters.
+    The need to publish the same document in more than one medium -- for example, print and Web -- is a common process problem and source of complexity. You might not suspect that it is also a rhetoric problem, but as I will show, it actually a significant and difficult rhetoric problem as well. The term _single sourcing_ is used to describe a variety of different ways to address this need, all of which involve using a single body of content to create output in more than one medium.
 
     Single sourcing adds complexity to the job of separating content from formatting because you are now separating content from not one but two or more sets of formatting. In other words, you are not simply separating content from formatting, you are separating a set of decisions about formatting from your content so you can make different decisions for each medium. If you don't get the partitioning correct, problems will show up when you try to apply two different sets of formatting to the same content. 
     
-    Many organizations have unhandled complexity in this area -- complexity that falls through to readers. Often, their authoring techniques do not allow writers to sufficiently separate media-specific formatting from content. As a result, formatting for one medium gets applied to another medium, which means the content in that medium does not work as well as it could. By improving how you separate content from formatting, you can significantly reduce the amount of complexity that goes unhandled, resulting in a better experience for your readers.  
+    Many organizations have unhandled complexity in this area -- complexity that can result in rhetorical problems. Often, their authoring techniques do not allow writers to sufficiently separate media-specific formatting from content. As a result, formatting for one medium gets applied to another medium, which means the content in that medium does not work as well as it could. By improving how you separate content from formatting, you can significantly reduce the amount of complexity that goes unhandled, resulting in a better experience for your readers.  
     
     section: Basic single sourcing 
     
@@ -158,14 +158,16 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
     section: Differential single sourcing
     
-        Basic {single sourcing} outputs the same document presentation to different media. However, each medium is different, and what works well in one medium does not always work as well in another. For example, online media generally support {hypertext}(concept) links, while paper does not. Suppose you have a piece of content that includes a link:
+        Basic {single sourcing} outputs the same document presentation to different media. However, each medium is different, and what works well in one medium does not always work as well in another. Thus the rhetoric that is appropriate to one media may not be appropriate to another, This is what I meant when I said at the beginning that single sourcing is a rhetoric problem as well as a process problem. 
+
+        For example, online media generally support {hypertext}(concept) links, while paper does not. Suppose you have a piece of content that includes a link:
         
         ```
             In Rio Bravo, {the Duke}(link "http://JohnWayne.com")
             plays an ex-Union colonel out for revenge.
         
         
-        In SAM syntax, the link markup (`link "http://JohnWayne.com`) specifies the address to link to. In the algorithm examples below, I refer to this markup as the _specifically_ attribute using the notation `@specifically`.
+        In SAM syntax, the link markup (`link "http://JohnWayne.com"`) specifies the address to link to. In the algorithm examples below, I refer to this markup as the _specifically_ attribute using the notation `@specifically`.
         
         In HTML, you output this as a link using the HTML `a` element, so the algorithm looks like [*fig.ssa-specifically-1].
 
@@ -225,11 +227,11 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         """
             The Duke (John Wayne) plays an ex-Union colonel.
 
-        This provides readers with less information, in the sense that it does not give them access to all the information on JohnWayne.com, but it does a better job of disambiguation and in a more paper-like way. The loss of the reference to JohnWayne.com is probably not an issue here. Following that link by typing it into a browser is a lot more work than simply clicking on a Web link. Someone who wants more information on John Wayne is far more likely to type "John Wayne" into Google than type "JohnWayne.com" into the browser address bar.   
+        This provides readers with less information, in the sense that it does not give them access to all the information on JohnWayne.com, but it does a better job of disambiguation and in a more paper-like way. It is a rhetoric appropriate to the media. The loss of the reference to JohnWayne.com is probably not an issue here. Following that link by typing it into a browser is a lot more work than simply clicking on a Web link. Someone who wants more information on John Wayne is far more likely to type "John Wayne" into Google than type "JohnWayne.com" into the browser address bar.   
         
         As written, the source content provides no easy way to produce this preferred form for paper. The content is in the {document domain}(concept), which specifies the presentation of the content. Therefore, it is not a neutral format between media that require different forms of presentation. The choice to specify a link directly in the markup gives it a strong bias towards the Web and online media rather than paper. A {document-domain} approach that favored paper would similarly lead to a poorer online presentation by omitting the link. 
         
-        You need a _differential_ approach to single sourcing, one that allows you to differ not only the formatting but the presentation of the content for different media.
+        Because different media require a different rhetoric, you need a _differential_ approach to single sourcing, one that allows you to differ not only the formatting but the presentation of the content for different media.
         
         One way to accomplish differential single sourcing is to record the content in the {subject domain}(concept), thus removing the prejudice of the document-domain presentation for one class of media or another. Here is how this markup might look:
         
@@ -270,7 +272,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         And this is more than a layout issue. Sometimes the things that paper does in a static way should be done dynamically in online media. For example, airline and train schedules have traditionally been printed as timetables on paper, but you rarely see them presented that way online. Rather, you see an interactive travel planner that lets you choose your starting point, destination, and desired travel times and then presents you with the best schedule, including when and where to make connections. If your single source is a timetable designed for print and PDF, you can't produce the kind of online presentation of your schedule that people expect, and that can have a direct impact on your business.
         
-        To single source schedule information for both paper and online media, you can't maintain that content in a document-domain table structure. You need to maintain it in a timetable database structure (which is in the {subject domain}, even though it looks like a database, not a document). 
+        To single-source schedule information for both paper and online media, you can't maintain that content in a document-domain table structure. You need to maintain it in a timetable database structure (which is in the {subject domain}, even though it looks like a database, not a document). 
         
         An algorithm can read such a database to generate a document-domain table for print publication. For the Web, however, you can create a web application that queries the same database dynamically to calculate routes and schedules for individual travelers. 
         
@@ -322,7 +324,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
      
     section: Primary and secondary media
         
-        While differential single sourcing can help you output documents that work well in multiple media, there are limits to how far this approach can take you. 
+        While differential single sourcing can help you output documents with the appropriate rhetoric in multiple media, there are limits to how far this approach can take you. 
         
         Books are a linear medium in which one chapter follows another in order. The Web is a {hypertext} medium in which every page is page one. Readers arrive at a page via search, and they navigate by following hypertext links. The linear and hypertext approaches are fundamentally different ways of writing that invite fundamentally different ways of navigating and using information.[*eppo] Even moving content to the {subject domain} as much as possible does not entirely factor out these fundamental differences in approach. 
 
@@ -335,7 +337,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         Often, the tools a group uses implicitly determine the primary medium. This usually means that the primary medium is paper, and paper often continues to be primary even after the organization stops producing paper, and their readers have moved to online formats. 
         
-        Some organizations think they should not switch to tools that are designed primarily for online content until they have entirely abandoned paper and paper-like formats such as PDF. This certainly does not need to be the case. It is perfectly possible to switch to online-primary tools and still produce linear media as a secondary output format. 
+        Some organizations think they should not switch to tools that are designed primarily for online content until they have entirely abandoned paper and paper-like formats such as PDF. But once online becomes your primary media, your rhetoric should change to a rhetoric appropriate to online media (potentially a very large change, as discussed in [#chapter.architecture]). Thus it is appropriate to switch to a rhetoric and tool set that is optimized for online but that can still produce linear media as a secondary output format. 
         
         Changing your information design practices from linear, paper-based designs to {hypertext} designs is not trivial, but such designs better suit the way many people use and access content today. I discuss these design differences in depth in my book, {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}(citetitle). Don't expect single sourcing, by itself, to successfully turn document-oriented design into effective hypertext. It is usually more effective to adopt an {Every Page is Page One}(concept) approach to information design and use structured writing and single-sourcing techniques as a best-effort method to create linear media for those of your readers who still need paper or paper-like formats -- or for those documents where linear organization still makes sense. 
 

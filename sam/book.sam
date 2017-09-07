@@ -1,6 +1,6 @@
 book:
     $title=Structured Writing 
-    $subtitle=Partitioning the Complexity of Content Production
+    $subtitle=Process and Rhetoric
     $author=Mark Baker 
     title: >($title)
     subtitle: >($subtitle)
@@ -8,28 +8,31 @@ book:
 
     >>>(xml info.xml)
     
-    >>>(sam preface.sam)
-    >>>(sam partitioning.sam)
+    >>>(sam rehtoric_and_process.sam)
 
-    part:(#part.domains) Domains
+
+    part:(#part.domains) Structuring Content
         >>>(sam domains.sam)
         >>>(sam threedomains.sam)  
         >>>(sam MediaDomain.sam)
         >>>(sam DocumentDomain.sam)
         >>>(sam subjectDomain.sam)
         >>>(sam ManagementDomain.sam)
-            
+
+    part:(#part.rhetoric) Process, Rhetoric, and Structure 
+        >>>(sam rhetoric.sam)
+        >>>(sam partitioning.sam)        
+        >>>(sam rhetorical-structure.sam)
+        >>>(sam architecture.sam)
+        >>>(sam authoring.sam)         
+
     part:(#part.algorithms) Algorithms
         >>>(sam algorithms.sam)
-        #>>>(sam algorithms-intro.sam)
-        >>>(sam quality.sam)
-        >>>(sam authoring.sam)         
         >>>(sam separatecontentfromformatting.sam)
         >>>(sam processing.sam)
         >>>(sam SingleSourcingAlgorithm.sam)
         >>>(sam reuseAlgorithm.sam)
-        >>>(sam composition.sam)
-        >>>(sam normalization.sam)
+        >>>(sam generate.sam)
         >>>(sam extract.sam)
         >>>(sam merge.sam)
         >>>(sam modeling.sam)
@@ -39,7 +42,6 @@ book:
         
     part:(#part.structures) Structures
         >>>(sam structures.sam)
-        >>>(sam rhetorical-structure.sam)  
         >>>(sam mechanical-structure.sam) 
         >>>(sam structures_chunks.sam)
         >>>(sam wide.sam)
@@ -47,19 +49,9 @@ book:
         >>>(sam metadata.sam)
         >>>(sam taxonomy.sam)
         >>>(sam relevance.sam)    
+        >>>(sam composition.sam)
         >>>(sam conformance.sam)   
 
-    part:(#part.process) Process
-        >>>(sam process.sam)
-        >>>(sam architecture.sam)
-        >>>(sam content-management.sam)
-        >>>(sam collaboration.sam)
-        >>>(sam audit.sam)
-        >>>(sam change.sam)
-        >>>(sam repeatability.sam)
-        >>>(sam timeliness.sam)
-        >>>(sam translation.sam)                                                                               
-        
     part:(#part.languages) Languages
         >>>(sam languages.sam)
         >>>(sam markup.sam)
@@ -69,6 +61,17 @@ book:
         >>>(sam extensible.sam)
         >>>(sam constraints.sam)
             
+    part:(#part.management) Management
+        >>>(sam process.sam)
+        >>>(sam content-management.sam)
+        >>>(sam collaboration.sam)
+        >>>(sam normalization.sam)
+        >>>(sam audit.sam)
+        >>>(sam change.sam)
+        >>>(sam repeatability.sam)
+        >>>(sam timeliness.sam)
+        >>>(sam translation.sam)                                
+        
     part:(#part.design) Design
         >>>(sam design.sam)
     

@@ -21,7 +21,10 @@ chapter:(#chapter.lightweight) Lightweight Languages
     
     section: Markdown
     
-        The most prominent of the lightweight languages, and arguably the lightest-weight, is Markdown. Invented in 2004 by John Gruber as a way to quickly write simple web pages using syntax similar to that of an text-format email, it has spread to all kind of systems and now exists is multiple variants that have been adapted for different purposes. I have used many examples of MarkDown in this book. Here is one of them:
+        index::type, term
+            language, Markdown
+    
+        The most prominent of the lightweight languages, and arguably the lightest-weight, is Markdown. Invented in 2004 by John Gruber as a way to quickly write simple web pages using syntax similar to that of an text-format email, it has spread to all kind of systems and now exists is multiple variants that have been adapted for different purposes. I have used several examples of MarkDown in this book. Here is one of them:
 
         ```(markdown)
             Wayne's best yet
@@ -32,50 +35,62 @@ chapter:(#chapter.lightweight) Lightweight Languages
             in _Rio Bravo_.
 
 
-        "Adapted for different purposes" mostly means that people have created versions with specific syntax and semantics in addition to those of Gruber's first version. For instance, the code sharing site GitHub has adopted "Git Hub flavored markdown" as the standard format for user-supplied information on the site, such as project descriptions and issues, and has added syntax specific to tracking issue numbers and code commits for projects, allowing the automatic generation of links between commits and the issues that relate to them. For example:
+        "Adapted for different purposes" mostly means that people have created versions with specific syntax and semantics in addition to those of Gruber's first version. For instance, the code sharing site {GitHub} has adopted "{Git Hub flavored Markdown}" as the standard format for user-supplied information on the site, such as project descriptions and issues, and has added syntax specific to tracking issue numbers and code commits for projects, allowing the automatic generation of links between commits and the issues that relate to them. For example:
 
         ```(github_markdown)
-            Issue #135 was fixed in commit 8e8c6a0b4c9c41bd72fab5fd53e3d967e9688110.
+            Issue #135 was fixed in commit 
+            8e8c6a0b4c9c41bd72fab5fd53e3d967e9688110.
 
 
         Markdown is a simple {document-domain} language. While its semantics are essentially a subset of HTML, it is more squarely in the document domain than HTML since it lacks any ability to specify formatting or even to create tables (though various MarkDown flavors have added support for tables).  
 
-        One of the recurring patterns of technology development, and certainly markup language development, is that when some simple format becomes popular because of its simplicity, people start to add "just one more thing" to it, with the result that it either becomes more complex (and thus less attractive) or more fragmented (and thus harder to build a tool chain for). Markdown is definitely going the route of fragmentation at the moment (though a standardization effort, in the form of CommonMark is also under way). There is even a project to add semantic annotation to MarkDown as part of the {Lightweight DITA}(system) project.
+        One of the recurring patterns of technology development, and certainly markup language development, is that when some simple format becomes popular because of its simplicity, people start to add "just one more thing" to it, with the result that it either becomes more complex (and thus less attractive) or more fragmented (and thus harder to build a tool chain for). Markdown is definitely going the route of fragmentation at the moment (though a standardization effort, in the form of {CommonMark} is also under way). There is even a project to add semantic annotation to MarkDown as part of the {Lightweight DITA} project.
         
-        None of this is a reason not to use MarkDown where its structures and syntax make it an appropriate source. MarkDown provides useful constraints on the basic formatting of a web page both by factoring out direct formatting features and by providing a very limited set of document domain features. These constraints help keep all contributors to a site from indulging in extravagant non-standard formatting or overly elaborate text structures. It successfully partitions basic Web formatting, though not much else. 
+        None of this is a reason not to use MarkDown where its structures and syntax make it an appropriate source. MarkDown provides useful constraints on the basic formatting of a web page both by factoring out direct formatting features and by providing a very limited set of {document domain} features. These constraints help keep all contributors to a site from indulging in extravagant non-standard formatting or overly elaborate text structures. It successfully partitions basic Web formatting, though not much else. 
         
-        Markdown is also used in conjunction with {static site generators}(concept) such as {Jekyll}(tool) which use Markdown for basic text structures in concert with templating languages like {Liquid}(language) (essentially a set of management domain structures, yielding a result that is comparable to a document/management domain hybrid in its capabilities, though not in its style). Tom Johnson provides a side by side comparison of DITA and Jekyll in a series of posts on his blog beginning with {http://idratherbewriting.com/2015/03/23/new-series-jekyll-versus-dita/}(url).  
+        Markdown is also used in conjunction with {static site generators}(concept) such as {Jekyll}(tool) which use Markdown for basic text structures in concert with templating languages like {Liquid}(language) (essentially a set of management domain structures, yielding a result that is comparable to a document/management domain hybrid in its capabilities, though not in its style). Tom Johnson provides a side by side comparison of {DITA} and {Jekyll} in a series of posts on his blog beginning with {http://idratherbewriting.com/2015/03/23/new-series-jekyll-versus-dita/}(url).  
         
-        Markdown does not provide any kind of subject domain structures or constraints at all. This may be a welcome feature when comparing it with more complex document domain languages, many of which do include some subject domain structures which can be confusing to some writers, or which writers may abuse to achieve formatting effects. 
+        Markdown does not provide any kind of {subject domain} structures or constraints at all. This may be a welcome feature when comparing it with more complex {document domain} languages, many of which do include some subject domain structures which can be confusing to some writers, or which writers may abuse to achieve formatting effects. 
         
-        The inspiration for its syntax, text-format emails, has faded to obscurity, so it is not clear that everyone automatically knows how to write Markdown, as was the original design intent, but a lot of it remains obvious and intuitive, meaning that, within it limits, Markdown has good functional lucidity. It works well if you don't need any of the stuff it partitions away.
+        The inspiration for its syntax, text-format emails, has faded to obscurity, so it is not clear that everyone automatically knows how to write Markdown, as was the original design intent, but a lot of it remains obvious and intuitive, meaning that, within it limits, Markdown has good functional lucidity. It works well if you don't need any of the stuff it partitions by omission.
         
     section: Wiki markup
     
-        Another popular lightweight format is Wiki markup, introduced by Ward Cunningham in 1995 as the writing format for WikiWikiWeb, the first Wiki.[https://en.wikipedia.org/wiki/WikiWikiWeb] Wiki markup is similar to Markdown in many respects (most lightweight languages share the same basic syntax conventions, based on the imitation of formatted document features in plain text documents). What makes Wiki markup distinct is how it is tied into the operation of a Wiki. One of its most notable feature is how linking is handled. In the original WikiWikiWeb markup, and word with internal capitals was considered a "WikiWord" and instantly became a link to a page with that WikiWord as the title. Such a page was created automatically if it did not already exist. This was an extremely simple implementation of a {linking algorithm} based on annotation rather than the naming of resources. 
+        index:: type, term
+            language, Wiki markup
+            tool, Wiki
+            tool, WikiWikiWed
+    
+        Another popular lightweight format is {Wiki markup}, introduced by {Ward Cunningham}(person) in 1995 as the writing format for {WikiWikiWeb}(tool), the first {Wiki}(tool).[https://en.wikipedia.org/wiki/WikiWikiWeb] Wiki markup is similar to Markdown in many respects (most lightweight languages share the same basic syntax conventions, based on the imitation of formatted document features in plain text documents). What makes Wiki markup distinct is how it is tied into the operation of a Wiki. One of its most notable feature is how {linking} is handled. In the original WikiWikiWeb markup, any word with internal capitals was considered a "WikiWord" and instantly became a link to a page with that WikiWord as the title. Such a page was created automatically if it did not already exist. This was an extremely simple implementation of a {linking algorithm} based on annotation rather than the naming of resources. 
 
         Different wikis have differences in the markup they support. Here is a small example of {MediaWiki}(tool) markup. ({MediaWiki}) is the system that runs {Wikipedia}(website "wikipedia.org")):
 
         ```(mediawiki)
-            "Take some more [[tea]]," the March Hare said to Alice, very earnestly.
+            "Take some more [[tea]]," the March Hare said 
+            to Alice, very earnestly.
 
-            "I've had '''nothing''' yet," Alice replied in an offended tone, "so I can't take more."
+            "I've had '''nothing''' yet," Alice replied in 
+            an offended tone, "so I can't take more."
 
-            "You mean you can't take ''less''?" said the Hatter. "It's very easy to take ''more'' than nothing."
+            "You mean you can't take ''less''?" said the Hatter. 
+            "It's very easy to take ''more'' than nothing."
 
         This sample is from the {Wikipedia} {article on Wikis}[https://en.wikipedia.org/wiki/Wiki#Editing]. You can find the explanation there.
         
-        A wiki is a type of simple {content management system}(tool) which allows people to create and edit pages directly from a web browser. A wiki, essentially, is a CMS which partitions and distributes the problem of web content management out to individual contributors, allowing anyone to edit and improve a site. Wikipedia is by far the largest and most well known Wiki. Wiki's are a significant example of a {bottom-up information architecture}. Anyone can add a page and that page is integrated into the overall collection by Wiki word style linking and by including itself in categories (conventionally, by naming them on the page).
+        A wiki is a type of simple {content management system} which allows people to create and edit pages directly from a web browser. A wiki, essentially, is a CMS which partitions and distributes the problem of web content management out to individual contributors, allowing anyone to edit and improve a site. {Wikipedia} is by far the largest and most well known Wiki. Wiki's are a significant example of a {bottom-up information architecture}. Anyone can add a page and that page is integrated into the overall collection by WikiWord style linking and by including itself in categories (conventionally, by naming them on the page).
         
         Cunningham described WikiWikiWeb as "The simplest online database that could possibly work."[http://www.wiki.org/wiki.cgi?WhatIsWiki] Like Markdown, its success has led to additional features, fragmentation, and growing complexity. Some commercial wikis are now complex content management systems. Indeed, it is somewhat difficult today to define the boundaries between Wikis, Blog platforms, and conventional CMSs. 
         
-        If Wikis have a defining characteristic today it is probably the bottom-up architecture rather than the original novelty of in-browser editing which is now found across many different kinds of CMS. Cunningham designed Wikis to be collaborative platforms -- places where people could collaborate with people they did not even know to create something new without the requirement for central direction or control. The idea was not only architecturally bottom-up but editorially bottom-up. Most Wiki products today, however, include features for exercising a degree of central control. Question and answer sites like Stack Exchange with their distributed and democratic control systems may be closer today to Cunningham's idea of a democratic creation space. 
+        If Wikis have a defining characteristic today it is probably the {bottom-up architecture} rather than the original novelty of in-browser editing which is now found across many different kinds of CMS. Cunningham designed Wikis to be collaborative platforms -- places where people could {collaborate} with people they did not even know to create something new without the requirement for central direction or control. The idea was not only architecturally bottom-up but editorially bottom-up. Most wiki products today, however, include features for exercising a degree of central control. {Question and answer sites}(concept) like {Stack Exchange}(site) with their distributed and democratic control systems may be closer today to Cunningham's idea of a democratic creation space. 
         
         What Wikis illustrate for structured writing is that very simple markup innovations like the WikiWord can have revolutionary effects on how content is created and organized. Most Wikis today use words between double square brackets for WikiWords, rather than internal capitals, but the principle is the same. You can link to a thing merely by naming it. 
         
-        Wiki words are also a case of {subject domain} annotation. Marking a phrase as a WikiWord says, "this is a significant subject". It does not provide type information like the subject domain annotation examples shown in this book, but merely denoting a phrase as significant says that it names some subject of importance that deserves a page of its own. This illustrates the point about bottom-up information architectures, that structured writing, even in very simple form, can create texts that are capable of self-organization, that can be assembled into meaningful collections without the imposition of any external structures. However, the wiki process leaves much of the complexity of content creation and management unhandled. The slack has to be taken up by human effort, which has worked well in the case of Wikipedia's army of volunteer contributors and editor, but is harder to reproduce on a corporate scale. 
+        Wiki words are also a case of {subject domain} annotation. Marking a phrase as a WikiWord says, "this is a significant subject". It does not provide type information like the subject  annotation examples shown in this book, but merely denoting a phrase as significant says that it names some subject of importance that deserves a page of its own. This illustrates the point about bottom-up information architectures, that structured writing, even in very simple form, can create texts that are capable of self-organization, that can be assembled into meaningful collections without the imposition of any external structures. However, the wiki process leaves much of the complexity of content creation and management unhandled. The slack has to be taken up by human effort, which has worked well in the case of {Wikipedia}'s army of volunteer contributors and editor, but is harder to reproduce on a corporate scale. 
     
     section: reStructuredText
+    
+        index:: type, term
+            language, reStructuredText
     
         {reStrucutredText} is a lightweight hybrid markup language most often associated with the {Sphinx} documentation framework which was developed for documenting the Python programming language. We looked at reStructuredText briefly as an example of a hybrid markup language in [#chapter.markup]. 
         
@@ -120,7 +135,10 @@ chapter:(#chapter.lightweight) Lightweight Languages
     
     section: ASCIIDoc
     
-        {ASCIIDoc} is a lightweight markup language based on the structure of {DocBook}. It is intended for the same sort of document types for which you might choose DocBook, but allows you to use a lightweight syntax. In appearance it is very similar to MarkDown, as shown in this example from Wikipedia:
+        index:: type, term
+            language, ASCIIDoc
+    
+        {ASCIIDoc} is a lightweight markup language based on the structure of {DocBook}. It is intended for the same sort of document types for which you might choose DocBook, but allows you to use a lightweight syntax. In appearance it is very similar to {MarkDown}, as shown in this example from Wikipedia:
         
         ```(ASCIIDoc)
             = My Article
@@ -186,7 +204,7 @@ chapter:(#chapter.lightweight) Lightweight Languages
         
         >>>(image ../graphics/Latex_example.xml)
         
-        It is the markup for the equation that shows why LaTeX is popular for academic and scientific publishing. While not exactly transparent, the markup is compact and functionally lucid for anyone with a little experience with it. 
+        It is the markup for the equation that shows why LaTeX is popular for academic and scientific publishing. While not exactly transparent, the markup is compact and {functionally lucid} for anyone with a little experience with it. 
         
         Wikipedia offers a comparison of various math markup formats which shows how big a difference syntax can make to the lucidity of markup language in some cases. 
 

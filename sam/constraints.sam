@@ -5,15 +5,16 @@ chapter:(#chapter.constraints) Constraint Languages
     index::type, term
         concept, constraints
         concept, constraint languages
+        concept, schema language
         language, XML Schema
         language, Schematron
         language, Relax NG
 
     Structured writing is about applying constraints to content and recording the constraints that the content follows, both to constrain what writers write and to constrain how algorithms interpret the content. This requires some way to express constraints in a formal and machine readable way. Schema languages partition this problem and redirect it to a common validation algorithm expressed by a standard piece of software that everyone can use. Schema languages are, quite simply, languages for expressing constraints. 
     
-    For a {concrete markup languages}(concept) like MarkDown, the content constraints are established in the code of the MarkDown processor. They are validated when the processor parses the MarkDown file. (In practice, though, MarkDown does no meaningful validation. Anything it does not recognize as markup, it simply outputs as text.)
+    For a {concrete markup languages}(concept) like {MarkDown}, the content constraints are established in the code of the MarkDown processor. They are validated when the processor parses the MarkDown file. (In practice, though, MarkDown does no meaningful validation. Anything it does not recognize as markup, it simply outputs as text.)
 
-    For {abstract markup languages}(concept) like XML you define structures yourself. Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a "validator".
+    For {abstract markup languages}(concept) like {XML} you define structures yourself. Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a "validator".
     
     A schema language is a structured language for defining structured languages. The schema for a markup languages says what structures are allowed and in what order and relationship. A given document either conforms to those constraints or it does not. 
 
@@ -46,7 +47,7 @@ chapter:(#chapter.constraints) Constraint Languages
         
     the validator would report an error because the words "Moby Dick" are directly inside the book element and text is not allowed in that position. 
     
-    There are several different schema languages for XML each of which is capable of expressing and enforcing different sets of constraints. It is not unusual to combine different schema languages to more completely constrain a markup language. In particular, it is not uncommon to use a schema language called {Schematron}(tool) in concert with other schema languages like {RNG}(tool "RelaxNG") or {XSD}. While most schema languages work by modeling the structure of a document, as in the {RNG} example above, {Schematron} works by making assertions about the structure in a language called {XPath}(tool). A {Schematron} schema would make a lousy guide for authoring, but it can test assertions, and therefore enforce constraints, that no other schema language can. 
+    There are several different schema languages for {XML} each of which is capable of expressing and enforcing different sets of constraints. It is not unusual to combine different schema languages to more completely constrain a markup language. In particular, it is not uncommon to use a schema language called {Schematron}(tool) in concert with other schema languages like {RNG}(tool "RelaxNG") or {XSD}. While most schema languages work by modeling the structure of a document, as in the {RNG} example above, {Schematron} works by making assertions about the structure in a language called {XPath}(tool). A {Schematron} schema would make a lousy guide for authoring, but it can test assertions, and therefore enforce constraints, that no other schema language can. 
     
     Here is a simple {Schematron} example. It defines one of the constraints listed above, namely that a book element must contain at least one page element. 
     
