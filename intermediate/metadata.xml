@@ -31,14 +31,12 @@
 <p>The standard definition of metadata is “data that describes data”, but that definition misses the central point. Metadata does not merely describe data, metadata creates data. Metadata turns an undifferentiated set of values into useful data by telling us what they mean.</p>
 <p>In the <phrase><annotation type="concept">document domain</annotation></phrase>, the ingredients of a recipe are just list items. The content of those list items are just strings of characters.</p>
 <codeblock language="sam">
-
 section: Ingredients
     * 12 eggs
     * 2 qt water
 </codeblock>
 <p>Adding <phrase><annotation type="concept">subject domain</annotation></phrase> markup allows us to specify to algorithms exactly what these strings mean.</p>
 <codeblock language="sam">
-
 ingredients:: ingredient, quantity, unit
     eggs, 12, each
     water, 2, qt
@@ -56,7 +54,6 @@ ingredients:: ingredient, quantity, unit
 <title>The recursive nature of metadata</title>
 <p>Metadata is a confusing concept because metadata is recursive. If metadata is the data that  creates data, then as data it too must be created by metadata. In other words, if the line <code>ingredients:: ingredient, quantity, unit</code> turns the ingredient lines into metadata in this markup:</p>
 <codeblock language="sam">
-
 ingredients:: ingredient, quantity, unit
     eggs, 12, each
     water, 2, qt
@@ -87,7 +84,6 @@ ingredients:: ingredient, quantity, unit
 <p>In some sense, therefore, ontology is the ultimate in <phrase><annotation type="concept">subject domain</annotation></phrase> markup. Indeed, one should also be able to generate human-readable narrative from an ontology, given a sufficiently sophisticated algorithm and a sufficiently sophisticated ontology.</p>
 <p>All of this is very much outside our scope in this book. <phrase><annotation type="concept">Subject domain</annotation></phrase> markup is an attempt to capture certain aspects of the subject matter of a work. But it is not an attempt to model the argument of a work. Consider the passage:</p>
 <codeblock language="sam">
-
 In {Rio Bravo}(movie), {the Duke}(actor "John Wayne") 
 plays an ex-Union colonel.
 </codeblock>

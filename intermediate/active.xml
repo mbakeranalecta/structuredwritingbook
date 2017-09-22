@@ -59,7 +59,6 @@
 <p>Another factor to consider, though, is that while active content is essentially just postponing the point at which you execute various structured writing algorithms until the content is in the user’s hands, you don’t necessarily want to postpone running those algorithms on the whole page. You usually only postpone them for the parts of the page that you want to make active. For instance, if you want real-time stock quotes embedded in your business stories whenever a company is mentioned, there is no reason to postpone the <phrase><annotation type="algorithm">synthesis</annotation></phrase>, <phrase><annotation type="algorithm">presentation</annotation></phrase>, and <phrase><annotation type="algorithm" specifically="formatting algorithm">formatting</annotation></phrase> of the entire page; you only need to postpone the synthesis of the stock quote itself. And if you want that quote to continue to update in real time while the page is displayed, you certainly don’t want to be redrawing the whole page every time the price changes.</p>
 <p>The display of stock quotes depends on <phrase><annotation type="concept">subject domain</annotation></phrase> <phrase><annotation type="concept">metadata</annotation></phrase> that unambiguously identifies the company mentioned in the content. For example:</p>
 <codeblock language="sam">
-
 {Microsoft}(company "NASDAQ:MSFT") is a large software company.
 </codeblock>
 <p>In a normal static publishing flow, this <phrase><annotation type="concept">subject domain</annotation></phrase> information would be resolved into a static piece of content by the <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase>:</p>
@@ -70,13 +69,11 @@
 <p>This means that only those parts of the content that you want displayed as active content need to be captured in the structured writing domain, and in the specific structures, required to reliably run the applicable algorithms. The rest of the content can be in a different domain. In practice, this usually means that you have <phrase><annotation type="concept">subject domain</annotation></phrase> structures to support the active content embedded in <phrase><annotation type="concept">document domain</annotation></phrase> structures. Of course, having all your content in the <phrase><annotation type="concept">subject domain</annotation></phrase> is also an option, in which case you would perform the <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase> on the content you want to deliver statically, while passing on the <phrase><annotation type="concept">subject-domain</annotation></phrase> representation of the content you want to be active to the system that will perform the active content algorithms.</p>
 <p>However, this is not necessarily, or even likely, to be a straightforward pass through. The downstream system that is going to execute the active content algorithm, such as a JavaScript app running in the web browser, may expect or require the <phrase><annotation type="concept">subject domain</annotation></phrase> information it uses in a particular format. For instance, you might have to embed the ticker symbol in a call to a function that returns stock quotes:</p>
 <codeblock language="xml">
-
 &lt;p&gt;Microsoft (&lt;span onload="getStockQuote(NASDAQ:MSFT)"/&gt;) 
 is a large software company.&lt;/p&gt;
 </codeblock>
 <p>So your server side <phrase><annotation type="algorithm">presentation algorithm</annotation></phrase> needs to transform your <phrase><annotation type="concept">subject domain</annotation></phrase> <phrase><annotation type="concept">annotation</annotation></phrase> into this format.</p>
 <codeblock language="pseudocode">
-
 match company
     continue
     $fncall = 'getStockQuote(' + @specifically + ')'
@@ -140,7 +137,6 @@ match company
 <p>While the <phrase><annotation type="concept">document domain</annotation></phrase> typically requires different markup for different algorithms, the <phrase><annotation type="concept">subject domain</annotation></phrase> typically does not. In the subject domain you capture the semantics of the subject matter, which are the same no matter what algorithms you are applying to the content.</p>
 <p>In the <phrase><annotation type="concept">subject domain</annotation></phrase>, the product list would be a structured data set with known semantics (probably maintained as a separate database).</p>
 <codeblock language="sam">
-
 products:: item, legs, price
     table, 4, $400      
     stool, 3, $20             

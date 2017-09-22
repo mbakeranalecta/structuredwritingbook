@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.single-sourcing"><db:title>Single Sourcing</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idm1928973980"><db:primary>single sourcing</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1928973980x"><db:primary>concept</db:primary><db:secondary>single sourcing</db:secondary></db:indexterm>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.single-sourcing"><db:title>Single Sourcing</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idm1965222124"><db:primary>single sourcing</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1965222124x"><db:primary>concept</db:primary><db:secondary>single sourcing</db:secondary></db:indexterm>
 
 
 
@@ -14,7 +14,6 @@
 <?dbfo-need height="3in"?>
 
 <db:figure xml:id="fig.ssa-eggs-1"><db:title>Document-domain recipe for hard-boiled eggs</db:title><db:programlisting language="sam">
-
 page: 
     title: Hard Boiled Eggs
     
@@ -38,7 +37,6 @@ page:
 <db:figure xml:id="fig.ssa-recipe2html"><db:title>Pseudocode to convert document-domain recipe to HTML output</db:title>
 <?dbfo keep-together="auto"?>
 <db:programlisting language="pseudo">
-
 match page
     create html
         stylesheet www.example.com/style.css
@@ -74,7 +72,6 @@ match li
 <db:para>In <db:xref linkend="fig.ssa-recipe2html"/>, paragraph and list structures have the same names in the source format as they do in the output format (HTML) so you just copy the structures rather than recreating them. This is a common pattern in structured writing algorithms.</db:para>
 <db:para>The algorithm in <db:xref linkend="fig.ssa-recipe2html"/> transforms our source into HTML that looks like <db:xref linkend="fig.ssa-html-recipe-output"/>.</db:para>
 <db:figure xml:id="fig.ssa-html-recipe-output"><db:title>Result of running the algorithm in <db:xref linkend="fig.ssa-recipe2html"/></db:title><db:programlisting language="html">
-
 &lt;html&gt;
     &lt;head&gt;
         &lt;link rel="stylesheet" type="text/css"
@@ -124,7 +121,6 @@ match li
 <db:para>One such typesetting system is <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO (Extensible Stylesheet Language - Formatting Objects). Other typesetting systems include <db:indexterm><db:primary>TeX</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>TeX</db:secondary></db:indexterm>TeX and newer versions of <db:indexterm><db:primary>CSS</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>CSS</db:secondary></db:indexterm>CSS. XSL-FO is a typesetting language written in <db:indexterm><db:primary>XML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XML</db:secondary></db:indexterm>XML. To format your content using <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO, you transform your source content into <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO markup, just the way you transform it into <db:indexterm><db:primary>HTML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>HTML</db:secondary></db:indexterm>HTML for the Web. But then you run the <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO markup through an <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO processor to produce your final output, typically <db:indexterm><db:primary>PDF</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>PDF</db:secondary></db:indexterm>PDF.</db:para>
 <db:para>Here is a small example of XSL-FO markup:</db:para>
 <db:programlisting language="XSL-FO">
-
 &lt;fo:block space-after="4pt"&gt;
    &lt;fo:wrapper font-size="14pt" font-weight="bold"&gt;
      Hard Boiled Eggs
@@ -134,7 +130,6 @@ match li
 <db:para>The <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO code contains <db:indexterm><db:primary>media-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media-domain</db:secondary></db:indexterm>media-domain instructions for spacing and font choices. There is no division between content structures and formatting structures as there is with <db:indexterm><db:primary>HTML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>HTML</db:secondary></db:indexterm>HTML and <db:indexterm><db:primary>CSS</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>CSS</db:secondary></db:indexterm>CSS. Also, as a pure media-domain language, XSL-FO does not have document-domain structures such as paragraphs and titles. To XSL-FO, a document is simply a set of blocks with specific formatting properties attached to them.</db:para>
 <db:para>To limit the amount of detail, the algorithm in <db:xref linkend="fig.ssa-fo-algorithm"/> shows only a portion of the pseudocode for handling recipe markup (The point here is not to teach <db:indexterm><db:primary>XSL-FO</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSL-FO</db:secondary></db:indexterm>XSL-FO, but to show how the algorithm works).</db:para>
 <db:figure xml:id="fig.ssa-fo-algorithm"><db:title>Portion of the algorithm to generate XSL-FO from a recipe</db:title><db:programlisting language="pseudo">
-
 match title
     output '&lt;fo:block space-after="4pt"&gt;'
         output '&lt;fo:wrapper font-size="14pt" font-weight="bold"&gt;'
@@ -149,14 +144,12 @@ match title
 <db:para>Basic <db:emphasis>single sourcing</db:emphasis> outputs the same document presentation to different media. However, each medium is different, and what works well in one medium does not always work as well in another. Thus the rhetoric that is appropriate to one media may not be appropriate to another, This is what I meant when I said at the beginning that single sourcing is a rhetoric problem as well as a process problem.</db:para>
 <db:para>For example, online media generally support <db:indexterm><db:primary>hypertext</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>hypertext</db:secondary></db:indexterm>hypertext links, while paper does not. Suppose you have a piece of content that includes a link:</db:para>
 <db:programlisting>
-
 In Rio Bravo, {the Duke}(link "http://JohnWayne.com")
 plays an ex-Union colonel out for revenge.
 </db:programlisting>
 <db:para>In SAM syntax, the link markup (<db:code>link "http://JohnWayne.com"</db:code>) specifies the address to link to. In the algorithm examples below, I refer to this markup as the <db:emphasis>specifically</db:emphasis> attribute using the notation <db:code>@specifically</db:code>.</db:para>
 <db:para>In HTML, you output this as a link using the HTML <db:code>a</db:code> element, so the algorithm looks like <db:xref linkend="fig.ssa-specifically-1"/>.</db:para>
 <db:figure xml:id="fig.ssa-specifically-1"><db:title>Algorithm to generate HTML link from the <db:code>@specifically</db:code> attribute</db:title><db:programlisting>
-
 match p
     copy
         continue
@@ -168,7 +161,6 @@ match link
 </db:programlisting></db:figure>
 <db:para>The result of this algorithm is shown in <db:xref linkend="fig.ssa-specifically-1-output"/>.</db:para>
 <db:figure xml:id="fig.ssa-specifically-1-output"><db:title>Output of the algorithm in <db:xref linkend="fig.ssa-specifically-1"/></db:title><db:programlisting language="html">
-
 &lt;p&gt;In Rio Bravo, &lt;a href="http://JohnWayne.com"&gt;The Duke&lt;/a&gt;
 plays and ex-Union colonel out for revenge.
 &lt;/p&gt;
@@ -176,7 +168,6 @@ plays and ex-Union colonel out for revenge.
 <db:para>But suppose you want to output this same content to paper. If you output it to PDF, you can still create a link as with HTML, but when that PDF is printed, all that’s left is a slight color change in the text and maybe an underline. Readers cannot follow the link.</db:para>
 <db:para>You can’t print an active link on paper, but you can print the URL, so the reader can type it into a browser. Your algorithm can print the link inline or as a footnote. <db:xref linkend="fig.ssa-specifically-2"/> shows the algorithm for printing the URL inline. (I dispense with the detailed XSL-FO syntax this time.)</db:para>
 <db:figure xml:id="fig.ssa-specifically-2"><db:title>Algorithm to display the URL for a link in print</db:title><db:programlisting language="pseudo">
-
 match p
     create fo:block
         continue
@@ -189,7 +180,6 @@ match link
 </db:programlisting></db:figure>
 <db:para>This will produce the output in <db:xref linkend="fig.ssa-specifically-out"/>:</db:para>
 <db:figure xml:id="fig.ssa-specifically-out"><db:title>Output of <db:xref linkend="fig.ssa-specifically-out"/></db:title><db:programlisting language="xml">
-
 &lt;fo:block&gt;
 In Rio Bravo, the Duke (see: http://JohnWayne.com) 
 plays an ex-Union colonel out for revenge.
@@ -204,13 +194,11 @@ plays an ex-Union colonel out for revenge.
 <db:para>Because different media require a different rhetoric, you need a <db:emphasis>differential</db:emphasis> approach to single sourcing, one that allows you to differ not only the formatting but the presentation of the content for different media.</db:para>
 <db:para>One way to accomplish differential single sourcing is to record the content in the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, thus removing the prejudice of the document-domain presentation for one class of media or another. Here is how this markup might look:</db:para>
 <db:programlisting language="sam">
-
 {The Duke}(actor "John Wayne") plays an ex-Union colonel.
 </db:programlisting>
 <db:para>In this example, you annotate the phrase “The Duke” with subject-domain markup that clarifies exactly what the text refers to. That annotation says that “the Duke” is the name of an actor, specifically John Wayne.</db:para>
 <db:para>Our document-domain examples attempted to clarify “the Duke” for readers, but they did so in media-dependent ways. This subject-domain example clarifies the meaning of “The Duke” in a presentation-neutral way; it explicitly, formally, and unambiguously marks up what the phrase refers to. This markup is written for algorithms, not readers. It allows an algorithm to generate an appropriate clarification for the reader in any target medium (see <db:xref linkend="fig.ssa-specifically-3-paper"/> and <db:xref linkend="fig.ssa-specifically-3-web"/>).</db:para>
 <db:figure xml:id="fig.ssa-specifically-3-paper"><db:title>Algorithm to render paper from subject-domain markup</db:title><db:programlisting>
-
 match actor
     continue
     output " ("
@@ -218,7 +206,6 @@ match actor
     output ") "
 </db:programlisting></db:figure>
 <db:figure xml:id="fig.ssa-specifically-3-web"><db:title>Algorithm to Web links from subject-domain markup</db:title><db:programlisting>
-
 match actor
     create link
         $href = get link for actor named @specifically
@@ -242,7 +229,6 @@ match actor
 <db:para>You can also do differential single sourcing by using conditional <db:indexterm><db:primary>management-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>management-domain</db:secondary></db:indexterm>management-domain structures in the document domain.</db:para>
 <db:para>For instance, if you are writing a manual that you intend to single source to a help system, you might want to add context setting information to the start of a section when it appears in the help system. The manual may be designed to be read sequentially, meaning that the context of individual sections is established by what came before. But help systems are always accessed randomly, meaning that the context of a particular help topic may not be clear if it was single sourced from a manual. To accommodate this, you could include a context-setting paragraph that is conditionalized to appear only in help output (see <db:xref linkend="ex.ssa-conditional-1"/>):</db:para>
 <db:figure xml:id="ex.ssa-conditional-1"><db:title>Differential single source example using management-domain structures</db:title><db:programlisting language="sam">
-
 section: Wrangling left-handed widgets
 
     ~~~(?help-only)
@@ -259,13 +245,11 @@ section: Wrangling left-handed widgets
 <db:para>In <db:xref linkend="ex.ssa-conditional-1"/>, the SAM markup <db:code>~~~</db:code> creates a fragment structure to which conditional tokens can be applied. Content indented under the fragment marker is part of the fragment.</db:para>
 <db:para>To output a manual, you suppress the help-only content:</db:para>
 <db:programlisting language="pseudo">
-
 match fragment where conditions = help-only
     ignore
 </db:programlisting>
 <db:para>To output help, you include it:</db:para>
 <db:programlisting language="pseudo">
-
 match fragment where conditions = help-only
     continue
 </db:programlisting>
@@ -284,5 +268,5 @@ match fragment where conditions = help-only
 <db:para>Often, the tools a group uses implicitly determine the primary medium. This usually means that the primary medium is paper, and paper often continues to be primary even after the organization stops producing paper, and their readers have moved to online formats.</db:para>
 <db:para>Some organizations think they should not switch to tools that are designed primarily for online content until they have entirely abandoned paper and paper-like formats such as PDF. But once online becomes your primary media, your rhetoric should change to a rhetoric appropriate to online media (potentially a very large change, as discussed in <db:xref linkend="chapter.architecture"/>). Thus it is appropriate to switch to a rhetoric and tool set that is optimized for online but that can still produce linear media as a secondary output format.</db:para>
 <db:para>Changing your information design practices from linear, paper-based designs to <db:indexterm><db:primary>hypertext</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>hypertext</db:secondary></db:indexterm>hypertext designs is not trivial, but such designs better suit the way many people use and access content today. I discuss these design differences in depth in my book, <db:indexterm><db:primary>Every Page is Page One: Topic-based Writing for Technical Communication and the Web</db:primary></db:indexterm><db:indexterm><db:primary>citetitle</db:primary><db:secondary>Every Page is Page One: Topic-based Writing for Technical Communication and the Web</db:secondary></db:indexterm><db:citetitle>Every Page is Page One: Topic-based Writing for Technical Communication and the Web</db:citetitle>. Don’t expect single sourcing, by itself, to successfully turn document-oriented design into effective hypertext. It is usually more effective to adopt an <db:indexterm><db:primary>Every Page is Page One</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>Every Page is Page One</db:secondary></db:indexterm>Every Page is Page One approach to information design and use structured writing and single-sourcing techniques as a best-effort method to create linear media for those of your readers who still need paper or paper-like formats – or for those documents where linear organization still makes sense.</db:para>
-<db:indexterm class="endofrange" startref="idm1928973980"/><db:indexterm class="endofrange" startref="idm1928973980x"/></db:section>
+<db:indexterm class="endofrange" startref="idm1965222124"/><db:indexterm class="endofrange" startref="idm1965222124x"/></db:section>
 </db:chapter>

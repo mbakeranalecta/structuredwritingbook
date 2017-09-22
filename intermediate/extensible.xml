@@ -99,7 +99,6 @@
 <p>A DITA topic, then, comes with a lot of built in functionality and structure that you don’t have to invent for yourself when you create a specialized version of that topic type. But the corollary is that not all content types are specialized instances of a DITA generic topic, nor are all the structures they contain instances of generic document domain structures. This means that while the set of information types that you can create using specialization is unbounded in number, it is not unbounded in type. There are types you can’t create by specialization, at least if you want to maintain the is-a relation to the base type (without which specialization isn’t specialization at all).</p>
 <p>When we factored the ingredients of a recipe out of a <phrase><annotation type="concept">document domain</annotation></phrase> list into a <phrase><annotation type="concept">subject domain</annotation></phrase> record structure it was, in part, to make them independent of the decision to format them as a <phrase><annotation type="structure">table</annotation></phrase> as a <phrase><annotation type="structure">list</annotation></phrase>.</p>
 <codeblock language="sam">
-
 ingredients:: ingredient, quantity, unit
     eggs, 3, each
     salt, 1, tsp
@@ -111,7 +110,6 @@ ingredients:: ingredient, quantity, unit
 </footnote>
 <p>Labels are a big part of document domain content. When we created a subject domain structure for recording the nutritional information for a recipe, we factor out all of the labels by putting the content in named fields. In other words, the labels went from being data (in the content) to <phrase><annotation type="concept">metadata</annotation></phrase> (part of the structure):</p>
 <codeblock language="sam">
-
 nutrition:
     serving: 1 large (50 g)
     calories: 78
@@ -211,7 +209,6 @@ nutrition:
 </index>
 <p>RestructuredText has a number of blocks for things like paragraphs, titles, and lists that are defined with a concrete syntax. It defines other blocks using directives:</p>
 <codeblock language="reStructuredText">
-
 .. image:: images/biohazard.png
    :height: 100
    :width: 200
@@ -252,7 +249,6 @@ nutrition:
 <p>This is similar, but not identical, to the aim of mainstream concrete and hybrid languages such as <phrase><annotation type="language">Markdown</annotation></phrase> and <phrase><annotation type="language">Restructured Text</annotation></phrase>, which is to have the source file be readable as a document. In other words, they strive to make the document structure clear from the markup. They are document domain languages, and they strive to make sure that the markup expresses the document structure they create in a way that is readable. SAM has the same goal, except that SAM was designed primarily for creating <phrase><annotation type="concept">subject domain</annotation></phrase> languages. As such, it is designed to make the subject domain structure of the document clear to the reader.</p>
 <p>A SAM document may not look as much like a finished document as a <phrase><annotation type="language">Markdown</annotation></phrase> or <phrase><annotation type="language">reStructuredText</annotation></phrase> document. For example, it does not use underlines to visually denote different levels of header. Instead, it focuses on creating a hierarchy of named blocks and fields. In doing so, it uses the kind of markup people commonly use to create named blocks of text and to express a hierarchical relationship between them. Blocks are introduced with a name followed by a colon, and hierarchy is expressed through indentation.</p>
 <codeblock language="SAM">
-
 examples: Basic SAM structures
 
     example: Paragraphs

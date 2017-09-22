@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.reuse"><db:title>Reuse</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idm1929356828"><db:primary>reuse</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1929356828x"><db:primary>algorithm</db:primary><db:secondary>reuse</db:secondary></db:indexterm><db:indexterm class="startofrange" significance="preferred" xml:id="idm1929346332"><db:primary>content reuse</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1929346332x"><db:primary>concept</db:primary><db:secondary>content reuse</db:secondary></db:indexterm>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.reuse"><db:title>Reuse</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idm1966224028"><db:primary>reuse</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1966224028x"><db:primary>algorithm</db:primary><db:secondary>reuse</db:secondary></db:indexterm><db:indexterm class="startofrange" significance="preferred" xml:id="idm1966222748"><db:primary>content reuse</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1966222748x"><db:primary>concept</db:primary><db:secondary>content reuse</db:secondary></db:indexterm>
 
 
 
@@ -56,7 +56,6 @@
 <db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/common2variable.svg" contentwidth="5.25in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/common2variable.png"/></db:imageobject><db:textobject><db:para>A diagram showing the common to variable reuse pattern.</db:para></db:textobject></db:mediaobject>
 <db:para>We looked at an example of this in <db:xref linkend="chapter.management-domain"/>, where we had a set of dangerous procedures which each required a standard warning. Each individual procedure is the variable part and the standard warning is the common part.:</db:para>
 <db:programlisting language="sam">
-
 procedure: Blow stuff up
     &gt;&gt;&gt;(files/shared/admonitions/danger)
     step: Plant dynamite.
@@ -73,12 +72,10 @@ procedure: Blow stuff up
 <db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/variable2common.svg" contentwidth="4in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/variable2common.png"/></db:imageobject><db:textobject><db:para>Diagram showing the variable to common reuse pattern.</db:para></db:textobject></db:mediaobject>
 <db:para>For instance, if you are writing a manual to cover a number of car models you can factor out the number of seats each model has.</db:para>
 <db:programlisting language="sam">
-
 The vehicle seats &gt;($seats) people.
 </db:programlisting>
 <db:para>This is the fixed content that will occur in all manuals, with the number of seats pulled in from an external source. Let’s say we have a collection of vehicle data that is stored in a structure like this:</db:para>
 <db:programlisting language="sam">
-
 vehicles:
     vehicle: compact
         seats: four
@@ -97,7 +94,6 @@ vehicles:
 </db:programlisting>
 <db:para>Then we write the algorithm to process the insert so that it queries this structure.</db:para>
 <db:programlisting language="pseudo">
-
 match insert where variable = $seats
     $number_of_seats = vehicles/vehicle[$model]/seats
     output $number_of_seats
@@ -117,7 +113,6 @@ match insert where variable = $seats
 <db:title>Using IDs</db:title>
 <db:para>The most basic way to factor out the file name is to give the content of the file an ID. An ID is a management domain structure used to identify a piece of content in a location independent way. No matter where the content is stored, it keeps the same ID. Here is the warning file with the ID <db:code>#warn_danger</db:code> added:</db:para>
 <db:programlisting language="sam">
-
 warning:(#warn_danger) 
     title: Danger
     
@@ -125,7 +120,6 @@ warning:(#warn_danger)
 </db:programlisting>
 <db:para>We can then insert the warning into our procedure by referring to that ID.</db:para>
 <db:programlisting language="sam">
-
 procedure: Blow stuff up
     &gt;&gt;&gt;(#warn_danger)
     step: Plant dynamite.
@@ -135,7 +129,6 @@ procedure: Blow stuff up
 </db:programlisting>
 <db:para>The decision about which warning to include has now been shifted from the writer to the algorithm.</db:para>
 <db:programlisting language="pseudo">
-
 match insert with ID
     $insert_content = find ID in $content_set
     output $insert_content
@@ -144,7 +137,6 @@ match insert with ID
 <db:para>This means that the algorithm needs some way to resolve the ID and find the content to include. In many cases, a <db:indexterm><db:primary>content management system</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>content management system</db:secondary></db:indexterm>content management system is used to resolve the ID. In other cases it is as simple as the algorithm searching through a set of files to find the ID or building a catalog that points to the files that contain IDs.</db:para>
 <db:para>To do variable into variable reuse in a system that uses IDs, you simply point the <db:indexterm><db:primary>algorithm</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>algorithm</db:secondary></db:indexterm>algorithm at a different set of files that contain the same IDs, but attached to different content. So if your foreign market requires a different warning, you can create a file like this:</db:para>
 <db:programlisting language="sam">
-
 warning:(#warn_danger) 
     title: Look out!
     
@@ -157,7 +149,6 @@ warning:(#warn_danger)
 <db:para>Another way to do this is with another <db:indexterm><db:primary>management domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>management domain</db:secondary></db:indexterm>management domain structure called a key. A key is similar to an ID but it is not directly tied to a resource. Instead, the same key can be used to point to different resources at different times. Since a key does not represent any one concrete resource, we don’t assign the key to a resource. Instead we use an intermediate lookup table to resolve keys to particular resources for a particular purpose.</db:para>
 <db:para>So in this case we have the warning in a file called files/shared/admonitions/domestic/danger with the following content (no ID):</db:para>
 <db:programlisting language="sam">
-
 warning: 
     title: Danger
     
@@ -165,7 +156,6 @@ warning:
 </db:programlisting>
 <db:para>And we have the procedure which includes the warning via a key:</db:para>
 <db:programlisting language="sam">
-
 procedure: Blow stuff up
     &gt;&gt;&gt;(%warn_danger)
     step: Plant dynamite.
@@ -176,7 +166,6 @@ procedure: Blow stuff up
 <db:para>(I am using <db:code>#</db:code> to denote IDs and <db:code>%</db:code> to denote keys. This is the notation that SAM uses for IDs and keys, but it is purely arbitrary and has nothing to do with how they work. Different systems will denote IDs and keys in different ways.)</db:para>
 <db:para>To connect the key to the warning file, we then create a key lookup table:</db:para>
 <db:programlisting language="sam">
-
 keys:
     key:
         name: warn_danger
@@ -184,14 +173,12 @@ keys:
 </db:programlisting>
 <db:para>When the algorithm processes the procedure, it sees the key reference <db:code>%warn_danger</db:code> and looks it up in the key lookup table. The key lookup table tells the algorithm that the key resolves to the resource <db:code>files/shared/admonitions/domestic/danger</db:code>. The algorithm then loads that file and inserts the contents into the output.</db:para>
 <db:programlisting language="pseudo">
-
 match insert with key
     $resource = find key in lookup-table
     output $resource
 </db:programlisting>
 <db:para>To output your content for the foreign market, you simply prepare a new key lookup table:</db:para>
 <db:programlisting language="sam">
-
 keys:
     key:
         name: warn_danger
@@ -202,7 +189,6 @@ keys:
 <db:para>One feature of the key approach is that, because it does not attach the key directly to the content, it can be used to identify resources that do not have IDs, which may include resources that you do not control.</db:para>
 <db:para>One downside of keys is that by themselves they can only point to a whole resource. This could force you to keep all your reusable units in separate files. To avoid this, you can combine keys with IDs. The following example combines the foreign and domestic danger warnings into one file and gives each an ID:</db:para>
 <db:programlisting language="sam">
-
 warnings:
     warning:(#warn_danger_domestic) 
         title: Danger
@@ -216,7 +202,6 @@ warnings:
 </db:programlisting>
 <db:para>Now we can rewrite our key lookup tables to use the IDs to pull the right warning out of this common file. For the domestic build we would use a key lookup table like this:</db:para>
 <db:programlisting language="sam">
-
 keys:
     key:
         name: warn_danger
@@ -224,7 +209,6 @@ keys:
 </db:programlisting>
 <db:para>And for the foreign build, one that looks like this:</db:para>
 <db:programlisting language="sam">
-
 keys:
     key:
         name: warn_danger
@@ -240,12 +224,10 @@ keys:
 <db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/commonconditions.svg" contentwidth="3in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/commonconditions.png"/></db:imageobject><db:textobject><db:para>Diagram of the common with conditions reuse pattern.</db:para></db:textobject></db:mediaobject>
 <db:para>For instance, in content for a car manual you might have conditional text for the number of people the car seats.</db:para>
 <db:programlisting language="sam">
-
 The vehicle seats {four}(?compact){five}(?midsize){seven}(?van).
 </db:programlisting>
 <db:para>Here the main text is the fixed piece and the variable pieces are the words “four”, “five”, and “seven”. Which of these will be included in the output depends on which condition is applied during the build. If the condition <db:code>midsize</db:code> is applied, then the output text will be “five” and the other alternatives will be suppressed.</db:para>
 <db:programlisting language="pseudo">
-
 match phrase with condition
     if condition in $build_conditions
         continue
@@ -267,7 +249,6 @@ match phrase with condition
 </db:itemizedlist>
 <db:para>Common with conditions is not limited to cases where there are alternate values, however. In some cases, content may simply be inserted or omitted for certain outputs.</db:para>
 <db:programlisting language="sam">
-
 The main features of the car are:
 
 ol:
@@ -299,7 +280,6 @@ ol:
 <db:title>Factor out the common</db:title>
 <db:para>In <db:xref linkend="chapter.management-domain"/>, I noted that the subject domain alternative to using an insertion instruction for the warning text was to specify which procedures were dangerous, thus factoring out the constraint that the warning must appear.</db:para>
 <db:programlisting language="sam">
-
 procedure: Blow stuff up
     is-it-dangerous: yes
     step: Plant dynamite.
@@ -309,21 +289,18 @@ procedure: Blow stuff up
 </db:programlisting>
 <db:para>In this case, the author does not have to identify the material to be included, either directly by file name or indirectly through an <db:indexterm><db:primary>ID</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>ID</db:secondary></db:indexterm>ID or a <db:indexterm><db:primary>key</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>key</db:secondary></db:indexterm>key. Instead, it is up to the algorithm to include it:</db:para>
 <db:programlisting language="pseudo">
-
 match procedure/is-it-dangerous 
     if is-it-dangerous = 'yes'
         output files/shared/warnings#warn_danger_domestic
 </db:programlisting>
 <db:para>To produce the foreign market version of the documentation, you simply edit the rule:</db:para>
 <db:programlisting language="pseudo">
-
 match procedure/is-it-dangerous 
     if is-it-dangerous = 'yes'
         output files/shared/warnings#warn_danger_foreign
 </db:programlisting>
 <db:para>Or, to further the partitioning of complexity in the code, you can use keys:</db:para>
 <db:programlisting language="pseudo">
-
 match procedure/is-it-dangerous 
     if is-it-dangerous = 'yes'
         $resource = find key '%warn_danger' in lookup-table
@@ -338,7 +315,6 @@ match procedure/is-it-dangerous
 <db:title>Factor out the variable</db:title>
 <db:para>You can also factor out the variable content. For example, in the case of the different models of a car, rather than conditionalizing the list of features in the document, like this:</db:para>
 <db:programlisting language="sam">
-
 The main features of the car are:
 
 ol:
@@ -349,7 +325,6 @@ ol:
 </db:programlisting>
 <db:para>You can factor out the list entirely:</db:para>
 <db:programlisting language="sam">
-
 The main features of the car are:
 
 &gt;&gt;&gt;(%main_features)
@@ -357,14 +332,12 @@ The main features of the car are:
 <db:para>You can then maintain the features list in a database. The organization probably already has a database of features for each vehicle, so we don’t need to create anything new. We simply query the existing database. (After all, this is about reusing what already exists rather then recreating it!)</db:para>
 <db:para>So now our algorithm looks something like this:</db:para>
 <db:programlisting language="pseudo">
-
 match insert with key
     $resource = lookup key in lookup-table
     output $resource
 </db:programlisting>
 <db:para>We then have a key lookup table where the resource is identified by a query on the database</db:para>
 <db:programlisting language="sam">
-
 keys:
     key:
         name: %main-features
@@ -383,7 +356,6 @@ keys:
 <db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/tree.svg" contentwidth="2in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/tree.png"/></db:imageobject><db:textobject><db:para>A diagram showing the tree structure of a book.</db:para></db:textobject></db:mediaobject>
 <db:para>The assembly approach requires a structure to describe how the units are assembled. This structure is often called a map. (It is called a map in <db:indexterm><db:primary>DITA</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DITA</db:secondary></db:indexterm><db:indexterm><db:primary>DITA</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>DITA</db:secondary></db:indexterm>DITA, for instance.) Some applications may also refer to it as a table of contents.</db:para>
 <db:programlisting language="sam">
-
 map: Widget Wrangler Deluxe User Manual
    unit: units/ww/deluxe/intro
        unit: units/ww/shared/basic_features
@@ -396,7 +368,6 @@ map: Widget Wrangler Deluxe User Manual
 </db:programlisting>
 <db:para>Rather than using a map, you can allow the units themselves to pull in other units, which may in turn pull in other units. So the Widget Wrangler Deluxe install introduction unit might look like this:</db:para>
 <db:programlisting>
-
 unit: Installing the Widget Wrangler Deluxe
 
     You should be very careful when installing the 
@@ -413,7 +384,6 @@ unit: Installing the Widget Wrangler Deluxe
 <db:title>Combining multiple techniques</db:title>
 <db:para>There is one problem with the idea of using a common install intro for both the regular and deluxe widget wrangler. The intro mentions the name of the product. To solve this problem without requiring two different units, we can use the variable into common or common with conditions reuse techniques within the intro unit. Here is an example using variable into common:</db:para>
 <db:programlisting>
-
 unit: Installing the &gt;($product_name)
 
     You should be very careful when installing 
@@ -482,5 +452,5 @@ unit: Installing the &gt;($product_name)
 <db:listitem><db:para>Another approach to reducing duplication in your content is to combine information on multiple products into a single publication and differentiate them in the text. There are limits to this, obviously, and some organization got into content reuse specifically so that they could remove the complexity of multiple versions in a single manual. Still, there are times when it is an appropriate solution.</db:para></db:listitem>
 </db:varlistentry>
 </db:variablelist>
-<db:indexterm class="endofrange" startref="idm1929356828"/><db:indexterm class="endofrange" startref="idm1929346332"/><db:indexterm class="endofrange" startref="idm1929356828x"/><db:indexterm class="endofrange" startref="idm1929346332x"/></db:section>
+<db:indexterm class="endofrange" startref="idm1966224028"/><db:indexterm class="endofrange" startref="idm1966222748"/><db:indexterm class="endofrange" startref="idm1966224028x"/><db:indexterm class="endofrange" startref="idm1966222748x"/></db:section>
 </db:chapter>

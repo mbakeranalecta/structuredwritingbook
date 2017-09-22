@@ -53,7 +53,6 @@
 <p>A schema language is a structured language for defining structured languages. The schema for a markup languages says what structures are allowed and in what order and relationship. A given document either conforms to those constraints or it does not.</p>
 <p>Here is an example of a schema in a schema language called <phrase><annotation type="tool">RelaxNG</annotation></phrase>, which is one of several schema languages available for defining <phrase><annotation type="language">XML</annotation></phrase>-based markup languages:<citation value="https://en.wikipedia.org/wiki/RELAX_NG#XML_syntax"/></p>
 <codeblock language="RNG">
-
 &lt;element name="book" xmlns="http://relaxng.org/ns/structure/1.0"&gt;
    &lt;oneOrMore&gt;
       &lt;element name="page"&gt;
@@ -76,7 +75,6 @@
 </ul>
 <p>Thus if an author wrote:</p>
 <codeblock language="xml">
-
 &lt;book&gt;Moby Dick
     &lt;page&gt;Call me Ishmael. Some years ago- never mind how long 
     precisely- having little or no money in my purse, and nothing 
@@ -88,7 +86,6 @@
 <p>There are several different schema languages for <phrase><annotation type="language">XML</annotation></phrase> each of which is capable of expressing and enforcing different sets of constraints. It is not unusual to combine different schema languages to more completely constrain a markup language. In particular, it is not uncommon to use a schema language called <phrase><annotation type="tool">Schematron</annotation></phrase> in concert with other schema languages like <phrase><annotation type="tool" specifically="RelaxNG">RNG</annotation></phrase> or <phrase><annotation type="language">XSD</annotation></phrase>. While most schema languages work by modeling the structure of a document, as in the <phrase><annotation type="tool" specifically="RelaxNG">RNG</annotation></phrase> example above, <phrase><annotation type="tool">Schematron</annotation></phrase> works by making assertions about the structure in a language called <phrase><annotation type="tool">XPath</annotation></phrase>. A <phrase><annotation type="tool">Schematron</annotation></phrase> schema would make a lousy guide for authoring, but it can test assertions, and therefore enforce constraints, that no other schema language can.</p>
 <p>Here is a simple <phrase><annotation type="tool">Schematron</annotation></phrase> example. It defines one of the constraints listed above, namely that a book element must contain at least one page element.</p>
 <codeblock language="schematron">
-
 &lt;schema xmlns="http://purl.oclc.org/dsdl/schematron"  
  queryBinding="xslt2"&gt;
     &lt;pattern&gt;

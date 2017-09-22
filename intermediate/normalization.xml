@@ -38,7 +38,6 @@
 <p>How exactly do you construct a set of constraints for detecting duplicate content? First you need to begin with a definition of duplicate content. A reasonable general definition is this: duplicate content is content that describes the same subject matter to the same audience for the same purpose. All three aspects of this definition matter. We communicate to achieve an objective, so purpose matters. We communicate with a variety of people, so audience matters. Ignoring these things in our definition of duplication could result in serious quality problems.</p>
 <p>So let’s examine a case of potentially duplicate content and look at how we can establish a formal system for deciding if another piece of content is a duplicate or not. Consider two movie reviews, written in markdown:</p>
 <codeblock language="markdown">
-
 Disappointing outing for the Duke
 ================================
 
@@ -49,7 +48,6 @@ in _Rio Bravo_.
 </codeblock>
 <p>and:</p>
 <codeblock language="markdown">
-
 Wayne's best yet
 ================
 
@@ -63,7 +61,6 @@ in _Rio Bravo_.
 </footnote>
 <p>But suppose these same reviews were written in <phrase><annotation type="language">SAM</annotation></phrase> in a subject domain movie review language:</p>
 <codeblock language="sam">
-
 movie-review: Disappointing outing for the Duke
     movie-title: Rio Bravo
     review-text:
@@ -75,7 +72,6 @@ movie-review: Disappointing outing for the Duke
 </codeblock>
 <p>and:</p>
 <codeblock language="sam">
-
 movie-review: Wayne's best yet
     movie-title: Rio Bravo
     review-text:
@@ -95,7 +91,6 @@ movie-review: Wayne's best yet
 <p>The question of whether we want to keep both reviews is therefore a business decision. You will seldom find two independently written pieces of content that are word for word identical. You will seldom find reusable content that is word for word what you would have written yourself. The definition of duplicate content is not based on identical text, but on whether or not the content serves an identical rhetorical purpose (which is to say, an identical business purpose). The constraints that determine if two pieces of content are duplicates of each other, therefore, are business rules.</p>
 <p>Let’s say you are willing to have multiple reviews of the same movie in your collection as long as they gave different opinions. To accommodate this you can change your business rule for detecting duplicate movie reviews by adding a grading system to your review structure:</p>
 <codeblock language="sam">
-
 movie-review: Disappointing outing for the Duke
     movie-title: Rio Bravo
     5-star-rating: 2
@@ -108,7 +103,6 @@ movie-review: Disappointing outing for the Duke
 </codeblock>
 <p>and:</p>
 <codeblock language="sam">
-
 movie-review: Wayne's best yet
     movie-title: Rio Bravo
     5-star-rating: 5

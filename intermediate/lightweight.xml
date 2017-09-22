@@ -45,7 +45,6 @@
 </index>
 <p>The most prominent of the lightweight languages, and arguably the lightest-weight, is Markdown. Invented in 2004 by John Gruber as a way to quickly write simple web pages using syntax similar to that of an text-format email, it has spread to all kind of systems and now exists is multiple variants that have been adapted for different purposes. I have used several examples of MarkDown in this book. Here is one of them:</p>
 <codeblock language="markdown">
-
 Wayne's best yet
 ================
 
@@ -55,7 +54,6 @@ in _Rio Bravo_.
 </codeblock>
 <p>“Adapted for different purposes” mostly means that people have created versions with specific syntax and semantics in addition to those of Gruber’s first version. For instance, the code sharing site <phrase>GitHub</phrase> has adopted “<phrase>Git Hub flavored Markdown</phrase>” as the standard format for user-supplied information on the site, such as project descriptions and issues, and has added syntax specific to tracking issue numbers and code commits for projects, allowing the automatic generation of links between commits and the issues that relate to them. For example:</p>
 <codeblock language="github_markdown">
-
 Issue #135 was fixed in commit 
 8e8c6a0b4c9c41bd72fab5fd53e3d967e9688110.
 </codeblock>
@@ -85,7 +83,6 @@ Issue #135 was fixed in commit
 <p>Another popular lightweight format is <phrase>Wiki markup</phrase>, introduced by <phrase><annotation type="person">Ward Cunningham</annotation></phrase> in 1995 as the writing format for <phrase><annotation type="tool">WikiWikiWeb</annotation></phrase>, the first <phrase><annotation type="tool">Wiki</annotation></phrase>.<citation value="https://en.wikipedia.org/wiki/WikiWikiWeb"/> Wiki markup is similar to Markdown in many respects (most lightweight languages share the same basic syntax conventions, based on the imitation of formatted document features in plain text documents). What makes Wiki markup distinct is how it is tied into the operation of a Wiki. One of its most notable feature is how <phrase><annotation type="algorithm" specifically="linking algorithm">linking</annotation></phrase> is handled. In the original WikiWikiWeb markup, any word with internal capitals was considered a “WikiWord” and instantly became a link to a page with that WikiWord as the title. Such a page was created automatically if it did not already exist. This was an extremely simple implementation of a <phrase><annotation type="algorithm">linking algorithm</annotation></phrase> based on annotation rather than the naming of resources.</p>
 <p>Different wikis have differences in the markup they support. Here is a small example of <phrase><annotation type="tool">MediaWiki</annotation></phrase> markup. (<phrase><annotation type="tool">MediaWiki</annotation></phrase>) is the system that runs <phrase><annotation type="website" specifically="wikipedia.org">Wikipedia</annotation></phrase>):</p>
 <codeblock language="mediawiki">
-
 "Take some more [[tea]]," the March Hare said 
 to Alice, very earnestly.
 
@@ -113,7 +110,6 @@ an offended tone, "so I can't take more."
 <p><phrase>reStrucutredText</phrase> is a lightweight hybrid markup language most often associated with the <phrase><annotation type="tool">Sphinx</annotation></phrase> documentation framework which was developed for documenting the Python programming language. We looked at reStructuredText briefly as an example of a hybrid markup language in <citation nameref="chapter.markup"/>.</p>
 <p>Similar to MarkDown, reStructuredText uses a plain text formatting approach to basic text structures. This part of the markup looks very natural because it uses characters and patterns that you might easily use to format a document if the only editor you had available were a plain text editor:</p>
 <codeblock language="reStructuredText">
-
 Hard Boiled Eggs
 ================
 A hard boiled egg is simple and nutritious. 
@@ -138,7 +134,6 @@ Preparation
 </codeblock>
 <p>But reStructuredText also has a feature called directives which is used to create markup with more complex semantics. Here, for example, is a directive for inserting an image:</p>
 <codeblock language="reStructuredText">
-
 .. image:: images/harcboiledegg.png
    :height: 100
    :width: 200
@@ -158,7 +153,6 @@ Preparation
 </index>
 <p><phrase><annotation type="language">ASCIIDoc</annotation></phrase> is a lightweight markup language based on the structure of <phrase><annotation type="language"><annotation type="standard">DocBook</annotation></annotation></phrase>. It is intended for the same sort of document types for which you might choose DocBook, but allows you to use a lightweight syntax. In appearance it is very similar to <phrase><annotation type="language">MarkDown</annotation></phrase>, as shown in this example from Wikipedia:</p>
 <codeblock language="ASCIIDoc">
-
 = My Article
 J. Smith
 
@@ -188,7 +182,6 @@ Metals commonly used include:
 <title>LaTeX</title>
 <p>LaTeX is a <phrase><annotation type="concept">document domain</annotation></phrase> markup language used extensively in academia and scientific publishing. It is not based on XML syntax but on the syntax of <phrase><annotation type="language">TeX</annotation></phrase>, a typesetting system developed by Donald Knuth in 1978.<citation value="https://en.wikipedia.org/wiki/LaTeX"/> Here is an example of LaTeX, from Wikipedia:</p>
 <codeblock language="LaTex">
-
 \documentclass[12pt]{article}
 \usepackage{amsmath}
 \title{\LaTeX}
@@ -224,12 +217,10 @@ Metals commonly used include:
 <insert item="../graphics/Quadratic_formula.xml" type="image"/>
 <p>The LaTeX markup is:</p>
 <codeblock language="sam">
-
 x=\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 </codeblock>
 <p>Whereas the XML-based <phrase><annotation type="language">MathML</annotation></phrase> version looks like this:</p>
 <codeblock language="xml">
-
 &lt;math mode="display" xmlns="http://www.w3.org/1998/Math/MathML"&gt;
  &lt;semantics&gt;
   &lt;mrow&gt;
@@ -273,7 +264,6 @@ x=\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 <title>Subject Domain Languages</title>
 <p>So far we have looked at languages that are primarily <phrase><annotation type="concept">document domain</annotation></phrase> oriented. The <phrase><annotation type="concept">document domain</annotation></phrase> is an obvious choice for a public language since the use of common document types like books and articles is widespread. But there are a number of public <phrase><annotation type="concept">subject domain</annotation></phrase> languages as well. One example that we have looked at before (<citation nameref="chapter.merge"/>) is JavaDoc. Here is the example we looked at there:</p>
 <codeblock language="Java">
-
 /**
  * Validates a chess move.
  *

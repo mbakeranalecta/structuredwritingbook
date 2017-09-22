@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.metadata"><db:title>Metadata</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idm1929406508"><db:primary>metadata</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1929406508x"><db:primary>concept</db:primary><db:secondary>metadata</db:secondary></db:indexterm>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.metadata"><db:title>Metadata</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idm1964377756"><db:primary>metadata</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1964377756x"><db:primary>concept</db:primary><db:secondary>metadata</db:secondary></db:indexterm>
 
 
 
@@ -7,14 +7,12 @@
 <db:para>The standard definition of metadata is “data that describes data”, but that definition misses the central point. Metadata does not merely describe data, metadata creates data. Metadata turns an undifferentiated set of values into useful data by telling us what they mean.</db:para>
 <db:para>In the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain, the ingredients of a recipe are just list items. The content of those list items are just strings of characters.</db:para>
 <db:programlisting language="sam">
-
 section: Ingredients
     * 12 eggs
     * 2 qt water
 </db:programlisting>
 <db:para>Adding <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain markup allows us to specify to algorithms exactly what these strings mean.</db:para>
 <db:programlisting language="sam">
-
 ingredients:: ingredient, quantity, unit
     eggs, 12, each
     water, 2, qt
@@ -32,7 +30,6 @@ ingredients:: ingredient, quantity, unit
 <db:title>The recursive nature of metadata</db:title>
 <db:para>Metadata is a confusing concept because metadata is recursive. If metadata is the data that  creates data, then as data it too must be created by metadata. In other words, if the line <db:code>ingredients:: ingredient, quantity, unit</db:code> turns the ingredient lines into metadata in this markup:</db:para>
 <db:programlisting language="sam">
-
 ingredients:: ingredient, quantity, unit
     eggs, 12, each
     water, 2, qt
@@ -63,12 +60,11 @@ ingredients:: ingredient, quantity, unit
 <db:para>In some sense, therefore, ontology is the ultimate in <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain markup. Indeed, one should also be able to generate human-readable narrative from an ontology, given a sufficiently sophisticated algorithm and a sufficiently sophisticated ontology.</db:para>
 <db:para>All of this is very much outside our scope in this book. <db:indexterm><db:primary>Subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>Subject domain</db:secondary></db:indexterm>Subject domain markup is an attempt to capture certain aspects of the subject matter of a work. But it is not an attempt to model the argument of a work. Consider the passage:</db:para>
 <db:programlisting language="sam">
-
 In {Rio Bravo}(movie), {the Duke}(actor "John Wayne") 
 plays an ex-Union colonel.
 </db:programlisting>
 <db:para>Here the subject domain markup formalizes the fact that Rio Bravo is a movie and that “the Duke” is a reference to the actor John Wayne. It does not model the relationship between the two. An ontology would want to model the “starred in” relationship between John Wayne and Rio Bravo, whereas  <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain structured writing is normally content to leave this to the text.</db:para>
 <db:para>Similarly, this <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain markup does not bother to denote that Union is a reference to both a country and its armed forces, and that colonel is a rank in those armed forces. It does not denote these things because this particular markup language is concerned with movies and these facts are entirely incidental to the movie business. Actors, directors, and movies are significant subjects in the movie review domain. The names of nations and their armies that figure in the plot of individual movies are incidental in that domain. A full ontological treatment of the passage above, however, would need to model those relationships.</db:para>
 <db:para>Structured writing does make certain aspects of content clear to algorithms, but not with the intention of making it possible for the algorithms to make real-world inferences and decisions based on the information in that content. It only does what is necessary to partition and redirect content complexity in a content system in which human authors to use algorithms as tools to improve the quality of the content they prepare for human readers.</db:para>
-<db:indexterm class="endofrange" startref="idm1929406508"/><db:indexterm class="endofrange" startref="idm1929406508x"/></db:section>
+<db:indexterm class="endofrange" startref="idm1964377756"/><db:indexterm class="endofrange" startref="idm1964377756x"/></db:section>
 </db:chapter>

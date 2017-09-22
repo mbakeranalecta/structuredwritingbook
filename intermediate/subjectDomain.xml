@@ -25,13 +25,11 @@
 <title>type, term</title>
 <p>concept, subject domain</p>
 </index>
-<p>The <phrase><annotation type="concept">subject domain</annotation></phrase> is concerned with the subject matter of a text, including both the rhetoric of a subject – the way information on a subject is expressed and presented for a particular audience and purpose – and the identification of subjects expressed in the content. The subject domain overlaps with the document domain in that both are concerned with rhetoric, but the subject domain is concerned with the individual rhetoric or particular subjects for particular audiences. This may take the form of a document structure that is unique to a particular subject, or it may be structures that factor out any one rhetorical approach, allowing different rhetorical treatments of the same subject matter to be created.</p>
-<p>The most important decisions a writer makes are rhetorical ones: what to say and how to say it. In the <phrase><annotation type="concept">document domain</annotation></phrase>, the writer makes all these decisions, but they don’t explicitly record them all. They record only the text that results from making those decisions and some basic decisions about presentation, such as using a list. In the subject domain, however, the writer records their rhetorical decisions much more explicitly and the structure can constrain rhetorical decisions much more specifically.</p>
+<p>If the <phrase><annotation type="concept">media domain</annotation></phrase> is concerned with what the content looks like and the <phrase><annotation type="concept">document domain</annotation></phrase> is concerned with how the content is organized into a document, the <phrase><annotation type="concept">subject domain</annotation></phrase> is concerned with the subject matter of the content. Subject domain structures tell you what the content is about.</p>
 <p>A recipe is a useful example for illustrating the subject domain. <citation idref="ex.subj-restructured"/> is a recipe written in <phrase><annotation type="language">reStructuredText</annotation></phrase>, a lightweight general purpose <phrase><annotation type="concept">document domain</annotation></phrase> markup language:</p>
 <figure id="ex.subj-restructured">
 <title>Recipe for hard-boiled eggs marked up in reStructuredText</title>
 <codeblock language="reStructuredText">
-
 Hard-Boiled Eggs
 ================
 A hard-boiled egg is simple and nutritious. 
@@ -59,7 +57,6 @@ Preparation
 <figure id="ex.subj-html">
 <title>Recipe for hard-boiled eggs marked up in HTML</title>
 <codeblock language="HTML">
-
 &lt;html&gt;
     &lt;h1&gt;Hard-Boiled Eggs&lt;/h1&gt;
     
@@ -101,7 +98,6 @@ Preparation
 <figure id="ex.subj-sam">
 <title>Recipe for hard-boiled eggs marked up in a subject-domain language</title>
 <codeblock language="sam">
-
 recipe: Hard-Boiled Egg
     introduction:
         A hard-boiled egg is simple and nutritious. 
@@ -119,17 +115,18 @@ recipe: Hard-Boiled Egg
 </figure>
 <p>This structure breaks the document into a collection of named structures – introduction, ingredients, and preparation – which are contained in an overall structure called <code>recipe</code>. This is the basic rhetorical structure of a recipe. This markup clearly identifies this as a recipe (not a novel, a car manual, or a knitting pattern), and the writer is explicitly guided to follow this pattern. Also, the writer must present the ingredients as an unordered list and the preparation as a numbered list. (<citation nameref="chapter.conformance"/> looks at how to express and enforce such constraints.)</p>
 <p>In other words, in this example, someone other than the writer has made certain basic rhetorical decisions about how to write a recipe – let’s call that person an <phrase><annotation type="role">information architect</annotation></phrase>, though this is not always the responsibility of people with that title. By making this rhetorical structure explicit, the information architect communicates this requirement to writers, which simplifies their task because they no longer need to make this decision for each recipe they write. It also ensures that all recipes follow this pattern.</p>
+<p>The subject domain overlaps with the document domain in that the the structure for discussing a particular subject is also a document type. That is, a recipe is a specific type of document. In fact, the word recipe is specifically a type of document. The word for the dish you make by following the recipe is “dish”. A generic document domain language like <phrase><annotation type="language">reStructuredText</annotation></phrase> lets you write a recipe or any other kind of document you like. A specific recipe markup language constrains the writer to follow a particular rhetorical pattern when writing about how to prepare a dish. Thus the use of the <phrase><annotation type="concept">subject domain</annotation></phrase> allows you to place specific rhetorical constraints on specific document types.</p>
+<p>(I should note here that there are specific rhetorical structures that are not based on individual subjects but on other factors, like know-good methods of exposition that may be used with multiple subjects. I will look at these <citation nameref="chapter.rhetorical_structure"/>.)</p>
 <p>This does not mean we are entirely in the subject domain, any more than moving from a <phrase>vector graphics</phrase> program to a <phrase>word processor</phrase> meant we were entirely in the <phrase><annotation type="concept">document domain</annotation></phrase>. This recipe markup language enforces a couple of basic rhetorical decisions about recipes, but leaves plenty of others to the writer. Few markup languages are entirely in one domain. Later, you’ll see how to move this recipe markup further into the subject domain, capturing more rhetorical decisions in the markup language design.</p>
-<p>But this markup does not just force the writer to follow a set of rhetorical decisions, it factors out some rhetorical decisions altogether. This means that the writer neither makes nor implements those decisions. An <phrase><annotation type="role">information architect</annotation></phrase> makes the decisions and then designs an algorithm to implement them.</p>
-<p>Suppose you decide that the ingredients and preparation sections of each recipe should be titled “Ingredients” and “Preparation.” If your writers write recipes in the <phrase><annotation type="concept">document domain</annotation></phrase> using a language such as <phrase><annotation type="language">Markdown</annotation></phrase>, they have to remember to execute this decision each time. But in the <phrase><annotation type="concept">subject domain</annotation></phrase>, the titles are factored out. Instead there are markup structures called <code>ingredients</code> and <code>preparation</code> that don’t contain titles. A <phrase><annotation type="algorithm">publishing algorithm</annotation></phrase> adds the titles later.</p>
+<p>But the subject domain is not just about enforcing rhetorical decision on writers. It is better to factor out a decision than to enforce it, and even this very simple subject domain markup factors out a couple of rhetorical decisions. This means that the writer neither makes nor implements those decisions. An <phrase><annotation type="role">information architect</annotation></phrase> makes the decisions and then designs an algorithm to implement them.</p>
+<p>Suppose you decide that the ingredients and preparation sections of each recipe should be titled “Ingredients” and “Preparation.” If your writers write recipes in the <phrase><annotation type="concept">document domain</annotation></phrase> using a language such as <phrase><annotation type="language">Markdown</annotation></phrase>, they have to remember to execute this decision each time. But in this  <phrase><annotation type="concept">subject domain</annotation></phrase> example, the titles are factored out. Instead there are markup structures called <code>ingredients</code> and <code>preparation</code> that don’t contain titles. A <phrase><annotation type="algorithm">publishing algorithm</annotation></phrase> adds the titles later.</p>
 <p>This partitioning of tasks requires the writer to record enough information for the publishing algorithm to do its job. Here the presence of the <code>ingredients</code> and <code>presentation</code> sections in the recipe structure provides the information the algorithm needs to insert the appropriate titles.</p>
 <p>By factoring out titles, you also factor out the constraint on what those titles must be. You don’t need to remember the title text, and a whimsical writer can no longer decide to re-title these sections “Stuff you need,” “Stuff you do,” or some other variant. And you can change these titles across all recipes, including those that are already written, by changing the algorithm.</p>
 <p>This illustrates why it is generally preferable, where possible, to factor out a decision rather than to enforce it. An enforced decision may be made correctly and consistently, thanks to the constraint, but it has still be made by the author and it is recorded in the content as a <phrase><annotation type="italic">fait accomplis</annotation></phrase>. It can only be changed by changing the content. A decision that has been factored out can be made and changed later without affecting the content, opening up a number of possibilities that we will explore in later chapters.</p>
-<p>That said, enforciing constraints is a powerful tool. If you publish a lot of recipes, you probably have many more rhetorical decisions you would like to be made consistently. For instance, you might want every recipe to state its preparation time and the number of people it serves. In our subject-domain markup, we can enforce and record that constraint by moving that information from the introduction section to separate fields (see <citation idref="ex.subj-add-constraint"/>).</p>
+<p>That said, enforcing constraints is a powerful tool. If you publish a lot of recipes, you probably have many more rhetorical decisions you would like to be made consistently. For instance, you might want every recipe to state its preparation time and the number of people it serves. In our subject-domain markup, we can enforce and record that constraint by moving that information from the introduction section to separate fields (see <citation idref="ex.subj-add-constraint"/>).</p>
 <figure id="ex.subj-add-constraint">
 <title>Recipe with preparation time and servings added</title>
 <codeblock language="sam">
-
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious.
@@ -159,7 +156,6 @@ recipe: Hard Boiled Egg
 <figure id="ex.subj-ingredient-1">
 <title>Subject-domain markup for ingredients</title>
 <codeblock language="sam">
-
 ingredients:
     ingredient: 
         name: eggs
@@ -175,7 +171,6 @@ ingredients:
 <figure id="ex.subj-ingredient-2">
 <title>Subject-domain shortcut for ingredient markup</title>
 <codeblock language="sam">
-
 ingredients:: ingredient, quantity, unit
     eggs, 12, each
     water, 2, qt
@@ -190,7 +185,6 @@ ingredients:: ingredient, quantity, unit
 <figure id="ex.subj-recipe-sam">
 <title>Subject-domain markup for recipes</title>
 <codeblock language="sam">
-
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious.

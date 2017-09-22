@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.generate"><db:title>Generated Content</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idm1927563404"><db:primary>generated content</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1927563404x"><db:primary>concept</db:primary><db:secondary>generated content</db:secondary></db:indexterm><db:indexterm class="startofrange" significance="preferred" xml:id="idm1927557004"><db:primary>generating content</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1927557004x"><db:primary>task</db:primary><db:secondary>generating content</db:secondary></db:indexterm>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.generate"><db:title>Generated Content</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idm1965238908"><db:primary>generated content</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1965238908x"><db:primary>concept</db:primary><db:secondary>generated content</db:secondary></db:indexterm><db:indexterm class="startofrange" significance="preferred" xml:id="idm1965245436"><db:primary>generating content</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1965245436x"><db:primary>task</db:primary><db:secondary>generating content</db:secondary></db:indexterm>
 
 
 
@@ -8,7 +8,6 @@
 <db:para>The fundamental of content generation are pretty simple. It is just a matter of taking separate pieces of content and data and combining them to form new content. Thus when I spoke earlier about storing the ingredients of a recipe as a data structure and using an algorithm to present them as either a table or a list, that was an example of content generation.</db:para>
 <db:para>Here is what the algorithm to turn that data into a list might look like (again, in pseudocode):</db:para>
 <db:programlisting language="pseudo">
-
 match ingredients
     create ul
         continue
@@ -24,7 +23,6 @@ match ingredients/record
 </db:programlisting>
 <db:para>Here is what the algorithm for interpolating separate serving and preptime fields into the introduction of a recipe might look like:</db:para>
 <db:programlisting language="pseudo">
-
 match description
     continue
     output 'Preparation time is '
@@ -58,7 +56,6 @@ match serves
 <db:para>In <db:indexterm><db:primary>DITA</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DITA</db:secondary></db:indexterm><db:indexterm><db:primary>DITA</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>DITA</db:secondary></db:indexterm>DITA, the normal process is to assemble a book using a <db:code>map</db:code> file. A map file may assemble a book out of <db:indexterm><db:primary>DITA</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DITA</db:secondary></db:indexterm><db:indexterm><db:primary>DITA</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>DITA</db:secondary></db:indexterm>DITA topics or other maps, and this may include assembling the chapters from topics as well. In the end, though, the <db:indexterm><db:primary>table of contents</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>table of contents</db:secondary></db:indexterm>table of contents is generated in the same way, by traversing the document assembled by the <db:code>map</db:code>.</db:para>
 <db:para>In both these cases, the order of the TOC is specified by hand by the person who creates the <db:code>book</db:code> or <db:code>map</db:code> file. But there are other ways to determine the order of content in a TOC. For instance, a reference work such as an API reference may be organized by listing each library in order by name, and each function in alphabetical order by name within its library, creating a table of content with two levels. There is no need to write a map or book file to create this table of contents. There is an algorithm for creating this table of contents. In fact, it is the algorithm stated in the first sentence of this paragraph, “listing each library in order by name, and each function in alphabetical order by name within its library”. Here is that algorithm expressed in pseudo code:</db:para>
 <db:programlisting language="pseudo">
-
 create toc
     for each library sorted alphabetically
         create toc-entry library name
@@ -74,7 +71,6 @@ create toc
 <db:para>For instance, you might want to have a list of all the movies starring each actor in a collection of movie reviews. Such a list is not only a useful piece of information, they are also an important aid for navigating around a site. Maintaining such a list by hand would be laborious and error prone, especially with new movies being added to the collection all the time.</db:para>
 <db:para>If you have your movie reviews in a structured format that lists the actors in the movie in a format accessible to algorithms, like this:</db:para>
 <db:programlisting language="sam">
-
 movie: Rio Bravo
     starring:: actor
         John Wayne
@@ -85,7 +81,6 @@ movie: Rio Bravo
 </db:programlisting>
 <db:para>you can generate the filmographies for all your actors, like this:</db:para>
 <db:programlisting language="pseudo">
-
 create-filmographies
     for each unique actor in movie/starring/actor 
         create filmography named actor with link to actor
@@ -94,7 +89,6 @@ create-filmographies
 </db:programlisting>
 <db:para>Tables of contents are a <db:indexterm><db:primary>top-down information architecture</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>top-down information architecture</db:secondary></db:indexterm>top-down information architecture device. You expect to find them at the top of the information set. List are a <db:indexterm><db:primary>bottom-up information architecture</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>bottom-up information architecture</db:secondary></db:indexterm>bottom-up information architecture device. You expect to find them as independent pages or as elements within a page. Thus if our collection includes the biographies of actors, and we want each biography to include the filmography, we can omit the filmography from the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain version of the biography and add it to the output in the <db:indexterm><db:primary>publishing algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>publishing algorithm</db:secondary></db:indexterm>publishing algorithm.</db:para>
 <db:programlisting language="pseudo">
-
 match actor-bio
     create html
         create h1 "Biography: " + actor-name
@@ -118,13 +112,11 @@ match actor-bio
 <db:title>Content queries</db:title>
 <db:para>If you know what subjects the phrases in your content are referring to, you can use that information to form queries to pull in additional information from other sources. For instance, let’s say that you are writing about novels and you annotate the titles of novels that are mentioned in your text:</db:para>
 <db:programlisting language="xml">
-
 {War and Peace}(book "ISBN:1400079985") is a very long book.
 </db:programlisting>
 <db:para>Here the title is marked up as the title for a book and, to make things more precise, an ISBN number is provided as well. An ISBN number is the key to a large amount of data about a published book. If we have the ISBN number, we can look up all sorts of other information. For instance, we can use the ISBN to look up publication details using a web service like ISBNdb (http://isbndb.com).</db:para>
 <db:para>Most web services return information in XML. A hypothetical ISBN web service might return an XML document that looked like this (this is not what ISBNdb returns, just a simplified example):</db:para>
 <db:programlisting language="xml">
-
 &lt;book&gt;
     &lt;isbn&gt;1400079985&lt;/isbn&gt;
     &lt;title&gt;War and Peace&lt;/title&gt;
@@ -141,7 +133,6 @@ match actor-bio
 </db:blockquote>
 <db:para>The algorithm to do this looks something like this:</db:para>
 <db:programlisting language="pseudo">
-
 match p/title
     $isbn = @specifically 
 
@@ -175,18 +166,15 @@ match p/title
 <db:para>There are also some major process efficiencies to be realized by capturing this kind of metadata in your content. If you can use metadata keys to pull information from external sources, authors don’t have to look up all that information themselves when they write. Authors don’t have to decide which of the book details are going to appear in the final output. That decision is made by editing the XSLT stylesheet, and it can be changed, for all your existing content, simply by changing the stylesheet.</db:para>
 <db:para>Having writers enter the ISBN number in the content makes writing the algorithm straightforward, and sometimes it is appropriate because you are referring to a particular edition of a book and the ISBN number is the most reliable identifier of a specific edition. But in many case it is actually too specific, and it complicates life for the author to have to look up an ISBN when all they really want to refer to is the novel itself, regardless of which edition it is. This distinction can be important. There are many other editions of War and Peace, in many languages. War and Peace is a very long book in all those editions and all those languages. The paragraph is not referring specifically to the the Vintage Edition of 2008. It is referring to <db:emphasis>War and Peace</db:emphasis> as a novel generally.</db:para>
 <db:programlisting language="sam">
-
 {War and Peace}(novel) is a very long book.
 </db:programlisting>
 <db:para>Here, we have replaced the <db:code>book</db:code> annotation with the more specific <db:code>novel</db:code> annotation. If you are concerned that you might have references to other novels named <db:emphasis>War and Peace</db:emphasis> by other writers, you could make it more specific:</db:para>
 <db:programlisting language="sam">
-
 {War and Peace}(novel (Leo Tolstoy)) is a very long book.
 </db:programlisting>
 <db:para>In SAM, a phrase in parentheses inside an annotation is a namespace identifier. A namespace is a context in which a set of names is guaranteed to be unique. No author publishes more than one novel with the same name, so the name of the author is generally an adequate namespace identifier for the name of a novel. This markup is obviously easier for writers to create compared to asking for an ISBN. It only asks them for the things they already know, so they won’t have to stop to look anything up. That is an important part of <db:indexterm><db:primary>functional lucidity</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>functional lucidity</db:secondary></db:indexterm>functional lucidity</db:para>
 <db:para>But without an ISBN number, can we still get the book data we want? We still can, but we have to use a different query to extract it. Our original code did the lookup like this:</db:para>
 <db:programlisting language="pseudo">
-
 match p/novel
 
     $title = #content
@@ -230,5 +218,5 @@ match p/novel
 <db:para>As you have probably noticed, the methods used to generate content have a lot in common with those used to reuse content. That is because content reuse is just a form of content generation. Content reuse means generating more than one form or output content from the same collection of output content. Technically, the mechanisms and algorithms are the same; the differences have more to do with how you think about the problem.</db:para>
 <db:para>The biggest difference is that when you think in terms of content generation, you are automatically thinking in <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain terms. Content generation starts by treating content as data, and then generating content from that data. When people think of <db:indexterm><db:primary>content reuse algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>content reuse algorithm</db:secondary></db:indexterm>Content reuse, however, their thoughts often go straight to the <db:indexterm><db:primary>management domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>management domain</db:secondary></db:indexterm>management domain, to conditional content and pulling in content by reference. There can also be a tendency in content reuse to think of the first use as having a kind of primacy over the secondary uses. The first instance is not created as data with many potential uses, but as content designed for a specific use, which is then serendipitously reused when another potential use for the content is discovered.</db:para>
 <db:para>As I noted in <db:xref linkend="chapter.reuse"/>, there are certain kinds of reuse that are only feasible using <db:indexterm><db:primary>management domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>management domain</db:secondary></db:indexterm>management domain constructs, but a great deal can be accomplished using the subject domain approach. Creating conditional markup in your recipe to provide a different beverage match for <db:emphasis>Wine Weenie</db:emphasis> and <db:emphasis>The Teetotaler's Trumpet</db:emphasis> is a case of <db:indexterm><db:primary>reuse</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>reuse</db:secondary></db:indexterm>reuse thinking. Creating structure for alcoholic and non-alcoholic beverage matches to achieve the same goal (and potentially many more) is a case of content generation thinking. In many cases you will create a far more valuable content resource that is is far easier to write for and is far easier to maintain by thinking of your content set as a data source from which many kinds of content can be generated, rather than as a collection of reusable content components.</db:para>
-<db:indexterm class="endofrange" startref="idm1927563404"/><db:indexterm class="endofrange" startref="idm1927557004"/><db:indexterm class="endofrange" startref="idm1927563404x"/><db:indexterm class="endofrange" startref="idm1927557004x"/></db:section>
+<db:indexterm class="endofrange" startref="idm1965238908"/><db:indexterm class="endofrange" startref="idm1965245436"/><db:indexterm class="endofrange" startref="idm1965238908x"/><db:indexterm class="endofrange" startref="idm1965245436x"/></db:section>
 </db:chapter>

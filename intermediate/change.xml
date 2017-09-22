@@ -57,7 +57,6 @@
 <p>The safest approach to future proofing is not to try to anticipate the particular way in which the future will develop, but to create content structures that will be of value no matter what happens in the future. Creating content in the <phrase><annotation type="concept">subject domain</annotation></phrase> is the best way to practice this kind of future proofing, because writing in the subject domain creates <phrase><annotation type="concept">metadata</annotation></phrase> that contains only true statements about the subject matter itself. Those statements are going to remain true as long as the subject matter itself remains unchanged. That is as future proof as you can make your content.</p>
 <p>For example, suppose you write your ingredient list in <phrase><annotation type="language">reStructuredText</annotation></phrase> as a <phrase><annotation type="structure">table</annotation></phrase>:</p>
 <codeblock language="reStructuredText">
-
 ======  ========
 Item    Quantity
 ======  ========
@@ -68,7 +67,6 @@ water   2qt
 <p>Later you decide that you want to present ingredients as a <phrase><annotation type="structure">list</annotation></phrase> instead. To do this, you will have to go back to your content and change the markup. Doing this across a whole collection of recipes will be expensive.</p>
 <p>Suppose instead that you use <phrase><annotation type="concept">subject domain</annotation></phrase> markup:</p>
 <codeblock language="sam">
-
 ingredients:: ingredient, quantity
     eggs, 12
     water, 2qt
@@ -96,7 +94,6 @@ ingredients:: ingredient, quantity
 <p>Moving complexity to algorithms is the heart of the productivity and quality gains that you get from structured writing, but transferring complexity to an algorithm means transferring it to the person who writes and maintains your algorithms – your <phrase><annotation type="role">information architects</annotation></phrase> and <phrase><annotation type="role">content engineers</annotation></phrase>. In many case, the <phrase><annotation type="algorithm">change management</annotation></phrase> strategy you are implementing depends precisely on this: that in the event of a certain kind of change it will be handled by changing a single algorithm rather than by changing thousands of pieces of content. Insisting on a fixed and invariant tool set essentially means cutting yourself off from the possibility of partitioning complexity, particularly the complexity of change, in this way. This will greatly limit the extent to which you can bring much of your currently unhandled complexity under management, which in turn limits your ability to improve your rhetoric.</p>
 <p>A general move to the <phrase><annotation type="concept">document domain</annotation></phrase> (or the <phrase><annotation type="concept">subject domain</annotation></phrase>, or even a disciplined use of styles in a word processor) will allow you to handle font and layout changes. But what if the re-branding goes further? Suppose it involves changing the names of products or even the company. Should your structured writing approach explicitly support that change? Some organization like to mandate that writers insert a variable rather than the actual name for the company name and all product names. That way, when a product name or the company names changes all you have to do is redefine the variables.</p>
 <codeblock language="sam">
-
 We here at &gt;($company-name) do not recommend using 
 our product to catch roadrunners. 
 </codeblock>
@@ -104,7 +101,6 @@ our product to catch roadrunners.
 <p>Company and product names are distinct strings that are easy to search for when you need to make a change. The overhead of creating and maintaining the variables is greater than the overhead of doing a search and replace through the content when a change occurs. The use of variables, in other words, is creating more complexity than it is partitioning and transferring. And doing a search and replace allows you to make intelligent choices about historical usage and  inflections. It your content is held in text form (in a markup language) in a repository (file system or <phrase><annotation type="tool">content management system</annotation></phrase>) that allows you to do a search and replace across multiple files, this is probably easier and more reliable than using variables. (And it is what you are going to have to do anyway if there is a name change that you did not anticipate and therefore did not use variables for.)</p>
 <p>You may well need some markup for company and product names, however. You may want to format them differently or link from them to more information about the product or company. Rather than use a variable I would prefer to use an annotation like this:</p>
 <codeblock language="sam">
-
 We here at {Acme Corporation}(company) do not recommend 
 using our product to catch roadrunners.
 </codeblock>
@@ -150,7 +146,6 @@ using our product to catch roadrunners.
 <p>Change management, therefore, relies heavily on  <phrase><annotation type="process">conformance</annotation></phrase> to constraints and to the structures that express them. And this is a reciprocal relationship. To maintain conformance of your content, you have to be able to manage change successfully. But to manage change successfully, you need content to be conformant so that you can reliably identify the changes that are required and, as far as possible, execute those changes algorithmically.</p>
 <p>For example, say you have a movie review site that contains movie reviews as well as biographies of actors and directors. You have a review of <phrase><annotation type="italic">Rio Bravo</annotation></phrase> marked up like this:</p>
 <codeblock language="sam">
-
 movie-review:
     movie-title: Rio Bravo
     review-text:
@@ -159,7 +154,6 @@ movie-review:
 </codeblock>
 <p>At first, you do not have a biography for John Wayne on your site, so none of the reviews that mention John Wayne have a link to a biography. Then you add a John Wayne biography to your collection:</p>
 <codeblock language="sam">
-
 topic: 
     title: Biography of John Wayne
     index:

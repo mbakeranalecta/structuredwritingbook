@@ -45,7 +45,6 @@
 <p>Inevitably, writers have to make some concessions to the needs of algorithms, but we don’t want algorithms to impose such a burden on writers that we distract them from doing good research and quality writing. Any complexity that writers can’t handle results in poor rhetoric and unreliable data, which in turn results in inefficient process. So if the structures you create for the sake of algorithms prove too complex for writers to conform to, or too difficult to validate, you should ask if you could refactor those constraints again, perhaps to the <phrase><annotation type="concept">subject domain</annotation></phrase>, so that you get both the precision and detail that the algorithm needs and the ease of use and validation that the writer needs. In other words, don’t address one source of complexity in isolation. Keep moving complexity until every piece of it is handled by a person or process with skills, bandwidth, and resources to handle it.</p>
 <p>The recipe examples we have been using shows how a subject-domain structure can transfer complexity away from writers while providing for a high level of conformance checking.</p>
 <codeblock language="sam">
-
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious.
@@ -68,7 +67,6 @@ recipe: Hard Boiled Egg
 <p>But this is not the only way that <phrase><annotation type="concept">subject-domain</annotation></phrase> structured writing helps ensure completeness. Every <phrase><annotation type="concept">subject-domain</annotation></phrase> annotation highlights a subject that is important to your business. You can use an algorithm to scan those annotation and build a list of subjects that are important to your business. You can use this list to make sure that all the subjects you need to cover are actually covered.</p>
 <p>For example, structured writing allows you to annotate your text to call out the types of certain phrases such as function names, feature names, or stock symbols.</p>
 <codeblock language="sam">
-
 When installing widgets, use a {left-handed widget wrench}(tool) 
 to tighten them to the recommended torque for your device.
 </codeblock>
@@ -80,7 +78,6 @@ to tighten them to the recommended torque for your device.
 <p>Being consistent simply means abiding by constraints. As we have seen, this can take the form of either enforcing the constraint through required structure or, preferably, factoring out the constraint so that it is handled by algorithms rather than people. We have looked at how you can factor out constraints in both the <phrase><annotation type="concept">document domain</annotation></phrase> and the <phrase><annotation type="concept">subject domain</annotation></phrase>.</p>
 <p>If you annotate the important things in your content set, such as tools in the example above, you can use the annotations to check for consistency of names. Suppose a writer accidentally writes “spanner” rather than “wrench” in the name of the tool:</p>
 <codeblock language="sam">
-
 When installing widgets, use a {left-handed widget spanner}(tool) 
 to tighten them to the recommended torque for your device.
 </codeblock>
@@ -92,7 +89,6 @@ to tighten them to the recommended torque for your device.
 <p>Accuracy problems are often hard to spot. Typos, using old names for things, or giving deprecated examples are all hard for writers and reviewers to see. But there are structured writing techniques than can catch many of these kinds of problems.</p>
 <p>For example, if you were documenting an API, you could annotate each mention of a function.</p>
 <codeblock language="sam">
-
 Always check the return value of {rotateWidget()}(function) 
 to ensure the correct orientation was achieved. 
 </codeblock>
@@ -103,7 +99,6 @@ to ensure the correct orientation was achieved.
 <p>We can usefully divide constraints into two types: structural constraints and semantic constraints. Structural constraints deal with the the relationship of various text structures. Semantic constraints deal with the meaning of the content.</p>
 <p>For instance, consider this structure:</p>
 <codeblock language="xml">
-
 &lt;person&gt;
     &lt;name&gt;John Smith&lt;/name&gt;
     &lt;age&gt;middle&lt;/age&gt;
@@ -112,7 +107,6 @@ to ensure the correct orientation was achieved.
 </codeblock>
 <p>Some people certainly describe themselves as middle aged, and Christmas Day is certainly a date of birth, if an incomplete one. The author has complied with the structure of the document. But the creator of this markup language was probably looking for more precise information, probably in a format that an algorithm could read. What they wanted was:</p>
 <codeblock language="xml">
-
 &lt;person&gt;
     &lt;name&gt;John Smith&lt;/name&gt;
     &lt;age&gt;46&lt;/age&gt;
@@ -124,7 +118,6 @@ to ensure the correct orientation was achieved.
 <p>The data types referred to in the example above are not data types as they are commonly understood in programming terms (which refers to how they are stored in memory). In XML, as in all major markup languages, the data is all strings. A data type in a schema is actually just a pattern. There is a language for describing patterns in text that is called <phrase><annotation type="tool">regular expressions</annotation></phrase>. Regular expressions are a bit cryptic and take some getting used to but they are incredibly powerful at describing patterns in text. XML schema lets you define types for elements using regular expressions, so there is a huge amount you can do to constrain the content of elements in your documents.</p>
 </footnote>
 <codeblock language="xsd">
-
 &lt;xs:schema 
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     elementFormDefault="qualified"&gt;
@@ -153,7 +146,6 @@ to ensure the correct orientation was achieved.
 <p>This can be particularly effective when you are creating content in the subject domain since you don’t have to specify information in sentences, even if you intend to publish it that way. You can break the content out into separate structures and define the data type of those structures to ensure you get complete and accurate information, and to ensure that you can operate on that information using algorithms.</p>
 <p>The recipe text that we have used before is a good example of how content that could be expressed entirely in free-form paragraphs can be broken down in a fine-grained way that allows us to impose a variety of structural and semantic constraints.</p>
 <codeblock language="sam">
-
 recipe: Hard Boiled Egg
     introduction:
         A hard boiled egg is simple and nutritious.
@@ -193,7 +185,6 @@ recipe: Hard Boiled Egg
 <!--  Come up with another example? The difficulties of data arithmetic make -->
 <!--  this example confusing. -->
 <codeblock language="schematron">
-
 &lt;schema xmlns="http://purl.oclc.org/dsdl/schematron"
 queryBinding="xslt2"&gt;
     &lt;pattern&gt;
@@ -240,7 +231,6 @@ queryBinding="xslt2"&gt;
 <p>As part of the conformance audit for the programmer’s guide, we added a check that looked up each reference to an API call, including those in code blocks, in the source files for the API reference and reported an error if they did not match. None of the errors listed above would have been detected without this check.</p>
 <p>Of course, for this check to be possible, the algorithm that did the checking had to be able to identify every time the programmer’s guide mentioned an API call, and it had to be able to find all the API call names in the API reference. For this to be possible, both documents had to be written in a structured format that made the function names accessible to the algorithm. Here is a simplified example. First, a code sample from a programmer’s guide:</p>
 <codeblock language="sam">
-
 code-sample: Hello World
     
     The Hello World sample uses the {print}(function) to 
@@ -251,7 +241,6 @@ code-sample: Hello World
 </codeblock>
 <p>Next, a function reference listing from the API reference:</p>
 <codeblock language="sam">
-
 function: 
     name: print
     return-value: none

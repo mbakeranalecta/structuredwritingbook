@@ -21,7 +21,6 @@
 
 <db:para>The most prominent of the lightweight languages, and arguably the lightest-weight, is Markdown. Invented in 2004 by John Gruber as a way to quickly write simple web pages using syntax similar to that of an text-format email, it has spread to all kind of systems and now exists is multiple variants that have been adapted for different purposes. I have used several examples of MarkDown in this book. Here is one of them:</db:para>
 <db:programlisting language="markdown">
-
 Wayne's best yet
 ================
 
@@ -31,7 +30,6 @@ in _Rio Bravo_.
 </db:programlisting>
 <db:para>“Adapted for different purposes” mostly means that people have created versions with specific syntax and semantics in addition to those of Gruber’s first version. For instance, the code sharing site GitHub has adopted “Git Hub flavored Markdown” as the standard format for user-supplied information on the site, such as project descriptions and issues, and has added syntax specific to tracking issue numbers and code commits for projects, allowing the automatic generation of links between commits and the issues that relate to them. For example:</db:para>
 <db:programlisting language="github_markdown">
-
 Issue #135 was fixed in commit 
 8e8c6a0b4c9c41bd72fab5fd53e3d967e9688110.
 </db:programlisting>
@@ -48,7 +46,6 @@ Issue #135 was fixed in commit
 <db:para>Another popular lightweight format is Wiki markup, introduced by <db:indexterm><db:primary>Ward Cunningham</db:primary></db:indexterm><db:indexterm><db:primary>person</db:primary><db:secondary>Ward Cunningham</db:secondary></db:indexterm>Ward Cunningham in 1995 as the writing format for <db:indexterm><db:primary>WikiWikiWeb</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>WikiWikiWeb</db:secondary></db:indexterm>WikiWikiWeb, the first <db:indexterm><db:primary>Wiki</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>Wiki</db:secondary></db:indexterm>Wiki.<db:footnote><db:para>https://en.wikipedia.org/wiki/WikiWikiWeb</db:para></db:footnote> Wiki markup is similar to Markdown in many respects (most lightweight languages share the same basic syntax conventions, based on the imitation of formatted document features in plain text documents). What makes Wiki markup distinct is how it is tied into the operation of a Wiki. One of its most notable feature is how <db:indexterm><db:primary>linking algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>linking algorithm</db:secondary></db:indexterm>linking is handled. In the original WikiWikiWeb markup, any word with internal capitals was considered a “WikiWord” and instantly became a link to a page with that WikiWord as the title. Such a page was created automatically if it did not already exist. This was an extremely simple implementation of a <db:indexterm><db:primary>linking algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>linking algorithm</db:secondary></db:indexterm>linking algorithm based on annotation rather than the naming of resources.</db:para>
 <db:para>Different wikis have differences in the markup they support. Here is a small example of <db:indexterm><db:primary>MediaWiki</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>MediaWiki</db:secondary></db:indexterm>MediaWiki markup. (<db:indexterm><db:primary>MediaWiki</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>MediaWiki</db:secondary></db:indexterm>MediaWiki) is the system that runs Wikipedia):</db:para>
 <db:programlisting language="mediawiki">
-
 "Take some more [[tea]]," the March Hare said 
 to Alice, very earnestly.
 
@@ -71,7 +68,6 @@ an offended tone, "so I can't take more."
 <db:para>reStrucutredText is a lightweight hybrid markup language most often associated with the <db:indexterm><db:primary>Sphinx</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>Sphinx</db:secondary></db:indexterm>Sphinx documentation framework which was developed for documenting the Python programming language. We looked at reStructuredText briefly as an example of a hybrid markup language in <db:xref linkend="chapter.markup"/>.</db:para>
 <db:para>Similar to MarkDown, reStructuredText uses a plain text formatting approach to basic text structures. This part of the markup looks very natural because it uses characters and patterns that you might easily use to format a document if the only editor you had available were a plain text editor:</db:para>
 <db:programlisting language="reStructuredText">
-
 Hard Boiled Eggs
 ================
 A hard boiled egg is simple and nutritious. 
@@ -96,7 +92,6 @@ Preparation
 </db:programlisting>
 <db:para>But reStructuredText also has a feature called directives which is used to create markup with more complex semantics. Here, for example, is a directive for inserting an image:</db:para>
 <db:programlisting language="reStructuredText">
-
 .. image:: images/harcboiledegg.png
    :height: 100
    :width: 200
@@ -111,7 +106,6 @@ Preparation
 
 <db:para><db:indexterm><db:primary>ASCIIDoc</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>ASCIIDoc</db:secondary></db:indexterm>ASCIIDoc is a lightweight markup language based on the structure of <db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DocBook</db:secondary></db:indexterm><db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>DocBook</db:secondary></db:indexterm>DocBook. It is intended for the same sort of document types for which you might choose DocBook, but allows you to use a lightweight syntax. In appearance it is very similar to <db:indexterm><db:primary>MarkDown</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>MarkDown</db:secondary></db:indexterm>MarkDown, as shown in this example from Wikipedia:</db:para>
 <db:programlisting language="ASCIIDoc">
-
 = My Article
 J. Smith
 
@@ -141,7 +135,6 @@ Metals commonly used include:
 <db:title>LaTeX</db:title>
 <db:para>LaTeX is a <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain markup language used extensively in academia and scientific publishing. It is not based on XML syntax but on the syntax of <db:indexterm><db:primary>TeX</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>TeX</db:secondary></db:indexterm>TeX, a typesetting system developed by Donald Knuth in 1978.<db:footnote><db:para>https://en.wikipedia.org/wiki/LaTeX</db:para></db:footnote> Here is an example of LaTeX, from Wikipedia:</db:para>
 <db:programlisting language="LaTex">
-
 \documentclass[12pt]{article}
 \usepackage{amsmath}
 \title{\LaTeX}
@@ -177,12 +170,10 @@ Metals commonly used include:
 <db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/Quadratic_formula.svg" contentwidth="2in" align="left"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/Quadratic_formula.png"/></db:imageobject><db:textobject><db:para>A Quadratic formula rendered from LaTeX.</db:para></db:textobject></db:mediaobject>
 <db:para>The LaTeX markup is:</db:para>
 <db:programlisting language="sam">
-
 x=\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 </db:programlisting>
 <db:para>Whereas the XML-based <db:indexterm><db:primary>MathML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>MathML</db:secondary></db:indexterm>MathML version looks like this:</db:para>
 <db:programlisting language="xml">
-
 &lt;math mode="display" xmlns="http://www.w3.org/1998/Math/MathML"&gt;
  &lt;semantics&gt;
   &lt;mrow&gt;
@@ -226,7 +217,6 @@ x=\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 <db:title>Subject Domain Languages</db:title>
 <db:para>So far we have looked at languages that are primarily <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain oriented. The <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain is an obvious choice for a public language since the use of common document types like books and articles is widespread. But there are a number of public <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain languages as well. One example that we have looked at before (<db:xref linkend="chapter.merge"/>) is JavaDoc. Here is the example we looked at there:</db:para>
 <db:programlisting language="Java">
-
 /**
  * Validates a chess move.
  *

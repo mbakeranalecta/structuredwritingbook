@@ -34,7 +34,6 @@
 <figure id="ex.md-1">
 <title>Condition text markup (XML)</title>
 <codeblock language="xml">
-
 &lt;section publication="Wine Weenie"&gt;
     &lt;title&gt;Wine match&lt;/title&gt;
     &lt;p&gt;Pinot Noir&lt;/p&gt;
@@ -56,7 +55,6 @@
 <figure id="ex.md-2">
 <title>Include a warning in a dangerous procedure (SAM markup)</title>
 <codeblock language="sam">
-
 procedure: Blow stuff up
     &lt;&lt;&lt;(files/shared/admonitions/danger.sam)
     step: Plant dynamite.
@@ -70,7 +68,6 @@ procedure: Blow stuff up
 <figure id="ex.md-3">
 <title>Include a warning in a dangerous procedure (XML markup)</title>
 <codeblock language="XML">
-
 &lt;procedure&gt;
     &lt;title&gt;Blow stuff up&lt;/title&gt;
     &lt;xi:include href="files/shared/admonitions/danger.xml"/&gt;
@@ -92,7 +89,6 @@ procedure: Blow stuff up
 <figure id="ex.md-4">
 <title>Subject domain alternative for conditional content</title>
 <codeblock language="xml">
-
 &lt;wine-match&gt;Pinot Noir&lt;/wine-match&gt;
 &lt;beverage-match&gt;Lemonade&lt;/beverage-match&gt;
 </codeblock>
@@ -109,7 +105,6 @@ procedure: Blow stuff up
 <figure id="ex.md-5">
 <title>Subject-domain markup for a warning notice</title>
 <codeblock language="sam">
-
 procedure: Blow stuff up
     is-it-dangerous: yes
     step: Plant dynamite.
@@ -132,7 +127,6 @@ procedure: Blow stuff up
 <figure id="ex.md-7">
 <title>DITA product attribute example</title>
 <codeblock language="DITA">
-
 &lt;p&gt;
 the car seats &lt;ph product="CX-5"&gt;5&lt;/ph&gt;&lt;ph product="CX-9"&gt;7&lt;/ph&gt;
 &lt;/p&gt;
@@ -145,7 +139,6 @@ the car seats &lt;ph product="CX-5"&gt;5&lt;/ph&gt;&lt;ph product="CX-9"&gt;7&lt
 <p>I call this a hybrid approach because the DITA <phrase><annotation type="structure" specifically="@product" namespace="DITA">product</annotation></phrase> attribute does not exist merely to declare that a piece of text applies to a particular product. It is a conditional-processing attribute. That is, it is an instruction, even though it is phrased as a subject-domain declaration.</p>
 <p>To appreciate the difference, consider another approach to documenting multiple versions of a product. Rather than generating a separate document for each product variant, you could create a single document that covers all product variants and highlights the differences. Pure subject-domain markup would support either approach by simply recording the data for each variant:</p>
 <codeblock language="sam">
-
 seats:
     CX-5: 5
     CX-9: 7
@@ -156,7 +149,6 @@ seats:
 </blockquote>
 <p>The product attribute does not provide this flexibility:</p>
 <codeblock language="DITA">
-
 &lt;p&gt;The car seats 
 &lt;ph product="CX-5"&gt;5&lt;/ph&gt;&lt;ph product="CX-9"&gt;7&lt;/ph&gt;
 &lt;/p&gt;

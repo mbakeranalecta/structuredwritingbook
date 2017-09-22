@@ -40,7 +40,6 @@
 <figure id="fig.ssa-eggs-1">
 <title>Document-domain recipe for hard-boiled eggs</title>
 <codeblock language="sam">
-
 page: 
     title: Hard Boiled Eggs
     
@@ -68,7 +67,6 @@ page:
 <keep-together>auto</keep-together>
 </pagination-tweak>
 <codeblock language="pseudo">
-
 match page
     create html
         stylesheet www.example.com/style.css
@@ -107,7 +105,6 @@ match li
 <figure id="fig.ssa-html-recipe-output">
 <title>Result of running the algorithm in <citation idref="fig.ssa-recipe2html"/></title>
 <codeblock language="html">
-
 &lt;html&gt;
     &lt;head&gt;
         &lt;link rel="stylesheet" type="text/css"
@@ -158,7 +155,6 @@ match li
 <p>One such typesetting system is <phrase><annotation type="language">XSL-FO</annotation></phrase> (Extensible Stylesheet Language - Formatting Objects). Other typesetting systems include <phrase><annotation type="language">TeX</annotation></phrase> and newer versions of <phrase><annotation type="language">CSS</annotation></phrase>. XSL-FO is a typesetting language written in <phrase><annotation type="language">XML</annotation></phrase>. To format your content using <phrase><annotation type="language">XSL-FO</annotation></phrase>, you transform your source content into <phrase><annotation type="language">XSL-FO</annotation></phrase> markup, just the way you transform it into <phrase><annotation type="language">HTML</annotation></phrase> for the Web. But then you run the <phrase><annotation type="language">XSL-FO</annotation></phrase> markup through an <phrase><annotation type="language">XSL-FO</annotation></phrase> processor to produce your final output, typically <phrase><annotation type="language">PDF</annotation></phrase>.</p>
 <p>Here is a small example of XSL-FO markup:</p>
 <codeblock language="XSL-FO">
-
 &lt;fo:block space-after="4pt"&gt;
    &lt;fo:wrapper font-size="14pt" font-weight="bold"&gt;
      Hard Boiled Eggs
@@ -170,7 +166,6 @@ match li
 <figure id="fig.ssa-fo-algorithm">
 <title>Portion of the algorithm to generate XSL-FO from a recipe</title>
 <codeblock language="pseudo">
-
 match title
     output '&lt;fo:block space-after="4pt"&gt;'
         output '&lt;fo:wrapper font-size="14pt" font-weight="bold"&gt;'
@@ -186,7 +181,6 @@ match title
 <p>Basic <phrase><annotation type="italic">single sourcing</annotation></phrase> outputs the same document presentation to different media. However, each medium is different, and what works well in one medium does not always work as well in another. Thus the rhetoric that is appropriate to one media may not be appropriate to another, This is what I meant when I said at the beginning that single sourcing is a rhetoric problem as well as a process problem.</p>
 <p>For example, online media generally support <phrase><annotation type="concept">hypertext</annotation></phrase> links, while paper does not. Suppose you have a piece of content that includes a link:</p>
 <codeblock>
-
 In Rio Bravo, {the Duke}(link "http://JohnWayne.com")
 plays an ex-Union colonel out for revenge.
 </codeblock>
@@ -195,7 +189,6 @@ plays an ex-Union colonel out for revenge.
 <figure id="fig.ssa-specifically-1">
 <title>Algorithm to generate HTML link from the <code>@specifically</code> attribute</title>
 <codeblock>
-
 match p
     copy
         continue
@@ -210,7 +203,6 @@ match link
 <figure id="fig.ssa-specifically-1-output">
 <title>Output of the algorithm in <citation idref="fig.ssa-specifically-1"/></title>
 <codeblock language="html">
-
 &lt;p&gt;In Rio Bravo, &lt;a href="http://JohnWayne.com"&gt;The Duke&lt;/a&gt;
 plays and ex-Union colonel out for revenge.
 &lt;/p&gt;
@@ -221,7 +213,6 @@ plays and ex-Union colonel out for revenge.
 <figure id="fig.ssa-specifically-2">
 <title>Algorithm to display the URL for a link in print</title>
 <codeblock language="pseudo">
-
 match p
     create fo:block
         continue
@@ -237,7 +228,6 @@ match link
 <figure id="fig.ssa-specifically-out">
 <title>Output of <citation idref="fig.ssa-specifically-out"/></title>
 <codeblock language="xml">
-
 &lt;fo:block&gt;
 In Rio Bravo, the Duke (see: http://JohnWayne.com) 
 plays an ex-Union colonel out for revenge.
@@ -253,7 +243,6 @@ plays an ex-Union colonel out for revenge.
 <p>Because different media require a different rhetoric, you need a <phrase><annotation type="italic">differential</annotation></phrase> approach to single sourcing, one that allows you to differ not only the formatting but the presentation of the content for different media.</p>
 <p>One way to accomplish differential single sourcing is to record the content in the <phrase><annotation type="concept">subject domain</annotation></phrase>, thus removing the prejudice of the document-domain presentation for one class of media or another. Here is how this markup might look:</p>
 <codeblock language="sam">
-
 {The Duke}(actor "John Wayne") plays an ex-Union colonel.
 </codeblock>
 <p>In this example, you annotate the phrase “The Duke” with subject-domain markup that clarifies exactly what the text refers to. That annotation says that “the Duke” is the name of an actor, specifically John Wayne.</p>
@@ -261,7 +250,6 @@ plays an ex-Union colonel out for revenge.
 <figure id="fig.ssa-specifically-3-paper">
 <title>Algorithm to render paper from subject-domain markup</title>
 <codeblock>
-
 match actor
     continue
     output " ("
@@ -272,7 +260,6 @@ match actor
 <figure id="fig.ssa-specifically-3-web">
 <title>Algorithm to Web links from subject-domain markup</title>
 <codeblock>
-
 match actor
     create link
         $href = get link for actor named @specifically
@@ -302,7 +289,6 @@ match actor
 <figure id="ex.ssa-conditional-1">
 <title>Differential single source example using management-domain structures</title>
 <codeblock language="sam">
-
 section: Wrangling left-handed widgets
 
     ~~~(?help-only)
@@ -320,13 +306,11 @@ section: Wrangling left-handed widgets
 <p>In <citation idref="ex.ssa-conditional-1"/>, the SAM markup <code>~~~</code> creates a fragment structure to which conditional tokens can be applied. Content indented under the fragment marker is part of the fragment.</p>
 <p>To output a manual, you suppress the help-only content:</p>
 <codeblock language="pseudo">
-
 match fragment where conditions = help-only
     ignore
 </codeblock>
 <p>To output help, you include it:</p>
 <codeblock language="pseudo">
-
 match fragment where conditions = help-only
     continue
 </codeblock>

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.processing"><db:title>Processing Structured Text</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idm1928327852"><db:primary>processing structured text</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1928327852x"><db:primary>task</db:primary><db:secondary>processing structured text</db:secondary></db:indexterm>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.processing"><db:title>Processing Structured Text</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idm1966085388"><db:primary>processing structured text</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1966085388x"><db:primary>task</db:primary><db:secondary>processing structured text</db:secondary></db:indexterm>
 
 
 
@@ -18,7 +18,6 @@
 <db:title>Restoring style information</db:title>
 <db:para>In <db:xref linkend="chapter.separating"/>, the first example of <db:indexterm><db:primary>separating content from formatting</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>separating content from formatting</db:secondary></db:indexterm>separating content from formatting factored out the style information from this structure:</db:para>
 <db:programlisting>
-
 {font: 10pt "Open Sans"}The box contains:
 {font: 10pt "Open Sans"}[bullet][tab]Sand
 {font: 10pt "Open Sans"}[bullet][tab]Eggs
@@ -26,7 +25,6 @@
 </db:programlisting>
 <db:para>The style information was replaced with style names:</db:para>
 <db:programlisting>
-
 {style: paragraph}The box contains:
 {style: bullet-paragraph}Sand
 {style: bullet-paragraph}Eggs
@@ -34,13 +32,11 @@
 </db:programlisting>
 <db:para>And then the styles were defined as follows:</db:para>
 <db:programlisting>
-
 paragraph = {font: 10pt "Open Sans"}
 bullet-paragraph = {font: 10pt "Open Sans"}[bullet][tab]
 </db:programlisting>
 <db:para>To unite each paragraph with the correct style, you can write a set of search-and-replace rules:</db:para>
 <db:programlisting>
-
 find {style: paragraph}
     replace {font: 10pt "Open Sans"}
 
@@ -50,7 +46,6 @@ find {style: bullet-paragraph}
 <db:para>This algorithm combines two sources of information: the structured text and the style definitions. Usually, the style definitions are embedded in the rules, as in this example. In some cases, however, the rules may pull content from a separate file. I show examples of this later.</db:para>
 <db:para>Applying these rules brings back the original content:</db:para>
 <db:programlisting>
-
 {font: 10pt "Open Sans"}The box contains:
 {font: 10pt "Open Sans"}[bullet][tab]Sand
 {font: 10pt "Open Sans"}[bullet][tab]Eggs
@@ -61,7 +56,6 @@ find {style: bullet-paragraph}
 
 <db:para>If you want to change the styles, you can apply a different set of rules (in other words, make a different set of decisions):</db:para>
 <db:programlisting>
-
 find {style: paragraph}
     replace {font: 12pt "Century Schoolbook"}
 
@@ -70,7 +64,6 @@ find {style: bullet-paragraph}
 </db:programlisting>
 <db:para>Applying these new rules gives you the following:</db:para>
 <db:programlisting>
-
 {font: 12pt "Century Schoolbook"}The box contains:
 {font: 12pt "Century Schoolbook"}[em dash][tab]Sand
 {font: 12pt "Century Schoolbook"}[em dash][tab]Eggs
@@ -82,7 +75,6 @@ find {style: bullet-paragraph}
 <db:para>The tools that do this sort of processing do not literally use search and replace like this. Rather, they parse the source document to pull out the structures and allow you to specify your processing rules by referring to those structures.</db:para>
 <db:para>The mechanism by which a processing tool recognizes structure is not our focus here. We are just going to tell it what to do when it finds a structure. So, the next set of rules match structures rather than looking for literal strings in the text:</db:para>
 <db:programlisting>
-
 match paragraph
     apply style {font: 12pt "Century Schoolbook"}
 
@@ -92,7 +84,6 @@ match bullet-paragraph
 </db:programlisting>
 <db:para>The result of applying these rules is the same as before:</db:para>
 <db:programlisting>
-
 {font: 12pt "Century Schoolbook"}The box contains:
 {font: 12pt "Century Schoolbook"}[em dash][tab]Sand
 {font: 12pt "Century Schoolbook"}[em dash][tab]Eggs
@@ -119,12 +110,10 @@ match bullet-paragraph
 <db:title>Applying rules in the document domain</db:title>
 <db:para>Suppose you have a piece of document-domain structured text that contains this <db:code>title</db:code> structure:</db:para>
 <db:programlisting language="sam">
-
 title: Moby Dick
 </db:programlisting>
 <db:para>You want to transform this document into HTML. When a rule matches a structure in the source document, the processor outputs the equivalent HTML structure. Here is the pseudocode for this rule (it is in a slightly different format from the pseudocode above):</db:para>
 <db:programlisting language="pseudo">
-
 match title
     create h1 
         continue
@@ -132,7 +121,6 @@ match title
 <db:para>This says, when the processor sees a <db:code>title</db:code> structure in the source, it creates an <db:code>h1</db:code> structure in the output and then continues applying rules to the content of the title structure.</db:para>
 <db:para>The <db:code>continue</db:code> instruction is indented under the <db:code>create h1</db:code> instruction to indicate that the results will appear inside the <db:code>h1</db:code> structure. Another way of expressing this would be:</db:para>
 <db:programlisting language="pseudo">
-
 match title
     &lt;h1&gt;
         continue
@@ -141,25 +129,21 @@ match title
 <db:para>Again, it does not matter what form you use for your pseudocode as long as you clearly express the decision to make when the event in question occurs.</db:para>
 <db:para>In this example, the processor outputs the text content of the structure automatically (as is the case in many tools), so the output of this rule (expressed in HTML) is:</db:para>
 <db:programlisting language="html">
-
 &lt;h1&gt;Moby Dick&lt;/h1&gt;
 </db:programlisting>
 <db:para>But suppose there is another structure inside the title? In this case that structure is an <db:indexterm><db:primary>annotation</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>annotation</db:secondary></db:indexterm>annotation of part of the title text:</db:para>
 <db:programlisting language="sam">
-
 title: Review of {Rio Bravo}(movie)
 </db:programlisting>
 <db:para>Here the annotated text is set off with curly braces and the annotation itself is in parentheses immediately after it. (This is a feature of the <db:indexterm><db:primary>SAM</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>SAM</db:secondary></db:indexterm>SAM markup syntax that I use for most of the examples in this book.) This annotation says that the words “Rio Bravo” refer to a movie. The annotation is a content structure, just like the title structure, and is nested inside the text of the title.</db:para>
 <db:para>So what do you need to do to your <db:code>title</db:code> rule to make it handle <db:code>movie</db:code> annotations embedded in the title text? Absolutely nothing. Instead, you write a separate rule for handling <db:code>movie</db:code> annotations no matter where they occur:</db:para>
 <db:programlisting language="pseudo">
-
 match movie
     create i
         continue
 </db:programlisting>
 <db:para>When the processor hits <db:code>continue</db:code> in the <db:code>title</db:code> rule, it processes the content of the title structure. In doing so, it encounters the <db:code>movie</db:code> structure and executes the <db:code>movie</db:code> rule. The result is output that looks like this:</db:para>
 <db:programlisting language="html">
-
 &lt;h1&gt;Review of &lt;i&gt;Rio Bravo&lt;/i&gt;&lt;/h1&gt;
 </db:programlisting>
 <db:para>The <db:code>continue</db:code> instruction is all you need to add to your rules to allow them to deal with nested structures. The rules remain an unordered collection, just like a style sheet. (In fact, <db:indexterm><db:primary>XSLT</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>XSLT</db:secondary></db:indexterm>XSLT, a language that implements this model, calls a set of processing rules a “stylesheet.”)</db:para>
@@ -168,7 +152,6 @@ match movie
 <db:title>Processing based on context</db:title>
 <db:para>When you move to the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain, you use context to reduce the number of structures you need. For example, where <db:indexterm><db:primary>HTML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>HTML</db:secondary></db:indexterm>HTML has six different heading structures (<db:code>H1</db:code> through <db:code>H6</db:code>), <db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DocBook</db:secondary></db:indexterm>DocBook has only one (<db:code>title</db:code>), which can occur in many different contexts. So how do you apply the right formatting to a title based on its context? You create a different rule for the <db:code>title</db:code> structure in each context. You express the context by listing the parent structure names separated by slashes:</db:para>
 <db:programlisting language="pseudo">
-
 match book/title
     create h1 
         continue
@@ -187,13 +170,11 @@ match figure/title
 </db:programlisting>
 <db:para>Now here is the clever bit. You don’t have to change the <db:code>movie</db:code> rule to work with any of these versions of the <db:code>title</db:code> rule. Suppose your title is the title of a section, like this:</db:para>
 <db:programlisting language="sam">
-
 section:
     title: Review of {Rio Bravo}(movie)
 </db:programlisting>
 <db:para>When you process, the processor will execute the <db:code>section/title</db:code> rule to deal with the title structure and the <db:code>movie</db:code> rule when the <db:code>movie</db:code> structure occurs in the course of processing the content of the <db:code>title</db:code> structure. The results are as follows:</db:para>
 <db:programlisting language="html">
-
 &lt;h3&gt;Review of &lt;i&gt;Rio Bravo&lt;/i&gt;&lt;/h3&gt;
 </db:programlisting>
 <db:para>Here is the basic pattern for most structured writing algorithms:</db:para>
@@ -219,7 +200,6 @@ section:
 <db:para>When you move content to the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain or the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, you often create container structures to provide context. These container structures have no media-domain analog, so what do you do with them when you publish? The containers provide context for the rest of your processing rules, but what do you do with the containers themselves?</db:para>
 <db:para>In the previous example the content was contained in a <db:code>section</db:code> structure. So how does the <db:code>section</db:code> structure get processed?</db:para>
 <db:programlisting language="pseudo">
-
 match section
     continue
 </db:programlisting>
@@ -231,7 +211,6 @@ match section
 <db:para>As we saw in <db:xref linkend="chapter.separating"/>, a simple example of factoring out text is numbered and bulleted lists, where you factor out the text of the numbers and bullets. Let’s look at how you create rules to put them back.</db:para>
 <db:para>Suppose you have a document that contains these two different kinds of lists:</db:para>
 <db:programlisting>
-
 paragraph: To wash hair:
 ordered-list:
     list-item:Lather
@@ -246,21 +225,18 @@ unordered-list:
 </db:programlisting>
 <db:para>Let’s write a set of rules to deal with this document. Converting this to HTML lists isn’t very interesting, since HTML handles list numbering and bullets itself. Instead, let’s create instructions for printing on paper. Real printing instructions get tediously detailed, so let’s use the same style specification shorthand used earlier. The <db:code>paragraph</db:code> rule is simple enough:</db:para>
 <db:programlisting>
-
 match paragraph
     apply style {font: 10pt "Century Schoolbook"}
     continue
 </db:programlisting>
 <db:para>Now let’s deal with the <db:code>ordered-list</db:code>. The ordered list structure is just a container, so you don’t need to create an output structure for it. But because this is an ordered list, you need to start a count to number the items in the list. That means you need a variable to store the current count. The <db:code>$</db:code> prefix indicates that you are creating a variable:</db:para>
 <db:programlisting>
-
 match ordered-list
     $count=1
     continue
 </db:programlisting>
 <db:para>Then, the rule for each ordered list item outputs the value of the variable <db:code>$count</db:code> and increments it by one:</db:para>
 <db:programlisting>
-
 match ordered-list/list-item
     apply style {font: 12pt "Century Schoolbook"}
     output $count
@@ -272,7 +248,6 @@ match ordered-list/list-item
 <db:para>When the processor encounters a new numbered list, it executes the <db:code>ordered-list</db:code> rule, which resets <db:code>$count</db:code> to 1.</db:para>
 <db:para>This rule does not match <db:code>list-item</db:code> elements that are children of an <db:code>unordered-list</db:code> element, so you need a separate set of rules for unordered lists:</db:para>
 <db:programlisting language="pseudocode">
-
 match unordered-list
     continue
     
@@ -283,7 +258,6 @@ match ordered-list/list-item
 </db:programlisting>
 <db:para>Applying the combined set of rules produces output like this:</db:para>
 <db:programlisting>
-
 {font: 10pt "Century Schoolbook"}To wash hair:
 {font: 10pt "Century Schoolbook"}1.[tab]Lather
 {font: 10pt "Century Schoolbook"}2.[tab]Rinse
@@ -300,7 +274,6 @@ match ordered-list/list-item
 <db:para>You may not always want to apply final formatting to your content in a single step. When you separated content from formatting, you did the separation in several stages. You may want to put them back together in several stages. This not only results in simpler, easier-to-maintain algorithms, it can make it possible for you to reuse some of the downstream steps (nearer the <db:indexterm><db:primary>media domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media domain</db:secondary></db:indexterm>media domain) for different types of <db:indexterm><db:primary>document-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document-domain</db:secondary></db:indexterm>document-domain and <db:indexterm><db:primary>subject-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject-domain</db:secondary></db:indexterm>subject-domain content.</db:para>
 <db:para>So far the examples have come from the <db:indexterm><db:primary>media domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media domain</db:secondary></db:indexterm>media domain and the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain. Here is a <db:indexterm><db:primary>subject-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject-domain</db:secondary></db:indexterm>subject-domain example that builds on <db:xref linkend="ex.separate-1"/>, which moved a labeled list from the document domain to the subject domain.</db:para>
 <db:programlisting language="sam">
-
 address:
     street: 123 Elm Street
     town: Smallville
@@ -309,7 +282,6 @@ address:
 </db:programlisting>
 <db:para>Moving this content back to the document domain should make it look like this:</db:para>
 <db:programlisting language="sam">
-
 labeled-list:
     list-item:
         label: Street
@@ -326,7 +298,6 @@ labeled-list:
 </db:programlisting>
 <db:para>Here is the set of rules to accomplish this transformation:</db:para>
 <db:programlisting>
-
 match address
     create labeled-list
         continue
@@ -372,5 +343,5 @@ match code
 <db:para>This chapter does not by any means describe the full range of available content processing techniques or all the ways in which algorithms can recognize and manipulate structures in content. The point of introducing structured writing algorithms and the basics of content processing is to enable you to think about structures with an eye to how they can be processed. Often when you look at structures in this way you can see how you can use a simpler structure and how that simpler structure can be processed to achieve the same result as a more complex structure.</db:para>
 <db:para>Don’t be afraid to write out your algorithms in pseudocode to make sure you have a clear idea of the processing you intend for your structures, and don’t feel confined by the algorithms shown in this book or the annotation I use for pseudocode. You own your pseudocode. Choose a format that is clear to you and that communicates clearly to whoever will be implementing the actual code. Working together with that person can help you improve your appreciation of algorithms and your ability to write useful pseudocode.</db:para>
 <db:para>Can learning to write real code help with this to? Absolutely it can. Is it necessary? No. What is essential is to think in terms of distributing certain parts of your content system to algorithms and to develop the ability to describe those algorithms and structures well enough that a programmer can implement them.</db:para>
-<db:indexterm class="endofrange" startref="idm1928327852"/><db:indexterm class="endofrange" startref="idm1928327852x"/></db:section>
+<db:indexterm class="endofrange" startref="idm1966085388"/><db:indexterm class="endofrange" startref="idm1966085388x"/></db:section>
 </db:chapter>

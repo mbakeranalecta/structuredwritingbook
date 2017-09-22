@@ -32,7 +32,6 @@
 <p>Different markup languages often construct the same semantic block differently. <phrase><annotation type="language"><annotation type="standard">DITA</annotation></annotation></phrase>, <phrase><annotation type="language"><annotation type="standard">DocBook</annotation></annotation></phrase>, and <phrase><annotation type="language"><annotation type="standard">HTML</annotation></annotation></phrase> all define lists, and each of them defines the internals of a list differently. Nonetheless we recognize that each of them is an implementation of the idea of a list and for most purposes you could markup your content with any one of them without any loss of functionality.</p>
 <p>A list is made up of structural blocks that build the shape of a list. I’ll illustrate this with XML since it makes the blocks explicit:</p>
 <codeblock language="xml">
-
 &lt;ol&gt;
     &lt;li&gt;
         &lt;p&gt;This is the first item.&lt;/p&gt;
@@ -46,7 +45,6 @@
 <p>Other <phrase><annotation type="concept">document domain</annotation></phrase> examples of semantic blocks include <phrase><annotation type="structure">tables</annotation></phrase> and <phrase><annotation type="structure">procedures</annotation></phrase>. (Again you will find that DocBook, DITA, and HTML, not to mention S1000D, and <phrase><annotation type="language">reStructuredtext</annotation></phrase>, all have tables, all with different internal structures, and that both DocBook and DITA have procedures, again internally different. It is possible to disagree greatly about how to structure a semantic block while still recognizing different implementations as examples of the same semantic type.)</p>
 <p>In the subject domain, examples of semantic blocks would include the ingredients list from the recipe example we have been using:</p>
 <codeblock language="sam">
-
 ingredients:: ingredient, quantity, unit
     eggs, 3, each
     salt, 1, tsp
@@ -54,7 +52,6 @@ ingredients:: ingredient, quantity, unit
 </codeblock>
 <p>and the parameter description from an API reference:</p>
 <codeblock language="sam">
-
 parameter: string
     required: yes
     description:
@@ -62,7 +59,6 @@ parameter: string
 </codeblock>
 <p>One characteristic of semantic blocks is that they often tend to repeat as a unit, as this example does in an API reference entry:</p>
 <codeblock language="sam">
-
 function: print
     return-value: none
     parameters:
@@ -146,13 +142,11 @@ function: print
 <title>Paragraphs and phrases</title>
 <p>Paragraphs are the thing that make structured content the most different from other computable data sets. This is not really because of the paragraph structure per se, but because of the phrases within the paragraphs that we want to annotate. It is rare in any other data set to see a structure floating within the value of another structure. But that is exactly what happens when we annotate phrases in a paragraph.</p>
 <codeblock language="sam">
-
 In {Rio Bravo}(movie), {the Duke}(actor "John Wayne") 
 plays an ex-Union colonel.
 </codeblock>
 <p>In this examples, the annotation on the phrases “Rio Bravo” and “the Duke” float in the middle of the paragraph block. Here is the same thing in XML:</p>
 <codeblock language="xml">
-
 &lt;p&gt;In &lt;movie&gt;Rio Bravo&lt;/movie&gt;, 
 &lt;actor name="John Wayne"&gt;the Duke&lt;/actor&gt; 
 plays an ex-Union colonel.&lt;/p&gt;
@@ -175,7 +169,6 @@ plays an ex-Union colonel.&lt;/p&gt;
 <p>Mixed content is the reason that most traditional data format are not a good fit for content. They may be able to model element content and data content, but they lack an elegant way to model mixed content.</p>
 <p>Even conventional programming languages have trouble with mixed content. In fact most libraries for XML processing invent an additional wrapper around each string of characters in a mixed content element, effectively representing it as if it were written like this (without mixed content):</p>
 <codeblock language="xml">
-
 &lt;p&gt;&lt;text&gt;In &lt;/text&gt;&lt;movie&gt;Rio Bravo&lt;/movie&gt;&lt;text&gt;, 
 &lt;/text&gt;&lt;actor name="John Wayne"&gt;the Duke&lt;/actor&gt;&lt;text&gt; 
 plays an ex-Union colonel.&lt;/text&gt;&lt;/p&gt;
@@ -187,7 +180,6 @@ plays an ex-Union colonel.&lt;/text&gt;&lt;/p&gt;
 </blockquote>
 <p>You solve it by first extracting the data from the narrative:</p>
 <codeblock>
-
 4 + 5 - 2 =
 </codeblock>
 <p>But with content, which we can sometimes extract the data from the content, as we have seen, we also need to retain the content, or the means to recreate the content, since the content (not the answer) is the product we are trying to produce.</p>

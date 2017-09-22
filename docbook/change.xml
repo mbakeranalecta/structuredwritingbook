@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.change"><db:title>Change management</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idm1929565324"><db:primary>change</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1929565324x"><db:primary>concept</db:primary><db:secondary>change</db:secondary></db:indexterm><db:indexterm class="startofrange" significance="preferred" xml:id="idm1929569932"><db:primary>change management</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1929569932x"><db:primary>algorithm</db:primary><db:secondary>change management</db:secondary></db:indexterm>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.change"><db:title>Change management</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idm1966212124"><db:primary>change</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1966212124x"><db:primary>concept</db:primary><db:secondary>change</db:secondary></db:indexterm><db:indexterm class="startofrange" significance="preferred" xml:id="idm1966209308"><db:primary>change management</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1966209308x"><db:primary>algorithm</db:primary><db:secondary>change management</db:secondary></db:indexterm>
 
 
 
@@ -29,7 +29,6 @@
 <db:para>The safest approach to future proofing is not to try to anticipate the particular way in which the future will develop, but to create content structures that will be of value no matter what happens in the future. Creating content in the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain is the best way to practice this kind of future proofing, because writing in the subject domain creates <db:indexterm><db:primary>metadata</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>metadata</db:secondary></db:indexterm>metadata that contains only true statements about the subject matter itself. Those statements are going to remain true as long as the subject matter itself remains unchanged. That is as future proof as you can make your content.</db:para>
 <db:para>For example, suppose you write your ingredient list in <db:indexterm><db:primary>reStructuredText</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>reStructuredText</db:secondary></db:indexterm>reStructuredText as a <db:indexterm><db:primary>table</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>table</db:secondary></db:indexterm>table:</db:para>
 <db:programlisting language="reStructuredText">
-
 ======  ========
 Item    Quantity
 ======  ========
@@ -40,7 +39,6 @@ water   2qt
 <db:para>Later you decide that you want to present ingredients as a <db:indexterm><db:primary>list</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>list</db:secondary></db:indexterm>list instead. To do this, you will have to go back to your content and change the markup. Doing this across a whole collection of recipes will be expensive.</db:para>
 <db:para>Suppose instead that you use <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain markup:</db:para>
 <db:programlisting language="sam">
-
 ingredients:: ingredient, quantity
     eggs, 12
     water, 2qt
@@ -68,7 +66,6 @@ ingredients:: ingredient, quantity
 <db:para>Moving complexity to algorithms is the heart of the productivity and quality gains that you get from structured writing, but transferring complexity to an algorithm means transferring it to the person who writes and maintains your algorithms – your <db:indexterm><db:primary>information architects</db:primary></db:indexterm><db:indexterm><db:primary>role</db:primary><db:secondary>information architects</db:secondary></db:indexterm>information architects and <db:indexterm><db:primary>content engineers</db:primary></db:indexterm><db:indexterm><db:primary>role</db:primary><db:secondary>content engineers</db:secondary></db:indexterm>content engineers. In many case, the <db:indexterm><db:primary>change management</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>change management</db:secondary></db:indexterm>change management strategy you are implementing depends precisely on this: that in the event of a certain kind of change it will be handled by changing a single algorithm rather than by changing thousands of pieces of content. Insisting on a fixed and invariant tool set essentially means cutting yourself off from the possibility of partitioning complexity, particularly the complexity of change, in this way. This will greatly limit the extent to which you can bring much of your currently unhandled complexity under management, which in turn limits your ability to improve your rhetoric.</db:para>
 <db:para>A general move to the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain (or the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, or even a disciplined use of styles in a word processor) will allow you to handle font and layout changes. But what if the re-branding goes further? Suppose it involves changing the names of products or even the company. Should your structured writing approach explicitly support that change? Some organization like to mandate that writers insert a variable rather than the actual name for the company name and all product names. That way, when a product name or the company names changes all you have to do is redefine the variables.</db:para>
 <db:programlisting language="sam">
-
 We here at &gt;($company-name) do not recommend using 
 our product to catch roadrunners. 
 </db:programlisting>
@@ -76,7 +73,6 @@ our product to catch roadrunners.
 <db:para>Company and product names are distinct strings that are easy to search for when you need to make a change. The overhead of creating and maintaining the variables is greater than the overhead of doing a search and replace through the content when a change occurs. The use of variables, in other words, is creating more complexity than it is partitioning and transferring. And doing a search and replace allows you to make intelligent choices about historical usage and  inflections. It your content is held in text form (in a markup language) in a repository (file system or <db:indexterm><db:primary>content management system</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>content management system</db:secondary></db:indexterm>content management system) that allows you to do a search and replace across multiple files, this is probably easier and more reliable than using variables. (And it is what you are going to have to do anyway if there is a name change that you did not anticipate and therefore did not use variables for.)</db:para>
 <db:para>You may well need some markup for company and product names, however. You may want to format them differently or link from them to more information about the product or company. Rather than use a variable I would prefer to use an annotation like this:</db:para>
 <db:programlisting language="sam">
-
 We here at {Acme Corporation}(company) do not recommend 
 using our product to catch roadrunners.
 </db:programlisting>
@@ -122,7 +118,6 @@ using our product to catch roadrunners.
 <db:para>Change management, therefore, relies heavily on  <db:indexterm><db:primary>conformance</db:primary></db:indexterm><db:indexterm><db:primary>process</db:primary><db:secondary>conformance</db:secondary></db:indexterm>conformance to constraints and to the structures that express them. And this is a reciprocal relationship. To maintain conformance of your content, you have to be able to manage change successfully. But to manage change successfully, you need content to be conformant so that you can reliably identify the changes that are required and, as far as possible, execute those changes algorithmically.</db:para>
 <db:para>For example, say you have a movie review site that contains movie reviews as well as biographies of actors and directors. You have a review of <db:emphasis>Rio Bravo</db:emphasis> marked up like this:</db:para>
 <db:programlisting language="sam">
-
 movie-review:
     movie-title: Rio Bravo
     review-text:
@@ -131,7 +126,6 @@ movie-review:
 </db:programlisting>
 <db:para>At first, you do not have a biography for John Wayne on your site, so none of the reviews that mention John Wayne have a link to a biography. Then you add a John Wayne biography to your collection:</db:para>
 <db:programlisting language="sam">
-
 topic: 
     title: Biography of John Wayne
     index:
@@ -143,5 +137,5 @@ topic:
 </db:programlisting>
 <db:para>Suddenly every movie review that mentions John Wayne in the text or lists him as a star should be <db:indexterm><db:primary>linking algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>linking algorithm</db:secondary></db:indexterm>linking to this biography. That might be fifty pages of your site that now should be linking to the topic you just added. That is a lot of change to process just because of one added page. But if you have used the <db:indexterm><db:primary>linking algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>linking algorithm</db:secondary></db:indexterm>linking technique based on <db:indexterm><db:primary>subject annotations</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>subject annotations</db:secondary></db:indexterm>subject annotations, as described in <db:xref linkend="chapter.linking"/>, then all you have to do is rebuild your content set and those links will be created automatically. There is literally no separate change management step that need needs to be done to get those links. It has been entirely factored out.</db:para>
 <db:para>As we noted in <db:xref linkend="chapter.conformance"/>, the heart of <db:indexterm><db:primary>conformance</db:primary></db:indexterm><db:indexterm><db:primary>process</db:primary><db:secondary>conformance</db:secondary></db:indexterm>conformance is designing structures that are easy to conform to. Change management is not something you can tack on as an afterthought, but nor is is something that necessarily requires a separate set of structures. Content that is highly <db:indexterm><db:primary>conformance</db:primary></db:indexterm><db:indexterm><db:primary>process</db:primary><db:secondary>conformance</db:secondary></db:indexterm>conformant and highly <db:indexterm><db:primary>auditable</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>auditable</db:secondary></db:indexterm>auditable is easy to change consistently, which in turn help maintain conformance. The heart of the problem lies in designing content for conformance.</db:para>
-<db:indexterm class="endofrange" startref="idm1929565324"/><db:indexterm class="endofrange" startref="idm1929569932"/><db:indexterm class="endofrange" startref="idm1929565324x"/><db:indexterm class="endofrange" startref="idm1929569932x"/></db:section>
+<db:indexterm class="endofrange" startref="idm1966212124"/><db:indexterm class="endofrange" startref="idm1966209308"/><db:indexterm class="endofrange" startref="idm1966212124x"/><db:indexterm class="endofrange" startref="idm1966209308x"/></db:section>
 </db:chapter>

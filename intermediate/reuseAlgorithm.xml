@@ -84,7 +84,6 @@
 <insert item="../graphics/common2variable.xml" type="image"/>
 <p>We looked at an example of this in <citation nameref="chapter.management-domain"/>, where we had a set of dangerous procedures which each required a standard warning. Each individual procedure is the variable part and the standard warning is the common part.:</p>
 <codeblock language="sam">
-
 procedure: Blow stuff up
     &gt;&gt;&gt;(files/shared/admonitions/danger)
     step: Plant dynamite.
@@ -101,12 +100,10 @@ procedure: Blow stuff up
 <insert item="../graphics/variable2common.xml" type="image"/>
 <p>For instance, if you are writing a manual to cover a number of car models you can factor out the number of seats each model has.</p>
 <codeblock language="sam">
-
 The vehicle seats &gt;($seats) people.
 </codeblock>
 <p>This is the fixed content that will occur in all manuals, with the number of seats pulled in from an external source. Let’s say we have a collection of vehicle data that is stored in a structure like this:</p>
 <codeblock language="sam">
-
 vehicles:
     vehicle: compact
         seats: four
@@ -125,7 +122,6 @@ vehicles:
 </codeblock>
 <p>Then we write the algorithm to process the insert so that it queries this structure.</p>
 <codeblock language="pseudo">
-
 match insert where variable = $seats
     $number_of_seats = vehicles/vehicle[$model]/seats
     output $number_of_seats
@@ -145,7 +141,6 @@ match insert where variable = $seats
 <title>Using IDs</title>
 <p>The most basic way to factor out the file name is to give the content of the file an ID. An ID is a management domain structure used to identify a piece of content in a location independent way. No matter where the content is stored, it keeps the same ID. Here is the warning file with the ID <code>#warn_danger</code> added:</p>
 <codeblock language="sam">
-
 warning:(#warn_danger) 
     title: Danger
     
@@ -153,7 +148,6 @@ warning:(#warn_danger)
 </codeblock>
 <p>We can then insert the warning into our procedure by referring to that ID.</p>
 <codeblock language="sam">
-
 procedure: Blow stuff up
     &gt;&gt;&gt;(#warn_danger)
     step: Plant dynamite.
@@ -163,7 +157,6 @@ procedure: Blow stuff up
 </codeblock>
 <p>The decision about which warning to include has now been shifted from the writer to the algorithm.</p>
 <codeblock language="pseudo">
-
 match insert with ID
     $insert_content = find ID in $content_set
     output $insert_content
@@ -172,7 +165,6 @@ match insert with ID
 <p>This means that the algorithm needs some way to resolve the ID and find the content to include. In many cases, a <phrase><annotation type="tool">content management system</annotation></phrase> is used to resolve the ID. In other cases it is as simple as the algorithm searching through a set of files to find the ID or building a catalog that points to the files that contain IDs.</p>
 <p>To do variable into variable reuse in a system that uses IDs, you simply point the <phrase><annotation type="concept">algorithm</annotation></phrase> at a different set of files that contain the same IDs, but attached to different content. So if your foreign market requires a different warning, you can create a file like this:</p>
 <codeblock language="sam">
-
 warning:(#warn_danger) 
     title: Look out!
     
@@ -185,7 +177,6 @@ warning:(#warn_danger)
 <p>Another way to do this is with another <phrase><annotation type="concept">management domain</annotation></phrase> structure called a key. A key is similar to an ID but it is not directly tied to a resource. Instead, the same key can be used to point to different resources at different times. Since a key does not represent any one concrete resource, we don’t assign the key to a resource. Instead we use an intermediate lookup table to resolve keys to particular resources for a particular purpose.</p>
 <p>So in this case we have the warning in a file called files/shared/admonitions/domestic/danger with the following content (no ID):</p>
 <codeblock language="sam">
-
 warning: 
     title: Danger
     
@@ -193,7 +184,6 @@ warning:
 </codeblock>
 <p>And we have the procedure which includes the warning via a key:</p>
 <codeblock language="sam">
-
 procedure: Blow stuff up
     &gt;&gt;&gt;(%warn_danger)
     step: Plant dynamite.
@@ -204,7 +194,6 @@ procedure: Blow stuff up
 <p>(I am using <code>#</code> to denote IDs and <code>%</code> to denote keys. This is the notation that SAM uses for IDs and keys, but it is purely arbitrary and has nothing to do with how they work. Different systems will denote IDs and keys in different ways.)</p>
 <p>To connect the key to the warning file, we then create a key lookup table:</p>
 <codeblock language="sam">
-
 keys:
     key:
         name: warn_danger
@@ -212,14 +201,12 @@ keys:
 </codeblock>
 <p>When the algorithm processes the procedure, it sees the key reference <code>%warn_danger</code> and looks it up in the key lookup table. The key lookup table tells the algorithm that the key resolves to the resource <code>files/shared/admonitions/domestic/danger</code>. The algorithm then loads that file and inserts the contents into the output.</p>
 <codeblock language="pseudo">
-
 match insert with key
     $resource = find key in lookup-table
     output $resource
 </codeblock>
 <p>To output your content for the foreign market, you simply prepare a new key lookup table:</p>
 <codeblock language="sam">
-
 keys:
     key:
         name: warn_danger
@@ -230,7 +217,6 @@ keys:
 <p>One feature of the key approach is that, because it does not attach the key directly to the content, it can be used to identify resources that do not have IDs, which may include resources that you do not control.</p>
 <p>One downside of keys is that by themselves they can only point to a whole resource. This could force you to keep all your reusable units in separate files. To avoid this, you can combine keys with IDs. The following example combines the foreign and domestic danger warnings into one file and gives each an ID:</p>
 <codeblock language="sam">
-
 warnings:
     warning:(#warn_danger_domestic) 
         title: Danger
@@ -244,7 +230,6 @@ warnings:
 </codeblock>
 <p>Now we can rewrite our key lookup tables to use the IDs to pull the right warning out of this common file. For the domestic build we would use a key lookup table like this:</p>
 <codeblock language="sam">
-
 keys:
     key:
         name: warn_danger
@@ -252,7 +237,6 @@ keys:
 </codeblock>
 <p>And for the foreign build, one that looks like this:</p>
 <codeblock language="sam">
-
 keys:
     key:
         name: warn_danger
@@ -268,12 +252,10 @@ keys:
 <insert item="../graphics/commonconditions.xml" type="image"/>
 <p>For instance, in content for a car manual you might have conditional text for the number of people the car seats.</p>
 <codeblock language="sam">
-
 The vehicle seats {four}(?compact){five}(?midsize){seven}(?van).
 </codeblock>
 <p>Here the main text is the fixed piece and the variable pieces are the words “four”, “five”, and “seven”. Which of these will be included in the output depends on which condition is applied during the build. If the condition <code>midsize</code> is applied, then the output text will be “five” and the other alternatives will be suppressed.</p>
 <codeblock language="pseudo">
-
 match phrase with condition
     if condition in $build_conditions
         continue
@@ -295,7 +277,6 @@ match phrase with condition
 </ul>
 <p>Common with conditions is not limited to cases where there are alternate values, however. In some cases, content may simply be inserted or omitted for certain outputs.</p>
 <codeblock language="sam">
-
 The main features of the car are:
 
 ol:
@@ -327,7 +308,6 @@ ol:
 <title>Factor out the common</title>
 <p>In <citation nameref="chapter.management-domain"/>, I noted that the subject domain alternative to using an insertion instruction for the warning text was to specify which procedures were dangerous, thus factoring out the constraint that the warning must appear.</p>
 <codeblock language="sam">
-
 procedure: Blow stuff up
     is-it-dangerous: yes
     step: Plant dynamite.
@@ -337,21 +317,18 @@ procedure: Blow stuff up
 </codeblock>
 <p>In this case, the author does not have to identify the material to be included, either directly by file name or indirectly through an <phrase><annotation type="structure">ID</annotation></phrase> or a <phrase><annotation type="structure">key</annotation></phrase>. Instead, it is up to the algorithm to include it:</p>
 <codeblock language="pseudo">
-
 match procedure/is-it-dangerous 
     if is-it-dangerous = 'yes'
         output files/shared/warnings#warn_danger_domestic
 </codeblock>
 <p>To produce the foreign market version of the documentation, you simply edit the rule:</p>
 <codeblock language="pseudo">
-
 match procedure/is-it-dangerous 
     if is-it-dangerous = 'yes'
         output files/shared/warnings#warn_danger_foreign
 </codeblock>
 <p>Or, to further the partitioning of complexity in the code, you can use keys:</p>
 <codeblock language="pseudo">
-
 match procedure/is-it-dangerous 
     if is-it-dangerous = 'yes'
         $resource = find key '%warn_danger' in lookup-table
@@ -366,7 +343,6 @@ match procedure/is-it-dangerous
 <title>Factor out the variable</title>
 <p>You can also factor out the variable content. For example, in the case of the different models of a car, rather than conditionalizing the list of features in the document, like this:</p>
 <codeblock language="sam">
-
 The main features of the car are:
 
 ol:
@@ -377,7 +353,6 @@ ol:
 </codeblock>
 <p>You can factor out the list entirely:</p>
 <codeblock language="sam">
-
 The main features of the car are:
 
 &gt;&gt;&gt;(%main_features)
@@ -385,14 +360,12 @@ The main features of the car are:
 <p>You can then maintain the features list in a database. The organization probably already has a database of features for each vehicle, so we don’t need to create anything new. We simply query the existing database. (After all, this is about reusing what already exists rather then recreating it!)</p>
 <p>So now our algorithm looks something like this:</p>
 <codeblock language="pseudo">
-
 match insert with key
     $resource = lookup key in lookup-table
     output $resource
 </codeblock>
 <p>We then have a key lookup table where the resource is identified by a query on the database</p>
 <codeblock language="sam">
-
 keys:
     key:
         name: %main-features
@@ -411,7 +384,6 @@ keys:
 <insert item="../graphics/tree.xml" type="image"/>
 <p>The assembly approach requires a structure to describe how the units are assembled. This structure is often called a map. (It is called a map in <phrase><annotation type="language"><annotation type="standard">DITA</annotation></annotation></phrase>, for instance.) Some applications may also refer to it as a table of contents.</p>
 <codeblock language="sam">
-
 map: Widget Wrangler Deluxe User Manual
    unit: units/ww/deluxe/intro
        unit: units/ww/shared/basic_features
@@ -424,7 +396,6 @@ map: Widget Wrangler Deluxe User Manual
 </codeblock>
 <p>Rather than using a map, you can allow the units themselves to pull in other units, which may in turn pull in other units. So the Widget Wrangler Deluxe install introduction unit might look like this:</p>
 <codeblock>
-
 unit: Installing the Widget Wrangler Deluxe
 
     You should be very careful when installing the 
@@ -441,7 +412,6 @@ unit: Installing the Widget Wrangler Deluxe
 <title>Combining multiple techniques</title>
 <p>There is one problem with the idea of using a common install intro for both the regular and deluxe widget wrangler. The intro mentions the name of the product. To solve this problem without requiring two different units, we can use the variable into common or common with conditions reuse techniques within the intro unit. Here is an example using variable into common:</p>
 <codeblock>
-
 unit: Installing the &gt;($product_name)
 
     You should be very careful when installing 

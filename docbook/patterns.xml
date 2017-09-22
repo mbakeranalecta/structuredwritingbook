@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.patterns"><db:title>Patterns</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idm1927988764"><db:primary>patterns</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1927988764x"><db:primary>concept</db:primary><db:secondary>patterns</db:secondary></db:indexterm>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.patterns"><db:title>Patterns</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idm1965918220"><db:primary>patterns</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1965918220x"><db:primary>concept</db:primary><db:secondary>patterns</db:secondary></db:indexterm>
 
 
 
@@ -9,12 +9,10 @@
 <db:para>A common example of this is the pattern of a URL. In most Web-based editors, if you enter a URL as plain text (no markup identifying it as a URL), the editor will recognize the pattern and will turn the URL into a clickable link in the HTML output.</db:para>
 <db:para>Recognizing patterns rather than forcing the author to mark them up explicitly can increase functional lucidity significantly. Consider something as simple as a date. A date is a complex piece of data consisting of at least three elements, the year, month, and day. (It gets more complex if you include the day of the week or the time.) If you need those individual components of a date for processing purposes, you might be tempted to require dates to be marked up like this.</db:para>
 <db:programlisting language="sam">
-
 date: {2016}(year)-{08}(month)-{25}(day)
 </db:programlisting>
 <db:para>or</db:para>
 <db:programlisting language="sam">
-
 date:
     year: 2016
     month: 08
@@ -23,12 +21,10 @@ date:
 <db:para>This is fully explicit markup. It places every piece of the data in its own explicit structure. However, it lacks <db:indexterm><db:primary>functional lucidity</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>functional lucidity</db:secondary></db:indexterm>functional lucidity.</db:para>
 <db:para>A date in the format <db:code>2016-08-25</db:code> is already a piece of structured markup. In fact, it is a standardized piece of structured markup defined by the international standard <db:indexterm><db:primary>ISO 8601</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>ISO 8601</db:secondary></db:indexterm>ISO 8601. The only problem in identifying a date as such is that in another context <db:code>2016-08-25</db:code> could be a mathematical expression that resolves to <db:code>1983</db:code>. But we can eliminate this potential confusion if we isolate the context so that we can recognize when an <db:indexterm><db:primary>ISO 8601</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>ISO 8601</db:secondary></db:indexterm>ISO 8601 date is being used, and then use the <db:indexterm><db:primary>ISO 8601</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>ISO 8601</db:secondary></db:indexterm>ISO 8601 format specification to isolate the year month and day components of that data. In other words, all we need to do is this:</db:para>
 <db:programlisting language="sam">
-
 {1941-12-07}(date) is a day that will live in infamy. 
 </db:programlisting>
 <db:para>It also means that if the author wants to enter the date in another format, we can annotate it with the <db:indexterm><db:primary>ISO 8601</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>ISO 8601</db:secondary></db:indexterm>ISO 8601 format to make the meaning clear to algorithms.</db:para>
 <db:programlisting language="sam">
-
 {December 7, 1941}(date "1941-12-07") is a day 
 that will live in infamy. 
 </db:programlisting>
@@ -37,34 +33,29 @@ that will live in infamy.
 <db:title>Design implications</db:title>
 <db:para>XML recognizes the value of patterns. The XML data types standard<db:footnote><db:para>https://www.w3.org/TR/xmlschema-2/</db:para></db:footnote> defines a number of common patterns, and the XML schema language (<db:indexterm><db:primary>XSD</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSD</db:secondary></db:indexterm>XSD)<db:footnote><db:para>https://www.w3.org/standards/xml/schema</db:para></db:footnote> allow you to define patterns for use in your own markup. It calls these patterns “simple types” (as opposed to “complex types”, which are composed of multiple nested elements). Thus you can specify in <db:indexterm><db:primary>XSD</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSD</db:secondary></db:indexterm>XSD that a date field is of the simple type <db:code>xs:date</db:code>. The <db:code>xs:date</db:code> data type is a pattern that is based on <db:indexterm><db:primary>ISO 8601</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>ISO 8601</db:secondary></db:indexterm>ISO 8601, so you can do following in XML (as long as the schema defines the type of the <db:code>date</db:code> element as <db:code>xs:date</db:code>):</db:para>
 <db:programlisting language="xml">
-
 &lt;date&gt;1941-12-07&lt;/date&gt; is a day that will live in infamy. 
 </db:programlisting>
 <db:para>It is important to understand what this does. If the type of element <db:code>date</db:code> in your XML markup language is defined as <db:code>xs:date</db:code> then an XSD <db:indexterm><db:primary>schema validator</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>schema validator</db:secondary></db:indexterm>schema validator will validate <db:code>1941-12-07</db:code> as a valid date but will reject <db:code>&lt;date&gt;last Thursday&lt;/date&gt;</db:code> as invalid. It will not break the date down into its separate year, month, and day components. If you need that, you will have to get your algorithm to do that for itself. But your algorithm can do that reliably because the markup constrains the interpretation of the date, establishing that it is indeed an <db:indexterm><db:primary>ISO 1806</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>ISO 1806</db:secondary></db:indexterm>ISO 1806 date. Most programming languages will have library functions that know how to manipulate <db:indexterm><db:primary>ISO 8601</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>ISO 8601</db:secondary></db:indexterm>ISO 8601 dates, so you probably don’t have to do any work yourself to get the year, month, and day components of a date.</db:para>
 <db:para>For other patterns, most programming languages have a library called “regular expressions” which you can use to rip a pattern apart and get at the pieces. (XSD actually lets you define new patterns by specifying a regular expression for the pattern you want to match.) <db:indexterm><db:primary>Regular expressions</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>Regular expressions</db:secondary></db:indexterm>Regular expressions will let your algorithms decode pattern in your content if its interpretation is sufficiently constrained by its context, removing the need to ask authors to explicitly break down many types of information into separate fields.</db:para>
 <db:para>For example, in our most of our recipe examples, we have been explicitly breaking down the items in an ingredient list into ingredient, quantity, and unit of measure like this:</db:para>
 <db:programlisting language="sam">
-
 ingredients:: ingredient, quantity, unit
     eggs, 12, each
     water, 2, qt
 </db:programlisting>
 <db:para>That format is not terribly onerous to write, but there is still a small functional lucidity penalty here. An author might more naturally write:</db:para>
 <db:programlisting language="sam">
-
 ingredients::
     eggs 12
     water 2qt
 </db:programlisting>
 <db:para>Ingredient name, quantity, and unit of measure are still clearly distinct here. Any human reader can see them instantly. The trick is to get an algorithm to read them the same way. This trick can be accomplished fairly easily using a regular expression:</db:para>
 <db:programlisting language="re">
-
 (?P&lt;ingredient&gt;.+?)(?P&lt;quantity&gt;\d+)(?P&lt;unit&gt;qt|tsp|tbsp)?
 </db:programlisting>
 <db:para>(The regular expression I am using here is deliberately simple and does not include a full list of all the possible names for units of measures. A more precise expression would likely be required for production quality code, but it would be distractingly verbose for our present purpose.)</db:para>
 <db:para>To show you how this works, here is a set of ingredient values:</db:para>
 <db:programlisting language="text">
-
 eggs 12
 water 4qt
 salt 1tsp
@@ -73,7 +64,6 @@ pork chops 4
 </db:programlisting>
 <db:para>Here is the result of applying the regular expression above to those values (this is a report generated by regex101.com, a fantastic site for designing and testing regular expressions):</db:para>
 <db:programlisting language="text">
-
 Match 1
 Full match    0-7    `eggs 12`
 Group `ingredient`    0-5    `eggs `
@@ -107,7 +97,6 @@ Group `quantity`    52-53    `4`
 <db:para>Avoiding unnecessary markup of already recognizable patterns both simplifies our markup design and increase the <db:indexterm><db:primary>functional lucidity</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>functional lucidity</db:secondary></db:indexterm>functional lucidity of our markup languages.</db:para>
 <db:para>If we were creating this recipe structure in <db:indexterm><db:primary>XML</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XML</db:secondary></db:indexterm><db:indexterm><db:primary>XML</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>XML</db:secondary></db:indexterm>XML and using <db:indexterm><db:primary>XML Schema</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XML Schema</db:secondary></db:indexterm>XML Schema (XSD) as our schema language, we could create a data type for the ingredient field that would verify that the text entered met that pattern we are expecting:</db:para>
 <db:programlisting language="xsd">
-
 &lt;xsd:element name="ingredient"&gt;
     &lt;xsd:simpleType&gt;
         &lt;xsd:restriction base="xsd:string"&gt;
@@ -118,7 +107,6 @@ Group `quantity`    52-53    `4`
 </db:programlisting>
 <db:para>This type definition would ensure that if the writer entered ingredients in the wrong form or using the wrong names for units, an error would be raised. For instance, these ingredient list items would trigger an error:</db:para>
 <db:programlisting language="xml">
-
 &lt;ingredients&gt;
     &lt;ingredient&gt;12 eggs&lt;/ingredient&gt; 
     &lt;ingredient&gt;water 2 cups&lt;/ingredient&gt;
@@ -127,5 +115,5 @@ Group `quantity`    52-53    `4`
 </db:programlisting>
 <db:para>The first would fail because the pattern would not find the quantity where it expected to. The next two would fail because cups and lumps are not on the list of strings recognized by the pattern (which probably should be extended to allow cups, but not lumps). In the XML schema example, the names of the fields that were present in the original regular expression are omitted because XML schema is not going to break the values apart and put them in separate fields for us. As far as XML schema is concerned, this is just the definition of a single element. It would be up to a processing application to break the pieces apart and make separate fields of them. It is design intent for <db:indexterm><db:primary>SAM</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>SAM</db:secondary></db:indexterm>SAM that its schema language will let you do just this: define multiple fields with a regular expression that tells you how to break a string apart and names the individual fields to extract from the pattern.</db:para>
 <db:para>By the way, though I have used the ingredients listing as an example here, I probably would not use this pattern in a production system. While the <db:code>eggs, 12, each</db:code> structure is a tiny bit unnatural, its explicitness makes it less error prone. It is less likely that writers will get the order of information wrong, and then have to pause to deal with the error message they get. Asking them to break the items of information apart explicitly here is probably the lesser of two evils. The use of patterns is an aid to functional lucidity and you need to balance naturalness against explicitness in the way that best supports functional lucidity in each case.</db:para>
-<db:indexterm class="endofrange" startref="idm1927988764"/><db:indexterm class="endofrange" startref="idm1927988764x"/></db:section>
+<db:indexterm class="endofrange" startref="idm1965918220"/><db:indexterm class="endofrange" startref="idm1965918220x"/></db:section>
 </db:chapter>

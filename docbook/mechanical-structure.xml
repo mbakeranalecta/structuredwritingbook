@@ -55,7 +55,6 @@
 <db:para>Every block is annotated to tell us, and algorithms, what constraints it meets. The most basic of these annotations is the name of the block, which describes it basic type. The name of a table block is “table”, which tells us that its type is table. Blocks may also have other annotations that either refine its type of provide additional information about the block.</db:para>
 <db:para>These additional annotations don’t have to be in the same domain as the block name. We saw an example of this in <db:xref linkend="chapter.subject-domain"/>:</db:para>
 <db:programlisting language="xml">
-
 &lt;section publication="Wine Weenie"&gt;
     &lt;title&gt;Wine match&lt;/title&gt;
     &lt;p&gt;Pinot Noir&lt;/p&gt;
@@ -85,7 +84,6 @@
 <db:para>Under normal circumstance, the structures that constrain the content also constrain the  interpretation of that content. In other words, the markup that tells the writer what to write also tells the algorithm (or other downstream user) what the content means. But there are cases in which annotations are added to ordinary document domain structure to tell downstream processes what the content means. These structures don’t constrain the writer, which means they don’t guide the writer either. The writer has to know exactly how to do this kind of annotation and remember to do it without guide or prompting.</db:para>
 <db:para>Consider these examples of HTML Microformats from Wikipedia<db:footnote><db:para>https://en.wikipedia.org/wiki/Microformat</db:para></db:footnote>. The first example shows an address formatted as a list.</db:para>
 <db:programlisting language="HTML">
-
 &lt;ul&gt;
    &lt;li&gt;Joe Doe&lt;/li&gt;
    &lt;li&gt;The Example Company&lt;/li&gt;
@@ -98,7 +96,6 @@
 <db:para>Here the phrase “The Example Company” is contained in <db:code>li</db:code> tags. This is part of a list structure delineated by <db:code>ul</db:code> tags, so the markup is largely structural in the document domain. The <db:code>li</db:code> does not tell you what the content itself is about. It does not tell you anything useful beyond what document structure it belongs to.</db:para>
 <db:para>The second example adds vCard microformat markup:</db:para>
 <db:programlisting language="HTML">
-
 &lt;ul class="vcard"&gt;
   &lt;li class="fn"&gt;Joe Doe&lt;/li&gt;
   &lt;li class="org"&gt;The Example Company&lt;/li&gt;
@@ -114,7 +111,6 @@
 <db:para>But this is not just about suggesting a different way of interpreting <db:code>The Example Company</db:code> (as an organization name, as well as as a list item).  There is actually a complex <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain structure being expressed by the vCard markup. Not only is the list item <db:code>The Example Company</db:code> annotated as <db:code>org</db:code>, the list that contains it is annotated as <db:code>vcard</db:code>. The constraint of interpretation provided by <db:code>org</db:code> is actually dependent on it being part of a <db:code>vcard</db:code> structure.</db:para>
 <db:para>In other words, the secondary structure created by the annotations in the sample above is equivalent to pure subject domain markup like this:</db:para>
 <db:programlisting language="SAM">
-
 vcard:
    fn: Joe Doe
    org: The Example Company
@@ -126,7 +122,6 @@ vcard:
 <db:para>Authoring our content this way would obviously be inefficient and error prone. But this is only a problem if the content is actually authored in this format. If the content is authored in a format in which its creation is constrained to the same extent as we wish the output to be constrained, it does not actually matter that the resulting output constrains interpretation more than it constrains creation. Our concern as content creators is simply to make sure that any content we produce that promises to abide by a constraint actually does so, whether the format we deliver it in actually imposes that constraint or merely annotates it.</db:para>
 <db:para>So, we can confidently produce this information using subject domain markup and then deliver it as HTML with hCard annotation markup using a presentation algorithm something like this (as with all example algorithms in this book, this is pseudocode):</db:para>
 <db:programlisting language="pseudo">
-
 match vcard
     create ul
         attribute class = "vcard"
@@ -162,13 +157,11 @@ match url
 <db:para>In XML, though, there is broad (though not unlimited) support for additional annotations on blocks in the form of attributes. In the XML world, therefore, there is considerable choice, and considerable debate, about when and where you should use elements vs. attributes in your content models.</db:para>
 <db:para>Consider, for example, this XML element that contains no content but two attributes:</db:para>
 <db:programlisting language="xml">
-
 &lt;author-name first="Mark" last="Baker"&gt;
 </db:programlisting>
 <db:para>the element is named <db:code>author-name</db:code> and it has two attributes named <db:code>first</db:code> and <db:code>last</db:code> that contain my first and last name respectively.</db:para>
 <db:para>Why is this marked up like this and not like this:</db:para>
 <db:programlisting language="xml">
-
 &lt;author-name&gt;
     &lt;first&gt;Mark&lt;/first&gt;
     &lt;last&gt;Baker&lt;/first&gt;
@@ -178,7 +171,6 @@ match url
 <db:para>Is one of these options correct and the other incorrect? When should you use attributes and when should you use elements?</db:para>
 <db:para>Consider our vcard example. It could be written this way, using just elements:</db:para>
 <db:programlisting language="XML">
-
 &lt;vcard&gt;
    &lt;fn&gt;Joe Doe&lt;/fn&gt;
    &lt;org&gt;The Example Company&lt;/org&gt;
@@ -188,7 +180,6 @@ match url
 </db:programlisting>
 <db:para>Or it could be written this way, using attributes:</db:para>
 <db:programlisting language="XML">
-
 &lt;vcard
    fn="Joe Doe"
    org="The Example Company"
@@ -202,7 +193,6 @@ match url
 <db:para>But for documents it is more complex. To understand why XML even has attributes, and why other languages, such as SAM or reStructuredText, also have similar mechanisms for adding annotations to blocks, we need to go back to the original concept of markup as something written onto a manuscript after the fact. In this view, markup is an addition to the text, not part of it. The content of an element is part of the underlying text. Anything you want to add, therefore, cannot be element content, since that would be adding to the text. Everything else has to be added to element definitions as attributes.</db:para>
 <db:para>This view is reinforced by the academic interest in markup as a way to prepare texts for study. Again, here, the text is preexisting and canonical. The markup is external to it and so everything that is external to the original text must be contained in the markup itself (as attributes) and nothing that is internal to the original text must be removed or replaced by markup. (This is a form of partitioning in its own right, to serve a particular purpose.) Thus in this fragment of a Shakespeare play marked up by John Bosek we see that the original text is kept perfectly intact:</db:para>
 <db:programlisting language="xml">
-
 &lt;ACT&gt;
 &lt;TITLE&gt;ACT I&lt;/TITLE&gt;
 &lt;SCENE&gt;
@@ -226,35 +216,29 @@ In delivering my son from me, I bury a second husband.
 </db:programlisting>
 <db:para>Had this markup employed the normal refactoring of text into markup that we have seen in our discussions of the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document and <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domains, then the number and title of scenes would have been factored out so that instead of:</db:para>
 <db:programlisting language="xml">
-
 &lt;SCENE&gt;
     &lt;TITLE&gt;SCENE I. Rousillon. The COUNT's palace.&lt;/TITLE&gt;
 </db:programlisting>
 <db:para>we might have factored out the scene number and the work ‘SCENE’ like this:</db:para>
 <db:programlisting language="xml">
-
 &lt;SCENE&gt;
     &lt;TITLE&gt;Rousillon. The COUNT's palace.&lt;/TITLE&gt;
 </db:programlisting>
 <db:para>Going further, we might have noted that the introduction of a scene is invariable the name of its location, so we might have done this:</db:para>
 <db:programlisting language="xml">
-
 &lt;SCENE&gt;
     &lt;LOCATION&gt;Rousillon. The COUNT's palace.&lt;/LOCATION&gt;
 </db:programlisting>
 <db:para>or even this:</db:para>
 <db:programlisting language="xml">
-
 &lt;SCENE location="Rousillon. The COUNT's palace."&gt;
 </db:programlisting>
 <db:para>And similarly, we might have replaced:</db:para>
 <db:programlisting language="xml">
-
 &lt;SPEECH&gt;
     &lt;SPEAKER&gt;BERTRAM&lt;/SPEAKER&gt;
 </db:programlisting>
 <db:programlisting language="xml">
-
 &lt;SPEECH SPEAKER="BERTRAM"&gt;
 </db:programlisting>
 <db:para>Making a few changes like this in the markup would leave us with only the words actually spoken by the actors as the “text” of the play and everything else expressed as elements or attributes.</db:para>
@@ -264,7 +248,6 @@ In delivering my son from me, I bury a second husband.
 <db:para>The way we, as practitioners of structured writing, settle these matters is by asking ourselves which approach best supports the structured writing algorithms that we want to implement, and always remembering that the reliability of every other algorithm depends on how well <db:indexterm><db:primary>conformance</db:primary></db:indexterm><db:indexterm><db:primary>process</db:primary><db:secondary>conformance</db:secondary></db:indexterm>conformance to constraints is maintained, and that conformance  depends to a large extent on how the authoring algorithm designs for conformance and for functional lucidity.</db:para>
 <db:para>In none of this are we in the least concerned about preserving the canonical nature of a preexisting text. There is no preexisting text. We are all about creating new texts. Because of this we have every reason to prefer to use sub-structures rather than annotations on existing structures, to express things like our vCard example. In fact, SAM, which is designed specifically for structured authoring, only supports this format:</db:para>
 <db:programlisting language="SAM">
-
 vcard:
    fn: Joe Doe
    org: The Example Company

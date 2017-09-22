@@ -68,7 +68,6 @@
 <insert item="../graphics/rendering.xml" type="image"/>
 <p>One example of a page description language is <phrase><annotation type="language">PostScript</annotation></phrase>. Here is the PostScript code for drawing a circle:</p>
 <codeblock language="PostScript">
-
 100 100 50 0 360 arc closepath
 stroke
 </codeblock>
@@ -88,7 +87,6 @@ stroke
 <insert item="../graphics/encoding.xml" type="image"/>
 <p>Here is an example of <phrase><annotation type="language">XSL-FO</annotation></phrase> that we looked at in <citation nameref="chapter.single-sourcing"/>:</p>
 <codeblock language="XSL-FO">
-
 &lt;fo:block space-after="4pt"&gt;
    &lt;fo:wrapper font-size="14pt" font-weight="bold"&gt;
      Hard Boiled Eggs
@@ -96,7 +94,6 @@ stroke
 &lt;/fo:block&gt;
 </codeblock>
 <codeblock>
-
 </codeblock>
 <p>You process <phrase><annotation type="language">XSL-FO</annotation></phrase> using an <phrase><annotation type="language">XSL-FO</annotation></phrase> processor such as <phrase><annotation type="tool">Apache FOP</annotation></phrase>. Thus the <phrase><annotation type="language">XSL-FO</annotation></phrase> processor runs the encoding algorithm, producing a page description language such as <phrase><annotation type="language">PostScript</annotation></phrase> or <phrase><annotation type="media">PDF</annotation></phrase> as an output.</p>
 <p>Writers are not likely to write in XSL-FO directly, though it is not entirely impossible to do so. In fact some boilerplate content such as front matter for a book does sometimes get written and recorded directly in <phrase><annotation type="language">XSL-FO</annotation></phrase>. (I did this myself on one project.) But when you are constructing a publishing tool chain, you will need to select and integrate the appropriate encoding tools as part of your process.</p>

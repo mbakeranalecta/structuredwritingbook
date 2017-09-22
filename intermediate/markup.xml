@@ -38,7 +38,6 @@
 <p>This is pretty much exactly what we do today when we create an HTML page and specify a CSS stylesheet to supply the formatting instructions. Those instructions are then executed by the browser to render the content on screen or paper.</p>
 <p>Actually, we are getting ahead of ourselves here. A better analogy to old style typesetter’s marks is an HTML page with the styles specified inline.</p>
 <codeblock language="HTML">
-
 &lt;p style="font-family: serif; font-weight: bold; 
  font-size: 12pt"&gt;
 </codeblock>
@@ -66,7 +65,6 @@
 <p>Actually the recognition of markup in HTML is a little more complicated than that, but that is more detail than we need to get into here. The point here is simply that there are certain sequences in the text which trigger a processing program (generally called a “parser”) to recognize when markup starts and when it ends.</p>
 <p>What if you want to enter these “markup start” characters into the text of your document? You can’t just type them in because the parser will think they are markup. To fix this, markup languages either define “escape” characters, that signal the parser to treat the following character as text, or they include markup for inserting individual characters in a way that won’t be confused with markup characters. HTML takes the second approach. To include a <code>&lt;</code> character in HTML, you use what is called a “character entity.” A character entity is a code for a character. It begins with <code>&amp;</code> (another markup start character), followed by a character code and ending with a semicolon. The character entity for <code>&lt;</code> in HTML and XML is <code>&amp;lt;</code>. (“lt” is short for “less than”, the name of the <code>&lt;</code> character.)</p>
 <codeblock language="html">
-
 &lt;p&gt;In HTML, tags start with the &amp;lt; character.&lt;/p&gt;
 </codeblock>
 <p>This will display as:</p>
@@ -75,7 +73,6 @@
 </blockquote>
 <p>Since <code>&amp;</code> is also a markup start character, we need to replace it with a character entity as well if we want to include it literally. To include a literal <code>&amp;</code> you use the character entity <code>&amp;amp;</code>.</p>
 <codeblock language="html">
-
 &lt;p&gt;In HTML, character entities start 
 with the &amp;amp; character.&lt;/p&gt;
 </codeblock>
@@ -85,7 +82,6 @@ with the &amp;amp; character.&lt;/p&gt;
 </blockquote>
 <p>To include the literal sting <code>&amp;amp;</code> therefore, you would write <code>&amp;amp;amp;</code>.</p>
 <codeblock language="html">
-
 &lt;p&gt;The character entity for an ampersand is &amp;amp;amp;.&lt;/p&gt;
 </codeblock>
 <p>This will display as:</p>
@@ -94,14 +90,12 @@ with the &amp;amp; character.&lt;/p&gt;
 </blockquote>
 <p>Other markup languages do not make such an explicit distinction between text and markup. For example, in Markdown a numbered list is created by putting numbers in front of list items:</p>
 <codeblock language="markdown">
-
 1. First
 2. Second
 3. Third
 </codeblock>
 <p>Here the numbers are markup. That is, the Markdown processor recognizes them as indicating a list and will translate them into a structure in HTML like this:</p>
 <codeblock language="html">
-
 &lt;ol&gt;
     &lt;li&gt;First&lt;/li&gt;
     &lt;li&gt;Second&lt;/li&gt;
@@ -110,14 +104,12 @@ with the &amp;amp; character.&lt;/p&gt;
 </codeblock>
 <p>But numbers followed by a period are only markup a certain context – the beginning of a line. Elsewhere, they are plain text. There is no need to escape numbers followed by periods when they occur elsewhere in the text. Thus the following markdown file:</p>
 <codeblock language="markdown">
-
 1. First comes 1.
 2. Second comes 2.
 3. Third comes 3.
 </codeblock>
 <p>will translate to HTML as:</p>
 <codeblock language="html">
-
 &lt;ol&gt;
     &lt;li&gt;First comes 1.&lt;/li&gt;
     &lt;li&gt;Second comes 2.&lt;/li&gt;
@@ -135,7 +127,6 @@ with the &amp;amp; character.&lt;/p&gt;
 <title>Concrete markup languages</title>
 <p>A concrete markup language has a fixed set of markup patterns that describes a fixed set of content structures. For example, <phrase><annotation type="language">Markdown</annotation></phrase> is a concrete markup language that uses a markup that is designed to mimic the way people write plain text emails. Here is the passage about <phrase><annotation type="citetitle">Moby Dick</annotation></phrase> written in Markdown:</p>
 <codeblock language="markdown">
-
 Moby Dick
 =========
 
@@ -154,7 +145,6 @@ Herman Melville's _Moby Dick_ is a long book about a big whale.
 <p>None of these abstract structures describes document structures in any of the structured writing domains. Instead, specific markup languages based on XML (or its cousin, SGML) indicate <phrase>subject</phrase>, <phrase>document</phrase>, <phrase>management</phrase>, or <phrase><annotation type="concept">media domain</annotation></phrase> structures as named instances of elements and attributes.</p>
 <p>Here is the <phrase><annotation type="citetitle">Moby Dick</annotation></phrase> passage again, this time in <phrase><annotation type="language">XML</annotation></phrase> (more specifically, in <phrase><annotation type="language">DocBook</annotation></phrase>):</p>
 <codeblock language="DocBook">
-
 &lt;section&gt;
     &lt;title&gt;Moby Dick&lt;/title&gt;
     &lt;para&gt;Herman Melville's &lt;citetitle&gt;Moby Dick&lt;/citetitle&gt; 
@@ -207,7 +197,6 @@ Herman Melville's _Moby Dick_ is a long book about a big whale.
 <title>Concrete languages in abstract clothing</title>
 <p>The key defining characteristic of an abstract language is the use of abstract named structures like XML elements. All XML elements share a common markup start sequence followed by the element name. This creates a named block of content.  But concrete languages can use named blocks too. For example, <phrase><annotation type="language">JavaDoc</annotation></phrase>, a concrete language for describing Java APIs, uses named blocks using <code>@</code> as a markup start character:</p>
 <codeblock language="Java">
-
 /**
  * Validates a chess move.
  *
@@ -253,7 +242,6 @@ int theToFile, int theToRank) {
 <p>By hybrid, I mean a language that combines both abstract and concrete markup in one language. A hybrid language has a base set of concrete syntax describing basic text structures but it also has abstract structures such as XML’s elements and attributes that can be the basis of extensibility and constraint.</p>
 <p>An example of a hybrid markup language is <phrase><annotation type="language">reStructuredText</annotation></phrase>. Like <phrase><annotation type="language">Markdown</annotation></phrase>, it has a basic concrete syntax for things like lists and paragraphs. But it also supports what it calls “directives”, which are essentially named block structures. For example, a codeblock in reStructuredText looks like this:</p>
 <codeblock language="reST">
-
 .. code-block:: html
     :linenos:
 
@@ -266,7 +254,6 @@ int theToFile, int theToRank) {
 <p>I have developed a hybrid markup language which is designed to be both extensible and constrainable. I call it SAM (which stands either for Semantic Authoring Markdown or Semantic Authoring Markup, as you please). SAM is the language I have been using for most of the examples in this book.</p>
 <p>Here is the <phrase><annotation type="citetitle">Moby Dick</annotation></phrase> passage written in SAM:</p>
 <codeblock language="sam">
-
 section: Moby Dick
 
     Herman Melville's {Moby Dick}(novel) is a long 
@@ -279,7 +266,6 @@ section: Moby Dick
 <p>SAM is not intended to be nearly as general in scope as a purely abstract markup language like XML. It is meant for semantic authoring (which is to say, structured writing). As such it incorporates a number of shortcuts to make writing typical structured documents easier.</p>
 <p>In a typical document, a block of text (larger than a paragraph) typically has a title. So in SAM, a string after a block tag is considered to be a title. That means that the markup above is equivalent to:</p>
 <codeblock language="sam">
-
 section: 
     title: Moby Dick
 
@@ -292,7 +278,6 @@ section:
 <p>Most concrete markup languages, at least those designed for documents, try to make their marked-up documents look and read as much as possible like a formatted document. SAM is designed to be easy and natural to read, like a concrete markup language, but it is also designed to make the structure of the content as clear and explicit as possible while requiring the minimum of markup. This is why it uses indentation to express structure. Indentation shows structure clearly with a minimum of markup noise to distract the reader’s eye.</p>
 <p>Because it is meant specifically for authoring, a SAM parser outputs XML, which can then be processed by the standard XML tool chain. Below is how the SAM markup above would be output by a SAM parser:</p>
 <codeblock language="XML">
-
 &lt;section&gt;
     &lt;title&gt;Moby Dick&lt;/title&gt;        
     &lt;p&gt;Herman Melville's &lt;phrase&gt;
