@@ -49,20 +49,15 @@ chapter:(#chapter.mechanical-structure) Content as data
         footnote:(*2)
             This is not universal. For example, addresses, which are based on hierarchical locations, are typically modeled as flat ordered lists. The order reflects the hierarchy, but the structure does not nest city inside country and street inside city.
         
-        The options available in the document domain are:
+        Outside of the {media domain} the options available are:
         
-        * Create a flat document-domain language. Examples are HTML and Markdown. The problem here is that a flat language imposes few constraints, and the lack of context-setting hierarchy makes it hard to model different types of document structures without creating hundred of tags -- which negates any {functional lucidity} that you gain by keeping the language flat.
+        * Use a flat {document-domain} language. Examples are HTML and Markdown. The problem here is that a flat language imposes few constraints, and the lack of context-setting hierarchy makes it hard to model different types of document structures without creating hundred of tags -- which negates any {functional lucidity} that you gain by keeping the language flat.
         
-        * Create a hierarchical language that has a permissive structure, so you can put blocks inside blocks in lots of different ways. An example of this is DocBook. The problem here is that the permutations make writing algorithms difficult, and you often need to impose additional writing constraints that go beyond those expressed or enforced by the markup itself. This again diminishes {functional lucidity} and compromises {conformance}. (An interesting property of this approach is that the flexibility of the language means that writers can create documents that are very hierarchical or very flat. However, this is not really a virtue, because it is not clear how this choice contributes to improved content quality.)
+        * Use a hierarchical {document-domain} language that has a permissive structure, so you can put blocks inside blocks in lots of different ways. An example of this is {DocBook}. The problem here is that the permutations make writing algorithms difficult, and you often need to impose additional writing constraints that go beyond those expressed or enforced by the markup itself. This again diminishes {functional lucidity} and compromises {conformance}. (An interesting property of this approach is that the flexibility of the language means that writers can create documents that are very hierarchical or very flat. However, this is not really a virtue, because it is not clear how this choice contributes to improved content quality.)
         
-        * Define a smaller, stricter document-domain language that fits the types of documents you want to write, possibly using a restricted subset of an existing language such as {DocBook}. The main difficulty with this approach is that you have to design your own language, which many organizations try to avoid. In addition, this approach transfers complexity to an information architect or content engineer. You may find it no more expensive to go to the {subject domain}, which may also provide better {functional lucidity} and {conformance}. 
+        * Create a smaller, stricter document-domain language that fits the types of documents you want to write. The main difficulty with this approach is that you have to design your own language, which many organizations try to avoid. (In some cases you can reduce this effort by using a restricted subset of an existing language such as {DocBook}, something we will look at in [#chapter.extensible].) 
         
-        * Define a strict hierarchical document-domain language that expresses the constraints you need and make writers learn it. This works if you are able to recoup the expense of training your writers. It does not work if you want to include occasional contributors.
-
-        !!!(RLH)
-            What's the difference between the fourth and third bullets? It seems like in both cases you need to do language design; the only difference being that in one case you start with another language.
-        
-        * Move content creation to the {subject domain}. 
+        * Move content creation to the {subject domain}. This also involves creating your own languages, but it can provide additional support for rhetoric and process while improving functional lucidity. 
         
     bibliography:
         entry:(#Flynn2009)
@@ -98,14 +93,7 @@ chapter:(#chapter.mechanical-structure) Content as data
         
         Therefore, you must define terms precisely when developing a structured writing language. But it is equally important that the language be {functionally lucid}. {Functional lucidity} requires you to create structures that do not detract from writing. This requirement is not met if writers must constantly puzzle out or debate the right way to mark something up. This means not only defining what the names mean, but also choosing structures that are easy to name correctly. As I describe in [#chapter.conformance], the best way to achieve conformance is to design structures that are easy to conform to. 
 
-        !!!(RLH)
-            I think that starting here, and continuing to the end of this section, you dive into topics that are only tangentially related to naming, and they aren't really followed up in any way that I could determine (e.g., meta models). I did a little copy edit, but then I stepped back and realized that you could probably drop the next three paragraphs (up to the next section), and it would make the section stronger. I suggest you do that.
         
-        In the software world, meta models and abstractions are powerful tools for modeling systems. They provide clear high-level rules for the design of specific structures and create opportunities to reuse code for objects with a shared base model. But these tools can also lead to very abstract naming schemes and even to abstract structures. In the content world, such abstract names and structures can be formally correct but lack the kind of {functional lucidity} required for effective authoring.
-        
-        The problem of defining a data structure to express a rhetorical structure is not only one of defining a correct representation of the content. You also have to design and name structures that can be written by your writers without imposing a heavy burden on their attention. In other words, designing content data structures, at least those intended for use by writers, is as much about interface design as it is about data structure design. 
-        
-        Clear, concrete, and specific names and an organization of blocks that intuitively fits the subject matter make it easier to write, which in turn leads to more consistent and reliable rhetoric. There is no reason such structures cannot be derived from abstract model, or that they cannot be mapped to abstract models after the fact, but it is important to keep unfamiliar abstractions from intruding into the writer's world.
         
     section: Different rules for intermediate languages
     
@@ -167,8 +155,11 @@ chapter:(#chapter.mechanical-structure) Content as data
 
         !!!(RLH)
             Oops, I missed something in the paragraph below. It's not obvious to me what you mean by "Authoring our content this way..." By "this way," do you mean using microformats that overlay a second structure or something else? Please take a look at the previous paragraph and this one, and see if you can take another shot at explaining what you mean.
+            
+        !!!(MB)
+            Done.
 
-        Authoring content this way would obviously be inefficient and error prone. But this is only a problem if the content is actually authored in this format. If the content is authored in a format in which its creation is constrained to the same extent as we wish the output to be constrained, it does not actually matter that the resulting output constrains interpretation more than it constrains creation. Our concern as content creators is simply to make sure that any content we produce that promises to abide by a constraint actually does so, whether the format we deliver it in actually imposes that constraint or merely annotates it. 
+        Asking writers to add unconstrained {subject domain} metadata to {document domain} structures like this would obviously be inefficient and error prone. But this is only a problem if the content is actually authored in this format. If the content is authored in a format in which its creation is constrained to the same extent as we wish the output to be constrained, it does not actually matter that the resulting output constrains interpretation more than it constrains creation. Our concern as content creators is simply to make sure that any content we produce that promises to abide by a constraint actually does so, whether the format we deliver it in actually imposes that constraint or merely annotates it. 
         
         So, you can confidently produce this information using subject-domain markup and then deliver it as HTML with vCard annotation markup using a presentation algorithm something like (*fig.mechanical-subject-2) (as with all example algorithms in this book, this example is pseudocode):
 
@@ -323,7 +314,7 @@ chapter:(#chapter.mechanical-structure) Content as data
 
         While these questions may be important for the scholarly study of text, they are not nearly as important for structured writing. Our concern is to partition the task of content creation, which means you can simply choose the format that does that in the most functionally lucid way while ensuring that all the information required by the next partition is accurately captured. The fact that such questions exist, however, helps explain why a markup language like XML is structured the way it is and why so many texts are marked up the way they are -- and why so many markup languages are designed the way they are. 
 
-        The way we, as practitioners of structured writing, settle these matters is by asking ourselves which approach best supports the structured writing algorithms that we want to implement, always remembering that the reliability of every other algorithm depends on how well writers conform to constraints, which in turn depends on how well the authoring algorithm supports conformance and functional lucidity. 
+        The way we, as practitioners of structured writing, settle these matters is by asking ourselves which approach best supports the structured writing algorithms that we want to implement, always remembering that the reliability of every other algorithm depends on how well writers conform to constraints, which in turn depends on how well the authoring markup language supports conformance and functional lucidity. 
 
         In none of this is there any reason to be in the least concerned about preserving the canonical nature of a preexisting text. There is no preexisting text. Therefore, there is every reason to prefer sub-structures rather than annotations to express things such as our vCard example. In fact, SAM, which is designed specifically for structured authoring, supports only this format:             
         
@@ -339,11 +330,7 @@ chapter:(#chapter.mechanical-structure) Content as data
         footnote:(*fn.xslt)
             It is worth noting that {XSLT}, the language most commonly used to process {XML}, implicitly assumes that element content in an XML document is the text of the output document and that attributes are not, thus the text of elements passes through to output automatically unless you catch it and suppress it, whereas the text of attributes is ignored unless you catch and output them.  
                
-        In summary, when defining the mechanical structure of your structured writing, don't get hung up on what is text and what is markup. In each domain, text and markup together form a body of constrained content that can be successfully created by an author and successfully processed by one or more algorithms. Only when you resolve the content all the way to the media domain do you finally have to sort our exactly which characters appear in which order and which decorations you need to represent that content to a particular audience. When we choose to create content in the other domains, it is precisely because we want to exercise more control over these things and to use algorithms to help us create and manage them. Whether some idea or constraint is expressed by text of markup in those domains should be based solely on what works best in those domains. (Which is precisely why attempting to do structured writing using a WYSIWYG editor is so counter productive, and why it is so important to ensure the functional lucidity of your markup as markup.)
-
-        !!!(RLH)
-            I don't think you need the final, parenthetical, sentence in this section. It seems superfluous and away from your main point.
-    
+        In summary, when defining the mechanical structure of your structured writing, don't get hung up on what is text and what is markup. In each domain, text and markup together form a body of constrained content that can be successfully created by an author and successfully processed by one or more algorithms. Only when you resolve the content all the way to the media domain do you finally have to sort our exactly which characters appear in which order and which decorations you need to represent that content to a particular audience. When we choose to create content in the other domains, it is precisely because we want to exercise more control over these things and to use algorithms to help us create and manage them. Whether some idea or constraint is expressed by text of markup in those domains should be based solely on what works best in those domains.
     
     
     
