@@ -20,10 +20,7 @@ run the SAM Parser. For example:
 
     python3 samparser.py sam/whatis.sam -o docbook/whatis.xml -x sam2docbook.xsl -i intermediate/whatis.xml
     
-To invoke the smart quotes function of the parser, use the `-q` option. 
-
-    samparser sam/whatis.sam -o docbook/whatis.xml -x sam2docbook.xsl -q
-    
+  
 To validate the SAM file, use the `-xsd` option to validate the intermediate 
 file against the schema `swchapter.xsd` (coming soon!). You will want to dump the 
 intermediate file if using this option because validation errors will 
