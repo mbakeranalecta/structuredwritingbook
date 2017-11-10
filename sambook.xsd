@@ -50,6 +50,12 @@
         <xs:element name="grid" type="grid-type"/>
         <xs:element name="pullquote" type="pullquote-type"/>
         <xs:element name="sidebar" type="sidebar-type"/>
+        <xs:element name="remark">
+          <xs:complexType>
+            <xs:group ref="body-group"/>
+            <xs:attribute name="attribution"/>
+          </xs:complexType>
+        </xs:element>
         <xs:element name="pagination-tweak" type="pagination-tweak-type"/>
       </xs:choice>
     </xs:sequence>
@@ -205,7 +211,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="p" type="p-type"/>
     </xs:sequence>
-    <xs:attribute name="item" />
+    <xs:attribute name="item"/>
     <xs:attribute name="type" type="xs:NCName"/>
     <xs:attribute name="stringref" type="xs:NCName"/>
   </xs:complexType>
@@ -298,7 +304,7 @@
   </xs:complexType>
 
   <xs:complexType name="inline-insert-type">
-    <xs:attribute name="item" />
+    <xs:attribute name="item"/>
     <xs:attribute name="type" type="xs:NCName"/>
     <xs:attribute name="stringref" type="xs:NCName"/>
   </xs:complexType>
