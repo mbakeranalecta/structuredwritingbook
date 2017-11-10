@@ -93,14 +93,14 @@
         </xsl:attribute>
     </xsl:template>
     
-    <xsl:template match="insert[@type='string']">
-        <xsl:variable name="item" select="@item"/>
-        <xsl:value-of select="//string[@name=$item]"/>
+    <xsl:template match="insert[@stringref]">
+        <xsl:variable name="stringref" select="@stringref"/>
+        <xsl:value-of select="//string[@name=$stringref]"/>
     </xsl:template>
     
-    <xsl:template match="inline-insert[@type='string']">
-        <xsl:variable name="item" select="@item"/>
-        <xsl:value-of select="//string[@name=$item]"/>
+    <xsl:template match="inline-insert[@stringref]">
+        <xsl:variable name="stringref" select="@stringref"/>
+        <xsl:value-of select="//string[@name=$stringref]"/>
     </xsl:template>
     
     <xsl:template match="insert[@type='sam']">

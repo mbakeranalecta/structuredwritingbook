@@ -205,8 +205,9 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="p" type="p-type"/>
     </xs:sequence>
-    <xs:attribute name="item" use="required"/>
-    <xs:attribute name="type" use="required" type="xs:NCName"/>
+    <xs:attribute name="item" />
+    <xs:attribute name="type" type="xs:NCName"/>
+    <xs:attribute name="stringref" type="xs:NCName"/>
   </xs:complexType>
 
   <xs:complexType name="figure-type">
@@ -297,8 +298,9 @@
   </xs:complexType>
 
   <xs:complexType name="inline-insert-type">
-    <xs:attribute name="item" use="required"/>
-    <xs:attribute name="type" use="required" type="xs:NCName"/>
+    <xs:attribute name="item" />
+    <xs:attribute name="type" type="xs:NCName"/>
+    <xs:attribute name="stringref" type="xs:NCName"/>
   </xs:complexType>
 
   <xs:complexType mixed="true" name="citation-type">
