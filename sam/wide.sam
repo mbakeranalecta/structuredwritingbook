@@ -7,7 +7,7 @@ chapter:(#chapter.wide) Wide Structures
         structure, tables
         structure, graphics
         structure, code blocks
-        concept, preformatted text
+        concept, pre-formatted text
 
     The notion of separating content from formatting works quite well when the content is a string of words. A string of words has only one dimension: length. A printed string, of course, has two dimensions: length and height, since each letter has a height and a width. But the height and the width of letters is a pure {media-domain} concern. Fitting a one-dimensional string of characters into a two dimensional font on a two dimensional page is one of the first things that gets factored out as we begin to structure content. When we separate content from formatting, we separate the font from the character and are left with a string of characters whose length is measured not in inches or centimeters but in character count.  
     
@@ -16,217 +16,224 @@ chapter:(#chapter.wide) Wide Structures
     But when it comes to content that has dimensions that cannot be factored out, things get more difficult. The main problem cases are:
     
     * tables
+    * pre-formatted text, such as a program listing, that has meaningful line breaks
     * graphics and other media
-    * preformatted text, such as program listings, that have meaningful line breaks
     
     section: Tables
     
-        Tables are one of the more complex problems in structured writing, particularly in the document domain. A table laid out for presentation in one publication can easily get messed up when an algorithm tries to fit it into another, as in this example from a commercially published book on my Kindle:
+        Tables are one of the more complex problems in structured writing, particularly in the document domain. A table laid out for presentation in one publication can easily get messed up when an algorithm tries to fit it into another, as in [#broken-table-formatting], which comes from a commercially published book on my Kindle.
         
         figure:(#broken-table-formatting) Broken table formatting
-            >>>(image ../graphics/tableformatting.jpg)
+            >>>(image ../graphics/tableformatting.xml)
         
-        This table is a particularly difficult case as it is not only one wide thing (a table), but it contains another wide thing (preformatted program code). I don't know exactly how this table was marked up, or which domain the content was written in, or how the {formatting algorithm} failed, resulting in the mess above, but including preformatted text in a table cell creates a no-win situation for a rendering algorithm when it tries to shrink a table to a narrower view port. Does it:
+        This table is difficult because one wide thing (a table) contains another wide thing (pre-formatted program code). I don't know exactly how this table was marked up, which domain the content was written in, or how the {formatting algorithm} failed, resulting in the mess above, but including pre-formatted text in a table cell creates a no-win situation for a rendering algorithm. Does it:
 
         * violate the formatting of the program code by introducing extra line breaks
         
         * give the code the space it needs by squeezing all the other columns impossibly narrow
         
-        * resize the columns proportionally and let the preformatted text overlap the next column, but truncate it at the edge of the table
+        * resize the columns proportionally and let the pre-formatted text overlap the next column, but truncate it at the edge of the table
         
-        * resize the columns proportionally and truncate the preformatted text at the column boundary
+        * resize the columns proportionally and truncate the pre-formatted text at the column boundary
         
-        * shrink the entire table so everything still formats correctly, even if it is shown in three point type
+        * shrink the entire table so everything formats correctly, even if it is shown in three point type
         
-        * let the table expand outside the viewport so that it is either cut off or the reader has to scroll horizontally to read (Web Browsers tend to take this approach, but will it work on an e-reader? It certainly won't work on paper.)
+        * let the table expand outside the viewport so that it is either cut off or the reader has to scroll horizontally. (Web browsers tend to take this approach, but will it work on an e-reader? It certainly won't work on paper.)
         
-        * make the table into a graphic so that the reader can pan and zoom on it like they do with a large picture. (Some e-books seem to take this approach.)
+        * make the table into a graphic so readers can pan and zoom like they do with a large picture. (Some e-books take this approach.)
         
-        If you are thinking that there is not one good option in the bunch, you are appreciating the extent of the problem. For existing books being transferred to e-readers, of course, there is not much that can be done to salvage the situation, short of a complete restructuring  of the file. Those books were probably prepared in a word processor on the more abstract edge of the media domain and the tables were prepared for a known page width in the printed book. 
+        If you are thinking that there is no good option in the bunch, you appreciate the extent of the problem. For existing books being transferred to e-readers, you can't do much to salvage the situation, short of completely restructuring the file. Those books were probably prepared in a word processor on the more abstract edge of the media domain, and the tables were prepared for a known page width in the printed book. 
         
-        The tendency of readers to use small devices, such as tablets, e-readers, and phones for reading means that wide tables are problematic for new content. On a phone, the amount of a table that is visible on screen at any one time may be so small as to make the table essentially unnavigable, and to make it useless for such common table tasks as looking up values or presenting an overview of a subject at a glance.
+        Because many people read on small devices such as tablets, e-readers, and phones, wide tables cause problems. On a phone, the amount of a table that is visible on screen at any one time may be so small as to make the table essentially unnavigable and useless for such common tasks as looking up values or presenting an overview of a subject at a glance.
 
-        Tables can cause problems with height as well as width. While most authors would instinctively know not to import a graphic that was six feet tall, we sometimes create tables that are that long or longer. On a web browser, the reader could simply scroll the table. But as soon as you start scrolling, you lose sight of the column headers and it becomes harder to read data across the table. On paper, it is common to repeat the headings at the top of each page when the table flows over several pages. This works, and it is possible to imitate the effect in a web browser by placing the body of the table in a scrollable frame under a fixed set of headings. But what happens on the page if the height of a table row is larger than the height of the page? Then a single row has to be broken over the page break, leading to questions about how you treat the break in the text of each cell in the row. In traditional typesetting, these things can be massaged by hand on a case by case basis. Getting a rendering algorithm to do it gracefully in every case is a very challenging task. 
+        Tables can cause problems with height as well as width. While most authors would never import a graphic that was six feet tall, we sometimes create tables that are that long or longer. On a web browser, readers can simply scroll the table. But as soon as you start scrolling, you lose sight of the column headers and it becomes harder to read data across the table. On paper, you can repeat the headings at the top of each page when a table flows over several pages. This works, and you can imitate the effect in a web browser by placing the body of the table in a scrollable frame under a fixed heading. But what happens if the height of a table row is larger than the height of the page? How do you break the text in each cell in that row? In traditional typesetting, you can make adjustments by hand on a case-by-case basis, but getting a rendering algorithm to do this gracefully in every case is very challenging.
         
-        Creating tables in the document domain creates problems even when the intended output is paper and a sufficiently wide viewport is assumed. Since a table divides content up into multiple columns, there is always a question of how wide each column should be relative to the others, and whether or not the table should occupy the full width of the viewport or not. A table with just a few numeric values, for instance, probably should not be full page width because that would spread the numbers out too far and make comparisons difficult. One the other hand, a table with a lot of text in each cell needs to be full width, and needs to have column widths roughly proportional to the amount of text in the each column. But this is tricky because some columns have side heads which means there are far fewer words in the first column than in the others, but you don't want to compress that column proportional to its word count because then the side headings will be unreadable. 
+        Creating tables in the document domain creates problems even when the intended output is paper, and you assume a sufficiently wide viewport. Since a table divides content into multiple columns, there is always a question of how wide each column should be relative to the others and whether or not the table should occupy the full width of the viewport. For example, you probably don't want a table with just a few numeric values to span a full page width because that would spread the numbers out too far and make comparisons difficult. One the other hand, a table with a lot of text in each cell needs to be full width and needs to have column widths roughly proportional to the amount of text in the each column. However, suppose the first column is a side head with far fewer words than the other columns. You probably don't want to compress that column proportional to its word count because then the side headings will be unreadable. 
 
-        In a media domain editor, which shows the formatting of the content as it will appear on paper, writers can create the table at a fixed width of their choice and then drag the column widths around to get the aesthetics of column boundaries right by eye. But tables created like this are not likely to format correctly on other devices, as [#broken-table-formatting] shows. And if you move the content creation out of the media domain and into the document domain, it is no longer possible to present the writer with a WYSIWYG page width for them to adjust column widths by eye. (You can fake it, but the adjustments made on screen will have no relationship to how the table is actually formatted on any output page.) At this point you have to leave column width calculation to the rendering algorithm. The best you can do it to give it some hints about how to do its job. 
+        In a media-domain editor, which shows the formatting of the content as it will appear on paper, a writer can create a table at a fixed width and drag the column widths around to get the aesthetics of column boundaries right by eye. But tables created like this are not likely to format correctly on other devices, as [#broken-table-formatting] shows. And if you move content creation out of the media domain and into the document domain, you can no longer present writers with a WYSIWYG page width that would allow them to adjust column widths by eye. (You can fake it, but adjustments made on screen bear no relationship to how the table displays on any output page.) At this point you have to leave column-width calculation to the rendering algorithm. The best you can do it to give it some hints.
         
-        This need to give the rendering algorithm hints about how to fit tables to pages has resulted in the creation of some very complicated table markup languages. Here is an example using the {CALS table model}, courtesy of Wikipedia:
-        
-        ```(xml)
-            <table>
-              <title>Table title</title>
+        figure:(#cals-table-example) CALS table markup language column and row span example (from Wikipedia)
+            ```(xml)
+                <table>
+                  <title>Table title</title>
+    
+                  <tgroup cols="3">
+                    <colspec colname="_1" colwidth="1*"/>
+                    <colspec colname="_2" colwidth="3*"/>
+                    <colspec colname="_3" colwidth="2*"/>
+                    
+                    <thead>
+                      <row>
+                        <entry>1st cell in table heading</entry>
+                        <entry>2nd cell in table heading</entry>
+                        <entry>3rd cell in table heading</entry>
+                      </row>
+                      <row>
+                        <entry>1st cell in table heading</entry>
+                        <entry>2nd cell in table heading</entry>
+                        <entry>3rd cell in table heading</entry>
+                      </row>
+                    </thead>
+    
+                    <tbody>
+                      <row>
+                        <entry>1st cell in row 1 of table body</entry>
+                        <entry>2nd cell in row 1 of table body</entry>
+                        <entry>3rd cell in row 1 of table body</entry>
+                      </row>
+    
+                      <row>
+                        <entry nameend="_2" namest="_1">cell spanning two columns</entry>
+                        <entry morerows="1">cell spanning two rows</entry>
+                      </row>
+    
+                      <row>
+                        <entry>1st cell in row 3 of table body</entry>
+                        <entry>2nd cell in row 3 of table body</entry>
+                      </row>
+                    </tbody>
+                  </tgroup>
+                </table>
 
-              <tgroup cols="3">
-                <colspec colname="_1" colwidth="1*"/>
-                <colspec colname="_2" colwidth="3*"/>
-                <colspec colname="_3" colwidth="2*"/>
-                
-                <thead>
-                  <row>
-                    <entry>1st cell in table heading</entry>
-                    <entry>2nd cell in table heading</entry>
-                    <entry>3rd cell in table heading</entry>
-                  </row>
-                  <row>
-                    <entry>1st cell in table heading</entry>
-                    <entry>2nd cell in table heading</entry>
-                    <entry>3rd cell in table heading</entry>
-                  </row>
-                </thead>
-
-                <tbody>
-                  <row>
-                    <entry>1st cell in row 1 of table body</entry>
-                    <entry>2nd cell in row 1 of table body</entry>
-                    <entry>3rd cell in row 1 of table body</entry>
-                  </row>
-
-                  <row>
-                    <entry nameend="_2" namest="_1">cell spanning two columns</entry>
-                    <entry morerows="1">cell spanning two rows</entry>
-                  </row>
-
-                  <row>
-                    <entry>1st cell in row 3 of table body</entry>
-                    <entry>2nd cell in row 3 of table body</entry>
-                  </row>
-                </tbody>
-              </tgroup>
-            </table>
-        
-        This sample is for a table with one case of a cell spanning two columns and one of a cell spanning two rows. As you can tell, this is not exactly obvious from the markup. In practice, no one is going to create an CALS table by writing the markup by hand. They are going to use the table drawing tools in a graphical XML editor. 
+        This need to give the rendering algorithm hints about how to fit tables to pages has resulted in the creation of some very complicated table markup languages. [#cals-table-example] contains an example using the {CALS table model}. It shows a table that has one cell spanning two columns and one cell spanning two rows. As you can tell, this is not exactly obvious from the markup. In practice, few writers create CALS tables by writing the markup by hand. Instead, they use the table drawing tools in a graphical XML editor. 
         
         # >>> screen shot
 
-        The problem with this is that while the view of the table in the editor looks just like the view of a table in a world processor like {Microsoft Word}, Word's graphical display is based on the actual page currently set up in printer settings and on the actual font that the document will be printed in. It can therefore show how things will fit in the table on an actual page (allowing the author to make {media-domain} adjustments to the table). An XML editor cannot know what page size will be chosen or what font will be used when a document is printed. So while the display looks like it allows the same {media domain} adjustments to be made, this is an illusion and the table will not print as shown on screen. This gives a false impression of the real complexity of the table problem, hiding complexity from the person who is supposed to deal with it.
+        However, although graphical XML editors can display tables in a manner that looks the same as a word processor like {Microsoft Word}, they cannot allow writers to make the kinds of {media-domain} adjustments that they can make with a word processor. A word processor's graphical display is based on the actual page currently set up in printer settings and on the font the document will be printed in. Therefore, a writer can see how a table fits on an actual page and make {media-domain} adjustments. An XML editor cannot know the page size or the font. So while the display looks like it allows writers to make the same {media-domain} adjustments, this is an illusion, and the table will not print as shown on screen. This gives a false impression of the real complexity of the table problem, hiding complexity from the person who is supposed to deal with it.
         
-        Other markup languages take a different approach to tables. For instance, {reStructuredText} allows you to create a table like this:
+        Other markup languages take a different approach to tables. For instance, {reStructuredText} allows you to create a table using markup that looks like [#restructuredtext-table-example].
+
+
+        figure:(#restructuredtext-table-example) reStructuredText table markup language column and row span example
+            ```(reST)
+                +------------+------------+-----------+ 
+                | Header 1   | Header 2   | Header 3  | 
+                +============+============+===========+ 
+                | body row 1 | column 2   | column 3  | 
+                +------------+------------+-----------+ 
+                | body row 2 | Cells may span columns.| 
+                +------------+------------+-----------+ 
+                | body row 3 | Cells may  | - Cells   | 
+                +------------+ span rows. | - contain | 
+                | body row 4 |            | - blocks. | 
+                +------------+------------+-----------+
         
-        ```(reST)
-            +------------+------------+-----------+ 
-            | Header 1   | Header 2   | Header 3  | 
-            +============+============+===========+ 
-            | body row 1 | column 2   | column 3  | 
-            +------------+------------+-----------+ 
-            | body row 2 | Cells may span columns.| 
-            +------------+------------+-----------+ 
-            | body row 3 | Cells may  | - Cells   | 
-            +------------+ span rows. | - contain | 
-            | body row 4 |            | - blocks. | 
-            +------------+------------+-----------+
-        
-        Like the {DocBook} CALS example, it allow you to span rows and columns, and 
-        in this case the effect is obvious from the markup. Equally obvious is that editing the content of this table, or creating a table in this style with any significant amount of text in the cells is going to be very difficult. Nor does this form provide a solution to any of the table rendering challenges described above. 
+        Like the CALS example, reStructuredText allows you to span rows and columns, and in this example, the effect is obvious. Equally obvious is that editing or creating a table with any significant amount of text in the cells is going to be very difficult. Nor does reStructuredText solve any of the table rendering challenges described above. 
         
     section: Alternatives to tables
     
-        Structured writing is about partitioning and redirecting the complexity of content so that it is always handled by someone with the attention, knowledge and resources to handle it. As the discussion above demonstrates, table markup dumps a lot of complexity on the writer, complexity they are not fully able to handle because they don't control the final formatting of content in all the media and devices it will be presented on. The best way to partition the problem, therefore, is to get away from writers creating tables as much as possible by factoring out the decision to present information as a table. Let the writer capture the information. Move the decision on whether and how to present it as a table down the road. 
+        Structured writing is about partitioning and redirecting the complexity of content so that it is always handled by someone with the attention, knowledge, and resources to handle it. As the discussion above demonstrates, table markup dumps a lot of complexity on writers, complexity they are not fully able to handle because they don't control the final formatting of content in all the media and devices it will be presented on. The best way to partition the problem, therefore, is to factor out the decision to present information as a table. Let writers capture information, and move the decision on whether to present that information as a table or in some other form down the road. 
         
         What can you factor the content into? There are a number of alternatives, depending on what the table was being used for. 
         
-        section: Alternate presentation
+        section: Alternate presentations
         
-            In many cases the use of a table simply isn't necessary. There are other way to present the content with no loss of comprehensibility or quality. Some tables are just ways of formatting lists, particularly lists with two levels of nesting. If lists are an equally effective way of presenting content, choose lists rather than tables when writing in the document domain.  
+            In many cases, tables simply aren't necessary. There are other ways to present the content with no loss of comprehensibility or quality. Sometimes, tables are just used to format lists, particularly lists with two levels of nesting. If a list is an equally effective way of presenting content, choose a list rather than a table when writing in the document domain.  
         
-        section: Subject domain structure
+        section: Subject-domain structure
 
             One way to present the list of ingredients in a recipe is to create a table with the ingredient name aligned left and the quantity aligned right. But as we have seen in our recipe examples, you can create a subject-specific ingredient list structure to capture your ingredient information, which you can then format any way you like for output.
-            
-            ```(sam)
-                ingredients:: ingredient, quantity, unit
-                    eggs, 3, each
-                    salt, 1, tsp
-                    butter, .5, cup
 
-            A structure like this is a table in a different sense of the word: it is a database table and the `ingredients` structure creates a mini database table inside the body of the content. The difference between this table and a media domain table is that we know exactly what type of information each of the columns contains. This allows the {presentation algorithm} to make intelligent choices about column widths and all the other rendering issues that arise with tables and pass on appropriate hints to the {rendering algorithm} for rendering ingredient list tables in particular. Of course, it also supports the alternative presentation choice of using a list rather than a table for ingredients.
+            figure:(#subject-specific-recipe) Subject-domain ingredient listing
+                ```(sam)
+                    ingredients:: ingredient, quantity, unit
+                        eggs, 3, each
+                        salt, 1, tsp
+                        butter, .5, cup
+
+            A structure such as the one shown in [#subject-specific-recipe] is a table in a different sense of the word: it is a database table and the `ingredients` structure creates a mini database table inside the body of the content. The difference between this table and a media-domain table is that we know exactly what type of information each column contains. This allows the {presentation algorithm} to make intelligent choices about column widths and all the other rendering issues that arise with tables and then pass on appropriate hints to the {rendering algorithm}. Of course, this structure also supports presentation using a list rather than a table.
             
-            Another example where tables are sometimes used in the {media domain} is procedures. Tables are sometimes used to create side heads for step numbers or high level descriptions of a step, which is then detailed in the right column. Instead of this, use explicit procedure markup which can then be formatted different ways for output. Again, if a table is chosen as the output format, knowing that the contents are a procedure allows the {formatting algorithm} to provide appropriate layout hinting to the {rendering algorithm}.
+            Tables are also sometimes used in procedures. With a table, you can create side heads for step numbers in one column and a description for each step in another column. However, instead of this, consider using explicit procedure markup, which can be formatted differently depending on the output medium. If you choose a table as the output format, knowing that the contents are a procedure allows the {formatting algorithm} to provide appropriate layout hints to the {rendering algorithm}.
         
         section: Record data as data
         
-            Many reference works have traditionally been presented as tables on paper. But most such works are really databases. They are not designed to be read but to be queried. That is, they are used to look up individual pieces of data in a large set. For a database of this sort, {differential single sourcing} requires that you provide the best method of querying the data that is available on each media (which includes the method whose interface fits best in the available viewport). In these cases, the data should not be recorded in tables, at least, not in {media domain} tables. It should be recorded in whatever database format is most suited to the data and to the kinds of queries that the reader wants to make. 
+            Many reference works have traditionally been presented as tables on paper. But most such works are really databases. They are designed to be queried, not read. That is, they are used to look up individual pieces of data in a large set. For a database of this sort, {differential single sourcing} requires that you provide the best method of querying the data for each output medium; that is, the method whose interface fits best in the available viewport. To support differential single sourcing, you should not record data in tables, at least, not in {media-domain} tables. You should record it in whatever database format best suits the data and the kinds of queries your readers want to make. 
             
-            If one of the query mechanisms you want to support for this is printed tables on paper, then the content for those tables should be {extracted}(algorithm "extract") from the database to create the printed table. Again, the additional semantic information available from the database structure allows the {formatting algorithm} to supply the appropriate rendering hints to the {rendering algorithm}.       
+            If you want to support printed tables for print media, then you should {extract}(algorithm "extract") content from the database to create the printed table. The additional semantic information available from the database structure allows the {formatting algorithm} to supply appropriate rendering hints to the {rendering algorithm}.       
 
-            When you have done all of that, you will probably be left with two kinds of tables that you still have to deal with: Small ad-hoc grid layouts, and table which are database tables, but which are one of a kind, rather than something like ingredients, where the same table structure occurs in every recipe. For these, you will need some form of document-domain table markup. Which markup you choose will come down to how much fancy formatting of tables you want to be able to do, and how willing you are to let the rendering algorithm format your tables without extensive hinting from you.
+            When you have done all of that, you will probably be left with two kinds of tables to deal with: small ad-hoc grid layouts and one-of-a-kind database tables. These are tables that occur just once and don't justify the overhead of creating a subject-domain data structure. For these, you need some form of document-domain table markup. Which markup you choose will come down to how much fancy formatting of tables you require and how willing you are to let the rendering algorithm format your tables without extensive hinting.
 
     section: Code
-        There are some texts, particularly computer code and data, in which line endings are meaningful. (Poetry is another example, but its issues are simpler than those of code, so I will stick to talking about code.) Code is a form of structured writing and, in many languages, whitespace -- meaning line breaks, spaces, and indentation -- are part of the markup that defines the structure of the program. When you present code in a document, therefore, you have to respect line endings. 
+        There are some texts, particularly computer code and data, in which line breaks are meaningful. (Poetry is another example, but its issues are simpler than those of code, so I will stick to talking about code.) Code is a form of structured writing and, in many languages, whitespace -- meaning line breaks, spaces, and indentation -- is part of the markup that defines the structure of the program. Therefore, when you present code in a document, you have to respect whitespace. 
         
-        Furthermore, programmers usually work in a fixed-width font, meaning that all the letters are the same width. They tend to line up similar structures with whitespace to make them easier to read, so using a proportional width font for code in documentation will not only look weird to programmers, it will mess up that formatting. It will also make the code less recognizable as code, which could reduce information scent.
+        Furthermore, programmers usually work in a fixed-width font, meaning that all the letters are the same width when displayed. Programmers align similar structures with whitespace to make them easier to read; using a proportional width font for code in documentation messes up formatting and looks weird to programmers. It also makes the code less recognizable as code, which could reduce {information scent}.
 
-        All of which is to say that computer code, data, and other similar formats where line ends are meaningful have to be presented in a fixed width font and with line breaks where they are supposed to be. That makes code samples wide objects, just like tables, with many of the same issues when it comes to rendering them on small devices. One saving grace is that there are not usually any height issues with code samples. 
+        Therefore, computer code, data, and other similar formats where whitespace is meaningful must be presented in a fixed-width font with line breaks placed where they are supposed to be. That makes code samples wide objects, just like tables, with many of the same issues when it comes to rendering them on small devices. One saving grace is that programming examples are less likely to have issues with height.
 
-        There is not much you can do to help the {rendering} algorithm when it comes to code. The options for fitting wide code on a narrow display are to shrink to fit, scroll to view, or truncate. It is not particularly likely that you are going to want your {rendering} algorithm to make a different choice for different kinds of code. Needless to say, putting a code block inside another wide structure, such as a table, is a recipe for disaster, as [#broken-table-formatting] shows. It would be wisest not to allow this in your markup language design.
+        There is not much you can do to help the {rendering} algorithm when it comes to code. The options for fitting wide code on a narrow display are: shrink to fit, scroll to view, or truncate. You probably do not want your {rendering} algorithm to make a different choice for different kinds of code. Needless to say, putting a code block inside another wide structure, such as a table, is a recipe for disaster, as [#broken-table-formatting] shows. It would be wisest not to allow this in your markup language design.
 
-        What is essential is that your document domain or subject domain markup clearly indicates when a piece of text is code. Preferably is should also indicate what kind of code it is, since knowing this can allow the formatting algorithm to do syntax highlighting for code in a known language, and can allow the linking algorithm to detect and link API calls to the API reference. In some cases it might even allow an algorithm to validate the code to make sure it runs or uses the current version of the API.
+        What is essential is that your document-domain or subject-domain markup clearly indicate when a piece of text is code. Preferably it should also indicate what kind of code it is, since knowing this can allow the formatting algorithm to do syntax highlighting for code in a known language and can allow the linking algorithm to detect and link API calls to the API reference. In some cases it might even allow an algorithm to validate the code to make sure it runs or uses the current version of the API.
 
     section: Pictures and graphics
     
-        Pictures and graphics are naturally wide objects. The are two basic formats for graphics, {vector}(concept "vector graphics") and {raster}(concept "raster graphics"). Raster graphics are made up of pixels, like a photograph, and have a fixed resolution. Vector graphics are stored as a set of lines and curves and can be scaled to meet any output requirement. 
+        Pictures and graphics are naturally wide objects. There are two basic formats: {raster}(concept "raster graphics") and {vector}(concept "vector graphics"). Raster graphics are made up of pixels, like a photograph, and have a fixed resolution. Vector graphics are stored as a set of lines and curves and can be scaled to meet any output requirement. 
                 
-        Sometimes the publishing algorithm needs to know how big the graphic is and  how large it is supposed to be on the page. With raster files, the resolution of the file is set. However, its size may be in question. Is a graphic that is 600 pixels by 600 pixels a 1x1 inch picture at 600 dpi, a 2x2 inch picture at 300 dpi, or a 6x6 inch picture at 100 dpi? This is important if you are inserting a headshot into a document which will be published on both paper and the Web. You want a 1x1 photo at 600dpi for print, but you don't want that blowing up to a 6x6 photo when you add it to a web page which will display it at a typical 96dpi unless something intervenes to scale it appropriately.
+        The publishing algorithm needs to know how big the graphic is and how large it is supposed to be on the page. With raster files, the resolution -- that is, the number of pixels -- is set. However, its size on the page can vary. Is a graphic that is 600 pixels by 600 pixels a 1x1 inch picture at 600 dpi, a 2x2 inch picture at 300 dpi, or a 6x6 inch picture at 100 dpi? This is important if you are inserting a headshot into a document that will be published on both paper and the web. Rendering that photo on paper as a 1x1 inch image makes sense, but you don't want that photo to blow up to a 6x6 image when you add it to a web page, where it will be displayed it at a typical 96dpi unless something intervenes to scale it appropriately.
 
-        Then there is the question of the intended size of the image, which is a design consideration independent of the resolution of the raster file. The intention of the person who created the picture and the intention of the person using it both play a role here. Diagrams showing complex relationships should not be shrunk down to where the relationships are unreadable. Simple diagrams should not be blown up to the size of a full page. Diagrams containing text should not be reduced or expanded so that the text becomes invisible or disproportionate to the text on the page. The person using the graphic may have some discretion, based on the role they wish the graphic to play, but their choices should stay within the range prescribed by the creator's intention. In other words, it is important to correctly partition the concerns of the creator and user of a graphic, and to make sure that there is effective communication between them, ensuring that none of the complexity of the relationship gets dropped. 
+        Then there is the question of the intended size of the image, which is a design consideration independent of the resolution of the raster file. The intention of the graphic artist who created the picture and the intention of a writer using it to create a deliverable both play a role here. Diagrams showing complex relationships should not be shrunk down to where the relationships are unreadable. Simple diagrams should not be blown up to the size of a full page. Diagrams containing text should not be reduced or expanded so that the text becomes invisible or out of proportion with the text on the page.
         
-        If the {rendering algorithm} does not know how big a graphic is supposed to be, it has limited choices:
+        The writer may have some discretion, based on the role the graphic has to play, but the result should stay within the range prescribed by the artists's intention. In other words, you have to correctly partition the concerns of both the creator and the user of a graphic, and you have to make sure both parties can communicate effectively so that none of the complexity of the relationship gets dropped. 
         
-        * Show a raster graphic at 100% of its resolution, regardless of whether it fits in the viewport or not (which means either cropping it or forcing a the reader to scroll if it goes outside the viewport). 
+        If the {rendering algorithm} does not know how big a graphic should be, it has limited choices, depending on whether the graphic is too big or too small for the viewport:
         
-        * Scale the graphic to the viewport (which may be stretching it as well as shrinking it). 
+        * Show a raster graphic at 100% of its resolution, regardless of whether it fits in the viewport (which may require cropping it or forcing readers to scroll it). 
         
-        Since neither of these options will produce consistently good results, we generally need to provide the rendering engine with some information to help it render the graphic appropriately.[*2]
+        * Scale the graphic to the viewport (which may require stretching or shrinking it). 
+        
+        Since neither of these options produces consistently good results, you generally need to give the rendering engine information to help it render the graphic appropriately.[*2]
         
         footnote:(*2)
-            Many web designers take an opposite approach, preparing a graphic to the exact size they intend it to be displayed at on a specific web page layout. This is a completely {media domain} approach, of course. In structured writing, we generally want a more flexible solution. We have all seen what happens to meticulously designed desktop website when they are displayed on a phone screen. 
+            Many web designers take an opposite approach, preparing a graphic to the exact size required for a specific web page layout. This is strictly a {media-domain} approach, of course. In structured writing, we need a more flexible solution to avoid what we have all seen happen when a meticulously designed desktop website gets displayed on a phone screen. 
             
-        The simplest way to supply this information is to include it in the markup that inserts the graphic. Thus HTML lets you specify the height and width of a graphic.
-        
-        ```(html)
-            <img 
-                src="http://www.example.com/images/example.png" 
-                height="150" 
-                width="140" />
+        The simplest way to supply this information is to include it in the markup that inserts the graphic. Thus, HTML lets you specify the height and width of a graphic (see [#fig.html-height-width]).
+
+        figure:(#fig.html-height-width) HTML image markup
+            ```(html)
+                <img 
+                    src="http://www.example.com/images/example.png" 
+                    height="150" 
+                    width="140" />
                 
-        But do these values represent the size of the graphic or the size at which is it to be displayed in a particular media? In other words, do they define the size of the content (how big the image itself is) or do they define the size of the box that the image should fit in (the viewport for displaying the image)?[*4]
+        But do these values represent the size of the graphic or the size at which is it to be displayed in a particular medium? In other words, do they tell a processor the size of the image itself or do they describe the size of the box (viewport) the image should fit in?[*4]
         
         footnote:(*4)
             This is actually quite a complicated question, and the meaning has changed between various version of HTML. For some hints of the complexities involved, see
             http://www.w3.org/TR/html5/single-page.html#attr-dim-width. 
         
-        {DocBook} allows you to make this distinction. Its `imagedata` tag supports attributes for specifying the size of the viewport (`height` and `width`) and for specifying the size of the image (`contentheight` and `contentwidth`). The specification also contains additional attributes related to scaling and alignment and complex rules about how the {rendering algorithm} is supposed to behave based on which combination of these attributes is specified.[http://www.docbook.org/tdg/en/html/imagedata.html] In other words, it contains a sophisticated language to describe the sizing and scaling of graphics. It not only deals with {media domain} properties, it actually gives {media domain} instructions. 
+        {DocBook} allows you to make this distinction. Its `imagedata` tag supports attributes for specifying the size of the viewport (`height` and `width`) and the size of the image (`contentheight` and `contentwidth`). The specification also contains additional attributes related to scaling and alignment and complex rules about how the {rendering algorithm} is supposed to behave based on which combination of these attributes you specify.[http://www.docbook.org/tdg/en/html/imagedata.html] In other words, DocBook contains a sophisticated language to describe the sizing and scaling of graphics. It not only deals with {media-domain} properties, it actually gives {media-domain} instructions. 
         
-        Working in the media domain is a problem, of course. It interferes with {functional lucidity} and it is problematic for {differential single sourcing}. But there is another issue to consider as well. Sometimes the best approach to {differential single sourcing} is to use the vector version of a graphic for one media and the raster format for another. For instance, you may want to use the vector version of a graphic for print and a raster version for online media.
+        Of course, working in the media domain can cause problems. It interferes with {functional lucidity} and makes {differential single sourcing} more difficult. But there is another issue to consider. In addition to needing different scaling values for different output media, sometimes the best approach to {differential single sourcing} is to use different versions of the same graphic for different media. For instance, you may want to use a vector format for print and a raster format for online media.
 
-        For all these reasons, we ought to make a distinction between the source of an image and the rendering of that image. For raster images, the source is the original high-resolution file recorded by the camera, the original screen shot, or the original raster file produced by an image editing program. For vector graphics, it is the original vector drawing file. From these source images, various image renderings may be made. 
+        For all these reasons, we need to distinguish the source of an image from the rendering of that image. For raster images, the source is the original high-resolution file recorded by a camera, a screen shot, or a raster file produced by an image editing program. For vector graphics, it is the original vector drawing file. From these source images, you can render a wide range of images.
         
-        What about the case where the you want a vector version for one media and a raster version for another? One approach is to generate a raster version of the appropriate size from the vector version. This could even be done on the fly at build time, but most of the time we will store multiple versions and select the right one to publish. To create the best image in each format, the artist may even create several original renderings of the same image idea, optimizing each for different uses. For instance, the black and white and color versions of a company logo will often be created separately, because the automatic gray-scale rendering of a color logo may not look good at all. You may also want to use different resolutions of the same raster graphic for different media or for different purposes. This may include manually redrawing a graphic to reduce fine detail, rather than simply scaling it mechanically.
+        What if you need a vector version for some media and a raster version for others? One approach is to generate a raster version of the appropriate size from the vector version. This can be done at build time, but most of the time you store multiple versions and select the right one to publish. To create the best image in each format, the artist may even create several renderings of the same image idea, optimizing each for different uses. For instance, you may need a separate gray-scale version of your company logo, because the automatic gray-scale rendering of a color logo may not look good. You may also want to use different resolutions of the same raster graphic for different media or for different purposes. And you may want to manually redraw a graphic at different resolutions to add or remove detail, rather than simply scaling it mechanically.
         
-        In these cases, how do we include the image in our source content? It is not enough to include the source file and scale it, since there are now several source files. You have to go back to the idea of the image -- the image that was in the artist's head, rather than any of the individual renderings of that image. How do we go about it?
+        In these cases, how do you include the image in your source content? You can't simply include the source file and scale it, since there are now several source files. You have to go back to the idea of the image -- the image that was in the artist's head -- rather than any of the individual renderings of that image. How do you do that?
         
-        In {DocBook} we can use conditional processing to include a different image file under different conditions:
-        
-        ```(DocBook)
-            <mediaobject>
-              <imageobject condition="epub">
-                <imagedata 
-                    fileref="../graphics/assemble.png"/>
-              </imageobject>
-              <imageobject condition="fo">
-                <imagedata 
-                    fileref="../graphics/assemble.svg" 
-                    contentwidth="4in" 
-                    align="left"/>
-              </imageobject>
-            </mediaobject>
+        In {DocBook} you can use conditional processing, as shown in see [#ex.docbook-conditional-image]. In this example, the `condition` attribute on the `imageobject` element specifies a different file to be used for two versions of a book (this book, actually). The `epub` version is for eReaders, most of which cannot render {SVG}(language) drawings, and so require a raster format ({PNG}(format) in this case), while the `fo` version is for print publication using the {XSL-FO} {page description language} and uses the vector format {SVG} for high-resolution rendering in print. 
 
-        Here the `condition` attribute on the `imageobject` element specifies a different file to be used for two versions of a book (this book, actually). The `epub` version is for eReaders, most of which cannot render {SVG}(language) drawings, and so require a raster format ({PNG}(format) in this case), while the `fo` version is for print publication using the {XSL-FO} {page description language} and uses the vector format {SVG} for high resolution rendering in print. 
+        figure:(#ex.docbook-conditional-image) DocBook markup for conditional images
+            ```(DocBook)
+                <mediaobject>
+                  <imageobject condition="epub">
+                    <imagedata 
+                        fileref="../graphics/assemble.png"/>
+                  </imageobject>
+                  <imageobject condition="fo">
+                    <imagedata 
+                        fileref="../graphics/assemble.svg" 
+                        contentwidth="4in" 
+                        align="left"/>
+                  </imageobject>
+                </mediaobject>
+
         
-        But this approach not only involves the use of {media domain} markup, it combines it with {management domain} markup. Is it possible to factor all of this out of the authored format? 
         
-        To do so we can have the writer include the idea of the image rather than a rendering of the image. There are several ways to do this. In fact, this is really the same idea as we saw in the {reuse algorithm} were we factored out the filename of the content to be included and replace it with a semantic representation of the reason for the content. There we factored out an explicit filename from this example:
+        However, this approach not only uses {media-domain} markup, it combines it with {management-domain} markup. Is it possible to factor all of this out of the authored format? 
+        
+        Yes, if the writer includes the idea of the image rather than a rendering of the image. There are several ways to do this. In fact, this is the same method described for the {reuse algorithm} where we factored out the filename of the content to be included and replaced it with a semantic representation of the reason for the content.
+        
+        In [#chapter.management-domain], we factored out an explicit filename from this example:
         
         ```(sam)
             procedure: Blow stuff up
@@ -256,11 +263,9 @@ chapter:(#chapter.wide) Wide Structures
                 step: Run away.
                 step: Press the big red button.
 
-        Each of these techniques can be applied to the insertion of graphics just as well as the insertion of text. 
+        You can apply these techniques to insert graphics as well as text. Suppose you have a constraint that whenever a procedure mentions a dialog box, you must include a picture of that dialog box, and you need to support three different platforms, each of which has different dialog boxes.
         
-        For instance, suppose you have a constraint that whenever a procedure mentions a dialog box you should have a picture of that dialog box, but your software is delivered on three different platforms and the dialog boxes look different on each. 
-        
-        We can factor out the platform specific version of the image by using a key to insert the image:
+        You can factor out the platform-specific version of the image by using a key to insert the image:
         
         ```(sam)
             procedure: Save a file
@@ -271,9 +276,9 @@ chapter:(#chapter.wide) Wide Structures
                     
                     >>>(%dialog.save-as)
 
-        Now the presentation algorithm can use a key lookup table for the appropriate platform to select the right version of the Save As dialog box for the version of the documentation you are building. If you port the product to a new platform, all you need is a new set of screen shots and a new key lookup table. You don't have to change the content at all. 
+        Now the presentation algorithm can use a key lookup table to select the right version of the *Save As* dialog box for the version of the documentation you are building. If you port the product to a new platform, all you need is a new set of screen shots and a new key lookup table. You don't have to change the content at all. 
         
-        There is a pretty simple rhetorical pattern at work in this passage, though. When a step mentions a dialog box, a picture of that dialog box is shown. We can exploit this pattern to factor the insert command out of the content altogether by annotating the mentions of UI components in the text: 
+        There is a simple rhetorical pattern at work in this passage. When a step mentions a dialog box, you show a picture of that dialog box. You can exploit this pattern to factor the insert command out of the content altogether by annotating the mentions of UI components in the text: 
         
         ```(sam)
             procedure: Save a file
@@ -294,63 +299,65 @@ chapter:(#chapter.wide) Wide Structures
                 
         There are several benefits to this partitioning of the image problem:
         
-        1. Authors do not have to worry about finding or inserting graphics or remembering the rules about when they are supposed to use screenshots. They just have to remember to mark up the names of dialog boxes when they mention them. (If you only want to show screen shots for certain screens, you only supply the screen shots for those screens, and have your algorithm pass silently over any `dialog-box` entry that does not have a screen shot in the collection. This allows you to adjust to reader feedback about whether more of fewer screen shots are needed simply by adding them to the collection, without changing the content at all -- partitioning at work.)
+        1. Authors do not have to worry about finding or inserting graphics or remembering the rules about when they are supposed to use screenshots. They just have to remember to mark up the names of dialog boxes when they mention them. If you only want to show screen shots for certain screens, you supply the screen shots for only those screens and have your algorithm pass silently over any `dialog-box` entry that does not have a screen shot in the collection. This allows you to adjust to reader feedback about how many screen shots are needed by simply adding them to or removing them from the collection; you don't need to change the content at all -- partitioning at work.
         
-        2. Updating graphics for UI changes is simpler because you just update the catalog of images. You don't have to go searching through docs to find images that are affected by the change. 
+        2. Updating graphics for UI changes is simpler because you just update the catalog of images. You don't have to search through docs to find images that are affected by the change. 
         
         3. You don't need any conditional logic in the text to include the right graphic for the platform.
         
         4. In media where the screen shot would not fit in the viewport, you can suppress the image or handle it a different way.
 
-        5. If you decide that most reader won't need to see the screenshot, you can use the markup to create a link to a topic describing the dialog box instead of putting a screenshot inline. In a {reuse} scenario, you might make different choices for content aimed at different levels of users (only including screenshots in material intended for novices, for instance).       
+        5. If you decide that most readers won't need to see the screenshot, you can use the markup to create a link to a topic describing the dialog box instead of putting a screenshot inline. In a {reuse} scenario, you might make different choices for content aimed at different levels of users (for instance, including screenshots only in material intended for novices).
         
-        In principle, there isn't any difference between factoring out text this way and factoring out graphics. Indeed, because you are not only factoring out text or a graphic, you are factoring out the decision about whether to express a particular idea with text or a graphics, and can potential make different choices about this for different audiences or different media. 
+        In principle, there isn't any difference between factoring out text and factoring out graphics. Indeed, beyond factoring out text or graphics, this partitioning also factors out the decision about whether to express a particular idea with text or a graphics. This means you can choose whether to use text or graphics depending on the audience or medium and implement that choice without changing your content.
         
-        However, when factoring out graphics, there is the added issue of the metadata that describes the various properties of the image and it renderings. One way to handle this is to create a metadata file for each image which provides the needed data for multiple renderings of the image and provides the path to each of the renderings. 
+        However, when factoring out graphics, you still need to supply the metadata needed to render those graphics. One way to handle this is to create a metadata file for each image that provides the data for multiple renderings of the image and a path to each of the renderings. 
         
-        The simplest way to implement this is to use an image include instruction that points to the metadata file instead of to an image file. This is what I did in writing this book. I noted above that the DocBook example, which conditionally includes two different versions of the graphics for epub and print was from this book. But this book is not written in {DocBook}, it is written in {SAM}. In the SAM source file, the image insertion looks like this:
+        The simplest way to implement this is to use an include instruction that points to the metadata file instead of the image file. This is what I did in writing this book. The strategy uses the DocBook technique shown in [#ex.docbook-conditional-image], which conditionally includes two different versions of a graphic, one for epub and one for print. But this book is not written in {DocBook}, it is written in {SAM}. In the SAM source file, the image insertion looks like this:
         
         ```(sam)
             >>>(image ../graphics/assemble.xml)
         
-        This is not the full factoring out of the graphics as described in the previous example. But note that the file that is being included is not a graphics file. Instead it is an XML file. That file looks like this:
-        
-        ```(xml)
-            <?xml version="1.0" encoding="UTF-8"?>
-            <image>
-                <source>assemble.svg</source>
-                <fo>
-                    <href>assemble.svg</href>
-                    <contentwidth>4in</contentwidth>
-                    <align>left</align>
-                </fo>
-                <epub>
-                    <href>assemble.png</href>
-                </epub>
-                <alt>
-                    <p>A diagram showing multiple pieces being 
-                    combined in different ways to produce different 
-                    outputs.</p>
-                </alt>
-            </image>
+        This is not the full factoring out of the graphics as described in the previous example, because the inclusion still refers to an image, and I haven't factored out the inclusion code. However, the file being included is not a graphics file; it is an XML file (see [#fig.sam.inclusion]).
 
-        This XML file describes the idea of the image, listing not only its source file and both of its renderings, but even a text description for use when the graphic cannot be displayed. By including this file instead of an image file, I was able to include the idea of the graphic in my content. 
-         
-        When the content was processed, the {presentation algorithm} loaded and read the `assemble.xml` file and used the information in it to generate the conditionalized {DocBook} file which became the source file for the {formatting algorithm} (which is implemented by the publisher's existing tool chain). 
-        
+        The XML file in [#fig.sam.inclusion] describes the idea of the image, listing not only its source file and both of its renderings, but even a text description for use when the graphic cannot be displayed. By including this file instead of an image file, I was able to include the idea of the graphic in my content. When the content is processed, the {presentation algorithm} loads and reads the `assemble.xml` file and uses the information in it to generate the conditionalized {DocBook} file that becomes the source file for the {formatting algorithm}, which is implemented by the publisher's existing DocBook tool chain. 
+
+        figure:(#fig.sam.inclusion) Graphics inclusion example
+            ```(xml)
+                <?xml version="1.0" encoding="UTF-8"?>
+                <image>
+                    <source>assemble.svg</source>
+                    <fo>
+                        <href>assemble.svg</href>
+                        <contentwidth>4in</contentwidth>
+                        <align>left</align>
+                    </fo>
+                    <epub>
+                        <href>assemble.png</href>
+                    </epub>
+                    <alt>
+                        <p>A diagram showing multiple pieces being 
+                        combined in different ways to produce different 
+                        outputs.</p>
+                    </alt>
+                </image>
+
         Could I have factored out the filename `assemble.xml` as well? Certainly. There are a number of other ways that I could have chosen to represent the idea of the graphic in the content. There are times when it makes a lot of sense to do that. If you are including screen shots in a procedure, for instance, the name of a dialog box is a good way of representing the idea of a graphic that is semantically relevant to the procedure itself. 
                 
         But in the case of the images in this book, their relationship to the text is a little more arbitrary than the relationship of a screen shot to a step in a procedure, so factoring out the filename would have created an abstraction that was actually more difficult to remember as an author. The point is not to be as abstract as possible, but to combine the highest degree of {functional lucidity} with the constraints that improve content quality, and that will be different for different kinds of material and for different circumstances. 
                        
         section: Inline graphics
-        
-            One further wrinkle with graphics is that writers sometimes want to place small graphics in the flow of a sentence, rather that as a separate block object. For instance, if giving instructions that involve the use of a keypad or keyboard, some writers may want to use graphics of the keys rather than simply print the character names. Under certain circumstances, this may make the content easier for a reader to follow. 
+
+            index:: type, term
+                term, inline graphics
+                
+            One further wrinkle with graphics is that writers sometimes need to place small graphics in the flow of a sentence, rather that as a separate block object. For instance, when describing instructions that involve a keypad or keyboard, some writers use graphics of the keys rather than simply printing the character names. Under certain circumstances, this can make the content easier for a reader to follow. 
             
-            Inline graphics can cause {rendering problems}. For instance, they may cause line spacing to be thrown off if the height of the graphics is greater than that of the font used. Inline graphics are something a writer can control and make judgments about when writing in the {media domain} but which may have unexpected and unwelcome consequences when formatted by algorithms from content created in the document or subject domains. 
+            Inline graphics can cause {rendering problems}. For instance, they may cause line spacing to be thrown off if the height of the graphics is greater than that of the font used. Writers can control and make judgments about inline graphics when writing in the {media domain}, but using them may lead to unexpected and unwelcome consequences in document- or subject-domain content.
             
-            There are two techniques you can use to minimize problems with inline graphics. The first is to avoid their use altogether, where that is practical. If there is another way to present the same material just as effectively, it is better to choose that option. 
+            There are two techniques you can use to minimize problems with inline graphics. The first is to avoid them altogether, wherever practical. If you can present the same material just as effectively in some other way, choose that option.
             
-            The other is to factor out the graphic by using a structure to record its semantics. For instance, instead of including an Enter key graphic like this:
+            The other technique is to factor out the graphic by using a structure to record its semantics. For instance, instead of including an *Enter* key graphic like this:
             
             ```(sam)
                 3. Press >(image enter_key.png) to confirm the selection. 
@@ -360,23 +367,23 @@ chapter:(#chapter.wide) Wide Structures
             ```(sam)
                 3. Press {Enter}(key) to confirm the selection. 
                            
-            This leaves open the choice of how to represent the key in the output, and allows for {differential single sourcing}. For example, on a display that did not support graphics, or where graphics would be too fussy, the {presentation algorithm} could render this as:
+            This leaves open the choice of how to represent the key in the output and allows for {differential single sourcing}. For example, on a display that did not support graphics, or where graphics would be too fussy, the {presentation algorithm} could render this as:
             
             """
                 3\. Press \[Enter] to confirm the selection.
                 
-            But for media where the use of a graphic is appropriate, the presentation routine could use a lookup table of key names and graphics to select the graphic file to represent they *Enter* key. 
+            But for media where the use of a graphic is appropriate, the presentation routine could use a lookup table of key names and graphics to select the graphic file to represent the *Enter* key. 
             
             """
                 3\. Press >(image ../graphics/computer_key_Enter.xml) to confirm the selection. 
                 
-            This approach allows the document designer to switch out the graphics used for keyboard keys to find ones that work best on different displays or at different scales. This partitions the graphic maintenance problem to the most qualified person. It is also much easier for the author who does not have to stop to think about which graphic to use. The same approach could be used in another common case, which is describing tool bar icons in a GUI application. 
+            This approach allows the document designer to select graphics that work best on different displays or at different scales. This partitions the graphic maintenance problem to the most qualified person. And authors don't have to stop to think about which graphic to use. The same approach could be used in another common case, which is describing tool bar icons in a GUI application. 
             
             ```(sam)
                 4. Press {Save}(button) to save your changes.
                 
-            This has all the same advantages as mentioned for keys, with the additional benefit that if the interface designer decides to change an icon or to redefine the whole set of icons, you only have to update the lookup table used by the {presentation} algorithm. This could also be used to sub in different icons for different platforms if your application is run on more than one operating system. This is much more efficient than using conditional text to import different graphics for different configurations. 
+            This has the same advantages, with the additional benefit that if the interface designer decides to change an icon or to redefine the whole set of icons, you only have to update the lookup table used by the {presentation} algorithm. This could also be used to substitute different icons for different platforms if your application is run on more than one operating system. This is much more efficient than using conditional text to import different graphics for different configurations. 
              
-            This is a good example of using the idea of the graphic rather than the graphic. The idea of the graphic is to represent the Enter key or Save button. This could be done in a number of ways, including a photograph of the key, by the use of a special font that creates the look of a key, or by a textual representation of the key such as `[Enter]`. The idea of a graphic is to represent a subject. So while you can insert the idea of a graphic in the form of a key or a reference to file that records the idea of a graphic and its implementations, you can also simply identify the subject itself. 
+            This is a good example of using the idea of the graphic rather than the graphic. The idea of the graphic is to represent the *Enter* key or *Save* button. You can do this in a number of ways, including using a photograph of the key, using a special font that creates the look of a key, representing the key using text such as `[Enter]`. The idea of a graphic is to represent a subject. So while you can insert the idea of a graphic in the form of a key or a reference to a file that records the idea of the graphic and its implementations, you can also simply identify the subject itself. 
            
-            As always, a common principle is at work here: better to capture the subject than a resource that represents the subject. Resources may change more often than subjects, and you may want different resources to represent a subject under different circumstance. But as long as the content remains current with it subject matter, the identification of the subject will not change. 
+            As always, a common principle is at work here: it's better to capture the subject than a resource that represents the subject. Resources change more often than subjects, and you may want different resources to represent a subject under different circumstance. But as long as the content remains current with it subject matter, the identification of the subject will not change. 
