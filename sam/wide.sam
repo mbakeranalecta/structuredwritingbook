@@ -28,15 +28,15 @@ chapter:(#chapter.wide) Wide Structures
         
         This table is difficult because one wide thing (a table) contains another wide thing (pre-formatted program code). I don't know exactly how this table was marked up, which domain the content was written in, or how the {formatting algorithm} failed, resulting in the mess above, but including pre-formatted text in a table cell creates a no-win situation for a rendering algorithm. Does it:
 
-        * violate the formatting of the program code by introducing extra line breaks
+        * violate the formatting of the program code by introducing extra line breaks.
         
-        * give the code the space it needs by squeezing all the other columns impossibly narrow
+        * give the code the space it needs by squeezing all the other columns impossibly narrow.
         
-        * resize the columns proportionally and let the pre-formatted text overlap the next column, but truncate it at the edge of the table
+        * resize the columns proportionally and let the pre-formatted text overlap the next column, but truncate it at the edge of the table.
         
-        * resize the columns proportionally and truncate the pre-formatted text at the column boundary
+        * resize the columns proportionally and truncate the pre-formatted text at the column boundary.
         
-        * shrink the entire table so everything formats correctly, even if it is shown in three point type
+        * shrink the entire table so everything formats correctly, even if it is shown in three point type.
         
         * let the table expand outside the viewport so that it is either cut off or the reader has to scroll horizontally. (Web browsers tend to take this approach, but will it work on an e-reader? It certainly won't work on paper.)
         
@@ -128,7 +128,7 @@ chapter:(#chapter.wide) Wide Structures
         
         section: Alternate presentations
         
-            In many cases, tables simply aren't necessary. There are other ways to present the content with no loss of comprehensibility or quality. Sometimes, tables are just used to format lists, particularly lists with two levels of nesting. If a list is an equally effective way of presenting content, choose a list rather than a table when writing in the document domain. Sometimes only part of the content needs to be in tabular format and can be express just as well as simpler other structures that contain a table or tables within them.
+            In many cases, tables simply aren't necessary. There are other ways to present the content with no loss of comprehensibility or quality. Sometimes, tables are just used to format lists, particularly lists with two levels of nesting. If a list is an equally effective way of presenting content, choose a list rather than a table when writing in the document domain. Sometimes only part of the content needs to be in tabular format and can be express just as well as other, simpler structures that contain a table or tables within them.
         
         section: Subject-domain structure
 
@@ -265,6 +265,9 @@ chapter:(#chapter.wide) Wide Structures
 
         You can apply these techniques to insert graphics as well as text. Suppose you have a constraint that whenever a procedure mentions a dialog box, you must include a picture of that dialog box, and you need to support three different platforms, each of which has different dialog boxes.
         
+        pagination-tweak:
+            min-space: 2in
+
         You can factor out the platform-specific version of the image by using a key to insert the image:
         
         ```(sam)
@@ -377,7 +380,9 @@ chapter:(#chapter.wide) Wide Structures
             """
                 3\. Press >(image ../graphics/computer_key_Enter.xml) to confirm the selection. 
                 
-            This approach allows the document designer to select graphics that work best on different displays or at different scales. This partitions the graphic maintenance problem to the most qualified person. And authors don't have to stop to think about which graphic to use. The same approach could be used in another common case, which is describing tool bar icons in a GUI application. 
+            This approach allows the document designer to select graphics that work best on different displays or at different scales. This partitions the graphic maintenance problem to the most qualified person. And authors don't have to stop to think about which graphic to use.
+
+            The same approach could be used in another common case, which is describing tool bar icons in a GUI application. 
             
             ```(sam)
                 4. Press {Save}(button) to save your changes.

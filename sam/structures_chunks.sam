@@ -24,7 +24,9 @@ chapter:(#chapter.blocks) Blocks, fragments, paragraphs, and phrases
         At the risk of adding further burden to an already overloaded term, I am going to call these recognizable objects {semantic blocks}(concept)(italic), because they are blocks that mean something in whichever domain they belong to.  (Note that I am not using the term _semantic_ to mean subject domain; blocks have semantics in all domains.) High-level markup design is essentially a matter of defining semantic blocks and the ways they go together. 
         
         An easy example of a semantic block is a list. A list is a semantic block because _list_ is an idea with meaning in the document domain independent of its exact internal structure. A writer can say, "I want a list here," independent of any specifics of markup. If a structure has a name like this in the real world, the block that implements it is a semantic block in the terminology I am coining for this book. 
-        
+
+    section: Structural blocks
+    
         Semantic blocks generally contain other blocks that you might not talk about independently if they weren't needed to describe the construction of a semantic block. I call these {structural blocks}(concept)(italic). Structural blocks are the construction details of a structured document. By analogy, in architectural terms, if a window is a semantic block, the lintel, sash, and jamb are structural blocks.
         
         The distinction between a semantic block and a structural block is not hard and fast. It has more to do with design intent than any concrete characteristic. The main point of making the distinction is to encourage you to think of markup design first in terms of semantic blocks. That is, blocks, with whatever internal structure you require, that capture the structure of something that is real and meaningful to you. Don't get bogged down in the precise internal structure until you figure out which semantic blocks you need.    
@@ -93,7 +95,7 @@ chapter:(#chapter.blocks) Blocks, fragments, paragraphs, and phrases
 
         Designing in terms of semantic blocks not only helps keep markup design and processing simpler, it also improves {functional lucidity}. If you present your markup language to writers as a set of familiar objects such lists and tables or as logical structures such as an ingredients list or parameter description -- rather than as a sea of tags -- you make their job easier.
         
-        Semantic blocks also make things easier for tools developers. An {XML editor} that implements a WYSIWYG interface to {XML} authoring can provide tool bar buttons for inserting semantic blocks such as lists or tables. This allows the author to enter these blocks as complete structures rather than having to enter every tag separately. 
+        Semantic blocks also make things easier for tools developers. An {XML editor} that implements a WYSIWYG interface to {XML} authoring can provide tool-bar buttons for inserting semantic blocks such as lists or tables. This allows the author to enter these blocks as complete structures rather than having to enter every tag separately. 
 
         The structure of a semantic block can be strict or loose. A strict semantic block has one basic structure with few options. A loose one allows a much wider variety of structure inside, sometimes to the point that it acts more as a semantic wrapper than a defined semantic block. 
 
@@ -205,7 +207,9 @@ chapter:(#chapter.blocks) Blocks, fragments, paragraphs, and phrases
             <actor name="John Wayne">the Duke</actor> 
             plays an ex-Union colonel.</p>
 
-        Here the `movie` and `actor` elements float in the content of the `p` element. In XML parlance, this is called _mixed content_. If fact, XML breaks the structure of elements down into three types:
+        Here the `movie` and `actor` elements float in the content of the `p` element. In XML parlance, this is called _mixed content_.
+
+        XML breaks the structure of elements down into three types:
         
         |element content| Elements that contain only other elements. 
         
@@ -215,7 +219,7 @@ chapter:(#chapter.blocks) Blocks, fragments, paragraphs, and phrases
         
         Mixed content is the reason that most traditional data formats are not a good fit for content. They may be able to model element content and data content, but they lack an elegant way to model mixed content. 
         
-        Even conventional programming languages have trouble with mixed content. In fact most libraries for XML processing invent an additional wrapper around each string of characters in a mixed content element, effectively representing it as if it were written like this (without mixed content):
+        Even conventional programming languages have trouble with mixed content. Most libraries for XML processing invent an additional wrapper around each string of characters in a mixed content element, effectively representing it as if it were written like this (without mixed content):
         
         ```(xml)
             <p><text>In </text><movie>Rio Bravo</movie><text>, 
@@ -245,7 +249,7 @@ chapter:(#chapter.blocks) Blocks, fragments, paragraphs, and phrases
         
         Every structured writing domain needs to annotate phrases. {Media-domain} structured writing needs to annotate phrases to describe formatting. The {document domain} needs to annotate phrases to describe their role in the document. The {management domain} needs to annotate phrases to assign conditions or extract content for reuse. The {subject domain} needs to annotate phrases to describe the subject the phrase refers to. 
         
-        In planning your markup structures, therefore, it is important to think about which structures in your language need to be mixed content and which do not. Finding ways to avoid mixed content without violating the spirit of the essentially narrative nature of writing can pay dividends in an improved ability to express constraints and to execute virtually all the structured writing algorithms.
+        In planning your markup structures, therefore, it is important to think about which structures in your language need to be mixed content and which do not. Finding ways to avoid mixed content without violating the spirit of the narrative nature of writing can pay dividends in an improved ability to express constraints and to execute virtually all the structured writing algorithms.
         
         On the other hand, some of the most important subject matter that you need to model and make available to algorithms cannot effectively be factored out of paragraphs, particularly while maintaining {functional lucidity}. Be prepared, therefore, to think seriously about the types of phrases that you need to annotate below the paragraph level and exactly which domain those annotations should be in. 
         
