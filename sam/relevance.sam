@@ -6,87 +6,88 @@ chapter:(#chapter.relevance) Relevance
     index: type, term
         concept, relevance
     
-    Establishing the relevance of content is essential for readers, and for many of the structured writing algorithms. 
+    Establishing the relevance of content is essential for readers and for many of the structured writing algorithms. 
     
-    * Every reader who looks for content has to decide if a given document is relevant to their needs. 
-    * A search engine needs to determine if a document is relevant to a reader's search. 
-    * The {reuse algorithm} needs to determine if content relevant to a certain point exists or not. 
-    * The {content generation algorithm} needs to find all the pieces of content relevant to a certain purpose. 
-    * The {linking algorithm} needs to find any documents relevant to a subject mentioned in the current document so it can create links to them. 
-    * {Conformance checking} needs to determine if there is information in one document that should conform to information in another document. 
+    * Readers looking for content have to decide if a given document meets their needs. 
+    * Search engines need to determine if a document is relevant to a reader's search. 
+    * The {reuse algorithm} needs to determine if content relevant to a certain point exists.
+    * The {content-generation algorithm} needs to find all of the content relevant to a purpose. 
+    * The {linking algorithm} needs to find any documents relevant to a subject mentioned in the current document, so it can create links to them. 
+    * The {conformance-checking algorithm} needs to determine if there is information in one document that should conform to information in another document. 
     * The {quality algorithm} needs to ensure that a document contains all the information relevant to the reader's needs. 
-    * The {information architecture algorithm} needs to discover all the the connections between pieces of content as well as their types and the constraints they obey in order to build a navigable information set.
+    * The {information-architecture algorithm} needs to discover all of the connections between pieces of content, the types of those connections, and the constraints they obey in order to build a navigable information set.
     
-    The management of relevance therefore has a twofold role: the first it to alleviate as much as possible the complexity the reader faces in establishing relevance, and the second is to make sure that every algorithm that needs to establish the relevance of content are able to do so correctly and unambiguously. 
+    Managing relevance has a twofold role: first, alleviate as much as possible the complexity the reader faces in establishing relevance, and second, make sure that algorithms that need to establish the relevance of content do so correctly and unambiguously. 
     
     Structure supports relevance in two ways: being relevant, and demonstrating relevance.  
     
     section: Being relevant
     
-        All too often, making sure that content is relevant is neglected. CMS systems will attach metadata to unstructured documents asserting their relevance to certain topics or requirements without verifying that they actually meet those requirements. In many cases, the {CMS} has a cataloging system for content that requires certain {metadata} fields to be completed, often from a predetermined list of values. Developing a good set of relevant criteria and values is complex and the development effort is often conducted in a way that does not yield sound relevance criteria for users or readers. {Taxonomy} definition by committee often imposes an abstract logic that does not match the concerns or language of actual readers and users. 
+        Relevance is too often neglected. Content management systems (CMS) attach metadata to unstructured documents, asserting their relevance to certain topics or requirements without verifying that those documents actually meet those requirements. In many cases, the {CMS} has a cataloging system that requires writers to complete certain {metadata} fields, often from a predetermined list of values. Developing a good set of relevance criteria and values is complex, and development efforts often do not yield sound relevance criteria for readers. Defining the {taxonomy} by committee often imposes an abstract logic that does not match the concerns or language of readers.
         
-        If developed correctly, this {metadata} may have the potential to define the relevance of content, but these requirements are not always communicated to the writer before they write. Instead, writers are left to compose content without any guidance as to what would make it relevant, and then asked to tag it with the {CMS} metadata after the fact. In many cases, this tagging is done hastily and lazily, simply picking whatever terms seem appropriate at first glance without really thinking about whether the piece fulfills the promise the metadata is making. 
+        If developed correctly, such {metadata} may have the potential to define the relevance of content, but these requirements are not always communicated to writers in advance. Instead, writers are left to compose content without any guidance as to what would make it relevant, and then they are asked to tag content with {CMS} metadata after the fact. In many cases, this tagging is done hastily and lazily, simply picking whatever terms seem appropriate at first glance without really thinking about whether the piece fulfills the promise the metadata is making. 
         
-        The result is that the content returned by the {CMS} is often not relevant to the reader's needs because it simply does not possess the relevance that the CMS metadata claims it does. In many cases, bypassing the CMS's navigation mechanisms and doing a simple site search will produce better results, since the search engine looks at the content itself to determine what it is relevant to. But while this can rescue the reader's quest for relevant content where such content exists, it does nothing to ensure that relevant content actually gets created. Without this assurance, the CMS may be telling lies to its owners as well as to it readers.
+        As a result, content returned by the {CMS} is often not relevant to the reader's needs because it simply does not contain what the CMS metadata claims it does. In many cases, bypassing the CMS's navigation mechanisms and doing a simple site search produces better results, since the search engine looks at the content itself to determine what it is relevant to. But while this can rescue the reader's quest for relevant content, where such content exists, it does nothing to ensure that relevant content actually gets created. Without this assurance, the CMS may be telling lies to its owners as well as to it readers.
         
-        The plain fact is that if you are going to implement strict standards of relevance, and a strict vocabulary for proclaiming relevance, this needs to be communicated to the writer long before they have finished writing and are trying to submit their content to the CMS. One way to do that is through structured writing.
+        If you are going to implement strict standards of relevance and a strict vocabulary for proclaiming relevance, you must communicate this to writers long before they try to submit their content to the CMS. One way to do that is through structured writing.
         
         #FIXME: example
         
     section: Showing relevance
     
-        Being relevant is important, but it is equally important to show that you are relevant. Readers and algorithms can't find you if you don't show your relevance. 
+        Having relevant content is important, but it is equally important that your content show that it's relevant. Readers and algorithms can't find your content if it doesn't show its relevance. 
         
-        Actually, that is not entirely true. Search engines can determine the relevance of content with an amazing degree of accuracy simply be reading the text itself and looking at how the content is used and linked to. This attests to the first importance of being relevant. 
+        Actually, that is not entirely true. Search engines can determine the relevance of content with an amazing degree of accuracy simply by reading the text and looking at how the content is used and linked to. This attests to the first importance of being relevant. 
         
-        But if the search engine decides a topic may be relevant and adds that topic to search results, but the reader then looks at it and can't see the relevance, you still don't reach the reader. (And the search engine may take note as well and downgrade that topic's relevance ranking.)
+        However, if the search engine decides a topic may be relevant and adds that topic to search results, but the reader looks at it and can't see the relevance, you still haven't reached that reader. In addition, the search engine may take note as well and downgrade that topic's relevance ranking.
         
-        Showing your relevance to the reader is all about establishing your subject matter and context and doing it clearly and unambiguously in the few seconds that the reader is likely to look before dismissing you and moving on to the next item in their search results. When developing a markup language (or other structured content container) for your content, one of the most important things to consider is how the reader will recognize what your documents are relevant to. This is about the {rhetorical structure} of each piece of content and how well it works to support the reader's recognition of the relevance of content . This is something I deal with at length in my book, {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}(citetitle)
+        Showing relevance is all about establishing your subject matter and context and doing so clearly, unambiguously, and quickly. Otherwise, the reader will dismiss the results and continue searching. When developing a markup language (or other structured content container) for your content, one of the most important things to consider is how the reader will recognize what your documents are relevant to. This is determined by the {rhetorical structure} of each piece of content and whether that structure helps the reader see the relevance of that content. I deal with this question at length in my book, {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}(citetitle).
         
         Relevance is not established the same way for all readers or for all subjects. For a recipe, for instance, a picture may do a lot to establish relevance. For an API reference, a version number and the description of a return value may be key relevance indicators. 
         
-        But relevance is not just about the subject matter. It is also about the reader's purpose. For a  page about a business, the inclusion of a stock price chart may tell you that the page is of interest to an investor rather than a potential customer. Placing that chart at the top of the page helps establish the relevance quickly. For an article about a place, pictures of beaches or nightlife show that the page is relevant to potential tourists, not to residents trying to decide what schools to send their kids to. 
+        But relevance is not just about the subject matter. It is also about the reader's purpose. For a  page about a business, the inclusion of a stock price chart may tell you that the page is of interest to an investor rather than a potential customer. Placing that chart at the top of the page helps establish the relevance quickly. For an article about a place, pictures of beaches or nightlife show that the page is relevant to potential tourists but not relevant to residents trying to decide what schools to send their kids to. 
         
-        Creating content in the {subject domain} allows you to make sure that writers produce all the pieces of information that make a page relevant to the intended audience. Because the {subject domain} also factors out the order of presentation of content, it allows you to make sure that every page is organized in a way that best shows its relevance. 
+        Creating content in the {subject domain} allows you to make sure that writers produce all the pieces of information that make a page relevant to the intended audience. Because the {subject domain} also factors out presentation order, it allows you to make sure that every page is organized in a way that best shows its relevance. 
         
-        Better still, because {subject domain} content is organized by algorithms, you can experiment to see if one organization of content works better than another and adapt your {presentation algorithm} accordingly without having to edit any of the content. 
+        Better still, because {subject-domain} content is organized for presentation by algorithms, you can experiment to see if one organization of content works better than another and adapt your {presentation algorithm} accordingly without having to edit any of the content. 
         
-        Also, because storing content in the {subject domain} allows you to use the {extract and merge} algorithm to pull in content from other sources, you don't have to include the beach pictures or the stock chart with your subject domain content. Instead, you can have the {synthesis algorithm} query other content sets or feeds to find the best current tourist shots or to generate the stock chart in real time. 
+        Also, because storing content in the {subject domain} allows you to use the {extract-and-merge} algorithm to pull in content from other sources, you don't have to include the beach pictures or the stock chart with your subject-domain content. Instead, you can have the {synthesis algorithm} query other content sets or feeds to find the best current tourist shots or to generate the stock chart in real time. 
         
-        But that, of course, depends on the your content format having explicit fields that establish its relevance, because in order for the {synthesis algorithm} to do this it has to be able to find relevant pictures or a relevant stock chart. It is not enough to show relevance to readers, you also need to show relevance to algorithms.
+        But that, of course, depends on your content having fields that establish relevance and give the {synthesis algorithm} the information it needs to find relevant pictures or a relevant stock chart. It is not enough to show relevance to readers, you also need to show relevance to algorithms.
         
     section: Showing relevance to algorithms
         
-        Showing relevance to algorithms comes down to breaking information up into clearly labeled fields containing clearly unambiguous values. For example, to query a web service that generates stock charts, you would need to provide it with a clearly unambiguous identifier for the company whose chart you wanted. The best way to do that would not be the company name, since there can be duplicate or similar names in different industries (Apple Computer vs Apple Music, for example), but the company's stock symbol, which is guaranteed to be unique by the exchange on which it is listed (though you do have to provide the exchange code as well to be globally unique: `NASDAQ:AAPL`, not just `AAPL`).
+        Showing relevance to algorithms comes down to breaking information up into clearly labeled fields containing unambiguous values. For example, to query a web service that generates stock charts, you need to provide an unambiguous identifier for the company whose chart you want. The company name is not the best identifier, since there can be duplicate or similar names in different industries (Apple Computer versus Apple Music, for example). A better choice is the company's stock symbol, which is guaranteed to be unique on the exchange where it is listed (though you do have to provide the exchange code: `NASDAQ:AAPL`, not just `AAPL`).
         
-        This means that the web service needs to index its information on stock prices according to stock symbols (which is exactly what it does, of course). Actually, it is more than likely that the stock chart drawing service does not hold price information at all, but requests it as needed from yet another web service. The stock ticker symbol is the unambiguous key that identifies the company in each of these transactions.
+        This means that the web service needs to index stock prices according to stock symbols (which is what it does, of course). Actually, it is likely that the stock chart drawing service does not hold price information at all but, instead, requests it as needed from yet another web service. The stock ticker symbol is the unambiguous key that identifies the company in each of these transactions.
         
-        While humans and algorithms assess relevance in different ways, the foundations of relevance are the same for both: clear identification of the type and subject matter of the information. This means that you need to maintain {metadata} that clearly identifies the type and subject, and also present the content in a way that makes its type and subject evident at a glance. 
+        While humans and algorithms assess relevance in different ways, the foundations of relevance are the same for both: clear identification of the type and subject matter of the information. This means that you need to maintain {metadata} that clearly identifies the type and subject and also present the content in a way that makes its type and subject evident at a glance. 
+
+        figure:(#fig.relevance-egg) Recipe illustrating subject-domain markup for relevance
+            ```(sam)
+                recipe: Hard Boiled Egg
+                    introduction:
+                        A hard boiled egg is simple and nutritious.
+                    picture: 
+                        >>>(image egg.jpg)
+                    ingredients:: ingredient, quantity
+                        eggs, 12
+                        water, 2qt
+                    preparation:
+                        1. Place eggs in pan and cover with water.
+                        2. Bring water to a boil.
+                        3. Remove from heat and cover for 12 minutes.
+                        4. Place eggs in cold water to stop cooking.
+                        5. Peel and serve.
+                    prep-time: 15 minutes
+                    serves: 6
+                    nutrition:
+                        serving: 1 large (50 g)
+                        calories: 78
         
-        ```(sam)
-            recipe: Hard Boiled Egg
-                introduction:
-                    A hard boiled egg is simple and nutritious.
-                picture: 
-                    >>>(image egg.jpg)
-                ingredients:: ingredient, quantity
-                    eggs, 12
-                    water, 2qt
-                preparation:
-                    1. Place eggs in pan and cover with water.
-                    2. Bring water to a boil.
-                    3. Remove from heat and cover for 12 minutes.
-                    4. Place eggs in cold water to stop cooking.
-                    5. Peel and serve.
-                prep-time: 15 minutes
-                serves: 6
-                nutrition:
-                    serving: 1 large (50 g)
-                    calories: 78
+        [#fig.relevance-egg] contains structures that both humans and algorithms can use to assess relevance. The document type, clearly identified as `recipe`, establishes basic relevance. Including a picture helps humans visually identify the recipe. Information such as the number of calories could be used by an algorithm to select recipes for a low-calorie cookbook. 
         
-        This recipe example contains a number of structures that both humans and algorithms can use to assess relevance. The simple fact that this is specifically a document of type `recipe` establishes basic relevance. The inclusion of a picture helps humans visually identify the recipe they are looking for. Information like the number of calories could be used by an algorithm to select recipes for a low-calorie cookbook. 
-        
-        It is possible to maintain {metadata} on type and subject of content in a {content management system} that hosts content written in the {document}(concept "document domain") or {media domains}. In this scenario, ensuring that the organization of the content makes the type and subject evident at a glance is a separate problem from correctly labeling the content in the CMS. While it is certainly possible, with the right authoring discipline, to make sure that the content demonstrates what the metadata claims about it, it is also possible for the content not to match what the metadata claims, or not to demonstrate its type and subject effectively. 
+        It is possible to maintain {metadata} on type and subject of content in a {content management system} that hosts content written in the {document}(concept "document domain") or {media domains}. However, in the document and media domains, ensuring that readers can identify the type and subject at a glance is a separate problem from correctly labeling the content in the CMS. In these domains it is possible, with the right authoring discipline, to ensure that content matches the metadata, but it is also possible to have mismatches or even to have a situation where content does not demonstrate its type and subject effectively. 
         
         Moving content to the {subject domain} allows you to show relevance to both humans and machines with the same structures, assuring that the two do not get out of sync. 
         

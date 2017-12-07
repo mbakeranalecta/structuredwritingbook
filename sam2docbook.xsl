@@ -801,28 +801,34 @@
     </xsl:template>
 
     <xsl:template match="section">
-        <db:section>
-            <xsl:apply-templates/>
-            <xsl:if test="not(following::section) and not(section)">
-                <xsl:for-each select="/chapter/index/record/term">
-                    <db:indexterm  class='endofrange'>
-                        <xsl:attribute name="startref">
-                            <xsl:value-of select="generate-id()"/>
-                        </xsl:attribute>
-                    </db:indexterm>
-                </xsl:for-each>
-                
-                <xsl:for-each select="/chapter/index/record/term">
-                    <db:indexterm  class='endofrange'>
-                        <xsl:attribute name="startref">
-                            <xsl:value-of select="generate-id()"/>
-                            <xsl:text>x</xsl:text>
-                        </xsl:attribute>
-                    </db:indexterm>
-                </xsl:for-each>
-                
-            </xsl:if>
-        </db:section>
+      <db:section>
+        <xsl:if test="@name">
+          <xsl:attribute name="xml:id">
+            <xsl:value-of select="@name"/>
+          </xsl:attribute>
+        </xsl:if>
+
+        <xsl:apply-templates/>
+        <xsl:if test="not(following::section) and not(section)">
+          <xsl:for-each select="/chapter/index/record/term">
+            <db:indexterm  class='endofrange'>
+              <xsl:attribute name="startref">
+                <xsl:value-of select="generate-id()"/>
+              </xsl:attribute>
+            </db:indexterm>
+          </xsl:for-each>
+          
+          <xsl:for-each select="/chapter/index/record/term">
+            <db:indexterm  class='endofrange'>
+              <xsl:attribute name="startref">
+                <xsl:value-of select="generate-id()"/>
+                <xsl:text>x</xsl:text>
+              </xsl:attribute>
+            </db:indexterm>
+          </xsl:for-each>
+          
+        </xsl:if>
+      </db:section>
     </xsl:template>
     
     
