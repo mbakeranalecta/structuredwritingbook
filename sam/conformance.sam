@@ -190,25 +190,12 @@ chapter:(#chapter.conformance) Conformance
         
     section: Entry validation constraints
         
-        The ability of algorithms to read the data in your structures can have another conformance benefit because it allows you to check one piece of information against another. For instance, if you have date of birth and age you can calculate current age from the date of birth and compare it against the value of the age field. If the values don't match, you know the author made an error and you can report it. Here is a Schematron assertion that tests this constraint (in a slightly imprecise fashion: date arithmetic is surprisingly hard!):
-        
-        # Come up with another example? The difficulties of data arithmetic make
-        # this example confusing.
-        
-        ```(schematron)
-            <schema xmlns="http://purl.oclc.org/dsdl/schematron"
-            queryBinding="xslt2">
-                <pattern>
-                    <title>Age constraint</title>
-                    <rule context="person">
-                        <assert test="age = 
-                        xs:int(days-from-duration(current-date() -
-                        xs:date(date-of-birth)) div 365.25)">
-                            Age does not match the given date-of-birth.
-                        </assert>
-                    </rule>
-                </pattern>
-            </schema>
+        The ability of algorithms to read the data in your structures can have another conformance benefit because it allows you to check one piece of information against another. For instance, if you have date of birth and age you can calculate current age from the date of birth and compare it against the value of the age field. If the values don't match, you know the author made an error and you can report it. Here is some pseudocode for such a test:
+
+        ```(pseudocode)
+            if not $age = years-between(now, $date-of-birth)
+                error "Age does not match the given date-of-birth."
+
             
     section: Referential integrity constraints
     
