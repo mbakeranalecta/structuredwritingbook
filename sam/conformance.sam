@@ -6,154 +6,35 @@ chapter:(#chapter.conformance) Conformance
         concept, conformance
         tool, schema language
 
-    Structured writing uses constraints to govern rhetoric and to partition and redirect process complexity. In doing so, it transfers decisions from one partition to another. Successfully transferring a decision requires that we transfer the information required to make the decision.  The success of our effort to partition and redistribute complexity, therefore, depend on everyone's conformance to the applicable constraints. Every failure to conform is a piece of information not transferred and therefore complexity going unhandled, and since complexity cannot be destroyed, it falls through to a downstream process and ultimately to the reader. The design of structures that support and express conformance to constraints, therefore, is a key component of any structured writing system. 
+    Structured writing uses constraints to govern rhetoric and to partition and redirect process complexity. In doing so, it transfers decisions from one partition to another. When you transfer a decision, you must transfer the information needed to make the decision, which in turn depends on everyone conforming to the applicable constraints. Every failure to conform means that some piece of information is not transferred and, therefore, some complexity goes unhandled. Since complexity cannot be destroyed, it falls through to a downstream process and ultimately to the reader. Therefore, a key part of developing a structured writing system is designing structures that support and express conformance to constraints.
     
-    Conformance is a complex problem. We can't expect to be successful if we just make up structures and systems and demand conformance to their constraints without any thought as to how conformance is to be specified and assessed. It is perfectly possible (and all too common) to invent systems that would operate flawlessly if everyone conformed, but which never work well because their constraints are impossible to conform to in the real world of work. 
+    Conformance is a complex problem. You can't expect to be successful if you just make up structures and systems and demand conformance to their constraints without any thought as to how conformance is to be specified and assessed. It is possible (and all too common) to invent a system that would operate flawlessly if everyone conformed, but which fails in the real world because it is impossible to conform to the constraints.
     
-    Constraints have always been part of the writing process. Style guides and grammatical reference works express constraints that writers are expected to follow. Editorial guidelines tell writers what kind of content a publisher is looking for, at what length, and in what format. If a publisher says that manuscripts must be delivered in {DocBook}(language) or {Word}(tool) format, that is a constraint. When the government says that you must submit your online tax return in a particular file format, that is a constraint. 
+    Constraints have always been part of writing. Style guides and grammatical reference works express constraints that writers are expected to follow. Editorial guidelines tell writers what kind of content a publisher is looking for, at what length, and in what format. If a publisher says that manuscripts must be delivered in {DocBook}(language) or {Word}(tool) format, that is a constraint. When the government says that you must submit your online tax return in a particular file format, that is a constraint. 
     
-    Some of these constraints are merely statements of requirements. Writers are not given any assistance in following them nor is there any verification mechanism to tell them if they have followed them or not (other than perhaps an email from an irate editor). Others are highly mechanical. Good tax preparation software will guide you all the way in filling out your tax forms and will run all kinds of checks to make sure that you did it correctly. It will also factor out many of the complexities of the tax code and ask you for information in a way you can understand, thus making it easier for you to conform.
+    Some constraints merely state requirements. Writers are given no assistance in following them nor is there any verification mechanism (other than perhaps an email from an irate editor). Other constraints are mechanical. Good tax preparation software guides you through your tax forms and checks to make sure that you complete them correctly. It also factors out many of the complexities of the tax code and asks you for information in a way you can understand, thus making it easier for you to conform.
     
-    This higher level of conformance checking and support helps make the process easier and the results more reliable. Unless the data passed from one partition to another is reliable, partitioning breaks down and both process and rhetoric suffer. Conformance is the linchpin of structured writing. Without it, none of the other algorithms will work reliably.
+    This higher level of conformance checking and support helps make the process easier and the results more reliable. Unless the data passed from one partition to another is reliable, partitioning breaks down and both process and rhetoric suffer. Conformance is the linchpin of structured writing. Without it, none of the other algorithms work reliably.
     
-    How many constraints you need to place on your content depends on your quality and process goals -- how and where you want to partition and distribute complexity in your organization. The larger your content set becomes, and the more critical rhetorical quality is to your business, the more frequent and dynamic your outputs are, and the more of your processes rely on algorithms, the more constraints you need and the more pressing the issue of conformance becomes. {Content reuse}(algorithm), for example, relies on conformance to the constraints for writing content that fits when reused, and on conformance to the constraints on what can be reused where. Any kind of content generation relies on reliable source data. If you want to do any kind of {real-time publishing}(concept), meaning there is no time to do quality assurance on the output of the algorithm, then reliable content is key, and conformance is how you ensure that content is reliable. 
+    How many constraints you need to place on your content depends on your quality and process goals -- how and where you want to partition and distribute complexity in your organization. The larger your content set, the more critical rhetorical quality is to your business, the more frequent and dynamic your outputs are, the more your processes rely on algorithms, and the more constraints you need, the more pressing the issue of conformance becomes. For example, {content reuse}(algorithm) relies on writers conforming to constraints that ensure that reusable parts fit when reused and constraints on how they must assemble reusable parts. Any kind of content generation relies on reliable source data. For {real-time publishing}(concept) -- meaning there is no time to do quality assurance on the output of the algorithm -- reliable content is key, and conformance is how you ensure that content is reliable. 
     
-    One of the ways in which a structured writing project can get into trouble is by introducing new constraints to meet management or publishing automation goals without considering how conformance to those constraints will be achieved. In some cases, this results in a highly imperative approach to conformance, in which writers are trained to implement the constraints, but where the structures they are creating provide no guidance or validation of those constraints. The system constraints, in other words, are not reflected in the content structures. If you are creating complex structures and also creating complex constraints that are not reflected or implemented in those structures, you have dumped a huge amount of complexity on your writers and you are going to have a twofold conformance problem: conformance will be expensive, and it will be inconsistent. 
+    Structured writing projects can get into trouble when they introduce constraints to meet management or publishing automation goals without considering how to achieve conformance to those constraints. This can lead to writers being expected to conform to constraints using structures that provide no guidance or validation mechanisms. The system constraints, in other words, are not reflected in the content structures. As a result, you end up dumping a huge amount of complexity on your writers, which means conformance will be expensive and inconsistent. 
 
-    The best way to ensure conformance with a constraint is to factor out the constraint. If the constraint is that the titles of works cited should always be formatted in a certain way, you can factor out this constraint by moving to the {document domain}(concept) and using something like {DocBook}(language)’s `citetitle` element to mark up the titles of works. Now it is the {publishing algorithm}(algorithm) that is responsible for conforming to the formatting constraint. The formatting constraint has been factored out of the content. 
+    The best way to ensure conformance with a constraint is to factor out the constraint. For example, if inline citations must be formatted in a certain way, you can factor out this constraint by moving to the {document domain}(concept) and using something like {DocBook}(language)’s `citetitle` element to mark up the titles of works. Now, the {publishing algorithm}(algorithm) is responsible for conforming to the formatting constraint. You have factored out the formatting constraint.
 
-    When we move content creation from the {media domain} to the {document domain} we are factoring out all of the formatting constraints of the document. When we move content from the {document domain} to the {subject domain} we are factoring out many of the document design or management constraints and enforcing a number of constraints about what information will be captured. 
+    When you move content creation from the {media domain} to the {document domain} you factor out all formatting constraints. When you move content from the {document domain} to the {subject domain} you factor out many document design or management constraints and enforce a number of constraints about what information will be captured. 
     
-    But while this factors out one set of constraints, it also creates a new set of constraint in the new domain. When we factored out the formatting constraint for the titles of works cited, we introduced a new constraint, which is to markup the title of works using `citetitle`. Factoring one constraint into another is useful if it makes the constraint easier to conform to or easier to validate or it captures additional data that enables other algorithms. A constraint may be easier to conform to if it is simpler, easier to remember, or does not require knowledge that is outside the writer's field. For instance, the `citetitle` tag is a single tag, not a set of formatting instructions, and the author knows when they are citing the title of a work. A constraint may be easier to validate if it has fewer components or can be limited to a narrower scope. For instance, the set of things that are titles of works is smaller than the set of things that are formatted in italic, so validating the `citetitle` constraint requires looking at a smaller and more homogeneous set.  
-    
-    If the constraint you are introducing is not easier to conform to or easier to validate, you probably should think twice before you introduce it. There are certainly cases where moving content to a more formal document domain model introduces more constraints than it eliminates without making those constraints easier to comply with or validate. On the other hand, sometimes those additional constraints are required to reduce complexity somewhere else in the process, or to manage previously unmanaged complexity. In other words, you are transferring complexity to writers from somewhere else in the content system.
-    
-    Inevitably, writers have to make some concessions to the needs of algorithms, but we don't want algorithms to impose such a burden on writers that we distract them from doing good research and quality writing. Any complexity that writers can't handle results in poor rhetoric and unreliable data, which in turn results in inefficient process. So if the structures you create for the sake of algorithms prove too complex for writers to conform to, or too difficult to validate, you should ask if you could refactor those constraints again, perhaps to the {subject domain}(concept), so that you get both the precision and detail that the algorithm needs and the ease of use and validation that the writer needs. In other words, don't address one source of complexity in isolation. Keep moving complexity until every piece of it is handled by a person or process with skills, bandwidth, and resources to handle it. 
-    
-    The recipe examples we have been using shows how a subject-domain structure can transfer complexity away from writers while providing for a high level of conformance checking. 
-    
-    ```(sam)
-        recipe: Hard Boiled Egg
-            introduction:
-                A hard boiled egg is simple and nutritious.
-            ingredients:: ingredient, quantity
-                eggs, 12
-                water, 2qt
-            preparation:
-                1. Place eggs in pan and cover with water.
-                2. Bring water to a boil.
-                3. Remove from heat and cover for 12 minutes.
-                4. Place eggs in cold water to stop cooking.
-                5. Peel and serve.
-            prep-time: 15 minutes
-            serves: 6
-            
-    Pulling the prep-time and serving numbers into separate fields makes it easy to validate that the writer has conformed to the constraint to include this information while also making it easier for the writer to supply this information. Putting the ingredients into a record set rather than a list or table factors out any presentation constraint entirely, making it impossible not to comply. And again, it is easier for the writer to create the content in this form than it is to create a presentation-level table, for instance. 
+    But while this factors out one set of constraints, it creates a new set of constraints in the new domain. When you factor out the formatting constraint for inline citations, you introduced a constraint that requires writers to markup the title of works using `citetitle`. Factoring one constraint into another is useful if it makes the constraint easier to conform to or easier to validate or if it captures additional data that enables other algorithms. For instance, `citetitle` is a single tag, not a set of formatting instructions, and writers know when they are citing the title of a work.
 
+    A constraint may be easier to validate if it has fewer components or can be limited to a narrower scope. For instance, the set of titles of works is smaller than the set of things that are formatted in italic, so validating the `citetitle` constraint requires looking at a smaller and more homogeneous set.  
     
-    section: Completeness
-        Completeness is an obvious aspect of content quality. Unfortunately, lack of completeness is often hard for writers and reviewers to spot. The {curse of knowledge} means that omission of information is hard to see unless there is an obvious hole in a predefined and explicit document structure. Defining structures that encapsulate information requirements can significantly improve completeness. In [#chapter.subject-domain] we saw how calling out the preparation time and number of servings for a recipe helps ensure that the author always remembers to include that information, whether or not we decide to present it in fields or as part of a paragraph.
-        
-        But this is not the only way that {subject-domain} structured writing helps ensure completeness. Every {subject-domain} annotation highlights a subject that is important to your business. You can use an algorithm to scan those annotation and build a list of subjects that are important to your business. You can use this list to make sure that all the subjects you need to cover are actually covered. 
-
-        For example, structured writing allows you to annotate your text to call out the types of certain phrases such as function names, feature names, or stock symbols.
-        
-        ```(sam)        
-            When installing widgets, use a {left-handed widget wrench}(tool) 
-            to tighten them to the recommended torque for your device.
-        
-        
-        This sample annotates the phrase "left-handed widget wrench" and records that these words describe a tool. If all mentions of tools are annotated this way, you can then compile a list of all the tools you mention in all your topics and make sure that you have suitable documentation for each of them. I will talk  more about this in [#chapter.audit]. 
-        
-    section: Consistency
-        Similarly to completeness, consistency can make a big difference to readers, but lack of consistency is hard to spot if the structure of the content is not explicit in all the ways we want it to be consistent. 
-        
-        Being consistent simply means abiding by constraints. As we have seen, this can take the form of either enforcing the constraint through required structure or, preferably, factoring out the constraint so that it is handled by algorithms rather than people. We have looked at how you can factor out constraints in both the {document domain} and the {subject domain}(concept).
-        
-        If you annotate the important things in your content set, such as tools in the example above, you can use the annotations to check for consistency of names. Suppose a writer accidentally writes "spanner" rather than "wrench" in the name of the tool:
-        
-        ```(sam)        
-            When installing widgets, use a {left-handed widget spanner}(tool) 
-            to tighten them to the recommended torque for your device.
-        
-        
-        Since you can now generate a list of tools mentioned in the text, you can check each mention against a list of approved tool names. This can reveal both incorrect names (consistency) and tools that may be missing from the official list (completeness).
-        
-        The same would apply to values in fields, such as the wine match field in the recipe example. With the wine match in a separate field you can compile a list of wines mentioned or check each mention against an approved list. More on this in [#chapter.taxonomy].
-        
-    section: Accuracy
-        Accuracy problems are often hard to spot. Typos, using old names for things, or giving deprecated examples are all hard for writers and reviewers to see. But there are structured writing techniques than can catch many of these kinds of problems.
-        
-        For example, if you were documenting an API, you could annotate each mention of a function.
-        
-        ```(sam)
-            Always check the return value of {rotateWidget()}(function) 
-            to ensure the correct orientation was achieved. 
-        
-        
-        API function names can be quite tricky to remember sometimes and small typos can be difficult to spot. But with this annotation, you can validate all mentions of functions against the API reference or the code base. This technique not only catches misspellings. I have seen it catch the use of deprecated functions in examples, for instance.
+    If the constraint you are introducing is not easier to conform to or easier to validate, you should think twice before you introduce it. There are cases where moving content to the document domain introduces more constraints than it eliminates without making those constraints easier to comply with or validate. On the other hand, sometimes you need additional constraints to reduce complexity elsewhere or to manage previously unmanaged complexity, which transfers complexity to writers from somewhere else in the content system.
     
-    section: Semantic constraints
+    Inevitably, writers have to make some concessions to the needs of algorithms, but those concessions should not distract them from doing good research and writing quality content. Any complexity that writers can't handle results in poor rhetoric and unreliable data, which in turn results in inefficient processes. If the structures you create for the sake of algorithms prove too complex to conform to or too difficult to validate, consider refactoring those constraints again, perhaps to the {subject domain}(concept), so you get the precision and detail algorithms need and the ease of use and validation that writers need. In other words, don't address one source of complexity in isolation. Keep moving complexity until every piece of it is handled by a person or process with skills, bandwidth, and resources to handle it. 
     
-        We can usefully divide constraints into two types: structural constraints and semantic constraints. Structural constraints deal with the the relationship of various text structures. Semantic constraints deal with the meaning of the content.  
-     
-        For instance, consider this structure:
-        
-        ```(xml)
-            <person>
-                <name>John Smith</name>
-                <age>middle</age>
-                <date-of-birth>Christmas Day</date-of-birth>
-            </person>
-                
-        Some people certainly describe themselves as middle aged, and Christmas Day is certainly a date of birth, if an incomplete one. The author has complied with the structure of the document. But the creator of this markup language was probably looking for more precise information, probably in a format that an algorithm could read. What they wanted was:
+    The recipe examples, such as [#fig.recipe-conform], show how a subject-domain structure can transfer complexity away from writers while providing for a high level of conformance checking. 
 
-        ```(xml)
-            <person>
-                <name>John Smith</name>
-                <age>46</age>
-                <date-of-birth>1970-12-25</date-of-birth>
-            </person>
-                
-        Some schema languages (a concept I will explain in [#chapter.constraints]), such as {XML Schema}(tool), let you specify the data type[*data-type] of an element. You could specify that the type of the age field must be a whole number between 0 and 150 and that the date-of-birth field must be a recognizable date format. Here's what the XML schema for these constraints might look like:
-        
-        footnote:(*data-type)
-            The data types referred to in the example above are not data types as they are commonly understood in programming terms (which refers to how they are stored in memory). In XML, as in all major markup languages, the data is all strings. A data type in a schema is actually just a pattern. There is a language for describing patterns in text that is called {regular expressions}(tool). Regular expressions are a bit cryptic and take some getting used to but they are incredibly powerful at describing patterns in text. XML schema lets you define types for elements using regular expressions, so there is a huge amount you can do to constrain the content of elements in your documents. 
-
-                
-        ```(xsd)
-            <xs:schema 
-                xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                elementFormDefault="qualified">
-
-                <xs:element name="person">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="name" type="xs:string"/>
-                            <xs:element name="age" type="age-range"/>                
-                            <xs:element name="date-of-birth" type="xs:date"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                
-                <xs:simpleType name="age-range">
-                    <xs:restriction base="xs:int">
-                        <xs:minInclusive value="0"/>
-                        <xs:maxInclusive value="150"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:schema>
-    
-        This schema uses the built in types `xs:string` and `xs:date` for the `name` and `date-of-birth` elements and defines a new type called `age-range` for the age element. Using this schema, the example above would now fail to validate with type errors reported for the `age` and `date-of-birth` fields. 
-        
-        Applying these kinds of semantic constraints to content is not going to work if most of your text is in free-form paragraphs. It is hard to define useful patterns for long passages of text. If you want to exercise fine-grained control over your content, therefore, you must first break information down into individual fields and then apply type constraints to those fields. 
-        
-        In some cases, we create text structures purely for the purpose of being able to apply semantic constraints to their content. We use structural constraints to isolate semantic constraints so that they are testable and enforceable.
-               
-        This can be particularly effective when you are creating content in the subject domain since you don't have to specify information in sentences, even if you intend to publish it that way. You can break the content out into separate structures and define the data type of those structures to ensure you get complete and accurate information, and to ensure that you can operate on that information using algorithms. 
-        
-        The recipe text that we have used before is a good example of how content that could be expressed entirely in free-form paragraphs can be broken down in a fine-grained way that allows us to impose a variety of structural and semantic constraints. 
-        
+    figure:(#fig.recipe-conform) Recipe example showing support for constraints 
         ```(sam)
             recipe: Hard Boiled Egg
                 introduction:
@@ -169,131 +50,261 @@ chapter:(#chapter.conformance) Conformance
                     5. Peel and serve.
                 prep-time: 15 minutes
                 serves: 6
-                wine-match: champagne and orange juice
-                beverage-match: orange juice
-                nutrition:
-                    serving: 1 large (50 g)
-                    calories: 78
-                    total-fat: 5 g
-                    saturated-fat: 0.7 g
-                    polyunsaturated-fat: 0.7 g    
-                    monounsaturated-fat: 2 g    
-                    cholesterol: 186.5 mg    
-                    sodium: 62 mg    
-                    potassium: 63 mg    
-                    total-carbohydrate: 0.6 g    
-                    dietary-fiber: 0 g    
-                    sugar: 0.6 g    
-                    protein: 6 g    
+            
+    Pulling the prep-time and serving numbers into separate fields makes it easy to validate that the writer has conformed to the constraint to include this information while also making it easier for the writer to supply this information. Putting the ingredients into a record set rather than a list or table factors out any presentation constraint entirely, making it impossible not to comply. And again, it is easier for writers to create content in this form than it is to create, for instance, a presentation-level table.
+    
+    section: Completeness
+        Completeness is an obvious aspect of content quality. Unfortunately, lack of completeness is often hard for writers and reviewers to spot. The {curse of knowledge} makes it hard to see omitted information unless there is an obvious hole in a predefined and explicit document structure. Defining structures that encapsulate information requirements can significantly improve completeness. In [#chapter.subject-domain] we saw how calling out the preparation time and number of servings for a recipe helps ensure that writers always remember to include that information.
         
-        This entire recipe could be presented free form. But when structured like this we can enforce detailed constraints like ensuring that there is always a wine match listed or calories are always given as a whole number. The {publishing algorithm} could actually stitch all this content into paragraphs again if that was how you wanted to publish it. But when it is created in this format the author is provided with a huge amount of guidance about the information you want, and you are able to manipulate and publish the content in many different ways. Readers will benefit because all the recipes will conform to what you know readers need and want in a recipe.  
+        But this is not the only way that {subject-domain} structured writing helps ensure completeness. Every {subject-domain} annotation highlights a subject that is important to your business. You can use an algorithm to scan those annotation and build a list of subjects that you can use to make sure that you cover every subject you need to cover. 
+
+        For example, structured writing allows you to annotate certain phrases such as function names, feature names, or stock symbols.
+
+        figure:(#fig.inline-annotation) Example of inline annotation
+            ```(sam)        
+                When installing widgets, use a {left-handed widget wrench}(tool) 
+                to tighten them to the recommended torque for your device.
+        
+        
+        [#fig.inline-annotation] annotates the phrase "left-handed widget wrench" and records that these words describe a tool. If writers annotate all mentions of tools, you can compile a list of all the tools mentioned in your topics and make sure that you have suitable documentation for each of them. I talk more about this in [#chapter.audit]. 
+        
+    section: Consistency
+        Like completeness, consistency can make a big difference to readers, but lack of consistency is hard to spot if the structure of the content is not explicit in all the ways you want it to be consistent. 
+        
+        Being consistent simply means abiding by constraints. You can either enforce the constraint by having writers use a required structure or, preferably, factor out the constraint so that it is handled by an algorithm. We have looked at how you can factor out constraints in both the {document domain} and the {subject domain}(concept).
+        
+        If you annotate the important things in your content set, such as the tool in [#fig.inline-annotation], you can use the annotations to check for naming consistency. For example, if a writer accidentally uses the term "spanner" rather than "wrench," you can catch the error in an audit against a list of approved tool names. This can reveal both incorrect names (consistency) and tools that may be missing from the official list (completeness).
+        
+        The same applies to values in fields such as the wine match field in the recipe example. You can use the wine match field to compile a list of wines mentioned or check each mention against an approved list. More on this in [#chapter.taxonomy].
+        
+    section: Accuracy
+        Accuracy problems are often hard to spot. Typos, using old names for things, or giving deprecated examples are all hard for writers and reviewers to see. But there are structured writing techniques than can catch many of these kinds of problems.
+        
+        For example, if you are documenting an API, you can annotate each mention of a function.
+        
+        ```(sam)
+            Always check the return value of {rotateWidget()}(function) 
+            to ensure the correct orientation was achieved. 
+        
+        
+        API function names can be tricky to remember, and typos can be difficult to spot. But if you annotate function names, you can validate all mentions of functions against the API reference or the code base. This technique not only catches misspellings, it can also catch the use of deprecated functions in examples.
+    
+    section: Semantic constraints
+    
+        We can divide constraints into two types: structural constraints and semantic constraints. Structural constraints deal with the relationships between text structures. Semantic constraints deal with the meaning of the content.
+
+        For instance, consider the structure in [#fig.person-middle-age].[*fn.age-date]
+        
+        footnote:(*fn.age-date)
+            In practice, you would probably factor out `age` from this structure, since it can be calculated by an algorithm, but it makes a useful example here.
+            
+
+        figure:(#fig.person-middle-age) Person structure with badly coded values        
+            ```(xml)
+                <person>
+                    <name>John Smith</name>
+                    <age>middle</age>
+                    <date-of-birth>Christmas Day</date-of-birth>
+                </person>
+                
+        Some people certainly describe themselves as middle aged, and Christmas Day is certainly a date of birth, if an incomplete one. The writer has complied with the document structure. But the creator of this markup language was probably looking for more precise information, in a format more like [#fig.person-46]. which an algorithm can more easily read.
+        
+        figure:(#fig.person-46) Person structure with well-coded values
+            ```(xml)
+                <person>
+                    <name>John Smith</name>
+                    <age>46</age>
+                    <date-of-birth>1970-12-25</date-of-birth>
+                </person>
+                
+        Some schema languages (a concept I explain in [#chapter.constraints]), such as {XML Schema}(tool), let you specify the data type[*data-type] of an element. You can specify that the data type of a value in the `age` field must be a whole number between 0 and 150 and that the `date-of-birth` field must be a recognizable date format. [#fig.xml-schema-constraints] shows what an XML schema for these constraints might look like.
+
+        footnote:(*data-type)
+            The data types referred to in the example above are not data types as they are commonly understood in programming terms (which refers to how they are stored in memory). In XML, as in all major markup languages, the data is all strings. A data type in a schema is actually just a pattern. There is a language for describing patterns in text that is called {regular expressions}(tool). Regular expressions are a bit cryptic and take some getting used to, but they are incredibly powerful at describing patterns in text. XML schema lets you define types for elements using regular expressions, so there is a huge amount you can do to constrain the content of elements in your documents. 
+
+        pagination-tweak:
+            min-space: 3in
+
+        figure:(#fig.xml-schema-constraints) XML Schema markup for data type constraints
+            ```(xsd)
+                <xs:schema 
+                    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                    elementFormDefault="qualified">
+    
+                    <xs:element name="person">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="name" type="xs:string"/>
+                                <xs:element name="age" type="age-range"/>                
+                                <xs:element name="date-of-birth" type="xs:date"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    
+                    <xs:simpleType name="age-range">
+                        <xs:restriction base="xs:int">
+                            <xs:minInclusive value="0"/>
+                            <xs:maxInclusive value="150"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:schema>
+    
+        The schema in [#fig.xml-schema-constraints] uses the built-in types `xs:string` and `xs:date` for the `name` and `date-of-birth` elements and defines a new type called `age-range` for the `age` element. Now, if you try to validate [#fig.person-middle-age], the process will fail with data-type errors on both fields.
+        
+        Applying these kinds of semantic constraints won't work if most of your text is in free-form paragraphs. It is hard to define useful patterns for long passages of text. If you want to exercise fine-grained control over your content, you must first break information down into individual fields and then apply type constraints to those fields. 
+        
+        In some cases, you can create text structures that exist solely to isolate semantic constraints so that they are testable and enforceable.
+               
+        This can be particularly effective when you are creating content in the subject domain since you don't have to specify information in sentences, even if you intend to publish it that way. You can break the content out into separate structures and define the data type of those structures to ensure you get complete and accurate information and to ensure that you can operate on that information using algorithms. 
+        
+        The recipe text ([#fig.recipe-redux]) is a good example of how content that could be expressed entirely in free-form paragraphs can be broken down in a fine-grained way that allows you to impose a variety of structural and semantic constraints.
+
+        figure:(#fig.recipe-redux) Hard-boiled egg recipe
+            ```(sam)
+                recipe: Hard Boiled Egg
+                    introduction:
+                        A hard boiled egg is simple and nutritious.
+                    ingredients:: ingredient, quantity
+                        eggs, 12
+                        water, 2qt
+                    preparation:
+                        1. Place eggs in pan and cover with water.
+                        2. Bring water to a boil.
+                        3. Remove from heat and cover for 12 minutes.
+                        4. Place eggs in cold water to stop cooking.
+                        5. Peel and serve.
+                    prep-time: 15 minutes
+                    serves: 6
+                    wine-match: champagne and orange juice
+                    beverage-match: orange juice
+                    nutrition:
+                        serving: 1 large (50 g)
+                        calories: 78
+                        total-fat: 5 g
+                        saturated-fat: 0.7 g
+                        polyunsaturated-fat: 0.7 g    
+                        monounsaturated-fat: 2 g    
+                        cholesterol: 186.5 mg    
+                        sodium: 62 mg    
+                        potassium: 63 mg    
+                        total-carbohydrate: 0.6 g    
+                        dietary-fiber: 0 g    
+                        sugar: 0.6 g    
+                        protein: 6 g    
+        
+        This entire recipe could be presented free form. But when structured like this you can enforce detailed constraints such as ensuring that there is always a wine match or that calories are always given as a whole number. The {publishing algorithm} could stitch all this content into paragraphs if that is how you want to publish it. But this format gives writers a huge amount of guidance about the information you want, and you can manipulate and publish the content in many different ways. Readers benefit because every recipe conforms to what you know readers need and want in a recipe.  
         
     section: Entry validation constraints
         
-        The ability of algorithms to read the data in your structures can have another conformance benefit because it allows you to check one piece of information against another. For instance, if you have date of birth and age you can calculate current age from the date of birth and compare it against the value of the age field. If the values don't match, you know the author made an error and you can report it. Here is some pseudocode for such a test:
+        If algorithms can read the data in your structures, they can check one piece of information against another. For instance, if you have `date-of-birth` and `age`, you can calculate current age from the date of birth and compare it against the value of the age field. If the values don't match, you know the writer made an error and you can report it. [#ex.age-data-pseudo] shows pseudocode for such a test.
 
-        ```(pseudocode)
-            if not $age = years-between(now, $date-of-birth)
-                error "Age does not match the given date-of-birth."
+        figure:(#ex.age-data-pseudo) Pseudocode to compare `age` field with calculated age
+            ```(pseudocode)
+                if not $age = years-between(now, $date-of-birth)
+                    error "Age does not match the given date-of-birth."
 
-            
     section: Referential integrity constraints
     
-        In the management domain, there are a set of constraints that we could call referential integrity constraints. Referential integrity simply means that if you make a reference to something, that thing should exist. In the management domain, we often give IDs to structures and use those IDs to refer to those structures for purposes such as {content reuse}(algorithm). 
+        In the management domain, there are a set of constraints that I call {referential integrity} constraints.[*fn.referential-integrity] Referential integrity simply means that if you refer to something, that thing should exist. In the management domain, we often give IDs to structures and use those IDs to refer to those structures for purposes such as {content reuse}(algorithm).
+
+        footnote:(*fn.referential-integrity)
+            The term referential integrity comes from the relational database world, where it has the same meaning.
         
-        If you are going to reuse a piece of content by referring to its ID, there is an obvious constraint that a piece of content with that ID must exist. This constraint is important enough that the XML specification actually builds in direct support for it (as does SAM). XML itself requires that if an attribute is defined as having the type IDREF, then there must be an element with an attribute of type ID with the same value in the same document. This can be useful for checking things like a footnote reference in a document actually corresponds to a footnote somewhere in the document. 
+        If you are going to reuse a piece of content by referring to its ID, there is an obvious constraint that a piece of content with that ID must exist. This constraint is important enough that XML directly supports it (as does SAM). The XML specification says that if you have an element with an attribute of type IDREF, then there must be an element with an attribute of type ID with the same value in the same document. This can be useful for checking that things such as a footnote reference corresponds to a footnote somewhere in the document. 
         
-        Many management domain algorithms, however, require referential integrity not only within a single document but between documents. The conformance of a document to these referential integrity constraints can sometimes only be judged by the {publishing algorithm} when it is published in a particular combination. In fact, it is possible for a document to have referential integrity when published in one collection and to lack it when published in another. 
+        Many management-domain algorithms go beyond this constraint and require referential integrity not only within a single document but between documents. Conformance to this type of referential integrity constraint can sometimes only be judged by the {publishing algorithm} when you publish a particular combination of documents. Thus, it is possible for a document to have referential integrity when published in one collection and to lack it when published in another. 
         
-        Since it is always better to validate a constraint as early as possible, a content management system that is aware of the referential integrity constraints of a system (such as a {DITA CMS}, for example) may validate the referential integrity of content in all its potential combinations without the need to actually publish it. 
+        Since it is best to validate a constraint as early as possible, a content management system that is aware of the referential integrity constraints of a system (such as a {DITA CMS}, for example) may validate the referential integrity of content in all its potential combinations prior to publication.
         
-        Nevertheless, referential integrity constraints of this complexity still present a management and authoring headache, even with content management system support. It is worth considering if there is a way to factor them out. One example of how this can be done is found in the various approaches to the {linking algorithm}(algorithm) (see [#chapter.linking]).
+        Nevertheless, referential integrity constraints of this complexity still present a management and authoring headache, even with content management system support. So it is worth looking for a way to factor them out. One example of how this can be done is found in the various approaches to the {linking algorithm}(algorithm) (see [#chapter.linking]).
             
     section: Conformance to external sources
     
-        Referential integrity constraints can span multiple documents. So can semantic constraints. For example, you may want values in your document to match values in databases or in other documents. A technical writer documenting an API may produce an API reference, much of which may be extracted from the program source code (see [#chapter.extract]), and also a programmer's guide, which they write from scratch. The programmer's guide will obviously mention the functions in the API many times. There is the possibility that the writer may misspell one of the names, or that the API may be changed after parts of the document are written, or that a function the writer has mentioned no longer exists.
+        Referential integrity constraints can span multiple documents. So can semantic constraints. For example, you may want values in your document to match values in databases or in other documents. A technical writer documenting an API may produce an API reference, much of which can be extracted from the program source code (see [#chapter.extract]), and also a programmer's guide, which is written from scratch. The programmer's guide will mention the API functions frequently, which makes errors more likely. It is possible that the writer may misspell names, the API may change, or a function may be removed.
         
-        It is clearly a semantic constraint on the programmer's guide that all the API calls it mentions should actually be present in the API. Since the API reference is generated from the source code, we can express this constrain as: functions mentioned in the programmers guide must be listed in the API reference. 
+        It is clearly a semantic constraint on the programmer's guide that all the API calls it mentions must be present in the API. Since the API reference is generated from the source code, you can express this constrain as: functions mentioned in the programmers guide must be listed in the API reference. 
         
         This is an important constraint. When we implemented algorithmic support for this constraint on one project I worked on, it revealed a number of errors:
         
-        * Misspelled function names in the programmer's guide.
-        * The inclusion in the programmer's guide of material related to a private API that was never released to the public. 
-        * The failure of the API guide to include an important section of the API due to incorrect markup in the source code. 
-        * A section of the programmer's guide that discussed how to do things using a deprecated API and failed to discuss how to do them with the new API.
+        * The programmer's guide contained misspelled function names.
+        * The programmer's guide included material related to a private API that was never released to the public. 
+        * The API guide failed to include an important section of the API due to incorrect markup in the source code. 
+        * The programmer's guide documented how to use a deprecated API and neglected to describe how to use the new API.
         
-        All these errors were present in the programmer's guide and API reference despite several thorough reviews by multiple people over multiple software release. These are all the kinds of errors that human beings have a hard time spotting in review. But they all have significant impact on users who are trying to actually use the API.
+        These errors occurred despite several thorough reviews by multiple people over multiple software releases. Human beings have a hard time spotting these kinds of errors in review, even though they have a significant impact on users.
         
-        As part of the conformance audit for the programmer's guide, we added a check that looked up each reference to an API call, including those in code blocks, in the source files for the API reference and reported an error if they did not match. None of the errors listed above would have been detected without this check. 
+        As part of the conformance audit for the programmer's guide, we looked up each reference to an API call, including those in code blocks, in the API reference and reported an error if they did not match. None of the errors listed above would have been detected without this check. 
         
-        Of course, for this check to be possible, the algorithm that did the checking had to be able to identify every time the programmer's guide mentioned an API call, and it had to be able to find all the API call names in the API reference. For this to be possible, both documents had to be written in a structured format that made the function names accessible to the algorithm. Here is a simplified example. First, a code sample from a programmer's guide:
-        
-        ```(sam)
-            code-sample: Hello World
-                
-                The Hello World sample uses the {print}(function) to 
-                output the text "Hello World"
-                
-                ```(python)
-                    print("Hello World.")
+        To implement this check, the algorithm had to identify references to API calls in the programmer's guide and find APIs by name in the API reference. For this to be possible, both documents had to be written in a structured format that made the API names accessible to the algorithm. Here is a simplified example. First, a code sample from a programmer's guide ([#ex.code-sample]).
+
+        figure:(#ex.code-sample) Code example with a function annotated
+            ```(sam)
+                code-sample: Hello World
                     
-        Next, a function reference listing from the API reference:
-        
-        ```(sam)
-            function: 
-                name: print
-                return-value: none
-                parameters:
-                    parameter: string
-                        required: yes
-                        description:
-                            The string to print.
-                    parameter: end
-                        required: no
-                        default: '\n'
-                        description:
-                            The characters to output after the 
-                            {string}(parameter).
+                    The Hello World sample uses the {print}(function) to 
+                    output the text "Hello World"
+                    
+                    ```(python)
+                        print("Hello World.")
+                    
+        Next, a function reference listing from the API reference ([#ex.api-reference]).
+
+        figure:(#ex.ape-reference) Sample API function reference 
+            ```(sam)
+                function: 
+                    name: print
+                    return-value: none
+                    parameters:
+                        parameter: string
+                            required: yes
+                            description:
+                                The string to print.
+                        parameter: end
+                            required: no
+                            default: '\n'
+                            description:
+                                The characters to output after the 
+                                {string}(parameter).
                             
-        Because the API reference labels "print" as a function name and the code-sample annotates "print" as the name of a function, we can look up "print" in the API reference to validate the annotated text in the programmer's guide.
-                         
-        By adding these structures and annotations to the content, we isolated the semantics of the function call names so that we could apply semantic conformance checks to them. 
+        Because the API reference labels `print` as a function name and the code-sample annotates `print` as the name of a function, you can look up `print` in the API reference to validate the annotated text in the programmer's guide. By adding these structures and annotations to the content, you isolate the semantics of the function call names so that you can apply semantic conformance checks to them. 
         
     section: Conformance and change
         
-        Requiring conformance to outside sources means that a document's conformance is neither static nor absolute. A document that was conforming may stop being conforming because of outside events. But this reflects reality. One of the most complex aspects of {content management}, in fact, is detecting when a document ceases to be conforming because of a change in the reality that it describes. Using structured writing techniques to validate the conformance of a document against an external source can go a long way to addressing this class of problem. For more on change management, see [#chapter.change].
+        Requiring conformance to outside sources means that a document's conformance is neither static nor absolute. Outside events may cause a document that was conforming to no longer conform. But this reflects reality. One of the most complex aspects of {content management} is detecting when a document ceases to be conforming because of a change in the reality that it describes. Using structured writing techniques to validate the conformance of a document against an external source can go a long way to addressing this class of problem. For more on change management, see [#chapter.change].
 
     section: Design for conformance
     
-        Mechanical constraints can do a lot to ensure and validate conformance. But conformance is fundamentally a human activity and we may need humans to conform to constraints that we cannot easily express or validate in purely mechanical terms. 
+        Mechanical constraints can do a lot to ensure and validate conformance. But conformance is fundamentally a human activity, and you need humans to conform to constraints that cannot be easily expressed or validated in purely mechanical terms. 
     
-        {Schemas} and downstream algorithms can verify that a writer created the required mechanical structures, and, in some cases, that they created them with content in the required form. But in most cases there is little or nothing that they can do to verify that the content of those structures is actually what the structure says it is. Unless the author understands what the structure is for, they are not likely to create content that actually obeys the constraints that the structure expresses. 
-        
-        If the author is not on-board with creating content according to the structure, there is nothing the mechanical conformance can do to ensure that they did not just write it the way they wanted to while wrapping the required structured tags around it to make it pass the validation tests.
+        {Schemas} and downstream algorithms can verify whether writers have created the required mechanical structures and, in some cases, whether they created them with content in the required form. But in most cases there is little or nothing that algorithms can do to verify that the content of a structure is actually what the structure says it is.
 
-        If there are optional elements to a structure, there is nothing that mechanical validation can do to determine if the optional parts of the structure were included when they should have been or omitted when they should have been. Only the author can know this, and only if they understand the purpose of those structures and are on board with them as the appropriate structure for what they are writing. 
+        If writers don't understand what a structure is for, or if they are not on-board with creating content according to the structure, they are not likely to create content that obeys the constraints that the structure expresses. And no mechanical conformance algorithm can ensure that they did not just write their content the way they wanted to and then wrap the required structured tags around it to make it pass the validation tests.
 
-        If the structures are difficult for the writer to understand (if they are complex management domain structures that require complex abstract IDs, for instance) then the author has to think about issues outside of their domain of expertise. Complexity has been dumped on them that they are ill-equipped to handle. They have to stop thinking about writing and their subject matter and start thinking about the system. Since most writers don't really understand how complex structured writing systems work internally, they tend to do the simplest thing they can think of that makes the system stop throwing errors and accept their work. This often produces dumb compliance to mechanical system constraints rather than intelligent conformance to content constraints. And this dumb compliance essentially dumps the complexity that the writer could not handle on the reader or another part of the organization. 
+        If there are optional elements to a structure, there is nothing that mechanical validation can do to determine whether the optional parts of the structure were included when they should have been or omitted when they should have been. Only the writers can determine this, and to do so, writers must understand the purpose of those structures and that those structures are appropriate for what they are writing.
 
-        The real key to achieving conformance it to create structures that are easy to conform to. For most content, conformance is not about trying to catch evil doers. The authors are on side and trying to produce good content. Authors who understand structured content may impose constraints as an aid to their own work, just as a carpenter, for instance, might design a jig to guide their saw. Constraints are a tool for writers, not a defense against them. Constraints may force a lazy writer to pull up their socks and do some more research. They may force an inattentive writer to recast their first draft into a more consistent format. But they should never prevent a good and diligent writer from doing good work. 
+        If you create structures that are difficult for writers to understand (for example, if they are complex management-domain structures that require complex abstract IDs), then they have to think about issues outside of their area of expertise. And when you dump complexity on writers that they are ill-equipped to handle, they have to stop thinking about writing and their subject matter and start thinking about the system. Since most writers don't really understand how complex structured writing systems work, they tend to do whatever it takes to make the system stop throwing errors and accept their work. This often produces dumb compliance to mechanical system constraints rather than intelligent conformance to content constraints. And this dumb compliance dumps the complexity that the writer could not handle on the reader or another part of the organization. 
+
+        The real key to achieving conformance is to create structures that are easy to conform to. For most content, conformance is not about trying to catch evil doers. The writers are on your side, and they try to produce good content. Writers who understand structured content may impose constraints as an aid to their own work, just as a carpenter, for instance, might design a jig to guide their saw. Constraints are a tool for writers, not a defense against them. Constraints may force lazy writers to pull up their socks and do some more research or force inattentive writers to recast their first draft into a more consistent format. But constraints should never prevent a good and diligent writer from doing good work. 
         
-        The real core of compliance in structured writing, therefore, is not enforcement, but creating structures that:
+        Therefore, the real core of compliance in structured writing is not enforcement; it's creating structures that clearly and specifically:
         
-        * Are clearly and specifically appropriate to the subject matter and the audience being addressed, that align with, or at least do not hinder, the rhetoric of the piece.
+        * Match the subject matter and audience and align with, or at least do not hinder, the rhetoric of the piece
         
-        * Clearly and specifically supply the information that the reader needs to accomplish a clear and specific goal. 
+        * Supply the information readers need to accomplish their goals 
         
-        * Clearly communicate to writers what is expected of them in terms they understand.
+        * Communicate to writers what is expected of them in terms they understand
         
-        * Either remind writers of what is required or (preferably) factor it out. 
+        * Either remind writers of what is required or (preferably) factor it out 
         
-        Writers may disagree, of course, about what goals should be addressed, what information readers need to achieve those goals, or how best to express information to that audience. Where we have many writers contributing to a common information set, it is important that these rhetorical differences be addressed and resolved professionally and that all writers involved be on board with the plan going forward. It is at that point that well-thought-out content structures can capture the decisions made and make sure that everyone stays on track and is consistent. 
+        Of course, writers may disagree about what goals to address, what information readers need to achieve those goals, or how to express that information to readers. When many writers contribute to a common information set, these rhetorical differences must be addressed and resolved professionally, and all writers must be on board with the plan. At that point, well-thought-out content structures can capture the decisions made and make sure that everyone stays on track and is consistent. 
         
-        For example, suppose we have a set of cooks contributing to a common recipe information set. Everyone gets on board with the principle that every recipe should include the preparation time and the number of servings. At that point, creating a recipe structure that explicitly calls out those fields helps all the cooks to remember, and therefore comply with, the agreement they have made. This will significantly improve compliance compared to merely stating the requirement in the style guide. (And, of course, it will make that information available to other algorithms as well, reducing the complexity of assembling various documents from a common set of recipes.)
+        For example, suppose you have a set of cooks contributing to a common recipe information set. Once everyone gets on board with the principle that every recipe should include the preparation time and the number of servings, you can create a recipe structure that explicitly calls out those fields. The structure helps the cooks remember, and therefore comply with, the agreement they have made. This will significantly improve compliance compared to merely stating the requirements in a style guide. And, of course, it makes that information available to other algorithms as well, reducing the complexity of assembling various documents from a common set of recipes.
         
-        {Auditing} and enforcement still have a role to play, not because writers are hostile to the system, but because they a human. But auditing and enforcement are secondary to the main aim of conformance-friendly design. And in that spirit, auditing and conformance should be seen as part of a feedback loop that is constantly seeking to improve the design. If you keep finding the same mistakes over and over again, that is not a training problem or a human resources problem, it is a design problem. 
+        {Auditing} and enforcement still have a role to play, not because writers are hostile to the system, but because they human. But auditing and enforcement are secondary to the main aim of conformance-friendly design. And in that spirit, auditing and conformance should be seen as part of a feedback loop that constantly seeks to improve the design. If you find the same mistakes over and over again, that is not a training problem or a human resources problem, it is a design problem. 
         
-        Finally, be aware of how your authoring interface affects conformance. How do you know if you are meeting constraints -- in any activity? Feedback. With any activity, we need a way to know when we are done and when the work is correct. In the {media domain}(concept), there is one form of feedback: how the document looks. With a true WYSIWYG display, if it looks right on the screen, it will render correctly on paper, or whatever media you are targeting as you write. That is the writer's signal that they are done, and done correctly. That's fine in the {media domain}. But if you are trying to create content in the {document domain} but giving your writers a media domain display (thanks to a structured editor that is trying to look as much as possible like Microsoft Word) then the feedback they receive will be media domain feedback, and the conformance you will get will be media domain conformance. There is a very real risk that content created this way will not work as intended when output to other media, or reused, or processed with any of the other structured writing domains. Don't expect to get real conformance to any structure that is hidden from the author. No one can conform to a structure they can't see.
+        Finally, be aware of how your authoring interface affects conformance. How do you know if you are meeting constraints -- in any activity? Feedback. With any activity, you need to know when you are done and when the work is correct. In the {media domain}(concept), there is one form of feedback: how the document looks. With a true WYSIWYG display, if it looks right on the screen, it will render correctly on paper or whatever media you are targeting. The display tells writers when they are done.
+
+        That works in the {media domain}. However, if you are creating content in the {document domain} but giving your writers a media-domain display -- for example, with a structured editor that mimics Microsoft Word -- then the feedback they receive will be media-domain feedback, and the conformance you get will be media-domain conformance. There is a risk that content created this way will not work as intended when output to other media, reused, or processed with content from any of the other structured writing domains. Don't expect to get real conformance to any structure that is hidden from the writer. You can't conform to a structure you can't see.
         
 
 
