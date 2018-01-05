@@ -6,9 +6,9 @@ chapter:(#chapter.markup) Markup
     index:: type, term
         concept, markup
 
-    If structures in structured writing consist of nested blocks, then writers express those blocks in text (most of the time) through markup. Markup is, essentially, the insertion of metadata into a text to constrain the creation and interpretation of that text. We have been looking at structured writing examples expressed in markup all through this book. Now let's look at markup itself.   
+    If structures in structured writing consist of nested blocks, the way those blocks are expressed in text is (most of the time) through markup. Markup is, essentially, the insertion of metadata into a text to constrain the creation and interpretation of that text. We have been looking at structured writing examples expressed in markup all through this book. Now let's look at markup itself.   
     
-    Markup has long been part of partitioning and distributing content creation. For centuries, scribes worked directly in the media domain, using pen and ink to inscribe words and pictures on papyrus or velum. With the printing press, however, came a fundamental partitioning of the publishing process. Writers no longer worked directly in the media domain. While writers still placed ink directly on paper, at first by pen and then by typewriter, they no longer prepared the final visual form of the content. That task was partitioned off and directed to the typesetter.  
+    Markup has long been part of partitioning and distribution of content creation. For centuries, scribes worked directly in the {media domain}, using pen and ink to inscribe words and pictures on papyrus or velum. With the printing press, however, came a fundamental partitioning of the publishing process. Writers no longer worked directly in the media domain. While writers still placed ink directly on paper, at first by pen and then by typewriter, they no longer prepared the final visual form of the content. That task was partitioned off and directed to the typesetter.  
 
     To tell the typesetter how to create the final visual form, document designers added instructions (metadata) to the writer's manuscript. The designers did this using typesetter's marks, and the process was called "marking up" the document (see [*typesetter]). We still use "marking up" to describe how structured writing is done today and the term "markup language" to describe the languages used for most structured writing.
 
@@ -18,9 +18,9 @@ chapter:(#chapter.markup) Markup
     pagination-tweak:
         min-space: 1in
 
-    The writer preparing a manuscript for typesetting worked in the {document domain}, using basic document structures, such as paragraphs, lists, and titles, without any indication of how they should look in print. The designer then wrote a set of instructions for applying formatting to those structures -- a {formatting algorithm}(concept). Then the typesetter executed that algorithm by setting the type, which the printer used to print final output. 
+    The writer preparing a manuscript for typesetting worked in the {document domain}, using basic document structures, such as paragraphs, lists, and titles, without any indication of how they should look in print. The designer then wrote a set of instructions for applying formatting to those structures -- a {formatting algorithm}. Then the typesetter executed that algorithm by setting the type, which the printer used to print final output. 
 
-    This is like what you do today when you create an HTML page and specify a CSS style sheet to supply the formatting instructions. A browser executes those instructions to render the content.
+    This is almost exactly what you do today when you create an HTML page and specify a CSS style sheet to supply the formatting instructions. A browser then executes those instructions to render the content  on screen or paper.
 
     Actually, a better analogy to old-style typesetter's marks is an HTML page with inline styles:
 
@@ -49,21 +49,26 @@ chapter:(#chapter.markup) Markup
            
     section: Markup vs. regular text
     
-        Some markup languages make an explicit distinction between markup and regular text. One example is an HTML tag. Tags are set off by opening and closing angle brackets:
+        Some markup languages define markup in universal terms. That is, the characters that define markup are recognized as markup no matter where they occur in the file. One example is an HTML tag. Tags are set off by opening and closing angle brackets:
+
 
         formatted-code:
             | *<h1>*      
         
-        HTML uses open angle brackets (`<`) to indicate the start of markup and closing angle brackets (`>`) to indicate the end of markup and a return to regular text. A slash (`/`) after the opening angle bracket indicates an end tag, which marks the end of a structure:
+        HTML uses open angle brackets (`<`) to indicate the start of markup and closing angle brackets (`>`) to indicate the end of markup and a return to regular text. A slash (`/`) after the opening angle bracket indicates an end tag, which marks the end of a structure:[*fn.markup] 
 
         formatted-code:
             | *<h1>*Moby Dick*</h1>*
 
-        Actually, recognizing markup in HTML is a little more complicated than that, but for this discussion, the point is that certain sequences in the text trigger a processing program (generally called a _parser_) to recognize when markup starts and ends.
+        footnote:(*fn.markup)
+            Actually, the recognition of markup languages like XML and HTML is a little more complicated than that. It is sequences of characters that are recognized rather than individual characters, and therefore no individual character is universally recognized as markup. But the main point is simply that certain specific sequences in the text trigger a processing program (generally called a _parser_) to recognize when markup starts and ends.
         
+
+        Every element in HTML uses the same syntax, and any element with a name that is not recognized as part of HTML is still treated as an element, and results in a markup error. 
+
         What if you want to enter a markup-start character into the text of your document without having it interpreted as markup? You can't just type it in because the parser will think it is markup. To fix this, markup languages either define an escape character, which tells the parser to treat the following character as text, or they include markup for inserting individual characters in a way that won't be confused with markup characters.
 
-        HTML takes the second approach. To include a `<` character in HTML, you use what is called a _character entity_. A character entity is a code for a character. It begins with another start character, an ampersand (`&`), followed by a character code, and ends with a semicolon. The character entity for `<` in HTML and XML is `&lt;` (`lt` is short for "less than"). 
+        HTML takes the second approach. To include a `<` character in HTML, you use what is called a _character entity_. A character entity is a code for a character. It begins with another markup-start character, an ampersand (`&`), followed by a character code, and ends with a semicolon. The character entity for `<` in HTML and XML is `&lt;` (`lt` is short for "less than"). 
               
         ```(html)
             <p>In HTML, tags start with the &lt; character.</p>
@@ -95,14 +100,14 @@ chapter:(#chapter.markup) Markup
         """
             The character entity for an ampersand is &amp;amp;.
             
-        Other markup languages do not make such an explicit distinction between text and markup. For example, in Markdown, you create a numbered list by putting numbers in front of list items:
+        Other markup languages do not make a universal distinction between text and markup. For example, in {Markdown}, you create a numbered list by putting numbers in front of list items:
         
         ```(markdown)
             1. First
             2. Second
             3. Third
             
-        Here, the numbers are markup. That is, the Markdown processor recognizes them as indicating a list and translates them into an HTML structure like this:
+        Here, the numbers are markup. That is, the Markdown processor recognizes them as indicating a list and translates them into an {HTML} structure like this:
         
         ```(html)
             <ol>
@@ -111,7 +116,7 @@ chapter:(#chapter.markup) Markup
                 <li>Third</li>
             </ol>
             
-        But numbers followed by a period are only markup in a certain context -- the beginning of a line. Elsewhere, they are plain text. You don't need to escape numbers followed by periods when they occur elsewhere in the text.
+        But numbers followed by a period are only markup in a certain context -- the beginning of a line. Elsewhere, they are plain text. You don't need to escape numbers followed by periods when they occur elsewhere in the text. One consequence of this is that you cannot have a markup error in processing Markdown. Anything that is not recognized as markup is simply treated as plain text. (You can certainly make mistakes in marking up up a document in Markdown, but the Markdown processor will not catch them because it will simply treat your incorrect markup as plain text. This is why Markdown editors often use split screen editing, so you can catch your errors visually.)
 
         pagination-tweak:
             min-space: 1.5in
@@ -132,13 +137,13 @@ chapter:(#chapter.markup) Markup
                 <li>Third comes 3.</li>
             </ol>
         
-        In Markdown, then, markup is not fully explicit. It is a pattern recognized in context. Therefore, rather than thinking of markup as being distinct from text, it is better to think of markup as being a pattern within a piece of text that delineates its structure. In some cases the patterns are absolute and have the same meaning everywhere, and sometimes they are contextual and have one meaning in some locations and another meaning elsewhere. Sometimes the markup characters are distinct from the text characters, and sometimes a pattern in the text serves as markup.
+        In Markdown, then, markup is not defined in universal terms. It is a pattern recognized in context. Therefore, rather than thinking of markup as being distinct from text, it is better to think of markup as being a pattern within a piece of text that delineates its structure. In some cases the patterns are universal and have the same meaning everywhere, and sometimes they are contextual and have one meaning in some locations and another meaning elsewhere. Sometimes the markup characters are distinct from the text characters, and sometimes a pattern in the text serves as markup.
         
     section: Markup languages
     
         A set of markup conventions taken together constitutes a markup language.  {Markdown}(language), {DocBook}(language), and {reStructuredText}(language) are all markup languages. However, each of these languages recognizes markup in a different way. An ampersand (`&`) is a markup start character in {HTML}(language) and {XML}(language), but it is a plain text character in {reStructuredText}(language).
         
-        You can usefully divide markup languages into three types: concrete, abstract, and hybrid. 
+        We can usefully divide markup languages into three types: concrete, abstract, and hybrid. 
            
         section: Concrete markup languages
             index:: type, term
@@ -166,7 +171,7 @@ chapter:(#chapter.markup) Markup
                 concept, abstract markup languages
 
     
-            Abstract markup languages do not describe specific concrete document structures directly. They describe abstract markup structures, which can be named to represent structures in any domain. 
+            An abstract markup languages does not describe specific concrete document structures directly. It describes abstract markup structures which can be named to represent structures in any domain. 
         
             XML is an example of an abstract markup language.[*1] The markup in an XML file does not directly indicate things such as headings or paragraphs. Instead, it indicates a set of abstract structures called elements, attributes, entities, processing instructions, marked sections, and comments. 
         
@@ -245,11 +250,11 @@ chapter:(#chapter.markup) Markup
         
                 In [*fig.javadoc], `@param` and `@return` are named blocks. But in JavaDoc, there is a fixed set of named blocks that are defined as part of the language. You can't create a new language by defining your own block names. By contrast, {XML} itself defines absolutely no element names. Only instances of XML, like {DocBook}(language), define element names. 
         
-                A particularly notable example of a concrete language in abstract clothing is {HTML}. HTML looks a lot like an instance of {XML}, but it is not. An XML parser cannot parse most HTML. HTML is nominally an instance of SGML but never did quite conform to it. HTML generally requires a specific HTML parser, such as is found in all browsers. XHTML is a version of HTML that is an instance of XML. {HTML5} actually supports two different syntaxes, one of which is an instance of XML and one of which is not, meaning that it has both a concrete syntax and a syntax which is a instance of an abstract language. (This is consequence of having made a mess early on and having to live with it for evermore. A lesson for all markup language designers.)
+                A particularly notable example of a concrete language in abstract clothing is {HTML}. HTML looks a lot like an instance of {XML}, but it is not. An XML parser cannot parse most HTML. HTML is nominally an instance of SGML but never did quite conform to it. HTML generally requires a specific HTML parser, such as is found in all browsers. XHTML is a version of HTML that is an instance of XML. {HTML5} actually supports two different syntaxes, one of which is an instance of XML and one of which is not, meaning that it has both a concrete syntax and a syntax which is a instance of an abstract language. (This is consequence of the long history of HTML and the wild west approach to both syntax and semantics during the browser wars, leading to significant backward-compatibility problems for today's browsers. This illustrates one of the perils of writing the the media and document domains. Languages in these domains evolve over time to meet new needs and resolve old problems, but this evolution creates backward compatibility problems for documents written in the old versions of the format. While formats can evolve in the subject domain as well, the fact that subject domain markup is recording facts about the subject matter and not formatting or presentation decisions makes it inherently more stable and you can pull old subject domain content into new document domain and media formats simply by updating the publishing algorithms.)
                        
             section: The ability to extend
     
-                The downside of concrete languages is that their concrete syntax defines a fixed set of structures. If you want other structures, there is no way to create them short of inventing your own concrete language, or a variant of an existing one, and coding the parser and all the other tools required to interpret that language. Designing new concrete languages is non-trivial because you need to make sure that any combination of characters can be interpreted in an unambiguous way. Some versions of {Markdown}, including the original, contain ambiguities about how certain sequences of characters should be interpreted, which obviously detracts from its reliability and {functional lucidity}. 
+                The downside of concrete languages is that their concrete syntax defines a fixed set of structures. If you want other structures, there is no way to create them short of inventing your own concrete language, or a variant of an existing one, and coding the parser and all the other tools required to interpret that language. Designing new concrete languages is non-trivial because you need to make sure that any combination of characters that the writer can type is interpreted in an unambiguous way. Some versions of {Markdown}, including the original, contain ambiguities about how certain sequences of characters should be interpreted, which obviously detracts from its reliability and {functional lucidity}. 
         
                 If you want to define your own structures to express the constraints that matter to your business, you need an easier method. Abstract languages such as XML make this much easier. You create a {schema}(tool) that describes the structures you want and write algorithms to process those structures. (I talk about schemas in [#chapter.constraints].)
 
@@ -263,11 +268,11 @@ chapter:(#chapter.markup) Markup
                
             section: Showing and hiding structure
     
-                To reliably create structured content, writers need to see the structures they are creating. In the {media domain}(concept) a WYSIWYG interface shows you the media-domain structures you are creating by visually rendering them on screen. But what about the other domains? The document domain creates abstract document structures that are deliberately separated from their formatting. The subject domain creates subject-based structures that don't have a one-to-one relationship with any organization or formatting of a document. The management domain creates structures that have nothing to do with the representation of content at all. How does the writer get to see these structures when writing in these domains?
+                To reliably create structured content, writers need to see the structures they are creating. In the {media domain} a WYSIWYG interface shows you the media-domain structures you are creating by visually rendering them on screen. But what about the other domains? The {document domain} creates abstract document structures that are deliberately separated from their formatting. The {subject domain} creates subject-based structures that don't have a one-to-one relationship with any organization or formatting of a document. The {management domain} creates structures that have nothing to do with the representation of content at all. How does the writer get to see these structures when writing in these domains?
         
-                This is a big problem with {XML}, the only abstract language in widespread use today. XML tends to hide structure. As an abstract language, an XML document is a hierarchy of elements and attributes -- not the concrete {subject}-, {document}-, {management}-, or {media-domain} structures the writer is supposed to be creating. Those concrete structures are present in the markup because their names are there, but they are not visually distinguished the way the basic document structures are in a concrete language like Markdown. And XML syntax is verbose, meaning that there is a lot of clutter in the raw text of an XML document, which makes it hard to discern both the structure and the content. XML's verbose syntax and strict hierarchy were designed to make it easy to parse and to help guard against transmission errors. It was not designed to be a format to write in. Thus, it does a poor job of partitioning parsing issues from authoring issues. 
+                This is a big problem with {XML}, the only abstract language in widespread use today. XML tends to hide structure. As an abstract language, an XML document is a hierarchy of elements and attributes -- not the concrete {subject}-, {document}-, {management}-, or {media-domain} structures the writer is supposed to be creating. Those concrete structures are present in the markup because their names are there, but they are not visually distinguished the way the basic document structures are in a concrete language like {Markdown}. And XML syntax is verbose, meaning that there is a lot of clutter in the raw text of an XML document, which makes it hard to discern both the structure and the content. XML's verbose syntax and strict hierarchy were designed to make it easy to parse and to help guard against transmission errors. It was not designed to be a format to write in. Thus, it does a poor job of partitioning parsing issues from authoring issues. 
         
-                To remove that clutter, many writers use XML editors that provide a graphical view of the content similar to that of a word processor. But while graphical XML editors remove visual clutter, they also hide the structure. Even if the writer is supposed to be working in the document domain or the subject domain, the editor is displaying content in the media domain. This greatly reduces the functional lucidity of the {document-domain} or {subject-domain} language and encourages backsliding into the {media domain}. 
+                To remove that clutter, many writers use {XML editors} that provide a graphical view of the content similar to that of a word processor. But while graphical XML editors remove visual clutter, they also hide the structure. Even if the writer is supposed to be working in the document domain or the subject domain, the editor is displaying content in the media domain. This greatly reduces the functional lucidity of the {document-domain} or {subject-domain} language and encourages backsliding into the {media domain}. 
         
                 And then there are the problems that arise when you try to edit the graphical view of an XML document. Underneath is a hierarchical XML structure, but all you can see is the flat media-domain view of the graphical editor. Editing or cutting and pasting structures you can't see can be frustrating and time consuming. You can learn to do it, but even when you learn, the process is still more complicated than it should be. Most editors let you turn on a hybrid view where you see a graphical representation of the XML tags in the WYSIWYG view. Although you can manipulate the tags in this view, this is a complex interface that requires a lot of attention and study to use effectively.
         
@@ -277,7 +282,7 @@ chapter:(#chapter.markup) Markup
             index:: type, term
                 concept, hybrid markup languages
     
-            There are significant advantages and significant disadvantages to both concrete and abstract languages. Hybrid languages try to find a middle way. 
+            As we have seen, there are significant advantages and significant disadvantages to both concrete and abstract languages. Hybrid languages try to find a middle way. 
         
             By hybrid, I mean a language that combines both abstract and concrete markup in one language. A hybrid language has a base set of concrete syntax describing basic text structures, but it also has abstract structures, such as XML's elements and attributes, that can be the basis of extensibility and constraint.
         
@@ -293,7 +298,7 @@ chapter:(#chapter.markup) Markup
         
             {reStructuredText} provides an extension mechanism that allows you to add new directives. But while reStructuredText directives are similar to XML elements, reStructuredText predefines a core set of directives for common document structures. The `code-block` directive above is not an extension of reStructuredText, it is part of the core language.  
         
-            Because it defines a large set of document-domain directives, reStructuredText is inherently a {document-domain} language. You could, of course, add subject-domain directives to it. Most document-domain languages in use today include some subject-domain structures, reflecting the purpose they were originally designed to serve. Nonetheless, reStructuredText is inherently a document-domain language. 
+            Because it defines a large set of document-domain directives, {reStructuredText} is inherently a {document-domain} language. You could, of course, add {subject-domain} directives to it. Most document-domain languages in use today include some subject-domain structures, reflecting the purpose they were originally designed to serve. Nonetheless, reStructuredText is inherently a document-domain language. 
         
             Another important note about reStructuredText is that it has no constraint mechanism. You can add new directives, but you can't constrain their use or the use of the predefined directives. 
 
@@ -330,11 +335,11 @@ chapter:(#chapter.markup) Markup
             
             However, unlike {RestructuredText}, {SAM} does not have an extensive set of predefined named blocks. It only predefines the basic text structures that it provides concrete syntax for. You can write an entire book in reStructuredText without defining any new directives, The most you can write in SAM without defining any blocks is a single paragraph or list. 
         
-            SAM is designed to have a constraint mechanism, which allows you to write a schema that defines what blocks and annotations are allowed in a SAM document. This includes constraining the use of the concrete syntax as well. SAM represents a different type of hybrid from {reStructuredText}, which is extensible but not constrainable. This reflects the fact that reStructuredText is intended as an extensible document-domain language, whereas SAM is intended primarily as a neutral starting point for designing subject-domain languages (though you can design document-domain languages in it as well).
+            SAM is designed to have a constraint mechanism, which allows you to write a schema that defines what blocks and annotations are allowed in a SAM document. This includes constraining the use of the concrete syntax as well. SAM represents a different type of hybrid from {reStructuredText}, which is extensible but not constrainable. This reflects the fact that reStructuredText is intended as an extensible {document-domain} language, whereas SAM is intended primarily as a neutral starting point for designing {subject-domain} languages (though you can design document-domain languages in it as well).
         
-            Also unlike {RestructuredText}(language), {SAM} is not intended to have its own publishing tool chain. The SAM parser outputs an {XML}(language) document which can be transformed into an appropriate document-domain language for publishing. This book was written in SAM, using a simple document-domain language I created for the purpose. That language, which includes some subject-domain annotations, was transformed into a semantically equivalent XML document by the SAM parser. That XML document was then transformed into {DocBook} according to the publisher's specifications (the publisher imposed constraints that are not expressed in DocBook itself). From that point on, the publisher's existing DocBook tool chain took over.
+            Also unlike {RestructuredText}, {SAM} is not intended to have its own publishing tool chain. The SAM parser outputs an {XML} document which can be transformed into an appropriate {document-domain} language for publishing. This book was written in SAM, using a simple document-domain language I created for the purpose. That language, which includes some {subject-domain} annotations, was transformed into a semantically equivalent XML document by the SAM parser. That XML document was then transformed into {DocBook} according to the publisher's specifications (the publisher imposed constraints that are not expressed in DocBook itself). From that point on, the publisher's existing DocBook tool chain took over.
               
-            Most concrete markup languages, at least those designed for documents, try to make their marked-up documents look and read as much as possible like a formatted document. SAM is designed to be easy and natural to read, like a concrete markup language, but it is also designed to make the structure of the content as clear and explicit as possible while requiring the minimum of markup. This is why it uses indentation to express structure. Indentation shows structure clearly with a minimum of markup noise to distract the reader. 
+            Most concrete markup languages, at least those designed for documents, try to make their marked-up documents look and read as much as possible like a formatted document. SAM is designed to be easy and natural to read, like a concrete markup language, but it is also designed to make the structure of the content as clear and explicit as possible while requiring a minimum of markup. This is why it uses indentation to express structure. Indentation shows structure clearly with a minimum of markup noise to distract the reader. 
         
             Because it is meant specifically for authoring, a SAM parser outputs XML, which can then be processed by the standard XML tool chain. [*fig.moby-dick-xml] shows how the SAM markup in [*fig.moby-dick-sam-2] would be output by a SAM parser.
 
@@ -349,8 +354,8 @@ chapter:(#chapter.markup) Markup
               
             section: Instances of hybrid markup languages
     
-                I said earlier that this book is written in SAM, but that is not quite accurate. As noted above, you can't directly write anything in an abstract or hybrid language. You write in instances of those languages. Thus, DocBook is an instance of the abstract language XML. You can write documents in DocBook. We do say, of course, that we write documents in XML, but that statement is, if not wholly inaccurate, certainly non-specific. Saying that a document is written in DocBook tells you what constraints it meets. Saying it is written in XML merely tells you which syntax it uses, which is a whole lot less informative.
-        
+                I said earlier that this book is written in SAM, but that is not quite accurate. As noted above, you can't directly write anything in an abstract language. You write in instances of those languages. Thus, DocBook is an instance of the abstract language XML. You can write documents in DocBook. (We do say, of course, that we write documents in XML, but that statement is, if not wholly inaccurate, certainly non-specific. Saying that a document is written in DocBook tells you what constraints it meets. Saying it is written in XML merely tells you which syntax it uses, which is a whole lot less informative.) With hybrid languages, it depends on what type of hybrid they are, and whether the concrete part of the language is extensive enough to be used alone. In the case of SAM, it is not. Therefore you cannot write a meaningful document in pure SAM. You have to create your own language using SAM syntax. 
+
                 So, to be more specific, this book is written in a markup language written in SAM that I created for the specific purpose of writing this book. That markup language was then transformed by a processing application into {DocBook}, which is the markup language the publisher uses for producing books. From there is was processed through the publisher's regular DocBook-based tool chain to produce print and e-book output.
         
-                Choosing the style of markup you will use is very much tied to the choices you make about the structures you want. In the following chapters, I look at a variety of markup languages using a variety of markup styles. As always, of course, your choices should be dictated by what works best for the overall partitioning and direction of complexity that you are seeking to achieve in your content system. 
+                Choosing the style of markup you will use is very much tied to the choices you make about the structures you want. In the following chapters, I look at a variety of markup languages using a variety of markup styles. As always, of course, your choices should be dictated by what works best for the overall partitioning and redirection of complexity that you are seeking to achieve in your content system. 
