@@ -61,10 +61,10 @@ chapter:(#chapter.markup) Markup
             | *<h1>*Moby Dick*</h1>*
 
         footnote:(*fn.markup)
-            Actually, the recognition of markup languages like XML and HTML is a little more complicated than that. It is sequences of characters that are recognized rather than individual characters, and therefore no individual character is universally recognized as markup. But the main point is simply that certain specific sequences in the text trigger a processing program (generally called a _parser_) to recognize when markup starts and ends.
+            Actually, recognizing markup in languages like XML and HTML is a little more complicated than that. Sequences of characters are recognized rather than individual characters, and therefore, no individual character is universally recognized as markup. But the main point is simply that certain specific sequences in the text trigger a processing program (generally called a _parser_) to recognize when markup starts and ends.
         
 
-        Every element in HTML uses the same syntax, and any element with a name that is not recognized as part of HTML is still treated as an element, and results in a markup error. 
+        Every element in HTML uses the same syntax. Any element with a name that is not recognized as part of HTML can still be treated as an element, but the parser will handle it as a markup error. 
 
         What if you want to enter a markup-start character into the text of your document without having it interpreted as markup? You can't just type it in because the parser will think it is markup. To fix this, markup languages either define an escape character, which tells the parser to treat the following character as text, or they include markup for inserting individual characters in a way that won't be confused with markup characters.
 
@@ -171,7 +171,7 @@ chapter:(#chapter.markup) Markup
                 concept, abstract markup languages
 
     
-            An abstract markup languages does not describe specific concrete document structures directly. It describes abstract markup structures which can be named to represent structures in any domain. 
+            An abstract markup language does not describe specific concrete document structures directly. It describes abstract markup structures, which can be named to represent structures in any domain. 
         
             XML is an example of an abstract markup language.[*1] The markup in an XML file does not directly indicate things such as headings or paragraphs. Instead, it indicates a set of abstract structures called elements, attributes, entities, processing instructions, marked sections, and comments. 
         
@@ -179,6 +179,9 @@ chapter:(#chapter.markup) Markup
                 The formal term for a language like XML is "meta language," a language for describing other languages. In calling XML an _abstract_ language, I am focusing on a different property, its use of structures that are not parts of a document but generic containers. A meta language needs such abstract containers, but I find that the term meta language is not helpful to most readers. Therefore, I have chosen to focus on this property of using abstract structures as opposed to the concrete structures of a language like Markdown. 
             
             None of these abstract structures describes document structures in any of the structured writing domains. Instead, markup languages based on XML (or its cousin, SGML) indicate {subject}-, {document}-, {management}-, or {media-domain} structures as named instances of elements and attributes. 
+
+            pagination-tweak:
+                min-space: 2in
         
             Here is the {Moby Dick} passage again, this time in {XML} (more specifically, in {DocBook}):
         
@@ -227,7 +230,10 @@ chapter:(#chapter.markup) Markup
         
             section: Concrete languages in abstract clothing
     
-                The key defining characteristic of an abstract language is the use of abstract named structures such as XML elements. All XML elements share a common markup start sequence followed by the element name. This creates a named block of content.  But concrete languages can use named blocks too. For example, {JavaDoc}, a concrete language for describing Java APIs, uses named blocks using `@` as a markup start character (see [*fig.javadoc]).
+                The key defining characteristic of an abstract language is the use of abstract named structures such as XML elements. All XML elements share a common markup start sequence followed by the element name. This creates a named block of content.  But concrete languages can use named blocks too. For example, {JavaDoc}, a concrete language for describing Java APIs, uses named blocks using and at sign (`@`) as a markup start character.
+
+                In [*fig.javadoc], `@param` and `@return` are named blocks. But in JavaDoc, there is a fixed set of named blocks that are defined as part of the language. You can't create a new language by defining your own block names. By contrast, {XML} itself defines absolutely no element names. Only instances of XML, like {DocBook}(language), define element names. 
+        
 
                 figure:(*fig.javadoc) JavaDoc code fragment
                     ```(Java)
@@ -248,13 +254,14 @@ chapter:(#chapter.markup) Markup
                             // ...body
                         }
         
-                In [*fig.javadoc], `@param` and `@return` are named blocks. But in JavaDoc, there is a fixed set of named blocks that are defined as part of the language. You can't create a new language by defining your own block names. By contrast, {XML} itself defines absolutely no element names. Only instances of XML, like {DocBook}(language), define element names. 
-        
-                A particularly notable example of a concrete language in abstract clothing is {HTML}. HTML looks a lot like an instance of {XML}, but it is not. An XML parser cannot parse most HTML. HTML is nominally an instance of SGML but never did quite conform to it. HTML generally requires a specific HTML parser, such as is found in all browsers. XHTML is a version of HTML that is an instance of XML. {HTML5} actually supports two different syntaxes, one of which is an instance of XML and one of which is not, meaning that it has both a concrete syntax and a syntax which is a instance of an abstract language. (This is consequence of the long history of HTML and the wild west approach to both syntax and semantics during the browser wars, leading to significant backward-compatibility problems for today's browsers. This illustrates one of the perils of writing the the media and document domains. Languages in these domains evolve over time to meet new needs and resolve old problems, but this evolution creates backward compatibility problems for documents written in the old versions of the format. While formats can evolve in the subject domain as well, the fact that subject domain markup is recording facts about the subject matter and not formatting or presentation decisions makes it inherently more stable and you can pull old subject domain content into new document domain and media formats simply by updating the publishing algorithms.)
+                A particularly notable example of a concrete language in abstract clothing is {HTML}. HTML looks a lot like an instance of {XML}, but it is not. An XML parser cannot parse most HTML. HTML is nominally an instance of SGML but never did quite conform to it. HTML generally requires a specific HTML parser, such as is found in all browsers. XHTML is a version of HTML that is an instance of XML. {HTML5} actually supports two different syntaxes, one of which is an instance of XML and one of which is not, meaning that it has both a concrete syntax and a syntax which is a instance of an abstract language.[*fn.html-hist]
+
+                footnote:(*fn.html-hist)
+                    This is consequence of the long history of HTML and the wild-west approach to both syntax and semantics during the browser wars, leading to significant backward-compatibility problems for today's browsers. This illustrates one of the perils of writing in the media and document domains. Languages in these domains evolve over time to meet new needs and resolve old problems, but this evolution creates backward compatibility problems for documents written in old versions of the format. Formats can evolve in the subject domain as well; however, because subject-domain markup records facts about the subject matter, and not formatting or presentation decisions, it is inherently more stable, and you can pull old subject-domain content into new document- and media-domain formats simply by updating the publishing algorithms.
                        
             section: The ability to extend
     
-                The downside of concrete languages is that their concrete syntax defines a fixed set of structures. If you want other structures, there is no way to create them short of inventing your own concrete language, or a variant of an existing one, and coding the parser and all the other tools required to interpret that language. Designing new concrete languages is non-trivial because you need to make sure that any combination of characters that the writer can type is interpreted in an unambiguous way. Some versions of {Markdown}, including the original, contain ambiguities about how certain sequences of characters should be interpreted, which obviously detracts from its reliability and {functional lucidity}. 
+                The downside of concrete languages is that their concrete syntax defines a fixed set of structures. If you want other structures, there is no way to create them short of inventing your own concrete language, or a variant of an existing one, and coding the parser and all the other tools required to interpret that language. Designing new concrete languages is non-trivial because you must ensure that any combination of characters that the writer types can be interpreted unambiguously. Some versions of {Markdown}, including the original, contain ambiguities about how to interpret certain sequences of characters, which detracts from its reliability and {functional lucidity}. 
         
                 If you want to define your own structures to express the constraints that matter to your business, you need an easier method. Abstract languages such as XML make this much easier. You create a {schema}(tool) that describes the structures you want and write algorithms to process those structures. (I talk about schemas in [#chapter.constraints].)
 
@@ -287,7 +294,7 @@ chapter:(#chapter.markup) Markup
             By hybrid, I mean a language that combines both abstract and concrete markup in one language. A hybrid language has a base set of concrete syntax describing basic text structures, but it also has abstract structures, such as XML's elements and attributes, that can be the basis of extensibility and constraint.
         
             An example of a hybrid markup language is {reStructuredText}(language). Like {Markdown}(language), it has a basic concrete syntax for things like lists and paragraphs. But it also supports what it calls _directives_, which are essentially named block structures. For example, a code block in reStructuredText looks like this:
-        
+         
             ```(reST)
                 .. code-block:: html
                     :linenos:
