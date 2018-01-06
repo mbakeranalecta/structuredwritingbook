@@ -61,10 +61,10 @@ chapter:(#chapter.markup) Markup
             | *<h1>*Moby Dick*</h1>*
 
         footnote:(*fn.markup)
-            Actually, recognizing markup in languages like XML and HTML is a little more complicated than that. Sequences of characters are recognized rather than individual characters, and therefore, no individual character is universally recognized as markup. But the main point is simply that certain specific sequences in the text trigger a processing program (generally called a _parser_) to recognize when markup starts and ends.
+            Actually, the recognition of  markup in languages like XML and HTML is a little more complicated than that. Sequences of characters are recognized rather than individual characters, and therefore, no individual character is universally recognized as markup. But the main point is simply that certain specific sequences in the text trigger a processing program (generally called a _parser_) to recognize when markup starts and ends.
         
 
-        Every element in HTML uses the same syntax. Any element with a name that is not recognized as part of HTML can still be treated as an element, but the parser will handle it as a markup error. 
+        Every element in HTML uses the same syntax. Any element with a name that is not recognized as part of HTML is still treated as an element, which the HTML parser will handle as a markup error (usually by ignoring it, since the priority in HTML is to display as much of the document as you can). 
 
         What if you want to enter a markup-start character into the text of your document without having it interpreted as markup? You can't just type it in because the parser will think it is markup. To fix this, markup languages either define an escape character, which tells the parser to treat the following character as text, or they include markup for inserting individual characters in a way that won't be confused with markup characters.
 
