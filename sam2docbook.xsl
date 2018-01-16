@@ -294,6 +294,13 @@
         <xsl:call-template name="index-annotation"/>
         <xsl:apply-templates/>
     </xsl:template>
+
+    <xsl:template match="annotation[@type='link']">
+      <db:link>
+        <xsl:attribute name="xlink:href"><xsl:value-of select="@specifically"/></xsl:attribute>
+        <xsl:apply-templates/>
+      </db:link>
+    </xsl:template>
     
     <xsl:template match="annotation[@type='process']">
         <xsl:call-template name="index-annotation"/>
