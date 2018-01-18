@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter name="chapter.separating">
 <title>Separating Content from Formatting</title>
+
 <annotations>
 <p>Concepts</p>
 <p><phrase><annotation type="concept">abstract language</annotation></phrase> <phrase><annotation type="concept">adaptive content</annotation></phrase> <phrase><annotation type="concept" specifically="algorithm">algorithms</annotation></phrase> <phrase><annotation type="concept">algorithm</annotation></phrase> <phrase><annotation type="concept">annotations</annotation></phrase> <phrase><annotation type="concept">annotation</annotation></phrase> <phrase><annotation type="concept">bottom-up information architecture</annotation></phrase> <phrase><annotation type="concept">categories</annotation></phrase> <phrase><annotation type="concept">categorization</annotation></phrase> <phrase><annotation type="concept">classification</annotation></phrase> <phrase><annotation type="concept">consistency</annotation></phrase> <phrase><annotation type="concept">constraints</annotation></phrase> <phrase><annotation type="concept">content silos</annotation></phrase> <phrase><annotation type="concept">content strategy</annotation></phrase> <phrase><annotation type="concept">coverage</annotation></phrase> <phrase><annotation type="concept">document domain</annotation></phrase> <phrase><annotation type="concept">document type</annotation></phrase> <phrase><annotation type="concept">document-domain</annotation></phrase> <phrase><annotation type="concept">electronic media</annotation></phrase> <phrase><annotation type="concept">Every Page is Page One</annotation></phrase> <phrase><annotation type="concept">extensibility</annotation></phrase> <phrase><annotation type="concept">faceted navigation</annotation></phrase> <phrase><annotation type="concept">feeds</annotation></phrase> <phrase><annotation type="concept">findability</annotation></phrase> <phrase><annotation type="concept">frameworks</annotation></phrase> <phrase><annotation type="concept">functional lucidity</annotation></phrase> <phrase><annotation type="concept">functionally lucid</annotation></phrase> <phrase><annotation type="concept">future proofing</annotation></phrase> <phrase><annotation type="concept">future proof</annotation></phrase> <phrase><annotation type="concept">guidance</annotation></phrase> <phrase><annotation type="concept">hierarchical structure</annotation></phrase> <phrase><annotation type="concept">hybrid markup language</annotation></phrase> <phrase><annotation type="concept">information architecture</annotation></phrase> <phrase><annotation type="concept">information design</annotation></phrase> <phrase><annotation type="concept">information foraging</annotation></phrase> <phrase><annotation type="concept">information mapping</annotation></phrase> <phrase><annotation type="concept">information typing</annotation></phrase> <phrase><annotation type="concept">interactive media</annotation></phrase> <phrase><annotation type="concept">management domain</annotation></phrase> <phrase><annotation type="concept">management-domain</annotation></phrase> <phrase><annotation type="concept">media domain</annotation></phrase> <phrase><annotation type="concept">media-domain</annotation></phrase> <phrase><annotation type="concept">metadata</annotation></phrase> <phrase><annotation type="concept">navigation</annotation></phrase> <phrase><annotation type="concept">normalization</annotation></phrase> <phrase><annotation type="concept">personalized content</annotation></phrase> <phrase><annotation type="concept">progressive disclosure</annotation></phrase> <phrase><annotation type="concept">referential integrity</annotation></phrase> <phrase><annotation type="concept">rendering problems</annotation></phrase> <phrase><annotation type="concept">reuse of patterns</annotation></phrase> <phrase><annotation type="concept">rhetorical</annotation></phrase> <phrase><annotation type="concept">rhetoric</annotation></phrase> <phrase><annotation type="concept">searchable</annotation></phrase> <phrase><annotation type="concept">search</annotation></phrase> <phrase><annotation type="concept">specialization</annotation></phrase> <phrase><annotation type="concept">structured content type</annotation></phrase> <phrase><annotation type="concept">structured writing domains</annotation></phrase> <phrase><annotation type="concept">style</annotation></phrase> <phrase><annotation type="concept">subject affinities</annotation></phrase> <phrase><annotation type="concept">subject affinity</annotation></phrase> <phrase><annotation type="concept">subject domain</annotation></phrase> <phrase><annotation type="concept">subject-domain</annotation></phrase> <phrase><annotation type="concept">taxonomy</annotation></phrase> <phrase><annotation type="concept">terminology</annotation></phrase> <phrase><annotation type="concept">top-down information architecture</annotation></phrase> <phrase><annotation type="concept" specifically="top-down information architecture">top-down</annotation></phrase> <phrase><annotation type="concept">WYSIWYG</annotation></phrase></p>
@@ -30,6 +31,7 @@
 <p>If there is one phrase that most people associate with structured writing, it is “separating content from formatting.” This is the most basic and well-known structured writing algorithm and it can be used to achieve a number of process and rhetorical goals. It is a useful place to start the study of algorithms because it illustrates the strategies used for all the other algorithms. Separating content from formatting separates decisions about the appearance of a document from decisions about its content. However, as you will see in this chapter, doing this is not as simple as it may seem.</p>
 <section>
 <title>Separate out style instructions</title>
+
 <p>Let’s start with a piece of text that includes a description of its format. I use CSS syntax to describe the format because but CSS is easy to understand and helps illustrate the separation, but don’t focus on the syntax, it is just there to illustrate the principle. I also represent certain characters (bullets and tabs) by their names, so you can see exactly where everything is going:</p>
 <codeblock>
 {font: 10pt "Open Sans"}The box contains:
@@ -55,6 +57,7 @@ paragraph = {font: 12pt "Century Schoolbook"}
 </section>
 <section>
 <title>Separate out formatting characters</title>
+
 <p>Cool, but suppose you need to change the style of the bullets. The bullet style is certainly formatting, but bullets are text characters. To change them you can’t just change the font, you have to change the characters themselves.</p>
 <p>Some characters in your text are part of the content, and some are part of the formatting. Therefore, a style may include characters as well as formatting directives, as shown here:</p>
 <codeblock>
@@ -88,6 +91,7 @@ bullet-paragraph = {font: 12pt "Century Schoolbook"}[em dash][tab]
 </section>
 <section>
 <title>Name your abstractions correctly</title>
+
 <p>The names you choose for styles and other abstractions matter. The wrong name sets up a false expectation, which can lead to writers using a style incorrectly. So the first lesson about separating content from formatting is that naming matters. You are creating an abstraction, so you need to figure out what that abstraction is and name it appropriately.</p>
 <p>What is the abstraction here? Sand, Eggs, and Gold are list items. So maybe you do this:</p>
 <codeblock>
@@ -103,6 +107,7 @@ list-item = {font: 12pt "Century Schoolbook"}[em dash][tab]
 </section>
 <section>
 <title>Make sure you have the right set of abstractions</title>
+
 <p>But then, of course, you run into lists like the following:</p>
 <codeblock>
 {style: paragraph}To wash hair:
@@ -147,6 +152,7 @@ ordered-list-item =
 </section>
 <section>
 <title>Create containers to provide context</title>
+
 <p>One problem with this approach to creating lists is that you have to apply a different style to the first item of a list. It would be better if you could use the same style for each list item and have the numbering just work. However, this is hard to do because nothing in the content says where one numbered list ends and the next begins. For this you need a new abstraction. So far, you have abstractions for ordered and unordered list items, but you don’t have an abstraction for lists themselves.</p>
 <p>Up to this point, everything has been purely in the <phrase><annotation type="concept">media domain</annotation></phrase>. You replaced direct formatting definitions with indirect definitions through styles. But now it’s necessary to venture into the <phrase><annotation type="concept">document domain</annotation></phrase>, creating the abstract idea of a list and inserting that abstract idea into your content.</p>
 <codeblock>
@@ -166,6 +172,7 @@ list:
 </section>
 <section>
 <title>Move the abstractions to the containers</title>
+
 <p>But what if a writer inadvertently does this:</p>
 <codeblock>
 paragraph: To wash hair:
@@ -208,6 +215,7 @@ section:
 </section>
 <section>
 <title>Separate out abstract formatting</title>
+
 <p>To separate content from formatting for ordered and unordered lists, you must separate out some of the content as well. Specifically, you must separate out some of the characters. The distinction between content and formatting is not the same as the distinction between characters and the styles applied to them. Sometimes characters are part of the formatting rather than the content.</p>
 <p>Consider a labeled-list structure:</p>
 <blockquote>
@@ -250,6 +258,7 @@ labeled-list:
 <p>As always, when you separate something from your content, you have to replace it with something else. In <citation nameref="ex.separate-1"/>, named structures reflect the subject matter of the entries, which moves this content into the <phrase><annotation type="concept">subject domain</annotation></phrase>.</p>
 <figure name="ex.separate-1">
 <title>Address markup in the subject domain</title>
+
 <codeblock language="sam">
 address:
     street: 123 Elm Street

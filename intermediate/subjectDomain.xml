@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter name="chapter.subject-domain">
 <title>Writing in the Subject Domain</title>
+
 <annotations>
 <p>Concepts</p>
 <p><phrase><annotation type="concept">abstract language</annotation></phrase> <phrase><annotation type="concept">adaptive content</annotation></phrase> <phrase><annotation type="concept" specifically="algorithm">algorithms</annotation></phrase> <phrase><annotation type="concept">algorithm</annotation></phrase> <phrase><annotation type="concept">annotations</annotation></phrase> <phrase><annotation type="concept">annotation</annotation></phrase> <phrase><annotation type="concept">bottom-up information architecture</annotation></phrase> <phrase><annotation type="concept">categories</annotation></phrase> <phrase><annotation type="concept">categorization</annotation></phrase> <phrase><annotation type="concept">classification</annotation></phrase> <phrase><annotation type="concept">consistency</annotation></phrase> <phrase><annotation type="concept">constraints</annotation></phrase> <phrase><annotation type="concept">content silos</annotation></phrase> <phrase><annotation type="concept">content strategy</annotation></phrase> <phrase><annotation type="concept">coverage</annotation></phrase> <phrase><annotation type="concept">document domain</annotation></phrase> <phrase><annotation type="concept">document type</annotation></phrase> <phrase><annotation type="concept">document-domain</annotation></phrase> <phrase><annotation type="concept">electronic media</annotation></phrase> <phrase><annotation type="concept">Every Page is Page One</annotation></phrase> <phrase><annotation type="concept">extensibility</annotation></phrase> <phrase><annotation type="concept">faceted navigation</annotation></phrase> <phrase><annotation type="concept">feeds</annotation></phrase> <phrase><annotation type="concept">findability</annotation></phrase> <phrase><annotation type="concept">frameworks</annotation></phrase> <phrase><annotation type="concept">functional lucidity</annotation></phrase> <phrase><annotation type="concept">functionally lucid</annotation></phrase> <phrase><annotation type="concept">future proofing</annotation></phrase> <phrase><annotation type="concept">future proof</annotation></phrase> <phrase><annotation type="concept">guidance</annotation></phrase> <phrase><annotation type="concept">hierarchical structure</annotation></phrase> <phrase><annotation type="concept">hybrid markup language</annotation></phrase> <phrase><annotation type="concept">information architecture</annotation></phrase> <phrase><annotation type="concept">information design</annotation></phrase> <phrase><annotation type="concept">information foraging</annotation></phrase> <phrase><annotation type="concept">information mapping</annotation></phrase> <phrase><annotation type="concept">information typing</annotation></phrase> <phrase><annotation type="concept">interactive media</annotation></phrase> <phrase><annotation type="concept">management domain</annotation></phrase> <phrase><annotation type="concept">management-domain</annotation></phrase> <phrase><annotation type="concept">media domain</annotation></phrase> <phrase><annotation type="concept">media-domain</annotation></phrase> <phrase><annotation type="concept">metadata</annotation></phrase> <phrase><annotation type="concept">navigation</annotation></phrase> <phrase><annotation type="concept">normalization</annotation></phrase> <phrase><annotation type="concept">personalized content</annotation></phrase> <phrase><annotation type="concept">progressive disclosure</annotation></phrase> <phrase><annotation type="concept">referential integrity</annotation></phrase> <phrase><annotation type="concept">rendering problems</annotation></phrase> <phrase><annotation type="concept">reuse of patterns</annotation></phrase> <phrase><annotation type="concept">rhetorical</annotation></phrase> <phrase><annotation type="concept">rhetoric</annotation></phrase> <phrase><annotation type="concept">searchable</annotation></phrase> <phrase><annotation type="concept">search</annotation></phrase> <phrase><annotation type="concept">specialization</annotation></phrase> <phrase><annotation type="concept">structured content type</annotation></phrase> <phrase><annotation type="concept">structured writing domains</annotation></phrase> <phrase><annotation type="concept">style</annotation></phrase> <phrase><annotation type="concept">subject affinities</annotation></phrase> <phrase><annotation type="concept">subject affinity</annotation></phrase> <phrase><annotation type="concept">subject domain</annotation></phrase> <phrase><annotation type="concept">subject-domain</annotation></phrase> <phrase><annotation type="concept">taxonomy</annotation></phrase> <phrase><annotation type="concept">terminology</annotation></phrase> <phrase><annotation type="concept">top-down information architecture</annotation></phrase> <phrase><annotation type="concept" specifically="top-down information architecture">top-down</annotation></phrase> <phrase><annotation type="concept">WYSIWYG</annotation></phrase></p>
@@ -23,12 +24,14 @@
 </annotations>
 <index>
 <title>type, term</title>
+
 <p>concept, subject domain</p>
 </index>
 <p>If the <phrase><annotation type="concept">media domain</annotation></phrase> is concerned with what the content looks like and the <phrase><annotation type="concept">document domain</annotation></phrase> is concerned with how the content is organized into a document, the <phrase><annotation type="concept">subject domain</annotation></phrase> is concerned with the subject matter of the content. Subject domain structures tell you what the content is about.</p>
 <p>A recipe is a useful example for illustrating the subject domain. <citation idref="ex.subj-restructured"/> is a recipe written in <phrase><annotation type="language">reStructuredText</annotation></phrase>, a lightweight general purpose <phrase><annotation type="concept">document domain</annotation></phrase> markup language:</p>
 <figure id="ex.subj-restructured">
 <title>Recipe for hard-boiled eggs marked up in reStructuredText</title>
+
 <codeblock language="reStructuredText">
 Hard-Boiled Eggs
 ================
@@ -56,6 +59,7 @@ Preparation
 <p>In <phrase><annotation type="language">reStructuredText</annotation></phrase>, text underlined with equals signs is a major heading and text underlined with dashes is a minor heading. You create a table by using equals signs to mark the beginning and end of the table and the boundary between the table head and the table body. You place each row on a new line and mark columns by putting spaces in the rows of equals signs. You create ordered lists by putting numbers in front of lines of text. The equivalent HTML document to <citation idref="ex.subj-restructured"/> would look like <citation idref="ex.subj-html"/>.</p>
 <figure id="ex.subj-html">
 <title>Recipe for hard-boiled eggs marked up in HTML</title>
+
 <codeblock language="HTML">
 &lt;html&gt;
     &lt;h1&gt;Hard-Boiled Eggs&lt;/h1&gt;
@@ -97,6 +101,7 @@ Preparation
 <p>Moving this document to the subject domain allows you to impose these rhetorical constraints and requires the writer to record that they have followed them. Neither <phrase><annotation type="language">reStructuredText</annotation></phrase> nor <phrase><annotation type="language"><annotation type="standard">HTML</annotation></annotation></phrase> gives you a way to do that, so you need a different markup language. <citation idref="ex.subj-sam"/> shows what that might look like:</p>
 <figure id="ex.subj-sam">
 <title>Recipe for hard-boiled eggs marked up in a subject-domain language</title>
+
 <codeblock language="sam">
 recipe: Hard-Boiled Egg
     introduction:
@@ -126,6 +131,7 @@ recipe: Hard-Boiled Egg
 <p>That said, enforcing constraints is a powerful tool. If you publish a lot of recipes, you probably have many more rhetorical decisions you would like to be made consistently. For instance, you might want every recipe to state its preparation time and the number of people it serves. In our subject-domain markup, we can enforce and record that constraint by moving that information from the introduction section to separate fields (see <citation idref="ex.subj-add-constraint"/>).</p>
 <figure id="ex.subj-add-constraint">
 <title>Recipe with preparation time and servings added</title>
+
 <codeblock language="sam">
 recipe: Hard Boiled Egg
     introduction:
@@ -155,6 +161,7 @@ recipe: Hard Boiled Egg
 <p>The rhetoric of an ingredient listing includes three pieces of information: the name of the ingredient, the quantity, and the unit of measure used to express the quantity. These can be presented as a list or a table. To factor out the presentation choice, you can create an ingredient structure that calls out each piece of information separately (see <citation idref="ex.subj-ingredient-1"/>).</p>
 <figure id="ex.subj-ingredient-1">
 <title>Subject-domain markup for ingredients</title>
+
 <codeblock language="sam">
 ingredients:
     ingredient: 
@@ -170,6 +177,7 @@ ingredients:
 <p><citation idref="ex.subj-ingredient-2"/> shows a shortcut that makes this markup less verbose. (This is a markup syntax named <phrase><annotation type="language">SAM</annotation></phrase> that I will talk about later).</p>
 <figure id="ex.subj-ingredient-2">
 <title>Subject-domain shortcut for ingredient markup</title>
+
 <codeblock language="sam">
 ingredients:: ingredient, quantity, unit
     eggs, 12, each
@@ -180,10 +188,12 @@ ingredients:: ingredient, quantity, unit
 <p>But in the subject domain we get another set of benefits. The explicit markup of the subject matter lets us access this content as data and run algorithms on that data to produce new and different forms of content (something I will explore in more depth in <citation nameref="chapter.generate"/>). For instance, it would allow us to convert measurements from imperial to metric units so we could publish our recipes in countries that use the metric system.</p>
 <section>
 <title>Using subjects to establish context</title>
+
 <p>In <citation nameref="chapter.document-domain"/>, I noted that you can use context to identify the role that structures play in a document, which allows you to get away with fewer structures. For instance, you can use a single <code>title</code> tag for all titles because you can differentiate different types of titles from the context in which they occur. The same is true with subject-domain structures. They can provide context that allows you to treat basic text structures differently.</p>
 <p>Consider our markup language for recipes (<citation idref="ex.subj-recipe-sam"/>).</p>
 <figure id="ex.subj-recipe-sam">
 <title>Subject-domain markup for recipes</title>
+
 <codeblock language="sam">
 recipe: Hard Boiled Egg
     introduction:

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter name="chapter.processing">
 <title>Processing Structured Text</title>
+
 <annotations>
 <p>Concepts</p>
 <p><phrase><annotation type="concept">abstract language</annotation></phrase> <phrase><annotation type="concept">adaptive content</annotation></phrase> <phrase><annotation type="concept" specifically="algorithm">algorithms</annotation></phrase> <phrase><annotation type="concept">algorithm</annotation></phrase> <phrase><annotation type="concept">annotations</annotation></phrase> <phrase><annotation type="concept">annotation</annotation></phrase> <phrase><annotation type="concept">bottom-up information architecture</annotation></phrase> <phrase><annotation type="concept">categories</annotation></phrase> <phrase><annotation type="concept">categorization</annotation></phrase> <phrase><annotation type="concept">classification</annotation></phrase> <phrase><annotation type="concept">consistency</annotation></phrase> <phrase><annotation type="concept">constraints</annotation></phrase> <phrase><annotation type="concept">content silos</annotation></phrase> <phrase><annotation type="concept">content strategy</annotation></phrase> <phrase><annotation type="concept">coverage</annotation></phrase> <phrase><annotation type="concept">document domain</annotation></phrase> <phrase><annotation type="concept">document type</annotation></phrase> <phrase><annotation type="concept">document-domain</annotation></phrase> <phrase><annotation type="concept">electronic media</annotation></phrase> <phrase><annotation type="concept">Every Page is Page One</annotation></phrase> <phrase><annotation type="concept">extensibility</annotation></phrase> <phrase><annotation type="concept">faceted navigation</annotation></phrase> <phrase><annotation type="concept">feeds</annotation></phrase> <phrase><annotation type="concept">findability</annotation></phrase> <phrase><annotation type="concept">frameworks</annotation></phrase> <phrase><annotation type="concept">functional lucidity</annotation></phrase> <phrase><annotation type="concept">functionally lucid</annotation></phrase> <phrase><annotation type="concept">future proofing</annotation></phrase> <phrase><annotation type="concept">future proof</annotation></phrase> <phrase><annotation type="concept">guidance</annotation></phrase> <phrase><annotation type="concept">hierarchical structure</annotation></phrase> <phrase><annotation type="concept">hybrid markup language</annotation></phrase> <phrase><annotation type="concept">information architecture</annotation></phrase> <phrase><annotation type="concept">information design</annotation></phrase> <phrase><annotation type="concept">information foraging</annotation></phrase> <phrase><annotation type="concept">information mapping</annotation></phrase> <phrase><annotation type="concept">information typing</annotation></phrase> <phrase><annotation type="concept">interactive media</annotation></phrase> <phrase><annotation type="concept">management domain</annotation></phrase> <phrase><annotation type="concept">management-domain</annotation></phrase> <phrase><annotation type="concept">media domain</annotation></phrase> <phrase><annotation type="concept">media-domain</annotation></phrase> <phrase><annotation type="concept">metadata</annotation></phrase> <phrase><annotation type="concept">navigation</annotation></phrase> <phrase><annotation type="concept">normalization</annotation></phrase> <phrase><annotation type="concept">personalized content</annotation></phrase> <phrase><annotation type="concept">progressive disclosure</annotation></phrase> <phrase><annotation type="concept">referential integrity</annotation></phrase> <phrase><annotation type="concept">rendering problems</annotation></phrase> <phrase><annotation type="concept">reuse of patterns</annotation></phrase> <phrase><annotation type="concept">rhetorical</annotation></phrase> <phrase><annotation type="concept">rhetoric</annotation></phrase> <phrase><annotation type="concept">searchable</annotation></phrase> <phrase><annotation type="concept">search</annotation></phrase> <phrase><annotation type="concept">specialization</annotation></phrase> <phrase><annotation type="concept">structured content type</annotation></phrase> <phrase><annotation type="concept">structured writing domains</annotation></phrase> <phrase><annotation type="concept">style</annotation></phrase> <phrase><annotation type="concept">subject affinities</annotation></phrase> <phrase><annotation type="concept">subject affinity</annotation></phrase> <phrase><annotation type="concept">subject domain</annotation></phrase> <phrase><annotation type="concept">subject-domain</annotation></phrase> <phrase><annotation type="concept">taxonomy</annotation></phrase> <phrase><annotation type="concept">terminology</annotation></phrase> <phrase><annotation type="concept">top-down information architecture</annotation></phrase> <phrase><annotation type="concept" specifically="top-down information architecture">top-down</annotation></phrase> <phrase><annotation type="concept">WYSIWYG</annotation></phrase></p>
@@ -31,6 +32,7 @@
 <p>Understanding how to put things back together is a big part of understanding how to separate them. Indeed, describing how you would put them back together is the only way to know for certain that you didn’t lose anything when you did the separation. This is essential to ensuring a clean partitioning that does not allow any complexity to fall through the cracks.</p>
 <section>
 <title>Two into one: reversing the factoring out of invariants</title>
+
 <p>Moving content from the <phrase><annotation type="concept">media domain</annotation></phrase> to the <phrase><annotation type="concept">document domain</annotation></phrase> or the <phrase><annotation type="concept">subject domain</annotation></phrase> involves progressively factoring out invariants in the content. Each step in this process creates two artifacts: the structured content and the invariant piece that was factored out.</p>
 <p>Processing structured text is about putting the pieces back together – combining the structured content with the invariants that were factored out. But processing structured text is also about making and/or executing the decisions that were partitioned away from the writer. These decisions may be invariant, such as applying approved corporate style, or they may be variable, such as presenting content differently in different media or for different audiences. Invariant decisions are always made the same way for a given purpose. They may be made differently for different purposes but still the same way for each purpose.</p>
 <p>If factoring out the invariants moves content toward the document or subject domains, recombining the content with the invariants moves it in the opposite direction, toward the <phrase><annotation type="concept">media domain</annotation></phrase>. This could mean moving the content from the <phrase><annotation type="concept">subject domain</annotation></phrase> to the <phrase><annotation type="concept">document domain</annotation></phrase> or from the document domain to the media domain, or simply from a more abstract form in the media domain to a more concrete form, which is our first example.</p>
@@ -40,6 +42,7 @@
 </section>
 <section>
 <title>Restoring style information</title>
+
 <p>In <citation nameref="chapter.separating"/>, the first example of <phrase><annotation type="concept">separating content from formatting</annotation></phrase> factored out the style information from this structure:</p>
 <codeblock>
 {font: 10pt "Open Sans"}The box contains:
@@ -96,6 +99,7 @@ find {style: bullet-paragraph}
 </section>
 <section>
 <title>Rules based on structures</title>
+
 <p>The tools that do this sort of processing do not literally use search and replace like this. Rather, they parse the source document to pull out the structures and allow you to specify your processing rules by referring to those structures.</p>
 <p>The mechanism by which a processing tool recognizes structure is not our focus here. We are just going to tell it what to do when it finds a structure. So, the next set of rules match structures rather than looking for literal strings in the text:</p>
 <codeblock>
@@ -118,6 +122,7 @@ match bullet-paragraph
 </section>
 <section>
 <title>The order of the rules does not matter</title>
+
 <p>You may have noticed that these rules do pretty much exactly what style sheets do in applications such as <phrase><annotation type="tool" specifically="Microsoft Word">Word</annotation></phrase> or <phrase><annotation type="tool">FrameMaker</annotation></phrase>. If you understand style sheets, you understand a good deal of how structured writing algorithms work.</p>
 <p>One important thing to notice is that when you create a style sheet in <phrase><annotation type="tool" specifically="Microsoft Word">Word</annotation></phrase> or <phrase><annotation type="tool">FrameMaker</annotation></phrase>, you don’t specify the order in which styles are applied to the document. The same is true when you create a CSS style sheet. The style sheet is just a flat list of rules. The order in which the rules are applied to the document depends entirely on the order in which the various structures occur in the document.<citation idref="fn.priority"/></p>
 <footnote id="fn.priority">
@@ -132,6 +137,7 @@ match bullet-paragraph
 </section>
 <section>
 <title>Applying rules in the document domain</title>
+
 <p>Suppose you have a piece of document-domain structured text that contains this <code>title</code> structure:</p>
 <codeblock language="sam">
 title: Moby Dick
@@ -159,7 +165,7 @@ match title
 <codeblock language="sam">
 title: Review of {Rio Bravo}(movie)
 </codeblock>
-<p>Here the annotated text is set off with curly braces and the annotation itself is in parentheses immediately after it. (This is a feature of the <phrase><annotation type="language">SAM</annotation></phrase> markup syntax that I use for most of the examples in this book.) This annotation says that the words “Rio Bravo” refer to a movie. The annotation is a content structure, just like the title structure, and is nested inside the text of the title.</p>
+<p>Here the annotated text is set off with curly braces and the annotation itself is in parentheses immediately after it. (This is a feature of the <phrase><annotation type="language">SAM</annotation></phrase> markup syntax that I use for most of the examples in this book.) This annotation says that the words <phrase><annotation type="italic">Rio Bravo</annotation></phrase> refer to a movie. The annotation is a content structure, just like the title structure, and is nested inside the text of the title.</p>
 <p>So what do you need to do to your <code>title</code> rule to make it handle <code>movie</code> annotations embedded in the title text? Absolutely nothing. Instead, you write a separate rule for handling <code>movie</code> annotations no matter where they occur:</p>
 <codeblock language="pseudo">
 match movie
@@ -174,6 +180,7 @@ match movie
 </section>
 <section>
 <title>Processing based on context</title>
+
 <p>When you move to the <phrase><annotation type="concept">document domain</annotation></phrase>, you use context to reduce the number of structures you need. For example, where <phrase><annotation type="language">HTML</annotation></phrase> has six different heading structures (<code>H1</code> through <code>H6</code>), <phrase><annotation type="language">DocBook</annotation></phrase> has only one (<code>title</code>), which can occur in many different contexts. So how do you apply the right formatting to a title based on its context? You create a different rule for the <code>title</code> structure in each context. You express the context by listing the parent structure names separated by slashes:</p>
 <codeblock language="pseudo">
 match book/title
@@ -221,6 +228,7 @@ section:
 </section>
 <section>
 <title>Processing container structures</title>
+
 <p>When you move content to the <phrase><annotation type="concept">document domain</annotation></phrase> or the <phrase><annotation type="concept">subject domain</annotation></phrase>, you often create container structures to provide context. These container structures have no media-domain analog, so what do you do with them when you publish? The containers provide context for the rest of your processing rules, but what do you do with the containers themselves?</p>
 <p>In the previous example the content was contained in a <code>section</code> structure. So how does the <code>section</code> structure get processed?</p>
 <codeblock language="pseudo">
@@ -231,6 +239,7 @@ match section
 </section>
 <section>
 <title>Restoring factored-out text</title>
+
 <p>Sometimes when you factor out invariants, you not only factor out styles, you also factor out text. To process the content, you need to restore the text (obviously you can restore different text if you need to, which is why you factored it out in the first place).</p>
 <p>As we saw in <citation nameref="chapter.separating"/>, a simple example of factoring out text is numbered and bulleted lists, where you factor out the text of the numbers and bullets. Let’s look at how you create rules to put them back.</p>
 <p>Suppose you have a document that contains these two different kinds of lists:</p>
@@ -295,6 +304,7 @@ match ordered-list/list-item
 </section>
 <section>
 <title>Processing in multiple steps</title>
+
 <p>You may not always want to apply final formatting to your content in a single step. When you separated content from formatting, you did the separation in several stages. You may want to put them back together in several stages. This not only results in simpler, easier-to-maintain algorithms, it can make it possible for you to reuse some of the downstream steps (nearer the <phrase><annotation type="concept">media domain</annotation></phrase>) for different types of <phrase><annotation type="concept">document-domain</annotation></phrase> and <phrase><annotation type="concept">subject-domain</annotation></phrase> content.</p>
 <p>So far the examples have come from the <phrase><annotation type="concept">media domain</annotation></phrase> and the <phrase><annotation type="concept">document domain</annotation></phrase>. Here is a <phrase><annotation type="concept">subject-domain</annotation></phrase> example that builds on <citation nameref="ex.separate-1"/>, which moved a labeled list from the document domain to the subject domain.</p>
 <codeblock language="sam">
@@ -359,6 +369,7 @@ match code
 </section>
 <section>
 <title>Query-based processing</title>
+
 <p>The rule-based approach shown here is not the only way to process structured writing. There is another approach that I call the query-based approach.<citation idref="1"/> In this approach, you write a query expression that reaches into the structure of a document and pulls out a structure or a set of structures from the middle of the document.</p>
 <p>This is a useful technique if you want to radically rearrange the content of a document or if you want to pull content out of one document to use in another. Any reference in these pages to using an algorithm to go through a content set and pull out certain pieces of data is an example of the query-based approach. You will see more examples of this in future chapters.</p>
 <footnote id="1">

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter name="chapter.reuse">
 <title>Reuse</title>
+
 <annotations>
 <p>Concepts</p>
 <p><phrase><annotation type="concept">abstract language</annotation></phrase> <phrase><annotation type="concept">adaptive content</annotation></phrase> <phrase><annotation type="concept" specifically="algorithm">algorithms</annotation></phrase> <phrase><annotation type="concept">algorithm</annotation></phrase> <phrase><annotation type="concept">annotations</annotation></phrase> <phrase><annotation type="concept">annotation</annotation></phrase> <phrase><annotation type="concept">bottom-up information architecture</annotation></phrase> <phrase><annotation type="concept">categories</annotation></phrase> <phrase><annotation type="concept">categorization</annotation></phrase> <phrase><annotation type="concept">classification</annotation></phrase> <phrase><annotation type="concept">consistency</annotation></phrase> <phrase><annotation type="concept">constraints</annotation></phrase> <phrase><annotation type="concept">content silos</annotation></phrase> <phrase><annotation type="concept">content strategy</annotation></phrase> <phrase><annotation type="concept">coverage</annotation></phrase> <phrase><annotation type="concept">document domain</annotation></phrase> <phrase><annotation type="concept">document type</annotation></phrase> <phrase><annotation type="concept">document-domain</annotation></phrase> <phrase><annotation type="concept">electronic media</annotation></phrase> <phrase><annotation type="concept">Every Page is Page One</annotation></phrase> <phrase><annotation type="concept">extensibility</annotation></phrase> <phrase><annotation type="concept">faceted navigation</annotation></phrase> <phrase><annotation type="concept">feeds</annotation></phrase> <phrase><annotation type="concept">findability</annotation></phrase> <phrase><annotation type="concept">frameworks</annotation></phrase> <phrase><annotation type="concept">functional lucidity</annotation></phrase> <phrase><annotation type="concept">functionally lucid</annotation></phrase> <phrase><annotation type="concept">future proofing</annotation></phrase> <phrase><annotation type="concept">future proof</annotation></phrase> <phrase><annotation type="concept">guidance</annotation></phrase> <phrase><annotation type="concept">hierarchical structure</annotation></phrase> <phrase><annotation type="concept">hybrid markup language</annotation></phrase> <phrase><annotation type="concept">information architecture</annotation></phrase> <phrase><annotation type="concept">information design</annotation></phrase> <phrase><annotation type="concept">information foraging</annotation></phrase> <phrase><annotation type="concept">information mapping</annotation></phrase> <phrase><annotation type="concept">information typing</annotation></phrase> <phrase><annotation type="concept">interactive media</annotation></phrase> <phrase><annotation type="concept">management domain</annotation></phrase> <phrase><annotation type="concept">management-domain</annotation></phrase> <phrase><annotation type="concept">media domain</annotation></phrase> <phrase><annotation type="concept">media-domain</annotation></phrase> <phrase><annotation type="concept">metadata</annotation></phrase> <phrase><annotation type="concept">navigation</annotation></phrase> <phrase><annotation type="concept">normalization</annotation></phrase> <phrase><annotation type="concept">personalized content</annotation></phrase> <phrase><annotation type="concept">progressive disclosure</annotation></phrase> <phrase><annotation type="concept">referential integrity</annotation></phrase> <phrase><annotation type="concept">rendering problems</annotation></phrase> <phrase><annotation type="concept">reuse of patterns</annotation></phrase> <phrase><annotation type="concept">rhetorical</annotation></phrase> <phrase><annotation type="concept">rhetoric</annotation></phrase> <phrase><annotation type="concept">searchable</annotation></phrase> <phrase><annotation type="concept">search</annotation></phrase> <phrase><annotation type="concept">specialization</annotation></phrase> <phrase><annotation type="concept">structured content type</annotation></phrase> <phrase><annotation type="concept">structured writing domains</annotation></phrase> <phrase><annotation type="concept">style</annotation></phrase> <phrase><annotation type="concept">subject affinities</annotation></phrase> <phrase><annotation type="concept">subject affinity</annotation></phrase> <phrase><annotation type="concept">subject domain</annotation></phrase> <phrase><annotation type="concept">subject-domain</annotation></phrase> <phrase><annotation type="concept">taxonomy</annotation></phrase> <phrase><annotation type="concept">terminology</annotation></phrase> <phrase><annotation type="concept">top-down information architecture</annotation></phrase> <phrase><annotation type="concept" specifically="top-down information architecture">top-down</annotation></phrase> <phrase><annotation type="concept">WYSIWYG</annotation></phrase></p>
@@ -51,6 +52,7 @@
 <p>“Reusing” can suggest that this activity is somewhat akin to rummaging through that jar of old nuts and bolts you have in the garage looking for one that is the right size to fix your lawnmower. While you can do it that way, that approach is neither efficient nor reliable. The efficient and reliable approach involves deliberately creating content for duplication in multiple locations. This means that you need to place constraints on the content to be reused and the content that reuses it, and that means you are in the realm of structured writing.</p>
 <section>
 <title>Fitting pieces of content together</title>
+
 <p>If you are going to create one piece of content that can be used in many outputs, you have to make sure it fits in each of those outputs (in other words, partition it appropriately for reuse.)</p>
 <p>If you cut and paste, this is not a concern. You can cut any text you like, paste it in anywhere, and edit it to fit if you need to. But if the content you want to use is used in other places, you can’t edit it to fit because that might cause it to no longer fit in the other places. For reuse to work, the content must be written to fit in multiple places. In other words, it has to meet a set of constraints that will ensure that it will fit in multiple places. We will look at this in more detail in <citation nameref="chapter.composition"/>. In this chapter we will focus on the algorithms for fitting the pieces together.</p>
 <p>There are seven basic models for fitting pieces of content together:</p>
@@ -80,6 +82,7 @@
 </section>
 <section>
 <title>Common into variable</title>
+
 <p>In the common into variable case, you have a common piece of content that occurs in many places. This could mean it occurs in many documents or in many places in the same document, or both.</p>
 <insert item="../graphics/common2variable.xml" type="image"/>
 <p>We looked at an example of this in <citation nameref="chapter.management-domain"/>, where we had a set of dangerous procedures which each required a standard warning. Each individual procedure is the variable part and the standard warning is the common part.:</p>
@@ -96,6 +99,7 @@ procedure: Blow stuff up
 </section>
 <section>
 <title>Variable into common</title>
+
 <p>In the variable into common case, you have a single document that will be output in many different ways by inserting variable content at certain locations.</p>
 <insert item="../graphics/variable2common.xml" type="image"/>
 <p>For instance, if you are writing a manual to cover a number of car models you can factor out the number of seats each model has.</p>
@@ -131,6 +135,7 @@ match insert where variable = $seats
 </section>
 <section>
 <title>Variable into variable</title>
+
 <p>Variable into variable is a variation on common into variable in which you can make a wholesale change of the common elements that you are pulling into a set of variable documents.</p>
 <p>For example, suppose you decide to market your product line to a new market. The new market has different safety regulation which means you need to insert a different standard warning into all your manuals. In this case, you want to swap out the common elements used in your home market and substitute the common elements for the foreign market.</p>
 <insert item="../graphics/variable2variable.xml" type="image"/>
@@ -139,6 +144,7 @@ match insert where variable = $seats
 <p>As always in structured writing, we look for a way to factor out the problematic content. So here we look for a way to factor out the file name and replace it with something else.</p>
 <section>
 <title>Using IDs</title>
+
 <p>The most basic way to factor out the file name is to give the content of the file an ID. An ID is a management domain structure used to identify a piece of content in a location independent way. No matter where the content is stored, it keeps the same ID. Here is the warning file with the ID <code>#warn_danger</code> added:</p>
 <codeblock language="sam">
 warning:(#warn_danger) 
@@ -174,6 +180,7 @@ warning:(#warn_danger)
 </section>
 <section>
 <title>Using keys</title>
+
 <p>Another way to do this is with another <phrase><annotation type="concept">management domain</annotation></phrase> structure called a key. A key is similar to an ID but it is not directly tied to a resource. Instead, the same key can be used to point to different resources at different times. Since a key does not represent any one concrete resource, we don’t assign the key to a resource. Instead we use an intermediate lookup table to resolve keys to particular resources for a particular purpose.</p>
 <p>So in this case we have the warning in a file called files/shared/admonitions/domestic/danger with the following content (no ID):</p>
 <codeblock language="sam">
@@ -248,6 +255,7 @@ keys:
 </section>
 <section>
 <title>Common with conditions</title>
+
 <p>In some cases of variable into common, the variant pieces is not actually  factored out into a separate file. Rather, each of the possible alternatives is included in the file conditionally.</p>
 <insert item="../graphics/commonconditions.xml" type="image"/>
 <p>For instance, in content for a car manual you might have conditional text for the number of people the car seats.</p>
@@ -306,6 +314,7 @@ ol:
 </section>
 <section>
 <title>Factor out the common</title>
+
 <p>In <citation nameref="chapter.management-domain"/>, I noted that the subject domain alternative to using an insertion instruction for the warning text was to specify which procedures were dangerous, thus factoring out the constraint that the warning must appear.</p>
 <codeblock language="sam">
 procedure: Blow stuff up
@@ -341,6 +350,7 @@ match procedure/is-it-dangerous
 </section>
 <section>
 <title>Factor out the variable</title>
+
 <p>You can also factor out the variable content. For example, in the case of the different models of a car, rather than conditionalizing the list of features in the document, like this:</p>
 <codeblock language="sam">
 The main features of the car are:
@@ -377,6 +387,7 @@ keys:
 </section>
 <section>
 <title>Assemble from pieces</title>
+
 <p>In the assemble from pieces approach, there is no common vs. variable distinction and no single source document into which reused content is inserted or to which conditions are applied. Instead, there is a set of content units that are assembled to form a finished document.</p>
 <insert item="../graphics/assemble.xml" type="image"/>
 <p>For example, if you have a range of products with common features, you might assemble the documentation for those products using a common introduction with a piece representing each feature of each model.</p>
@@ -410,6 +421,7 @@ unit: Installing the Widget Wrangler Deluxe
 </section>
 <section>
 <title>Combining multiple techniques</title>
+
 <p>There is one problem with the idea of using a common install intro for both the regular and deluxe widget wrangler. The intro mentions the name of the product. To solve this problem without requiring two different units, we can use the variable into common or common with conditions reuse techniques within the intro unit. Here is an example using variable into common:</p>
 <codeblock>
 unit: Installing the &gt;($product_name)
@@ -426,10 +438,12 @@ unit: Installing the &gt;($product_name)
 </section>
 <section>
 <title>Content reuse is not a panacea</title>
+
 <p>Content reuse can seem like an easy win, and in some cases it can return substantial benefits, but there are pitfalls to be aware of. You will need to plan carefully to make sure that you avoid the traps that await the unwary.</p>
 <p>Many reuse techniques introduce a lot of complexity into the writer’s job and into the content itself. These techniques may address major sources of content complexity in your organization but they come with a high cost in terms of new complexity introduced. Even if the reuse tools look easy to use, they can introduce large amounts of complexity into your process.</p>
 <section>
 <title>Rhetoric traps</title>
+
 <p>Designing content to be reused can harm its rhetoric, either by distracting the writer with complexity or by motivating them to prefer reusability over rhetorical quality. There are three main rhetoric traps with content reuse.</p>
 <ul>
 <li>
@@ -450,6 +464,7 @@ unit: Installing the &gt;($product_name)
 </section>
 <section>
 <title>Cost traps</title>
+
 <p>It is easy to see content reuse as a big cost saving. Reusing content means you do not have to write the same content over and over again. It is easy to add up the cost of all that redundant writing and regard that number as pure cost savings from a content reuse strategy.</p>
 <p>But all of the reuse techniques create multiple artifacts that need to be managed. This includes both content and processing code. You need a mechanism to make sure that your content obeys the constraints required to make the pieces of content fit together reliably. You need a mechanism to make sure that way you have done reuse actually produces the documents you want. The cost of such management can be non-trivial and the consequences of the management breaking down can be significant.</p>
 <p>While reuse is supposed to reduce the cost of modifying content when the subject matter changes, there are hidden cost traps here as well. It is often not until the subject matter changes that you find out if the content we have treated as common is really common. If not, you may have a complex management task to sort out what is really common and what isn’t. This can involve complex edits that then have to be tested and verified. If you get everything right, you can realize major savings when it comes time to modify your content, but if you get it wrong, it can multiply costs. Not only that, it also means that the money you spent factoring duplicate content out in anticipation a change that did not happen is wasted as well. Reacting to changes that actually happen is sometimes cheaper than preparing for multiple changes that never happen.</p>
@@ -465,6 +480,7 @@ unit: Installing the &gt;($product_name)
 </section>
 <section>
 <title>Alternatives to reuse</title>
+
 <p>There are three alternative to content reuse as a way of dealing with information that appears in more than one place:</p>
 <ll>
 <li>

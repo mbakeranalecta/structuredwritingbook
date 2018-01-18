@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.management-domain"><db:title>The Management Domain: an Intrusion</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idm1529541644"><db:primary>management domain</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idm1529541644x"><db:primary>concept</db:primary><db:secondary>management domain</db:secondary></db:indexterm>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.management-domain"><db:title>The Management Domain: an Intrusion</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp519755876"><db:primary>management domain</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp519755876x"><db:primary>concept</db:primary><db:secondary>management domain</db:secondary></db:indexterm>
+
 
 
 
@@ -23,6 +24,7 @@
 <db:para>This is a common pattern with management-domain structures; the knowledge requirement they introduce is often greater then the one they factor out. When we factored out list formatting in the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain, leaving the writer to record the fact that they were creating a list, this was a simple reduction of requirements, since the writer always had to make the decision to create a list. But here we are introducing something brand new to learn: conditional markup and its logic and behavior. Let’s look at another example that exhibits the same pattern.</db:para>
 <db:section>
 <db:title>Including boilerplate content</db:title>
+
 <db:para>Suppose you must include a standard warning statement with any content that describes a dangerous procedure. Structured writing partitions complexity by factoring out invariants, and the invariant here is that this warning statement must appear whenever you describe a dangerous procedure.</db:para>
 <db:para>Just as we extracted formatting information into a separate file when we moved content from the media domain to the document domain, we now extract the invariant warning from the document and place it in a separate file. Any place we want this warning to occur, we insert an instruction to include the contents of the file at that location. (see <db:xref linkend="ex.md-2"/>).</db:para>
 <db:figure xml:id="ex.md-2"><db:title>Include a warning in a dangerous procedure (SAM markup)</db:title><db:programlisting language="sam">
@@ -52,6 +54,7 @@ procedure: Blow stuff up
 </db:section>
 <db:section>
 <db:title>An alternative approach in the subject domain</db:title>
+
 <db:para><db:xref linkend="ex.md-4"/> shows how you might approach the two-magazines problem in the subject domain:</db:para>
 <db:figure xml:id="ex.md-4"><db:title>Subject domain alternative for conditional content</db:title><db:programlisting language="xml">
 &lt;wine-match&gt;Pinot Noir&lt;/wine-match&gt;
@@ -82,6 +85,7 @@ procedure: Blow stuff up
 </db:section>
 <db:section>
 <db:title>Hybrid approaches</db:title>
+
 <db:para>It is not always an either/or decision to use pure <db:indexterm><db:primary>management-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>management-domain</db:secondary></db:indexterm>management-domain or pure <db:indexterm><db:primary>subject-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject-domain</db:secondary></db:indexterm>subject-domain approaches. Management-domain structures tend to be used in generic document-domain languages, since such languages are not designed to be specific to any particular subject matter. Nonetheless, such languages often have roots in particular fields and sometimes include <db:indexterm><db:primary>subject-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject-domain</db:secondary></db:indexterm>subject-domain structures from those fields. Both DocBook and DITA, for instance, originated in the field of software documentation, and both include structures, such as code blocks, that are related to the subject of software.</db:para>
 <db:para>Some languages mix subject-domain structures into their management structures. One example is the <db:indexterm><db:primary>@product</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>@product</db:secondary></db:indexterm><db:code>product</db:code> attribute, which is part of DITA’s conditional-text processing system.</db:para>
 <db:para>DITA lets you add the <db:indexterm><db:primary>@product</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>@product</db:secondary></db:indexterm><db:code>product</db:code> attribute to a wide variety of elements. Your build system can then include or exclude elements in a particular output based on the value of that attribute. <db:xref linkend="ex.md-7"/> shows an example of the DITA <db:indexterm><db:primary>@product</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>@product</db:secondary></db:indexterm><db:code>product</db:code> attribute.</db:para>
@@ -115,5 +119,5 @@ seats:
 <db:para>Also, no writer would expect this management-domain markup to be used to create a single document covering both cars. No writer would interpret the markup to mean this. Rather than declaring facts about each car, this markup was designed to produce a document about one car or the other, not both. It is conditional-text markup and, therefore, an instruction.</db:para>
 <db:para>While the introduction of subject-domain names into <db:indexterm><db:primary>management domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>management domain</db:secondary></db:indexterm>management domain structures provides an appropriate bit of semantic sugar for authors, this hybrid approach really remains firmly in the management domain.</db:para>
 <db:para>In the following chapters we will see many more examples of the management domain, including cases where there is and is not a <db:indexterm><db:primary>subject-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject-domain</db:secondary></db:indexterm>subject-domain alternative.</db:para>
-<db:indexterm class="endofrange" startref="idm1529541644"/><db:indexterm class="endofrange" startref="idm1529541644x"/></db:section>
+<db:indexterm class="endofrange" startref="idp519755876"/><db:indexterm class="endofrange" startref="idp519755876x"/></db:section>
 </db:chapter>

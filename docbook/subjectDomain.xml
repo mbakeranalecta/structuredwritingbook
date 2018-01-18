@@ -3,6 +3,7 @@
 
 
 
+
 <db:para>If the <db:indexterm><db:primary>media domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media domain</db:secondary></db:indexterm>media domain is concerned with what the content looks like and the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain is concerned with how the content is organized into a document, the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain is concerned with the subject matter of the content. Subject domain structures tell you what the content is about.</db:para>
 <db:para>A recipe is a useful example for illustrating the subject domain. <db:xref linkend="ex.subj-restructured"/> is a recipe written in <db:indexterm><db:primary>reStructuredText</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>reStructuredText</db:secondary></db:indexterm>reStructuredText, a lightweight general purpose <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain markup language:</db:para>
 <db:figure xml:id="ex.subj-restructured"><db:title>Recipe for hard-boiled eggs marked up in reStructuredText</db:title><db:programlisting language="reStructuredText">
@@ -140,6 +141,7 @@ ingredients:: ingredient, quantity, unit
 <db:para>But in the subject domain we get another set of benefits. The explicit markup of the subject matter lets us access this content as data and run algorithms on that data to produce new and different forms of content (something I will explore in more depth in <db:xref linkend="chapter.generate"/>). For instance, it would allow us to convert measurements from imperial to metric units so we could publish our recipes in countries that use the metric system.</db:para>
 <db:section>
 <db:title>Using subjects to establish context</db:title>
+
 <db:para>In <db:xref linkend="chapter.document-domain"/>, I noted that you can use context to identify the role that structures play in a document, which allows you to get away with fewer structures. For instance, you can use a single <db:code>title</db:code> tag for all titles because you can differentiate different types of titles from the context in which they occur. The same is true with subject-domain structures. They can provide context that allows you to treat basic text structures differently.</db:para>
 <db:para>Consider our markup language for recipes (<db:xref linkend="ex.subj-recipe-sam"/>).</db:para>
 <db:figure xml:id="ex.subj-recipe-sam"><db:title>Subject-domain markup for recipes</db:title><db:programlisting language="sam">

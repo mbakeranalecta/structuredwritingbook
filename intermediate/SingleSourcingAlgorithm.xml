@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter name="chapter.single-sourcing">
 <title>Single Sourcing</title>
+
 <annotations>
 <p>Concepts</p>
 <p><phrase><annotation type="concept">abstract language</annotation></phrase> <phrase><annotation type="concept">adaptive content</annotation></phrase> <phrase><annotation type="concept" specifically="algorithm">algorithms</annotation></phrase> <phrase><annotation type="concept">algorithm</annotation></phrase> <phrase><annotation type="concept">annotations</annotation></phrase> <phrase><annotation type="concept">annotation</annotation></phrase> <phrase><annotation type="concept">bottom-up information architecture</annotation></phrase> <phrase><annotation type="concept">categories</annotation></phrase> <phrase><annotation type="concept">categorization</annotation></phrase> <phrase><annotation type="concept">classification</annotation></phrase> <phrase><annotation type="concept">consistency</annotation></phrase> <phrase><annotation type="concept">constraints</annotation></phrase> <phrase><annotation type="concept">content silos</annotation></phrase> <phrase><annotation type="concept">content strategy</annotation></phrase> <phrase><annotation type="concept">coverage</annotation></phrase> <phrase><annotation type="concept">document domain</annotation></phrase> <phrase><annotation type="concept">document type</annotation></phrase> <phrase><annotation type="concept">document-domain</annotation></phrase> <phrase><annotation type="concept">electronic media</annotation></phrase> <phrase><annotation type="concept">Every Page is Page One</annotation></phrase> <phrase><annotation type="concept">extensibility</annotation></phrase> <phrase><annotation type="concept">faceted navigation</annotation></phrase> <phrase><annotation type="concept">feeds</annotation></phrase> <phrase><annotation type="concept">findability</annotation></phrase> <phrase><annotation type="concept">frameworks</annotation></phrase> <phrase><annotation type="concept">functional lucidity</annotation></phrase> <phrase><annotation type="concept">functionally lucid</annotation></phrase> <phrase><annotation type="concept">future proofing</annotation></phrase> <phrase><annotation type="concept">future proof</annotation></phrase> <phrase><annotation type="concept">guidance</annotation></phrase> <phrase><annotation type="concept">hierarchical structure</annotation></phrase> <phrase><annotation type="concept">hybrid markup language</annotation></phrase> <phrase><annotation type="concept">information architecture</annotation></phrase> <phrase><annotation type="concept">information design</annotation></phrase> <phrase><annotation type="concept">information foraging</annotation></phrase> <phrase><annotation type="concept">information mapping</annotation></phrase> <phrase><annotation type="concept">information typing</annotation></phrase> <phrase><annotation type="concept">interactive media</annotation></phrase> <phrase><annotation type="concept">management domain</annotation></phrase> <phrase><annotation type="concept">management-domain</annotation></phrase> <phrase><annotation type="concept">media domain</annotation></phrase> <phrase><annotation type="concept">media-domain</annotation></phrase> <phrase><annotation type="concept">metadata</annotation></phrase> <phrase><annotation type="concept">navigation</annotation></phrase> <phrase><annotation type="concept">normalization</annotation></phrase> <phrase><annotation type="concept">personalized content</annotation></phrase> <phrase><annotation type="concept">progressive disclosure</annotation></phrase> <phrase><annotation type="concept">referential integrity</annotation></phrase> <phrase><annotation type="concept">rendering problems</annotation></phrase> <phrase><annotation type="concept">reuse of patterns</annotation></phrase> <phrase><annotation type="concept">rhetorical</annotation></phrase> <phrase><annotation type="concept">rhetoric</annotation></phrase> <phrase><annotation type="concept">searchable</annotation></phrase> <phrase><annotation type="concept">search</annotation></phrase> <phrase><annotation type="concept">specialization</annotation></phrase> <phrase><annotation type="concept">structured content type</annotation></phrase> <phrase><annotation type="concept">structured writing domains</annotation></phrase> <phrase><annotation type="concept">style</annotation></phrase> <phrase><annotation type="concept">subject affinities</annotation></phrase> <phrase><annotation type="concept">subject affinity</annotation></phrase> <phrase><annotation type="concept">subject domain</annotation></phrase> <phrase><annotation type="concept">subject-domain</annotation></phrase> <phrase><annotation type="concept">taxonomy</annotation></phrase> <phrase><annotation type="concept">terminology</annotation></phrase> <phrase><annotation type="concept">top-down information architecture</annotation></phrase> <phrase><annotation type="concept" specifically="top-down information architecture">top-down</annotation></phrase> <phrase><annotation type="concept">WYSIWYG</annotation></phrase></p>
@@ -32,6 +33,7 @@
 <p>Many organizations have unhandled complexity in this area – complexity that can result in rhetorical problems. Often, their authoring techniques do not allow writers to sufficiently separate media-specific formatting from content. As a result, formatting for one medium gets applied to another medium, which means the content in that medium does not work as well as it could. By improving how you separate content from formatting, you can significantly reduce the amount of complexity that goes unhandled, resulting in a better experience for your readers.</p>
 <section>
 <title>Basic single sourcing</title>
+
 <p>The basic single-sourcing algorithm is straightforward (see <citation nameref="chapter.processing"/>). Basic single sourcing involves taking a piece of content in the <phrase><annotation type="concept">document domain</annotation></phrase> and processing its document-domain structures into different <phrase><annotation type="concept">media-domain</annotation></phrase> structures for each target medium.</p>
 <p>Suppose you have recorded a recipe in the document domain (see <citation idref="fig.ssa-eggs-1"/>).</p>
 <pagination-tweak>
@@ -39,6 +41,7 @@
 </pagination-tweak>
 <figure id="fig.ssa-eggs-1">
 <title>Document-domain recipe for hard-boiled eggs</title>
+
 <codeblock language="sam">
 page: 
     title: Hard Boiled Eggs
@@ -63,6 +66,7 @@ page:
 <p>You can output this recipe to two different media by applying two different formatting algorithms. First you output to the Web by creating <phrase><annotation type="language"><annotation type="standard">HTML</annotation></annotation></phrase> (see <citation idref="fig.ssa-recipe2html"/>).</p>
 <figure id="fig.ssa-recipe2html">
 <title>Pseudocode to convert document-domain recipe to HTML output</title>
+
 <pagination-tweak>
 <keep-together>auto</keep-together>
 </pagination-tweak>
@@ -104,6 +108,7 @@ match li
 <p>The algorithm in <citation idref="fig.ssa-recipe2html"/> transforms our source into HTML that looks like <citation idref="fig.ssa-html-recipe-output"/>.</p>
 <figure id="fig.ssa-html-recipe-output">
 <title>Result of running the algorithm in <citation idref="fig.ssa-recipe2html"/></title>
+
 <codeblock language="html">
 &lt;html&gt;
     &lt;head&gt;
@@ -165,6 +170,7 @@ match li
 <p>To limit the amount of detail, the algorithm in <citation idref="fig.ssa-fo-algorithm"/> shows only a portion of the pseudocode for handling recipe markup (The point here is not to teach <phrase><annotation type="language">XSL-FO</annotation></phrase>, but to show how the algorithm works).</p>
 <figure id="fig.ssa-fo-algorithm">
 <title>Portion of the algorithm to generate XSL-FO from a recipe</title>
+
 <codeblock language="pseudo">
 match title
     output '&lt;fo:block space-after="4pt"&gt;'
@@ -178,6 +184,7 @@ match title
 </section>
 <section>
 <title>Differential single sourcing</title>
+
 <p>Basic <phrase><annotation type="italic">single sourcing</annotation></phrase> outputs the same document presentation to different media. However, each medium is different, and what works well in one medium does not always work as well in another. Thus the rhetoric that is appropriate to one media may not be appropriate to another, This is what I meant when I said at the beginning that single sourcing is a rhetoric problem as well as a process problem.</p>
 <p>For example, online media generally support <phrase><annotation type="concept">hypertext</annotation></phrase> links, while paper does not. Suppose you have a piece of content that includes a link:</p>
 <codeblock>
@@ -188,6 +195,7 @@ plays an ex-Union colonel out for revenge.
 <p>In HTML, you output this as a link using the HTML <code>a</code> element, so the algorithm looks like <citation idref="fig.ssa-specifically-1"/>.</p>
 <figure id="fig.ssa-specifically-1">
 <title>Algorithm to generate HTML link from the <code>@specifically</code> attribute</title>
+
 <codeblock>
 match p
     copy
@@ -202,6 +210,7 @@ match link
 <p>The result of this algorithm is shown in <citation idref="fig.ssa-specifically-1-output"/>.</p>
 <figure id="fig.ssa-specifically-1-output">
 <title>Output of the algorithm in <citation idref="fig.ssa-specifically-1"/></title>
+
 <codeblock language="html">
 &lt;p&gt;In Rio Bravo, &lt;a href="http://JohnWayne.com"&gt;The Duke&lt;/a&gt;
 plays and ex-Union colonel out for revenge.
@@ -212,6 +221,7 @@ plays and ex-Union colonel out for revenge.
 <p>You can’t print an active link on paper, but you can print the URL, so the reader can type it into a browser. Your algorithm can print the link inline or as a footnote. <citation idref="fig.ssa-specifically-2"/> shows the algorithm for printing the URL inline. (I dispense with the detailed XSL-FO syntax this time.)</p>
 <figure id="fig.ssa-specifically-2">
 <title>Algorithm to display the URL for a link in print</title>
+
 <codeblock language="pseudo">
 match p
     create fo:block
@@ -227,6 +237,7 @@ match link
 <p>This will produce the output in <citation idref="fig.ssa-specifically-out"/>:</p>
 <figure id="fig.ssa-specifically-out">
 <title>Output of <citation idref="fig.ssa-specifically-out"/></title>
+
 <codeblock language="xml">
 &lt;fo:block&gt;
 In Rio Bravo, the Duke (see: http://JohnWayne.com) 
@@ -249,6 +260,7 @@ plays an ex-Union colonel out for revenge.
 <p>Our document-domain examples attempted to clarify “the Duke” for readers, but they did so in media-dependent ways. This subject-domain example clarifies the meaning of “The Duke” in a presentation-neutral way; it explicitly, formally, and unambiguously marks up what the phrase refers to. This markup is written for algorithms, not readers. It allows an algorithm to generate an appropriate clarification for the reader in any target medium (see <citation idref="fig.ssa-specifically-3-paper"/> and <citation idref="fig.ssa-specifically-3-web"/>).</p>
 <figure id="fig.ssa-specifically-3-paper">
 <title>Algorithm to render paper from subject-domain markup</title>
+
 <codeblock>
 match actor
     continue
@@ -259,6 +271,7 @@ match actor
 </figure>
 <figure id="fig.ssa-specifically-3-web">
 <title>Algorithm to Web links from subject-domain markup</title>
+
 <codeblock>
 match actor
     create link
@@ -271,6 +284,7 @@ match actor
 </section>
 <section>
 <title>Differential organization and presentation</title>
+
 <p>Differences in presentation between media can be broader than this. Paper documents sometimes use complex tables and elaborate layouts that don’t translate well to online media. Effective table layout depends on knowing the width of the page you have available, and online you don’t know that. A table that looks great on paper may be unreadable on a mobile device, for instance.</p>
 <p>And this is more than a layout issue. Sometimes the things that paper does in a static way should be done dynamically in online media. For example, airline and train schedules have traditionally been printed as timetables on paper, but you rarely see them presented that way online. Rather, you see an interactive travel planner that lets you choose your starting point, destination, and desired travel times and then presents you with the best schedule, including when and where to make connections. If your single source is a timetable designed for print and PDF, you can’t produce the kind of online presentation of your schedule that people expect, and that can have a direct impact on your business.</p>
 <p>To single-source schedule information for both paper and online media, you can’t maintain that content in a document-domain table structure. You need to maintain it in a timetable database structure (which is in the <phrase><annotation type="concept">subject domain</annotation></phrase>, even though it looks like a database, not a document).</p>
@@ -279,15 +293,18 @@ match actor
 <p>In this scenario, you move content to the <phrase><annotation type="concept">subject domain</annotation></phrase> to partition the presentation from the information, which allows you to produce a different information design for different media (see <citation idref="ex.ssa-differential"/>). I examine these scenarios in more depth in <citation nameref="chapter.wide"/>.</p>
 <figure id="ex.ssa-differential">
 <title>Information design for single sourcing</title>
+
 <insert item="../graphics/Differential.xml" type="image"/>
 </figure>
 </section>
 <section>
 <title>Conditional differential design</title>
+
 <p>You can also do differential single sourcing by using conditional <phrase><annotation type="concept">management-domain</annotation></phrase> structures in the document domain.</p>
 <p>For instance, if you are writing a manual that you intend to single source to a help system, you might want to add context setting information to the start of a section when it appears in the help system. The manual may be designed to be read sequentially, meaning that the context of individual sections is established by what came before. But help systems are always accessed randomly, meaning that the context of a particular help topic may not be clear if it was single sourced from a manual. To accommodate this, you could include a context-setting paragraph that is conditionalized to appear only in help output (see <citation idref="ex.ssa-conditional-1"/>):</p>
 <figure id="ex.ssa-conditional-1">
 <title>Differential single source example using management-domain structures</title>
+
 <codeblock language="sam">
 section: Wrangling left-handed widgets
 
@@ -317,6 +334,7 @@ match fragment where conditions = help-only
 </section>
 <section>
 <title>Primary and secondary media</title>
+
 <p>While differential single sourcing can help you output documents with the appropriate rhetoric in multiple media, there are limits to how far this approach can take you.</p>
 <p>Books are a linear medium in which one chapter follows another in order. The Web is a <phrase><annotation type="concept">hypertext</annotation></phrase> medium in which every page is page one. Readers arrive at a page via search, and they navigate by following hypertext links. The linear and hypertext approaches are fundamentally different ways of writing that invite fundamentally different ways of navigating and using information.<citation idref="eppo"/> Even moving content to the <phrase><annotation type="concept">subject domain</annotation></phrase> as much as possible does not entirely factor out these fundamental differences in approach.</p>
 <footnote id="eppo">

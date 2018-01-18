@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <chapter name="chapter.management-domain">
 <title>The Management Domain: an Intrusion</title>
+
 <annotations>
 <p>Concepts</p>
 <p><phrase><annotation type="concept">abstract language</annotation></phrase> <phrase><annotation type="concept">adaptive content</annotation></phrase> <phrase><annotation type="concept" specifically="algorithm">algorithms</annotation></phrase> <phrase><annotation type="concept">algorithm</annotation></phrase> <phrase><annotation type="concept">annotations</annotation></phrase> <phrase><annotation type="concept">annotation</annotation></phrase> <phrase><annotation type="concept">bottom-up information architecture</annotation></phrase> <phrase><annotation type="concept">categories</annotation></phrase> <phrase><annotation type="concept">categorization</annotation></phrase> <phrase><annotation type="concept">classification</annotation></phrase> <phrase><annotation type="concept">consistency</annotation></phrase> <phrase><annotation type="concept">constraints</annotation></phrase> <phrase><annotation type="concept">content silos</annotation></phrase> <phrase><annotation type="concept">content strategy</annotation></phrase> <phrase><annotation type="concept">coverage</annotation></phrase> <phrase><annotation type="concept">document domain</annotation></phrase> <phrase><annotation type="concept">document type</annotation></phrase> <phrase><annotation type="concept">document-domain</annotation></phrase> <phrase><annotation type="concept">electronic media</annotation></phrase> <phrase><annotation type="concept">Every Page is Page One</annotation></phrase> <phrase><annotation type="concept">extensibility</annotation></phrase> <phrase><annotation type="concept">faceted navigation</annotation></phrase> <phrase><annotation type="concept">feeds</annotation></phrase> <phrase><annotation type="concept">findability</annotation></phrase> <phrase><annotation type="concept">frameworks</annotation></phrase> <phrase><annotation type="concept">functional lucidity</annotation></phrase> <phrase><annotation type="concept">functionally lucid</annotation></phrase> <phrase><annotation type="concept">future proofing</annotation></phrase> <phrase><annotation type="concept">future proof</annotation></phrase> <phrase><annotation type="concept">guidance</annotation></phrase> <phrase><annotation type="concept">hierarchical structure</annotation></phrase> <phrase><annotation type="concept">hybrid markup language</annotation></phrase> <phrase><annotation type="concept">information architecture</annotation></phrase> <phrase><annotation type="concept">information design</annotation></phrase> <phrase><annotation type="concept">information foraging</annotation></phrase> <phrase><annotation type="concept">information mapping</annotation></phrase> <phrase><annotation type="concept">information typing</annotation></phrase> <phrase><annotation type="concept">interactive media</annotation></phrase> <phrase><annotation type="concept">management domain</annotation></phrase> <phrase><annotation type="concept">management-domain</annotation></phrase> <phrase><annotation type="concept">media domain</annotation></phrase> <phrase><annotation type="concept">media-domain</annotation></phrase> <phrase><annotation type="concept">metadata</annotation></phrase> <phrase><annotation type="concept">navigation</annotation></phrase> <phrase><annotation type="concept">normalization</annotation></phrase> <phrase><annotation type="concept">personalized content</annotation></phrase> <phrase><annotation type="concept">progressive disclosure</annotation></phrase> <phrase><annotation type="concept">referential integrity</annotation></phrase> <phrase><annotation type="concept">rendering problems</annotation></phrase> <phrase><annotation type="concept">reuse of patterns</annotation></phrase> <phrase><annotation type="concept">rhetorical</annotation></phrase> <phrase><annotation type="concept">rhetoric</annotation></phrase> <phrase><annotation type="concept">searchable</annotation></phrase> <phrase><annotation type="concept">search</annotation></phrase> <phrase><annotation type="concept">specialization</annotation></phrase> <phrase><annotation type="concept">structured content type</annotation></phrase> <phrase><annotation type="concept">structured writing domains</annotation></phrase> <phrase><annotation type="concept">style</annotation></phrase> <phrase><annotation type="concept">subject affinities</annotation></phrase> <phrase><annotation type="concept">subject affinity</annotation></phrase> <phrase><annotation type="concept">subject domain</annotation></phrase> <phrase><annotation type="concept">subject-domain</annotation></phrase> <phrase><annotation type="concept">taxonomy</annotation></phrase> <phrase><annotation type="concept">terminology</annotation></phrase> <phrase><annotation type="concept">top-down information architecture</annotation></phrase> <phrase><annotation type="concept" specifically="top-down information architecture">top-down</annotation></phrase> <phrase><annotation type="concept">WYSIWYG</annotation></phrase></p>
@@ -33,6 +34,7 @@
 <p><citation idref="ex.md-1"/> shows how you could handle this in the document domain:</p>
 <figure id="ex.md-1">
 <title>Conditional text markup (XML)</title>
+
 <codeblock language="xml">
 &lt;section publication="Wine Weenie"&gt;
     &lt;title&gt;Wine match&lt;/title&gt;
@@ -50,10 +52,12 @@
 <p>This is a common pattern with management-domain structures; the knowledge requirement they introduce is often greater then the one they factor out. When we factored out list formatting in the <phrase><annotation type="concept">document domain</annotation></phrase>, leaving the writer to record the fact that they were creating a list, this was a simple reduction of requirements, since the writer always had to make the decision to create a list. But here we are introducing something brand new to learn: conditional markup and its logic and behavior. Let’s look at another example that exhibits the same pattern.</p>
 <section>
 <title>Including boilerplate content</title>
+
 <p>Suppose you must include a standard warning statement with any content that describes a dangerous procedure. Structured writing partitions complexity by factoring out invariants, and the invariant here is that this warning statement must appear whenever you describe a dangerous procedure.</p>
 <p>Just as we extracted formatting information into a separate file when we moved content from the media domain to the document domain, we now extract the invariant warning from the document and place it in a separate file. Any place we want this warning to occur, we insert an instruction to include the contents of the file at that location. (see <citation idref="ex.md-2"/>).</p>
 <figure id="ex.md-2">
 <title>Include a warning in a dangerous procedure (SAM markup)</title>
+
 <codeblock language="sam">
 procedure: Blow stuff up
     &lt;&lt;&lt;(files/shared/admonitions/danger.sam)
@@ -67,6 +71,7 @@ procedure: Blow stuff up
 <p>The equivalent in XML would look something like <citation idref="ex.md-3"/>.</p>
 <figure id="ex.md-3">
 <title>Include a warning in a dangerous procedure (XML markup)</title>
+
 <codeblock language="XML">
 &lt;procedure&gt;
     &lt;title&gt;Blow stuff up&lt;/title&gt;
@@ -85,9 +90,11 @@ procedure: Blow stuff up
 </section>
 <section>
 <title>An alternative approach in the subject domain</title>
+
 <p><citation idref="ex.md-4"/> shows how you might approach the two-magazines problem in the subject domain:</p>
 <figure id="ex.md-4">
 <title>Subject domain alternative for conditional content</title>
+
 <codeblock language="xml">
 &lt;wine-match&gt;Pinot Noir&lt;/wine-match&gt;
 &lt;beverage-match&gt;Lemonade&lt;/beverage-match&gt;
@@ -104,6 +111,7 @@ procedure: Blow stuff up
 <p>The subject-domain approach, on the other hand, is all about the rhetorical rule itself. Specifically, it expresses the aspect of the subject domain that triggers the rule: whether a procedure is dangerous or not. <citation idref="ex.md-5"/> shows how you might mark up this information.</p>
 <figure id="ex.md-5">
 <title>Subject-domain markup for a warning notice</title>
+
 <codeblock language="sam">
 procedure: Blow stuff up
     is-it-dangerous: yes
@@ -121,11 +129,13 @@ procedure: Blow stuff up
 </section>
 <section>
 <title>Hybrid approaches</title>
+
 <p>It is not always an either/or decision to use pure <phrase><annotation type="concept">management-domain</annotation></phrase> or pure <phrase><annotation type="concept">subject-domain</annotation></phrase> approaches. Management-domain structures tend to be used in generic <phrase>document-domain languages</phrase>, since such languages are not designed to be specific to any particular subject matter. Nonetheless, such languages often have roots in particular fields and sometimes include <phrase><annotation type="concept">subject-domain</annotation></phrase> structures from those fields. Both DocBook and DITA, for instance, originated in the field of software documentation, and both include structures, such as code blocks, that are related to the subject of software.</p>
 <p>Some languages mix subject-domain structures into their management structures. One example is the <phrase><annotation type="structure" specifically="@product" namespace="DITA">product</annotation></phrase> attribute, which is part of DITA’s conditional-text processing system.</p>
 <p>DITA lets you add the <phrase><annotation type="structure" specifically="@product" namespace="DITA">product</annotation></phrase> attribute to a wide variety of elements. Your build system can then include or exclude elements in a particular output based on the value of that attribute. <citation idref="ex.md-7"/> shows an example of the DITA <phrase><annotation type="structure" specifically="@product" namespace="DITA">product</annotation></phrase> attribute.</p>
 <figure id="ex.md-7">
 <title>DITA product attribute example</title>
+
 <codeblock language="DITA">
 &lt;p&gt;
 the car seats &lt;ph product="CX-5"&gt;5&lt;/ph&gt;&lt;ph product="CX-9"&gt;7&lt;/ph&gt;
