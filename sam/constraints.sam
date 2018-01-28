@@ -13,71 +13,88 @@ chapter:(#chapter.constraints) Constraint Languages
 
     Structured writing is about applying constraints to content and recording the constraints that the content follows, both to constrain what writers write and to constrain how algorithms interpret the content. This requires some way to express constraints in a formal and machine readable way. Schema languages partition this problem and redirect it to a common validation algorithm expressed by a standard piece of software that everyone can use. Schema languages are, quite simply, languages for expressing constraints. 
     
-    For a {concrete markup languages}(concept) like {MarkDown}, the content constraints are established in the code of the MarkDown processor. They are validated when the processor parses the MarkDown file. (In practice, though, MarkDown does no meaningful validation. Anything it does not recognize as markup, it simply outputs as text.)
+    For {concrete markup languages}(concept), such as {Markdown}, the constraints are established in the code of the processor. A Markdown file is validated when the processor parses that file. (In practice, though, Markdown does no meaningful validation. Anything it does not recognize as markup, it simply outputs as text.)
 
-    For {abstract markup languages}(concept) like {XML} you define structures yourself. Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a "validator".
+    For {abstract markup languages}(concept), such as {XML}, you define structures yourself. Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a {validator}.
     
     A schema language is a structured language for defining structured languages. The schema for a markup languages says what structures are allowed and in what order and relationship. A given document either conforms to those constraints or it does not. 
 
-    Here is an example of a schema in a schema language called {RelaxNG}(tool), which is one of several schema languages available for defining {XML}(language)-based markup languages:[https://en.wikipedia.org/wiki/RELAX_NG#XML_syntax]
+    [*fig.relaxng] contains a schema fragment in a schema language called {RelaxNG}(tool), which is one of several schema languages available for defining {XML}(language)-based markup languages.
 
-    ```(RNG)
-        <element name="book" xmlns="http://relaxng.org/ns/structure/1.0">
-           <oneOrMore>
-              <element name="page">
-                 <text/>
-              </element>
-           </oneOrMore>
-        </element>
-    
-    This example defines two elements and three constraints. The first element is called `book` and the second is called `page`. The constraints are:
+    figure:(*fig.relaxng) RelaxNG schema language
+        ```(RNG)
+            <element name="book" xmlns="http://relaxng.org/ns/structure/1.0">
+               <oneOrMore>
+                  <element name="page">
+                     <text/>
+                  </element>
+               </oneOrMore>
+            </element>
+
+    pagination-tweak:
+        min-space: 2in
+        
+    [*fig.relaxng] defines two elements and three constraints. The first element is called `book` and the second is called `page`. The constraints are:
     
     * The `page` element must occur inside the `book` element. (Because the `page` element is defined inside the `book` element structure.)
-    * There must be at least one `page` element inside the `book` element, and there can be more. (Because the `page` element is defined inside an RNG `oneOrMore` element.)
-    * Text can occur inside the `page` element, but not directly inside the `book` element. (Because the RNG `text` element occurs inside the definition of the `page` element, but not as a direct child of the `book` element definition.)
+    * There must be at least one `page` element inside the `book` element, and there can be more. (Because the `page` element is defined inside an RelaxNG `oneOrMore` element.)
+    * Text can occur inside the `page` element, but not directly inside the `book` element. (Because the RelaxNG `text` element occurs inside the definition of the `page` element, but not as a direct child of the `book` element definition.)
     
-    Thus if an author wrote:
-    
-    ```(xml)
-        <book>Moby Dick
-            <page>Call me Ishmael. Some years ago- never mind how long 
-            precisely- having little or no money in my purse, and nothing 
-            particular to interest me on shore, I thought I would sail 
-            about a little and see the watery part of the world.</page>
-        </book>
+    Thus, if an author writes the passage in [*fig.moby-dick], a validator will report an error because the words "Moby Dick" are directly inside the book element and text is not allowed in that position.
+
+    figure:(*fig.moby-dick) Passage from Moby Dick, marked up in XML
+        ```(xml)
+            <book>Moby Dick
+                <page>Call me Ishmael. Some years ago- never mind how long 
+                precisely- having little or no money in my purse, and nothing 
+                particular to interest me on shore, I thought I would sail 
+                about a little and see the watery part of the world.</page>
+            </book>
         
-    the validator would report an error because the words "Moby Dick" are directly inside the book element and text is not allowed in that position. 
-    
-    There are several different schema languages for {XML} each of which is capable of expressing and enforcing different sets of constraints. It is not unusual to combine different schema languages to more completely constrain a markup language. In particular, it is not uncommon to use a schema language called {Schematron}(tool) in concert with other schema languages like {RNG}(tool "RelaxNG") or {XSD}. While most schema languages work by modeling the structure of a document, as in the {RNG} example above, {Schematron} works by making assertions about the structure in a language called {XPath}(tool). A {Schematron} schema would make a lousy guide for authoring, but it can test assertions, and therefore enforce constraints, that no other schema language can. 
-    
-    Here is a simple {Schematron} example. It defines one of the constraints listed above, namely that a book element must contain at least one page element. 
-    
-    ```(schematron)
-        <schema xmlns="http://purl.oclc.org/dsdl/schematron"  
-         queryBinding="xslt2">
-            <pattern>
-                <title>Book constraint</title>
-                <rule context="book">
-                    <assert test="page">A book must contain at 
-                    least one page.</assert>
-                </rule>
-            </pattern>
-        </schema>
-    
-    The rule says that in the context of the element `book` the assertion that there is an element `page` must be true. If it is not, the message within the `assert` element will be displayed. 
-    
-    In the {RNG} schema example, the schema is essentially a template that models the hierarchy of the document. The constraints are consequences of the structure of that hierarchy. (The `book` element cannot contain text because there is no place for text in that part of the hierarchy.) Only documents that conform to the template are valid.
-    
-    In the {Schematron} example, the schema is a series of constraint statements. The hierarchy of the document is a consequence of meeting all the constraints. Any document is valid as long as it conforms to all the stated constraints. 
-    
-    There are essentially two ways to describe constraints. One is to start from the basis that nothing is allowed unless there is a specific rule allows it. The other is to start from the basis that everything is allowed unless there is some specific rule that forbids it. Schematron is based on the latter doctrine. It says anything is valid as long as it passes a given set of tests. Other schema languages take the former approach. If you validate an XML document against an empty XSD schema, for instance, the validator will say it is invalid because it can't find the definition of the root element. In essence, therefore, their constraints are described as a set of permissions. The writer is then constrained to stay within the boundaries of what is permitted.
-    
-    Starting on the basis that everything is allowed is not generally a good model for structured writing. You have to write algorithms that can handle everything that is included in a document, so you pretty much have to start with a definitive list of what is allowed and in what combinations. This is why Schematron is seldom used as a standalone schema language. But it can be very useful for qualifying the use of certain structures permitted by other in other schema languages, in particular the kinds of constraints that cannot be expressed in the main schema language. 
+    There are several different schema languages for {XML}, each of which is capable of expressing and enforcing different sets of constraints. It is not unusual to combine different schema languages to more completely constrain a markup language. In particular, many schemas, including the DocBook schema, use a schema language called {Schematron}(tool) in concert with another schema languages such as {RelaxNG} or {XSD}.
 
-    The wider point here are that there are many occasions in the course of writing and publishing content in which to express and enforce constraints. Some constraints can only be expressed during the publishing process, for instance. An example would be the resolution of a {key} reference. We can only tell if there is a value or resource corresponding to the key when the {synthesis algorithm} is compete and all the elements of the published content set are assembled and resolved. 
+    While most schema languages work by modeling the structure of a document, as in the {RelaxNG} example ([*fig.relaxng]), {Schematron} works by making assertions about the structure in a language called {XPath}(tool). A {Schematron} schema would make a lousy guide for authoring, but it uses assertions to enforce constraints that no other schema language can. 
 
-    Constraint, therefore, is not something that exists at a single point in the writing and publishing process. It is something you need to consider across the entire publishing process design. In particular, when errors occur at any point in the publishing process, you should trace them back to the point where the constraint that could have prevented them was violated, and ask how that constraint could have been better implemented or enforced. 
+    pagination-tweak:
+        min-space: 1.5in
+        
+    [*fig.schematron] is a simple {Schematron} example. It defines one of the constraints listed above, namely that a book element must contain at least one page element. 
+
+    figure:(*fig.schematron) Schematron rule that constrains `book` elements to contain at least one `page` element
+        ```(schematron)
+            <schema xmlns="http://purl.oclc.org/dsdl/schematron"  
+             queryBinding="xslt2">
+                <pattern>
+                    <title>Book constraint</title>
+                    <rule context="book">
+                        <assert test="page">A book must contain at 
+                        least one page.</assert>
+                    </rule>
+                </pattern>
+            </schema>
+
+    The rule says that in the context of the element `book`, the assertion that there is an element `page` must be true. If it is not, the message in the `assert` element is displayed. 
     
-    One of the most basic design principles of any process is that errors should be caught as early in the process as possible, and that any error-prone process should be designed to make errors less likely. Factoring out constraints by moving content to a different domain, as we have noted several times, is an excellent way to reduce errors in structured writing, and to ensure that errors are caught earlier in the process. 
+    In the {RelaxNG} schema example ([*fig.relaxng]), the schema is essentially a template that models the hierarchy of the document. The constraints are consequences of the structure of that hierarchy. For example, the `book` element cannot contain text because there is no place for text in that part of the hierarchy. Only documents that conform to the template are valid.
+    
+    In the {Schematron} example ([*fig.schematron]), the schema is a series of constraint statements. The hierarchy of the document is a consequence of meeting all the constraints. Any document is valid as long as it conforms to all the stated constraints. 
+    
+    There are two ways to describe constraints:
+    
+    * Nothing is allowed unless a specific rule allows it.
+    * Everything is allowed unless a specific rule forbids it.
+
+    Schematron is based on the latter doctrine. It says anything is valid as long as it passes a given set of tests. Other schema languages take the former approach. For example, if you validate an XML document against an empty XSD schema, the validator will say the document is invalid because it can't find the definition of the root element. An XSD or RelaxNG schema describes constraints as a set of permissions. The writer is constrained to stay within the boundaries of what is permitted.
+
+    pagination-tweak:
+        min-space: 1.5in
+        
+    Starting with the doctrine that everything is allowed is generally not a good model for structured writing. To write algorithms that can handle a document, you have to know what elements and attributes are allowed and in what combinations. This is why Schematron is seldom used as a standalone schema language. But it can be useful for expressing constraints that cannot be expressed in the main schema language. 
+
+    The wider point here is that in the course of writing and publishing content you often need to express and enforce constraints. Some constraints -- for example resolving {key} references -- can be expressed only during the publishing process. You can match a key to a value or resource only after the {synthesis algorithm} is complete and all the elements of the published content set have been assembled and resolved. 
+
+    Constraints, therefore, do not exist at just a single point in the writing and publishing process. You must consider them across the entire publishing process. In particular, when an error occurs in the publishing process, you should trace it back to the point where the constraint that could have prevented it was violated and ask how that constraint could have been better implemented or enforced. 
+    
+    Two of the most basic design principles are to catch errors as early as possible and to design any error-prone process to make errors less likely. Factoring out constraints by moving content to a different domain is an excellent way to reduce errors in structured writing and to catch those that do occur earlier in the process. 
     
    
