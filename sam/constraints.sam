@@ -67,13 +67,13 @@ chapter:(#chapter.constraints) Constraint Languages
                 <pattern>
                     <title>Book constraint</title>
                     <rule context="book">
-                        <assert test="page">A book must contain at 
-                        least one page.</assert>
+                        <assert test="page[240]">A book must contain at 
+                        least 240 pages.</assert>
                     </rule>
                 </pattern>
             </schema>
 
-    The rule says that in the context of the element `book`, the assertion that there is an element `page` must be true. If it is not, the message in the `assert` element is displayed. 
+    The rule says that in the context of the element `book`, the assertion that there is an element `page` that is number 240 in the sequence of pages must be true. In other words, there must be at least 240 pages in a book. If there are not, the message in the `assert` element is displayed. 
     
     In the {RelaxNG} schema example ([*fig.relaxng]), the schema is essentially a template that models the hierarchy of the document. The constraints are consequences of the structure of that hierarchy. For example, the `book` element cannot contain text because there is no place for text in that part of the hierarchy. Only documents that conform to the template are valid.
     
@@ -95,6 +95,10 @@ chapter:(#chapter.constraints) Constraint Languages
 
     Constraints, therefore, do not exist at just a single point in the writing and publishing process. You must consider them across the entire publishing process. In particular, when an error occurs in the publishing process, you should trace it back to the point where the constraint that could have prevented it was violated and ask how that constraint could have been better implemented or enforced. 
     
-    Two of the most basic design principles are to catch errors as early as possible and to design any error-prone process to make errors less likely. Factoring out constraints by moving content to a different domain is an excellent way to reduce errors in structured writing and to catch those that do occur earlier in the process. 
+    Two of the most basic design principles of any system is to catch errors as early as possible and to design any error-prone process to make errors less likely. The earlier an error is caught, the less work is wasted before the error is detected. And if we can remove the possibility of the error occurring at all, we can avoid all the costs that go with detecting and fixing the error, and with the greater costs of not catching it at all before the content is in the hands of the reader.
+
+    Schema languages are excellent tools for expressing constraints in structured writing. However, in partitioning your content system it is important to begin by asking where any given constraint should be enforced. The content process is about getting ideas in a head to dots on a page or screen. Enforcing constraints and catching errors as early as possible means catching them as near as possible to the ideas in the a head end of the process. This is why rhetorical constraints can play such a large role in improving not just quality but process. They can be used to impose constraints and catch errors nearer to ideas in the head, rather than trying to catch them as dots on the page. 
+
+    Of course, this means moving your content closer to the subject domain. When you sit down to write a schema for your content, therefore, you should not simply think about how to express the constraint you are immediately concerned with, you should think about whether there is a way to factor out that constraint, possibly by moving the content to a different domain. As I have noted several times in this book, subject domain structures tend to be simpler and stricter than document and media domain structures. This means that it is easier to write schemas for the subject domain than for the other domains. Schema languages are powerful tools, but they should be used in conjunction with a correct partitioning of the content system.  
     
    
