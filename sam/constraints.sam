@@ -17,7 +17,7 @@ chapter:(#chapter.constraints) Constraint Languages
 
     For {abstract markup languages}(concept), such as {XML}, you define structures yourself. Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a {validator}.
     
-    A schema language is a structured language for defining structured languages. The schema for a markup languages says what structures are allowed and in what order and relationship. A given document either conforms to those constraints or it does not. 
+    A schema language is a structured language for defining structured languages. The schema for a markup language says what structures are allowed and in what order and relationship. A given document either conforms to those constraints or it does not. 
 
     [*fig.relaxng] contains a schema fragment in a schema language called {RelaxNG}(tool), which is one of several schema languages available for defining {XML}(language)-based markup languages.
 
@@ -51,16 +51,13 @@ chapter:(#chapter.constraints) Constraint Languages
                 about a little and see the watery part of the world.</page>
             </book>
         
-    There are several different schema languages for {XML}, each of which is capable of expressing and enforcing different sets of constraints. It is not unusual to combine different schema languages to more completely constrain a markup language. In particular, many schemas, including the DocBook schema, use a schema language called {Schematron}(tool) in concert with another schema languages such as {RelaxNG} or {XSD}.
+    There are several different schema languages for {XML}, each of which is capable of expressing and enforcing different sets of constraints. It is not unusual to combine different schema languages to more completely constrain a markup language. In particular, many schemas, including the DocBook schema, use a schema language called {Schematron}(tool) in concert with another schema language such as {RelaxNG} or {XSD}.
 
     While most schema languages work by modeling the structure of a document, as in the {RelaxNG} example ([*fig.relaxng]), {Schematron} works by making assertions about the structure in a language called {XPath}(tool). A {Schematron} schema would make a lousy guide for authoring, but it uses assertions to enforce constraints that no other schema language can. 
-
-    pagination-tweak:
-        min-space: 1.5in
         
     [*fig.schematron] is a simple {Schematron} example. It defines one of the constraints listed above, namely that a book element must contain at least one page element. 
 
-    figure:(*fig.schematron) Schematron rule that constrains `book` elements to contain at least one `page` element
+    figure:(*fig.schematron) Schematron rule that constrains `book` elements to contain at least 240 `page` elements
         ```(schematron)
             <schema xmlns="http://purl.oclc.org/dsdl/schematron"  
              queryBinding="xslt2">
@@ -73,7 +70,7 @@ chapter:(#chapter.constraints) Constraint Languages
                 </pattern>
             </schema>
 
-    The rule says that in the context of the element `book`, the assertion that there is an element `page` that is number 240 in the sequence of pages must be true. In other words, there must be at least 240 pages in a book. If there are not, the message in the `assert` element is displayed. 
+    The rule says that in the context of the element `book`, the assertion that there is an element `page` that is number 240 in the sequence of pages must be true. In other words, there must be at least 240 pages in a book. If not, the message in the `assert` element is displayed. 
     
     In the {RelaxNG} schema example ([*fig.relaxng]), the schema is essentially a template that models the hierarchy of the document. The constraints are consequences of the structure of that hierarchy. For example, the `book` element cannot contain text because there is no place for text in that part of the hierarchy. Only documents that conform to the template are valid.
     
@@ -85,20 +82,17 @@ chapter:(#chapter.constraints) Constraint Languages
     * Everything is allowed unless a specific rule forbids it.
 
     Schematron is based on the latter doctrine. It says anything is valid as long as it passes a given set of tests. Other schema languages take the former approach. For example, if you validate an XML document against an empty XSD schema, the validator will say the document is invalid because it can't find the definition of the root element. An XSD or RelaxNG schema describes constraints as a set of permissions. The writer is constrained to stay within the boundaries of what is permitted.
-
-    pagination-tweak:
-        min-space: 1.5in
         
-    Starting with the doctrine that everything is allowed is generally not a good model for structured writing. To write algorithms that can handle a document, you have to know what elements and attributes are allowed and in what combinations. This is why Schematron is seldom used as a standalone schema language. But it can be useful for expressing constraints that cannot be expressed in the main schema language. 
+    Starting with the doctrine that everything is allowed is not a good model for structured writing. To write algorithms that can handle a document, you have to know what elements and attributes are allowed and in what combinations. This is why Schematron is seldom used as a standalone schema language. It is more frequently used to express constraints that cannot be expressed in the main schema language. 
 
     The wider point here is that in the course of writing and publishing content you often need to express and enforce constraints. Some constraints -- for example resolving {key} references -- can be expressed only during the publishing process. You can match a key to a value or resource only after the {synthesis algorithm} is complete and all the elements of the published content set have been assembled and resolved. 
 
-    Constraints, therefore, do not exist at just a single point in the writing and publishing process. You must consider them across the entire publishing process. In particular, when an error occurs in the publishing process, you should trace it back to the point where the constraint that could have prevented it was violated and ask how that constraint could have been better implemented or enforced. 
+    Constraints, therefore, do not exist at just a single point in the writing and publishing process. You must consider them across the entire publishing process. In particular, when an error occurs in the publishing process, trace it back to where the constraint that could have prevented it was violated and ask how you could better implement or enforce that constraint.
     
-    Two of the most basic design principles of any system is to catch errors as early as possible and to design any error-prone process to make errors less likely. The earlier an error is caught, the less work is wasted before the error is detected. And if we can remove the possibility of the error occurring at all, we can avoid all the costs that go with detecting and fixing the error, and with the greater costs of not catching it at all before the content is in the hands of the reader.
+    Two of the most basic design principles of any system are to catch errors as early as possible and to design any error-prone process to make errors less likely. The earlier you catch an error, the less work you waste before the error is detected. And if you can remove the possibility of the error occurring at all, you can avoid all the costs of detecting and fixing the error as well as the greater costs of not catching the error before the content is in the hands of the reader.
 
-    Schema languages are excellent tools for expressing constraints in structured writing. However, in partitioning your content system it is important to begin by asking where any given constraint should be enforced. The content process is about getting ideas in a head to dots on a page or screen. Enforcing constraints and catching errors as early as possible means catching them as near as possible to the ideas in the a head end of the process. This is why rhetorical constraints can play such a large role in improving not just quality but process. They can be used to impose constraints and catch errors nearer to ideas in the head, rather than trying to catch them as dots on the page. 
+    Schema languages are excellent tools for expressing constraints in structured writing. However, in partitioning your content system you also need to determine where each constraint should be enforced. The content process is about getting ideas from the writer's head to dots on a page or screen. Therefore, you need to enforce constraints and catch errors as close as you can to the beginning of the process: the ideas in the writer's head. Rhetorical constraints can play a large role in improving not just quality but also process, because they impose constraints and catch errors nearer to ideas in the writer's head, rather than trying to catch them as dots on the page. 
 
-    Of course, this means moving your content closer to the subject domain. When you sit down to write a schema for your content, therefore, you should not simply think about how to express the constraint you are immediately concerned with, you should think about whether there is a way to factor out that constraint, possibly by moving the content to a different domain. As I have noted several times in this book, subject domain structures tend to be simpler and stricter than document and media domain structures. This means that it is easier to write schemas for the subject domain than for the other domains. Schema languages are powerful tools, but they should be used in conjunction with a correct partitioning of the content system.  
+    This means moving your content closer to the subject domain. When you sit down to write a schema, you should not simply think about how to express constraints; you should also think about whether you can factor them out, possibly by moving the content to a different domain. Subject-domain structures tend to be simpler and stricter than document- and media-domain structures. This means that it is easier to write schemas for the subject domain than for the other domains. Schema languages are powerful tools, but they should be used in conjunction with a correct partitioning of the content system.  
     
    
