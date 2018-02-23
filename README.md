@@ -15,7 +15,7 @@ For example (assuming the parser is run from the root directory of the project):
 
     samparser sam/whatis.sam -o docbook/whatis.xml -x sam2docbook.xsl -i intermediate/whatis.xml
     
-To run on Mac of Linux you will need to invoke the Python 3 interpreter to
+To run on Mac or Linux you will need to invoke the Python 3 interpreter to
 run the SAM Parser. For example:
 
     python3 samparser.py sam/whatis.sam -o docbook/whatis.xml -x sam2docbook.xsl -i intermediate/whatis.xml
