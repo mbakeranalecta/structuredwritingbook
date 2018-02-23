@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <book>
-<string name="title">Structured Writing</string>
-<string name="subtitle">Process and Rhetoric</string>
-<string name="author">Mark Baker</string>
-<title><inline-insert stringref="title"/></title>
-<subtitle><inline-insert stringref="subtitle"/></subtitle>
-<by><inline-insert stringref="author"/></by>
+<variable name="title">Structured Writing</variable>
+<variable name="subtitle">Process and Rhetoric</variable>
+<variable name="author">Mark Baker</variable>
+<title><inline-insert variableref="title"/></title>
+<subtitle><inline-insert variableref="subtitle"/></subtitle>
+<by><inline-insert variableref="author"/></by>
 <insert item="info.xml" type="xml"/>
 <insert item="preface.sam" type="sam"/>
 <insert item="introduction.sam" type="sam"/>
@@ -92,7 +92,7 @@
 <appendix conditions="epub">
 <title>Copyright and Legal Notices</title>
 
-<subtitle><inline-insert stringref="title"/></subtitle>
+<subtitle><inline-insert variableref="title"/></subtitle>
 <insert item="info.xml" type="xml"/>
 </appendix>
 </book>
