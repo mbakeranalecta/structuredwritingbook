@@ -93,9 +93,9 @@
         </xsl:attribute>
     </xsl:template>
     
-    <xsl:template match="insert[@stringref]">
-        <xsl:variable name="stringref" select="@stringref"/>
-        <xsl:value-of select="//string[@name=$stringref]"/>
+    <xsl:template match="insert[@variableref]">
+        <xsl:variable name="variableref" select="@variableref"/>
+        <xsl:value-of select="//variable[@name=$variableref]"/>
     </xsl:template>
     
     <xsl:template match="inline-insert[@variableref]">
@@ -103,11 +103,6 @@
         <xsl:value-of select="//variable[@name=$variableref]"/>
     </xsl:template>
         
-    <xsl:template match="inline-insert[@stringref]">
-        <xsl:variable name="stringref" select="@stringref"/>
-        <xsl:value-of select="//string[@name=$stringref]"/>
-    </xsl:template>
-    
     <xsl:template match="insert[@type='sam']">
         <xsl:element name="xi:include">
             <xsl:attribute name="href">
