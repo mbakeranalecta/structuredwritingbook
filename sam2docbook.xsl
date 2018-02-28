@@ -98,6 +98,11 @@
         <xsl:value-of select="//string[@name=$stringref]"/>
     </xsl:template>
     
+    <xsl:template match="inline-insert[@variableref]">
+        <xsl:variable name="variableref" select="@variableref"/>
+        <xsl:value-of select="//variable[@name=$variableref]"/>
+    </xsl:template>
+    
     <xsl:template match="inline-insert[@stringref]">
         <xsl:variable name="stringref" select="@stringref"/>
         <xsl:value-of select="//string[@name=$stringref]"/>

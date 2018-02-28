@@ -7,25 +7,25 @@ chapter:(#chapter.change) Change management
         concept, change
         algorithm, change management
 
-    The subjects we write about change all the time. Keeping content in sync with changing subject matter and changing requirements is a major process challenge for all content organizations. Structured writing can do a lot to partition and redirect change and the consequences of change.
+    The subjects you write about change all the time. Keeping content in sync with changing subject matter and changing requirements is a major process challenge for all content organizations. Structured writing can do a lot to partition and redirect change and the consequences of change.
     
     Content changes for many reasons. For our purposes it is useful to consider the following sources of change:
     
-    |Subject matter changes| Content has to change when the subject matter -- the real world stuff that it describes -- changes. 
+    * *Subject matter changes:* Content has to change when the subject matter -- the real world stuff that it describes -- changes. 
     
-    |Rhetorical changes| Content may also change because we decide to express ideas differently. For instance, we may discover a better way to present a certain class of content so that it works better for the reader, and then decide to change all existing instance of that class to fit the new structure. And, of course, we have already seen that outputting to another media requires a new rhetoric as well.
+    * *Rhetorical changes:* Content may also change because you decide to express ideas differently. For instance, you may discover a better way to present a certain class of content to readers and decide to change all existing instances of that class to fit the new structure. And, of course, outputting to new media requires new rhetoric.
 
-    |Formatting changes| Content may change because you want to format it differently, either to support a new media or to respond to a rebranding.
+    * *Formatting changes:* Content may change because you want to format it differently, either to support new media or to re-brand.
     
-    |Externally-driven changes| Content may change because of changes external to itself, its style, and its subject matter. For instance, if a item contains a link to another item and that item is removed and replaced with something new and different, you have to change the link in every item that links to it, though the subject matter and style of those items has not changed at all. 
+    * *Externally-driven changes:* Content may change because of changes external to itself, its style, and its subject matter. For instance, if an item links to another item and that item is removed and replaced with something different, you have to change every item that links to the changed item, even if the subject matter and style of those items has not changed at all. 
     
-    One important motivation for structured writing is what is often called "future proofing". {Future proofing} means building a system or product with a view to making it able to survive future changes in environments or requirements. Future proofing is difficult because you cannot know with certainty what changes will occur, how likely they are, or what they will cost. 
+    One important motivation for adopting structured writing is what is often called {future proofing}(concept). {Future proofing} means building a system or product with a view to making it able to survive future changes in environments or requirements. Future proofing is difficult because you cannot know with certainty what changes will occur, how likely they are, or what they will cost. 
     
-    Building a future proof platform can increase up-front costs, delaying the time it takes to get to market and possibly missing a window of opportunity. Nor can you be sure that your investment will ever pay off, since the future you prepared for may not be the future you get. 
+    Building a future-proof platform can increase up-front costs, delaying time to market and possibly causing you to miss a window of opportunity. And you cannot be sure that your investment will ever pay off, since the future you prepared for may not be the future you get. 
 
-    But not building a future proof platform can result in your not being able to keep up with developments in a market and losing your early lead. It may require massive and expensive changes when future events render your current system obsolete. Instances of both problems abounded when traditional publication systems were confronted with the rapid rise of the {Web}.
+    But if you do not build a future-proof platform, you may not be able to keep up with market developments, causing you to lose an early lead. And you may be forced to make massive and expensive changes when future events render your current system obsolete. Both problems happened frequently when traditional publication systems were confronted by the rapid rise of the {web}.
     
-    The safest approach to future proofing is not to try to anticipate the particular way in which the future will develop, but to create content structures that will be of value no matter what happens in the future. Creating content in the {subject domain} is the best way to practice this kind of future proofing, because writing in the subject domain creates {metadata} that contains only true statements about the subject matter itself. Those statements are going to remain true as long as the subject matter itself remains unchanged. That is as future proof as you can make your content. 
+    The safest approach to future proofing is not to try to anticipate the particular way in which the future will develop. Instead, create content structures that will be of value no matter what happens in the future. Creating content in the {subject domain} is the best way to practice this kind of future proofing, because writing in the subject domain creates {metadata} that contains only true statements about the subject matter itself. Those statements will remain true as long as the subject matter remains unchanged. That is as future proof as you can make your content. 
     
     For example, suppose you write your ingredient list in {reStructuredText} as a {table}:
     
@@ -38,9 +38,9 @@ chapter:(#chapter.change) Change management
         ======  ========
 
     
-    Later you decide that you want to present ingredients as a {list} instead. To do this, you will have to go back to your content and change the markup. Doing this across a whole collection of recipes will be expensive. 
+    Later, if you decide to present ingredients as a {list}, you will have to go back to your content and change the markup. Doing this across a whole collection of recipes will be expensive. 
     
-    Suppose instead that you use {subject domain} markup:
+    Suppose, instead, that you use {subject-domain} markup:
     
     ```(sam)
         ingredients:: ingredient, quantity
@@ -48,98 +48,108 @@ chapter:(#chapter.change) Change management
             water, 2qt
 
 
-    Now you don't have to change the content to make the change in {presentation}. You just change the {publishing algorithm}(algorithm) to turn an ingredients record set into a list instead of a table. Thus the {subject domain} markup has future proofed your content against this change of presentation. The {document-domain} {reStructuredText} {markup} specified the use of a {table}, which is not a truth about the subject matter but a decision about presentation that can change independent of the subject matter. The {subject domain} markup simply specifies that "eggs" is an ingredient and "12" is a quantity. These are truths about the subject matter that will not change. Thus they are invulnerable to future changes outside of the subject matter itself.
+    Now, you don't have to change the content to change the {presentation}. You just change the {publishing algorithm}(algorithm) to turn an ingredients record set into a list instead of a table. Thus the {subject-domain} markup has future proofed your content against this change of presentation. The {document-domain} {reStructuredText} {markup} specified a {table}, which is not a truth about the subject matter; it's a decision about presentation. That decision can change independent of the subject matter. The {subject-domain} markup simply specifies that "eggs" is an ingredient and "12" is a quantity. These are truths about the subject matter that will not change. Thus, they are invulnerable to future changes outside of the subject matter itself.
     
-    Moving your content from the {media domain}(concept) to the {document domain}(concept) provides a degree of future proofing. By factoring out the formatting details, it protects your content against changes in {formatting} rules such as the font to use for headings. Moving your content from the document domain to the {subject domain} provides additional future proofing. By factoring out the content and organization of documents, it allows you to target different publications and to create different document designs for different media. For example, it lets you output different beverage suggestions to _Teetotaler's Trumpet_ and _Wine Weenie_ without making any changes to your source file.  
+    Moving your content from the {media domain}(concept) to the {document domain}(concept) provides a degree of future proofing. By factoring out the formatting details, it protects your content against changes in {formatting} rules such as what font to use for headings. Moving your content from the document domain to the {subject domain} provides additional future proofing. By factoring out the content and organization of documents, it allows you to target different publications and create different document designs for different media. For example, it lets you output different beverage suggestions to _Teetotaler's Trumpet_ and _Wine Weenie_ without making any changes to your source file.  
 
-    Throughout this book I have described complexity in terms of decisions. Future proofing content in essentially about making it possible to change the decisions you have made with the least cost. The best way to reduce the cost of changing a decision is to factor it out of the content and assign it to an algorithm. You can then change the decision by changing the algorithm. By contrast, changing a decision that has been encoded in the content requires finding every piece of content that is affected and changing it individually. 
+    Throughout this book I have described complexity in terms of decisions. Future proofing content enables you to change your decisions with the least cost. The best way to reduce the cost of changing a decision is to factor it out of the content and assign it to an algorithm. You can then change the decision by changing the algorithm. By contrast, changing a decision that has been encoded in the content requires you to find and change every piece of content that is affected.
 
-    Structured writing imposes specific structures on content for specific purposes. It does not make content magically immune to change nor does it guarantee you will not have to rewrite the content or change the structure to accommodate future changes in your subject matter or your business requirements. You can, however, design your content structures to help you manage specific and foreseeable changes. If you are lucky, the structures you create may also allow you to adapt content for unforeseen circumstances, particularly if your content is stored in the {subject domain}. But this is a bonus. You cannot guarantee any content or structure will work for things you have not foreseen. However, different domains, by their very nature, provide different degrees of future proofing:
+    Structured writing imposes specific structures on content for specific purposes. It does not make content magically immune to change nor does it guarantee that you will not have to rewrite your content or change its structure to accommodate changes in subject matter or business requirements. You can, however, design content structures that help you manage specific, foreseeable changes. If you are lucky, the structures you create may also allow you to adapt content for unforeseen circumstances, particularly if your content is stored in the {subject domain}. But this is a bonus. You cannot guarantee any content or structure will work for things you have not foreseen. However, different domains, by their very nature, provide different degrees of future proofing:
 
-    * Content in the {media domain} encode all, or nearly all, of your content decision in the content itself. Few if any decisions are factored out into algorithms, and the cost of changing these decisions is therefore high.
+    * Content in the {media domain} encodes all, or nearly all, of your content decisions in the content itself. Few if any decisions are factored out into algorithms, and, therefore, the cost of changing these decisions is high.
 
-    * The {document domain} factors out most formatting decisions from the content, reducing the cost of changing formatting decisions. But it still encodes all or nearly all presentation and rhetorical decisions, meaning changes in those areas are still expensive. 
+    * The {document domain} factors out most formatting decisions from the content, reducing the cost of changing formatting decisions. But it still encodes all, or nearly all, presentation and rhetorical decisions, meaning changes in those areas are still expensive. 
 
-    * The {management domain} is a mixed bag. In some cases it can be used to factor content or data into separate files which makes that content easier to locate and change. On the other hand, management domain structures often encode management decisions in the content, meaning you may have to find and change many instances for certain management decision changes. (Though at least they make the decisions explicit, making them easy to locate.)
+    * The {management domain} is a mixed bag. In some cases, it can be used to factor content or data into separate files, which can make that content easier to locate and change. On the other hand, management-domain structures often encode management decisions in the content, meaning you may have to find and change many instances for certain management decision changes. However, management-domain structures at least make the decisions explicit, making them easy to locate.
 
-    * The {subject domain} factors out most presentation decisions and many rhetorical and management decisions, while isolating and labeling other rhetorical decisions, making it much easier to locate the instances that need to change when a change occurs.     
+    * The {subject domain} factors out most presentation decisions and many rhetorical and management decisions while isolating and labeling other rhetorical decisions, making it much easier to locate the instances that need to be updated when a change occurs.     
     
-    Changes in content happen all the time. Many of them are entirely predictable and you can use structured writing to support the management of those changes. For instance, companies re-brand from time to time, often requiring a change of formatting for all publications. If the content is in media domain structures, the effort to change to a new appearance could be significant. If the content is in the {document domain}, however, changing how it is formatted is simply a matter of changing the {publishing algorithm} to produce different-looking output. 
+    Changes in content happen all the time. Many of them are entirely predictable, and you can use structured writing to help manage those changes. For instance, companies re-brand from time to time, which often requires formatting changes for all publications. If your content is in media-domain structures, the effort to change to a new appearance could be significant. However, if your content is in the {document domain}, changing to a new appearance is simply a matter of changing the {publishing algorithm}.
     
-    It is worth noting, though, that while changing the {publishing algorithm} is less work than changing the formatting of a large body of content, it is also more complex work. It requires a skill set that is not as widely available as the skill of changing fonts in a word processor, for instance. It also cannot be done incrementally. Once the entire new algorithm is written, all the content can be converted to the new look almost instantly. But until it is finished, none of the content can be converted. A structured writing system is not the kind of thing you can set up once and walk away from. If designed properly, it transfers complexity (and therefore decisions) from writers to {information architects} and {content engineers} and so you need to maintain the availability of those skill sets to your team. Hiring someone to come in and write a bunch of algorithms for you as if they will never need to change is to ignore where complexity is being directed in your new system. 
+    However, although changing the {publishing algorithm} is less work than changing the formatting of a large body of content, it is also more complex work. It requires a skill set that is not, for instance, as widely available as the ability to change fonts in a word processor. It also cannot be done incrementally. Once the new algorithm is complete, you can convert all of your content to the new look almost instantly. But until it is complete, no content can be converted. A structured writing system is not something you can set up once and walk away from. If designed properly, it transfers complexity (and therefore decisions) from writers to {information architects} and {content engineers}, and, therefore, you need to maintain the availability of those skills to your team. Hiring someone to write a bunch of algorithms and expecting that those algorithms will never need to change ignores where complexity is being directed in your new system. 
     
-    Moving complexity to algorithms is the heart of the productivity and quality gains that you get from structured writing, but transferring complexity to an algorithm means transferring it to the person who writes and maintains your algorithms -- your {information architects} and {content engineers}. In many case, the {change management} strategy you are implementing depends precisely on this: that in the event of a certain kind of change it will be handled by changing a single algorithm rather than by changing thousands of pieces of content. Insisting on a fixed and invariant tool set essentially means cutting yourself off from the possibility of partitioning complexity, particularly the complexity of change, in this way. This will greatly limit the extent to which you can bring much of your currently unhandled complexity under management, which in turn limits your ability to improve your rhetoric. 
+    Moving complexity to algorithms is the heart of the productivity and quality gains that you get from structured writing, but transferring complexity to an algorithm means transferring it to the people who write and maintain your algorithms -- your {information architects} and {content engineers}. In many cases, your {change management} strategy will depend on your ability to handle certain kinds of change by updating an algorithm rather than updating thousands of pieces of content. If you have a fixed and invariant tool set, you essentially cut yourself off from the possibility of partitioning complexity, particularly the complexity of change, by updating your tools. This will greatly limit the extent to which you can bring your currently unhandled complexity under management, which in turn limits your ability to improve your rhetoric. 
     
-    A general move to the {document domain} (or the {subject domain}, or even a disciplined use of styles in a word processor) will allow you to handle font and layout changes. But what if the re-branding goes further? Suppose it involves changing the names of products or even the company. Should your structured writing approach explicitly support that change? Some organization like to mandate that writers insert a variable rather than the actual name for the company name and all product names. That way, when a product name or the company names changes all you have to do is redefine the variables.         
+    Moving to the {document domain} or the {subject domain} (or even to a disciplined use of styles in a word processor) will allow you to handle font and layout changes. But what if the re-branding goes further? Suppose it involves changing the names of products or even the company. Should your structured writing approach explicitly support that change? Some organization like to mandate that writers insert a variable rather than the actual name for the company name and all product names. That way, when a product name or the company names changes all you have to do is redefine the variables.         
 
     ```(sam)
         We here at >($company-name) do not recommend using 
         our product to catch roadrunners. 
     
-    I have always been skeptical of the value of this practice. It forces the writers to remember to use the variable every time. This interrupts their chain of thought, which slows their writing down and uses up some of their precious attention, thus impacting content quality. And it is virtually impossible to ensure {compliance}. Writers will sometimes simply forget and write the names out normally, which means you always have to search for these instances anyway when a change happens. Then there are issues with historical usage of the names, where you don't want the change to happen, and with inflections if the new or old names end in 's' (in English; other languages may have different inflection problems). 
+    I am skeptical of this practice. Writers must remember to use the variable every time, which interrupts their chain of thought, slows down their writing, and uses up some of their precious attention, thus affecting content quality. And it is virtually impossible to ensure {compliance}. Writers can forget and write the names out normally, which means that when a change occurs, you have to search for those instances, anyway. Then there are issues with historical usage of the names (where you don't want the change to happen), inflections (if the new or old names end in 's'), and articles (if the initial letter changes from consonant to vowel or vice versa).[*fn.inflection]
+
+    footnote:(*fn.inflection)
+        These problems occur in English; other languages may have different problems. 
     
-    Company and product names are distinct strings that are easy to search for when you need to make a change. The overhead of creating and maintaining the variables is greater than the overhead of doing a search and replace through the content when a change occurs. The use of variables, in other words, is creating more complexity than it is partitioning and transferring. And doing a search and replace allows you to make intelligent choices about historical usage and  inflections. It your content is held in text form (in a markup language) in a repository (file system or {content management system}) that allows you to do a search and replace across multiple files, this is probably easier and more reliable than using variables. (And it is what you are going to have to do anyway if there is a name change that you did not anticipate and therefore did not use variables for.)
+    Company and product names are distinct strings that are easy to search for when you need to make a change. The overhead of creating and maintaining variables is greater than the overhead of doing a search and replace through the content. Using variables, in other words, creates more complexity than it partitions and transfers. And doing a search and replace allows you to make intelligent choices about historical usage, inflections, and articles. If your content is in text form in a repository that allows you to do a search and replace across multiple files, search and replace is probably easier and more reliable than using variables. And you will need to do search and replace, anyway, if there is a name change that you did not anticipate and, therefore, did not encode in a variable.
     
-    You may well need some markup for company and product names, however. You may want to format them differently or link from them to more information about the product or company. Rather than use a variable I would prefer to use an annotation like this:
+    However, you may still need some markup for company and product names. You may want to format them differently or link from them to more information about the product or company. Rather than use a variable, I prefer to use an annotation such as the following:
     
     ```(sam)
         We here at {Acme Corporation}(company) do not recommend 
         using our product to catch roadrunners.
         
-    This second approach identifies the words "Acme Corporation" as a company name. Creating this markup requires no extra thought from the writer. They do not have to remember what the appropriate variable name is. (They do have to remember `company` as an annotation type, but that is a type, not an individual name, and if your markup is well designed your annotation types should be few and memorable.) And this same markup can be used to format the company name appropriately and to generate links to information on the company. 
+    This second approach identifies the words "Acme Corporation" as a company name. Creating this markup requires no extra thought from writers. They do not have to remember what the appropriate variable name is. (They do have to remember `company` as an annotation type, but that is a type, not an individual name, and if your markup is well designed, your annotation types should be few and memorable.) And the same markup can be used to format the company name and to generate links to information about the company. 
 
-    This does not guarantee that the writer will always remember to add the annotation, or that they will always spell the company name correctly. (There is no way to guarantee that a free-floating annotation will always be remembered. The best you can do is make them easy to do.) But (as discussed in [chapter.audit]) you can use the `company` annotation to find all the phrases marked as company name, sort them, and look for variants. This then allows you to go back and fix incorrect spellings. But it also allows you to identify the ways in which writers are misspelling the company name and search the whole text for those misspellings. This improves your success rate catching both misspellings and the failure to annotate. This kind of {content hygiene} operation should be performed regularly on any content set, and {subject domain} {annotation} makes it easier to do while removing a distraction for writers. (For more on this, see [#chapter.taxonomy].)
+    This does not guarantee that writers will always remember to add the annotation, or that they will always spell the company name correctly. There is no way to guarantee that writers will always remember a free-floating annotation; the best you can do is make annotations easy to create. However, as discussed in [#chapter.audit], you can use the `company` annotation to find all the phrases marked as company name, sort them, and look for variants. This allows you to go back and fix incorrect spellings. And it allows you to identify the ways in which writers misspell the company name and search your content for those misspellings. This improves your success rate, catching both misspellings and failures to annotate. You should perform this kind of {content hygiene} operation regularly. {Subject-domain} {annotation} removes a distraction for writers and makes this operation easier to do. (For more on this, see [#chapter.taxonomy].)
     
-    At another level, re-branding can involve the organization deciding to change its tone or voice. It may wish to go from professional and reserved to friendly and jocular. There is no way, of course, for any structured writing process to recast content from formal to funny. You can't make your content proof against every kind of change. 
+    At another level, re-branding may require a change in tone or voice. You may decide to go from professional and reserved to friendly and jocular. There is no way, of course, for any structured writing process to recast content from formal to funny. You can't future proof your content against every kind of change. 
 
     section: Out with the old, in with the new
     
-        One form of change that is so common that it may be overlooked is simply the ongoing creation of new content and the editing of old content. In the age of the {Web}, this is a particular concern because we can now add a new piece of content whenever it is ready, edit an existing piece whenever it needs it, and delete an old piece whenever it becomes obsolete. We don't have to wait for a major publication release for all these changes to roll out. Each rolls out when it is ready. And each time one rolls out, it impacts the {information architecture} of the entire content set. 
-        
-        Adding, editing, or deleting one topic does not mean that all the other topics are unaffected:
+        One easily overlooked source of change is the ongoing creation of new content and the editing of old content. This is a particular concern with web-based content, because you can add, edit, or delete content at any time. You don't have to wait for a major publication release to roll out changes. Each can roll out when it is ready.
+
+        However, each time you roll out a change, you affect the {information architecture} of the entire content set. Adding, editing, or deleting just one topic can have a widespread impact:
 
         * There may be topics that link to the deleted topic. 
-        * There may be topics that should link to the newly added topic. 
-        * There may be topics that should no longer link to a changed topic, and topics that should now start linking to it. 
+        * There may be topics that should link to a newly added or changed topic. 
+        * There may be topics that should no longer link to a changed topic. 
         * Topics in a category may now have a new neighbor or may have lost one. 
         * Any {top-down} navigation tools need to be updated for the topic changes. 
         * Deleted topics may leave holes in the information set that need to be filled.
         * New topics or edited topics may mention subjects that are not adequately covered by existing topics, revealing the need for yet more topics. 
         * Deleted or edited topics may leave other topics orphaned, needing to be removed or edited to serve a current purpose. 
-        * Events in the world can change the status of a whole set of topics, for instance, those relating to an upcoming event which becomes a previous event the moment it has taken place. 
-        
-        When there is the potential for adding, editing, or deleting a topic to have ripple effects through the whole content set, and when such additions, deletions, and edits happen on a daily basis, it is vital to have algorithmic support for change management. Managing all the effects by hand is doomed to failure. 
+        * Events in the world can change the status of a whole set of topics; for instance, an upcoming event becomes a previous event the moment it has taken place. 
+
+        When topics can be added, edited, or deleted on a daily basis, it is vital to have algorithmic support. Managing these changes by hand is doomed to failure. 
            
-        {Content management systems} often have change management features that can be helpful. For instance, many of them will inform you if a change or deletion of an existing {topic} will break any existing {links}. They will also help you find topics on related subjects or manage the membership of {categories} and the navigation aids that are based on them. What they won't do is tell you things like which pieces of existing content should be linking to the new content you just added. The only way to discover that is if the existing content contains subject domain annotations that relate to to the subject for the new topic. With these in place, a linking algorithm (as described in [#chapter.linking]) can discover these relationships automatically. 
+        {Content management systems} often have change management features that can be helpful. For instance, many of them will inform you if changing or deleting an existing {topic} will break existing {links}. They will also help you find topics on related subjects or manage the membership of {categories} and the navigation aids that are based on them.
 
-        As should be coming clear by this point, change management is really an aspect of all the structured writing algorithms. For any of the algorithms to keep working over time and as content changes, the structures that support those algorithms have to stay {conformant}. Part of designing those structures, therefore, should be thinking seriously about what it will take to maintain them in a conformant state when changes happen. 
+        What they won't do is tell you things such as which pieces of existing content should be linking to the new content you just added. The only way to discover that is if the existing content contains subject-domain annotations that relate to the subject for the new topic. With these in place, a linking algorithm (as described in [#chapter.linking]) can discover these relationships automatically. 
 
-        Change management, therefore, relies heavily on  {conformance} to constraints and to the structures that express them. And this is a reciprocal relationship. To maintain conformance of your content, you have to be able to manage change successfully. But to manage change successfully, you need content to be conformant so that you can reliably identify the changes that are required and, as far as possible, execute those changes algorithmically. 
+        As should be coming clear by this point, change management is an aspect of all the structured writing algorithms. For any algorithm to keep working over time, and as content changes, the structures that support those algorithms have to stay {conformant}. Therefore, as you design structures, you should be thinking seriously about what it will take to maintain them in a conformant state when changes happen. 
+
+        Change management, therefore, relies heavily on {conformance} to constraints and to the structures that express those constraints. This is a reciprocal relationship. To ensure that your content remains conformant, you must manage change successfully. But to manage change successfully, you need content to be conformant, so you can reliably identify required changes and, as far as possible, execute them algorithmically. 
         
-        For example, say you have a movie review site that contains movie reviews as well as biographies of actors and directors. You have a review of _Rio Bravo_ marked up like this:
-        
-        ```(sam)
-            movie-review:
-                movie-title: Rio Bravo
-                review-text:
-                    In {Rio Bravo}(movie), {the Duke}(actor "John Wayne") 
-                    plays an ex-Union colonel.
+        For example, consider a movie review site that contains movie reviews as well as biographies of actors and directors. Suppose you have a review of _Rio Bravo_ marked up like [*fig.review-bio].
+
+        figure:(*fig.review-bio) Movie review for _Rio Bravo_
+            ```(sam)
+                movie-review:
+                    movie-title: Rio Bravo
+                    review-text:
+                        In {Rio Bravo}(movie), {the Duke}(actor "John Wayne") 
+                        plays an ex-Union colonel.
+
+        pagination-tweak:
+            min-space: 2in
+            
+        At first, you do not have a biography for John Wayne on your site, so none of the reviews that mention John Wayne have a link to a biography. Then, you add a John Wayne biography to your collection (see [*fig.wayne-bio]):
+
+        figure:(*fig.wayne-bio) Markup for a biography of John Wayne
+            ```(sam)
+                topic: 
+                    title: Biography of John Wayne
+                    index:
+                        type: actor
+                        value: John Wayne
+                    body:
                     
-        At first, you do not have a biography for John Wayne on your site, so none of the reviews that mention John Wayne have a link to a biography. Then you add a John Wayne biography to your collection:
-        
-        ```(sam)
-            topic: 
-                title: Biography of John Wayne
-                index:
-                    type: actor
-                    value: John Wayne
-                body:
-                
-                    John Wayne was an American actor known for westerns.
+                        John Wayne was an American actor known for westerns.
  
-        Suddenly every movie review that mentions John Wayne in the text or lists him as a star should be {linking} to this biography. That might be fifty pages of your site that now should be linking to the topic you just added. That is a lot of change to process just because of one added page. But if you have used the {linking} technique based on {subject annotations}, as described in [#chapter.linking], then all you have to do is rebuild your content set and those links will be created automatically. There is literally no separate change management step that need needs to be done to get those links. It has been entirely factored out. 
+        Now, every movie review that mentions John Wayne in the text or lists him as a star should {link} to this biography. That might be fifty pages of your site that now should link to the topic you just added. That is a lot of change to process just because of one added page. However, if you used the {linking} technique described in [#chapter.linking], which is based on {subject annotations}, then all you have to do is rebuild your content set, and those links will be created automatically. There is no separate change management step required to create those links. That step has been entirely factored out. 
         
-        As we noted in [#chapter.conformance], the heart of {conformance} is designing structures that are easy to conform to. Change management is not something you can tack on as an afterthought, but nor is is something that necessarily requires a separate set of structures. Content that is highly {conformant} and highly {auditable} is easy to change consistently, which in turn help maintain conformance. The heart of the problem lies in designing content for conformance. 
+        As I noted in [#chapter.conformance], the heart of {conformance} is designing structures that are easy to conform to. Change management is not something you can tack on as an afterthought nor is it something that necessarily requires a separate set of structures. Content that is highly {conformant} and highly {auditable} is easy to change consistently, which in turn helps maintain conformance. The heart of the problem lies in designing content for conformance. 
         
         
         
