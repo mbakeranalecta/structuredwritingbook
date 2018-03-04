@@ -18,7 +18,7 @@
         </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="string"/>
+    <xsl:template match="variable"/>
     
     <xsl:template match="by"/>
     
@@ -775,31 +775,32 @@
     
     
     <xsl:template match="ll">
-        <db:variablelist>
+        <db:itemizedlist>
             <xsl:apply-templates/>
-        </db:variablelist>
+        </db:itemizedlist>  
     </xsl:template>
     
-    
     <xsl:template match="ll/li">
-        <db:varlistentry>
+        <db:listitem>
             <xsl:apply-templates/>
-        </db:varlistentry>
+        </db:listitem>
     </xsl:template>
     
     <xsl:template match="ll/li/label">
-        <db:term>
-            <xsl:apply-templates/>
-        </db:term>
+        <db:para>
+            <db:emphasis role="bold">
+              <xsl:apply-templates/>
+              <xsl:text>: </xsl:text>
+            </db:emphasis>
+            <xsl:apply-templates select="following-sibling::p[1]" mode="ll"/>
+        </db:para>
     </xsl:template>
     
-    <xsl:template match="ll/li/p">
-        <db:listitem>
-            <db:para>
-                <xsl:apply-templates/>
-            </db:para>
-        </db:listitem>
+    <xsl:template match="ll/li/p[1]"/>
+    <xsl:template match="ll/li/p[1]" mode="ll">
+        <xsl:apply-templates/>
     </xsl:template>
+    
     
     <xsl:template match="caption">
         <db:caption>
