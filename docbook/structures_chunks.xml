@@ -8,15 +8,23 @@
 <db:itemizedlist>
 <db:listitem>
 <db:para><db:emphasis role="bold">Structural blocks:</db:emphasis> the basic building blocks of structure.</db:para>
+
+
 </db:listitem>
 <db:listitem>
 <db:para><db:emphasis role="bold">Semantic blocks:</db:emphasis> blocks that have a meaningful relationship to things writers understand and care about.</db:para>
+
+
 </db:listitem>
 <db:listitem>
 <db:para><db:emphasis role="bold">Information-typing blocks:</db:emphasis> semantic blocks used in information typing theory, which is used in some markup systems, particularly <db:indexterm><db:primary>DITA</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DITA</db:secondary></db:indexterm><db:indexterm><db:primary>DITA</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>DITA</db:secondary></db:indexterm>DITA.</db:para>
+
+
 </db:listitem>
 <db:listitem>
 <db:para><db:emphasis role="bold">Rhetorical blocks:</db:emphasis> blocks that govern the rhetorical structure of a document.</db:para>
+
+
 </db:listitem>
 </db:itemizedlist>
 <db:para>Although the above list is ordered by size, it is actually easier to explain the design roles of these block types if you start in the middle with semantic blocks.</db:para>
@@ -164,23 +172,23 @@ plays an ex-Union colonel.&lt;/p&gt;
 </db:programlisting>
 <db:para>Here the <db:code>movie</db:code> and <db:code>actor</db:code> elements float in the content of the <db:code>p</db:code> element. In XML parlance, this is called <db:emphasis>mixed content</db:emphasis>.</db:para>
 <db:para>XML breaks the structure of elements down into three types:</db:para>
-<db:variablelist>
-<db:varlistentry>
-<db:term>element content</db:term>
+<db:itemizedlist>
+<db:listitem>
+<db:para><db:emphasis role="bold">element content:</db:emphasis> Elements that contain only other elements.</db:para>
 
-<db:listitem><db:para>Elements that contain only other elements.</db:para></db:listitem>
-</db:varlistentry>
-<db:varlistentry>
-<db:term>data content</db:term>
 
-<db:listitem><db:para>Elements that contain only text data.</db:para></db:listitem>
-</db:varlistentry>
-<db:varlistentry>
-<db:term>mixed content</db:term>
+</db:listitem>
+<db:listitem>
+<db:para><db:emphasis role="bold">data content:</db:emphasis> Elements that contain only text data.</db:para>
 
-<db:listitem><db:para>Elements that contain both text data and elements.</db:para></db:listitem>
-</db:varlistentry>
-</db:variablelist>
+
+</db:listitem>
+<db:listitem>
+<db:para><db:emphasis role="bold">mixed content:</db:emphasis> Elements that contain both text data and elements.</db:para>
+
+
+</db:listitem>
+</db:itemizedlist>
 <db:para>Mixed content is the reason that most traditional data formats are not a good fit for content. They may be able to model element content and data content, but they lack an elegant way to model mixed content.</db:para>
 <db:para>Even conventional programming languages have trouble with mixed content. Most libraries for XML processing invent an additional wrapper around each string of characters in a mixed content element, effectively representing it as if it were written like this (without mixed content):</db:para>
 <db:programlisting language="xml">

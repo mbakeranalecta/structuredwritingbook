@@ -24,20 +24,28 @@
 </annotations>
 <p>If the data structure of a structured document is a set of nested blocks, how do you design a content structure as a set of nested blocks? Let’s start by looking at the different types of blocks, their purpose, and how they relate to each other. Most markup systems don’t make a high-level distinction between different types of blocks (for example, in XML, they are all elements). However, from a language design point of view, it is useful to break down blocks into different types, each of which requires a different design focus.</p>
 <p>In this chapter I look at four main types of block. These types are not mechanically different from each other; rather, they play a different design role in the overall structure of a document. The four types are:</p>
-<ul>
+<ll>
 <li>
-<p><phrase><annotation type="bold">Structural blocks:</annotation></phrase> the basic building blocks of structure.</p>
+<label>Structural blocks</label>
+
+<p>the basic building blocks of structure.</p>
 </li>
 <li>
-<p><phrase><annotation type="bold">Semantic blocks:</annotation></phrase> blocks that have a meaningful relationship to things writers understand and care about.</p>
+<label>Semantic blocks</label>
+
+<p>blocks that have a meaningful relationship to things writers understand and care about.</p>
 </li>
 <li>
-<p><phrase><annotation type="bold">Information-typing blocks:</annotation></phrase> semantic blocks used in information typing theory, which is used in some markup systems, particularly <phrase><annotation type="language"><annotation type="standard">DITA</annotation></annotation></phrase>.</p>
+<label>Information-typing blocks</label>
+
+<p>semantic blocks used in information typing theory, which is used in some markup systems, particularly <phrase><annotation type="language"><annotation type="standard">DITA</annotation></annotation></phrase>.</p>
 </li>
 <li>
-<p><phrase><annotation type="bold">Rhetorical blocks:</annotation></phrase> blocks that govern the rhetorical structure of a document.</p>
+<label>Rhetorical blocks</label>
+
+<p>blocks that govern the rhetorical structure of a document.</p>
 </li>
-</ul>
+</ll>
 <p>Although the above list is ordered by size, it is actually easier to explain the design roles of these block types if you start in the middle with semantic blocks.</p>
 <section>
 <title>Semantic blocks</title>

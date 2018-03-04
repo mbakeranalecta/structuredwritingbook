@@ -790,8 +790,9 @@
         <db:para>
             <db:emphasis role="bold">
               <xsl:apply-templates/>
-              <xsl:text>: </xsl:text>
+              <xsl:text>:</xsl:text>
             </db:emphasis>
+            <xsl:text> </xsl:text>
             <xsl:apply-templates select="following-sibling::p[1]" mode="ll"/>
         </db:para>
     </xsl:template>
