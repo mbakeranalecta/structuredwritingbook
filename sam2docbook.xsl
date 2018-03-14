@@ -476,18 +476,17 @@
         </db:citetitle>
     </xsl:template>
     
-    <xsl:template match="citation[@value]">
-        <xsl:apply-templates/>    
+    <xsl:template match="citation">
         <xsl:choose>
             <xsl:when test="ancestor::footnote">
                 <xsl:text>[</xsl:text>
-                <xsl:value-of select="@value"/>
+                <xsl:apply-templates/>
                 <xsl:text>]</xsl:text>
             </xsl:when>
             <xsl:otherwise>
                 <db:footnote>
                     <db:para>
-                        <xsl:value-of select="@value"/>
+                        <xsl:apply-templates/>
                     </db:para>
                 </db:footnote>
             </xsl:otherwise>
@@ -553,9 +552,9 @@
         </db:bridgehead>
     </xsl:template>
     
-    <xsl:template match="blockquote/citation[@value]">   
+    <xsl:template match="blockquote/citation">   
         <db:attribution>
-            <xsl:value-of select="@value"/>
+            <xsl:apply-templates/>
         </db:attribution>
     </xsl:template>
     
