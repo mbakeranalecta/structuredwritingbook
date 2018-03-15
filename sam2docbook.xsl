@@ -476,7 +476,7 @@
         </db:citetitle>
     </xsl:template>
     
-    <xsl:template match="citation">
+    <xsl:template match="citation" priority="-0.4">
         <xsl:choose>
             <xsl:when test="ancestor::footnote">
                 <xsl:text>[</xsl:text>
@@ -565,15 +565,16 @@
         </db:attribution>
     </xsl:template>
     
-    <xsl:template match="citation[@nameref]" priority="-.1">
-        <db:xref linkend="{@nameref}"/>
-    </xsl:template>
 
     <xsl:template match="phrase/citation[@nameref]">
         <xsl:apply-templates/>
         <xsl:text> (</xsl:text>
         <db:xref linkend="{@nameref}"/>
         <xsl:text>)</xsl:text>
+    </xsl:template>
+    
+    <xsl:template match="citation[@nameref]" priority="-0.2">
+        <db:xref linkend="{@nameref}"/>
     </xsl:template>
     
     <xsl:template match="insert[@type='image']">
