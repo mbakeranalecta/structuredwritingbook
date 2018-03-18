@@ -41,6 +41,14 @@
     </xsl:template>
     
     <xsl:template match="chapter/title"/>
+
+    <xsl:template match="section/title" mode="section-title">
+        <db:title>
+            <xsl:apply-templates/>
+        </db:title>
+    </xsl:template>
+    
+    <xsl:template match="section/title"/>
     
     <xsl:template match="subtitle">
         <db:subtitle>
@@ -816,8 +824,51 @@
             <xsl:value-of select="@name"/>
           </xsl:attribute>
         </xsl:if>
-
-        <xsl:apply-templates/>
+          <xsl:apply-templates select="title" mode="section-title"/>
+          <xsl:for-each select="index/record/term">
+              <db:indexterm class="startofrange" significance="preferred">
+                  <xsl:attribute name="xml:id">
+                      <xsl:value-of select="generate-id()"/>
+                  </xsl:attribute>
+                  <db:primary>
+                      <xsl:value-of select="."/>
+                  </db:primary>
+              </db:indexterm>
+              <db:indexterm class="startofrange">
+                  <xsl:attribute name="xml:id">
+                      <xsl:value-of select="generate-id()"/>
+                      <xsl:text>x</xsl:text>
+                  </xsl:attribute>
+                  <db:primary>
+                      <xsl:value-of select="../type"/>
+                  </db:primary>
+                  <db:secondary>
+                      <xsl:value-of select="."/>
+                  </db:secondary>
+              </db:indexterm>
+          </xsl:for-each>
+          
+          <xsl:apply-templates/>
+          
+          <xsl:if test="not(section)">
+              <xsl:for-each select="index/record/term">
+                  <db:indexterm  class='endofrange'>
+                      <xsl:attribute name="startref">
+                          <xsl:value-of select="generate-id()"/>
+                      </xsl:attribute>
+                  </db:indexterm>
+              </xsl:for-each>
+              
+              <xsl:for-each select="index/record/term">
+                  <db:indexterm  class='endofrange'>
+                      <xsl:attribute name="startref">
+                          <xsl:value-of select="generate-id()"/>
+                          <xsl:text>x</xsl:text>
+                      </xsl:attribute>
+                  </db:indexterm>
+              </xsl:for-each>
+          </xsl:if>
+          
         <xsl:if test="not(following::section) and not(section)">
           <xsl:for-each select="/chapter/index/record/term">
             <db:indexterm  class='endofrange'>
