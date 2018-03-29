@@ -12,8 +12,8 @@
 <db:para>There are cases where non-overlapping block structure is inadequate for some rhetorical structures. This is more of an issue for the academic study of texts than for structured writing, but it can occur in both fields. However, allowing overlapping fields adds complexity to many of the structured writing algorithms, and it is rarely a worthwhile approach to partitioning content.</db:para>
 <db:para>For our purposes, therefore, I am going to deal with the mechanical structure of content strictly in terms of nested, non-overlapping blocks, such as shown in <db:xref linkend="fig.block-structure"/>.</db:para>
 <db:figure xml:id="fig.block-structure"><db:title>Nested block structure of a recipe</db:title><db:mediaobject><db:imageobject><db:imagedata fileref="../graphics/blocks.svg" contentwidth="5.25in" align="left"/></db:imageobject></db:mediaobject></db:figure>
-<db:section>
-<db:title>Flat vs. hierarchical structures</db:title>
+<db:section><db:title>Flat vs. hierarchical structures</db:title>
+
 
 <db:para>Even using a strictly nested blocks approach requires some fundamental choices about mechanical structure. The first is flat vs. hierarchical structure.</db:para>
 <db:para>As noted in <db:xref linkend="chapter.document-domain"/>, HTML has six levels of heading (<db:code>h1</db:code> through <db:code>h6</db:code>), whereas <db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DocBook</db:secondary></db:indexterm><db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>DocBook</db:secondary></db:indexterm>DocBook has only <db:code>title</db:code>. DocBook lets you divide a document into sections and nest sections inside sections. You can then print the titles of sections inside sections in a smaller font than the titles of first-level sections. You can render headings in different sizes without having six different tags.</db:para>
@@ -50,8 +50,8 @@
 </db:itemizedlist>
 </db:section>
 
-<db:section>
-<db:title>Annotating blocks</db:title>
+<db:section><db:title>Annotating blocks</db:title>
+
 
 <db:para>When treating content as data, you annotate every block to identify – to people and algorithms – what constraints it meets. The most basic annotation is the name of the block, which describes its type. The name of a table block is <db:code>table</db:code>, which tells us that the block is a table. Blocks may also have other annotations that either refine the type or provide additional information.</db:para>
 <db:para>These additional annotations don’t have to be in the same domain as the block name. <db:xref linkend="fig.mechanical-wine"/> repeats an example of this from <db:xref linkend="chapter.subject-domain"/>.</db:para>
@@ -67,21 +67,21 @@
 </db:programlisting></db:figure>
 <db:para>In <db:xref linkend="fig.mechanical-wine"/>, the <db:code>section</db:code> element defines a block in the document domain, and the <db:code>publication</db:code> attribute adds an annotation in the management domain.</db:para>
 </db:section>
-<db:section>
-<db:title>Agreeing on names</db:title>
+<db:section><db:title>Agreeing on names</db:title>
+
 
 <db:para>For structured writing to work, everyone involved must understand and agree on what the names and annotations mean. Annotations tell people and processes what constraints each block obeys. If the names and annotations don’t mean what we have all agreed to, communication between the partitions of the content system breaks down and both process and rhetoric suffer.</db:para>
 <db:para>Confusion and disagreement about the meaning of names and annotations are not uncommon. Large document-domain languages such as <db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DocBook</db:secondary></db:indexterm><db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>DocBook</db:secondary></db:indexterm>DocBook and <db:indexterm><db:primary>DITA</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DITA</db:secondary></db:indexterm><db:indexterm><db:primary>DITA</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>DITA</db:secondary></db:indexterm>DITA have large vocabularies, and many of the names they offer are quite abstract. Questions about the right way to tag certain passages are common in the communities around these languages, and opinions can vary considerably in some cases.</db:para>
 <db:para>These disagreements don’t affect just low-level structures. In <db:indexterm><db:primary>DITA</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DITA</db:secondary></db:indexterm><db:indexterm><db:primary>DITA</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>DITA</db:secondary></db:indexterm>DITA, for example, it is common to debate whether a topic that contains operational information, but is not procedural, is a concept or a task. And some writers use only generic topics because they don’t think DITA’s task, concept, and reference topics fit their content.</db:para>
 <db:para>Therefore, you must define terms precisely when developing a structured writing language. But it is equally important that the language be <db:indexterm><db:primary>functionally lucid</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>functionally lucid</db:secondary></db:indexterm>functionally lucid. <db:indexterm><db:primary>Functional lucidity</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>Functional lucidity</db:secondary></db:indexterm>Functional lucidity requires you to create structures that do not detract from writing. You can’t meet this requirement if writers must puzzle out or debate the right way to mark something up. Not only must you define what the names mean, but you must also choose structures that are easy to name correctly. As I describe in <db:xref linkend="chapter.conformance"/>, the best way to achieve conformance is to design structures that are easy to conform to.</db:para>
 </db:section>
-<db:section>
-<db:title>Different rules for intermediate languages</db:title>
+<db:section><db:title>Different rules for intermediate languages</db:title>
+
 
 <db:para>Of course, functional lucidity only matters for the formats that writers actually write in. As we have seen, the <db:indexterm><db:primary>publishing algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>publishing algorithm</db:secondary></db:indexterm>publishing algorithm typically consists of multiple steps, and each one of those steps can create a format that is closer to the media domain than the one before it. It is perfectly possible to design a document-domain structure just to serve as a step in the publishing chain. Separate authoring formats are created for writers to actually write in (perhaps <db:indexterm><db:primary>subject-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject-domain</db:secondary></db:indexterm>subject-domain formats or simplified highly constrained ad-hoc document-domain formats). Content is transformed from these formats to the document-domain format by the <db:indexterm><db:primary>presentation algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>presentation algorithm</db:secondary></db:indexterm>presentation algorithm and then the document-domain format is translated into various different media-domain languages by the formatting software. An arrangement like this eliminates the need to compromise between different demands in designing a single language, generally making each language in the chain simpler and more constrained, which in turn makes each one easier to <db:indexterm><db:primary>validate</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>validate</db:secondary></db:indexterm>validate and process.</db:para>
 </db:section>
-<db:section>
-<db:title>Secondary structures of interpretation</db:title>
+<db:section><db:title>Secondary structures of interpretation</db:title>
+
 
 <db:para>Under normal circumstance, the structures that constrain content also constrain the interpretation of that content. In other words, the markup that tells the writer what to write also tells the algorithm (or other downstream user) what the content means. But there are cases where annotations are added to document-domain structures to tell downstream processes what the content means. These structures don’t constrain writers, which means they don’t guide them either. Writers must know exactly how to create this kind of annotation without any guidance or prompting.</db:para>
 <db:para>Consider these examples of HTML microformats from Wikipedia.<db:footnote><db:para>https://en.wikipedia.org/wiki/Microformat</db:para></db:footnote> <db:xref linkend="fig.mechanical-address"/> shows an address formatted as a list.</db:para>
@@ -152,8 +152,8 @@ match url
             continue
 </db:programlisting></db:figure>
 </db:section>
-<db:section>
-<db:title>Child blocks vs. additional annotations</db:title>
+<db:section><db:title>Child blocks vs. additional annotations</db:title>
+
 
 <db:para>As noted above, sometimes the name of a block is not sufficient to fully describe the constraints it meets. In these cases, you can add additional annotations to a block. But you can also achieve much the same thing by adding child blocks. A child block belongs to the main block, so it is part of it and can constrain the interpretation of the main block just as much as an annotation does. One of the issues in designing data structures for content, therefore, is deciding when to use additional annotations and when to use child blocks.</db:para>
 <db:para>Different markup languages have different levels of support for additional annotation on blocks, so this issue is affected by the markup language you choose. SAM, for instance, supports only a limited, fixed set of additional annotations on blocks. Therefore, if you want to add constraints on interpretation, you have to use child blocks.</db:para>

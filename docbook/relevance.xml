@@ -33,8 +33,8 @@
 </db:itemizedlist>
 <db:para>Managing relevance has a twofold role: first, alleviate as much as possible the complexity the reader faces in establishing relevance, and second, make sure that algorithms that need to establish the relevance of content do so correctly and unambiguously.</db:para>
 <db:para>Structure supports relevance in two ways: being relevant, and demonstrating relevance.</db:para>
-<db:section>
-<db:title>Being relevant</db:title>
+<db:section><db:title>Being relevant</db:title>
+
 
 <db:para>Relevance is too often neglected. Content management systems (CMS) attach metadata to unstructured documents, asserting their relevance to certain topics or requirements without verifying that those documents actually meet those requirements. In many cases, the <db:indexterm><db:primary>content management system</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>content management system</db:secondary></db:indexterm>CMS has a cataloging system that requires writers to complete certain <db:indexterm><db:primary>metadata</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>metadata</db:secondary></db:indexterm>metadata fields, often from a predetermined list of values. Developing a good set of relevance criteria and values is complex, and development efforts often do not yield sound relevance criteria for readers. Defining the <db:indexterm><db:primary>taxonomy</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>taxonomy</db:secondary></db:indexterm>taxonomy by committee often imposes an abstract logic that does not match the concerns or language of readers.</db:para>
 <db:para>If developed correctly, such <db:indexterm><db:primary>metadata</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>metadata</db:secondary></db:indexterm>metadata may have the potential to define the relevance of content, but these requirements are not always communicated to writers in advance. Instead, writers are left to compose content without any guidance as to what would make it relevant, and then they are asked to tag content with <db:indexterm><db:primary>content management system</db:primary></db:indexterm><db:indexterm><db:primary>tool</db:primary><db:secondary>content management system</db:secondary></db:indexterm>CMS metadata after the fact. In many cases, this tagging is done hastily and lazily, simply picking whatever terms seem appropriate at first glance without really thinking about whether the piece fulfills the promise the metadata is making.</db:para>
@@ -42,8 +42,8 @@
 <db:para>If you are going to implement strict standards of relevance and a strict vocabulary for proclaiming relevance, you must communicate this to writers long before they try to submit their content to the CMS. One way to do that is through structured writing.</db:para>
 <!-- FIXME: example -->
 </db:section>
-<db:section>
-<db:title>Showing relevance</db:title>
+<db:section><db:title>Showing relevance</db:title>
+
 
 <db:para>Having relevant content is important, but it is equally important that your content show that it’s relevant. Readers and algorithms can’t find your content if it doesn’t show its relevance.</db:para>
 <db:para>Actually, that is not entirely true. Search engines can determine the relevance of content with an amazing degree of accuracy simply by reading the text and looking at how the content is used and linked to. This attests to the first importance of being relevant.</db:para>
@@ -56,8 +56,8 @@
 <db:para>Also, because storing content in the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain allows you to use the <db:indexterm><db:primary>extract algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>extract algorithm</db:secondary></db:indexterm>extract and <db:indexterm><db:primary>merge algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>merge algorithm</db:secondary></db:indexterm>merge algorithms to pull in content from other sources, you don’t have to include the beach pictures or the stock chart with your subject-domain content. Instead, you can have the <db:indexterm><db:primary>synthesis algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>synthesis algorithm</db:secondary></db:indexterm>synthesis algorithm query other content sets or feeds to find the best current tourist shots or to generate the stock chart in real time.</db:para>
 <db:para>But that, of course, depends on your content having fields that establish relevance and give the <db:indexterm><db:primary>synthesis algorithm</db:primary></db:indexterm><db:indexterm><db:primary>algorithm</db:primary><db:secondary>synthesis algorithm</db:secondary></db:indexterm>synthesis algorithm the information it needs to find relevant pictures or a relevant stock chart. It is not enough to show relevance to readers, you also need to show relevance to algorithms.</db:para>
 </db:section>
-<db:section>
-<db:title>Showing relevance to algorithms</db:title>
+<db:section><db:title>Showing relevance to algorithms</db:title>
+
 
 <db:para>Showing relevance to algorithms comes down to breaking information up into clearly labeled fields containing unambiguous values. For example, to query a web service that generates stock charts, you need to provide an unambiguous identifier for the company whose chart you want. The company name is not the best identifier, since there can be duplicate or similar names in different industries (Apple Computer versus Apple Music, for example). A better choice is the company’s stock symbol, which is guaranteed to be unique on the exchange where it is listed (though you do have to provide the exchange code: <db:code>NASDAQ:AAPL</db:code>, not just <db:code>AAPL</db:code>).</db:para>
 <db:para>This means that the web service needs to index stock prices according to stock symbols (which is what it does, of course). Actually, it is likely that the stock chart drawing service does not hold price information at all but, instead, requests it as needed from yet another web service. The stock ticker symbol is the unambiguous key that identifies the company in each of these transactions.</db:para>

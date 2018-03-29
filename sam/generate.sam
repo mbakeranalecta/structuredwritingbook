@@ -188,23 +188,24 @@ chapter:(#chapter.generate) Generated Content
 
         figure:(*fig.generate-isbn-pseudocode) Algorithm to look up book information using the ISBN
             ```(pseudo)
-                match p/title
+                match p/book
                     $isbn = @specifically 
 
                     $book-info = get 'http://example.com/isbn/lookup?' + $isbn
 
                     create i
                         continue
-                        output " ("
-                        output $book-info/book/author
-                        output ", "
-                        output $book-info/book/publisher"/>
-                        output ", " 
-                        output $book-info/book/publication-year"/>
-                        output ", "
-                        output $book-info/book/page-count"/>
-                        output " pages"
-                        output )
+
+                    output " ("
+                    output $book-info/book/author
+                    output ", "
+                    output $book-info/book/publisher"/>
+                    output ", " 
+                    output $book-info/book/publication-year"/>
+                    output ", "
+                    output $book-info/book/page-count"/>
+                    output " pages"
+                    output )
 
         This basic technique opens all kinds of doors. The power of structured writing as a tool to merge information from different sources is enormous. Here are just a few of the tricks you could pull using information retrieved using the ISBN number:
 
@@ -214,7 +215,7 @@ chapter:(#chapter.generate) Generated Content
 
         * Create a link to an online bookstore where readers can buy the book. If you belong to an affiliate program for the online bookstore, you can earn a commission each time a reader follows your link and buys the book.
 
-        You can also realize major process efficiencies by capturing this kind of metadata in your content. If you can use metadata keys to pull information from external sources, writers don’t have to look up that information when they write. And writers don’t have to decide which book details will appear in the final output. That decision is made separately by editing the XSLT style sheet, and you can change that decision for all your existing content simply by changing the style sheet.
+        You can also realize major process efficiencies by capturing this kind of metadata in your content. If you can use metadata keys to pull information from external sources, writers don’t have to look up that information when they write. And writers don’t have to decide which book details will appear in the final output. That decision is made separately by editing the algorithm, and you can change that decision for all your existing content simply by changing the algorithm.
 
         Having writers enter the ISBN number in the content makes writing the algorithm straightforward, and sometimes it is appropriate because you are referring to a particular edition of a book and the ISBN number is the most reliable identifier of a specific edition. But in many case it is actually too specific, and it complicates life if writers have to look up the ISBN when all they want to refer to is the novel itself, regardless of the edition. This distinction can be important. There are many other editions of _War and Peace_, in many languages. _War and Peace_ is a very long book in all those editions and all those languages. The paragraph does not refer specifically to the Vintage Edition of 2008. It refers to _War and Peace_ as a novel generally.         
 
@@ -228,7 +229,7 @@ chapter:(#chapter.generate) Generated Content
 
         In SAM, a phrase in parentheses inside an annotation is a {namespace} identifier. A namespace is a context in which a set of names is guaranteed to be unique. No author publishes more than one novel with the same name, so the name of the author is generally an adequate namespace identifier for the name of a novel. This markup is obviously easier for writers to create than an ISBN. It asks them only for the things they already know, so they won’t have to stop to look anything up. That is an important part of {functional lucidity}.
 
-        However, without an ISBN number, can you still get the book data you want? You can, but you have to use a different query to extract it. The original code did the lookup like this:
+        However, without an ISBN number, can you still get the book data you want? You can, but you have to use a different query to extract it:
 
         ```(pseudo)
             match p/novel
@@ -246,8 +247,8 @@ chapter:(#chapter.generate) Generated Content
         Stated like this it seems obvious which choice you should make, but in practice these decisions are often made by the people developing the algorithms, and they often choose to make their lives easier at the expense of the writers. This may seem like a detail, but when correct partitioning and distribution is at stake, decisions should not be left to one partition to make. These decisions require input from all sides and the attention of the project owners.  
 
     section: Personalized content
-        index:: type, term, term
-            concept, content, personalized
+        index:: type, term
+            concept, content\, personalized
         index:: type, term
             concept, personalized content
     
@@ -285,6 +286,6 @@ chapter:(#chapter.generate) Generated Content
 
         As you have probably noticed, the methods used to generate content have a lot in common with those used to reuse content. That is because content reuse is just a form of content generation. Content reuse means generating more than one form or output content from the same collection of output content. Technically, the mechanisms and algorithms are the same; the differences have more to do with how you think about the problem.
 
-        The biggest difference is that when you think in terms of content generation, you are automatically thinking in {subject-domain} terms. Content generation starts by treating content as data and then generates content from that data. When people think of {content reuse}, however, their thoughts often go straight to the {management domain}, to conditional content and pulling in content by reference. There is also a tendency in content reuse to think of the first use as having a kind of primacy over secondary uses. However, you don't create the first instance as data with many potential uses; you create it for a specific use, which is then serendipitously reused when you discover another potential use for the content.
+        The biggest difference is that when you think in content generation terms, you are automatically thinking in {subject-domain} terms. Content generation starts by treating content as data and then generates content from that data. When people think in {content reuse} terms, however, their thoughts often go straight to the {management domain}, to conditional content and pulling in content by reference. Thinking in content reuse terms also tends to give first use primacy over secondary uses. The first instance is created to serve a specific purpose. You then  serendipitously discover another potential use for the content. Thinking in content generation terms does not give primacy to any one use. The content is created as data with many potential uses. There is no first use or secondary uses. Every use is a production from the source data, and it really does not matter how many such uses there are. 
 
         As I noted in [#chapter.reuse], there are certain kinds of reuse that are only feasible using {management-domain} constructs, but a great deal can be accomplished using the subject-domain approach. Creating conditional markup in your recipe to provide a different beverage match for _Wine Weenie_ and _The Teetotaler's Trumpet_ is a case of {reuse} thinking. Creating structure for alcoholic and non-alcoholic beverage matches to achieve the same goal (and potentially many more) is a case of content generation thinking. In many cases, you will create a far more valuable content resource that is is easier to write for and is easier to maintain by thinking of your content set as a data source from which many kinds of content can be generated rather than a collection of reusable content components.   

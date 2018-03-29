@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.single-sourcing"><db:title>Single Sourcing</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp140576560159920"><db:primary>single sourcing</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp140576560159920x"><db:primary>concept</db:primary><db:secondary>single sourcing</db:secondary></db:indexterm>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.single-sourcing"><db:title>Single Sourcing</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp323552468"><db:primary>single sourcing</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp323552468x"><db:primary>concept</db:primary><db:secondary>single sourcing</db:secondary></db:indexterm>
 
 
 
@@ -7,8 +7,8 @@
 <db:para>The need to publish the same document in more than one medium – for example, print and Web – is a common process problem and source of complexity. You might not suspect that it is also a rhetoric problem, but as I will show, it actually a significant and difficult rhetoric problem as well. The term <db:emphasis>single sourcing</db:emphasis> is used to describe a variety of different ways to address this need, all of which involve using a single body of content to create output in more than one medium.</db:para>
 <db:para>Single sourcing adds complexity to the job of separating content from formatting because you are now separating content from not one but two or more sets of formatting. In other words, you are not simply separating content from formatting, you are separating a set of decisions about formatting from your content so you can make different decisions for each medium. If you don’t get the partitioning correct, problems will show up when you try to apply two different sets of formatting to the same content.</db:para>
 <db:para>Many organizations have unhandled complexity in this area – complexity that can result in rhetorical problems. Often, their authoring techniques do not allow writers to sufficiently separate media-specific formatting from content. As a result, formatting for one medium gets applied to another medium, which means the content in that medium does not work as well as it could. By improving how you separate content from formatting, you can significantly reduce the amount of complexity that goes unhandled, resulting in a better experience for your readers.</db:para>
-<db:section>
-<db:title>Basic single sourcing</db:title>
+<db:section><db:title>Basic single sourcing</db:title>
+
 
 <db:para>The basic single-sourcing algorithm is straightforward (see <db:xref linkend="chapter.processing"/>). Basic single sourcing involves taking a piece of content in the <db:indexterm><db:primary>document domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document domain</db:secondary></db:indexterm>document domain and processing its document-domain structures into different <db:indexterm><db:primary>media-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media-domain</db:secondary></db:indexterm>media-domain structures for each target medium.</db:para>
 <db:para>Suppose you have recorded a recipe in the document domain (see <db:xref linkend="fig.ssa-eggs-1"/>).</db:para>
@@ -141,8 +141,8 @@ match title
 </db:programlisting></db:figure>
 <db:para>The rule shown in <db:xref linkend="fig.ssa-fo-algorithm"/> simply wraps the XSL-FO formatting structures around the text of the title. It unpacks the text from a <db:indexterm><db:primary>document-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>document-domain</db:secondary></db:indexterm>document-domain structure and inserts it into a <db:indexterm><db:primary>media-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>media-domain</db:secondary></db:indexterm>media-domain structure.</db:para>
 </db:section>
-<db:section>
-<db:title>Differential single sourcing</db:title>
+<db:section><db:title>Differential single sourcing</db:title>
+
 
 <db:para>Basic <db:emphasis>single sourcing</db:emphasis> outputs the same document presentation to different media. However, each medium is different, and what works well in one medium does not always work as well in another. Thus the rhetoric that is appropriate to one media may not be appropriate to another, This is what I meant when I said at the beginning that single sourcing is a rhetoric problem as well as a process problem.</db:para>
 <db:para>For example, online media generally support <db:indexterm><db:primary>hypertext</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>hypertext</db:secondary></db:indexterm>hypertext links, while paper does not. Suppose you have a piece of content that includes a link:</db:para>
@@ -217,8 +217,8 @@ match actor
 </db:programlisting></db:figure>
 <db:para>This assumes the existence of a system that can respond to the <db:code>get link</db:code> instruction and look up pages to link to based on the type and a name of a subject. I look at such a system in <db:xref linkend="chapter.linking"/>, which revisits this example in more detail.</db:para>
 </db:section>
-<db:section>
-<db:title>Differential organization and presentation</db:title>
+<db:section><db:title>Differential organization and presentation</db:title>
+
 
 <db:para>Differences in presentation between media can be broader than this. Paper documents sometimes use complex tables and elaborate layouts that don’t translate well to online media. Effective table layout depends on knowing the width of the page you have available, and online you don’t know that. A table that looks great on paper may be unreadable on a mobile device, for instance.</db:para>
 <db:para>And this is more than a layout issue. Sometimes the things that paper does in a static way should be done dynamically in online media. For example, airline and train schedules have traditionally been printed as timetables on paper, but you rarely see them presented that way online. Rather, you see an interactive travel planner that lets you choose your starting point, destination, and desired travel times and then presents you with the best schedule, including when and where to make connections. If your single source is a timetable designed for print and PDF, you can’t produce the kind of online presentation of your schedule that people expect, and that can have a direct impact on your business.</db:para>
@@ -228,8 +228,8 @@ match actor
 <db:para>In this scenario, you move content to the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain to partition the presentation from the information, which allows you to produce a different information design for different media (see <db:xref linkend="ex.ssa-differential"/>). I examine these scenarios in more depth in <db:xref linkend="chapter.wide"/>.</db:para>
 <db:figure xml:id="ex.ssa-differential"><db:title>Information design for single sourcing</db:title><db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/Differential.svg" contentwidth="3.5in" align="center"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/Differential.png"/></db:imageobject><db:textobject><db:para>A diagram showing differential single sourcing.</db:para></db:textobject></db:mediaobject></db:figure>
 </db:section>
-<db:section>
-<db:title>Conditional differential design</db:title>
+<db:section><db:title>Conditional differential design</db:title>
+
 
 <db:para>You can also do differential single sourcing by using conditional <db:indexterm><db:primary>management-domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>management-domain</db:secondary></db:indexterm>management-domain structures in the document domain.</db:para>
 <db:para>For instance, if you are writing a manual that you intend to single source to a help system, you might want to add context setting information to the start of a section when it appears in the help system. The manual may be designed to be read sequentially, meaning that the context of individual sections is established by what came before. But help systems are always accessed randomly, meaning that the context of a particular help topic may not be clear if it was single sourced from a manual. To accommodate this, you could include a context-setting paragraph that is conditionalized to appear only in help output (see <db:xref linkend="ex.ssa-conditional-1"/>):</db:para>
@@ -259,8 +259,8 @@ match fragment where conditions = help-only
     continue
 </db:programlisting>
 </db:section>
-<db:section>
-<db:title>Primary and secondary media</db:title>
+<db:section><db:title>Primary and secondary media</db:title>
+
 
 <db:para>While differential single sourcing can help you output documents with the appropriate rhetoric in multiple media, there are limits to how far this approach can take you.</db:para>
 <db:para>Books are a linear medium in which one chapter follows another in order. The Web is a <db:indexterm><db:primary>hypertext</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>hypertext</db:secondary></db:indexterm>hypertext medium in which every page is page one. Readers arrive at a page via search, and they navigate by following hypertext links. The linear and hypertext approaches are fundamentally different ways of writing that invite fundamentally different ways of navigating and using information.<db:footnote>
@@ -274,5 +274,5 @@ match fragment where conditions = help-only
 <db:para>Often, the tools a group uses implicitly determine the primary medium. This usually means that the primary medium is paper, and paper often continues to be primary even after the organization stops producing paper, and their readers have moved to online formats.</db:para>
 <db:para>Some organizations think they should not switch to tools that are designed primarily for online content until they have entirely abandoned paper and paper-like formats such as PDF. But once online becomes your primary media, your rhetoric should change to a rhetoric appropriate to online media (potentially a very large change, as discussed in <db:xref linkend="chapter.architecture"/>). Thus it is appropriate to switch to a rhetoric and tool set that is optimized for online but that can still produce linear media as a secondary output format.</db:para>
 <db:para>Changing your information design practices from linear, paper-based designs to <db:indexterm><db:primary>hypertext</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>hypertext</db:secondary></db:indexterm>hypertext designs is not trivial, but such designs better suit the way many people use and access content today. I discuss these design differences in depth in my book, <db:indexterm><db:primary>Every Page is Page One: Topic-based Writing for Technical Communication and the Web</db:primary></db:indexterm><db:indexterm><db:primary>citetitle</db:primary><db:secondary>Every Page is Page One: Topic-based Writing for Technical Communication and the Web</db:secondary></db:indexterm><db:citetitle>Every Page is Page One: Topic-based Writing for Technical Communication and the Web</db:citetitle>. Don’t expect single sourcing, by itself, to successfully turn document-oriented design into effective hypertext. It is usually more effective to adopt an <db:indexterm><db:primary>Every Page is Page One</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>Every Page is Page One</db:secondary></db:indexterm>Every Page is Page One approach to information design and use structured writing and single-sourcing techniques as a best-effort method to create linear media for those of your readers who still need paper or paper-like formats – or for those documents where linear organization still makes sense.</db:para>
-<db:indexterm class="endofrange" startref="idp140576560159920"/><db:indexterm class="endofrange" startref="idp140576560159920x"/></db:section>
+<db:indexterm class="endofrange" startref="idp323552468"/><db:indexterm class="endofrange" startref="idp323552468x"/></db:section>
 </db:chapter>

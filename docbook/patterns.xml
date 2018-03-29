@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.patterns"><db:title>Patterns</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp140487291784672"><db:primary>patterns</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp140487291784672x"><db:primary>concept</db:primary><db:secondary>patterns</db:secondary></db:indexterm>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.patterns"><db:title>Patterns</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp324475508"><db:primary>patterns</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp324475508x"><db:primary>concept</db:primary><db:secondary>patterns</db:secondary></db:indexterm>
 
 
 
@@ -30,8 +30,8 @@ date:
 that will live in infamy. 
 </db:programlisting>
 <db:para>Of course, a sufficiently clever algorithm could recognize <db:code>December 7, 1941</db:code> as a date as well, because it is a predictable pattern. One of the defining features of patterns is that you can recognize the semantic equivalence between two patterns that express the same information. You can increase the <db:indexterm><db:primary>functional lucidity</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>functional lucidity</db:secondary></db:indexterm>functional lucidity of your markup by recognizing a variety of semantically equivalent patterns, rather than imposing a uniform syntax on writers.</db:para>
-<db:section>
-<db:title>Design implications</db:title>
+<db:section><db:title>Design implications</db:title>
+
 
 <db:para>XML recognizes the value of patterns. The XML data types standard<db:footnote><db:para>https://www.w3.org/TR/xmlschema-2/</db:para></db:footnote> defines a number of common patterns, and the XML schema language (<db:indexterm><db:primary>XSD</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSD</db:secondary></db:indexterm>XSD)<db:footnote><db:para>https://www.w3.org/standards/xml/schema</db:para></db:footnote> allows you to define patterns for use in your own markup. It calls these patterns “simple types” (as opposed to “complex types,” which are composed of multiple nested elements). Thus, in <db:indexterm><db:primary>XSD</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>XSD</db:secondary></db:indexterm>XSD, you can specify that the contents of a date field must conform to the simple type <db:code>xs:date</db:code>, which is a pattern based on <db:indexterm><db:primary>ISO 8601</db:primary></db:indexterm><db:indexterm><db:primary>standard</db:primary><db:secondary>ISO 8601</db:secondary></db:indexterm>ISO 8601. If the schema defines the data type for the <db:code>date</db:code> element as <db:code>xs:date</db:code>, you can do following:</db:para>
 <db:programlisting language="xml">
@@ -119,5 +119,5 @@ Group `quantity`    52-53    `4`
 </db:programlisting>
 <db:para>The first <db:code>ingredient</db:code> fails because the quantity (12) appears before the ingredient, not after. The next two fail because cups and lumps are not on the list of strings recognized by the pattern, which probably should be extended to allow cups, but not lumps. In <db:xref linkend="fig.xsd-ingredients"/>, the names of the fields that were present in the original regular expression are omitted because XML schema is not going to break the values apart and put them in separate fields for us. As far as XML schema is concerned, this is just the definition of a single element. It would be up to a processing application to break the pieces apart into make separate fields.</db:para>
 <db:para>By the way, though I have used the ingredients listing as an example here, I probably would not use this pattern in a production system. While the <db:code>eggs, 12, each</db:code> structure is a tiny bit unnatural, its explicitness makes it less error prone. It is less likely that writers will get the order of information wrong and have to pause to deal with an error message. Asking writers to break the information apart explicitly is probably the lesser of two evils. When using patterns to improve functional lucidity, you need to balance naturalness against explicitness.</db:para>
-<db:indexterm class="endofrange" startref="idp140487291784672"/><db:indexterm class="endofrange" startref="idp140487291784672x"/></db:section>
+<db:indexterm class="endofrange" startref="idp324475508"/><db:indexterm class="endofrange" startref="idp324475508x"/></db:section>
 </db:chapter>
