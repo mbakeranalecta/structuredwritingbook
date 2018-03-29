@@ -5,7 +5,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
     index:: type, term
         concept, single sourcing
 
-    The need to publish the same document in more than one medium -- for example, print and Web -- is a common process problem and source of complexity. You might not suspect that it is also a rhetoric problem, but as I will show, it actually a significant and difficult rhetoric problem as well. The term _single sourcing_ is used to describe a variety of different ways to address this need, all of which involve using a single body of content to create output in more than one medium.
+    The need to publish the same document in more than one medium -- for example, print and web -- is a common process problem and source of complexity. You might not suspect that it is also a rhetoric problem, but as I will show, it actually a significant and difficult rhetoric problem as well. The term _single sourcing_ is used to describe a variety of different ways to address this need, all of which involve using a single body of content to create output in more than one medium.
 
     Single sourcing adds complexity to the job of separating content from formatting because you are now separating content from not one but two or more sets of formatting. In other words, you are not simply separating content from formatting, you are separating a set of decisions about formatting from your content so you can make different decisions for each medium. If you don't get the partitioning correct, problems will show up when you try to apply two different sets of formatting to the same content. 
     
@@ -42,7 +42,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
                             li: Peel and serve.
         
                
-        You can output this recipe to two different media by applying two different formatting algorithms. First you output to the Web by creating {HTML} (see [*fig.ssa-recipe2html]).
+        You can output this recipe to two different media by applying two different formatting algorithms. First you output to the web by creating {HTML} (see [*fig.ssa-recipe2html]).
 
         figure:(*fig.ssa-recipe2html) Pseudocode to convert document-domain recipe to HTML output
             pagination-tweak:
@@ -118,7 +118,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
                 </html>
         
         
-        Outputting to paper (or to PDF, which is a kind of virtual paper) is more complex. On the Web, you output to a screen which is of flexible width and infinite length. The browser wraps lines of text to the screen width (unless formatting commands tell it to do otherwise), and there is no issue with breaking text from one page to another. For paper, however, you have to fit content into a set of fixed-size pages.   
+        Outputting to paper (or to PDF, which is a kind of virtual paper) is more complex. On the web, you output to a screen which is of flexible width and infinite length. The browser wraps lines of text to the screen width (unless formatting commands tell it to do otherwise), and there is no issue with breaking text from one page to another. For paper, however, you have to fit content into a set of fixed-size pages.   
         
         This introduces a number of formatting issues, including the following:
         
@@ -129,7 +129,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         Because of issues like this, you don't write a formatting algorithm for paper the same the way you write an algorithm for HTML. Instead, you use an intermediate typesetting system that already knows how to handle tasks such as inserting page-number references and handling line and page breaks. Rather than handling these things yourself, you give the typesetting system general guidance and then let it do its job.
 
-        One such typesetting system is {XSL-FO}(language) (Extensible Stylesheet Language - Formatting Objects). Other typesetting systems include {TeX}(language) and newer versions of {CSS}(language). XSL-FO is a typesetting language written in {XML}(language). To format your content using {XSL-FO}, you transform your source content into {XSL-FO} markup, just the way you transform it into {HTML}(language) for the Web. But then you run the {XSL-FO} markup through an {XSL-FO} processor to produce your final output, typically {PDF}(language). 
+        One such typesetting system is {XSL-FO}(language) (Extensible Stylesheet Language - Formatting Objects). Other typesetting systems include {TeX}(language) and newer versions of {CSS}(language). XSL-FO is a typesetting language written in {XML}(language). To format your content using {XSL-FO}, you transform your source content into {XSL-FO} markup, just the way you transform it into {HTML}(language) for the web. But then you run the {XSL-FO} markup through an {XSL-FO} processor to produce your final output, typically {PDF}(language). 
         
         Here is a small example of XSL-FO markup:
         
@@ -169,7 +169,10 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         
         In SAM syntax, the link markup (`link "http://JohnWayne.com"`) specifies the address to link to. In the algorithm examples below, I refer to this markup as the _specifically_ attribute using the notation `@specifically`.
-        
+
+        pagination-tweak:
+            min-space: 1.5in
+            
         In HTML, you output this as a link using the HTML `a` element, so the algorithm looks like [*fig.ssa-specifically-1].
 
         figure:(*fig.ssa-specifically-1) Algorithm to generate HTML link from the `@specifically` attribute
@@ -212,6 +215,9 @@ chapter:(#chapter.single-sourcing) Single Sourcing
                     output @specifically
                     output ") "
             
+        pagination-tweak:
+            min-space: 1.5in
+            
         This will produce the output in [*fig.ssa-specifically-out]:
 
         figure:(*fig.ssa-specifically-out) Output of [*fig.ssa-specifically-out]
@@ -223,14 +229,14 @@ chapter:(#chapter.single-sourcing) Single Sourcing
                 </fo:block>
           
         
-        This works, but note that the effect is not the same in each medium. Online, the link to JohnWayne.com disambiguates the phrase "The Duke" for those readers who do not recognize it. A simple click on the link will explain who "the Duke" is. But in the paper example, such disambiguation exists only incidentally, because the words "JohnWayne" happen to appear in the URL. This is not how you would disambiguate "The Duke" if you were writing for paper. You would be more likely to do something like this:
+        This works, but notice that the effect is different in print ([*fig.ssa-specifically-out]) and online ([*fig.ssa-specifically-1-output]). Online, the link to `JohnWayne.com` disambiguates the phrase "The Duke" for those readers who do not recognize it. A simple click on the link will explain who "the Duke" is. But in the paper example, such disambiguation exists only incidentally, because the words "JohnWayne" happen to appear in the URL. This is not how you would disambiguate "The Duke" if you were writing for paper. You would be more likely to do something like this:
         
         """
             The Duke (John Wayne) plays an ex-Union colonel.
 
-        This provides readers with less information, in the sense that it does not give them access to all the information on JohnWayne.com, but it does a better job of disambiguation and in a more paper-like way. It is a rhetoric appropriate to the media. The loss of the reference to JohnWayne.com is probably not an issue here. Following that link by typing it into a browser is a lot more work than simply clicking on a Web link. Someone who wants more information on John Wayne is far more likely to type "John Wayne" into Google than type "JohnWayne.com" into the browser address bar.   
+        This provides readers with less information, in the sense that it does not give them access to all the information on `JohnWayne.com`, but it does a better job of disambiguation, and it does so in a more paper-like way. It is a rhetoric appropriate to the media. Losing the reference to `JohnWayne.com` is probably not an issue here. Following that link by typing it into a browser is a lot more work than simply clicking on a web link. Someone who wants more information on John Wayne is far more likely to type "John Wayne" into Google than type "JohnWayne.com" into the browser address bar.   
         
-        As written, the source content provides no easy way to produce this preferred form for paper. The content is in the {document domain}(concept), which specifies the presentation of the content. Therefore, it is not a neutral format between media that require different forms of presentation. The choice to specify a link directly in the markup gives it a strong bias towards the Web and online media rather than paper. A {document-domain} approach that favored paper would similarly lead to a poorer online presentation by omitting the link. 
+        As written, the source content provides no easy way to produce this preferred form for paper. The content is in the {document domain}(concept), which specifies the presentation of the content. Therefore, it is not a neutral format between media that require different forms of presentation. The choice to specify a link directly in the markup gives it a strong bias towards the web and online media rather than paper. A {document-domain} approach that favored paper would similarly lead to a poorer online presentation by omitting the link. 
         
         Because different media require a different rhetoric, you need a _differential_ approach to single sourcing, one that allows you to differ not only the formatting but the presentation of the content for different media.
         
@@ -255,7 +261,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
                     output @specifically
                     output ") "
                         
-        figure:(*fig.ssa-specifically-3-web) Algorithm to Web links from subject-domain markup
+        figure:(*fig.ssa-specifically-3-web) Algorithm to web links from subject-domain markup
 
             ```
                 match actor
@@ -266,6 +272,9 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         
         This assumes the existence of a system that can respond to the `get link` instruction and look up pages to link to based on the type and a name of a subject. I look at such a system in [#chapter.linking], which revisits this example in more detail.  
+
+    pagination-tweak:
+        min-space: 2in
         
     section: Differential organization and presentation
     
@@ -275,7 +284,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         To single-source schedule information for both paper and online media, you can't maintain that content in a document-domain table structure. You need to maintain it in a timetable database structure (which is in the {subject domain}, even though it looks like a database, not a document). 
         
-        An algorithm can read such a database to generate a document-domain table for print publication. For the Web, however, you can create a web application that queries the same database dynamically to calculate routes and schedules for individual travelers. 
+        An algorithm can read such a database to generate a document-domain table for print publication. For the web, however, you can create a web application that queries the same database dynamically to calculate routes and schedules for individual travelers. 
         
         # pix of timetable and routing widget ???
 
@@ -327,7 +336,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         While differential single sourcing can help you output documents with the appropriate rhetoric in multiple media, there are limits to how far this approach can take you. 
         
-        Books are a linear medium in which one chapter follows another in order. The Web is a {hypertext} medium in which every page is page one. Readers arrive at a page via search, and they navigate by following hypertext links. The linear and hypertext approaches are fundamentally different ways of writing that invite fundamentally different ways of navigating and using information.[*eppo] Even moving content to the {subject domain} as much as possible does not entirely factor out these fundamental differences in approach. 
+        Books are a linear medium in which one chapter follows another in order. The web is a {hypertext} medium in which every page is page one. Readers arrive at a page via search, and they navigate by following hypertext links. The linear and hypertext approaches are fundamentally different ways of writing that invite fundamentally different ways of navigating and using information.[*eppo] Even moving content to the {subject domain} as much as possible does not entirely factor out these fundamental differences in approach. 
 
         footnote:(*eppo)
             For a full examination of the differences, see my book {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}(citetitle "Baker2013").
