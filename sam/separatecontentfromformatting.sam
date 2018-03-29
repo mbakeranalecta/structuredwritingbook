@@ -6,11 +6,11 @@ chapter:(#chapter.separating) Separating Content from Formatting
     index:: type, term
         concept, separating content from formatting
 
-    If there is one phrase that most people associate with structured writing, it is "separating content from formatting." This is the most basic and well-known structured writing algorithm and it can be used to achieve a number of process and rhetorical goals. It is a useful place to start the study of algorithms because it illustrates the strategies used for all the other algorithms. Separating content from formatting separates decisions about the appearance of a document from decisions about its content. However, as you will see in this chapter, doing this is not as simple as it may seem.
+    If there is one phrase that most people associate with structured writing, it is "separating content from formatting." This basic, well-known structured writing algorithm can be used to achieve a number of process and rhetorical goals. It is a useful place to start the study of algorithms because it illustrates the strategies used for all the other algorithms. Separating content from formatting separates decisions about the appearance of a document from decisions about its content.
     
     section: Separate out style instructions
     
-        Let's start with a piece of text that includes a description of its format. I use CSS syntax to describe the format because but CSS is easy to understand and helps illustrate the separation, but don't focus on the syntax, it is just there to illustrate the principle. I also represent certain characters (bullets and tabs) by their names, so you can see exactly where everything is going:
+        Let's start with a piece of text that includes a description of its format. I use CSS syntax to describe the format because CSS is easy to understand and helps illustrate the separation, but don't focus on the syntax, it is just there to illustrate the principle. I also represent certain characters (bullets and tabs) by their names, so you can see exactly where everything is going:
         
         ```
             {font: 10pt "Open Sans"}The box contains:
@@ -32,8 +32,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
        
         ```
             paragraph = {font: 10pt "Open Sans"}
-        
-        
+                    
         Once you separate the style information, you can change the formatting without changing the text; for example, you could choose a different font:
         
         ```
@@ -42,9 +41,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
     
     section: Separate out formatting characters
        
-        Cool, but suppose you need to change the style of the bullets. The bullet style is certainly formatting, but bullets are text characters. To change them you can't just change the font, you have to change the characters themselves. 
-        
-        Some characters in your text are part of the content, and some are part of the formatting. Therefore, a style may include characters as well as formatting directives, as shown here:
+        Cool, but suppose you need to change the style of the bullets. The bullet style is certainly formatting, but bullets are text characters. To change them you can't just change the font, you have to change the characters themselves. Some characters in your text are part of the content, and some are part of the formatting. Therefore, a style may include characters as well as formatting directives, as shown here:
         
         ```
             paragraph = {font: 12pt "Century Schoolbook"}
@@ -220,35 +217,31 @@ chapter:(#chapter.separating) Separating Content from Formatting
         
         Some markup languages take better advantage of containers than others. For example, HTML and Markdown both provide six different heading levels. However, content under an `H2` or an `H5` heading is not in any container. The content simply comes after the heading. This means that is it perfectly possible and legal to use heading elements in any order you want. Writers must select the heading level and ensure that it fits the structure of their document.
           
-        By contrast, {DocBook}(language) has a {section}(structure (DocBook)) structure. Like a list, a section records your interpretation of what you are creating in the document. The {section} structure instantiates the concept of a section. And once you have the instantiation of a section, you don't need six levels of heading. You can have one structure called {title}(structure (DocBook)). Sections can be nested inside other sections, and the formatting algorithm applies the correct style to the title based on context:
-        
+        By contrast, {DocBook}(language) has a {section}(structure (DocBook)) structure. Like a list, a section records your interpretation of what you are creating in the document. The {section} structure instantiates the concept of a section. And once you have the instantiation of a section, you don't need six levels of heading. You can have one structure called {title}(structure (DocBook)). Sections can be nested inside other sections, and the formatting algorithm applies the correct style to the title based on context.
+
+        This eliminates decisions about which heading element to use; there is just one: `title`. This ensures that headings in output consistently reflect the document's section and subsection structure.[*fn.signposts] 
+               
         ```
             section: 
                 title:
                 paragraph:
                 section:
                     title:
-        
-        
-        This eliminates decisions about which heading element to use; there is just one: `title`. This ensures that the headings in the output consistently reflect the section and subsection structure of the document.[*fn.signposts] 
-
+                
         footnote:(*fn.signposts)
             Not everyone holds to the view that headings in a text must reflect a hierarchy of sections. Instead, headings may be simply signposts along the way, where the size of the sign reflects some quality -- size of the town or the importance of the section -- other than a strict hierarchy. If that is how you look at document structures, you should choose a different way to separate content from formatting.
         
     section: Separate out abstract formatting
         
-        To separate content from formatting for ordered and unordered lists, you must separate out some of the content as well. Specifically, you must separate out some of the characters. The distinction between content and formatting is not the same as the distinction between characters and the styles applied to them. Sometimes characters are part of the formatting rather than the content.  
-        
-        Consider a labeled-list structure:
-        
-        """   
-            |Street| 123 Elm Street
+        To separate content from formatting for ordered and unordered lists, you must separate out some of the content as well. Specifically, you must separate out some of the characters. The distinction between content and formatting is not the same as the distinction between characters and the styles applied to them. Sometimes characters are part of the formatting rather than the content. Consider the following labeled-list structure:        
+
+        |Street| 123 Elm Street       
+
+        |Town| Smallville
             
-            |Town| Smallville
+        |Country| USA
             
-            |Country| USA
-            
-            |Code| 12345
+        |Code| 12345
         
         The generic structure of a labeled list might look like this:
         
