@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.patterns"><db:title>Patterns</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp324475508"><db:primary>patterns</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp324475508x"><db:primary>concept</db:primary><db:secondary>patterns</db:secondary></db:indexterm>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.patterns"><db:title>Patterns</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp2113611892"><db:primary>patterns</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp2113611892x"><db:primary>concept</db:primary><db:secondary>patterns</db:secondary></db:indexterm>
 
 
 
@@ -119,5 +119,5 @@ Group `quantity`    52-53    `4`
 </db:programlisting>
 <db:para>The first <db:code>ingredient</db:code> fails because the quantity (12) appears before the ingredient, not after. The next two fail because cups and lumps are not on the list of strings recognized by the pattern, which probably should be extended to allow cups, but not lumps. In <db:xref linkend="fig.xsd-ingredients"/>, the names of the fields that were present in the original regular expression are omitted because XML schema is not going to break the values apart and put them in separate fields for us. As far as XML schema is concerned, this is just the definition of a single element. It would be up to a processing application to break the pieces apart into make separate fields.</db:para>
 <db:para>By the way, though I have used the ingredients listing as an example here, I probably would not use this pattern in a production system. While the <db:code>eggs, 12, each</db:code> structure is a tiny bit unnatural, its explicitness makes it less error prone. It is less likely that writers will get the order of information wrong and have to pause to deal with an error message. Asking writers to break the information apart explicitly is probably the lesser of two evils. When using patterns to improve functional lucidity, you need to balance naturalness against explicitness.</db:para>
-<db:indexterm class="endofrange" startref="idp324475508"/><db:indexterm class="endofrange" startref="idp324475508x"/></db:section>
+<db:indexterm class="endofrange" startref="idp2113611892"/><db:indexterm class="endofrange" startref="idp2113611892x"/></db:section>
 </db:chapter>

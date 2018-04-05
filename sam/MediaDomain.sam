@@ -57,10 +57,10 @@ chapter:(#chapter.media-domain) Writing in the Media Domain
         
         The vector graphics program needs to know the shape of each character to render a text object in the media domain. However, that information is not stored as part of the text object. The representation of the text in the paint program includes the shape of the letters but in the vector graphics program it does not. That information has been moved out into a font file. 
 
-        figure:(*merge_text_and_font) Merging text and font information
+        figure:(#fig.merge_text_and_font) Merging text and font information
             >>>(image ../graphics/TextPlusFont.xml)
 
-        The shapes of the letters (technically, {glyphs}+(italic)) that make up the font are stored in font files. Font files consist of a set of shape objects that describe each glyph together with metadata such as the name of the font and the name of each glyph. To display the text, the graphics program uses information in the text object to identify the correct font file, locate the right glyph in that font file, and then draw the appropriate glyph on the current medium (see [*merge_text_and_font]). 
+        The shapes of the letters (technically, {glyphs}+(italic)) that make up the font are stored in font files. Font files consist of a set of shape objects that describe each glyph together with metadata such as the name of the font and the name of each glyph. To display the text, the graphics program uses information in the text object to identify the correct font file, locate the right glyph in that font file, and then draw the appropriate glyph on the current medium (see [#fig.merge_text_and_font]). 
 
         Every modern operating system partitions the rendering of fonts into a separate font system that any application can use. By transferring font rendering complexity to the font system, the OS designers make it easier for developers to create applications that work with formatted text. Rather than programming font handling themselves, programmers call operating system APIs ({Application Programming Interfaces}(concept)) to do it for them. It also makes things easier for font designers, since it partitions off the problems of installing fonts and making them available to applications.
 

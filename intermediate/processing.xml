@@ -28,7 +28,7 @@
 <term>processing structured text</term>
 </record>
 </index>
-<p><citation nameref="chapter.separating"/> looked at separating content from formatting. Separating them is necessary to achieving certain rhetorical and process goals. But of course they cannot stay separated. Content must be formatted before you present it to the reader. So let’s look at the algorithm for putting them back together again.</p>
+<p><citation nameref="chapter.separating"/> looked at separating content from formatting. Separating them is necessary to achieving certain rhetorical and process goals. But of course they cannot stay separated. Content must be formatted before you present it to the reader. So let’s look at the algorithm for putting content and formatting back together again.</p>
 <p>Understanding how to put things back together is a big part of understanding how to separate them. Indeed, describing how you would put them back together is the only way to know for certain that you didn’t lose anything when you did the separation. This is essential to ensuring a clean partitioning that does not allow any complexity to fall through the cracks.</p>
 <section>
 <title>Two into one: reversing the factoring out of invariants</title>
@@ -101,7 +101,7 @@ find {style: bullet-paragraph}
 <title>Rules based on structures</title>
 
 <p>The tools that do this sort of processing do not literally use search and replace like this. Rather, they parse the source document to pull out the structures and allow you to specify your processing rules by referring to those structures.</p>
-<p>The mechanism by which a processing tool recognizes structure is not our focus here. We are just going to tell it what to do when it finds a structure. So, the next set of rules match structures rather than looking for literal strings in the text:</p>
+<p>The mechanism by which a processing tool recognizes structure is not the focus here. You just tell the tool what to do when it finds a structure. So, the next set of rules match structures rather than looking for literal strings in the text:</p>
 <codeblock>
 match paragraph
     apply style {font: 12pt "Century Schoolbook"}

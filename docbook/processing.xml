@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.processing"><db:title>Processing Structured Text</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp326273124"><db:primary>processing structured text</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp326273124x"><db:primary>task</db:primary><db:secondary>processing structured text</db:secondary></db:indexterm>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.processing"><db:title>Processing Structured Text</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp2107249236"><db:primary>processing structured text</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp2107249236x"><db:primary>task</db:primary><db:secondary>processing structured text</db:secondary></db:indexterm>
 
 
 
 
-<db:para><db:xref linkend="chapter.separating"/> looked at separating content from formatting. Separating them is necessary to achieving certain rhetorical and process goals. But of course they cannot stay separated. Content must be formatted before you present it to the reader. So let’s look at the algorithm for putting them back together again.</db:para>
+<db:para><db:xref linkend="chapter.separating"/> looked at separating content from formatting. Separating them is necessary to achieving certain rhetorical and process goals. But of course they cannot stay separated. Content must be formatted before you present it to the reader. So let’s look at the algorithm for putting content and formatting back together again.</db:para>
 <db:para>Understanding how to put things back together is a big part of understanding how to separate them. Indeed, describing how you would put them back together is the only way to know for certain that you didn’t lose anything when you did the separation. This is essential to ensuring a clean partitioning that does not allow any complexity to fall through the cracks.</db:para>
 <db:section><db:title>Two into one: reversing the factoring out of invariants</db:title>
 
@@ -77,7 +77,7 @@ find {style: bullet-paragraph}
 
 
 <db:para>The tools that do this sort of processing do not literally use search and replace like this. Rather, they parse the source document to pull out the structures and allow you to specify your processing rules by referring to those structures.</db:para>
-<db:para>The mechanism by which a processing tool recognizes structure is not our focus here. We are just going to tell it what to do when it finds a structure. So, the next set of rules match structures rather than looking for literal strings in the text:</db:para>
+<db:para>The mechanism by which a processing tool recognizes structure is not the focus here. You just tell the tool what to do when it finds a structure. So, the next set of rules match structures rather than looking for literal strings in the text:</db:para>
 <db:programlisting>
 match paragraph
     apply style {font: 12pt "Century Schoolbook"}
@@ -354,5 +354,5 @@ match code
 <db:para>This chapter does not by any means describe the full range of available content processing techniques or all the ways in which algorithms can recognize and manipulate structures in content. The point of introducing structured writing algorithms and the basics of content processing is to enable you to think about structures with an eye to how they can be processed. Often when you look at structures in this way you can see how you can use a simpler structure and how that simpler structure can be processed to achieve the same result as a more complex structure.</db:para>
 <db:para>Don’t be afraid to write out your algorithms in pseudocode to make sure you have a clear idea of the processing you intend for your structures, and don’t feel confined by the algorithms shown in this book or the annotation I use for pseudocode. You own your pseudocode. Choose a format that is clear to you and that communicates clearly to whoever will be implementing the actual code. Working together with that person can help you improve your appreciation of algorithms and your ability to write useful pseudocode.</db:para>
 <db:para>Can learning to write real code help with this to? Absolutely it can. Is it necessary? No. What is essential is to think in terms of distributing certain parts of your content system to algorithms and to develop the ability to describe those algorithms and structures well enough that a programmer can implement them.</db:para>
-<db:indexterm class="endofrange" startref="idp326273124"/><db:indexterm class="endofrange" startref="idp326273124x"/></db:section>
+<db:indexterm class="endofrange" startref="idp2107249236"/><db:indexterm class="endofrange" startref="idp2107249236x"/></db:section>
 </db:chapter>

@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.separating"><db:title>Separating Content from Formatting</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp323790180"><db:primary>separating content from formatting</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp323790180x"><db:primary>concept</db:primary><db:secondary>separating content from formatting</db:secondary></db:indexterm>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.separating"><db:title>Separating Content from Formatting</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp2112717316"><db:primary>separating content from formatting</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp2112717316x"><db:primary>concept</db:primary><db:secondary>separating content from formatting</db:secondary></db:indexterm>
 
 
 
 
-<db:para>If there is one phrase that most people associate with structured writing, it is “separating content from formatting.” This is the most basic and well-known structured writing algorithm and it can be used to achieve a number of process and rhetorical goals. It is a useful place to start the study of algorithms because it illustrates the strategies used for all the other algorithms. Separating content from formatting separates decisions about the appearance of a document from decisions about its content. However, as you will see in this chapter, doing this is not as simple as it may seem.</db:para>
+<db:para>If there is one phrase that most people associate with structured writing, it is “separating content from formatting.” This basic, well-known structured writing algorithm can be used to achieve a number of process and rhetorical goals. It is a useful place to start the study of algorithms because it illustrates the strategies used for all the other algorithms. Separating content from formatting separates decisions about the appearance of a document from decisions about its content.</db:para>
 <db:section><db:title>Separate out style instructions</db:title>
 
 
-<db:para>Let’s start with a piece of text that includes a description of its format. I use CSS syntax to describe the format because but CSS is easy to understand and helps illustrate the separation, but don’t focus on the syntax, it is just there to illustrate the principle. I also represent certain characters (bullets and tabs) by their names, so you can see exactly where everything is going:</db:para>
+<db:para>Let’s start with a piece of text that includes a description of its format. I use CSS syntax to describe the format because CSS is easy to understand and helps illustrate the separation, but don’t focus on the syntax, it is just there to illustrate the principle. I also represent certain characters (bullets and tabs) by their names, so you can see exactly where everything is going:</db:para>
 <db:programlisting>
 {font: 10pt "Open Sans"}The box contains:
 {font: 10pt "Open Sans"}[bullet][tab]Sand
@@ -34,8 +34,7 @@ paragraph = {font: 12pt "Century Schoolbook"}
 <db:section><db:title>Separate out formatting characters</db:title>
 
 
-<db:para>Cool, but suppose you need to change the style of the bullets. The bullet style is certainly formatting, but bullets are text characters. To change them you can’t just change the font, you have to change the characters themselves.</db:para>
-<db:para>Some characters in your text are part of the content, and some are part of the formatting. Therefore, a style may include characters as well as formatting directives, as shown here:</db:para>
+<db:para>Cool, but suppose you need to change the style of the bullets. The bullet style is certainly formatting, but bullets are text characters. To change them you can’t just change the font, you have to change the characters themselves. Some characters in your text are part of the content, and some are part of the formatting. Therefore, a style may include characters as well as formatting directives, as shown here:</db:para>
 <db:programlisting>
 paragraph = {font: 12pt "Century Schoolbook"}
 bullet-paragraph = {font: 12pt "Century Schoolbook"}[bullet]
@@ -176,7 +175,10 @@ unordered-list:
 <db:para>Now, you have a single <db:code>list-item</db:code> structure that you can use in either an unordered list or an ordered list; the <db:indexterm><db:primary>formatting algorithm</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>formatting algorithm</db:secondary></db:indexterm>formatting algorithm determines the formatting based on which type of list the list-item belongs to. The name <db:code>list-item</db:code> describes a role in the document that is entirely separate from formatting.</db:para>
 <db:para>Moving the abstraction out to the container is an important part of the algorithm for separating content from formatting. It partitions ordered and unordered lists, making the construction of each simpler and more reliable. This helps keep things consistent and reduces the number of things writers have to remember. (Notice that this requires writers to decide whether a list is ordered or unordered, but they had to decide this anyway; the decision is implicit in the rhetoric of the piece.)</db:para>
 <db:para>Some markup languages take better advantage of containers than others. For example, HTML and Markdown both provide six different heading levels. However, content under an <db:code>H2</db:code> or an <db:code>H5</db:code> heading is not in any container. The content simply comes after the heading. This means that is it perfectly possible and legal to use heading elements in any order you want. Writers must select the heading level and ensure that it fits the structure of their document.</db:para>
-<db:para>By contrast, <db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DocBook</db:secondary></db:indexterm>DocBook has a <db:indexterm><db:primary>section</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>section</db:secondary></db:indexterm><db:code>section</db:code> structure. Like a list, a section records your interpretation of what you are creating in the document. The <db:indexterm><db:primary>section</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>section</db:secondary></db:indexterm><db:code>section</db:code> structure instantiates the concept of a section. And once you have the instantiation of a section, you don’t need six levels of heading. You can have one structure called <db:indexterm><db:primary>title</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>title</db:secondary></db:indexterm><db:code>title</db:code>. Sections can be nested inside other sections, and the formatting algorithm applies the correct style to the title based on context:</db:para>
+<db:para>By contrast, <db:indexterm><db:primary>DocBook</db:primary></db:indexterm><db:indexterm><db:primary>language</db:primary><db:secondary>DocBook</db:secondary></db:indexterm>DocBook has a <db:indexterm><db:primary>section</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>section</db:secondary></db:indexterm><db:code>section</db:code> structure. Like a list, a section records your interpretation of what you are creating in the document. The <db:indexterm><db:primary>section</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>section</db:secondary></db:indexterm><db:code>section</db:code> structure instantiates the concept of a section. And once you have the instantiation of a section, you don’t need six levels of heading. You can have one structure called <db:indexterm><db:primary>title</db:primary></db:indexterm><db:indexterm><db:primary>structure</db:primary><db:secondary>title</db:secondary></db:indexterm><db:code>title</db:code>. Sections can be nested inside other sections, and the formatting algorithm applies the correct style to the title based on context.</db:para>
+<db:para>This eliminates decisions about which heading element to use; there is just one: <db:code>title</db:code>. This ensures that headings in output consistently reflect the document’s section and subsection structure.<db:footnote>
+<db:para>Not everyone holds to the view that headings in a text must reflect a hierarchy of sections. Instead, headings may be simply signposts along the way, where the size of the sign reflects some quality – size of the town or the importance of the section – other than a strict hierarchy. If that is how you look at document structures, you should choose a different way to separate content from formatting.</db:para>
+</db:footnote></db:para>
 <db:programlisting>
 section: 
     title:
@@ -184,17 +186,12 @@ section:
     section:
         title:
 </db:programlisting>
-<db:para>This eliminates decisions about which heading element to use; there is just one: <db:code>title</db:code>. This ensures that the headings in the output consistently reflect the section and subsection structure of the document.<db:footnote>
-<db:para>Not everyone holds to the view that headings in a text must reflect a hierarchy of sections. Instead, headings may be simply signposts along the way, where the size of the sign reflects some quality – size of the town or the importance of the section – other than a strict hierarchy. If that is how you look at document structures, you should choose a different way to separate content from formatting.</db:para>
-</db:footnote></db:para>
 
 </db:section>
 <db:section><db:title>Separate out abstract formatting</db:title>
 
 
-<db:para>To separate content from formatting for ordered and unordered lists, you must separate out some of the content as well. Specifically, you must separate out some of the characters. The distinction between content and formatting is not the same as the distinction between characters and the styles applied to them. Sometimes characters are part of the formatting rather than the content.</db:para>
-<db:para>Consider a labeled-list structure:</db:para>
-<db:blockquote>
+<db:para>To separate content from formatting for ordered and unordered lists, you must separate out some of the content as well. Specifically, you must separate out some of the characters. The distinction between content and formatting is not the same as the distinction between characters and the styles applied to them. Sometimes characters are part of the formatting rather than the content. Consider the following labeled-list structure:</db:para>
 <db:itemizedlist>
 <db:listitem>
 <db:para><db:emphasis role="bold">Street:</db:emphasis> 123 Elm Street</db:para>
@@ -217,7 +214,6 @@ section:
 
 </db:listitem>
 </db:itemizedlist>
-</db:blockquote>
 <db:para>The generic structure of a labeled list might look like this:</db:para>
 <db:programlisting language="sam">
 labeled-list:
@@ -249,5 +245,5 @@ address:
 <db:para>Turning such structures into a specific form of presentation is the job of the presentation algorithm (see <db:xref linkend="chapter.publishing"/>). The presentation algorithm could turn it into a labeled list, a table, a paragraph, or an address label.</db:para>
 <db:para>In the <db:indexterm><db:primary>subject domain</db:primary></db:indexterm><db:indexterm><db:primary>concept</db:primary><db:secondary>subject domain</db:secondary></db:indexterm>subject domain, with the content separated from both formatting and presentation, you also gain the ability to query and reorganize the content in various interesting and useful ways (which I explore in later chapters).</db:para>
 <db:para>This is as far as you can go in separating content from formatting, and you can’t separate all content from formatting to quite this extent. Separating content from format is not a binary operation. There are various degrees of separation that you can apply for various reasons. It is important to understand exactly which degree of separation best serves your needs.</db:para>
-<db:indexterm class="endofrange" startref="idp323790180"/><db:indexterm class="endofrange" startref="idp323790180x"/></db:section>
+<db:indexterm class="endofrange" startref="idp2112717316"/><db:indexterm class="endofrange" startref="idp2112717316x"/></db:section>
 </db:chapter>

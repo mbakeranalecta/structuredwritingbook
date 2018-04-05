@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.reuse"><db:title>Reuse</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp326755812"><db:primary>reuse</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp326755812x"><db:primary>algorithm</db:primary><db:secondary>reuse</db:secondary></db:indexterm><db:indexterm class="startofrange" significance="preferred" xml:id="idp326749924"><db:primary>content reuse</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp326749924x"><db:primary>concept</db:primary><db:secondary>content reuse</db:secondary></db:indexterm>
+<db:chapter xmlns:db="http://docbook.org/ns/docbook" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:strings="http://exslt.org/strings" version="5.0" xml:id="chapter.reuse"><db:title>Reuse</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp2113273700"><db:primary>reuse</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp2113273700x"><db:primary>algorithm</db:primary><db:secondary>reuse</db:secondary></db:indexterm><db:indexterm class="startofrange" significance="preferred" xml:id="idp2113271908"><db:primary>content reuse</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp2113271908x"><db:primary>concept</db:primary><db:secondary>content reuse</db:secondary></db:indexterm>
 
 
 
@@ -114,7 +114,7 @@ match insert where variable = $seats
 <db:figure xml:id="fig.variable2variable-diagram"><db:title>Variable-into-variable diagram</db:title><db:mediaobject><db:imageobject condition="fo"><db:imagedata fileref="../graphics/variable2variable.svg" contentwidth="4.25in" align="center"/></db:imageobject><db:imageobject condition="epub"><db:imagedata fileref="../graphics/variable2variable.png"/></db:imageobject><db:textobject><db:para>Diagram showing the variable to variable reuse pattern.</db:para></db:textobject></db:mediaobject></db:figure>
 <db:para>In the common-into-variable example, you inserted the contents of a file that contained a standard warning. But for variable into variable, this approach does not work. Variable into variable requires you to load a different file for each market, but the content specifies a particular file name, making it difficult to select a different file for the new market.</db:para>
 <db:para>As always in structured writing, you look for a way to factor out the problematic content. So here, you look for a way to factor out the file name and replace it with something else.</db:para>
-<db:section><db:title>Using IDs</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp326793572"><db:primary>IDs</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp326793572x"><db:primary>concept</db:primary><db:secondary>IDs</db:secondary></db:indexterm>
+<db:section><db:title>Using IDs</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp2113343588"><db:primary>IDs</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp2113343588x"><db:primary>concept</db:primary><db:secondary>IDs</db:secondary></db:indexterm>
 
 
 
@@ -150,8 +150,8 @@ warning:(#warn_danger)
     Pay close attention. You could really hurt yourself.            
 </db:programlisting></db:figure>
 <db:para>By telling the algorithm that builds the foreign market docs to search this file for IDs, rather than the file with the domestic market warning, you automatically get the foreign warning rather than the domestic one.</db:para>
-<db:indexterm class="endofrange" startref="idp326793572"/><db:indexterm class="endofrange" startref="idp326793572x"/></db:section>
-<db:section><db:title>Using keys</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp326807652"><db:primary>keys</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp326807652x"><db:primary>concept</db:primary><db:secondary>keys</db:secondary></db:indexterm>
+<db:indexterm class="endofrange" startref="idp2113343588"/><db:indexterm class="endofrange" startref="idp2113343588x"/></db:section>
+<db:section><db:title>Using keys</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp2113357284"><db:primary>keys</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp2113357284x"><db:primary>concept</db:primary><db:secondary>keys</db:secondary></db:indexterm>
 
 
 
@@ -226,9 +226,9 @@ keys:
 </db:programlisting></db:figure>
 <db:para>This method partitions the warnings into separate files and also partitions the location of those files from the writer. Using keys as a bridge between two partitions can be a convenient way to manage content relationships without having to update source files every time the relationships change.</db:para>
 <db:para>The downside is that keys introduce an abstract element into the writer’s world, and abstractions are a form of complexity that can be difficult to deal with. Instead of deciding which warning to use, writers have to decide which key or ID to use. However, that decision is not necessarily easier to make, and it requires more system knowledge and a more abstract way of thinking than the original decision that was factored out. Keys and IDs abstract out the actual act of inclusion, but that is the least complex part of ensuring that the standard warning is used.</db:para>
-<db:indexterm class="endofrange" startref="idp326807652"/><db:indexterm class="endofrange" startref="idp326807652x"/></db:section>
+<db:indexterm class="endofrange" startref="idp2113357284"/><db:indexterm class="endofrange" startref="idp2113357284x"/></db:section>
 </db:section>
-<db:section><db:title>Common with conditions</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp323747668"><db:primary>conditions</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp323747668x"><db:primary>concept</db:primary><db:secondary>conditions</db:secondary></db:indexterm>
+<db:section><db:title>Common with conditions</db:title><db:indexterm class="startofrange" significance="preferred" xml:id="idp2113382372"><db:primary>conditions</db:primary></db:indexterm><db:indexterm class="startofrange" xml:id="idp2113382372x"><db:primary>concept</db:primary><db:secondary>conditions</db:secondary></db:indexterm>
 
 
 
@@ -286,7 +286,7 @@ ol:
 </db:listitem>
 </db:itemizedlist>
 <db:para>How successful a common-with-conditions approach will be also depends on what you choose for your conditional expressions. Generally, subject-domain conditions will be more stable and manageable than document-domain conditions. For instance, conditions that relate to different vehicles (subject domain) are based in the real world and are, therefore, objectively true as long as the subject matter remains the same. Conditions that relate to different publications or different media, on the other hand, are not objectively true and can’t be verified independently. The only way to verify them is to build the different documents or media and see if you get the content you expected. This makes maintaining such conditions cumbersome and error prone – an indication that complexity is not being distributed in an optimal way.</db:para>
-<db:indexterm class="endofrange" startref="idp323747668"/><db:indexterm class="endofrange" startref="idp323747668x"/></db:section>
+<db:indexterm class="endofrange" startref="idp2113382372"/><db:indexterm class="endofrange" startref="idp2113382372x"/></db:section>
 <db:section><db:title>Factor out the common</db:title>
 
 
@@ -477,5 +477,5 @@ unit: Installing the &gt;($product_name)
 
 </db:listitem>
 </db:itemizedlist>
-<db:indexterm class="endofrange" startref="idp326755812"/><db:indexterm class="endofrange" startref="idp326749924"/><db:indexterm class="endofrange" startref="idp326755812x"/><db:indexterm class="endofrange" startref="idp326749924x"/></db:section>
+<db:indexterm class="endofrange" startref="idp2113273700"/><db:indexterm class="endofrange" startref="idp2113271908"/><db:indexterm class="endofrange" startref="idp2113273700x"/><db:indexterm class="endofrange" startref="idp2113271908x"/></db:section>
 </db:chapter>
