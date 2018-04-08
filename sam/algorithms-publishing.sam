@@ -13,7 +13,7 @@ chapter:(#chapter.publishing) Publishing
 
     All structured writing must eventually be published. Publishing structured content means transforming it from the domain in which it was created ({subject domain}, {document domain}, or the abstract end of the {media domain}) to the most concrete end of the media domain spectrum: dots on paper or screen.
     
-    Publishing is a complex process, particularly in an environment where you may be practicing {single sourcing}, {content generation}, or many of the other structured writing algorithms we have looked at. The best way to handle that complexity is to partition and distribute it to appropriate people and processes.  
+    Publishing is a complex process, particularly in an environment where you may be practicing {single sourcing}, {content generation}, or many of the other structured writing algorithms we have looked at, or where you are combining content from different sources in a "shared pipes" model. The best way to handle that complexity is to partition and distribute it to appropriate people and processes.  
     
     In this chapter, I am going to describe a partitioning of the publishing process into four basic algorithms: the {synthesis}, {presentation}, {formatting}, and {encoding} algorithms. These four stages are formalized in the {SPFE architecture}(tool), which I will talk about later, but I think they are a fair representation of what goes on in most publishing tool chains, even if those tool chains don't divide responsibilities exactly as I describe them here, or make such clear separation between them as I do.
     
@@ -139,7 +139,7 @@ chapter:(#chapter.publishing) Publishing
         index:: type, term
             algorithm, synthesis
 
-        The job of the synthesis algorithm is to determine exactly what content will be part of a content set. It passes a complete set of content on to the {presentation algorithm} to be turned into one or more document presentations.     
+        The job of the synthesis algorithm is to determine exactly what content will be part of a content set. It passes a complete set of content on to the {presentation algorithm} to be turned into one or more document presentations. If you are pulling in content from multiple sources and multiple source formats, the synthesis algorithms is where you collect and sanitize content from all those sources and make sure it is ready for the later processing stages.     
         
         Among other things, the synthesis algorithm resolves all management domain structures in the content (unless some are to be retained for downstream post-publication algorithms to work with). This means that it processes all inclusions and evaluates all conditions. The result is {document domain} or {subject domain} content with all of the {management} structures removed and replaced with the appropriate document or subject domain structures and content. 
         
