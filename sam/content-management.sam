@@ -106,6 +106,14 @@ chapter:(#chapter.content-management) Content Management
  
         There is a movement within the documentation community called Docs as Code[http://www.writethedocs.org/guide/docs-as-code/], which advocates using the same management processes and tools for content as developers use for code, including VCSs and scripted content builds, rather than conventional CMS solutions.  
 
+    section: Multiple repositories
+
+        As I have noted several times, it is often preferable to be able to draw content from multiple sources and this often means multiple repositories. It is, of course, possible to store content in many different source formats in a single repository (unless that repository is designed to only work with one format) but in many cases it will also make sense to store content in different formats in different repositories, particularly if those repositories also serve different purposes for different groups.  
+
+        Actually, even talking about multiple vs single repositories can be misleading. As far as your algorithms are concerned, if there is one interface they can query to retrieve content, they are dealing with one repository. Behind that interface there may be different systems using different internal formats and residing in different physical locations. The Web is a perfect example of such a system. You can retrieve any resource on the web by issuing an HTTP request. that one request interface can retrieve all kinds of different resources from all kinds of different systems but the Web architecture, based on HTTP, makes the entire web look like one repository. 
+
+        The digital world is not like the physical world. You don't need to put all you stuff in the same cupboard in order to organize and retrieve it. You can build a interface to any data source you care about and treat all your diverse sources as one repository to feed your shared publishing infrastructure. 
+
     section: Making content manageable
     
         If you want to manage your content, you need to make your content easy to manage. The danger is that if you start with the principal aim of making your content manageable, you may find your {management} goals at odds with your {rhetorical} goals. It is easier to manage content (or anything else) if its structure is uniform. The constraints you impose to make content more manageable make it more uniform. Thus a system, such as {DITA}, which starts by proposing just three types of content (concept, task, and reference), has an obvious appeal from a management point of view. However, remember that it is your {rhetorical} goals that serve your readers. Your management goals should be subservient to your rhetorical goals. 
