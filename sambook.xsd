@@ -3,7 +3,7 @@
   <xs:element name="book">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" name="string" type="string-type"/>
+        <xs:element maxOccurs="unbounded" name="variable" type="variable-type"/>
         <xs:element name="title" type="title-type"/>
         <xs:element name="subtitle" type="subtitle-type"/>
         <xs:element name="by">
@@ -99,15 +99,22 @@
       <xs:element minOccurs="0" ref="annotations"/>
       <xs:element minOccurs="0" name="index" type="index-type"/>
       <xs:group ref="body-group"/>
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="section" type="section-type"/>
-        <xs:element name="bibliography" type="bibliography-type"/>
-      </xs:choice>
+      <xs:sequence minOccurs="0">
+        <xs:choice>
+          <xs:element name="section" type="section-type"/>
+          <xs:element name="bibliography" type="bibliography-type"/>
+        </xs:choice>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="section" type="section-type"/>
+          <xs:element name="pagination-tweak" type="pagination-tweak-type"/>
+          <xs:element name="bibliography" type="bibliography-type"/>
+        </xs:choice>
+      </xs:sequence>
     </xs:sequence>
     <xs:attribute name="name" type="xs:NCName"/>
   </xs:complexType>
 
-  <xs:complexType mixed="true" name="string-type">
+  <xs:complexType mixed="true" name="variable-type">
     <xs:attribute name="name" use="required" type="xs:NCName"/>
   </xs:complexType>
 
@@ -149,8 +156,8 @@
 
   <xs:complexType name="sidebar-type">
     <xs:sequence>
-      <xs:element name="title" type="title-type"/>
-      <xs:element name="p" type="p-type"/>
+      <xs:element name="title" type="title-type" minOccurs="0"/>
+      <xs:group ref="body-group"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -213,7 +220,7 @@
     </xs:sequence>
     <xs:attribute name="item"/>
     <xs:attribute name="type" type="xs:NCName"/>
-    <xs:attribute name="stringref" type="xs:NCName"/>
+    <xs:attribute name="variableref" type="xs:NCName"/>
   </xs:complexType>
 
   <xs:complexType name="figure-type">
@@ -224,7 +231,9 @@
         <xs:element name="insert" type="insert-type"/>
         <xs:element name="ol" type="ol-type"/>
         <xs:element name="codeblock" type="codeblock-type"/>
+        <xs:element name="blockquote" type="blockquote-type"/>
         <xs:element name="p" type="p-type"/>
+        <xs:element name="formatted-code" type="formatted-code-type"/>
       </xs:choice>
     </xs:sequence>
     <xs:attribute name="id" type="xs:NCName"/>
@@ -295,6 +304,8 @@
       <xs:group ref="body-group"/>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="section" type="section-type"/>
     </xs:sequence>
+    <xs:attribute name="id" type="xs:NCName"/>
+    <xs:attribute name="name" type="xs:NCName"/>
   </xs:complexType>
 
   <xs:complexType name="subtitle-type">
@@ -306,7 +317,7 @@
   <xs:complexType name="inline-insert-type">
     <xs:attribute name="item"/>
     <xs:attribute name="type" type="xs:NCName"/>
-    <xs:attribute name="stringref" type="xs:NCName"/>
+    <xs:attribute name="variableref" type="xs:NCName"/>
   </xs:complexType>
 
   <xs:complexType mixed="true" name="citation-type">
