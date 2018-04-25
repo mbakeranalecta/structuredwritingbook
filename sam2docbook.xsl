@@ -357,7 +357,17 @@
         <xsl:call-template name="index-annotation"/>
         <xsl:apply-templates/>       
     </xsl:template>
-    
+
+    <xsl:template match="annotation[@type='markup-language']">
+        <xsl:call-template name="index-annotation"/>
+        <xsl:apply-templates/>       
+    </xsl:template>
+
+    <xsl:template match="annotation[@type='schema-language']">
+        <xsl:call-template name="index-annotation"/>
+        <xsl:apply-templates/>       
+    </xsl:template>
+
     <xsl:template match="annotation[@type='company']">
         <xsl:call-template name="index-annotation"/>
         <xsl:apply-templates/>       

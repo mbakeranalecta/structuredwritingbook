@@ -13,7 +13,7 @@ chapter:(#chapter.merge) Merge
     
     API documentation tools often allow you to include authored content in the source code files. This content is contained in code comments and is often written in small {subject-domain}(concept) markup languages that are specific to the tool. Of course, as with all subject-domain structures, another tool can read them if it wants to.
 
-    figure:(*fig.javadoc) API documentation included in source code using JavaDoc
+    figure:(*fig.javadoc-api) API documentation included in source code using JavaDoc
         ```(Java)
             /**
              * Validates a chess move.
@@ -36,7 +36,7 @@ chapter:(#chapter.merge) Merge
                 // ...body
             }
     
-    [*fig.javadoc] is an example of authored content combined with source code in JavaDoc.[https://en.wikipedia.org/wiki/Javadoc#Example] In this example, everything between the opening `/*` and the closing `*/` is a comment (as far as {Java} is concerned), and the rest is a {Java} function definition. However, {JavaDoc} sees the comment block as structured text marked up using a style of {markup} specific to {JavaDoc}.
+    [*fig.javadoc-api] is an example of authored content combined with source code in JavaDoc.[https://en.wikipedia.org/wiki/Javadoc#Example] In this example, everything between the opening `/*` and the closing `*/` is a comment (as far as {Java} is concerned), and the rest is a {Java} function definition. However, {JavaDoc} sees the comment block as structured text marked up using a style of {markup} specific to {JavaDoc}.
     
     The {JavaDoc} processor extracts information from the function definition (the {extract algorithm}) and then merges it with information from the authored structured content (the {merge algorithm}). In doing so, it can validate the authored content, for instance, it can ensure that the names of parameters in the authored content match those in the function definition. This ability to validate authored content against extracted data is an important aid to {conformance} and {auditing}.
     
