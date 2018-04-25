@@ -10,7 +10,7 @@ chapter:(#chapter.linking) Linking
     A large part of the complexity of content is that readers do not read in a straight line. Numerous studies[*1] have shown that readers often read opportunistically, looking for one piece of information or the answer to a particular question. Their behavior can best be described as {information foraging}. They are sniffing for the scent of the information they want and will follow its trail as long as the scent gets stronger and the trail is easy to follow. 
 
     footnote:(*1)
-        For a discussion of these studies and their implications for how we write, see my book {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}(citetitle).
+        For a discussion of these studies and their implications for how we write, see my book {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}.
 
     The best way to support this information foraging behavior is with a {bottom-up information architecture} (as described in [#chapter.architecture]). Linking is key to building a bottom-up information architecture. But as we discussed in [#chapter.single-sourcing], different media often require different rhetoric and a difference in linking strategy is a big part of that difference. This makes linking a complex problem. 
     
@@ -85,7 +85,7 @@ chapter:(#chapter.linking) Linking
         
     section: Subject affinities in the document domain
         
-        Moving to the {document domain}(concept) is about factoring out the formatting specific structures of the media domain. But a link is not really a piece of formatting, so conventional refactoring into abstract document structures doesn't apply. For this reason, people working in the {document domain} often enter hypertext links exactly the way they would in the media domain -- by specifying a URL. Thus, in {DITA} you might enter a link as: 
+        Moving to the {document domain} is about factoring out the formatting specific structures of the media domain. But a link is not really a piece of formatting, so conventional refactoring into abstract document structures doesn't apply. For this reason, people working in the {document domain} often enter hypertext links exactly the way they would in the media domain -- by specifying a URL. Thus, in {DITA} you might enter a link as: 
         
         ```(DITA)
             <p>In Rio Bravo, 
@@ -128,7 +128,7 @@ chapter:(#chapter.linking) Linking
             ex-Union colonel out for revenge.
         
         
-        In other words, you can render the `xref` as a cross reference, a link, or a footnote, but you can only handle the subject affinity as a reference to that specific resource. You can't decide to link to a different resource or render it as a sidebar instead. If you want those capabilities, you need to turn to the {management domain}(concept).
+        In other words, you can render the `xref` as a cross reference, a link, or a footnote, but you can only handle the subject affinity as a reference to that specific resource. You can't decide to link to a different resource or render it as a sidebar instead. If you want those capabilities, you need to turn to the {management domain}.
 
     section: Subject affinities in the management domain
        
@@ -141,7 +141,7 @@ chapter:(#chapter.linking) Linking
             plays an ex-Union colonel out for revenge.</p>
         
         
-        Somewhere in the {DITA map}(concept) for each publication, the key `John_Wayne` points to a topic. Publications link the `keyref` to the resource pointed to by that key in each of their DITA maps. This allows you to link to different resources in each publication. 
+        Somewhere in the {DITA map} for each publication, the key `John_Wayne` points to a topic. Publications link the `keyref` to the resource pointed to by that key in each of their DITA maps. This allows you to link to different resources in each publication. 
         
     section: The problem with IDs and keys
     
@@ -182,7 +182,7 @@ chapter:(#chapter.linking) Linking
         index:: type, term
             concept, linking\, conditional
         
-        Before leaving the management domain, it is worth mentioning a management-domain approach that could address the differential single sourcing problem and handle subject affinities for both online and print publishing. This approach uses conditional structures to include content for both options in the source file. With a {specialization}(concept "DITA specialization") to support `media` as a conditional attribute, you could do this in DITA as shown in [*fig.linking-dita]..
+        Before leaving the management domain, it is worth mentioning a management-domain approach that could address the differential single sourcing problem and handle subject affinities for both online and print publishing. This approach uses conditional structures to include content for both options in the source file. With a {specialization} to support `media` as a conditional attribute, you could do this in DITA as shown in [*fig.linking-dita]..
 
         figure:(*fig.linking-dita) Conditional linking in DITA
             ```(DITA)
@@ -227,7 +227,7 @@ chapter:(#chapter.linking) Linking
         
         This is {subject annotation}, not link markup. Unlike {document-domain} `xref` markup, it does not insist that a reference should be created nor does it specify any resource to link to. Instead, it simply states what the subject of the text is. Specifically, it clarifies that the phrase "the Duke" refers to the actor named John Wayne (and not the Duke of Wellington or the Duke of Earl) and that the phrase "Rio Bravo" refers to the movie (and not the city in Texas or the nature reserve in Belize). 
         
-        Given this markup, you can easily render the subject affinity in a manner that works for print by having the {presentation algorithm}(concept) take the value of the `specifically` attribute (as this annotation is called in {SAM}) and output it between parentheses, as shown in [*fig.linking-duke-html]. 
+        Given this markup, you can easily render the subject affinity in a manner that works for print by having the {presentation algorithm} take the value of the `specifically` attribute (as this annotation is called in {SAM}) and output it between parentheses, as shown in [*fig.linking-duke-html]. 
 
         figure:(*fig.linking-duke-html) Subject affinity rendered for print
             ```(html)
@@ -271,7 +271,7 @@ chapter:(#chapter.linking) Linking
         
         * In a {reuse} scenario, you never have to worry about broken links or creating relationship tables. The {presentation algorithm} generates appropriate links to whatever topics are available.
         
-        * In a {differential single sourcing}(concept) scenario, you are never tied to one mechanism for handling the subject affinity. You can generate any mechanism you like in whatever media you like. 
+        * In a {differential single sourcing} scenario, you are never tied to one mechanism for handling the subject affinity. You can generate any mechanism you like in whatever media you like. 
         
         * You don't have to worry about maintaining links in your content because your source content does not contain any links. The subject annotations in your content are objective statements about your subject matter, so they don't change. All the links in the published content are generated by the linking algorithm, so no management is required.
         
@@ -338,9 +338,9 @@ chapter:(#chapter.linking) Linking
         
         There is a lot more to how this mechanism works in practice, including what you do about imperfect matches and what happens when the query returns multiple resources. But that goes into the specifics of individual systems, which is more detail than needed for present purposes. 
         
-        You can also index topics using a {content management system}(tool), in which case the linking algorithm would query the CMS to find topics to link to.  
+        You can also index topics using a {content management system}, in which case the linking algorithm would query the CMS to find topics to link to.  
         
-        A useful feature of this approach is that you can have the {publishing algorithm}(concept) fall back to creating a link to an external resource if an internal one is not available. If a search of the index of your own content fails, you can search indexes of external content. You can build such an index yourself, but some external sites provide indexes, APIs, or search facilities that you can use to locate appropriate pages to link to. 
+        A useful feature of this approach is that you can have the {publishing algorithm} fall back to creating a link to an external resource if an internal one is not available. If a search of the index of your own content fails, you can search indexes of external content. You can build such an index yourself, but some external sites provide indexes, APIs, or search facilities that you can use to locate appropriate pages to link to. 
         
         Of course, building these linking algorithms adds complexity to your content system. The subject domain partitions complexity away from writers and distributes it to {information architects} and {content engineers}. 
                 

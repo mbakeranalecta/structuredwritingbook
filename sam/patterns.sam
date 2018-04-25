@@ -8,7 +8,7 @@ chapter:(#chapter.patterns) Patterns
 
     I noted that lightweight markup languages such as {Markdown} rely on patterns in the text rather than explicit markup characters to delineate basic structures. XML, on the other hand, makes a strict distinction between what is markup and what is text. Markup is always recognized explicitly by markup sequences that cannot occur as normal text in any part of the document. 
     
-    All the same, even XML markup is defined by patterns. The {XML specification}(standard) defines XML using a series of patterns written in a notation called {EBNF}(language). The difference between XML syntax and Markdown syntax is that in XML, patterns are defined absolutely, so a markup start character is a markup start character no matter where it occurs, whereas in Markdown, the patterns are defined in context, so a `*` character starts a list item only at the beginning of a line, not the end. 
+    All the same, even XML markup is defined by patterns. The {XML specification} defines XML using a series of patterns written in a notation called {EBNF}. The difference between XML syntax and Markdown syntax is that in XML, patterns are defined absolutely, so a markup start character is a markup start character no matter where it occurs, whereas in Markdown, the patterns are defined in context, so a `*` character starts a list item only at the beginning of a line, not the end. 
     
     Since markup is all about patterns, you are not confined only to the patterns defined by the markup language itself. There are lots of patterns that occur naturally in content, and you can recognize those patterns and act on them with algorithms even if they are not formally marked up in your markup language. 
     
@@ -29,7 +29,7 @@ chapter:(#chapter.patterns) Patterns
         
     This is fully explicit markup. It places every piece of the data in its own explicit structure. However, it lacks {functional lucidity}. 
     
-    A date in the format `2016-08-25` is already a piece of structured markup, which is defined by {ISO 8601}(standard), an international standard. The only problem with marking up a date using this format is that in another context `2016-08-25` could be a mathematical expression that resolves to `1983`. But you can eliminate this potential confusion if you isolate the context so that a processor can recognize when you use an {ISO 8601} date. In other words, all you need to do is create an annotation, as shown here:
+    A date in the format `2016-08-25` is already a piece of structured markup, which is defined by {ISO 8601}, an international standard. The only problem with marking up a date using this format is that in another context `2016-08-25` could be a mathematical expression that resolves to `1983`. But you can eliminate this potential confusion if you isolate the context so that a processor can recognize when you use an {ISO 8601} date. In other words, all you need to do is create an annotation, as shown here:
     
     ```(sam)
         {1941-12-07}(date) is a day that will live in infamy. 
@@ -49,9 +49,9 @@ chapter:(#chapter.patterns) Patterns
         ```(xml)
             <date>1941-12-07</date> is a day that will live in infamy. 
         
-        It is important to understand what this does. If the type of element `date` in your XML markup language is defined as `xs:date`, then an XSD {schema validator}(tool) will accept `1941-12-07` as a valid date but reject `<date>last Thursday</date>` as invalid. It does not break the date down into year, month, and day components. If you need that, you have to get your algorithm to do that job. But your algorithm can reliably break down the date because the markup constrains the interpretation, establishing that it is indeed an {ISO 1806} date. Most programming languages have library functions that know how to manipulate {ISO 8601} dates, so you probably don't have to do any work yourself to get the year, month, and day components of a date. 
+        It is important to understand what this does. If the type of element `date` in your XML markup language is defined as `xs:date`, then an XSD {schema validator} will accept `1941-12-07` as a valid date but reject `<date>last Thursday</date>` as invalid. It does not break the date down into year, month, and day components. If you need that, you have to get your algorithm to do that job. But your algorithm can reliably break down the date because the markup constrains the interpretation, establishing that it is indeed an {ISO 1806} date. Most programming languages have library functions that know how to manipulate {ISO 8601} dates, so you probably don't have to do any work yourself to get the year, month, and day components of a date. 
             
-        For other patterns, most programming languages have a library called "regular expressions," which you can use to rip a pattern apart and get at the pieces. XSD goes a step further and lets you define new patterns using regular expressions. {Regular expressions}(tool) let your algorithms decode patterns in your content, as long as those patterns are sufficiently constrained by their context. This frees writers from having to explicitly break down many types of information into separate fields. 
+        For other patterns, most programming languages have a library called "regular expressions," which you can use to rip a pattern apart and get at the pieces. XSD goes a step further and lets you define new patterns using regular expressions. {Regular expressions} let your algorithms decode patterns in your content, as long as those patterns are sufficiently constrained by their context. This frees writers from having to explicitly break down many types of information into separate fields. 
         
         For example, in most of our recipe examples, we have explicitly broken down the items in an ingredient list into ingredient, quantity, and unit of measure like this:
         

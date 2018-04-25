@@ -141,7 +141,7 @@ chapter:(#chapter.markup) Markup
         
     section: Markup languages
     
-        A set of markup conventions taken together constitutes a markup language.  {Markdown}(language), {DocBook}(language), and {reStructuredText}(language) are all markup languages. However, each of these languages recognizes markup in a different way. An ampersand (`&`) is a markup start character in {HTML}(language) and {XML}(language), but it is a plain text character in {reStructuredText}(language).
+        A set of markup conventions taken together constitutes a markup language.  {Markdown}, {DocBook}, and {reStructuredText} are all markup languages. However, each of these languages recognizes markup in a different way. An ampersand (`&`) is a markup start character in {HTML} and {XML}, but it is a plain text character in {reStructuredText}.
         
         We can usefully divide markup languages into three types: concrete, abstract, and hybrid. 
            
@@ -232,7 +232,7 @@ chapter:(#chapter.markup) Markup
     
                 The key defining characteristic of an abstract language is the use of abstract named structures such as XML elements. All XML elements share a common markup start sequence followed by the element name. This creates a named block of content.  But concrete languages can use named blocks too. For example, {JavaDoc}, a concrete language for describing Java APIs, uses named blocks using and at sign (`@`) as a markup start character.
 
-                In [*fig.javadoc], `@param` and `@return` are named blocks. But in JavaDoc, there is a fixed set of named blocks that are defined as part of the language. You can't create a new language by defining your own block names. By contrast, {XML} itself defines absolutely no element names. Only instances of XML, like {DocBook}(language), define element names. 
+                In [*fig.javadoc], `@param` and `@return` are named blocks. But in JavaDoc, there is a fixed set of named blocks that are defined as part of the language. You can't create a new language by defining your own block names. By contrast, {XML} itself defines absolutely no element names. Only instances of XML, like {DocBook}, define element names. 
         
 
                 figure:(*fig.javadoc) JavaDoc code fragment
@@ -263,7 +263,7 @@ chapter:(#chapter.markup) Markup
     
                 The downside of concrete languages is that their concrete syntax defines a fixed set of structures. If you want other structures, there is no way to create them short of inventing your own concrete language, or a variant of an existing one, and coding the parser and all the other tools required to interpret that language. Designing new concrete languages is non-trivial because you must ensure that any combination of characters that the writer types can be interpreted unambiguously. Some versions of {Markdown}, including the original, contain ambiguities about how to interpret certain sequences of characters, which detracts from its reliability and {functional lucidity}. 
         
-                If you want to define your own structures to express the constraints that matter to your business, you need an easier method. Abstract languages such as XML make this much easier. You create a {schema}(tool) that describes the structures you want and write algorithms to process those structures. (I talk about schemas in [#chapter.constraints].)
+                If you want to define your own structures to express the constraints that matter to your business, you need an easier method. Abstract languages such as XML make this much easier. You create a {schema} that describes the structures you want and write algorithms to process those structures. (I talk about schemas in [#chapter.constraints].)
 
             section: The ability to constrain
     

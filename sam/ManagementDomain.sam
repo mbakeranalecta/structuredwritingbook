@@ -7,7 +7,7 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
         concept, management domain
         
 
-    So far I have talked about three domains: the {media domain}, the {document domain}(concept), and the {subject domain}(concept). But there is a fourth domain that intrudes into this picture: the {management domain}.
+    So far I have talked about three domains: the {media domain}, the {document domain}, and the {subject domain}. But there is a fourth domain that intrudes into this picture: the {management domain}.
 
     Why do I call the management domain an intrusion? Because while the subject, document, and media domains are about recording the content itself, the management domain is not about the content itself; it's about the process of managing content.         
     
@@ -27,7 +27,7 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
             </section>
     
 
-    This is an example of {conditional text}(algorithm). The `publication` attribute on the `section` element says, display this text only in this publication. Conditional text structures are {management metadata}(concept), which means they are in the {management domain}. They do not specify the formatting, organization, or subject matter of the document. They specify which publication the content should appear in, which is a content management decision.
+    This is an example of {conditional text}. The `publication` attribute on the `section` element says, display this text only in this publication. Conditional text structures are management {metadata}, which means they are in the {management domain}. They do not specify the formatting, organization, or subject matter of the document. They specify which publication the content should appear in, which is a content management decision.
 
     Content management decisions are always external to the writer's core task. They are not decisions about subject matter or rhetoric. They are decisions imposed on writers from elsewhere in the process. As such, the {management domain} is an intrusion not only into the content but also into the writer's time and attention. Some management-domain decisions should be made by writers, but putting the burden on writers increases the complexity of the writing process and the knowledge and skills required to write successfully. Wherever you can, look for alternatives to the {management domain}.
 
@@ -68,7 +68,7 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
         
         Why is this operation part of the {management domain}, rather than the {document domain}? Because it deals with a system operation: locating a file in the system and loading its contents. If we were purely in the document domain, the writer would be the one performing this operation: finding the file with the warning in it, opening it, and copying the contents into the document. The include instruction is just that: an instruction. It is not a declaration about the subject matter or structure of a document, such as we find in {subject-domain} or document-domain markup. It is an instruction to a machine to perform an operation. The {management domain} consists of either instructions or the declaration of data required to perform specific management instructions. It requires the writer to understand these instructions and other features of the content management system such as the location of files. 
 
-        Different structured writing systems have different instruction sets for handling the situation described above. In {DITA}, for instance, this use case is handled using something called a {conref}(structure (DITA)) or a {conkeyref}(structure (DITA)). DocBook uses a generic XML facility called {XInclude}(tool), which is shown in [*ex.md-3]. Thus the writer needs to learn the specific management features of the languages and tools they are using.
+        Different structured writing systems have different instruction sets for handling the situation described above. In {DITA}, for instance, this use case is handled using something called a {conref}(structure (DITA)) or a {conkeyref}(structure (DITA)). DocBook uses a generic XML facility called {XInclude}, which is shown in [*ex.md-3]. Thus the writer needs to learn the specific management features of the languages and tools they are using.
 
         One downside of the management-domain include instruction is that writers must have system knowledge to use it correctly. However, the use of conditional expressions or include instructions is not just a problem for writers, it also complicates {change management} and {content management} by distributing management-domain structures such as conditions and file paths throughout your content. Management-domain structures encode management decisions in the content itself. Changing those decisions means changing management structures all over the content set. 
         
@@ -95,7 +95,7 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
         The management-domain approach allows writers to insert a standard warning that is stored in one place.[*fn.md-reuse] Notice that the management-domain markup does not encapsulate the invariant rhetorical rule that dangerous procedures must have a standard warning. It simply provides a generic mechanism for inserting content from an external file. The writer must still remember and execute the rule about dangerous procedures.  
 
         footnote:(*fn.md-reuse)
-            This approach is a form of {content reuse}(concept), an algorithm discussed in [#chapter.reuse].
+            This approach is a form of {content reuse}, an algorithm discussed in [#chapter.reuse].
         
         The subject-domain approach, on the other hand, is all about the rhetorical rule itself. Specifically, it expresses the aspect of the subject domain that triggers the rule: whether a procedure is dangerous or not. [*ex.md-5] shows how you might mark up this information.
 
@@ -109,7 +109,7 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
                     step: Press the big red button.
         
         
-        This markup identifies the procedure as dangerous, a fact about the subject matter that our rhetorical standards require us to mention. Rather than making authors remember that a warning is required, locate the warning file, and include a reference to the file, we delegate those decisions to the {publication algorithm}(concept). The algorithm, not the writer, must remember to include the material in `files/shared/admonitions/danger` whenever the `is-it-dangerous` field of a `procedure` structure is set to `yes`. Algorithms are much better at this sort of task than humans are.
+        This markup identifies the procedure as dangerous, a fact about the subject matter that our rhetorical standards require us to mention. Rather than making authors remember that a warning is required, locate the warning file, and include a reference to the file, we delegate those decisions to the {publication algorithm}. The algorithm, not the writer, must remember to include the material in `files/shared/admonitions/danger` whenever the `is-it-dangerous` field of a `procedure` structure is set to `yes`. Algorithms are much better at this sort of task than humans are.
 
         Of course, writers still must remember to set `is-it-dangerous` to `yes` when they write a procedure (another example of creating a new constraint when we factor out an old one). But you can make it much easier for them to remember this requirement by making `is-it-dangerous` a mandatory field in the procedure structure and raising an error if the field is not included. This transfers the complexity of remembering the requirement and fulfilling it from the writer to the {conformance} and {publication} algorithms. 
 
@@ -121,7 +121,7 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
 
     section: Hybrid approaches
     
-        It is not always an either/or decision to use pure {management-domain}(concept) or pure {subject-domain} approaches. Management-domain structures tend to be used in generic {document-domain} languages, since such languages are not designed to be specific to any particular subject matter. Nonetheless, such languages often have roots in particular fields and sometimes include {subject-domain} structures from those fields. Both DocBook and DITA, for instance, originated in the field of software documentation, and both include structures, such as code blocks, that are related to the subject of software. 
+        It is not always an either/or decision to use pure {management-domain} or pure {subject-domain} approaches. Management-domain structures tend to be used in generic {document-domain} languages, since such languages are not designed to be specific to any particular subject matter. Nonetheless, such languages often have roots in particular fields and sometimes include {subject-domain} structures from those fields. Both DocBook and DITA, for instance, originated in the field of software documentation, and both include structures, such as code blocks, that are related to the subject of software. 
         
         Some languages mix subject-domain structures into their management structures. One example is the {product}(structure "@product" (DITA)) attribute, which is part of DITA's conditional-text processing system. 
         
@@ -137,7 +137,7 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
         DITA can afford to use this bit of subject-domain markup because product variations are a common reason for using conditional text processing in technical communication, the area for which DITA was created.[*fn.md-specialize]
 
         footnote:(*fn.md-specialize)
-            DITA can add other subject-domain attributes for conditional processing through a process called {specialization}(concept)+(italic). [#chapter.extensible] has additional information about DITA specialization.
+            DITA can add other subject-domain attributes for conditional processing through a process called {specialization}+(italic). [#chapter.extensible] has additional information about DITA specialization.
         
         I call this a hybrid approach because the DITA {product} attribute does not exist merely to declare that a piece of text applies to a particular product. It is a conditional-processing attribute. That is, it is an instruction, even though it is phrased as a subject-domain declaration. 
 

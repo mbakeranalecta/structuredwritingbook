@@ -10,7 +10,7 @@ chapter:(#chapter.processing) Processing Structured Text
     
     section: Two into one: reversing the factoring out of invariants
     
-        Moving content from the {media domain}(concept) to the {document domain}(concept) or the {subject domain}(concept) involves progressively factoring out invariants in the content. Each step in this process creates two artifacts: the structured content and the invariant piece that was factored out. 
+        Moving content from the {media domain} to the {document domain} or the {subject domain} involves progressively factoring out invariants in the content. Each step in this process creates two artifacts: the structured content and the invariant piece that was factored out. 
         
         Processing structured text is about putting the pieces back together -- combining the structured content with the invariants that were factored out. But processing structured text is also about making and/or executing the decisions that were partitioned away from the writer. These decisions may be invariant, such as applying approved corporate style, or they may be variable, such as presenting content differently in different media or for different audiences. Invariant decisions are always made the same way for a given purpose. They may be made differently for different purposes but still the same way for each purpose. 
 
@@ -21,7 +21,7 @@ chapter:(#chapter.processing) Processing Structured Text
             
     section: Restoring style information
         
-        In [#chapter.separating], the first example of {separating content from formatting}(concept) factored out the style information from this structure:
+        In [#chapter.separating], the first example of {separating content from formatting} factored out the style information from this structure:
         
         ```
             {font: 10pt "Open Sans"}The box contains:
@@ -113,13 +113,13 @@ chapter:(#chapter.processing) Processing Structured Text
                 
         
         
-        The way I have written these rules is an example of {pseudocode}(concept). Pseudocode is a means for sketching out an algorithm so you understand what you are trying to do before you write actual code. There is no formal syntax for pseudocode. It is intended for humans, not computers, and you can use whatever approach you like as long as it is clear to your intended audience. However, pseudocode should lay out a set of logical steps for accomplishing something and make it clear how the steps go together.  
+        The way I have written these rules is an example of {pseudocode}. Pseudocode is a means for sketching out an algorithm so you understand what you are trying to do before you write actual code. There is no formal syntax for pseudocode. It is intended for humans, not computers, and you can use whatever approach you like as long as it is clear to your intended audience. However, pseudocode should lay out a set of logical steps for accomplishing something and make it clear how the steps go together.  
 
         Writing an algorithm in pseudocode is a great way to make sure you understand the algorithm without worrying about the details of code -- or even learning how to code. And pseudocode algorithms are a great way to tell programmers what you need a program to do.  
         
     section: The order of the rules does not matter
         
-        You may have noticed that these rules do pretty much exactly what style sheets do in applications such as {Word}(tool "Microsoft Word") or {FrameMaker}(tool). If you understand style sheets, you understand a good deal of how structured writing algorithms work. 
+        You may have noticed that these rules do pretty much exactly what style sheets do in applications such as {Word} or {FrameMaker}. If you understand style sheets, you understand a good deal of how structured writing algorithms work. 
         
         One important thing to notice is that when you create a style sheet in {Word} or {FrameMaker}, you don't specify the order in which styles are applied to the document. The same is true when you create a CSS style sheet. The style sheet is just a flat list of rules. The order in which the rules are applied to the document depends entirely on the order in which the various structures occur in the document.[*fn.priority]
 
@@ -190,11 +190,11 @@ chapter:(#chapter.processing) Processing Structured Text
         ```(html)
             <h1>Review of <i>Rio Bravo</i></h1>
               
-        The `continue` instruction is all you need to add to your rules to allow them to deal with nested structures. The rules remain an unordered collection, just like a style sheet. (In fact, {XSLT}(tool), a language that implements this model, calls a set of processing rules a "stylesheet.")
+        The `continue` instruction is all you need to add to your rules to allow them to deal with nested structures. The rules remain an unordered collection, just like a style sheet. (In fact, {XSLT}, a language that implements this model, calls a set of processing rules a "stylesheet.")
         
     section: Processing based on context
         
-        When you move to the {document domain}, you use context to reduce the number of structures you need. For example, where {HTML}(language) has six different heading structures (`H1` through `H6`), {DocBook}(language) has only one (`title`), which can occur in many different contexts. So how do you apply the right formatting to a title based on its context? You create a different rule for the `title` structure in each context. You express the context by listing the parent structure names separated by slashes:
+        When you move to the {document domain}, you use context to reduce the number of structures you need. For example, where {HTML} has six different heading structures (`H1` through `H6`), {DocBook} has only one (`title`), which can occur in many different contexts. So how do you apply the right formatting to a title based on its context? You create a different rule for the `title` structure in each context. You express the context by listing the parent structure names separated by slashes:
         
         ```(pseudo)
             match book/title

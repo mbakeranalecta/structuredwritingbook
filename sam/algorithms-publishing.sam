@@ -15,9 +15,11 @@ chapter:(#chapter.publishing) Publishing
     
     Publishing is complex, particularly if you are using {single sourcing}, {content generation}, or many of the other structured writing algorithms or where you are combining content from different sources in a "shared pipes" model. The best way to handle that complexity is to partition and distribute it to appropriate people and processes.  
     
-    In this chapter, I describe a partitioning of the publishing process into four basic algorithms: the {synthesis}, {presentation}, {formatting}, and {encoding} algorithms. These four stages are formalized in the {SPFE architecture}(tool), which I discuss later, but I think they are a fair representation of what goes on in most publishing tool chains, even if those tool chains don't divide responsibilities exactly as I describe them here or separate them as clearly.
+    In this chapter, I describe a partitioning of the publishing process into four basic algorithms: the {synthesis}, {presentation}, {formatting}, and {encoding} algorithms. These four stages are formalized in the {SPFE architecture}, which I discuss later, but I think they are a fair representation of what goes on in most publishing tool chains, even if those tool chains don't divide responsibilities exactly as I describe them here or separate them as clearly.
     
     I have noted that successful partitioning depends on the ability to communicate everything needed for each partition to do its job and that one hallmark of a successful partitioning is how clear and functional the required communication is. In the partitioning of the publication process I describe here, each step deals with a different concern, and each step produces an output: a structured document or set of documents that is structured in terms of the concern it deals with. This output becomes the input to the next step. The structures that these steps produce and consume are stages along the path from the {subject}(concept "subject domain") to {document}(concept "document domain") to {media domain}s. In other words, the publication process moves content through the domains, just as described in [#chapter.three-domains].
+
+    In describing the publishing process, I am going to start at the media domain and work backward to the subject domain, just as I did in describing the domains themselves. Since the input of each stage is the output of the previous stage, it is easier to understand the process if we look at it in reverse order. This way we will see what each stage needs to produce in order to meet the needs of the following stage. 
     
     section: The rendering algorithm
     
@@ -27,12 +29,12 @@ chapter:(#chapter.publishing) Publishing
 
         There is actually a fifth algorithm in the publishing chain, which I call the {rendering algorithm}. The rendering algorithm is responsible for placing the right dots on the right surface, be that paper, screen, or a printing plate. However, this is a low-level device-specific algorithm, and no one in the structured writing business is likely to be involved in writing rendering algorithms. The closest you ever get is the next step up, the {encoding algorithm}. 
 
-        The rendering algorithm requires some form of input to tell it where to place the dots. In writing, this usually comes in the form of a {page description language}(tool). Like it sounds, this is a language for describing what goes where on a page, but it does so in higher-level terms than describing where each dot of ink or pixel of light is placed. A page description language deals in such as like lines, circles, gradients, margins, and fonts (see [*fig.pub-rendering]). 
+        The rendering algorithm requires some form of input to tell it where to place the dots. In writing, this usually comes in the form of a {page description language}. Like it sounds, this is a language for describing what goes where on a page, but it does so in higher-level terms than describing where each dot of ink or pixel of light is placed. A page description language deals in things like lines, circles, gradients, margins, and fonts (see [*fig.pub-rendering]). 
 
-        figure:(*fig.pub-rendering) Page description language
+        figure:(*fig.pub-rendering) The rendering algorithm
             >>>(image ../graphics/rendering.xml)
         
-        One example of a page description language is {PostScript}(language). [*fig.pub-postscript] shows the PostScript code for drawing a circle.
+        One example of a page description language is {PostScript}. [*fig.pub-postscript] shows the PostScript code for drawing a circle.
 
         figure:(*fig.pub-postscript) Postscript code for drawing a circle.
             ```(PostScript)
@@ -52,7 +54,7 @@ chapter:(#chapter.publishing) Publishing
         
         Several {formatting languages} are used in content processing. They are often called {typesetting languages}. {XSL-FO} (XSL - Formatting Objects) is one of the more commonly used in structured writing projects. {TeX} is another. 
 
-        figure:(*fig.pub-encoding) Illustration of the encoding algorithm
+        figure:(*fig.pub-encoding) Adding the encoding algorithm
             >>>(image ../graphics/encoding.xml)
         
         [*fig.pub-xsl-fo] shows the {XSL-FO} sample described in [#chapter.single-sourcing].
@@ -66,7 +68,7 @@ chapter:(#chapter.publishing) Publishing
                 </fo:block>
             ```
 
-        You process {XSL-FO} using an {XSL-FO} processor such as {Apache FOP}(tool). The {XSL-FO} processor runs the encoding algorithm, producing a page description language, such as {PostScript} or {PDF}, as output. 
+        You process {XSL-FO} using an {XSL-FO} processor such as {Apache FOP}. The {XSL-FO} processor runs the encoding algorithm, producing a page description language, such as {PostScript} or {PDF}, as output. 
         
         Writers are not likely to write in XSL-FO directly, though it is not impossible to do so. In fact some boilerplate content such as front matter for a book does sometimes get written and recorded directly in {XSL-FO}. (I did this on one project.) But when you are constructing a publishing tool chain, you will need to select and integrate the appropriate encoding tools as part of your process. 
         
@@ -74,11 +76,11 @@ chapter:(#chapter.publishing) Publishing
         
         For example, the {pagination} function figures out how to honor the keep-with-next formatting in an application like {Word} or {FrameMaker}. It also has to work out how to deal with complex figures such as tables: how to wrap text in each column, how to break a table across pages, and how to repeat the header rows when a table breaks to a new page. Finally, it has to figure out how to number each page and then fill in the right numbers for any references that include a particular page number. 
         
-        This is complex and exacting, and you need to select a formatting language that can render your content the way you want it done. 
+        These are complex and exacting operations, and you need to select a formatting language that can render your content the way you want it. 
         
-        You also have to consider how automatic you want all of this to be. In a high-volume publication environment you want it to be fully automatic, but this could involve accepting some compromises. For example, in book publishing it is not uncommon for writers and editors to make slight edits to the actual text of a document in order to make {pagination} work better. This is very easy to do when you are working in the {media domain} in an application like {Word}(tool "Microsoft Word") or {FrameMaker}(tool). If you end up with the last two words of a chapter at the top of a page all by itself, for instance, it is usually possible to find a way to edit the final paragraph to reduce the word count just enough to pull the end of the chapter back to the preceding page.
+        You also have to consider how automatic you want all of this to be. In a high-volume publication environment you want it to be fully automatic, but this could involve accepting some compromises. For example, in book publishing it is not uncommon for writers and editors to make slight edits to the actual text of a document in order to make {pagination} work better. This is very easy to do when you are working in the {media domain} in an application like {Word}(tool "Microsoft Word") or {FrameMaker}. If you end up with the last two words of a chapter at the top of a page all by itself, for instance, it is usually possible to find a way to edit the final paragraph to reduce the word count just enough to pull the end of the chapter back to the preceding page.
 
-        This gets much harder to do when you are writing in the {document domain} or the {subject domain}, particularly if you are {single sourcing} content to more than one publication or {reusing content}(algorithm "content reuse") in many places. An edit that fixes one pagination problem could cause another, and requiring this type of editing dumps back on writers the kind of formatting complexity that the document and subject domains are meant to remove. 
+        This gets much harder to do when you are writing in the {document domain} or the {subject domain}, particularly if you are {single sourcing} content to more than one publication or {reusing content} in many places. An edit that fixes one pagination problem could cause another, and requiring this type of editing dumps back on writers the kind of formatting complexity that the document and subject domains are meant to remove. 
         
         For web browsers and similar dynamic media viewers, such as {ebook readers} or {help systems}, the {pagination} process takes place dynamically when content is loaded into the view port, and pagination can be redone on the fly if the reader resizes a {browser} window or rotates a {tablet}. This means publishers have little opportunity to tweak the {pagination} process. They can guide it by providing rules, such as the {CSS} keep-together instruction, but they obviously cannot hand tweak the text to make it fit better each time the view port is resized. 
         
@@ -91,12 +93,12 @@ chapter:(#chapter.publishing) Publishing
 
         The formatting algorithm generates the {formatting language} that drives the {encoding} and {pagination} process. The formatting algorithm produces a {media-domain} representation of the content from content in the {document domain} or a more abstract {media-domain} format (see [*fig.pub-formattingpub]). 
 
-        figure:(*fig.pub-formattingpub) The formatting algorithm
+        figure:(*fig.pub-formattingpub) Adding the formatting algorithm
             >>>(image ../graphics/formattingpub.xml)
                 
         In the case of {HTML} output, the formatting algorithm generates HTML (with connections to the relevant {CSS}, {JavaScript}, and other formatting resources). This is the end of the publishing process for the web, since the browser will perform the encoding algorithm internally and the computer operating system will likely take care of the rendering. In the case of paper output, the formatting algorithm generates a formatting language such as {TeX} or {XSL-FO} which is then fed to the {encoding algorithm} as implemented by a {TeX} or {XSL-FO} processor. 
         
-        In some cases, organizations use word processing or desktop publishing applications to tweak the formatting of the output by having the formatting algorithm generate the input format of those applications (typically {RTF}(language) for Word and {MIF}(language) for FrameMaker). This allows them to exercise manual control over pagination, but with an obvious loss in process efficiency. In particular, any tweaks made in these applications are not routed back to the source content, so they will have to be done again by hand the next time the content is published. 
+        In some cases, organizations use word processing or desktop publishing applications to tweak the formatting of the output by having the formatting algorithm generate the input format of those applications (typically {RTF} for Word and {MIF} for FrameMaker). This allows them to exercise manual control over pagination, but with an obvious loss in process efficiency. In particular, any tweaks made in these applications are not routed back to the source content, so they will have to be done again by hand the next time the content is published. 
         
         This algorithm is usually the province of {publication designers}. One of the most elementary structured writing algorithms is to {separate content from formatting} ([#chapter.separating]) which means removing formatting as one of the writer's concerns. Almost every structured writing implementation will require you to write formatting algorithms. Even if you use an off-the-shelf language like {DITA} or {DocBook}, you will have to customize their formatting algorithms to get the formatting you want. I looked at some examples of basic formatting algorithms in [#chapter.processing]. 
 
@@ -107,28 +109,28 @@ chapter:(#chapter.publishing) Publishing
 
         The presentation algorithm determines how content is going to be organized as a document. A pure {document-domain} document represents the presentation of the content. The job of the {presentation algorithm} is to produce a pure {document-domain} version of the content. This may mean producing the entire presentation from purely {subject-domain} content or handling the occasional {subject-domain} structure in a largely {document-domain} file.   
 
-        figure:(*fig.pub-presentation) Presentation algorithm
+        figure:(*fig.pub-presentation) Adding the presentation algorithm
             >>>(image ../graphics/presentation.xml)
         
         Organizing content involves several things:
         
-        |Ordering| At some level, content forms a simple sequence in which one piece of information follows another. Writers working in the {document domain} typically order content as they write, but if they are working in the {subject domain}, they can choose how they order subject-domain information in the document domain.
+        |Ordering| At some level, content forms a simple sequence in which one piece of information follows another. Writers working in the {document domain} typically order content as they write, but if they are working in the {subject domain}, the {information architect} can choose how to order subject-domain information in the conversion to the document domain.
         
-        |Grouping| At a higher level, content is often organized into groups. This may be groups on a page or groups of pages. Grouping includes breaking content into sections, inserting subheads, inserting tables and graphics, and inserting information as labeled fields. Writers working in the document domain typically create these groupings as they write, but if they are working in the subject domain, they may have choices about how to group subject-domain information in the document domain. 
+        |Grouping| At a higher level, content is often organized into groups. This may be groups on a page or groups of pages. Grouping includes breaking content into sections, inserting subheads, inserting tables and graphics, and inserting information as labeled fields. Writers working in the document domain typically create these groupings as they write, but if writers are working in the subject domain, the {information architect} may have choices about how to group subject-domain information in the document domain. 
         
         |Blocking| On a page, groups may be organized sequentially or laid out in some form of block pattern. Exactly how blocks are laid out on the displayed page is a media-domain question that may even be done dynamically. However, to lay out blocks in the media domain the document domain markup must clearly delineate the types of blocks in a document in a way that allows the formatting algorithm to interpret and act reliably. 
        
-        |Labeling| Any grouping of content requires labels to identify the groups. This includes titles on blocks and labels on data fields. Labels are typically created by writers in the {document domain}, but are almost always factored out when writers work in the {subject domain} (most labels indicate the place of content in the {subject domain}, so inserting them is a necessary part of reversing the factoring out of labels that occurs when you move to the {subject domain}).
+        |Labeling| Any grouping of content requires labels to identify the groups. This includes titles on blocks and labels on data fields. Labels are typically created by writers in the {document domain}, but are almost always factored out when writers work in the {subject domain}. Most document-domain labels indicate the place of content in the {subject domain} (which is why the label you factor out is often similar to the subject-domain tag you insert when you refactor content to the subject domain). Inserting these labels in the presentation algorithm is therefore a necessary part of reversing the factoring out of labels that occurs when you move writing to the {subject domain}.
        
-        |Relating| Ordering, grouping, blocking, and labeling cover organization on a two-dimensional page or screen. But information can also be connected to other information by creating non-linear relationships between pieces of content using mechanisms such as {hypertext} {links} and {cross references}. 
+        |Relating| Ordering, grouping, blocking, and labeling cover organization on a two-dimensional page or screen. But information is related to other information in complex ways which we can express by creating non-linear relationships between pieces of content using mechanisms such as {hypertext} {links} and {cross references}. 
         
     section: Differential presentation algorithms
         
-        As I described in [#chapter.single-sourcing], you cannot ignore differences in media when organizing data in the {document domain}. Although the fact that a relationship exists is a pure document-domain issue, how that relationship is expressed, and even whether it is expressed or not, is affected by the media and its capabilities.
+        As I described in [#chapter.single-sourcing], you cannot ignore differences in media when organizing content in the {document domain}. Although the fact that a relationship exists is a pure document-domain issue, how that relationship is expressed, and even whether it is expressed or not, is affected by the media and its capabilities.
 
         Following {links} in online media is cheap. Following references to other works in the {paper} world is expensive, so document design for paper tends to favor linear relationships while document design for the {web} favors {hypertext} relationships. Therefore, you should expect to implement {differential single sourcing} and use different {presentation algorithms} for different media (see [*fig.pub-differentialpub]).
 
-        figure:(*fig.pub-differentialpub) Differential presentation algorithms
+        figure:(*fig.pub-differentialpub) Adding differential presentation algorithms
             >>>(image ../graphics/differentialpub.xml)
         
     section: Presentation sub-algorithms
@@ -137,7 +139,7 @@ chapter:(#chapter.publishing) Publishing
                
         section: The {linking algorithm}
        
-            How content is linked or cross-referenced is a key part of how it is organized in different media and a key part of {differential single sourcing}. I looked at the {linking algorithm}(algorithm) in detail in [#chapter.linking].
+            How content is linked or cross-referenced is a key part of how it is organized in different media and a key part of {differential single sourcing}. I looked at the {linking algorithm} in detail in [#chapter.linking].
        
         section: The {content generation algorithm}
        
@@ -157,14 +159,14 @@ chapter:(#chapter.publishing) Publishing
         
         In the case of {subject-domain} content, processing {management-domain} structures yields a definitive set of subject-domain structures that can be passed to the {presentation algorithm} for processing to the document domain (see [*fig.pub-synthesis]).
         
-        figure:(*fig.pub-synthesis) Synthesis algorithm
+        figure:(*fig.pub-synthesis) Adding the synthesis algorithm
             >>>(image ../graphics/synthesis.xml)
         
     section: {Differential synthesis}
     
         I noted above that you can use {differential presentation} to do {differential single sourcing} when you have two publications that contain the same content but are organized differently. If you want two publications in different media to have differences in their content, you can do this by doing differential synthesis and including different content in each publication (see [*fig.pub-differential-synthesis]). 
 
-        figure:(*fig.pub-differential-synthesis) Differential synthesis algorithm
+        figure:(*fig.pub-differential-synthesis) Adding differential synthesis algorithms
             >>>(image ../graphics/differential-synthesis.xml)
     
     section: Synthesis sub-algorithms

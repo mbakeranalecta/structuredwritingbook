@@ -152,13 +152,13 @@ chapter:(#chapter.separating) Separating Content from Formatting
         
         (`++count` here means add one to `count` and then display it.)
 
-        This is pretty much how {FrameMaker}(tool), {Microsoft Word}(tool), and many other tools handle lists. The reason for going through this example in such detail is to point out how much is involved in even this simple bit of partitioning. You began by removing formatting commands, followed by characters, which forced you to include characters in the style definitions. And then you had to calculate the value of characters. At each step, you had to consider all possible cases and create abstractions to handle them. 
+        This is pretty much how {FrameMaker}, {Microsoft Word}, and many other tools handle lists. The reason for going through this example in such detail is to point out how much is involved in even this simple bit of partitioning. You began by removing formatting commands, followed by characters, which forced you to include characters in the style definitions. And then you had to calculate the value of characters. At each step, you had to consider all possible cases and create abstractions to handle them. 
         
     section: Create containers to provide context
        
         One problem with this approach to creating lists is that you have to apply a different style to the first item of a list. It would be better if you could use the same style for each list item and have the numbering just work. However, this is hard to do because nothing in the content says where one numbered list ends and the next begins. For this you need a new abstraction. So far, you have abstractions for ordered and unordered list items, but you don't have an abstraction for lists themselves. 
         
-        Up to this point, everything has been purely in the {media domain}(concept). You replaced direct formatting definitions with indirect definitions through styles. But now it's necessary to venture into the {document domain}(concept), creating the abstract idea of a list and inserting that abstract idea into your content.
+        Up to this point, everything has been purely in the {media domain}. You replaced direct formatting definitions with indirect definitions through styles. But now it's necessary to venture into the {document domain}, creating the abstract idea of a list and inserting that abstract idea into your content.
         
         ```
             paragraph: To wash hair:
@@ -175,7 +175,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
             
         By creating the idea of a list, you further separate list formatting from the list content. Now, an algorithm can recognize a list and make formatting decisions based on that knowledge. 
         
-        The second important thing is that the content no longer refers to style names. Instead you have structures. `list` is a structure and so are `paragraph` and `ordered-list-item`. You can give the same structure a different style depending on where it is in the document. The {formatting algorithm}(concept) can determine which `ordered-list-item` is first and format it accordingly; this is {how list formatting works in CSS.}[https://css-tricks.com/numbering-in-style/]
+        The second important thing is that the content no longer refers to style names. Instead you have structures. `list` is a structure and so are `paragraph` and `ordered-list-item`. You can give the same structure a different style depending on where it is in the document. The {formatting algorithm} can determine which `ordered-list-item` is first and format it accordingly; this is {how list formatting works in CSS.}[https://css-tricks.com/numbering-in-style/]
         
         Now, writers no longer apply styles directly to content, even styles with abstract names. Rather they place content in structures and allow the formatting algorithm to apply styles appropriately. This separates the content even more from the formatting.
         
@@ -217,7 +217,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
         
         Some markup languages take better advantage of containers than others. For example, HTML and Markdown both provide six different heading levels. However, content under an `H2` or an `H5` heading is not in any container. The content simply comes after the heading. This means that is it perfectly possible and legal to use heading elements in any order you want. Writers must select the heading level and ensure that it fits the structure of their document.
           
-        By contrast, {DocBook}(language) has a {section}(structure (DocBook)) structure. Like a list, a section records your interpretation of what you are creating in the document. The {section} structure instantiates the concept of a section. And once you have the instantiation of a section, you don't need six levels of heading. You can have one structure called {title}(structure (DocBook)). Sections can be nested inside other sections, and the formatting algorithm applies the correct style to the title based on context.
+        By contrast, {DocBook} has a {section}(structure (DocBook)) structure. Like a list, a section records your interpretation of what you are creating in the document. The {section} structure instantiates the concept of a section. And once you have the instantiation of a section, you don't need six levels of heading. You can have one structure called {title}(structure (DocBook)). Sections can be nested inside other sections, and the formatting algorithm applies the correct style to the title based on context.
 
         This eliminates decisions about which heading element to use; there is just one: `title`. This ensures that headings in output consistently reflect the document's section and subsection structure.[*fn.signposts] 
                
@@ -263,7 +263,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
         
         But what if you have hundreds of addresses, all with the same labels? Are the labels content or are they presentation? Since the labels don't change from one list to another, you could look at them as being part of the presentation rather than the content. So let's look for a way to separate them from the content. 
         
-        As always, when you separate something from your content, you have to replace it with something else. In [#ex.separate-1], named structures reflect the subject matter of the entries, which moves this content into the {subject domain}(concept).
+        As always, when you separate something from your content, you have to replace it with something else. In [#ex.separate-1], named structures reflect the subject matter of the entries, which moves this content into the {subject domain}.
 
         figure:(#ex.separate-1) Address markup in the subject domain
             ```(sam)

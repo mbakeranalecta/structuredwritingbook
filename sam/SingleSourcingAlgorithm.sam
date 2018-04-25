@@ -13,7 +13,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
     
     section: Basic single sourcing 
     
-        The basic single-sourcing algorithm is straightforward (see [#chapter.processing]). Basic single sourcing involves taking a piece of content in the {document domain}(concept) and processing its document-domain structures into different {media-domain}(concept) structures for each target medium. 
+        The basic single-sourcing algorithm is straightforward (see [#chapter.processing]). Basic single sourcing involves taking a piece of content in the {document domain} and processing its document-domain structures into different {media-domain} structures for each target medium. 
         
         Suppose you have recorded a recipe in the document domain (see [*fig.ssa-eggs-1]).
 
@@ -129,7 +129,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         Because of issues like this, you don't write a formatting algorithm for paper the same the way you write an algorithm for HTML. Instead, you use an intermediate typesetting system that already knows how to handle tasks such as inserting page-number references and handling line and page breaks. Rather than handling these things yourself, you give the typesetting system general guidance and then let it do its job.
 
-        One such typesetting system is {XSL-FO}(language) (Extensible Stylesheet Language - Formatting Objects). Other typesetting systems include {TeX}(language) and newer versions of {CSS}(language). XSL-FO is a typesetting language written in {XML}(language). To format your content using {XSL-FO}, you transform your source content into {XSL-FO} markup, just the way you transform it into {HTML}(language) for the web. But then you run the {XSL-FO} markup through an {XSL-FO} processor to produce your final output, typically {PDF}(language). 
+        One such typesetting system is {XSL-FO} (Extensible Stylesheet Language - Formatting Objects). Other typesetting systems include {TeX} and newer versions of {CSS}. XSL-FO is a typesetting language written in {XML}. To format your content using {XSL-FO}, you transform your source content into {XSL-FO} markup, just the way you transform it into {HTML}(language) for the web. But then you run the {XSL-FO} markup through an {XSL-FO} processor to produce your final output, typically {PDF}. 
         
         Here is a small example of XSL-FO markup:
         
@@ -141,7 +141,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
             </fo:block>
         
         
-        The {XSL-FO} code contains {media-domain}(concept) instructions for spacing and font choices. There is no division between content structures and formatting structures as there is with {HTML}(language) and {CSS}(language). Also, as a pure media-domain language, XSL-FO does not have document-domain structures such as paragraphs and titles. To XSL-FO, a document is simply a set of blocks with specific formatting properties attached to them.
+        The {XSL-FO} code contains {media-domain} instructions for spacing and font choices. There is no division between content structures and formatting structures as there is with {HTML} and {CSS}. Also, as a pure media-domain language, XSL-FO does not have document-domain structures such as paragraphs and titles. To XSL-FO, a document is simply a set of blocks with specific formatting properties attached to them.
         
         To limit the amount of detail, the algorithm in [*fig.ssa-fo-algorithm] shows only a portion of the pseudocode for handling recipe markup (The point here is not to teach {XSL-FO}, but to show how the algorithm works).
 
@@ -161,7 +161,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
     
         Basic {single sourcing} outputs the same document presentation to different media. However, each medium is different, and what works well in one medium does not always work as well in another. Thus the rhetoric that is appropriate to one media may not be appropriate to another, This is what I meant when I said at the beginning that single sourcing is a rhetoric problem as well as a process problem. 
 
-        For example, online media generally support {hypertext}(concept) links, while paper does not. Suppose you have a piece of content that includes a link:
+        For example, online media generally support {hypertext} links, while paper does not. Suppose you have a piece of content that includes a link:
         
         ```
             In Rio Bravo, {the Duke}(link "http://JohnWayne.com")
@@ -236,11 +236,11 @@ chapter:(#chapter.single-sourcing) Single Sourcing
 
         This provides readers with less information, in the sense that it does not give them access to all the information on `JohnWayne.com`, but it does a better job of disambiguation, and it does so in a more paper-like way. It is a rhetoric appropriate to the media. Losing the reference to `JohnWayne.com` is probably not an issue here. Following that link by typing it into a browser is a lot more work than simply clicking on a web link. Someone who wants more information on John Wayne is far more likely to type "John Wayne" into Google than type "JohnWayne.com" into the browser address bar.   
         
-        As written, the source content provides no easy way to produce this preferred form for paper. The content is in the {document domain}(concept), which specifies the presentation of the content. Therefore, it is not a neutral format between media that require different forms of presentation. The choice to specify a link directly in the markup gives it a strong bias towards the web and online media rather than paper. A {document-domain} approach that favored paper would similarly lead to a poorer online presentation by omitting the link. 
+        As written, the source content provides no easy way to produce this preferred form for paper. The content is in the {document domain}, which specifies the presentation of the content. Therefore, it is not a neutral format between media that require different forms of presentation. The choice to specify a link directly in the markup gives it a strong bias towards the web and online media rather than paper. A {document-domain} approach that favored paper would similarly lead to a poorer online presentation by omitting the link. 
         
         Because different media require a different rhetoric, you need a _differential_ approach to single sourcing, one that allows you to differ not only the formatting but the presentation of the content for different media.
         
-        One way to accomplish differential single sourcing is to record the content in the {subject domain}(concept), thus removing the prejudice of the document-domain presentation for one class of media or another. Here is how this markup might look:
+        One way to accomplish differential single sourcing is to record the content in the {subject domain}, thus removing the prejudice of the document-domain presentation for one class of media or another. Here is how this markup might look:
         
         ```(sam)
             {The Duke}(actor "John Wayne") plays an ex-Union colonel.
@@ -339,17 +339,17 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         Books are a linear medium in which one chapter follows another in order. The web is a {hypertext} medium in which every page is page one. Readers arrive at a page via search, and they navigate by following hypertext links. The linear and hypertext approaches are fundamentally different ways of writing that invite fundamentally different ways of navigating and using information.[*eppo] Even moving content to the {subject domain} as much as possible does not entirely factor out these fundamental differences in approach. 
 
         footnote:(*eppo)
-            For a full examination of the differences, see my book {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}(citetitle "Baker2013").
+            For a full examination of the differences, see my book {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}.
         
         When single sourcing content to both linear paper-like media and {hypertext} web-like media, you generally have to choose a primary medium. Single sourcing that content to other media will be on a best-effort basis. It may be good enough for a particular purpose, but it will never be as good as it could have been had you designed exclusively for that medium.
         
-        Many of the tools used for single sourcing have a built-in bias towards one medium or another. Desktop-publishing tools such as {FrameMaker}(tool), for instance, were designed for linear media. Online collaborative tools such as {wikis}(tool) were designed for {hypertext} media. It is usually a good idea to pick a tool that was designed for the medium you choose as primary. Tools partition the complexity of content creation to best suit the primary medium they were designed for. 
+        Many of the tools used for single sourcing have a built-in bias towards one medium or another. Desktop-publishing tools such as {FrameMaker}, for instance, were designed for linear media. Online collaborative tools such as {wikis} were designed for {hypertext} media. It is usually a good idea to pick a tool that was designed for the medium you choose as primary. Tools partition the complexity of content creation to best suit the primary medium they were designed for. 
         
         Often, the tools a group uses implicitly determine the primary medium. This usually means that the primary medium is paper, and paper often continues to be primary even after the organization stops producing paper, and their readers have moved to online formats. 
         
         Some organizations think they should not switch to tools that are designed primarily for online content until they have entirely abandoned paper and paper-like formats such as PDF. But once online becomes your primary media, your rhetoric should change to a rhetoric appropriate to online media (potentially a very large change, as discussed in [#chapter.architecture]). Thus it is appropriate to switch to a rhetoric and tool set that is optimized for online but that can still produce linear media as a secondary output format. 
         
-        Changing your information design practices from linear, paper-based designs to {hypertext} designs is not trivial, but such designs better suit the way many people use and access content today. I discuss these design differences in depth in my book, {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}(citetitle). Don't expect single sourcing, by itself, to successfully turn document-oriented design into effective hypertext. It is usually more effective to adopt an {Every Page is Page One}(concept) approach to information design and use structured writing and single-sourcing techniques as a best-effort method to create linear media for those of your readers who still need paper or paper-like formats -- or for those documents where linear organization still makes sense. 
+        Changing your information design practices from linear, paper-based designs to {hypertext} designs is not trivial, but such designs better suit the way many people use and access content today. I discuss these design differences in depth in my book, {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}. Don't expect single sourcing, by itself, to successfully turn document-oriented design into effective hypertext. It is usually more effective to adopt an {Every Page is Page One}(concept) approach to information design and use structured writing and single-sourcing techniques as a best-effort method to create linear media for those of your readers who still need paper or paper-like formats -- or for those documents where linear organization still makes sense. 
 
         
     section: Single sourcing vs single format

@@ -11,7 +11,7 @@ chapter:(#chapter.merge) Merge
     
     You can extract useful information about an API function from the code that implements, but there is not enough detail to build a complete API reference. A good reference entry also requires an explanation of the purpose of the function, a little more detail about its parameters, and possibly a code sample illustrating its use. To address these needs, you can merge authored content covering these topics with content you have extracted from the source code.  
     
-    API documentation tools often allow you to include authored content in the source code files. This content is contained in code comments and is often written in small {subject-domain}(concept) markup languages that are specific to the tool. Of course, as with all subject-domain structures, another tool can read them if it wants to.
+    API documentation tools often allow you to include authored content in the source code files. This content is contained in code comments and is often written in small {subject-domain} markup languages that are specific to the tool. Of course, as with all subject-domain structures, another tool can read them if it wants to.
 
     figure:(*fig.javadoc-api) API documentation included in source code using JavaDoc
         ```(Java)
@@ -55,7 +55,7 @@ chapter:(#chapter.merge) Merge
 
     One of the downsides of API documentation tools like JavaDoc is that they tend to be tightly coupled systems that directly produce {media-domain} output such as formatted {HTML}, thus providing little or no control over presentation or formatting. This is a problem because it means that your API reference content will not look like the rest of your content. And worse, your API reference won't be integrated with or linked to the rest of your content. This means any mention of an API routine in your programmer's guide won't link to the documentation for that routine in the API reference.
 
-    It would be much better to generate subject-domain content from the API documentation tool and then process it with the rest of your content. Many API documentation tools make this possible by allowing you to export {XML}, which may be either {subject domain}(concept) or {document domain}(concept). Even if the output is document-domain XML, it may be regular enough that you can extract subject-domain structures reasonably easily. You can then skip the API documentation tool's built-in publishing chain and run the XML output through your regular {publishing} chain.
+    It would be much better to generate subject-domain content from the API documentation tool and then process it with the rest of your content. Many API documentation tools make this possible by allowing you to export {XML}, which may be either {subject domain} or {document domain}. Even if the output is document-domain XML, it may be regular enough that you can extract subject-domain structures reasonably easily. You can then skip the API documentation tool's built-in publishing chain and run the XML output through your regular {publishing} chain.
     
 
     
