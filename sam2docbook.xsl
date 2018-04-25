@@ -430,32 +430,29 @@
     </xsl:template>
     
     <xsl:template name="index-annotation">
+        <xsl:variable name="index-type" select="@type"/>
+        <xsl:variable name="index-term">
+            <xsl:choose>
+                <xsl:when test="@specifically">
+                    <xsl:value-of select="@specifically"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="descendant-or-self::text()"/>
+                </xsl:otherwise>
+            </xsl:choose>                             
+        </xsl:variable>
         <xsl:if test="not(ancestor::footnote)">
             <db:indexterm>
                 <db:primary>
-                    <xsl:choose>
-                        <xsl:when test="@specifically">
-                            <xsl:value-of select="@specifically"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:value-of select="descendant-or-self::text()"/>
-                        </xsl:otherwise>
-                    </xsl:choose>                             
+                    <xsl:value-of select="$index-term"/>
                 </db:primary>
             </db:indexterm>
             <db:indexterm>
                 <db:primary>
-                    <xsl:value-of select="@type"/>
+                    <xsl:value-of select="$index-type"/>
                 </db:primary>
                 <db:secondary>
-                    <xsl:choose>
-                        <xsl:when test="@specifically">
-                            <xsl:value-of select="@specifically"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:value-of select="descendant-or-self::text()"/>
-                        </xsl:otherwise>
-                    </xsl:choose>                             
+                    <xsl:value-of select="$index-term"/>                            
                 </db:secondary>
             </db:indexterm>
         </xsl:if>
