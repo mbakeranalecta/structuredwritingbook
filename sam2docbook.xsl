@@ -509,15 +509,36 @@
                     <xsl:value-of select="$index-term"/>
                 </db:primary>
             </db:indexterm>
+            
             <xsl:if test="$anntoation-types/type/name = $index-type">
-                <db:indexterm>
-                    <db:primary>
-                        <xsl:value-of select="$anntoation-types/type[name=$index-type]/alias"/>
-                    </db:primary>
-                    <db:secondary>
-                        <xsl:value-of select="$index-term"/>                            
-                    </db:secondary>
-                </db:indexterm>
+                <xsl:choose>
+                    <xsl:when test="descendant::annotation[@type='index-use-see-if-secondary']">
+                    <db:indexterm>
+                        <db:primary>
+                            <xsl:value-of select="$anntoation-types/type[name=$index-type]/alias"/>
+                        </db:primary>
+                        <db:secondary>
+                            <xsl:value-of select="$index-term"/>
+                        </db:secondary>
+                        <db:see>
+                            <xsl:value-of select="$index-term"/>
+                        </db:see>
+                    </db:indexterm>                        
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <db:indexterm>
+                            <db:primary>
+                                <xsl:value-of select="$anntoation-types/type[name=$index-type]/alias"/>
+                            </db:primary>
+                            <db:secondary>
+                                <xsl:value-of select="$index-term"/>                            
+                            </db:secondary>
+                        </db:indexterm>
+                    </xsl:otherwise>
+                </xsl:choose>
+
+
+                    
             </xsl:if>
         </xsl:if>
     </xsl:template>
