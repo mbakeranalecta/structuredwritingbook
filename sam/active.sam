@@ -48,14 +48,15 @@ chapter:(#chapter.active) Active content
 
     However, this is not likely to be a straightforward pass through. The downstream system that will execute the active-content algorithm -- for example, a JavaScript app running in the web browser -- may expect or require the {subject-domain} information to be in a particular format. For instance, you might have to embed the ticker symbol in a function call that returns stock quotes:
 
-    ```(xml)
-        <p>Microsoft (<span onload="getStockQuote(NASDAQ:MSFT)"/>) 
-        is a large software company.</p>
+    figure:(*fig.active-quote) HTML markup to get a stock quote
+        ```(xml)
+            <p>Microsoft (<span onload="getStockQuote(NASDAQ:MSFT)"/>) 
+            is a large software company.</p>
 
         
-    In this case, your server side {presentation algorithm} needs to transform your {subject-domain} {annotation} into the format shown in [*fig.active-quote]. 
+    In this case, your server side {presentation algorithm}  needs to transform your {subject-domain} {annotation} into the format shown in [*fig.active-quote] using a rule such as that shown in [*fig.active-quote-code]. 
     
-    figure:(*fig.active-quote) Pseudocode to get a stock quote
+    figure:(*fig.active-quote-code) Pseudocode to create the HTML markup
         ```(pseudocode)
     
             match company
@@ -111,7 +112,7 @@ chapter:(#chapter.active) Active content
     
     Creating your content in the {subject domain} gives you the greatest flexibility to generate {active content} in ways that are appropriate to the subject matter and the device. And because the subject domain does not require different structures to support active content, your writers don't have to understand or even think about how the active content might work. This partitions the complexity of active content from your writers. As we have seen before, partitioning content from its presentation lets you experiment with different forms of presentation. This allows you to test whether active content is working and to change the form of {active content} you use, all without involving writers or changing your content. 
     
-    This does not mean that active content is a free benefit of using the {subject domain}. You still have to design and implement the content behavior, and you have to make sure that you capture the subject-domain semantics needed to drive the active-content behaviors you want. Those semantics may not be different from other subject-domain semantics, but you may need to provide greater detail than you would for other algorithms.
+    This does not mean that active content is a free benefit of using the {subject domain}. You still have to design and implement the content behavior, and you have to make sure that you capture the subject-domain semantics needed to drive the active-content behaviors you want. Those semantics may not be different in kind from other subject-domain semantics, but you may need to provide greater detail than you would for other algorithms.
 
     You also need to ensure a high degree of {conformance} from your writers, because it is difficult to validate the correct operation of active-content algorithms at run time. The success of your active-content strategy depends on the quality and consistency of your input data. 
         
