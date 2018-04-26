@@ -456,6 +456,41 @@
         </db:link>        
     </xsl:template>
     
+    <xsl:template match="annotation[@type='index']">
+        <db:indexterm>
+            <db:primary>
+                <xsl:value-of select="@specifically"/>
+            </db:primary>
+        </db:indexterm>
+        <xsl:apply-templates/>
+    </xsl:template>
+    
+    <xsl:template match="annotation[@type='also-index-as']">
+        <xsl:variable name="primary" select="ancestor::annotation[@type='index']/@specifically"/>
+        <db:indexterm>
+            <db:primary>
+                <xsl:value-of select="@specifically"/>
+            </db:primary>
+            <db:see>
+                <xsl:value-of select="$primary"/>
+            </db:see>
+        </db:indexterm>
+        <xsl:apply-templates/>
+    </xsl:template>
+    
+    <xsl:template match="annotation[@type='index-see-also']">
+        <xsl:variable name="primary" select="ancestor::annotation[@type='index']/@specifically"/>
+        <db:indexterm>
+            <db:primary>
+                <xsl:value-of select="$primary"/>
+            </db:primary>
+            <db:seealso>
+                <xsl:value-of select="@specifically"/>
+            </db:seealso>
+        </db:indexterm>
+        <xsl:apply-templates/>
+    </xsl:template>
+    
     <xsl:template name="index-annotation">
         <xsl:variable name="index-type" select="@type"/>
         <xsl:variable name="index-term">
