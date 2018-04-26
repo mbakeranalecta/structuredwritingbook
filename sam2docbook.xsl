@@ -378,6 +378,11 @@
         <xsl:apply-templates/>
     </xsl:template>
 
+    <xsl:template match="annotation[@type='process']">
+        <xsl:call-template name="index-annotation"/>
+        <xsl:apply-templates/>
+    </xsl:template>
+
     <xsl:template match="annotation[@type='system']">
         <xsl:call-template name="index-annotation"/>
         <xsl:apply-templates/>
