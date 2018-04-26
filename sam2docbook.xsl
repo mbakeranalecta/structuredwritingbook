@@ -12,6 +12,8 @@
     
     <xsl:variable name="default-content-width">5.25in</xsl:variable>
     
+    <xsl:variable name='anntoation-types' select='document("annotation-types.xml")/annotation-types'/>
+    
   <xsl:template match="@*|node()">
         <xsl:copy>
             <xsl:apply-templates select="@*|node()"/>
@@ -159,6 +161,7 @@
             </xsl:if>
             <xsl:apply-templates select="title" mode="chapter-title"/>
             <xsl:for-each select="index/record/term">
+                <xsl:variable name="index-type" select="../type"/>
                 <db:indexterm class="startofrange" significance="preferred">
                     <xsl:attribute name="xml:id">
                         <xsl:value-of select="generate-id()"/>
@@ -167,18 +170,22 @@
                         <xsl:value-of select="."/>
                     </db:primary>
                 </db:indexterm>
-                <db:indexterm class="startofrange">
-                    <xsl:attribute name="xml:id">
-                        <xsl:value-of select="generate-id()"/>
-                        <xsl:text>x</xsl:text>
-                    </xsl:attribute>
-                    <db:primary>
-                        <xsl:value-of select="../type"/>
-                    </db:primary>
-                    <db:secondary>
-                        <xsl:value-of select="."/>
-                    </db:secondary>
-                </db:indexterm>
+                               
+                <xsl:if test="$anntoation-types/type/name = $index-type">
+                   <db:indexterm class="startofrange">
+                       <xsl:attribute name="xml:id">
+                           <xsl:value-of select="generate-id()"/>
+                           <xsl:text>x</xsl:text>
+                       </xsl:attribute>
+                       <db:primary>
+                           <xsl:value-of select="$anntoation-types/type[name=$index-type]/alias"/>
+                       </db:primary>
+                       <db:secondary>
+                           <xsl:value-of select="."/>
+                       </db:secondary>
+                   </db:indexterm>
+                </xsl:if>                
+               
             </xsl:for-each>
             
             <xsl:apply-templates/>
@@ -452,14 +459,16 @@
                     <xsl:value-of select="$index-term"/>
                 </db:primary>
             </db:indexterm>
-            <db:indexterm>
-                <db:primary>
-                    <xsl:value-of select="$index-type"/>
-                </db:primary>
-                <db:secondary>
-                    <xsl:value-of select="$index-term"/>                            
-                </db:secondary>
-            </db:indexterm>
+            <xsl:if test="$anntoation-types/type/name = $index-type">
+                <db:indexterm>
+                    <db:primary>
+                        <xsl:value-of select="$anntoation-types/type[name=$index-type]/alias"/>
+                    </db:primary>
+                    <db:secondary>
+                        <xsl:value-of select="$index-term"/>                            
+                    </db:secondary>
+                </db:indexterm>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
     
@@ -838,6 +847,7 @@
         </xsl:if>
           <xsl:apply-templates select="title" mode="section-title"/>
           <xsl:for-each select="index/record/term">
+              <xsl:variable name="index-type" select="../type"/>
               <db:indexterm class="startofrange" significance="preferred">
                   <xsl:attribute name="xml:id">
                       <xsl:value-of select="generate-id()"/>
@@ -846,18 +856,21 @@
                       <xsl:value-of select="."/>
                   </db:primary>
               </db:indexterm>
-              <db:indexterm class="startofrange">
-                  <xsl:attribute name="xml:id">
-                      <xsl:value-of select="generate-id()"/>
-                      <xsl:text>x</xsl:text>
-                  </xsl:attribute>
-                  <db:primary>
-                      <xsl:value-of select="../type"/>
-                  </db:primary>
-                  <db:secondary>
-                      <xsl:value-of select="."/>
-                  </db:secondary>
-              </db:indexterm>
+
+              <xsl:if test="$anntoation-types/type/name = $index-type">
+                  <db:indexterm class="startofrange">
+                      <xsl:attribute name="xml:id">
+                          <xsl:value-of select="generate-id()"/>
+                          <xsl:text>x</xsl:text>
+                      </xsl:attribute>
+                      <db:primary>
+                          <xsl:value-of select="$anntoation-types/type[name=$index-type]/alias"/>
+                      </db:primary>
+                      <db:secondary>
+                          <xsl:value-of select="."/>
+                      </db:secondary>
+                  </db:indexterm>
+              </xsl:if>                
           </xsl:for-each>
           
           <xsl:apply-templates/>
