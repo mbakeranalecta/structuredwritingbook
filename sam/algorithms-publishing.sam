@@ -19,7 +19,7 @@ chapter:(#chapter.publishing) Publishing
     
     I have noted that successful partitioning depends on the ability to communicate everything needed for each partition to do its job and that one hallmark of a successful partitioning is how clear and functional the required communication is. In the partitioning of the publication process I describe here, each step deals with a different concern, and each step produces an output: a structured document or set of documents that is structured in terms of the concern it deals with. This output becomes the input to the next step. The structures that these steps produce and consume are stages along the path from the {subject}(concept "subject domain") to {document}(concept "document domain") to {media domain}s. In other words, the publication process moves content through the domains, just as described in [#chapter.three-domains].
 
-    In describing the publishing process, I am going to start at the media domain and work backward to the subject domain, just as I did in describing the domains themselves. Since the input of each stage is the output of the previous stage, it is easier to understand the process if we look at it in reverse order. This way we will see what each stage needs to produce in order to meet the needs of the following stage. 
+    In describing the publishing process, I am going to start at the media domain and work backward to the subject domain, just as I did in describing the domains themselves. Since the input of each stage is the output of the previous stage, it is easier to understand the process if you look at it in reverse order. This way you will see what each stage needs to produce in order to meet the needs of the following stage. 
     
     section: The rendering algorithm
     
@@ -50,9 +50,9 @@ chapter:(#chapter.publishing) Publishing
     
         Since most writers don't write directly in a {page description language}, the page descriptions for your publication are almost certainly going to be created by an algorithm. I call this the encoding algorithm because it encodes your content in the page description language.
 
-        While it is possible that a highly specialized publishing tool chain may require a custom-made encoding algorithm, most encoding algorithms are implemented with existing tools that translate {formatting languages} into {page description languages} (see fig.pub-encoding). 
+        While it is possible that a highly specialized publishing tool chain may require a custom-made encoding algorithm, most encoding algorithms are implemented with existing tools that translate {formatting languages} into {page description languages} (see [*fig.pub-encoding]). 
         
-        Several {formatting languages} are used in content processing. They are often called {typesetting languages}. {XSL-FO} (XSL - Formatting Objects) is one of the more commonly used in structured writing projects. {TeX} is another. 
+        Several {formatting languages} are used in content processing. They are often called {typesetting languages}. {XSL-FO} (XSL Formatting Objects) is one of the more commonly used languages in structured writing projects. {TeX} is another. 
 
         figure:(*fig.pub-encoding) Adding the encoding algorithm
             >>>(image ../graphics/encoding.xml)
@@ -68,7 +68,7 @@ chapter:(#chapter.publishing) Publishing
                 </fo:block>
         
 
-        You process {XSL-FO} using an {XSL-FO} processor such as {Apache FOP}. The {XSL-FO} processor runs the encoding algorithm, producing a page description language, such as {PostScript} or {PDF}, as output. 
+        You process {XSL-FO} using a program such as {Apache FOP}. The {XSL-FO} processor runs the encoding algorithm, producing a page description language, such as {PostScript} or {PDF}, as output. 
         
         Writers are not likely to write in XSL-FO directly, though it is not impossible to do so. In fact some boilerplate content such as front matter for a book does sometimes get written and recorded directly in {XSL-FO}. (I did this on one project.) But when you are constructing a publishing tool chain, you will need to select and integrate the appropriate encoding tools as part of your process. 
         
@@ -122,7 +122,7 @@ chapter:(#chapter.publishing) Publishing
        
         |Labeling| Any grouping of content requires labels to identify the groups. This includes titles on blocks and labels on data fields. Labels are typically created by writers in the {document domain}, but are almost always factored out when writers work in the {subject domain}. Most document-domain labels indicate the place of content in the {subject domain} (which is why the label you factor out is often similar to the subject-domain tag you insert when you refactor content to the subject domain). Inserting these labels in the presentation algorithm is therefore a necessary part of reversing the factoring out of labels that occurs when you move writing to the {subject domain}.
        
-        |Relating| Ordering, grouping, blocking, and labeling cover organization on a two-dimensional page or screen. But information is related to other information in complex ways which we can express by creating non-linear relationships between pieces of content using mechanisms such as {hypertext} {links} and {cross references}. 
+        |Relating| Ordering, grouping, blocking, and labeling cover organization on a two-dimensional page or screen. But information is related to other information in complex ways that you can express by creating non-linear relationships between pieces of content using mechanisms such as {hypertext} {links} and {cross references}. 
         
     section: Differential presentation algorithms
         
