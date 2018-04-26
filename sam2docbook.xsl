@@ -360,6 +360,13 @@
         <xsl:apply-templates/>       
     </xsl:template>
     
+    <xsl:template match="annotation[@type='element']">
+        <!-- Not calling index-annotation because we don't want to index individual elements. -->
+        <db:code>
+            <xsl:apply-templates/>
+        </db:code>       
+    </xsl:template>
+
     <xsl:template match="annotation[@type='programming-language']">
         <xsl:call-template name="index-annotation"/>
         <xsl:apply-templates/>       
