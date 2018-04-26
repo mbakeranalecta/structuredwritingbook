@@ -367,6 +367,14 @@
         </db:code>       
     </xsl:template>
 
+
+    <xsl:template match="annotation[@type='attribute']">
+        <!-- Not calling index-annotation because we don't want to index individual elements. -->
+        <db:code>
+            <xsl:apply-templates/>
+        </db:code>       
+    </xsl:template>
+    
     <xsl:template match="annotation[@type='programming-language']">
         <xsl:call-template name="index-annotation"/>
         <xsl:apply-templates/>       
@@ -431,7 +439,7 @@
     </xsl:template>
     
     <xsl:template match="annotation[@type='citetitle']">
-        <xsl:call-template name="index-annotation"/>
+        <!--<xsl:call-template name="index-annotation"/>-->
         <db:citetitle>
             <xsl:apply-templates/>
         </db:citetitle>

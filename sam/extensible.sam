@@ -4,7 +4,7 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
     <<<(annotations.sam)
     index::type, term
         concept, extension
-        concept, constraint
+        concept, constraints
 
     The languages we have looked at to this point are publicly specified and have existing tool chains. Some are more constrained than others, and some support different structured writing algorithms and different ways of partitioning and redirecting complexity. Choosing one of them makes sense if the constraints they express and the algorithms they support partition content complexity in a way that is right for your organization. If not, you need to create your own structures to improve how complexity is partitioned and distributed in your organization.
 
@@ -30,7 +30,7 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
     section: ReStructuredText    
     
         index:: type, term
-            language, reStructuredText
+            markup-language, reStructuredText
     
         ReStructuredText defines a base set of structures -- such as paragraphs, titles, and lists -- with a concrete syntax. It defines other blocks using directives. [*fig.restructuredtext-directive] shows a directive that includes an image and a set of attributes for rendering that image. 
 
@@ -55,7 +55,7 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
     section: TeX
     
         index:: type, term
-            language, TeX
+            markup-language, TeX
             
         TeX (pronounced "Tek") is a typesetting system invented by {Donald Knuth} in 1978. As a typesetting language it is a concrete {media-domain} language. But Knuth also included a macro language in TeX, which allows users to define new commands in terms of existing commands. (I say commands because that is the term used in TeX. Markup in the media domain tends to be much more imperative than markup in the subject domain, which is entirely descriptive, so commands is an appropriate name for TeX's tags.) This macro language has been used to extend TeX, most notably in the form of {LaTeX}, a {document-domain} language described in [#chapter.lightweight].
         
@@ -64,7 +64,7 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
     section: SAM
     
         index:: type, term
-            language, SAM
+            markup-language, SAM
     
         Although lightweight languages provide great {functional lucidity}, they suffer from limited extensibility (which generally requires writing code) and a lack of constraint mechanisms. I believe that a fully extensible, fully constrainable lightweight markup language would be a valuable addition to the structured writing toolkit. This is why I developed {SAM}, the markup language used for most of the examples in this book and for writing the book itself. 
         
@@ -115,7 +115,7 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
     section: DocBook
     
         index:: type, term
-            language, DocBook
+            markup-language, DocBook
     
         {DocBook} is not really extensible in the same sense as the other languages mentioned here, but it still deserves a mention. DocBook provides a deliberately modular construction that makes it easy to create new {schemas} that include elements from DocBook. DocBook takes full advantage of the extensibility features built into XML schema languages. 
                
@@ -128,7 +128,7 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
     section: DITA
     
         index:: type, term
-            language, DITA
+            markup-language, DITA
     
         {DITA}'s approach to extension is unique among markup languages. In fact, it is something of a misnomer to call DITA a markup language. The DITA standard calls it an information typing architecture. What is an information typing architecture?  
         

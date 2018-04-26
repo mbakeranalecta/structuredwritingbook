@@ -4,7 +4,7 @@ chapter:(#chapter.lightweight) Lightweight Languages
     <<<(annotations.sam)
 
     index::type, term
-        language, lightweight markup languages
+        concept, lightweight markup languages
         
     I commented in [#chapter.markup] that XML does a poor job of partitioning authoring concerns from parsing concerns. XML is a fully general abstract markup language, and its syntax and its logical model are designed to support the creation of any markup language for any purpose whatsoever. This need to support any possible kind of structure makes XML a heavy, verbose language. 
 
@@ -27,7 +27,7 @@ chapter:(#chapter.lightweight) Lightweight Languages
     section: Markdown
     
         index::type, term
-            language, Markdown
+            markup-language, Markdown
     
         The most prominent of the lightweight languages, and arguably the lightest weight, is Markdown. Invented in 2004 by {John Gruber} as a way to quickly write simple web pages using syntax similar to that of an text-format email, Markdown has spread to all kind of systems and has multiple variants that have been adapted for different purposes. I have used several examples of Markdown in this book. Here is one of them:
 
@@ -68,11 +68,10 @@ chapter:(#chapter.lightweight) Lightweight Languages
     section: Wiki markup
     
         index:: type, term
-            language, Wiki markup
-            tool, Wiki
-            tool, WikiWikiWed
+            markup-language, Wiki markup
+            tool, WikiWikiWeb
     
-        Another popular lightweight format is {Wiki markup}, introduced by {Ward Cunningham}(person) in 1995 as the writing format for {WikiWikiWeb}, the first {wiki}(tool).[https://en.wikipedia.org/wiki/WikiWikiWeb] Wiki markup is similar to Markdown in many respects (most lightweight languages share the same basic syntax conventions, based on the imitation of formatted document features in plain text documents).
+        Another popular lightweight format is {Wiki markup}, introduced by {Ward Cunningham}(person "Cunningham, Ward") in 1995 as the writing format for {WikiWikiWeb}, the first {wiki}(tool).[https://en.wikipedia.org/wiki/WikiWikiWeb] Wiki markup is similar to Markdown in many respects (most lightweight languages share the same basic syntax conventions, based on the imitation of formatted document features in plain text documents).
 
         What makes Wiki markup distinct is how it is tied into the operation of a wiki. One notable feature is how it handles {linking}. In the original WikiWikiWeb markup, any word with internal capitals was considered a _WikiWord_ and instantly became a link to a page with that WikiWord as the title. Such a page was created automatically if it did not already exist. This was a simple implementation of a {linking algorithm} based on annotation rather than the naming of resources. 
 
@@ -104,7 +103,7 @@ chapter:(#chapter.lightweight) Lightweight Languages
     section: reStructuredText
     
         index:: type, term
-            language, reStructuredText
+            markup-language, reStructuredText
     
         {reStructuredText} is a lightweight hybrid markup language most often associated with the {Sphinx} documentation framework, which was developed for documenting the Python programming language. We looked at reStructuredText briefly as an example of a hybrid markup language in [#chapter.markup]. 
         
@@ -152,7 +151,7 @@ chapter:(#chapter.lightweight) Lightweight Languages
     section: ASCIIDoc
     
         index:: type, term
-            language, ASCIIDoc
+            markup-language, ASCIIDoc
     
         {ASCIIDoc} is a lightweight markup language based on the structure of {DocBook}. It is intended for the same sort of document types for which you might choose DocBook, but it allows you to use a lightweight syntax. In appearance it is similar to {Markdown}, as shown in [*fig.asciidoc].
 
@@ -185,6 +184,9 @@ chapter:(#chapter.lightweight) Lightweight Languages
         If you are looking for a lightweight document-domain markup language of medium complexity that is compatible with {DocBook} (meaning you are interested in creating books rather than web pages), ASCIIDoc is an option to consider. 
     
     section: LaTeX
+
+        index:: type, term
+            markup-language, LaTeX
     
         LaTeX is a {document-domain} markup language used extensively in academia and scientific publishing. It is based on the syntax of {TeX}, a typesetting system developed by Donald Knuth in 1978.[https://en.wikipedia.org/wiki/LaTeX] [*fig.latex] is an example of LaTeX.
 
