@@ -68,7 +68,7 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
                 <li>Onions</li>
             </ol>
 
-    Now that you have a distinct list object, you can factor out the invariant list formatting rule into a separate file. For {HTML}, we usually do this with a {CSS} stylesheet (see [*ex.css-list]):
+    Now that you have a distinct list object, you can factor out the invariant list formatting rule into a separate file. For {HTML}, we usually do this with a {CSS} style sheet (see [*ex.css-list]):
 
     figure:(*ex.css-list) CSS for a list structure
         ```(CSS)
@@ -173,7 +173,7 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
 
         Let's look at another example. A bibliography is a document structure for listing works cited in a document. It generally consists of the heading "Bibliography" followed by a set of paragraphs listing the cited works. In the media domain, you can easily create such a structure. It is just a sequence of paragraphs with some bold and italic formatting for author names, book titles, etc. 
 
-        In your media-domain stylesheet, you may have some character styles for things like `author-name` or `book-title`. You may even have a paragraph style for bibliography entries, but you typically don't have much more specific support.
+        In your media-domain style sheet, you may have some character styles for things like `author-name` or `book-title`. You may even have a paragraph style for bibliography entries, but you typically don't have much more specific support.
 
         But these few styles can't cover all the rules a publisher or organization places on the rhetoric of bibliographies. Writers are generally required to follow rules that detail how to handle titles, author names, and so forth. These constraints are not enforced by media-domain styles. Writers have to learn and follow these constraints themselves. If you want to remove these decisions from the writer (and thus achieve rhetorical consistency among all writers), you need a document-domain structure for a bibliography. {DocBook} has one (see [*ex.bib-docbook]). 
 
