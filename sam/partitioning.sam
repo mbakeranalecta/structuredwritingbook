@@ -8,13 +8,13 @@ chapter:(#chapter.partitioning) Partitioning Complexity
         concept, complexity
         concept, partitioning
         
-    To understand how to successfully partition the complexity of a content system, you must begin by asking what complexity is. The complexity of a task in the content process (or any other process) can be measured by the number of decisions people have to make and execute. Every decision requires knowledge (to make the correct choice) and skill (to execute that choice). The more decisions a task involves, the more knowledge and skill it requires, and the more knowledge and skill a task requires, the more complex it is. You can reduce the complexity of tasks by partitioning the complexity to minimize the knowledge and skills required for each task. 
+    To understand how to successfully partition the complexity of a content system, you must begin by asking what {complexity}+(index "complexity;decisions and") is. The complexity of a task in the content process (or any other process) can be measured by the number of {decisions}+(index "decisions;complexity and") people have to make and execute. Every decision requires knowledge (to make the correct choice) and skill (to execute that choice). The more decisions a task involves, the more knowledge and skill it requires, and the more knowledge and skill a task requires, the more complex it is. You can reduce the complexity of tasks by partitioning the complexity to minimize the knowledge and skills required for each task. 
 
     You can divide the decisions involved in a task into two kinds:
 
-    |Core| decisions that are fundamental to the task. These decisions are central to the task and cannot be removed by changing your processes. 
+    |Core| {decisions}+(index "decisions;core")+(index "core decisions") that are fundamental to the task. These decisions are central to the task and cannot be removed by changing your processes. 
 
-    |Extended| decisions that are introduced into the task by your processes or tools. Theoretically, at least, these decisions can be removed from the task by changing your processes or tools.
+    |Extended| {decisions}+(index "decisions;extended")+(index "extended decisions") that are introduced into the task by your processes or tools. Theoretically, at least, these decisions can be removed from the task by changing your processes or tools.
 
     The more extended decisions you remove from a task, the simpler you make that task. The purpose of partitioning the content system is to remove these decisions from key tasks, making them less complex and, therefore, improving productivity and quality. 
 
@@ -34,31 +34,35 @@ chapter:(#chapter.partitioning) Partitioning Complexity
 
         However, this radical change in partitioning introduced three problems:
 
-        First, it put a huge amount of complexity on the writer. In a desktop publishing environment, writers must make many more decisions, which require knowledge and skills in addition to those required to research and write content. The demand for writers who can handle this complexity changed hiring practices. Desktop publishing skill became a major hiring criteria for writers and remains so today. The focus in hiring moved from writing skills and knowledge of subject matter to the ability to manage the publishing process.
+        First, it put a huge amount of complexity on the writer. In a desktop publishing environment, writers must make many more decisions, which require knowledge and skills in addition to those required to research and write content. The demand for writers who could handle this complexity changed hiring practices. Desktop publishing skill became a major hiring criteria for writers and remains so today. The focus in hiring moved from writing skills and knowledge of subject matter to the ability to manage the publishing process.
 
         Second, because writers did layout and design while writing, their attention was divided between these tasks. Attention is a finite resource; when writers pay attention to layout and design rather than rhetoric, the quality of the writing suffers. And since the layout and design are only getting partial attention, their quality suffers as well.
 
         Third, although desktop publishing removed the need for a lot of vertical communication between writers, designers, and typesetters, it made no provision for horizontal communication between writers, leaving every writer on an island. Every book was a separate project. The division of the writer's attention and the lack of horizontal coordination left huge amounts of complexity unhandled in large content systems. Duplication, omissions, and inconsistencies became difficult to detect and fix, and providing effective {navigation} between books was virtually impossible. All of this rhetorical complexity was dumped on the reader in the form of poor quality content. Desktop publishing did not create this problem, but it did nothing to fix it.   
 
-    section: Style sheets    
+    section: Style sheets
+        index:: type, term
+            concept, style sheet
 
         One of the most visible early signs of unhandled complexity creating quality problems came in the form of the dreaded "desktop publishing look" -- an explosion of poorly designed and poorly laid out documents, characterized by bizarre font combinations, poor use of whitespace, poorly designed and placed graphics, and a seemingly random profusion of lines, shades, colors, and other decorative elements. (Insofar as these design defects hinder the reader's reception of the content, or detract from the image of the organization, they are also rhetorical problems.)
 
-        To help contain this, desktop publishing systems introduced {style sheets}, which partially partition content from formatting. Style sheets allow a writer to format text using predefined, named styles. Each style encapsulates a set of decisions about content formatting that have been made by a style sheet designer. Style sheets allow you to partition decisions about what the text looks like from decisions about what the text says. 
+        To help contain this, desktop publishing systems introduced {style sheets}+(index-see-also "cascading style sheets"), which partially partition content from formatting. Style sheets allow a writer to format text using predefined, named styles. Each style encapsulates a set of decisions about content formatting that have been made by a style sheet designer. Style sheets allow you to partition decisions about what the text looks like from decisions about what the text says. 
 
         Style sheets do not completely partition formatting decisions from writers, however. Writers still must pass information to the partition that makes formatting decisions, which means writers must decide which styles to apply (knowledge) and know how to apply them (skill). Although this is less complex and requires less design skill than formatting by hand, experience shows that many writers do not use styles correctly or even at all.   
 
-        Although style sheets remove some formatting decisions, the WYSIWYG (What You See is What You Get) display used by desktop publishing systems has another flaw. A key aspect of any interface between partitions is the feedback it gives users to let them know if they have done their work correctly. A WYSIWYG display tells you only one thing: does it look right? It does not tell you whether you have used styles correctly, or at all. And what looks right to you may not look right to the next person.
+        Although style sheets remove some formatting decisions, the {WYSIWYG}+(index "WYSIWYG;style sheets and") (What You See is What You Get) display used by desktop publishing systems has another flaw. A key aspect of any interface between partitions is the feedback it gives users to let them know if they have done their work correctly. A WYSIWYG display tells you only one thing: does it look right? It does not tell you whether you have used styles correctly, or at all. And what looks right to you may not look right to the next person.
 
-        Another problem is that style sheets partition the design of individual elements of a document, such as a title or a list, but not the overall design of the document. Document design remains on the writer's side of the partition. The style sheet restricts the formatting pallet, but it does not tell writers how to use that pallet to achieve an effective overall document design. Since writers are not document designers by trade, they may not always do this well, and multiple writers working on a common project will almost certainly do it inconsistently.
+        Another problem is that style sheets partition the design of individual elements of a document, such as a title or a list, but not the overall design of the document. {Document design}+(index "document structure;style sheets and") remains on the writer's side of the partition. The style sheet restricts the formatting pallet, but it does not tell writers how to use that pallet to achieve an effective overall document design. Since writers are not document designers by trade, they may not always do this well, and multiple writers working on a common project will almost certainly do it inconsistently.
                       
         Many organizations use {style guide}s to tell writers how to use the style pallet to design documents. (For instance, which styles to use when creating a bibliography.) But the style guide only provides instructions, it does not partition the task away from the writer. The style guide merely adds another knowledge requirement, adding complexity.
 
         Styles, therefore, provide only limited relief to the complexity dumped on the writer, and they are only moderately successful in promoting consistent document appearance.
 
     section: Content management systems
+        index:: type, term
+            tool, content management system
 
-        Meanwhile, the web brings a new set of challenges. A modern website is not a library of independent volumes; it's a complex {hypertext} consisting of many smaller pieces of content related in much more complex ways than paper documents ever were. {Search engines} and {social networks} have profoundly changed how readers seek and use content. Meeting those needs requires a level of coordination between writers -- and between the pieces of content they create -- that {desktop publishing} cannot provide. 
+        Meanwhile, the web brings a new set of challenges. A modern website is not a library of independent volumes; it's a complex {hypertext} consisting of many smaller pieces of content related in much more complex ways than paper documents ever were. {Search engines} and {social networks} have profoundly changed how readers seek and use content. Meeting those needs requires a level of coordination between writers -- and between the pieces of content they create -- that {desktop publishing}+(index "desktop publishing;content management systems and") cannot provide. 
 
         To help manage these challenges, most organizations have adopted {content management systems} (CMS). This has led to new forms of partitioning and new roles, such as {webmaster}, {information architect}, and, more recently, {content strategist}.
 
@@ -67,12 +71,14 @@ chapter:(#chapter.partitioning) Partitioning Complexity
         Increasingly, therefore, content management systems have begun to incorporate more structured techniques and rely on a technology that actually predates desktop publishing: markup languages.  
 
     section: Markup languages
+        index:: type, term
+            concept, markup language
         
-        A {markup language} is a system for indicating the structure of a text via marks in the text itself. The structured writing examples we have looked at so far have all be written in markup languages. Markup languages were used for publishing on mainframe computers long before desktop computers had the processing power required for desktop publishing. A markup language -- {HTML} -- gave birth to the web by enabling writers to include in a document the information needed to format and display that document in a web browser.  
+        A {markup language} is a system for indicating the structure of a text via marks in the text itself. The structured writing examples we have looked at so far have all been written in markup languages. Markup languages were used for publishing on mainframe computers long before desktop computers had the processing power required for desktop publishing. A markup language -- {HTML} -- gave birth to the web by enabling writers to include in a document the information needed to format and display that document in a web browser.  
 
         The HTML document includes both information to be displayed to the reader and information to be used by the browser to display the document -- information that is not shown to the reader. This combination of two different streams in a single stream of characters is at the heart of how a markup language works and the role it plays in a content process. It allows you to partition tasks within the content process by passing the information those tasks need along with the content intended for the reader. 
 
-        {HTML} is probably the single most widely used markup language in the world today, but there are thousands of others, and people create new markup languages for specific purposes all the time. Each markup language represents a specific interface between partitions in a content system.  
+        {HTML} is probably the single most widely used markup language in the world today, but there are thousands of others, and people create new markup languages all the time. Each markup language represents a specific interface between partitions in a content system.  
 
         Markup languages are by far the most general type of content interface, and they can be used to implement nearly any kind of partitioning you might need. In fact, markup languages are usually found behind the scenes in WYSIWYG and forms-based interfaces. However, markup languages can also stand alone as interfaces in their own right. {Markdown}, for instance, has become a popular markup language for writing simple web content. 
 
@@ -84,21 +90,24 @@ chapter:(#chapter.partitioning) Partitioning Complexity
 
 
     section: Algorithms
-
+    
+        index:: type, term
+            concept, algorithm; introduction
+            
         To take content created using a markup language and turn it into a formatted document requires an algorithm. Algorithms are also used to manage the content process. An algorithm is simply a regular, codified, and repeatable method for doing a task. 
 
         Most complex tasks have repeatable elements in them. A design question that has been settled once can be implemented over and over again without having to redo the design work. If one piece of content is formatted a certain way, chances are many similar pieces can be formatted the same way. Algorithms are great at doing the same task the same way over and over. Therefore, partitioning such tasks away from writers and directing them to algorithms is a great way to reduce the complexity of the writer's task.  
 
-        And while algorithms are repetitive by nature, they can also incorporate considerable knowledge, make sophisticated decisions, and execute complicated processes, which makes them capable of meeting both the knowledge and skill requirements to make useful decisions. Thus you can use algorithms to execute many of the extended decisions in a content process, leaving writers and designers free to focus on the core decisions. 
+        And while algorithms are repetitive by nature, they can also incorporate considerable knowledge, make sophisticated decisions, and execute complicated processes, which makes them capable of meeting both the knowledge and skill requirements to make useful decisions. Thus, you can use algorithms to execute many of the {extended decisions}+(index "extended decisions;using algorithms to make") in a content process, leaving writers and designers free to focus on the core decisions. 
 
-        A computer program is an encoding of an algorithm that a computer can execute. A program describes an algorithm to a computer, but you do not need to be a programmer to design an algorithm. The real trick is to discern which parts of a process can be defined as algorithms. That is why an understanding of the main structured writing algorithms is vital to effectively partitioning your content system.  
+        A {computer program}+(index "computer program, defined") is an encoding of an algorithm that a computer can execute. A program describes an algorithm to a computer, but you do not need to be a programmer to design an algorithm. The real trick is to discern which parts of a process can be defined as algorithms. That is why an understanding of the main structured writing algorithms is vital to effectively partitioning your content system.  
 
         Algorithms are fundamental to structured writing. Algorithms and structures work together to support rhetoric and process, and you can't design one without the other. The heart of this book describes the principal structured writing algorithms and the structures that support them. 
         
 
-    section: Partitioning and Roles 
+    section: Partitioning and roles 
         
-        Partitioning a content system often means changing the roles that people play in the organization. The introduction of {desktop publishing}, for instance, merged the role of writer and {typesetter} and, to a certain extent, the roles of {document designer} and {prepress operator}. Introducing more sophisticated (or simply more appropriate) structured writing techniques will likely mean introducing new roles or modifying existing ones.
+        {Partitioning}+(index "partitioning;roles and") a content system often means changing the roles that people play in the organization. The introduction of {desktop publishing}, for instance, merged the role of writer and {typesetter} and, to a certain extent, the roles of {document designer} and {prepress operator}. Introducing more sophisticated (or simply more appropriate) structured writing techniques will likely mean introducing new roles or modifying existing ones.
 
         Writing an algorithm redistributes complexity away from the person who used to do the task, but it directs that complexity to the person who writes and maintains the algorithm. For example, using a {CSS} style sheet to format lists redistributes the task of designing list formatting from writers, whose job is to know what they are talking about and how to say it, to a {publication designer}, whose job it is to know how to attractively format lists and how to code good {CSS}.  
         
@@ -106,11 +115,11 @@ chapter:(#chapter.partitioning) Partitioning Complexity
 
         As I discuss the major structured writing algorithms in [#part.algorithms], you will see how these algorithms partition tasks between writers and professionals such as {information architect}s, {content engineer}s, and {content strategist}s. 
 
-    section: Quality and Rhetoric
+    section: Quality and rhetoric
 
         Many structured writing systems focus only on the {separation of content from formatting} ([#chapter.separating]) and on content management functions ([#chapter.content-management]). Separating content from formatting can help improve content quality by freeing more of the writer's time and attention to focus on writing. However, you can do even more to improve the quality of content by placing explicit constraints on the rhetorical structures that writers create. 
 
-        Organizations are becoming more aware of the impact that {rhetorical quality} has on their business. The {web} has made it easier for users to access our information, but it has also made it easier for them to detect content that is inconsistent in tone and style, outdated, redundant, incomplete, or just plain useless. The web did not create these flaws, but it made them painfully apparent. It has also given organizations a much more direct way to see and to measure the impact of their content and of its flaws. Organizations can no longer ignore major rhetorical faults. This has led to the emergence of the discipline of {content strategy} as organizations feel the impact of poor content quality and see content quality as a strategic value.
+        Organizations are becoming more aware of the impact that {rhetorical quality} has on their business. The {web}+(index "web;rhetorical quality and the") has made it easier for users to access our information, but it has also made it easier for them to detect content that is inconsistent in tone and style, outdated, redundant, incomplete, or just plain useless. The web did not create these flaws, but it made them painfully apparent. It has also given organizations a much more direct way to see and to measure the impact of their content and of its flaws. Organizations can no longer ignore major rhetorical faults. This has led to the emergence of the discipline of {content strategy} as organizations feel the impact of poor content quality and see content quality as a strategic value.
 
         In the age of physical typesetting, there were no automated tools to help with the rhetorical quality of content, and the desktop publishing revolution was mostly concerned with digitizing the previously mechanical design and layout process. The limitations of the available tools forced organizations to partition their processes in ways that did not always support, encourage, or even permit, the highest quality rhetoric. The result was poor-quality content.
 
@@ -118,7 +127,7 @@ chapter:(#chapter.partitioning) Partitioning Complexity
 
     section: Build quality into the process
 
-        The idea that you can build quality into a process by managing the complexity of the design and production process, though accepted in other fields, has not been widely adopted in the content field. To a large extent, process improvements have been in publishing and content management, not rhetoric and content quality. Where structured writing tools have replaced desktop publishing tools, it has largely been in pursuit of process goals. But process and rhetoric are intimately related and treating them holistically can significantly improve both.
+        The idea that you can build {quality}+(index "quality;building in") into a process by managing the complexity of the design and production process, though accepted in other fields, has not been widely adopted in the content field. To a large extent, process improvements have been in publishing and content management, not rhetoric and content quality. Where structured writing tools have replaced desktop publishing tools, it has largely been in pursuit of process goals. But process and rhetoric are intimately related and treating them holistically can significantly improve both.
 
         Unfortunately, many current content systems not only fail to provide active rhetorical support to writers, they also fail to remove distractions and complexity from the writing environment. This ends up making the writer's life more complex rather than less. If writers end up with more complexity than they can comfortable handle, the result is reduced attention to rhetoric, which means diminished content quality. Sometimes that unhandled complexity also derails attempts to make the process more efficient because the information coming through the complex interface is not reliable enough for the new process to work correctly.
 
