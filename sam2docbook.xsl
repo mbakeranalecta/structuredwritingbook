@@ -132,8 +132,12 @@
             <xsl:if test="@attribution">
                 <xsl:value-of select="@attribution"/>
                 <xsl:text> - </xsl:text>
-                <xsl:apply-templates/>
             </xsl:if>
+            <xsl:if test="title">
+              <xsl:value-of select="title"/>
+              <xsl:text> - </xsl:text>
+            </xsl:if>
+            <xsl:apply-templates/>
         </db:remark>
     </xsl:template>
     
@@ -141,6 +145,7 @@
         <!-- DocBook remarks don't allow paragraphs -->
         <xsl:apply-templates/>
     </xsl:template>
+    <xsl:template match="remark/title"/> <!-- pick up any title in remark template -->
     
     <xsl:template match="insert[@type='xml']">
         <xsl:element name="xi:include">

@@ -224,7 +224,7 @@ chapter:(#chapter.markup) Markup
                 As a writer, you can use:
         
                 * A concrete language with ad-hoc syntax (like {Markdown})
-                * The concrete parts of a hybrid markup language (like {ReStructuredText}) without extensions
+                * The concrete parts of a hybrid markup language (like {reStructuredText}) without extensions
                 * A concrete language (like {DocBook}) based on an abstract language (probably XML)
                 * A concrete language (like the recipe markup language used in this book) based on a hybrid language ({SAM} in this case)
         
@@ -340,11 +340,11 @@ chapter:(#chapter.markup) Markup
                         Herman Melville's {Moby Dick}(novel) is a long 
                         book about a big whale.
             
-            However, unlike {RestructuredText}, {SAM} does not have an extensive set of predefined named blocks. It only predefines the basic text structures that it provides concrete syntax for. You can write an entire book in reStructuredText without defining any new directives, The most you can write in SAM without defining any blocks is a single paragraph or list. 
+            However, unlike {reStructuredText}, {SAM} does not have an extensive set of predefined named blocks. It only predefines the basic text structures that it provides concrete syntax for. You can write an entire book in reStructuredText without defining any new directives, The most you can write in SAM without defining any blocks is a single paragraph or list. 
         
             SAM is designed to have a constraint mechanism, which allows you to write a schema that defines what blocks and annotations are allowed in a SAM document. This includes constraining the use of the concrete syntax as well. SAM represents a different type of hybrid from {reStructuredText}, which is extensible but not constrainable. This reflects the fact that reStructuredText is intended as an extensible {document-domain} language, whereas SAM is intended primarily as a neutral starting point for designing {subject-domain} languages (though you can design document-domain languages in it as well).
         
-            Also unlike {RestructuredText}, {SAM} is not intended to have its own publishing tool chain. The SAM parser outputs an {XML} document which can be transformed into an appropriate {document-domain} language for publishing. This book was written in SAM, using a simple document-domain language I created for the purpose. That language, which includes some {subject-domain} annotations, was transformed into a semantically equivalent XML document by the SAM parser. That XML document was then transformed into {DocBook} according to the publisher's specifications (the publisher imposed constraints that are not expressed in DocBook itself). From that point on, the publisher's existing DocBook tool chain took over.
+            Also unlike {reStructuredText}, {SAM} is not intended to have its own publishing tool chain. The SAM parser outputs an {XML} document which can be transformed into an appropriate {document-domain} language for publishing. This book was written in SAM, using a simple document-domain language I created for the purpose. That language, which includes some {subject-domain} annotations, was transformed into a semantically equivalent XML document by the SAM parser. That XML document was then transformed into {DocBook} according to the publisher's specifications (the publisher imposed constraints that are not expressed in DocBook itself). From that point on, the publisher's existing DocBook tool chain took over.
               
             Most concrete markup languages, at least those designed for documents, try to make their marked-up documents look and read as much as possible like a formatted document. SAM is designed to be easy and natural to read, like a concrete markup language, but it is also designed to make the structure of the content as clear and explicit as possible while requiring a minimum of markup. This is why it uses indentation to express structure. Indentation shows structure clearly with a minimum of markup noise to distract the reader. 
         

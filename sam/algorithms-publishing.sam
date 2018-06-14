@@ -13,7 +13,7 @@ chapter:(#chapter.publishing) Publishing
 
     All structured writing must eventually be published. Publishing structured content means transforming it from the domain in which it was created ({subject domain}, {document domain}, or the abstract end of the {media domain}) to the most concrete end of the media-domain spectrum: dots on paper or screen.
     
-    Publishing is complex, particularly if you are using {single sourcing}, {content generation}, or many of the other structured writing algorithms or where you are combining content from different sources in a "shared pipes" model. The best way to handle that complexity is to partition and distribute it to appropriate people and processes.  
+    Publishing is complex, particularly if you are using {single sourcing}, {content generation}, or any of the structured writing algorithms that combine content from different sources in a "{shared pipes}" model. The best way to handle that complexity is to partition and distribute it to appropriate people and processes.  
     
     In this chapter, I describe a partitioning of the publishing process into four basic algorithms: the {synthesis}, {presentation}, {formatting}, and {encoding} algorithms. These four stages are formalized in the {SPFE architecture}, which I discuss later, but I think they are a fair representation of what goes on in most publishing tool chains, even if those tool chains don't divide responsibilities exactly as I describe them here or separate them as clearly.
     
@@ -24,14 +24,14 @@ chapter:(#chapter.publishing) Publishing
     section: The rendering algorithm
     
         index:: type, term
-            algorithm, rendering
+            algorithm, rendering algorithm
             concept, page description language 
 
         There is actually a fifth algorithm in the publishing chain, which I call the {rendering algorithm}. The rendering algorithm is responsible for placing the right dots on the right surface, be that paper, screen, or a printing plate. However, this is a low-level device-specific algorithm, and no one in the structured writing business is likely to be involved in writing rendering algorithms. The closest you ever get is the next step up, the {encoding algorithm}. 
 
         The rendering algorithm requires some form of input to tell it where to place the dots. In writing, this usually comes in the form of a {page description language}. Like it sounds, this is a language for describing what goes where on a page, but it does so in higher-level terms than describing where each dot of ink or pixel of light is placed. A page description language deals in things like lines, circles, gradients, margins, and fonts (see [*fig.pub-rendering]). 
 
-        figure:(*fig.pub-rendering) The rendering algorithm
+        figure:(*fig.pub-rendering) The rendering algorithm 
             >>>(image ../graphics/rendering.xml)
         
         One example of a page description language is {PostScript}. [*fig.pub-postscript] shows the PostScript code for drawing a circle.
@@ -41,7 +41,7 @@ chapter:(#chapter.publishing) Publishing
                 100 100 50 0 360 arc closepath
                 stroke         
         
-        This code moves a virtual pen over a virtual output device; the equivalent of a hand guiding a pen over paper. But it is a much lower-level operation than we need to worry about in structured writing.
+        This code moves a virtual pen over a virtual output device; the equivalent of a hand guiding a pen over paper. But it is a much lower-level operation than you need to worry about in structured writing.
         
     section: The encoding algorithm
 
@@ -118,7 +118,7 @@ chapter:(#chapter.publishing) Publishing
         
         |Grouping| At a higher level, content is often organized into groups. This may be groups on a page or groups of pages. Grouping includes breaking content into sections, inserting subheads, inserting tables and graphics, and inserting information as labeled fields. Writers working in the document domain typically create these groupings as they write, but if writers are working in the subject domain, the {information architect} may have choices about how to group subject-domain information in the document domain. 
         
-        |Blocking| On a page, groups may be organized sequentially or laid out in some form of block pattern. Exactly how blocks are laid out on the displayed page is a media-domain question that may even be done dynamically. However, to lay out blocks in the media domain the document domain markup must clearly delineate the types of blocks in a document in a way that allows the formatting algorithm to interpret and act reliably. 
+        |Blocking| On a page, groups may be organized sequentially or laid out in some form of block pattern. Exactly how blocks are laid out on the displayed page is a media-domain question that may even be done dynamically. However, to lay out blocks in the media domain the document-domain markup must clearly delineate the types of blocks in a document in a way that allows the formatting algorithm to interpret and act reliably. 
        
         |Labeling| Any grouping of content requires labels to identify the groups. This includes titles on blocks and labels on data fields. Labels are typically created by writers in the {document domain}, but are almost always factored out when writers work in the {subject domain}. Most document-domain labels indicate the place of content in the {subject domain} (which is why the label you factor out is often similar to the subject-domain tag you insert when you refactor content to the subject domain). Inserting these labels in the presentation algorithm is therefore a necessary part of reversing the factoring out of labels that occurs when you move writing to the {subject domain}.
        
@@ -141,7 +141,7 @@ chapter:(#chapter.publishing) Publishing
        
             How content is linked or cross-referenced is a key part of how it is organized in different media and a key part of {differential single sourcing}. I looked at the {linking algorithm} in detail in [#chapter.linking].
        
-        section: The {content generation algorithm}
+        section: The {content generation algorithm} 
        
             Part of the {presentation} of a document or document set is generating the {table of contents}, {index}, and other {navigation} aids. Generating these is part of the presentation process. Because these algorithms create new resources by extracting information from the rest of the content, it is often easier to run these algorithms in sequence after the main {presentation algorithm} has run. This also makes it easier to change the way you generate a {TOC} or {index} without affecting your other algorithms. For more on the content generation algorithm, see [#chapter.generate].
        
