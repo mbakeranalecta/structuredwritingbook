@@ -84,7 +84,8 @@
     <xsl:template match="chapter/index"/>
     <xsl:template match="preface/index"/>
     <xsl:template match="section/index"/>
-    
+
+
     <xsl:template match="appendix">
         <db:appendix>
             <xsl:apply-templates select="@* | *"/>
@@ -462,11 +463,39 @@
     </xsl:template>
     
     <xsl:template match="annotation[@type='index']">
-        <db:indexterm>
-            <db:primary>
-                <xsl:value-of select="@specifically"/>
-            </db:primary>
-        </db:indexterm>
+        <xsl:variable name="index-components" select="strings:tokenize(@specifically, ';')"/>
+        <xsl:choose>
+            <xsl:when test="normalize-space($index-components[3])">
+                <db:indexterm>
+                    <db:primary>
+                        <xsl:value-of select="normalize-space($index-components[1])"/>
+                    </db:primary>
+                    <db:secondary>
+                        <xsl:value-of select="normalize-space($index-components[2])"/>
+                    </db:secondary>
+                    <db:tertiary>
+                        <xsl:value-of select="normalize-space($index-components[3])"/>
+                    </db:tertiary>
+                </db:indexterm>
+            </xsl:when>
+            <xsl:when test="normalize-space($index-components[2])">
+                <db:indexterm>
+                    <db:primary>
+                        <xsl:value-of select="normalize-space($index-components[1])"/>
+                    </db:primary>
+                    <db:secondary>
+                        <xsl:value-of select="normalize-space($index-components[2])"/>
+                    </db:secondary>
+                </db:indexterm>
+            </xsl:when>
+            <xsl:otherwise>
+                <db:indexterm>
+                    <db:primary>
+                        <xsl:value-of select="normalize-space(@specifically)"/>
+                    </db:primary>
+                </db:indexterm>
+            </xsl:otherwise>
+        </xsl:choose>
         <xsl:apply-templates/>
     </xsl:template>
     
