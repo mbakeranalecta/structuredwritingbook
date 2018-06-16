@@ -500,7 +500,7 @@
     </xsl:template>
     
     <xsl:template match="annotation[@type='also-index-as']">
-        <xsl:variable name="primary" select="ancestor::annotation[@type='index']/@specifically"/>
+        <xsl:variable name="primary" select="strings:tokenize(ancestor::annotation[@type='index']/@specifically, ';')[1]"/>
         <db:indexterm>
             <db:primary>
                 <xsl:value-of select="@specifically"/>
@@ -553,7 +553,7 @@
 
                     <xsl:if test="$anntoation-types/type/name = $index-type">
                         <xsl:choose>
-                            <xsl:when test="descendant::annotation[@type='index-use-see-if-secondary']">
+                            <xsl:when test="ancestor::phrase/descendant::annotation[@type='index-use-see-if-secondary']">
                             <db:indexterm>
                                 <db:primary>
                                     <xsl:value-of select="$anntoation-types/type[name=$index-type]/alias"/>
