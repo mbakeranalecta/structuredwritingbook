@@ -524,6 +524,8 @@
         </db:indexterm>
         <xsl:apply-templates/>
     </xsl:template>
+
+    <xsl:template match="annotation[@type='index-use-see-if-secondary']"/> <!-- will be handled separately -->
     
     <xsl:template name="index-annotation">
         <xsl:variable name="index-type" select="@type"/>
@@ -570,9 +572,6 @@
                         </db:indexterm>
                     </xsl:otherwise>
                 </xsl:choose>
-
-
-                    
             </xsl:if>
         </xsl:if>
     </xsl:template>
@@ -950,33 +949,57 @@
             <xsl:value-of select="@name"/>
           </xsl:attribute>
         </xsl:if>
-          <xsl:apply-templates select="title" mode="section-title"/>
-          <xsl:for-each select="index/record/term">
+        <xsl:apply-templates select="title" mode="section-title"/>
+        <xsl:for-each select="index/record/term">
+          <xsl:variable name="index-components" select="strings:tokenize(., ';')"/>
               <xsl:variable name="index-type" select="../type"/>
-              <db:indexterm class="startofrange" significance="preferred">
-                  <xsl:attribute name="xml:id">
-                      <xsl:value-of select="generate-id()"/>
-                  </xsl:attribute>
-                  <db:primary>
-                      <xsl:value-of select="."/>
-                  </db:primary>
+          <xsl:choose>
+            <xsl:when test="normalize-space($index-components[3])">
+              <db:indexterm significance="preferred">
+                <db:primary>
+                  <xsl:value-of select="normalize-space($index-components[1])"/>
+                </db:primary>
+                <db:secondary>
+                  <xsl:value-of select="normalize-space($index-components[2])"/>
+                </db:secondary>
+                <db:tertiary>
+                  <xsl:value-of select="normalize-space($index-components[3])"/>
+                </db:tertiary>
               </db:indexterm>
-
-              <xsl:if test="$anntoation-types/type/name = $index-type">
-                  <db:indexterm class="startofrange">
-                      <xsl:attribute name="xml:id">
-                          <xsl:value-of select="generate-id()"/>
-                          <xsl:text>x</xsl:text>
-                      </xsl:attribute>
-                      <db:primary>
-                          <xsl:value-of select="$anntoation-types/type[name=$index-type]/alias"/>
-                      </db:primary>
-                      <db:secondary>
-                          <xsl:value-of select="."/>
-                      </db:secondary>
-                  </db:indexterm>
-              </xsl:if>                
-          </xsl:for-each>
+            </xsl:when>
+            <xsl:when test="normalize-space($index-components[2])">
+              <db:indexterm significance="preferred">
+                <db:primary>
+                  <xsl:value-of select="normalize-space($index-components[1])"/>
+                </db:primary>
+                <db:secondary>
+                  <xsl:value-of select="normalize-space($index-components[2])"/>
+                </db:secondary>
+              </db:indexterm>
+            </xsl:when>
+            <xsl:otherwise>
+              <db:indexterm significance="preferred">
+                    <db:primary>
+                        <xsl:value-of select="normalize-space(@specifically)"/>
+                    </db:primary>
+                </db:indexterm>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:if test="$anntoation-types/type/name = $index-type">
+            <db:indexterm class="startofrange">
+              <xsl:attribute name="xml:id">
+                <xsl:value-of select="generate-id()"/>
+                <xsl:text>x</xsl:text>
+              </xsl:attribute>
+              <db:primary>
+                <xsl:value-of select="$anntoation-types/type[name=$index-type]/alias"/>
+              </db:primary>
+              <db:secondary>
+                <xsl:value-of select="."/>
+              </db:secondary>
+            </db:indexterm>
+          </xsl:if>              
+        </xsl:for-each>
           
           <xsl:apply-templates/>
           
