@@ -13,7 +13,8 @@
     <xsl:variable name="default-content-width">5.25in</xsl:variable>
     
     <xsl:variable name="annotation-types" select='document("annotation-types.xml")/annotation-types'/>
-    
+    <xsl:variable name="index-use-see-if-secondary" select='document("index-use-see-if-secondary.xml")/index-use-see-if-secondary'/>
+
   <xsl:template match="@*|node()">
         <xsl:copy>
             <xsl:apply-templates select="@*|node()"/>
@@ -1005,6 +1006,10 @@
               <db:secondary>
                 <xsl:value-of select="."/>
               </db:secondary>
+                <xsl:variable name="term" select="."/>
+                <xsl:if test="$index-use-see-if-secondary/term[. = $term]">
+                    <db:see><xsl:value-of select="$term"/></db:see>
+                </xsl:if>
             </db:indexterm>
           </xsl:if>              
         </xsl:for-each>
