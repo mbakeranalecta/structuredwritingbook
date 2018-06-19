@@ -12,7 +12,7 @@
     
     <xsl:variable name="default-content-width">5.25in</xsl:variable>
     
-    <xsl:variable name='anntoation-types' select='document("annotation-types.xml")/annotation-types'/>
+    <xsl:variable name="annotation-types" select='document("annotation-types.xml")/annotation-types'/>
     
   <xsl:template match="@*|node()">
         <xsl:copy>
@@ -177,14 +177,14 @@
                     </db:primary>
                 </db:indexterm>
                                
-                <xsl:if test="$anntoation-types/type/name = $index-type">
+                <xsl:if test="$annotation-types/type/name = $index-type">
                    <db:indexterm class="startofrange">
                        <xsl:attribute name="xml:id">
                            <xsl:value-of select="generate-id()"/>
                            <xsl:text>x</xsl:text>
                        </xsl:attribute>
                        <db:primary>
-                           <xsl:value-of select="$anntoation-types/type[name=$index-type]/alias"/>
+                           <xsl:value-of select="$annotation-types/type[name=$index-type]/alias"/>
                        </db:primary>
                        <db:secondary>
                            <xsl:value-of select="."/>
@@ -525,7 +525,9 @@
         <xsl:apply-templates/>
     </xsl:template>
 
-    <xsl:template match="annotation[@type='index-use-see-if-secondary']"/> <!-- will be handled separately -->
+    <xsl:template match="annotation[@type='index-use-see-if-secondary']">
+        <xsl:apply-templates/><!-- will be handled separately -->
+    </xsl:template>
     
     <xsl:template name="index-annotation">
         <xsl:variable name="index-type" select="@type"/>
@@ -550,13 +552,12 @@
                             <xsl:value-of select="$index-term"/>
                         </db:primary>
                     </db:indexterm>
-
-                    <xsl:if test="$anntoation-types/type/name = $index-type">
+                    <xsl:if test="$annotation-types/type/name = $index-type">
                         <xsl:choose>
                             <xsl:when test="ancestor::phrase/descendant::annotation[@type='index-use-see-if-secondary']">
                             <db:indexterm>
                                 <db:primary>
-                                    <xsl:value-of select="$anntoation-types/type[name=$index-type]/alias"/>
+                                    <xsl:value-of select="$annotation-types/type[name=$index-type]/alias"/>
                                 </db:primary>
                                 <db:secondary>
                                     <xsl:value-of select="$index-term"/>
@@ -569,7 +570,7 @@
                             <xsl:otherwise>
                                 <db:indexterm>
                                     <db:primary>
-                                        <xsl:value-of select="$anntoation-types/type[name=$index-type]/alias"/>
+                                        <xsl:value-of select="$annotation-types/type[name=$index-type]/alias"/>
                                     </db:primary>
                                     <db:secondary>
                                         <xsl:value-of select="$index-term"/>
@@ -992,14 +993,14 @@
                 </db:indexterm>
             </xsl:otherwise>
           </xsl:choose>
-          <xsl:if test="$anntoation-types/type/name = $index-type">
+          <xsl:if test="$annotation-types/type/name = $index-type">
             <db:indexterm class="startofrange">
               <xsl:attribute name="xml:id">
                 <xsl:value-of select="generate-id()"/>
                 <xsl:text>x</xsl:text>
               </xsl:attribute>
               <db:primary>
-                <xsl:value-of select="$anntoation-types/type[name=$index-type]/alias"/>
+                <xsl:value-of select="$annotation-types/type[name=$index-type]/alias"/>
               </db:primary>
               <db:secondary>
                 <xsl:value-of select="."/>
