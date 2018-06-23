@@ -5,15 +5,15 @@ chapter:(#chapter.single-sourcing) Single Sourcing
     index:: type, term
         concept, single sourcing
 
-    The need to publish the same document in more than one medium -- for example, print and web -- is a common process problem and source of complexity. You might not suspect that it is also a rhetoric problem, but as I will show, it actually a significant and difficult rhetoric problem as well. The term _single sourcing_ is used to describe a variety of different ways to address this need, all of which involve using a single body of content to create output in more than one medium.
+    The need to publish the same document in more than one medium -- for example, print and web -- is a common process problem and source of complexity. Although you might not suspect it, this can also pose a significant and difficult {rhetoric}+(index "rhetoric;single sourcing and its impact on") problem. The term _single sourcing_ is used to describe a variety of different ways to address this need, all of which involve using a single body of content to create output in more than one medium.
 
     Single sourcing adds complexity to the job of separating content from formatting because you are now separating content from not one but two or more sets of formatting. In other words, you are not simply separating content from formatting, you are separating a set of decisions about formatting from your content so you can make different decisions for each medium. If you don't get the partitioning correct, problems will show up when you try to apply two different sets of formatting to the same content. 
     
-    Many organizations have unhandled complexity in this area -- complexity that can result in rhetorical problems. Often, their authoring techniques do not allow writers to sufficiently separate media-specific formatting from content. As a result, formatting for one medium gets applied to another medium, which means the content in that medium does not work as well as it could. By improving how you separate content from formatting, you can significantly reduce the amount of complexity that goes unhandled, resulting in a better experience for your readers.  
+    Many organizations have unhandled {complexity}+(index "complexity;single sourcing") in this area -- complexity that can result in rhetorical problems. Often, their authoring techniques do not allow writers to sufficiently separate media-specific formatting from content. As a result, formatting for one medium gets applied to another medium, which means the content in that medium does not work as well as it could. By improving how you separate content from formatting, you can significantly reduce the amount of complexity that goes unhandled, resulting in a better experience for your readers.  
     
     section: Basic single sourcing 
     
-        The basic single-sourcing algorithm is straightforward (see [#chapter.processing]). Basic single sourcing involves taking a piece of content in the {document domain} and processing its document-domain structures into different {media-domain} structures for each target medium. 
+        The basic {single-sourcing}+(index "single sourcing;algorithm") algorithm is straightforward (see [#chapter.processing]). Basic single sourcing involves taking a piece of content in the {document domain}+(index "document domain;single sourcing in the") and processing its document-domain structures into different {media-domain}+(index "media domain;single sourcing and the") structures for each target medium. 
         
         Suppose you have recorded a recipe in the document domain (see [*fig.ssa-eggs-1]).
 
@@ -42,7 +42,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
                             li: Peel and serve.
         
                
-        You can output this recipe to two different media by applying two different formatting algorithms. First you output to the web by creating {HTML} (see [*fig.ssa-recipe2html]).
+        You can output this recipe to two different media by applying two different formatting algorithms. First you output to the web by creating HTML (see [*fig.ssa-recipe2html]).
 
         figure:(*fig.ssa-recipe2html) Pseudocode to convert document-domain recipe to HTML output
             pagination-tweak:
@@ -84,7 +84,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         In [*fig.ssa-recipe2html], paragraph and list structures have the same names in the source format as they do in the output format (HTML) so you just copy the structures rather than recreating them. This is a common pattern in structured writing algorithms.
         
-        The algorithm in [*fig.ssa-recipe2html] transforms our source into HTML that looks like [*fig.ssa-html-recipe-output]. 
+        The algorithm in [*fig.ssa-recipe2html] transforms the source into HTML that looks like [*fig.ssa-html-recipe-output]. 
 
         figure:(*fig.ssa-html-recipe-output) Result of running the algorithm in [*fig.ssa-recipe2html]
             ```(html)
@@ -118,7 +118,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
                 </html>
         
         
-        Outputting to paper (or to PDF, which is a kind of virtual paper) is more complex. On the web, you output to a screen which is of flexible width and infinite length. The browser wraps lines of text to the screen width (unless formatting commands tell it to do otherwise), and there is no issue with breaking text from one page to another. For paper, however, you have to fit content into a set of fixed-size pages.   
+        Outputting to paper (or to PDF, which is a kind of virtual paper) is more complex. On the web, you output to a screen which is of flexible width and infinite length. The browser wraps lines of text to the screen width (unless formatting commands tell it to do otherwise), and there is no issue with breaking text from one page to another. For {paper}+(index "paper;formatting issues")+(index "print output;formatting issues with"), however, you have to fit content into a set of fixed-size pages.   
         
         This introduces a number of formatting issues, including the following:
         
@@ -129,7 +129,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         Because of issues like this, you don't write a formatting algorithm for paper the same the way you write an algorithm for HTML. Instead, you use an intermediate typesetting system that already knows how to handle tasks such as inserting page-number references and handling line and page breaks. Rather than handling these things yourself, you give the typesetting system general guidance and then let it do its job.
 
-        One such typesetting system is {XSL-FO} (Extensible Stylesheet Language - Formatting Objects). Other typesetting systems include {TeX} and newer versions of {CSS}. XSL-FO is a typesetting language written in {XML}. To format your content using {XSL-FO}, you transform your source content into {XSL-FO} markup, just the way you transform it into {HTML} for the web. But then you run the {XSL-FO} markup through an {XSL-FO} processor to produce your final output, typically {PDF}. 
+        One such typesetting system is {XSL-FO} (Extensible Stylesheet Language - Formatting Objects). Other typesetting systems include {TeX} and newer versions of {CSS}+(index "cascading style sheets (CSS);print formatting with"). XSL-FO is a typesetting language written in {XML}. To format your content using {XSL-FO}, you transform your source content into {XSL-FO} markup, just the way you transform it into {HTML} for the web. But then you run the {XSL-FO} markup through an {XSL-FO} processor to produce your final output, typically {PDF}. 
         
         Here is a small example of XSL-FO markup:
         
@@ -141,7 +141,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
             </fo:block>
         
         
-        The {XSL-FO} code contains {media-domain} instructions for spacing and font choices. There is no division between content structures and formatting structures as there is with {HTML} and {CSS}. Also, as a pure media-domain language, XSL-FO does not have document-domain structures such as paragraphs and titles. To XSL-FO, a document is simply a set of blocks with specific formatting properties attached to them.
+        The {XSL-FO} code contains {media-domain}+(index "media domain;XSL-FO and the") instructions for spacing and font choices. There is no division between content structures and formatting structures as there is with {HTML} and CSS. Also, as a pure media-domain language, XSL-FO does not have document-domain structures such as paragraphs and titles. To XSL-FO, a document is simply a set of blocks with specific formatting properties attached to them.
         
         To limit the amount of detail, the algorithm in [*fig.ssa-fo-algorithm] shows only a portion of the pseudocode for handling recipe markup (The point here is not to teach {XSL-FO}, but to show how the algorithm works).
 
@@ -158,17 +158,20 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         
     section: Differential single sourcing
-    
-        Basic {single sourcing} outputs the same document presentation to different media. However, each medium is different, and what works well in one medium does not always work as well in another. Thus the rhetoric that is appropriate to one media may not be appropriate to another, This is what I meant when I said at the beginning that single sourcing is a rhetoric problem as well as a process problem. 
 
-        For example, online media generally support {hypertext} links, while paper does not. Suppose you have a piece of content that includes a link:
+        index:: type, term
+            concept, differential single sourcing
+    
+        Basic single sourcing outputs the same document presentation to different media. However, each medium is different, and what works well in one medium does not always work as well in another. Thus the rhetoric that is appropriate to one media may not be appropriate to another, This is what I meant when I said at the beginning that single sourcing is a rhetoric problem as well as a process problem. 
+
+        For example, online media generally support {hypertext}+(index "hypertext;single sourcing and") {links}+(index "links;single sourcing and"), while paper does not. Suppose you have a piece of content that includes a link:
         
         ```
             In Rio Bravo, {the Duke}(link "http://JohnWayne.com")
             plays an ex-Union colonel out for revenge.
         
         
-        In SAM syntax, the link markup (`link "http://JohnWayne.com"`) specifies the address to link to. In the algorithm examples below, I refer to this markup as the _specifically_ attribute using the notation `@specifically`.
+        In {SAM}+(index "SAM;link markup in") syntax, the link markup (`link "http://JohnWayne.com"`) specifies the address to link to. In the algorithm examples below, I refer to this markup as the _specifically_ attribute using the notation `@specifically`.
 
         pagination-tweak:
             min-space: 1.5in
@@ -194,13 +197,13 @@ chapter:(#chapter.single-sourcing) Single Sourcing
             
             ```(html)
                 <p>In Rio Bravo, <a href="http://JohnWayne.com">The Duke</a>
-                plays and ex-Union colonel out for revenge.
+                   plays and ex-Union colonel out for revenge.
                 </p>
         
         
         But suppose you want to output this same content to paper. If you output it to PDF, you can still create a link as with HTML, but when that PDF is printed, all that's left is a slight color change in the text and maybe an underline. Readers cannot follow the link. 
         
-        You can't print an active link on paper, but you can print the URL, so the reader can type it into a browser. Your algorithm can print the link inline or as a footnote. [*fig.ssa-specifically-2] shows the algorithm for printing the URL inline. (I dispense with the detailed XSL-FO syntax this time.)
+        You can't print an active {link}+(index "links;single sourcing and")+(index "hypertext;single sourcing and") on paper, but you can print the URL, so the reader can type it into a browser. Your algorithm can print the link inline or as a footnote. [*fig.ssa-specifically-2] shows the algorithm for printing the URL inline. (I dispense with the detailed XSL-FO syntax this time.)
 
         figure:(*fig.ssa-specifically-2) Algorithm to display the URL for a link in print
         
@@ -236,11 +239,11 @@ chapter:(#chapter.single-sourcing) Single Sourcing
 
         This provides readers with less information, in the sense that it does not give them access to all the information on `JohnWayne.com`, but it does a better job of disambiguation, and it does so in a more paper-like way. It is a rhetoric appropriate to the media. Losing the reference to `JohnWayne.com` is probably not an issue here. Following that link by typing it into a browser is a lot more work than simply clicking on a web link. Someone who wants more information on John Wayne is far more likely to type "John Wayne" into Google than type "JohnWayne.com" into the browser address bar.   
         
-        As written, the source content provides no easy way to produce this preferred form for paper. The content is in the {document domain}, which specifies the presentation of the content. Therefore, it is not a neutral format between media that require different forms of presentation. The choice to specify a link directly in the markup gives it a strong bias towards the web and online media rather than paper. A {document-domain} approach that favored paper would similarly lead to a poorer online presentation by omitting the link. 
+        As written, the source content provides no easy way to produce this preferred form for paper. The content is in the {document domain}+(index "document domain;link presentation in the"), which specifies the presentation of the content. Therefore, it is not a neutral format between media that require different forms of presentation. The choice to specify a link directly in the markup gives it a strong bias towards the web and online media rather than paper. A {document-domain}+(index "document domain;link presentation in the") approach that favored paper would similarly lead to a poorer online presentation by omitting the {link}+(index "links;single sourcing and"). 
         
         Because different media require a different rhetoric, you need a _differential_ approach to single sourcing, one that allows you to differ not only the formatting but the presentation of the content for different media.
         
-        One way to accomplish differential single sourcing is to record the content in the {subject domain}, thus removing the prejudice of the document-domain presentation for one class of media or another. Here is how this markup might look:
+        One way to accomplish differential single sourcing is to record the content in the {subject domain}+(index "subject domain;link markup in the"), thus removing the prejudice of the document-domain presentation for one class of media or another. Here is how this markup might look:
         
         ```(sam)
             {The Duke}(actor "John Wayne") plays an ex-Union colonel.
@@ -278,11 +281,11 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
     section: Differential organization and presentation
     
-        Differences in presentation between media can be broader than this. Paper documents sometimes use complex tables and elaborate layouts that don't translate well to online media. Effective table layout depends on knowing the width of the page you have available, and online you don't know that. A table that looks great on paper may be unreadable on a mobile device, for instance. 
+        Differences in {presentation}+(index "presentation;single sourcing and") between media can be broader than this. Paper documents sometimes use complex tables and elaborate layouts that don't translate well to online media. Effective table layout depends on knowing the width of the page you have available, and online you don't know that. A {table}+(index "tables;single sourcing and") that looks great on paper may be unreadable on a mobile device, for instance. 
         
-        And this is more than a layout issue. Sometimes the things that paper does in a static way should be done dynamically in online media. For example, airline and train schedules have traditionally been printed as timetables on paper, but you rarely see them presented that way online. Rather, you see an interactive travel planner that lets you choose your starting point, destination, and desired travel times and then presents you with the best schedule, including when and where to make connections. If your single source is a timetable designed for print and PDF, you can't produce the kind of online presentation of your schedule that people expect, and that can have a direct impact on your business.
+        And this is more than a layout issue. Sometimes the things that paper does in a static way should be done dynamically in online media. For example, airline and train schedules have traditionally been printed as {timetables}+(index "timetables, presentation of") on paper, but you rarely see them presented that way online. Rather, you see an interactive travel planner that lets you choose your starting point, destination, and desired travel times and then presents you with the best schedule, including when and where to make connections. If your single source is a timetable designed for print and PDF, you can't produce the kind of online presentation of your schedule that people expect, and that can have a direct impact on your business.
         
-        To single-source schedule information for both paper and online media, you can't maintain that content in a document-domain table structure. You need to maintain it in a timetable database structure (which is in the {subject domain}, even though it looks like a database, not a document). 
+        To single source schedule information for both paper and online media, you can't maintain that content in a document-domain table structure. You need to maintain it in a timetable database structure (which is in the subject domain, even though it looks like a database, not a document). 
         
         An algorithm can read such a database to generate a document-domain table for print publication. For the web, however, you can create a web application that queries the same database dynamically to calculate routes and schedules for individual travelers. 
         
@@ -295,8 +298,11 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         
     section: Conditional differential design
+
+        index:: type, term
+            concept, conditional differential design
     
-        You can also do differential single sourcing by using conditional {management-domain} structures in the document domain.
+        You can also do {differential single sourcing}+(index "differential single source;conditional") by using conditional {management-domain}+(index "management domain;conditional structures in the") structures in the document domain.
        
         For instance, if you are writing a manual that you intend to single source to a help system, you might want to add context setting information to the start of a section when it appears in the help system. The manual may be designed to be read sequentially, meaning that the context of individual sections is established by what came before. But help systems are always accessed randomly, meaning that the context of a particular help topic may not be clear if it was single sourced from a manual. To accommodate this, you could include a context-setting paragraph that is conditionalized to appear only in help output (see [*ex.ssa-conditional-1]):
 
@@ -316,7 +322,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
                     3. Touch the sky.            
         
 
-        In [*ex.ssa-conditional-1], the SAM markup `~~~` creates a fragment structure to which conditional tokens can be applied. Content indented under the fragment marker is part of the fragment.
+        In [*ex.ssa-conditional-1], the {SAM}+(index "SAM;conditional markup in") markup `~~~` creates a fragment structure to which conditional tokens can be applied. Content indented under the fragment marker is part of the fragment.
         
         To output a manual, you suppress the help-only content:
         
@@ -334,33 +340,32 @@ chapter:(#chapter.single-sourcing) Single Sourcing
      
     section: Primary and secondary media
         
-        While differential single sourcing can help you output documents with the appropriate rhetoric in multiple media, there are limits to how far this approach can take you. 
+        While differential single sourcing can help you output documents with the appropriate rhetoric in multiple {media}+(index "media, primary and secondary"), there are limits to how far this approach can take you. 
         
-        Books are a linear medium in which one chapter follows another in order. The web is a {hypertext} medium in which every page is page one. Readers arrive at a page via search, and they navigate by following hypertext links. The linear and hypertext approaches are fundamentally different ways of writing that invite fundamentally different ways of navigating and using information.[*eppo] Even moving content to the {subject domain} as much as possible does not entirely factor out these fundamental differences in approach. 
+        {Books}+(index "books;linear structure of") are a linear medium in which one chapter follows another in order. The {web}+(index "web;navigational approach") is a {hypertext}+(index "hypertext;navigational approach") medium in which every page is page one. Readers arrive at a page via search, and they navigate by following hypertext links. The linear and hypertext approaches are fundamentally different ways of writing that invite fundamentally different ways of navigating and using information.[*eppo] Even moving content to the {subject domain} as much as possible does not entirely factor out these fundamental differences in approach. 
 
         footnote:(*eppo)
             For a full examination of the differences, see my book {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}.
         
-        When single sourcing content to both linear paper-like media and {hypertext} web-like media, you generally have to choose a primary medium. Single sourcing that content to other media will be on a best-effort basis. It may be good enough for a particular purpose, but it will never be as good as it could have been had you designed exclusively for that medium.
+        When single sourcing content to both linear paper-like media and hypertext web-like media, you generally have to choose a primary medium. Single sourcing that content to other media will be on a best-effort basis. It may be good enough for a particular purpose, but it will never be as good as it could have been had you designed exclusively for that medium.
         
-        Many of the tools used for single sourcing have a built-in bias towards one medium or another. Desktop-publishing tools such as {FrameMaker}, for instance, were designed for linear media. Online collaborative tools such as {wikis} were designed for {hypertext} media. It is usually a good idea to pick a tool that was designed for the medium you choose as primary. Tools partition the complexity of content creation to best suit the primary medium they were designed for. 
+        Many of the tools used for single sourcing have a built-in bias towards one medium or another. Desktop-publishing tools such as {FrameMaker}, for instance, were designed for linear media. Online collaborative tools such as {wikis} were designed for hypertext media. It is usually a good idea to pick a tool that was designed for the medium you choose as primary. {Tools}+(index "tools;role of media in selecting") partition the complexity of content creation to best suit the primary medium they were designed for. 
         
         Often, the tools a group uses implicitly determine the primary medium. This usually means that the primary medium is paper, and paper often continues to be primary even after the organization stops producing paper, and their readers have moved to online formats. 
         
         Some organizations think they should not switch to tools that are designed primarily for online content until they have entirely abandoned paper and paper-like formats such as PDF. But once online becomes your primary media, your rhetoric should change to a rhetoric appropriate to online media (potentially a very large change, as discussed in [#chapter.architecture]). Thus it is appropriate to switch to a rhetoric and tool set that is optimized for online but that can still produce linear media as a secondary output format. 
         
-        Changing your information design practices from linear, paper-based designs to {hypertext} designs is not trivial, but such designs better suit the way many people use and access content today. I discuss these design differences in depth in my book, {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}. Don't expect single sourcing, by itself, to successfully turn document-oriented design into effective hypertext. It is usually more effective to adopt an {Every Page is Page One}(concept) approach to information design and use structured writing and single-sourcing techniques as a best-effort method to create linear media for those of your readers who still need paper or paper-like formats -- or for those documents where linear organization still makes sense. 
+        Changing your information design practices from linear, paper-based designs to hypertext designs is not trivial, but such designs better suit the way many people use and access content today. I discuss these design differences in depth in my book, {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}. Don't expect single sourcing, by itself, to successfully turn document-oriented design into effective hypertext. It is usually more effective to adopt an {Every Page is Page One}(concept) approach to information design and use structured writing and single-sourcing techniques as a best-effort method to create linear media for those of your readers who still need paper or paper-like formats -- or for those documents where linear organization still makes sense. 
 
         
     section: Single sourcing vs single format
 
-        Finally, we should note that adopting a single source for information on a given subject is not the same thing as adopting a single source format for all content. Often, the best way to achieve sophisticated differential single sourcing is through subject-domain structures that are particular to an individual piece of subject matter. But, unfortunately, most systems designed and sold for doing single sourcing of content are implemented using a single source format for all content. 
+        Finally, adopting a {single source}+(index "single sourcing;single format versus") for information on a given subject is not the same thing as adopting a single-source format for all content. Often, the best way to achieve sophisticated differential single sourcing is through subject-domain structures that are particular to an individual piece of subject matter. But, unfortunately, most systems designed and sold for doing single sourcing of content are implemented using a single-source format for all content. 
 
-        It is not hard to see why. With a single source format -- invariable in the document domain with some degree of management domain structures added -- you can develop a single algorithm to transform the common format to multiple output formats. But, as we have seen, such a system cannot do many of the things needed to implement true differential single sourcing.
+        It is not hard to see why. With a single-source format -- invariable in the document domain with some management-domain structures added -- you can develop a single algorithm to transform the common format to multiple output formats. But, such a system cannot do many of the things needed to implement true differential single sourcing.
 
-        There is nothing wrong with a single document/management domain format feeding a set of formatting algorithms for different media, but if you want to do differential single sourcing, it should not be the format writers work in. Instead, it should be something used as an intermediate step in a "shared pipes"[https://www.scriptorium.com/2018/04/single-sourcing-dead-long-live-shared-pipes/] architecture. We will look at the elements of such an architecture in [#chapter.publishing]. 
-        
-        
+        There is nothing wrong with a single document-domain/management-domain format feeding a set of formatting algorithms for different media, but if you want to do differential single sourcing, it should not be the format writers work in. Instead, it should be used as an intermediate step in a {shared pipes}[https://www.scriptorium.com/2018/04/single-sourcing-dead-long-live-shared-pipes/] architecture. I look at the elements of such an architecture in [#chapter.publishing]. 
+
 
 
 
