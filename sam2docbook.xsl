@@ -195,7 +195,7 @@
                                  select="$annotation-types/type[name = $type]/alias"/>
                          </db:primary>
                          <db:secondary>
-                             <xsl:value-of select="."/>
+                             <xsl:value-of select="$term"/>
                          </db:secondary>
                          <xsl:if test="$index-use-see-if-secondary/term[. = $term]">
                              <db:see>
@@ -1116,7 +1116,7 @@
                                  select="$annotation-types/type[name = $type]/alias"/>
                          </db:primary>
                          <db:secondary>
-                             <xsl:value-of select="."/>
+                             <xsl:value-of select="$term"/>
                          </db:secondary>
                          <xsl:if test="$index-use-see-if-secondary/term[. = $term]">
                              <db:see>
