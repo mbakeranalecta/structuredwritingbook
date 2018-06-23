@@ -66,6 +66,19 @@
   <xs:element name="preface" type="chapter-type"/>
 
 
+  <xs:element name="blurb">
+    <xs:complexType>
+      <xs:group ref="body-group"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="bio">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="title" type="title-type"/>
+        <xs:group ref="body-group"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="partintro">
     <xs:complexType>
       <xs:sequence>
@@ -98,6 +111,7 @@
       <xs:element name="title" type="title-type"/>
       <xs:element minOccurs="0" ref="annotations"/>
       <xs:element minOccurs="0" name="subjects" type="subjects-type"/>
+      <xs:element minOccurs="0" name="block-index" type="block-index-type"/>
       <xs:group ref="body-group"/>
       <xs:sequence minOccurs="0">
         <xs:choice>
@@ -302,6 +316,7 @@
     <xs:sequence>
       <xs:element name="title" type="title-type"/>
       <xs:element minOccurs="0" name="subjects" type="subjects-type"/>
+      <xs:element minOccurs="0" name="block-index" type="block-index-type"/>
       <xs:group ref="body-group"/>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="section" type="section-type"/>
     </xs:sequence>
@@ -360,4 +375,9 @@
     <xs:attribute name="type" use="required" type="xs:NCName"/>
   </xs:complexType>
 
+  <xs:complexType name="block-index-type">
+    <xs:sequence>
+      <xs:element name="p" type="p-type"/>
+    </xs:sequence>
+  </xs:complexType>
 </xs:schema>

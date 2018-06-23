@@ -164,39 +164,95 @@
                 </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates select="title" mode="chapter-title"/>
-            <xsl:for-each select="subjects/record/term">
-                <xsl:variable name="subjects-type" select="../type"/>
-                <db:indexterm class="startofrange" significance="preferred">
+
+
+            <!-- Indexing based on subjects records -->
+
+            <xsl:for-each select="subjects/record">
+                <xsl:variable name="term" select="term"/>
+                <xsl:variable name="type" select="type"/>
+
+                <!-- Generate primaries for terms -->
+                <db:indexterm class="startofrange">
                     <xsl:attribute name="xml:id">
                         <xsl:value-of select="generate-id()"/>
                     </xsl:attribute>
                     <db:primary>
-                        <xsl:value-of select="."/>
+                        <xsl:value-of select="$term"/>
                     </db:primary>
                 </db:indexterm>
 
-                <xsl:if test="$annotation-types/type/name = $subjects-type">
-                    <db:indexterm class="startofrange">
-                        <xsl:attribute name="xml:id">
-                            <xsl:value-of select="generate-id()"/>
-                            <xsl:text>x</xsl:text>
-                        </xsl:attribute>
-                        <db:primary>
-                            <xsl:value-of
-                                select="$annotation-types/type[name = $subjects-type]/alias"/>
-                        </db:primary>
-                        <db:secondary>
-                            <xsl:value-of select="."/>
-                        </db:secondary>
-                    </db:indexterm>
-                </xsl:if>
+                 <!-- Generate primaries for types and secondaries for terms-->
+
+                 <xsl:if test="$annotation-types/type/name = $type">
+                     <db:indexterm class="startofrange">
+                         <xsl:attribute name="xml:id">
+                             <xsl:value-of select="generate-id()"/>
+                             <xsl:text>x</xsl:text>
+                         </xsl:attribute>
+                         <db:primary>
+                             <xsl:value-of
+                                 select="$annotation-types/type[name = $type]/alias"/>
+                         </db:primary>
+                         <db:secondary>
+                             <xsl:value-of select="."/>
+                         </db:secondary>
+                         <xsl:if test="$index-use-see-if-secondary/term[. = $term]">
+                             <db:see>
+                                 <xsl:value-of select="$term"/>
+                             </db:see>
+                         </xsl:if>
+                     </db:indexterm>
+                 </xsl:if>
+
+            </xsl:for-each>
+
+            <!-- Indexing based on block-index block -->
+
+            <xsl:for-each select="block-index/p/phrase/annotation[@type = 'index']">
+
+                <xsl:variable name="index-components" select="strings:tokenize(@specifically, ';')"/>
+
+                <db:indexterm significance="preferred" class="startofrange">
+                    <xsl:attribute name="xml:id">
+                        <xsl:value-of select="generate-id()"/>
+                    </xsl:attribute>
+
+                    <xsl:choose>
+                        <xsl:when test="normalize-space($index-components[3])">
+                            <db:primary>
+                                <xsl:value-of select="normalize-space($index-components[1])"/>
+                            </db:primary>
+                            <db:secondary>
+                                <xsl:value-of select="normalize-space($index-components[2])"/>
+                            </db:secondary>
+                            <db:tertiary>
+                                <xsl:value-of select="normalize-space($index-components[3])"/>
+                            </db:tertiary>
+                        </xsl:when>
+                        <xsl:when test="normalize-space($index-components[2])">
+                            <db:primary>
+                                <xsl:value-of select="normalize-space($index-components[1])"/>
+                            </db:primary>
+                            <db:secondary>
+                                <xsl:value-of select="normalize-space($index-components[2])"/>
+                            </db:secondary>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <db:primary>
+                                <xsl:value-of select="normalize-space($index-components[1])"/>
+                            </db:primary>
+                       </xsl:otherwise>
+                    </xsl:choose>
+
+                </db:indexterm>
 
             </xsl:for-each>
 
             <xsl:apply-templates/>
 
             <xsl:if test="not(section)">
-                <xsl:for-each select="subjects/record/term">
+                <xsl:for-each select="subjects/record">
                     <db:indexterm class="endofrange">
                         <xsl:attribute name="startref">
                             <xsl:value-of select="generate-id()"/>
@@ -204,11 +260,48 @@
                     </db:indexterm>
                 </xsl:for-each>
 
-                <xsl:for-each select="subjects/record/term">
+                <xsl:for-each select="subjects/record">
                     <db:indexterm class="endofrange">
                         <xsl:attribute name="startref">
                             <xsl:value-of select="generate-id()"/>
                             <xsl:text>x</xsl:text>
+                        </xsl:attribute>
+                    </db:indexterm>
+                </xsl:for-each>
+
+                <xsl:for-each select="block-index/p/annotation[@type = 'index']">
+                    <db:indexterm class="endofrange">
+                        <xsl:attribute name="startref">
+                            <xsl:value-of select="generate-id()"/>
+                            <xsl:text>y</xsl:text>
+                        </xsl:attribute>
+                    </db:indexterm>
+                </xsl:for-each>
+
+            </xsl:if>
+
+            <xsl:if test="not(following::section) and not(section)">
+                <xsl:for-each select="/chapter/subjects/record/term">
+                    <db:indexterm class="endofrange">
+                        <xsl:attribute name="startref">
+                            <xsl:value-of select="generate-id()"/>
+                        </xsl:attribute>
+                    </db:indexterm>
+                </xsl:for-each>
+
+                <xsl:for-each select="/chapter/subjects/record/term">
+                    <db:indexterm class="endofrange">
+                        <xsl:attribute name="startref">
+                            <xsl:value-of select="generate-id()"/>
+                            <xsl:text>x</xsl:text>
+                        </xsl:attribute>
+                    </db:indexterm>
+                </xsl:for-each>
+
+                <xsl:for-each select="block-index/p/phrase/annotation[@type = 'index']">
+                    <db:indexterm class="endofrange">
+                        <xsl:attribute name="startref">
+                            <xsl:value-of select="generate-id()"/>
                         </xsl:attribute>
                     </db:indexterm>
                 </xsl:for-each>
@@ -509,7 +602,7 @@
     </xsl:template>
 
     <xsl:template match="annotation[@type = 'index-see-also']">
-        <xsl:variable name="primary" select="ancestor::annotation[@type = 'index']/@specifically"/>
+        <xsl:variable name="primary" select="ancestor::phrase/text()"/>
         <db:indexterm>
             <db:primary>
                 <xsl:value-of select="$primary"/>
@@ -1078,6 +1171,8 @@
             </xsl:for-each>
 
             <xsl:apply-templates/>
+
+            <!-- Index range end elements -->
 
             <xsl:if test="not(section)">
                 <xsl:for-each select="subjects/record">
