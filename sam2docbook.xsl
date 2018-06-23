@@ -989,7 +989,7 @@
             <xsl:otherwise>
               <db:indexterm significance="preferred">
                     <db:primary>
-                        <xsl:value-of select="normalize-space(@specifically)"/>
+                        <xsl:value-of select="normalize-space($index-components[1])"/>
                     </db:primary>
                 </db:indexterm>
             </xsl:otherwise>

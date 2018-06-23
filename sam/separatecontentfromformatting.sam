@@ -10,7 +10,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
     
     section: Separate out style instructions
     
-        Let's start with a piece of text that includes a description of its format. I use CSS syntax to describe the format because CSS is easy to understand and helps illustrate the separation, but don't focus on the syntax, it is just there to illustrate the principle. I also represent certain characters (bullets and tabs) by their names, so you can see exactly where everything is going:
+        Let's start with a piece of text that includes a description of its format. I use {CSS}+(index "cascading style sheets (CSS);list formatting using")+(index "lists;CSS formatting for") syntax to describe the format because CSS is easy to understand and helps illustrate the separation, but don't focus on the syntax, it is just there to illustrate the principle. I also represent certain characters (bullets and tabs) by their names, so you can see exactly where everything is going:
         
         ```
             {font: 10pt "Open Sans"}The box contains:
@@ -33,7 +33,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
         ```
             paragraph = {font: 10pt "Open Sans"}
                     
-        Once you separate the style information, you can change the formatting without changing the text; for example, you could choose a different font:
+        Once you separate the style information, you can change the formatting without changing the text; for example, you could choose a different {font}+(index "fonts;factoring out"):
         
         ```
             paragraph = {font: 12pt "Century Schoolbook"}
@@ -76,11 +76,11 @@ chapter:(#chapter.separating) Separating Content from Formatting
             bullet-paragraph = {font: 12pt "Century Schoolbook"}[em dash][tab]
         
                
-        Because the style now uses an em-dash, rather than a bullet, the name bullet-paragraph may not be the best choice. The content still contains a style named for a particular piece of formatting, which means writers are still making the formatting choice "bullet" when it would be better for them to focus on the content choice "list."
+        Because the style now uses an em-dash, rather than a bullet, the name `bullet-paragraph` may not be the best choice. The content still contains a style named for a particular piece of formatting, which means writers are still making the formatting choice "bullet" when it would be better for them to focus on the content choice "list."
         
     section: Name your abstractions correctly
         
-        The names you choose for styles and other abstractions matter. The wrong name sets up a false expectation, which can lead to writers using a style incorrectly. So the first lesson about separating content from formatting is that naming matters. You are creating an abstraction, so you need to figure out what that abstraction is and name it appropriately.
+        The names you choose for styles and other {abstractions}+(index "abstractions;naming") matter. The wrong name sets up a false expectation, which can lead to writers using a style incorrectly. So the first lesson about separating content from formatting is that naming matters. You are creating an abstraction, so you need to figure out what that abstraction is and name it appropriately.
         
         What is the abstraction here? Sand, Eggs, and Gold are list items. So maybe you do this:
         
@@ -155,10 +155,12 @@ chapter:(#chapter.separating) Separating Content from Formatting
         This is pretty much how {FrameMaker}, {Microsoft Word}, and many other tools handle lists. The reason for going through this example in such detail is to point out how much is involved in even this simple bit of partitioning. You began by removing formatting commands, followed by characters, which forced you to include characters in the style definitions. And then you had to calculate the value of characters. At each step, you had to consider all possible cases and create abstractions to handle them. 
         
     section: Create containers to provide context
+        index:: type, term
+            structure, containers
        
-        One problem with this approach to creating lists is that you have to apply a different style to the first item of a list. It would be better if you could use the same style for each list item and have the numbering just work. However, this is hard to do because nothing in the content says where one numbered list ends and the next begins. For this you need a new abstraction. So far, you have abstractions for ordered and unordered list items, but you don't have an abstraction for lists themselves. 
+        One problem with this approach to creating lists is that you have to apply a different style to the first item of a list. It would be better if you could use the same style for each list item and have the numbering just work. However, this is hard to do because nothing in the content says where one numbered list ends and the next begins. For this you need a new abstraction. So far, you have {abstractions}+(index "abstractions;list") for ordered and unordered list items, but you don't have an abstraction for {lists}+(index "lists;containers for") themselves. 
         
-        Up to this point, everything has been purely in the {media domain}. You replaced direct formatting definitions with indirect definitions through styles. But now it's necessary to venture into the {document domain}, creating the abstract idea of a list and inserting that abstract idea into your content.
+        Up to this point, everything has been purely in the {media domain}+(index "media domain;lists in the"). You replaced direct formatting definitions with indirect definitions through styles. But now it's necessary to venture into the {document domain}+(index "document domain;lists in the"), creating the abstract idea of a list and inserting that abstract idea into your content.
         
         ```
             paragraph: To wash hair:
@@ -177,7 +179,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
         
         The second important thing is that the content no longer refers to style names. Instead you have structures. `list` is a structure and so are `paragraph` and `ordered-list-item`. You can give the same structure a different style depending on where it is in the document. The {formatting algorithm} can determine which `ordered-list-item` is first and format it accordingly; this is {how list formatting works in CSS.}[https://css-tricks.com/numbering-in-style/]
         
-        Now, writers no longer apply styles directly to content, even styles with abstract names. Rather they place content in structures and allow the formatting algorithm to apply styles appropriately. This separates the content even more from the formatting.
+        Now, writers no longer apply {styles}+(index "styles;using structure to apply") directly to content, even styles with abstract names. Rather they place content in structures and allow the formatting algorithm to apply styles appropriately. This separates the content even more from the formatting.
         
     section: Move the abstractions to the containers
         
@@ -191,7 +193,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
                 ordered-list-item:Repeat
         
        
-        To avoid this type of error, move the abstraction outward. Instead of creating ordered and unordered list items, create ordered and unordered lists:
+        To avoid this type of error, move the {abstraction}+(index "abstractions;move to containers") outward. Instead of creating ordered and unordered list items, create ordered and unordered lists:
         
         ```
             paragraph: To wash hair:
@@ -213,13 +215,13 @@ chapter:(#chapter.separating) Separating Content from Formatting
 
         Now, you have a single `list-item` structure that you can use in either an unordered list or an ordered list; the {formatting algorithm} determines the formatting based on which type of list the list-item belongs to. The name `list-item` describes a role in the document that is entirely separate from formatting.
         
-        Moving the abstraction out to the container is an important part of the algorithm for separating content from formatting. It partitions ordered and unordered lists, making the construction of each simpler and more reliable. This helps keep things consistent and reduces the number of things writers have to remember. (Notice that this requires writers to decide whether a list is ordered or unordered, but they had to decide this anyway; the decision is implicit in the rhetoric of the piece.)
+        Moving the abstraction out to the {container}+(index "containers;moving abstractions to") is an important part of the algorithm for separating content from formatting. It partitions ordered and unordered lists, making the construction of each simpler and more reliable. This helps keep things consistent and reduces the number of things writers have to remember. (Notice that this requires writers to decide whether a list is ordered or unordered, but they had to decide this anyway; the decision is implicit in the rhetoric of the piece.)
         
-        Some markup languages take better advantage of containers than others. For example, HTML and Markdown both provide six different heading levels. However, content under an `H2` or an `H5` heading is not in any container. The content simply comes after the heading. This means that is it perfectly possible and legal to use heading elements in any order you want. Writers must select the heading level and ensure that it fits the structure of their document.
+        Some markup languages take better advantage of containers than others. For example, {HTML}+(index "HTML;containers in") and {Markdown}+(index "Markdown;containers in") both provide six different heading levels. However, content under an `H2` or an `H5` heading is not in any container. The content simply comes after the heading. This means that is it perfectly possible and legal to use heading elements in any order you want. Writers must select the heading level and ensure that it fits the structure of their document.
           
-        By contrast, {DocBook} has a {section}(element (DocBook)) structure. Like a list, a section records your interpretation of what you are creating in the document. The {section} structure instantiates the concept of a section. And once you have the instantiation of a section, you don't need six levels of heading. You can have one structure called {title}(element (DocBook)). Sections can be nested inside other sections, and the formatting algorithm applies the correct style to the title based on context.
+        By contrast, {DocBook}+(index "DocBook;containers in") has a {section}(element (DocBook)) structure. Like a list, a section records your interpretation of what you are creating in the document. The {section} structure instantiates the concept of a section. And once you have the instantiation of a section, you don't need six levels of heading. You can have one structure called {title}(element (DocBook)). Sections can be nested inside other sections, and the formatting algorithm applies the correct style to the title based on context.
 
-        This eliminates decisions about which heading element to use; there is just one: `title`. This ensures that headings in output consistently reflect the document's section and subsection structure.[*fn.signposts] 
+        This eliminates decisions about which heading element to use; there is just one: `title`. This ensures that {headings}+(index "headings;hierarchy in") in output consistently reflect the document's section and subsection structure.[*fn.signposts] 
                
         ```
             section: 
@@ -233,7 +235,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
         
     section: Separate out abstract formatting
         
-        To separate content from formatting for ordered and unordered lists, you must separate out some of the content as well. Specifically, you must separate out some of the characters. The distinction between content and formatting is not the same as the distinction between characters and the styles applied to them. Sometimes characters are part of the formatting rather than the content. Consider the following labeled-list structure:        
+        To separate content from {formatting}+(index "formatting;separating out abstract") for ordered and unordered {lists}+(index "lists;labeled"), you must separate out some of the content as well. Specifically, you must separate out some of the characters. The distinction between content and formatting is not the same as the distinction between characters and the styles applied to them. Sometimes characters are part of the formatting rather than the content. Consider the following labeled-list structure:        
 
         |Street| 123 Elm Street       
 
@@ -263,7 +265,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
         
         But what if you have hundreds of addresses, all with the same labels? Are the labels content or are they presentation? Since the labels don't change from one list to another, you could look at them as being part of the presentation rather than the content. So let's look for a way to separate them from the content. 
         
-        As always, when you separate something from your content, you have to replace it with something else. In [#ex.separate-1], named structures reflect the subject matter of the entries, which moves this content into the {subject domain}.
+        As always, when you separate something from your content, you have to replace it with something else. In [#ex.separate-1], named structures reflect the subject matter of the entries, which moves this content into the {subject domain}+(index "subject domain;lists in the").
 
         figure:(#ex.separate-1) Address markup in the subject domain
             ```(sam)
@@ -274,11 +276,11 @@ chapter:(#chapter.separating) Separating Content from Formatting
                     code: 12345
         
         
-        Here, once again, it is important to distinguish formatting and presentation. _Formatting_ refers to the precise details of a text's appearance: the font chosen, the width of the text column, the size of the characters, the spacing between line, the size and shape of the bullet characters, and so forth. _Presentation_ refers to the organization of text.
+        Here, once again, it is important to distinguish {formatting}+(index "formatting;presentation versus") and {presentation}+(index "presentation;formatting versus"). _Formatting_ refers to the precise details of a text's appearance: the font chosen, the width of the text column, the size of the characters, the spacing between lines, the size and shape of the bullet characters, and so forth. _Presentation_ refers to the organization of text.
 
-        Deciding to use a list for a certain piece of information is a presentation decision, which is independent of the formatting details applied to lists. When you move content from the {media domain} to the {document domain}, you separate the formatting of the content from its presentation. The decision to present the information as a list remains; the decision about what that list looks like is separated out. 
+        Deciding to use a list for a certain piece of information is a presentation decision, which is independent of the formatting details applied to lists. When you move content from the {media domain}+(index "media domain;moving content from the document domain to the") to the {document domain}+(index "document domain;moving content to the"), you separate the formatting of the content from its presentation. The decision to present the information as a list remains; the decision about what that list looks like is separated out.
 
-        In contrast, moving content from the {document domain} to the {subject domain} separates the _information_ from the _presentation_. The subject-domain structure in [#ex.separate-1] is not a labeled list. It is a data record that can be turned into many different forms of presentation. 
+        In contrast, moving content from the {document domain}+(index "document domain;moving content to the subject domain from the") to the {subject domain}+(index "subject domain;moving content from the document domain to the") separates the {information}+(italic)+(index "information, separating presentation from") from the _presentation_. The subject-domain structure in [#ex.separate-1] is not a labeled list. It is a data record that can be turned into many different forms of {presentation}+(index "presentation;separating information from"). 
         
         Turning such structures into a specific form of presentation is the job of the presentation algorithm (see [#chapter.publishing]). The presentation algorithm could turn it into a labeled list, a table, a paragraph, or an address label.
         
