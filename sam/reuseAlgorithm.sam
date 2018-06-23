@@ -3,7 +3,7 @@ chapter:(#chapter.reuse) Reuse
 
     <<<(annotations.sam)
 
-    index:: type, term
+    subjects:: type, term
         algorithm, reuse
         algorithm, reuse algorithm
         concept, content reuse
@@ -124,7 +124,7 @@ chapter:(#chapter.reuse) Reuse
         
         section: Using IDs
         
-            index:: type, term
+            subjects:: type, term
                 concept, IDs
     
             The most basic way to factor out the file name is to give the file an ID. An ID is a {management-domain}+(index "management domain;IDs in the") structure used to identify a piece of content in a location-independent way. No matter where the content is stored, it keeps the same ID. [*fig.warning-danger-id] shows the warning file with the ID `#warn_danger` added. 
@@ -172,7 +172,7 @@ chapter:(#chapter.reuse) Reuse
         
         section: Using keys
         
-            index:: type, term
+            subjects:: type, term
                 concept, keys 
         
             Another way to do this is with another {management-domain}+(index "management domain;keys in the") structure called a _key_. A key is similar to an ID, but it is not directly tied to a resource. Instead, the same key can point to different resources at different times. Since a key does not represent any one concrete resource, you don't assign the key to a resource. Instead, you use an intermediate {lookup table}+(index "lookup table for keys")+(index "keys;lookup table for") to resolve keys to particular resources for a particular purpose.
@@ -269,7 +269,7 @@ chapter:(#chapter.reuse) Reuse
         
     section: Common with conditions
     
-        index:: type, term
+        subjects:: type, term
             concept, conditions
             algorithm, common-with-conditions reuse
         
@@ -330,7 +330,7 @@ chapter:(#chapter.reuse) Reuse
         
     section: Factor out the common
 
-        index:: type, term
+        subjects:: type, term
             algorithm, factor-out-the-common reuse
     
         In [#chapter.management-domain], I noted that the subject-domain alternative to using an insertion instruction for the warning text was to specify which procedures were dangerous, thus factoring out the constraint that the warning must appear (see [*fig.factor-out-common-sam]).
@@ -384,7 +384,7 @@ chapter:(#chapter.reuse) Reuse
         
     section: Factor out the variable
 
-        index:: type, term
+        subjects:: type, term
             algorithm, factor-out-the-variable reuse
     
         You can also factor out the variable content. In the case of the different models of a car, rather than conditionalizing the list of features in the document, you can maintain the list in a database. The organization probably already has a database of features for each vehicle, so you don't need to create anything new. Instead, you simply query the existing database. After all, reusing what already exists is what reuse is all about.
@@ -433,7 +433,7 @@ chapter:(#chapter.reuse) Reuse
     
     section: Assemble from pieces
 
-        index:: type, term
+        subjects:: type, term
             algorithm, assemble-from-pieces reuse
         
         In the assemble-from-pieces approach, there is no common vs. variable distinction and no single source document into which you insert reused content or apply conditions. Instead, you assemble a set of content units to form a finished document (see [*fig.assemble-diagram]). 
@@ -495,16 +495,16 @@ chapter:(#chapter.reuse) Reuse
         There are a number of ways to mix and match the basic reuse patterns to achieve an overall reuse strategy. Most systems designed to support reuse allow you to use all of these approaches and combine them as needed. However, don't lose sight of the amount of complexity you introduce into your content and your writers' workload when you rely on a complex set of reuse techniques.
                        
     section: Content reuse is not a panacea
-        index:: type, term
-            concept, content reuse;downsides
+        block-index:
+            {content reuse}(index "content reuse;downsides")
     
         Content reuse can seem like an easy win, and in some cases it can return substantial benefits, but there are pitfalls to be aware of. You need to plan carefully to make sure that you avoid the traps that await the unwary.
         
         Many reuse techniques introduce a lot of complexity into the writer's job and into the content itself. These techniques may address major sources of content complexity, but they come with a high cost in terms of new complexity introduced. Even if a reuse tool looks easy to use, it can introduce large amounts of complexity.
         
         section: Rhetoric traps
-            index:: type, term
-                concept, rhetoric;reuse and its impact on
+            block-index:
+                {rhetoric}(index "rhetoric;reuse and its impact on")
         
             Designing content to be reused can harm its rhetoric, either by distracting writers with complexity or by motivating them to prefer reusability over rhetorical quality. There are three main rhetoric traps with content reuse:
             
@@ -523,8 +523,8 @@ chapter:(#chapter.reuse) Reuse
             Finally, reuse can encourage you to come up with one way of telling our story that you present to all your audiences. But not all audiences are alike, and the way you tell your story to one audience may not work for another audience. Good rhetoric tells a good story to a particular audience. Two different tellings of the same story do not constitute redundant content if they address different audiences. 
         
         section: Cost traps
-            index:: type, term
-                concept, content reuse;cost considerations
+            block-index:
+                {content reuse}(index "content reuse;cost considerations")
         
             It is easy to see content reuse as a method to achieve big cost savings. Reusing content means you do not have to write the same content over and over again. It is easy to add up the cost of all that redundant {writing}+(index "writing;complexity of with reuse") and regard that number as pure cost savings from a content reuse strategy.
         
@@ -551,8 +551,8 @@ chapter:(#chapter.reuse) Reuse
             One final trap: there may not be as much potential reuse as you thought. Some organizations have plunged into reuse strategies in hopes of a big payoff only to find that they had far less reusable content than they first thought. The cost of systems and the complexity added to the process by complex reuse techniques require a high level of reuse to pay off. If you can't achieve that level of reuse, your system will end up costing you more than it saves.             
             
     section: Alternatives to reuse
-        index:: type, term
-            concept, content reuse;alternatives to
+        block-index:
+            {content reuse}(index "content reuse;alternatives to")
     
         Here are three alternatives to content reuse:
         

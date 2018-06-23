@@ -14,7 +14,7 @@
           </xs:complexType>
         </xs:element>
         <xs:choice maxOccurs="unbounded">
-          <xs:element name="index" type="index-type"/>
+          <xs:element name="index"/>
           <xs:element name="insert" type="insert-type"/>
           <xs:element name="part" type="part-type"/>
         </xs:choice>
@@ -97,7 +97,7 @@
     <xs:sequence>
       <xs:element name="title" type="title-type"/>
       <xs:element minOccurs="0" ref="annotations"/>
-      <xs:element minOccurs="0" name="index" type="index-type"/>
+      <xs:element minOccurs="0" name="subjects" type="subjects-type"/>
       <xs:group ref="body-group"/>
       <xs:sequence minOccurs="0">
         <xs:choice>
@@ -184,7 +184,7 @@
     </xs:choice>
   </xs:complexType>
 
-  <xs:complexType name="index-type">
+  <xs:complexType name="subjects-type">
     <xs:choice>
       <xs:sequence>
         <xs:element name="title" type="title-type"/>
@@ -301,7 +301,7 @@
   <xs:complexType name="section-type">
     <xs:sequence>
       <xs:element name="title" type="title-type"/>
-      <xs:element minOccurs="0" name="index" type="index-type"/>
+      <xs:element minOccurs="0" name="subjects" type="subjects-type"/>
       <xs:group ref="body-group"/>
       <xs:element maxOccurs="unbounded" minOccurs="0" name="section" type="section-type"/>
     </xs:sequence>

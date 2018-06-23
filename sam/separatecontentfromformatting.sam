@@ -3,7 +3,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
     
     <<<(annotations.sam)
     
-    index:: type, term
+    subjects:: type, term
         concept, separating content from formatting
 
     If there is one phrase that most people associate with structured writing, it is "separating content from formatting." This basic, well-known structured writing algorithm can be used to achieve a number of process and rhetorical goals. It is a useful place to start the study of algorithms because it illustrates the strategies used for all the other algorithms. Separating content from formatting separates decisions about the appearance of a document from decisions about its content.
@@ -155,7 +155,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
         This is pretty much how {FrameMaker}, {Microsoft Word}, and many other tools handle lists. The reason for going through this example in such detail is to point out how much is involved in even this simple bit of partitioning. You began by removing formatting commands, followed by characters, which forced you to include characters in the style definitions. And then you had to calculate the value of characters. At each step, you had to consider all possible cases and create abstractions to handle them. 
         
     section: Create containers to provide context
-        index:: type, term
+        subjects:: type, term
             structure, containers
        
         One problem with this approach to creating lists is that you have to apply a different style to the first item of a list. It would be better if you could use the same style for each list item and have the numbering just work. However, this is hard to do because nothing in the content says where one numbered list ends and the next begins. For this you need a new abstraction. So far, you have {abstractions}+(index "abstractions;list") for ordered and unordered list items, but you don't have an abstraction for {lists}+(index "lists;containers for") themselves. 

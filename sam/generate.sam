@@ -3,7 +3,7 @@ chapter:(#chapter.generate) Generated Content
 
     <<<(annotations.sam)
 
-    index:: type, term
+    subjects:: type, term
         task, generating content
 
     I have mentioned that one of the advantages of the {subject domain}+(index "subject domain;generating content in the") is that it allows you to generate different types of rhetoric from a base of subject-domain data. Here, I look at the {content}+(index "content;generating") generation algorithm in greater depth. 
@@ -64,7 +64,7 @@ chapter:(#chapter.generate) Generated Content
         Relying on the {subject-domain}+(index "subject domain;metadata") {metadata} already in the content, rather than creating a separate metadata record, can be a tremendous advantage, because it makes submission of content to a repository so much easier for writers. But, in some cases, it can also avoid the need for a costly {content management system}+(index "content management system;avoiding the need for a"), since it allows the {publishing algorithm}+(index "publishing algorithm;categorization and the") to categorize content at build time without needing a separate metadata store or a separate system to manage categorization. I look more at the role of the content management system in [#chapter.content-management].
             
     section: Tables of Contents (TOCs)
-        index:: type, term
+        subjects:: type, term
             concept, table of contents
     
         If you are creating a top-down information architecture, your structured writing system needs to generate {tables of contents}+(index "table of contents;generating a") just as a word processor or desktop publishing application does. 
@@ -92,7 +92,7 @@ chapter:(#chapter.generate) Generated Content
         One advantage of this approach is that if an algorithm assembles the TOC based on {metadata}+(index "metadata;building a table of contents using"), new content is automatically included in the TOC the next time you generate output. This simplifies the task of adding new content by avoiding the need to update multiple files or systems. This makes life easier for writers because they do not need to know how the TOC is constructed. They only have to create individual pieces of conforming content and submit them to the right location. This also avoids duplication, since the metadata the TOC generation algorithm uses is stored only in one place.  
         
     section: Lists
-        index:: type, term
+        subjects:: type, term
             concept, lists
 
         A major feature of a {bottom-up information architecture} is the {list}+(index "lists;bottom-up information architecture and"). Like TOCs, lists are a catalog of resources. But while a TOC is a list of resources defined by their container (contents = things in a container), a list may have any principle of organization or inclusion. 
@@ -138,9 +138,11 @@ chapter:(#chapter.generate) Generated Content
  
 
     section: Collections and selections
-        index:: type, term
+        subjects:: type, term
             concept, collections
-            concept, subject domain;collections in the
+
+        block-index:
+            {subject domain}(index "subject domain;collections in the")
 
         One of the applications of subject-domain markup that I mentioned in the recipe example is that it can be used to select content for a collection. Thus, if you capture calories and preparation time in your recipe markup, you can use that information to assemble a cookbook with a title like "Diet-Friendly Dishes You Can Make in 30 Minutes or Less." If you store seasonal information, you can create "Diet-Friendly Christmas Treats" or "Summer Suppers in 20 Minutes."
 
@@ -149,7 +151,7 @@ chapter:(#chapter.generate) Generated Content
         The subject domain is the gift that keeps on giving. You don't have to anticipate all of the possible uses for your subject-domain data, and collecting that data is relatively inexpensive since you are simply asking writers to enter information they already know in fields with concrete, specific names that are easy to understand. 
     
     section: Content queries
-        index:: type, term
+        subjects:: type, term
             concept, queries
 
         If you know what subjects the phrases in your content refer to, you can use that information to form queries to pull in additional information from other sources. For instance, let's say that you are writing about novels, and you annotate the titles of novels that are mentioned in your text:
@@ -247,9 +249,11 @@ chapter:(#chapter.generate) Generated Content
         Stated like this it seems obvious which choice you should make, but in practice these decisions are often made by the people developing the algorithms, and they often choose to make their lives easier at the expense of the writers. This may seem like a detail, but when correct partitioning and distribution is at stake, decisions should not be left to one partition to make. These decisions require input from all sides and the attention of the project owners.  
 
     section: Personalized content
-        index:: type, term
-            concept, content;personalized
+        subjects:: type, term
             concept, personalized content
+
+        block-index:
+            {personalized content}(index "content;personalized")
     
         A key feature of modern web architecture is personalized content, which means content that is generated in response to either what the site already knows about you -- from your account information or a transaction token such as a cookie -- or the selections or entries that you make on the page.
 
@@ -272,7 +276,7 @@ chapter:(#chapter.generate) Generated Content
         Most personalized content applications model their content in relational database tables for these very reasons. However, with the correct markup design, almost certainly in the {subject domain}+(index "subject domain;personalization in the"), there is no reason why you cannot use markup-based tools alone or in concert with database tools and solutions to achieve the same kind of result. 
 
     section: Audit reports
-        index:: type, term
+        subjects:: type, term
             algorithm, auditing
 
         Finally, you can use content generation algorithms to generate things other than content to be published. You can use it to generate reports about your content itself, which you can use to audit and manage your collection. I look at this in more detail in [#chapter.audit], but it is worth looking at the basics here because it is just another application of the capacity for content generation that you gain when you move content into the subject domain. 
@@ -282,9 +286,13 @@ chapter:(#chapter.generate) Generated Content
         Or suppose that you want to make sure that your book-related site has reviews and shopping links for every book that has been mentioned on the site this year. An algorithm can go through your content collection looking for the `book` or `novel` annotations in your articles, compile a list, sort it, eliminate duplicates, compare it to the list of reviews you currently have, and create a list of every book that is mentioned but not reviewed. 
 
     section: Reuse vs Generation
-        index:: type, term
-            concept, content reuse;generation versus
-            concept, generation;content reuse versus
+        subjects:: type, term
+            concept, content reuse
+            concept, content generation
+
+        block-index:
+            {content reuse}(index "content reuse;generation versus")
+            {content generation}(index "generation;content reuse versus")
 
         As you have probably noticed, the methods used to generate content have a lot in common with those used to reuse content. That is because content reuse is just a form of content generation. Content reuse means generating more than one form or output content from the same collection of output content. Technically, the mechanisms and algorithms are the same; the differences have more to do with how you think about the problem.
 
