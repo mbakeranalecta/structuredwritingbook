@@ -602,7 +602,7 @@
     </xsl:template>
 
     <xsl:template match="annotation[@type = 'index-see-also']">
-        <xsl:variable name="primary" select="ancestor::phrase/text()"/>
+        <xsl:variable name="primary" select="ancestor::phrase/descendant::*/text()"/>
         <db:indexterm>
             <db:primary>
                 <xsl:value-of select="$primary"/>
