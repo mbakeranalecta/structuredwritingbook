@@ -10,7 +10,7 @@
 
     <xsl:variable name="annotation-types" select='document("annotation-types.xml")/annotation-types'/>
     <xsl:variable name="index-use-see-if-secondary"
-        select='document("index-use-see-if-secondary.xml")/index-use-see-if-secondary'/>
+        select='document("intermediate/index.xml")/index/index-use-see-if-secondary'/>
 
     <xsl:template match="@* | node()">
         <xsl:copy>
@@ -73,7 +73,7 @@
         </db:partintro>
     </xsl:template>
 
-    <xsl:template match="book/index">
+    <xsl:template match="index">
         <db:index>
             <xsl:apply-templates/>
         </db:index>
@@ -197,7 +197,7 @@
                          <db:secondary>
                              <xsl:value-of select="$term"/>
                          </db:secondary>
-                         <xsl:if test="$index-use-see-if-secondary/term[. = $term]">
+                         <xsl:if test="$term = $index-use-see-if-secondary/record/term">
                              <db:see>
                                  <xsl:value-of select="$term"/>
                              </db:see>
@@ -588,6 +588,30 @@
         <xsl:apply-templates/>
     </xsl:template>
 
+    <xsl:template match="index-see">
+        <db:para>
+            <xsl:apply-templates/>
+        </db:para>
+    </xsl:template>
+
+    <xsl:template match="index-use-see-if-secondary"/>
+
+
+    <xsl:template match="index-see/record">
+        <db:indexterm>
+            <db:primary>
+                <xsl:value-of select="term"/>
+            </db:primary>
+            <db:see>
+                <xsl:value-of select="see"/>
+            </db:see>
+        </db:indexterm>
+    </xsl:template>
+
+    <xsl:template match="annotation[@type = 'also-index-as']">
+        <xsl:apply-templates/>
+    </xsl:template>
+<!--
     <xsl:template match="annotation[@type = 'also-index-as']">
         <xsl:variable name="primary"
             select="strings:tokenize(ancestor::annotation[@type = 'index']/@specifically, ';')[1]"/>
@@ -601,6 +625,7 @@
         </db:indexterm>
         <xsl:apply-templates/>
     </xsl:template>
+-->
 
 <!--
     <xsl:template match="annotation[@type = 'index-see-also']">
@@ -670,7 +695,7 @@
                     <xsl:if test="$annotation-types/type/name = $subjects-type">
                         <xsl:choose>
                             <xsl:when
-                                test="ancestor::phrase/descendant::annotation[@type = 'index-use-see-if-secondary']">
+                                test="$index-term = $index-use-see-if-secondary/record/term">
                                 <db:indexterm>
                                     <db:primary>
                                         <xsl:value-of
@@ -1142,7 +1167,7 @@
                          <db:secondary>
                              <xsl:value-of select="$term"/>
                          </db:secondary>
-                         <xsl:if test="$index-use-see-if-secondary/term[. = $term]">
+                         <xsl:if test="$term = $index-use-see-if-secondary/record/term">
                              <db:see>
                                  <xsl:value-of select="$term"/>
                              </db:see>
