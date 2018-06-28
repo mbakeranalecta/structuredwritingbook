@@ -86,7 +86,8 @@ chapter:(#chapter.mechanical-structure) Content as data
                 
     section: Agreeing on names
 
-        {structures}+(index "structures;naming")
+        block-index:
+            {structures}+(index "structures;naming")
     
         For structured writing to work, everyone involved must understand and agree on what the names and annotations mean. Annotations tell people and processes what constraints each block obeys. If the names and annotations don't mean what we have all agreed to, communication between the partitions of the content system breaks down and both process and rhetoric suffer. 
         
@@ -100,8 +101,9 @@ chapter:(#chapter.mechanical-structure) Content as data
         
     section: Different rules for intermediate languages
 
-        {languages}+(index "languages;intermediate")
-        {intermediate languages}+(index "intermediate languages")
+        block-index:
+            {languages}+(index "languages;intermediate")
+            {intermediate languages}+(index "intermediate languages")
     
         Of course, functional lucidity only matters for the formats that writers actually write in. As we have seen, the {publishing algorithm}+(index "publishing algorithm;intermediate languages in the") typically consists of multiple steps, and each one of those steps can create a format that is closer to the media domain than the one before it. It is perfectly possible to design a document-domain structure just to serve as a step in the {publishing chain}+(index "publishing pipeline;intermediate languages in the"). Separate authoring formats are created for writers to actually write in (perhaps subject-domain formats or simplified highly constrained ad-hoc document-domain formats). Content is transformed from these formats to the document-domain format by the {presentation algorithm}+(index "presentation algorithm;intermediate languages in the") and then the document-domain format is translated into various different media-domain languages by the formatting software. An arrangement like this eliminates the need to compromise between different demands in designing a single language, generally making each language in the chain simpler and more constrained, which in turn makes each one easier to {validate}+(index "conformance;intermediate languages and") and process.
 
@@ -115,7 +117,7 @@ chapter:(#chapter.mechanical-structure) Content as data
 
         Consider these {examples of HTML microformats from Wikipedia.}[https://en.wikipedia.org/wiki/Microformat] [*fig.mechanical-address] shows an address formatted as a list. 
 
-        figure:(*fig.mechanical-address) HTML microformat markup for an address
+        figure:(*fig.mechanical-address) HTML markup for an address
             ```(HTML)
                 <ul>
                    <li>Joe Doe</li>
