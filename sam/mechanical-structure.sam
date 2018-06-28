@@ -3,9 +3,9 @@ chapter:(#chapter.mechanical-structure) Content as data
 
     <<<(annotations.sam)
     
-    Structured writing represents content as data in order to make it accessible to algorithms. Conventional computer data structures such as relational database tables do not work well for content because they are too regular to fit the shape of content. Creating structures that are regular enough for algorithms to deal with yet irregular enough to fit the rhetorical patterns of written language is a challenging problem.
+    Structured writing represents content as data in order to make it accessible to algorithms. Conventional computer data structures such as {relational database}+(index "relational databases")+(index "databases;relational") tables do not work well for content because they are too regular to fit the shape of content. Creating structures that are regular enough for algorithms to deal with yet irregular enough to fit the rhetorical patterns of written language is a challenging problem.
     
-    Fundamentally, a document is just a stream of characters. However, that stream of characters contains rhetorical structures such as headings, bibliographical entries, bold text, chapters, ingredient lists, links, wine matches, tables, function signatures, and labeled lists. In addition, you may need to annotate {subject affinities} and attach management metadata. The question is, how do you express these various structures within the raw stream of characters?
+    Fundamentally, a document is just a stream of characters. However, that stream of characters contains rhetorical structures such as headings, bibliographical entries, bold text, chapters, ingredient lists, links, wine matches, tables, function signatures, and labeled lists. In addition, you may need to annotate subject affinities and attach management metadata. The question is, how do you express these various structures within the raw stream of characters?
     
     The most common answer is to divide the text into a series of blocks, divide those blocks into smaller blocks, and continue dividing until all the structures you need are contained in blocks. This is not the only way to do it. Some file formats, such as {WordPerfect}, use independent stop and start markers to delineate structures, meaning that the boundaries of structures can overlap. But while this kind of structure can work in the media domain, it is difficult for structured writing algorithms to work with such structures. Therefore, most structured writing today uses the nested block approach.[*1] 
     
@@ -20,17 +20,17 @@ chapter:(#chapter.mechanical-structure) Content as data
         >>>(image ../graphics/blocks.svg)
 
          
-    section: Flat vs. hierarchical structures
+    section: Flat versus hierarchical structures
     
-        Even using a strictly nested blocks approach requires some fundamental choices about mechanical structure. The first is flat vs. hierarchical structure.  
+        Even using a strictly nested blocks approach requires some fundamental choices about mechanical structure. The first is {flat}+(index "flat structure") versus {hierarchical structure}+(index "structure;flat versus hierarchical").  
         
-        As noted in [#chapter.document-domain], HTML has six levels of heading (`h1` through `h6`), whereas {DocBook} has only `title`. DocBook lets you divide a document into sections and nest sections inside sections. You can then print the titles of sections inside sections in a smaller font than the titles of first-level sections. You can render headings in different sizes without having six different tags. 
+        As noted in [#chapter.document-domain], HTML has six levels of heading (`h1` through `h6`), whereas {DocBook}+(index "DocBook;hierarchy in") has only `title`. DocBook lets you divide a document into sections and nest sections inside sections. You can then print the titles of sections inside sections in a smaller font than the titles of first-level sections. You can render headings in different sizes without having six different tags. 
         
         But the DocBook model assumes that the real structure of a document is a hierarchy of nested sections and that the size of titles announces the steps up and down that hierarchical tree. HTML makes no such assumption. It will let you put an `<h4>` immediately after an `<h1>` if you want to. It treats documents as essentially flat structures punctuated by headings of various sizes.
         
-        Which model of a document is correct? Which corresponds best to the rhetorical structure of the document? You can think of a document as being organized hierarchically, with major ideas expressed in sections, sub-ideas supporting the major ideas in subsections, etc. There are many documents that fit that model. But you can also think of documents as being more like a journey in which headings function like road signs. A city gets a big sign, a hamlet a small sign, and a town a medium sign. But the town is not inside the city, the hamlet is not inside the town, and there is no guarantee that on leaving the city you will come to a town before you come to a hamlet.   
+        Which model of a document is correct? Which corresponds best to the {rhetorical structure}+(index "rhetorical structure;flat versus hierarchical") of the document? You can think of a document as being organized hierarchically, with major ideas expressed in sections, sub-ideas supporting the major ideas in subsections, etc. There are many documents that fit that model. But you can also think of documents as being more like a journey in which headings function like road signs. A city gets a big sign, a hamlet a small sign, and a town a medium sign. But the town is not inside the city, the hamlet is not inside the town, and there is no guarantee that on leaving the city you will come to a town before you come to a hamlet.   
         
-        Studies by Peter Flynn indicate that most writers think of documents much more in terms of a punctuated linear model (a journey) than a hierarchical model.
+        Studies by {Peter Flynn} indicate that most writers think of documents much more in terms of a punctuated linear model (a journey) than a hierarchical model.
         
         """[#Flynn2009]
             The classical theory, derived from computer science and graph theory, is that the document is a hierarchical tree (actually inverted: a root-system) and that all necessary actions can be seen in terms of navigation around the tree, and of insertion into and withdrawal from the the nodes which form the branches and leaves.
@@ -43,22 +43,22 @@ chapter:(#chapter.mechanical-structure) Content as data
 
         Some semantic and rhetorical blocks are naturally more hierarchical than others. Even so, structured writing forces writers to think more hierarchically than they might otherwise, which means imposing a little bit of complexity on them to support all the partitioning and redirection of complexity needed for the content system overall. However, there is no need to do any more of this than the partitioning system demands.          
                 
-        If the structured writing {constraints} that you need to express demand hierarchy, while {functional lucidity} demands a more punctuated linear model, how do you design a markup language that reconciles these two opposing requirements? 
+        If the structured writing {constraints} that you need to express demand hierarchy, while {functional lucidity}+(index "functional lucidity;flat versus hierarchical design and") demands a more punctuated linear model, how do you design a markup language that reconciles these two opposing requirements? 
         
-        This is of greatest concern in the design of {document-domain} languages. The structure of {media-domain} languages follows the shape of the media they are modeling, which is largely flat. In the {subject domain}, content has been abstracted out of strict document order, which means that hierarchy in the {subject domain} tends to match the hierarchy of relationships in the subject matter itself.[*2] In the {document domain}, however, this is a real concern. The document domain consists of abstractions of document structures and the nature of their relationship to the structure of thought in the text is not obvious. 
+        This is of greatest concern in the design of {document-domain}+(index "document domain;flat versus hierarchical design") languages. The structure of media-domain languages follows the shape of the media they are modeling, which is largely flat. In the {subject domain}+(index "subject domain;"), content has been abstracted out of strict document order, which means that hierarchy in the {subject domain}+(index "subject domain;flat versus hierarchical design") tends to match the hierarchy of relationships in the subject matter itself.[*2] In the document domain, however, this is a real concern. The document domain consists of abstractions of document structures and the nature of their relationship to the structure of thought in the text is not obvious. 
         
         footnote:(*2)
             This is not universal. For example, addresses, which are based on hierarchical locations, are typically modeled as flat ordered lists. The order reflects the hierarchy, but the structure does not nest city inside country and street inside city.
         
-        Outside of the {media domain}, the options available are:
+        Outside of the media domain, the options available are:
         
-        * Use a flat {document-domain} language. Examples are HTML and Markdown. The problem here is that a flat language imposes few constraints, and the lack of context-setting hierarchy makes it hard to model different types of document structures without creating hundreds of tags, which negates any {functional lucidity} that you gain by keeping the language flat.
+        * Use a flat {document-domain}+(index "document domain;flat versus hierarchical design") language. Examples are HTML and Markdown. The problem here is that a flat language imposes few constraints, and the lack of context-setting hierarchy makes it hard to model different types of document structures without creating hundreds of tags, which negates any {functional lucidity}+(index "functional lucidity;flat versus hierarchical design and") that you gain by keeping the language flat.
         
-        * Use a hierarchical {document-domain} language that has a permissive structure, so you can put blocks inside blocks in lots of different ways. An example of this is {DocBook}. The problem here is that the permutations make writing algorithms difficult, and you often need to impose additional writing constraints that go beyond those expressed or enforced by the markup itself. This again diminishes {functional lucidity} and compromises {conformance}. (An interesting property of this approach is that the flexibility of the language means that writers can create documents that are very hierarchical or very flat. However, this is not really a virtue, because it is not clear how this choice contributes to improved content quality.)
+        * Use a hierarchical document-domain language that has a permissive structure, so you can put blocks inside blocks in lots of different ways. An example of this is {DocBook}+(index "DocBook;hierarchy in"). The problem here is that the permutations make writing algorithms difficult, and you often need to impose additional writing constraints that go beyond those expressed or enforced by the markup itself. This again diminishes {functional lucidity}+(index "functional lucidity;flat versus hierarchical design and") and compromises {conformance}+(index "conformance;flat versus hierarchical design and"). (An interesting property of this approach is that the flexibility of the language means that writers can create documents that are very hierarchical or very flat. However, this is not really a virtue, because it is not clear how this choice contributes to improved content quality.)
         
-        * Create a smaller, stricter document-domain language that fits the types of documents you want to write. The main difficulty with this approach is that you have to design your own language, which many organizations try to avoid. (In some cases you can reduce this effort by using a restricted subset of an existing language such as {DocBook}, something we will look at in [#chapter.extensible].) 
+        * Create a smaller, stricter document-domain language that fits the types of documents you want to write. The main difficulty with this approach is that you have to design your own language, which many organizations try to avoid. (In some cases you can reduce this effort by using a restricted subset of an existing language such as DocBook, something we will look at in [#chapter.extensible].) 
         
-        * Move content creation to the {subject domain}. This also involves creating your own languages, but it can provide support for rhetoric and process while improving functional lucidity. 
+        * Move content creation to the subject domain. This also involves creating your own languages, but it can provide support for rhetoric and process while improving functional lucidity. 
         
     bibliography:
         entry:(#Flynn2009)
@@ -66,7 +66,7 @@ chapter:(#chapter.mechanical-structure) Content as data
         
     section: Annotating blocks
         
-        When treating content as data, you annotate every block to identify -- to people and algorithms -- what constraints it meets. The most basic annotation is the name of the block, which describes its type. The name of a table block is `table`, which tells us that the block is a table. Blocks may also have other annotations that either refine the type or provide additional information. 
+        When treating content as data, you annotate every {block}+(index "blocks;annotating") to identify -- to people and algorithms -- what constraints it meets. The most basic annotation is the name of the block, which describes its type. The name of a table block is `table`, which tells us that the block is a table. Blocks may also have other annotations that either refine the type or provide additional information. 
         
         These additional annotations don't have to be in the same domain as the block name. [*fig.mechanical-wine] repeats an example of this from [#chapter.subject-domain].
 
@@ -85,23 +85,31 @@ chapter:(#chapter.mechanical-structure) Content as data
                 
                 
     section: Agreeing on names
+
+        {structures}+(index "structures;naming")
     
         For structured writing to work, everyone involved must understand and agree on what the names and annotations mean. Annotations tell people and processes what constraints each block obeys. If the names and annotations don't mean what we have all agreed to, communication between the partitions of the content system breaks down and both process and rhetoric suffer. 
         
-        Confusion and disagreement about the meaning of names and annotations are not uncommon. Large document-domain languages such as {DocBook} and {DITA} have large vocabularies, and many of the names they offer are quite abstract. Questions about the right way to tag certain passages are common in the communities around these languages, and opinions can vary considerably in some cases.
+        Confusion and disagreement about the meaning of names and annotations are not uncommon. Large document-domain languages such as {DocBook}+(index "DocBook;naming elements in") and {DITA}+(index "DITA;naming elements in") have large vocabularies, and many of the names they offer are quite abstract. Questions about the right way to tag certain passages are common in the communities around these languages, and opinions can vary considerably in some cases.
 
-        These disagreements don't affect just low-level structures. In {DITA}, for example, it is common to debate whether a topic that contains operational information, but is not procedural, is a concept or a task. And some writers use only generic topics because they don't think DITA's task, concept, and reference topics fit their content. 
+        These disagreements don't affect just low-level structures. In DITA, for example, it is common to debate whether a topic that contains operational information, but is not procedural, is a concept or a task. And some writers use only generic topics because they don't think DITA's task, concept, and reference topics fit their content. 
         
-        Therefore, you must define terms precisely when developing a structured writing language. But it is equally important that the language be {functionally lucid}. {Functional lucidity} requires you to create structures that do not detract from writing. You can't meet this requirement if writers must puzzle out or debate the right way to mark something up. Not only must you define what the names mean, but you must also choose structures that are easy to name correctly. As I describe in [#chapter.conformance], the best way to achieve conformance is to design structures that are easy to conform to. 
+        Therefore, you must define terms precisely when developing a structured writing language. But it is equally important that the language be functionally lucid. {Functional lucidity}+(index "functional lucidity;naming and") requires you to create structures that do not detract from writing. You can't meet this requirement if writers must puzzle out or debate the right way to mark something up. Not only must you define what the names mean, but you must also choose structures that are easy to name correctly. As I describe in [#chapter.conformance], the best way to achieve conformance is to design structures that are easy to conform to. 
 
         
         
     section: Different rules for intermediate languages
+
+        {languages}+(index "languages;intermediate")
+        {intermediate languages}+(index "intermediate languages")
     
-        Of course, functional lucidity only matters for the formats that writers actually write in. As we have seen, the {publishing algorithm} typically consists of multiple steps, and each one of those steps can create a format that is closer to the media domain than the one before it. It is perfectly possible to design a document-domain structure just to serve as a step in the publishing chain. Separate authoring formats are created for writers to actually write in (perhaps {subject-domain} formats or simplified highly constrained ad-hoc document-domain formats). Content is transformed from these formats to the document-domain format by the {presentation algorithm} and then the document-domain format is translated into various different media-domain languages by the {formatting software}. An arrangement like this eliminates the need to compromise between different demands in designing a single language, generally making each language in the chain simpler and more constrained, which in turn makes each one easier to {validate} and process.
+        Of course, functional lucidity only matters for the formats that writers actually write in. As we have seen, the {publishing algorithm}+(index "publishing algorithm;intermediate languages in the") typically consists of multiple steps, and each one of those steps can create a format that is closer to the media domain than the one before it. It is perfectly possible to design a document-domain structure just to serve as a step in the {publishing chain}+(index "publishing pipeline;intermediate languages in the"). Separate authoring formats are created for writers to actually write in (perhaps subject-domain formats or simplified highly constrained ad-hoc document-domain formats). Content is transformed from these formats to the document-domain format by the {presentation algorithm}+(index "presentation algorithm;intermediate languages in the") and then the document-domain format is translated into various different media-domain languages by the formatting software. An arrangement like this eliminates the need to compromise between different demands in designing a single language, generally making each language in the chain simpler and more constrained, which in turn makes each one easier to {validate}+(index "conformance;intermediate languages and") and process.
 
               
-    section: Secondary structures of interpretation    
+    section: Secondary structures of interpretation
+
+        block-index:
+            {microformats}+(index "microformats")
         
         Under normal circumstance, the structures that constrain content also constrain the interpretation of that content. In other words, the markup that tells the writer what to write also tells the algorithm (or other downstream user) what the content means. But there are cases where annotations are added to document-domain structures to tell downstream processes what the content means. These structures don't constrain writers, which means they don't guide them either. Writers must know exactly how to create this kind of annotation without any guidance or prompting. 
 
@@ -138,7 +146,7 @@ chapter:(#chapter.mechanical-structure) Content as data
 
         [*fig.mechanical-vcard] adds subject-domain metadata in the form of the class attributes. For example, it says that the phrase "The Example Company" refers to an organization (`org`). This annotation does not modify or refine the constraint expressed by the `li` tag. It is saying something else entirely. 
         
-        But this is not just about suggesting a different way of interpreting "The Example Company" (as an organization name, as well as as a list item).  The {vCard} markup expresses a complex {subject-domain} structure. Not only is the list item `The Example Company` annotated as `org`, the list that contains it is annotated as `vcard`. The interpretation of `org` actually depends on that annotation being part of a `vcard` structure.
+        But this is not just about suggesting a different way of interpreting "The Example Company" (as an organization name, as well as as a list item).  The {vCard} markup expresses a complex {subject-domain}+(index "subject-domain;address structure in the") structure. Not only is the list item `The Example Company` annotated as `org`, the list that contains it is annotated as `vcard`. The interpretation of `org` actually depends on that annotation being part of a `vcard` structure.
         
         In other words, the secondary structure created by the annotations in the [*fig.mechanical-vcard] is equivalent to the pure subject-domain markup shown in [*fig.mechanical-subject].
 
@@ -150,11 +158,11 @@ chapter:(#chapter.mechanical-structure) Content as data
                    tel: 604-555-1234
                    url: http://example.com/
         
-        The microformats overlay a second structure on the list structure. In the world of HTML, this makes sense. HTML needs to be a standardized {document-domain} language so that browsers can display it for human reading. Humans don't need the vCard annotations to recognize that the content is an address, but algorithms do. So the microformat adds a second, hidden, {subject-domain} structure to the document for readers that are algorithms rather than people. 
+        The microformats overlay a second structure on the list structure. In the world of HTML, this makes sense. {HTML}+(index "HTML;microformats in") needs to be a standardized document-domain language so that browsers can display it for human reading. Humans don't need the vCard annotations to recognize that the content is an address, but algorithms do. So the microformat adds a second, hidden, {subject-domain}+(index "subject-domain;address structure in the") structure to the document for readers that are algorithms rather than people. 
         
         Structured writing constrains both the creation and the interpretation of content. Normally, you expect that the creation of content would be just as constrained as the interpretation. After all, it is hard to reliably interpret structure if the creation of that structure is not constrained. However, in this case the interpretation of the data is more constrained than the creation.
 
-        Asking writers to add unconstrained {subject-domain} metadata to {document-domain} structures would be inefficient and error prone. But this is only a problem if we ask writers to author in this format. If writers author in a format that constrains creation to the same extent that we need to constrain output, it does not actually matter that the resulting output constrains interpretation more than it constrains creation. Our concern as content creators is simply to make sure that any content we produce that promises to abide by a constraint actually does so, whether the format we deliver it in actually imposes that constraint or merely annotates it. 
+        Asking writers to add unconstrained subject-domain metadata to document-domain structures would be inefficient and error prone. But this is only a problem if we ask writers to author in this format. If writers author in a format that constrains creation to the same extent that we need to constrain output, it does not actually matter that the resulting output constrains interpretation more than it constrains creation. Our concern as content creators is simply to make sure that any content we produce that promises to abide by a constraint actually does so, whether the format we deliver it in actually imposes that constraint or merely annotates it. 
         
         So, you can confidently produce this information using subject-domain markup and then deliver it as HTML with vCard annotation markup using a presentation algorithm like [*fig.mechanical-subject-2] (as with all example algorithms in this book, this example is pseudocode):
 
@@ -187,13 +195,13 @@ chapter:(#chapter.mechanical-structure) Content as data
                             attribute href = contents
                             continue
        
-    section: Child blocks vs. additional annotations
+    section: Child blocks versus additional annotations
     
-        As noted above, sometimes the name of a block is not sufficient to fully describe the constraints it meets. In these cases, you can add additional annotations to a block. But you can also achieve much the same thing by adding child blocks. A child block belongs to the main block, so it is part of it and can constrain the interpretation of the main block just as much as an annotation does. One of the issues in designing data structures for content, therefore, is deciding when to use additional annotations and when to use child blocks. 
+        As noted above, sometimes the name of a block is not sufficient to fully describe the constraints it meets. In these cases, you can add additional {annotations}+(index "subject annotation;child blocks versus") to a {block}+(index "blocks;subject annotations versus"). But you can also achieve much the same thing by adding child blocks. A child block belongs to the main block, so it is part of it and can constrain the interpretation of the main block just as much as an annotation does. One of the issues in designing data structures for content, therefore, is deciding when to use additional annotations and when to use child blocks. 
         
         Different markup languages have different levels of support for additional annotation on blocks, so this issue is affected by the markup language you choose. SAM, for instance, supports only a limited, fixed set of additional annotations on blocks. Therefore, if you want to add constraints on interpretation, you have to use child blocks.  
         
-        In XML, however, there is broad (though not unlimited) support for additional annotations on blocks in the form of attributes. In the XML world there is considerable choice, and considerable debate, about when and where to use elements vs. attributes in your content models.         
+        In XML, however, there is broad (though not unlimited) support for additional annotations on blocks in the form of {attributes}+(index "attributes as annotations")+(index "XML;attributes versus elements as annotations"). In the XML world there is considerable choice, and considerable debate, about when and where to use elements versus. attributes in your content models.         
         
         Consider, for example, this XML element that contains two attributes but no content:
 
@@ -240,9 +248,9 @@ chapter:(#chapter.mechanical-structure) Content as data
 
         Given this, you may be wondering why people bother with attributes, since you can do the same things with elements and have both more flexibility and more capacity to impose constraints. Yet people continue to use attributes extensively when designing markup languages in XML.  When people create XML document types for representing data, rather than for writing documents, they almost always use the attribute format, perhaps because it is slightly less verbose and slightly easier to read or, perhaps, because as programmers they are accustomed to representing data as key/value pairs linked with `=` signs.
 
-        But for documents it is more complex. To understand why XML even has attributes and why other languages, such as SAM or reStructuredText, also have similar mechanisms for adding annotations to blocks, you need to go back to the original concept of markup as something written onto a manuscript after the fact. In this view, markup is an addition to the text, not part of it. The content of an element is part of the underlying text. Anything you want to add, therefore, cannot be element content, since that would be adding to the text. Everything else has to be added to element definitions as attributes. 
+        But for documents it is more complex. To understand why {XML}+(index "XML;markup example")+(index "markup;XML example") even has attributes and why other languages, such as SAM or reStructuredText, also have similar mechanisms for adding annotations to blocks, you need to go back to the original concept of markup as something written onto a manuscript after the fact. In this view, markup is an addition to the text, not part of it. The content of an element is part of the underlying text. Anything you want to add, therefore, cannot be element content, since that would be adding to the text. Everything else has to be added to element definitions as attributes. 
 
-        This view is reinforced in the way academics use markup to prepare texts for study. Again, here, the text is preexisting and canonical. The markup is external to the text, and therefore, everything that is external to the original text must be contained in the markup itself (as attributes) and nothing that is part of the original text can be removed or replaced by markup. (This is a form of partitioning in its own right, to serve a particular purpose.) Thus in this fragment ([*fig.mechanical-Shakespeare]) of Shakespeare's _All's Well That Ends Well_, marked up by John Bosak, you can see that the original text is kept perfectly intact.
+        This view is reinforced in the way academics use markup to prepare texts for study. Again, here, the text is preexisting and canonical. The markup is external to the text, and therefore, everything that is external to the original text must be contained in the markup itself (as attributes) and nothing that is part of the original text can be removed or replaced by markup. (This is a form of partitioning in its own right, to serve a particular purpose.) Thus in this fragment ([*fig.mechanical-Shakespeare]) of Shakespeare's _All's Well That Ends Well_, marked up by {Jon Bosak}, you can see that the original text is kept perfectly intact.
 
         figure:(*fig.mechanical-Shakespeare) Fragment of Shakespeare's _All's Well That Ends Well_ marked up in XML
             ```(xml)
@@ -266,7 +274,7 @@ chapter:(#chapter.mechanical-structure) Content as data
                     </SPEECH>
                     …
 
-        Had this markup employed the normal refactoring of text into markup described in the discussions about the {document}(concept "document domain") and {subject}(concept "subject domain") domains, then the number and title of scenes would have been factored out so that instead of:
+        Had this markup employed the normal refactoring of text into markup described in the discussions about the document and subject domains, then the number and title of scenes would have been factored out so that instead of:
         
         ```(xml)
             <SCENE>
@@ -326,12 +334,12 @@ chapter:(#chapter.mechanical-structure) Content as data
                tel: 604-555-1234
                url: http://example.com/
         
-        SAM supports a limited set of annotations on blocks, all of which have predefined meanings. You could, in fact, eliminate annotations on blocks altogether and use child blocks for everything, but I have supported a limited set of common {management-domain} block annotations in SAM, mostly to improve functional lucidity.[*fn.xslt]
+        SAM supports a limited set of annotations on blocks, all of which have predefined meanings. You could, in fact, eliminate annotations on blocks altogether and use child blocks for everything, but I have supported a limited set of common {management-domain}+(index "management domain;SAM markup in the") block annotations in {SAM}+(index "SAM;management domain markup in"), mostly to improve functional {lucidity}+(index "XSLT").[*fn.xslt]
 
         footnote:(*fn.xslt)
-            It is worth noting that {XSLT}, the language most commonly used to process {XML}, implicitly assumes that element content in an XML document is the text of the output document and that attributes are not, thus the text of elements passes through to output automatically unless you catch it and suppress it, whereas the text of attributes is ignored unless you catch and output them.  
+            It is worth noting that {XSLT}, the language most commonly used to process XML, implicitly assumes that element content in an XML document is the text of the output document and that attributes are not, thus the text of elements passes through to output automatically unless you catch it and suppress it, whereas the text of attributes is ignored unless you catch and output them.  
                
-        In summary, when defining the mechanical structure of your structured writing, don't get hung up on what is text and what is markup. In each domain, text and markup together form a body of constrained content that can be successfully created by a writer and successfully processed by one or more algorithms. Only when you resolve the content all the way to the media domain do you finally have to sort our exactly which characters appear in which order and which decorations you need to represent that content to a particular audience. When we choose to create content in the other domains, it is precisely because we want to exercise more control over these things and to use algorithms to help us create and manage them. Whether some idea or constraint is expressed by text of markup in those domains should be based solely on what works best in those domains.
+        In summary, when defining the mechanical structure of your structured writing, don't get hung up on what is text and what is markup. In each domain, text and markup together form a body of constrained content that can be successfully created by a writer and successfully processed by one or more algorithms. Only when you resolve the content all the way to the media domain do you finally have to sort our exactly which characters appear in which order and which decorations you need to represent that content to a particular audience. When we choose to create content in the other domains, it is precisely because we want to exercise more control over these things and to use algorithms to help us create and manage them. Whether some idea or constraint is expressed by text of {markup}(index "XML;markup example")+(index "markup;XML example") in those domains should be based solely on what works best in those domains.
     
     
     
