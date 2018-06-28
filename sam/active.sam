@@ -10,7 +10,7 @@ chapter:(#chapter.active) Active content
     
     |{Personalized content}| You can select and arrange content for individual readers based on the things you know about them. For instance, if you are logged into {Amazon}, it customizes elements of every page based on your previous purchases, your wish list, and things you previously browsed. 
     
-    |Dynamic arrangement| Part of the {presentation algorithm} is arranging content on the page or screen, but with {online media} you can allow readers to arrange the content. For instance, you can publish {tables} that they can sort for themselves. 
+    |Dynamic arrangement| Part of the {presentation algorithm}+(index "presentation algorithm;dynamic arrangement") is arranging content on the page or screen, but with online media you can allow readers to arrange the content. For instance, you can publish {tables}+(index "tables;sortable") that they can sort for themselves. 
     
     |{Adaptive content}| Similarly, you can create content that adapts itself dynamically to the view port by, for instance, displaying in multiple columns on a wide view port and in a single column on a narrow one. 
     
@@ -18,35 +18,35 @@ chapter:(#chapter.active) Active content
     
     |{Feeds} and dynamic sources| You can include content that comes from an independent external source, such as a feed or web service.
 
-    |{Interactive media}| You can include {apps}, widgets, and media that readers can interact with.    
+    |{Interactive media}| You can include apps, widgets, and media that readers can interact with.    
 
     {Active content} simply postpones execution of one or more of the structured writing algorithms until the point at which the content is read.
 
-    For example, for {personalized content}, the {synthesis algorithm} is executed when you request a page, using personal details to select content for you. When you resize your browser or rotate your phone, the {presentation algorithm} is executed in the browser, changing the layout of the page. If the browser allows you to change the font size, the {formatting algorithm} is executed in the browser. If you have a page that pulls in a live stock quote, the {synthesis algorithm} is executed by the web server or browser when the page is served/displayed. 
+    For example, for {personalized content}, the {synthesis algorithm}+(index "synthesis algorithm;personalized content") is executed when you request a page, using personal details to select content for you. When you resize your browser or rotate your phone, the {presentation algorithm}+(index "presentation algorithm;dynamic arrangement") is executed in the browser, changing the layout of the page. If the browser allows you to change the font size, the {formatting algorithm} is executed in the browser. If you have a page that pulls in a live stock quote, the {synthesis algorithm}+(index "synthesis algorithm;personalized content") is executed by the web server or browser when the page is served/displayed. 
     
     In principle, therefore, you support active content the same way you support these algorithms in any form of structured writing: you create content in the appropriate domain and with the appropriate structures to reliably support the algorithms you need.
 
-    Reliability is key. If you create static {books} or {web pages}, you have the opportunity to review the output and even hand tweak it to fix any issues, but you can't do that with active content. You need to trust the algorithm 100%, which means you need to trust the content it is working on 100%. This makes {conformance} crucial to an {active-content} project, and, as we have seen, different domains support {conformance} with varying degrees of reliability. 
+    Reliability is key. If you create static {books} or {web pages}, you have the opportunity to review the output and even hand tweak it to fix any issues, but you can't do that with active content. You need to trust the algorithm 100%, which means you need to trust the content it is working on 100%. This makes {conformance}+(index "conformance;importance with active content") crucial to an {active-content} project, and, as we have seen, different domains support conformance with varying degrees of reliability. 
     
     Another factor to consider is that while active content essentially postpones the execution of one or more algorithms until the content is in the user's hands, you don't necessarily want to postpone running those algorithms on the whole page. You usually postpone execution only for those parts of the page that you want to make active.
 
     For instance, if you want real-time stock quotes embedded in your business stories whenever a company is mentioned, there is no reason to postpone running the {synthesis}, {presentation}, and {formatting} algorithms for the entire page; you need to postpone only the synthesis of the stock quote itself. And if you want that quote to continue to update in real time, while the page is displayed, you certainly don't want to redraw the whole page every time the price changes. 
 
-    Displaying stock quotes depends on {subject-domain} {metadata} that unambiguously identifies the company mentioned in the content. For example:
+    Displaying stock quotes depends on {subject-domain}+(index "subject domain;active content in the") {metadata}+(index "metadata;active content and") that unambiguously identifies the company mentioned in the content. For example:
     
     ```(sam)
         {Microsoft}(company "NASDAQ:MSFT") is a large software company.
     
-    In a normal, static publishing flow, this {subject-domain} information would be resolved into a static piece of content by the {presentation algorithm}:
+    In a normal, static publishing flow, this {subject-domain}+(index "subject domain;active content in the") information would be resolved into a static piece of content by the {presentation algorithm}:
 
     """
         *Microsoft* US$60.29 +0.34 (+0.57%) is a large software company.
         
-    However, for {active content} the main {presentation algorithm} needs to pass the {subject-domain} information about Microsoft to the browser, so it can retrieve the stock price in real time when the content is displayed. 
+    However, for {active content} the main {presentation algorithm} needs to pass the {subject-domain}+(index "subject domain;active content in the") information about Microsoft to the browser, so it can retrieve the stock price in real time when the content is displayed. 
     
-    This means that only those parts of the content that you want displayed as active content need to be captured in the domain and structures required to reliably run the applicable algorithms. The rest of the content can be in a different domain. In practice, this usually means that you embed {subject-domain} structures to support the active content in {document-domain} structures. Of course, you can have all your content in the {subject domain}, in which case you would run the {presentation algorithm} on the content you want to deliver statically, and pass the {subject-domain} representation of the active content to the system that will run the active-content algorithms.
+    This means that only those parts of the content that you want displayed as active content need to be captured in the domain and structures required to reliably run the applicable algorithms. The rest of the content can be in a different domain. In practice, this usually means that you embed {subject-domain}+(index "subject domain;active content in the") structures to support the active content in {document-domain}+(index "document domain;active content in the") structures. Of course, you can have all your content in the subject domain, in which case you would run the {presentation algorithm} on the content you want to deliver statically, and pass the subject-domain representation of the active content to the system that will run the active-content algorithms.
 
-    However, this is not likely to be a straightforward pass through. The downstream system that will execute the active-content algorithm -- for example, a JavaScript app running in the web browser -- may expect or require the {subject-domain} information to be in a particular format. For instance, you might have to embed the ticker symbol in a function call that returns stock quotes:
+    However, this is not likely to be a straightforward pass through. The downstream system that will execute the active-content algorithm -- for example, a JavaScript app running in the web browser -- may expect or require the subject-domain information to be in a particular format. For instance, you might have to embed the ticker symbol in a function call that returns stock quotes:
 
     figure:(*fig.active-quote) HTML markup to get a stock quote
         ```(xml)
@@ -54,7 +54,7 @@ chapter:(#chapter.active) Active content
             is a large software company.</p>
 
         
-    In this case, your server side {presentation algorithm}  needs to transform your {subject-domain} {annotation} into the format shown in [*fig.active-quote] using a rule such as that shown in [*fig.active-quote-code]. 
+    In this case, your server side {presentation algorithm}  needs to transform your {subject-domain}+(index "subject domain;active content in the") {annotation}+(index "annotation;active content") into the format shown in [*fig.active-quote] using a rule such as that shown in [*fig.active-quote-code]. 
     
     figure:(*fig.active-quote-code) Pseudocode to create the HTML markup
         ```(pseudocode)
@@ -67,11 +67,11 @@ chapter:(#chapter.active) Active content
                     create attribute onload = $fncall
                 output ') '
             
-    The {document domain} represents the desired presentation of a piece of content. Therefore, the only active-content algorithms that you can execute on ordinary {document-domain} structures are those that leave the {presentation} alone and only affect the {formatting}. For example, you can allow readers to select the font size of a web page, which is a purely formatting concern. 
+    The document domain represents the desired presentation of a piece of content. Therefore, the only active-content algorithms that you can execute on ordinary document-domain structures are those that leave the {presentation} alone and only affect the {formatting}. For example, you can allow readers to select the font size of a web page, which is a purely formatting concern. 
 
-    If you want to do active content that dynamically changes the presentation of the content or that changes the text of the content (as in our stock price example), then you need either {subject-domain} structures or {document-domain} structures that are explicitly designed to support active-content algorithms.         
+    If you want to do active content that dynamically changes the presentation of the content or that changes the text of the content (as in our stock price example), then you need either {subject-domain}+(index "subject domain;active content in the") structures or {document-domain}+(index "document domain;active content in the") structures that are explicitly designed to support active-content algorithms.         
     
-    For example, a generic {table} structure does not allow the reader to sort on any column. Sorting by column only makes sense if the content is inherently sortable. 
+    For example, a generic {table}+(index "tables;sortable") structure does not allow the reader to sort on any column. Sorting by column only makes sense if the content is inherently sortable. 
 
     figure:(*fig.active-table-1) Table with sortable columns
         +++
@@ -92,13 +92,13 @@ chapter:(#chapter.active) Active content
             3. | Block all entrances.
             4. | Activate the destruct sequence.        
     
-    Thus, you can't just make all tables sortable by column. Unless your {document-domain} structure explicitly states which columns are sortable and which are not, you can't implement this kind of active content.   
+    Thus, you can't just make all tables sortable by column. Unless your {document-domain}+(index "document domain;active content in the") structure explicitly states which columns are sortable and which are not, you can't implement this kind of active content.   
     
-    Therefore, to implement column sorting at the {document-domain} level, you need a table structure which ensures that the sorting behavior is applied only to columns where it makes sense in tables where it makes sense.
+    Therefore, to implement column sorting at the {document-domain}+(index "document domain;active content in the") level, you need a table structure which ensures that the sorting behavior is applied only to columns where it makes sense in tables where it makes sense.
 
-    Although the {document domain} typically requires different markup for different algorithms, the {subject domain} typically does not. In the subject domain you capture the semantics of the subject matter, which are the same no matter what algorithms you apply.
+    Although the {document domain}+(index "document domain;markup for algorithms") typically requires different markup for different algorithms, the {subject domain}+(index "subject domain;markup for algorithms") typically does not. In the subject domain you capture the semantics of the subject matter, which are the same no matter what algorithms you apply.
     
-    In the {subject domain}, the product list would be a structured data set with known semantics and would probably be maintained in a separate database, as shown in [*fig.active-separate-db].
+    In the {subject domain}+(index "subject domain;markup for algorithms"), the product list would be a structured data set with known semantics and would probably be maintained in a separate database, as shown in [*fig.active-separate-db].
 
     figure:(*fig.active-separate-db) Product list marked up as a structured data set
         ```(sam)
@@ -110,11 +110,11 @@ chapter:(#chapter.active) Active content
     
     Knowing what the semantics are, you can determine whether the data set is sortable and, if so, which columns can be used as sort keys, thus letting you know whether it can be presented as a sortable table.
     
-    Creating your content in the {subject domain} gives you the greatest flexibility to generate {active content} in ways that are appropriate to the subject matter and the device. And because the subject domain does not require different structures to support active content, your writers don't have to understand or even think about how the active content might work. This partitions the complexity of active content from your writers. As we have seen before, partitioning content from its presentation lets you experiment with different forms of presentation. This allows you to test whether active content is working and to change the form of {active content} you use, all without involving writers or changing your content. 
+    Creating your content in the {subject domain}+(index "subject domain;active content in the") gives you the greatest flexibility to generate {active content} in ways that are appropriate to the subject matter and the device. And because the subject domain does not require different structures to support active content, your writers don't have to understand or even think about how the active content might work. This partitions the complexity of active content from your writers. As we have seen before, partitioning content from its presentation lets you experiment with different forms of presentation. This allows you to test whether active content is working and to change the form of {active content} you use, all without involving writers or changing your content. 
     
-    This does not mean that active content is a free benefit of using the {subject domain}. You still have to design and implement the content behavior, and you have to make sure that you capture the subject-domain semantics needed to drive the active-content behaviors you want. Those semantics may not be different in kind from other subject-domain semantics, but you may need to provide greater detail than you would for other algorithms.
+    This does not mean that active content is a free benefit of using the {subject domain}+(index "subject domain;active content in the"). You still have to design and implement the content behavior, and you have to make sure that you capture the subject-domain semantics needed to drive the active-content behaviors you want. Those semantics may not be different in kind from other subject-domain semantics, but you may need to provide greater detail than you would for other algorithms.
 
-    You also need to ensure a high degree of {conformance} from your writers, because it is difficult to validate the correct operation of active-content algorithms at run time. The success of your active-content strategy depends on the quality and consistency of your input data. 
+    You also need to ensure a high degree of {conformance}+(index "conformance;importance with active content") from your writers, because it is difficult to validate the correct operation of active-content algorithms at run time. The success of your active-content strategy depends on the quality and consistency of your input data. 
         
     
 

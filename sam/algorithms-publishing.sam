@@ -4,20 +4,15 @@ chapter:(#chapter.publishing) Publishing
     <<<(annotations.sam)
 
     subjects:: type, term
-        algorithm, publishing
-        algorithm, synthesis
-        algorithm, presentation
-        algorithm, formatting
-        algorithm, encoding
-        algorithm, rendering
-
+        algorithm, publishing algorithm
+            
     All structured writing must eventually be published. Publishing structured content means transforming it from the domain in which it was created ({subject domain}, {document domain}, or the abstract end of the {media domain}) to the most concrete end of the media-domain spectrum: dots on paper or screen.
     
     Publishing is complex, particularly if you are using {single sourcing}, {content generation}, or any of the structured writing algorithms that combine content from different sources in a "{shared pipes}" model. The best way to handle that complexity is to partition and distribute it to appropriate people and processes.  
     
     In this chapter, I describe a partitioning of the publishing process into four basic algorithms: the {synthesis}, {presentation}, {formatting}, and {encoding} algorithms. These four stages are formalized in the {SPFE architecture}, which I discuss later, but I think they are a fair representation of what goes on in most publishing tool chains, even if those tool chains don't divide responsibilities exactly as I describe them here or separate them as clearly.
     
-    I have noted that successful partitioning depends on the ability to communicate everything needed for each partition to do its job and that one hallmark of a successful partitioning is how clear and functional the required communication is. In the partitioning of the publication process I describe here, each step deals with a different concern, and each step produces an output: a structured document or set of documents that is structured in terms of the concern it deals with. This output becomes the input to the next step. The structures that these steps produce and consume are stages along the path from the {subject}(concept "subject domain") to {document}(concept "document domain") to {media domain}s. In other words, the publication process moves content through the domains, just as described in [#chapter.three-domains].
+    I have noted that successful partitioning depends on the ability to communicate everything needed for each partition to do its job and that one hallmark of a successful partitioning is how clear and functional the required communication is. In the partitioning of the publication process I describe here, each step deals with a different concern, and each step produces an output: a structured document or set of documents that is structured in terms of the concern it deals with. This output becomes the input to the next step. The structures that these steps produce and consume are stages along the path from the {subject}(concept "subject domain")+(index "subject domain;publishing and the") to {document}(concept "document domain")+(index "document domain;publishing and the") to {media domain}+(index "media domain;publishing and the")s. In other words, the publication process moves content through the domains, just as described in [#chapter.three-domains].
 
     In describing the publishing process, I am going to start at the media domain and work backward to the subject domain, just as I did in describing the domains themselves. Since the input of each stage is the output of the previous stage, it is easier to understand the process if you look at it in reverse order. This way you will see what each stage needs to produce in order to meet the needs of the following stage. 
     
@@ -36,7 +31,7 @@ chapter:(#chapter.publishing) Publishing
         
         One example of a page description language is {PostScript}. [*fig.pub-postscript] shows the PostScript code for drawing a circle.
 
-        figure:(*fig.pub-postscript) Postscript code for drawing a circle.
+        figure:(*fig.pub-postscript) PostScript code for drawing a circle.
             ```(PostScript)
                 100 100 50 0 360 arc closepath
                 stroke         
@@ -46,7 +41,7 @@ chapter:(#chapter.publishing) Publishing
     section: The encoding algorithm
 
         subjects:: type, term
-            algorithm, encoding
+            algorithm, encoding algorithm
     
         Since most writers don't write directly in a {page description language}, the page descriptions for your publication are almost certainly going to be created by an algorithm. I call this the encoding algorithm because it encodes your content in the page description language.
 
@@ -78,18 +73,18 @@ chapter:(#chapter.publishing) Publishing
         
         These are complex and exacting operations, and you need to select a formatting language that can render your content the way you want it. 
         
-        You also have to consider how automatic you want all of this to be. In a high-volume publication environment you want it to be fully automatic, but this could involve accepting some compromises. For example, in book publishing it is not uncommon for writers and editors to make slight edits to the actual text of a document in order to make {pagination} work better. This is very easy to do when you are working in the {media domain} in an application like {Word}(tool "Microsoft Word") or {FrameMaker}. If you end up with the last two words of a chapter at the top of a page all by itself, for instance, it is usually possible to find a way to edit the final paragraph to reduce the word count just enough to pull the end of the chapter back to the preceding page.
+        You also have to consider how automatic you want all of this to be. In a high-volume publication environment you want it to be fully automatic, but this could involve accepting some compromises. For example, in book publishing it is not uncommon for writers and editors to make slight edits to the actual text of a document in order to make {pagination} work better. This is very easy to do when you are working in the {media domain} in an application like {Microsoft Word}(tool "Microsoft Word") or {FrameMaker}. If you end up with the last two words of a chapter at the top of a page all by itself, for instance, it is usually possible to find a way to edit the final paragraph to reduce the word count just enough to pull the end of the chapter back to the preceding page.
 
         This gets much harder to do when you are writing in the {document domain} or the {subject domain}, particularly if you are {single sourcing} content to more than one publication or {reusing content} in many places. An edit that fixes one pagination problem could cause another, and requiring this type of editing dumps back on writers the kind of formatting complexity that the document and subject domains are meant to remove. 
         
         For web browsers and similar dynamic media viewers, such as ebook readers or help systems, the {pagination} process takes place dynamically when content is loaded into the view port, and pagination can be redone on the fly if the reader resizes a {browser} window or rotates a tablet. This means publishers have little opportunity to tweak the {pagination} process. They can guide it by providing rules, such as the {CSS} keep-together instruction, but they obviously cannot hand tweak the text to make it fit better each time the view port is resized. 
         
-        The formatting language for dynamic media viewers is typically {Cascading Style Sheets} (CSS). 
+        The formatting language for dynamic media viewers is typically {Cascading Style Sheets}+(index "cascading style sheets (CSS);dynamic media viewers with") (CSS). 
         
     section: The formatting algorithm
     
         subjects:: type, term
-            algorithm, formatting
+            algorithm, formatting algorithm
 
         The formatting algorithm generates the {formatting language} that drives the {encoding} and {pagination} process. The formatting algorithm produces a {media-domain} representation of the content from content in the {document domain} or a more abstract {media-domain} format (see [*fig.pub-formattingpub]). 
 
@@ -100,35 +95,35 @@ chapter:(#chapter.publishing) Publishing
         
         In some cases, organizations use word processing or desktop publishing applications to tweak the formatting of the output by having the formatting algorithm generate the input format of those applications (typically {RTF} for Word and {MIF} for FrameMaker). This allows them to exercise manual control over pagination, but with an obvious loss in process efficiency. In particular, any tweaks made in these applications are not routed back to the source content, so they will have to be done again by hand the next time the content is published. 
         
-        This algorithm is usually the province of {publication designers}. One of the most elementary structured writing algorithms is to {separate content from formatting} ([#chapter.separating]) which means removing formatting as one of the writer's concerns. Almost every structured writing implementation will require you to write formatting algorithms. Even if you use an off-the-shelf language like {DITA} or {DocBook}, you will have to customize their formatting algorithms to get the formatting you want. I looked at some examples of basic formatting algorithms in [#chapter.processing]. 
+        This algorithm is usually the province of {publication designers}. One of the most elementary structured writing algorithms is to {separate content from formatting} ([#chapter.separating]) which means removing formatting as one of the writer's concerns. Almost every structured writing implementation will require you to write formatting algorithms. Even if you use an off-the-shelf language like {DITA}+(index "DITA;formatting algorithm and") or {DocBook}+(index "DocBook;formatting algorithm and"), you will have to customize their formatting algorithms to get the formatting you want. I looked at some examples of basic formatting algorithms in [#chapter.processing]. 
 
     section: The presentation algorithm
 
         subjects:: type, term
-            algorithm, presentation
+            algorithm, presentation algorithm
 
-        The presentation algorithm determines how content is going to be organized as a document. A pure {document-domain} document represents the presentation of the content. The job of the {presentation algorithm} is to produce a pure {document-domain} version of the content. This may mean producing the entire presentation from purely {subject-domain} content or handling the occasional {subject-domain} structure in a largely {document-domain} file.   
+        The presentation algorithm determines how content is going to be organized as a document. A pure {document-domain}+(index "document domain;presentation algorithm and the") document represents the presentation of the content. The job of the {presentation algorithm} is to produce a pure {document-domain}+(index "document domain;presentation algorithm and the") version of the content. This may mean producing the entire presentation from purely {subject-domain}+(index "subject domain;presentation algorithm and the") content or handling the occasional subject-domain structure in a largely document-domain file.   
 
         figure:(*fig.pub-presentation) Adding the presentation algorithm
             >>>(image ../graphics/presentation.xml)
         
         Organizing content involves several things:
         
-        |Ordering| At some level, content forms a simple sequence in which one piece of information follows another. Writers working in the {document domain} typically order content as they write, but if they are working in the {subject domain}, the {information architect} can choose how to order subject-domain information in the conversion to the document domain.
+        |Ordering| At some level, content forms a simple sequence in which one piece of information follows another. Writers working in the {document domain}+(index "document domain;presentation algorithm and the") typically order content as they write, but if they are working in the {subject domain}+(index "subject domain;presentation algorithm and the"), the {information architect}+(index "information architect;organizing presentation") can choose how to order subject-domain information in the conversion to the document domain.
         
-        |Grouping| At a higher level, content is often organized into groups. This may be groups on a page or groups of pages. Grouping includes breaking content into sections, inserting subheads, inserting tables and graphics, and inserting information as labeled fields. Writers working in the document domain typically create these groupings as they write, but if writers are working in the subject domain, the {information architect} may have choices about how to group subject-domain information in the document domain. 
+        |Grouping| At a higher level, content is often organized into groups. This may be groups on a page or groups of pages. Grouping includes breaking content into sections, inserting subheads, inserting tables and graphics, and inserting information as labeled fields. Writers working in the document domain typically create these groupings as they write, but if writers are working in the subject domain, the {information architect}+(index "information architect;organizing presentation") may have choices about how to group subject-domain information in the document domain. 
         
         |Blocking| On a page, groups may be organized sequentially or laid out in some form of block pattern. Exactly how blocks are laid out on the displayed page is a media-domain question that may even be done dynamically. However, to lay out blocks in the media domain the document-domain markup must clearly delineate the types of blocks in a document in a way that allows the formatting algorithm to interpret and act reliably. 
        
-        |Labeling| Any grouping of content requires labels to identify the groups. This includes titles on blocks and labels on data fields. Labels are typically created by writers in the {document domain}, but are almost always factored out when writers work in the {subject domain}. Most document-domain labels indicate the place of content in the {subject domain} (which is why the label you factor out is often similar to the subject-domain tag you insert when you refactor content to the subject domain). Inserting these labels in the presentation algorithm is therefore a necessary part of reversing the factoring out of labels that occurs when you move writing to the {subject domain}.
+        |Labeling| Any grouping of content requires labels to identify the groups. This includes titles on blocks and labels on data fields. Labels are typically created by writers in the {document domain}+(index "document domain;labels in the"), but are almost always factored out when writers work in the {subject domain}+(index "subject domain;labels in the"). Most document-domain labels indicate the place of content in the subject domain (which is why the label you factor out is often similar to the subject-domain tag you insert when you refactor content to the subject domain). Inserting these labels in the presentation algorithm is therefore a necessary part of reversing the factoring out of labels that occurs when you move writing to the subject domain.
        
-        |Relating| Ordering, grouping, blocking, and labeling cover organization on a two-dimensional page or screen. But information is related to other information in complex ways that you can express by creating non-linear relationships between pieces of content using mechanisms such as {hypertext} {links} and {cross references}. 
+        |Relating| Ordering, grouping, blocking, and labeling cover organization on a two-dimensional page or screen. But information is related to other information in complex ways that you can express by creating non-linear relationships between pieces of content using mechanisms such as {hypertext} {links}+(index "links;single sourcing and") and {cross references}. 
         
     section: Differential presentation algorithms
         
-        As I described in [#chapter.single-sourcing], you cannot ignore differences in media when organizing content in the {document domain}. Although the fact that a relationship exists is a pure document-domain issue, how that relationship is expressed, and even whether it is expressed or not, is affected by the media and its capabilities.
+        As I described in [#chapter.single-sourcing], you cannot ignore differences in media when organizing content in the {document domain}+(index "document domain;differential single sourcing in the"). Although the fact that a relationship exists is a pure document-domain issue, how that relationship is expressed, and even whether it is expressed or not, is affected by the media and its capabilities.
 
-        Following {links} in online media is cheap. Following references to other works in the {paper} world is expensive, so document design for paper tends to favor linear relationships while document design for the {web} favors {hypertext} relationships. Therefore, you should expect to implement {differential single sourcing} and use different {presentation algorithms} for different media (see [*fig.pub-differentialpub]).
+        Following {links}+(index "links;single sourcing and") in online media is cheap. Following references to other works in the {paper} world is expensive, so document design for paper tends to favor linear relationships while document design for the {web} favors {hypertext}+(index "hypertext;single sourcing and") relationships. Therefore, you should expect to implement {differential single sourcing} and use different {presentation algorithms} for different media (see [*fig.pub-differentialpub]).
 
         figure:(*fig.pub-differentialpub) Adding differential presentation algorithms
             >>>(image ../graphics/differentialpub.xml)
@@ -137,34 +132,40 @@ chapter:(#chapter.publishing) Publishing
        
         Many other structured writing algorithms, are executed as part of the presentation algorithm, including the following:
                
-        section: The {linking algorithm}
+        section: The linking algorithm
+
+            block-index:
+                {linking algorithm}
        
             How content is linked or cross-referenced is a key part of how it is organized in different media and a key part of {differential single sourcing}. I looked at the {linking algorithm} in detail in [#chapter.linking].
        
-        section: The {content generation algorithm} 
+        section: The content generation algorithm
+
+            block-index:
+                {content generation}+(index "content generation;algorithm")
        
-            Part of the {presentation} of a document or document set is generating the {table of contents}, {index}, and other {navigation} aids. Generating these is part of the presentation process. Because these algorithms create new resources by extracting information from the rest of the content, it is often easier to run these algorithms in sequence after the main {presentation algorithm} has run. This also makes it easier to change the way you generate a {TOC} or {index} without affecting your other algorithms. For more on the content generation algorithm, see [#chapter.generate].
+            Part of the {presentation}+(index "presentation;generating") of a document or document set is generating the {table of contents}, {index}, and other {navigation} aids. Generating these is part of the presentation process. Because these algorithms create new resources by extracting information from the rest of the content, it is often easier to run these algorithms in sequence after the main {presentation algorithm}+(index "presentation algorithm;generating") has run. This also makes it easier to change the way you generate a {TOC}+(index "table of contents;generating a") or {index}+(index "index;generating an") without affecting your other algorithms. For more on the content generation algorithm, see [#chapter.generate].
        
            
     section: The {synthesis algorithm}
    
         subjects:: type, term
-            algorithm, synthesis
+            algorithm, synthesis algorithm
 
         The synthesis algorithm determines exactly what content will be part of a content set. It passes a complete set of content to the {presentation algorithm}, which turns it into one or more document presentations. If you are pulling in content from multiple sources and multiple source formats, the synthesis algorithm is where you collect and sanitize content to make sure it is ready for the later processing stages.     
         
-        Among other things, the synthesis algorithm resolves all management-domain structures in the content (unless some are to be retained for downstream post-publication algorithms to work with). This means that it processes all inclusions and evaluates all conditions. The result is {document-domain} or {subject-domain} content with the {management-domain} structures removed and replaced with the appropriate document- or subject-domain structures.
+        Among other things, the synthesis algorithm resolves all management-domain structures in the content (unless some are to be retained for downstream post-publication algorithms to work with). This means that it processes all inclusions and evaluates all conditions. The result is {document-domain}+(index "document domain;synthesis algorithm") or {subject-domain}+(index "subject domain;synthesis algorithm") content with the {management-domain}+(index "management domain;synthesis algorithm") structures removed and replaced with the appropriate document- or subject-domain structures.
         
-        In the case of {document-domain} content, processing the {management-domain} structures yields a document-domain structure the {presentation algorithm} may be able to pass through unchanged (that is, the document-domain markup may already express the desired presentation). 
+        In the case of document-domain content, processing the management-domain structures yields a document-domain structure the {presentation algorithm} may be able to pass through unchanged (that is, the document-domain markup may already express the desired presentation). 
         
-        In the case of {subject-domain} content, processing {management-domain} structures yields a definitive set of subject-domain structures that can be passed to the {presentation algorithm} for processing to the document domain (see [*fig.pub-synthesis]).
+        In the case of subject-domain content, processing management-domain structures yields a definitive set of subject-domain structures that can be passed to the {presentation algorithm} for processing to the document domain (see [*fig.pub-synthesis]).
         
         figure:(*fig.pub-synthesis) Adding the synthesis algorithm
             >>>(image ../graphics/synthesis.xml)
         
-    section: {Differential synthesis}
+    section: {Differential synthesis}+(index "differential synthesis")
     
-        I noted above that you can use {differential presentation} to do {differential single sourcing} when you have two publications that contain the same content but are organized differently. If you want two publications in different media to have differences in their content, you can do this by doing differential synthesis and including different content in each publication (see [*fig.pub-differential-synthesis]). 
+        I noted above that you can use differential presentation to do {differential single sourcing} when you have two publications that contain the same content but are organized differently. If you want two publications in different media to have differences in their content, you can do this by doing differential synthesis and including different content in each publication (see [*fig.pub-differential-synthesis]). 
 
         figure:(*fig.pub-differential-synthesis) Adding differential synthesis algorithms
             >>>(image ../graphics/differential-synthesis.xml)
@@ -173,19 +174,19 @@ chapter:(#chapter.publishing) Publishing
         
         A number of structured writing algorithms are executed at the synthesis stage. In order to keep things well-partitioned, it is often advisable to execute each one as a separate sub step in the synthesis stage.
 
-        section: The {reuse algorithm}
+        section: The reuse algorithm
         
             Pulling in reused content is part of the synthesis process. I discussed the reuse algorithm in [#chapter.reuse].
 
         section: The {content-generation algorithm}
 
-            As noted in [#chapter.generate] the content-generation algorithm presents an alternative approach to creating different forms of output from a single source of data. It is run as part of the synthesis algorithm when creating raw content and as part of the presentation algorithm when creating presentation artifacts, such as a table of contents.  The content generation algorithm can be used in both the {synthesis} and {presentation} stages, since can generate either synthesis or presentation artifacts.
+            As noted in [#chapter.generate] the content-generation algorithm presents an alternative approach to creating different forms of output from a single source of data. It is run as part of the synthesis algorithm when creating raw content and as part of the presentation algorithm when creating presentation artifacts, such as a table of contents.  The content generation algorithm can be used in both the {synthesis}+(index "synthesis algorithm") and {presentation}+(index "presentation algorithm") stages, since can generate either synthesis or presentation artifacts.
 
-        section: The {extract algorithm}
+        section: The {extract algorithm}+(index "extract algorithm")
         
             In some cases you may wish to extract information from external sources to create content. This can include data created for other purposes, such as application code, or data created and maintained as a canonical source of information, such as a database of features for different models of a car. Extraction is part of the synthesis process. See [#chapter.extract].
             
-        section: The {merge algorithm}
+        section: The {merge algorithm}+(index "merge algorithm")
         
             In one sense, every structured writing algorithm is a merge algorithm. As described in [#chapter.processing], most algorithms process content by factoring in information or metadata that was factored out as the point of recording moved from the {media domain} to the {document domain} and the {subject domain}. But it is also possible, and often useful, to combine information from different sources to create a new set of content. Merging content is done at the synthesis stage. See [#chapter.merge].
 
@@ -193,7 +194,7 @@ chapter:(#chapter.publishing) Publishing
         
         For static presentation, all synthesis happens before the material is presented. But if you are presenting content on the web, you can defer parts of the synthesis algorithm to the browser, which can synthesize and present content by making calls to web services or back-end data sources or by making a request to code running on the server. I look at this in [#chapter.active].
     
-    section: Combining algorithms
+    section: Combining {algorithms}+(index "algorithms;combining")
             
         As described in ([#chapter.processing]), structured writing algorithms are usually implemented as sets of rules that operate on structures as they are encountered in the flow of the content. Since each algorithm is implemented as a set of rules, you can run two algorithms in parallel by combining the two sets of rules to create a single set of rules that implements both algorithms at once. 
             
@@ -204,8 +205,11 @@ chapter:(#chapter.publishing) Publishing
         In most cases, the major publishing algorithms ({synthesis}, {presentation}, {formatting}, {encoding}, and {rendering}) must be run in sequence, since they transform an entire content set from one domain to another (or from one part of a domain to another). In many cases the sub-algorithms of these major algorithms can be run in parallel by combining their rule sets, since they operate on different content structures.
         
     section: Architecture of a publishing tool chain
+
+        block-index:
+            {publishing pipeline}+(index "publishing pipeline")
     
-        The architecture of a publishing tool chain should facilitate the partitioning and distribution of complexity in the content system. The structured writing algorithms I have looked at in this part are executed at some point in the publishing process. The management algorithms described in [#part.management] are generally executed separately.
+        The architecture of a publishing tool chain should facilitate the {partitioning}+(index "partitioning; publishing") and distribution of complexity in the content system. The structured writing algorithms I have looked at in this part are executed at some point in the publishing process. The management algorithms described in [#part.management] are generally executed separately.
         
         Your partitioning needs to ensure that any necessary information is passed from one partition to another, whether the task is executed by a person or an algorithm. This means that a partition must be executed after the information it needs becomes available and before the information it produces is needed.
 
@@ -215,13 +219,13 @@ chapter:(#chapter.publishing) Publishing
         
         Every step in a content publishing chain reads in one or more structured content files and produces one or more structured content files in a different domain or, at least, nearer to the media domain and dots on a page than the input file. 
                 
-        In [#chapter.processing], I presented algorithms that moved {subject-domain} content to the {document domain}, and other algorithms that moved that same content from the {document domain} to the {media domain} for publishing. This is the template for all publishing processes. In the real world, though, you may have more than one intermediate stage in the journey. This type of architecture is sometimes referred to as a {publishing pipeline}. Each step in the publishing process is kept simple by doing just one job and then passing the content to the next step in the pipeline. 
+        In [#chapter.processing], I presented algorithms that moved {subject-domain}+(index "subject domain;publishing and the") content to the {document domain}+(index "document domain;publishing and the"), and other algorithms that moved that same content from the {document domain} to the {media domain} for publishing. This is the template for all publishing processes. In the real world, though, you may have more than one intermediate stage in the journey. This type of architecture is sometimes referred to as a {publishing pipeline}. Each step in the publishing process is kept simple by doing just one job and then passing the content to the next step in the pipeline. 
         
         A publishing pipeline requires individual programs to be simple and straightforward, which makes them easier to design, write, debug, and maintain. A pipeline with many small self-contained programs is usually cheaper to create and maintain and more robust than a single monolithic program that tries to do everything in one step. 
         
-        The pipeline approach also allows for a great deal of {code reuse}. For example, if your content is written in the {subject domain}, you need to get it all the way to the {media domain} for publication. But along the road to the media domain, it passes through the {document domain}. There are many robust {document-domain} {publishing} {tool chains} available, including {DocBook}, {DITA}, {reStructuredText}, and {LaTeX}. You could write a {presentation algorithm} to transform each of your {subject-domain} structures into one of these formats and then simply use that format's existing tool chain for the rest of your {publishing pipeline}. 
+        The pipeline approach also allows for a great deal of {code reuse}. For example, if your content is written in the subject domain, you need to get it all the way to the media domain for publication. But along the road to the media domain, it passes through the document domain. There are many robust document-domain {publishing} {tool chains}+(index "tool chain;publishing") available, including {DocBook}+(index "DocBook;tool chain"), {DITA}+(index "DITA;tool chain"), {reStructuredText}+(index "reStructuredText;tool chain"), and {LaTeX}+(index "LaTeX;tool chain"). You could write a {presentation algorithm} to transform each of your subject-domain structures into one of these formats and then simply use that format's existing tool chain for the rest of your {publishing pipeline}. 
 
-        Other opportunities exist for code reuse at a more granular level. For instance, in addition to subject-specific structures and subject annotations, your {subject-domain} content will need paragraphs, lists, and other basic text structures. You can use the same definitions for basic text structures and subject annotations across your entire content set and write one rule set for those text structures and subject annotations that you can use everywhere, greatly reducing the amount of code you have to write.          
+        Other opportunities exist for code reuse at a more granular level. For instance, in addition to subject-specific structures and subject annotations, your subject-domain content will need paragraphs, lists, and other basic text structures. You can use the same definitions for basic text structures and subject annotations across your entire content set and write one rule set for those text structures and subject annotations that you can use everywhere, greatly reducing the amount of code you have to write.          
         
         
         
