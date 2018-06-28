@@ -213,7 +213,7 @@
 
                 <xsl:variable name="index-components" select="strings:tokenize(@specifically, ';')"/>
 
-                <db:indexterm significance="preferred" class="startofrange">
+                <db:indexterm class="startofrange">
                     <xsl:attribute name="xml:id">
                         <xsl:value-of select="generate-id()"/>
                     </xsl:attribute>
@@ -1183,7 +1183,7 @@
 
                 <xsl:variable name="index-components" select="strings:tokenize(@specifically, ';')"/>
 
-                <db:indexterm significance="preferred" class="startofrange">
+                <db:indexterm class="startofrange">
                     <xsl:attribute name="xml:id">
                         <xsl:value-of select="generate-id()"/>
                     </xsl:attribute>
