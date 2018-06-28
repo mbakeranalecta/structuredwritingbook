@@ -292,15 +292,14 @@ chapter:(#chapter.linking) Linking
 
         Partitioning always introduces new complexity to replace what has been partitioned out. In this case, the new complexity is the effort required to create {subject-domain} annotations. However, this partitioning is particularly effective both because annotating subject affinities requires only knowledge the writer already has and because the same annotation is useful for so many other algorithms. This is one of the best features of the subject domain -- its structures can serve multiple algorithms rather than just one, which is, in itself, a highly effective partitioning of complexity. 
 
-        However, although the responsibility of finding resources to link to has been partitioned away from writers, you still need to consider the people and processes that are now required to locate appropriate resources. They do this by looking up resources based on the subject information (type and value) captured by the subject annotation. For this you need content that is indexed using those types and values (or their semantic equivalents). This means that you need to index your content. If you have a page on John Wayne, you can index it as shown in [*fig.linking-index].
+        However, although the responsibility of finding resources to link to has been partitioned away from writers, you still need to consider the people and processes that are now required to locate appropriate resources. They do this by looking up resources based on the subject information (type and term) captured by the subject annotation. For this you need content that is annotated at the document level using those types and terms (or their semantic equivalents). You can annotate your document to describe their subjects by adding fields at the document level. (This is {metadata}.) If you have a page on John Wayne, you can annotate it's subjects as shown in [*fig.linking-index].
 
         figure:(*fig.linking-index) Index information about John Wayne
             ```(sam)
                 topic: 
                     title: Biography of John Wayne
-                    index:
-                        type: actor
-                        value: John Wayne
+                    subjects:: type, term
+                        actor, John Wayne
                     body:
                         John Wayne was an American actor known for westerns.
 
@@ -313,13 +312,14 @@ chapter:(#chapter.linking) Linking
             ```(pseudo)
                 match actor
                     $target = find href of topic 
-                               where type = actor 
-                               and name = @name
+                              where in subjects
+                              type = actor 
+                              and term = @name
                     create xref
                         attribute href = $target
                         continue        
         
-        However, content stored in the subject domain may already be indexed effectively enough by its inherent subject-domain structures. Suppose your content collection includes the subject-domain actor biography shown in [*fig.linking-content].
+        However, content stored in the subject domain may already be annotated effectively enough by its inherent subject-domain structures. Suppose your content collection includes the subject-domain actor biography shown in [*fig.linking-content].
 
         figure:(*fig.linking-content) Subject-domain actor biography for John Wayne
             ```(sam)
