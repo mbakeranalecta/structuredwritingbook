@@ -45,7 +45,7 @@ chapter:(#chapter.mechanical-structure) Content as data
                 
         If the structured writing {constraints} that you need to express demand hierarchy, while {functional lucidity}+(index "functional lucidity;flat versus hierarchical design and") demands a more punctuated linear model, how do you design a markup language that reconciles these two opposing requirements? 
         
-        This is of greatest concern in the design of {document-domain}+(index "document domain;flat versus hierarchical design") languages. The structure of media-domain languages follows the shape of the media they are modeling, which is largely flat. In the {subject domain}+(index "subject domain;"), content has been abstracted out of strict document order, which means that hierarchy in the {subject domain}+(index "subject domain;flat versus hierarchical design") tends to match the hierarchy of relationships in the subject matter itself.[*2] In the document domain, however, this is a real concern. The document domain consists of abstractions of document structures and the nature of their relationship to the structure of thought in the text is not obvious. 
+        This is of greatest concern in the design of {document-domain}+(index "document domain;flat versus hierarchical design") languages. The structure of media-domain languages follows the shape of the media they are modeling, which is largely flat. In the {subject domain}+(index "subject domain;flat versus hierarchical design"), content has been abstracted out of strict document order, which means that hierarchy in the {subject domain}+(index "subject domain;flat versus hierarchical design") tends to match the hierarchy of relationships in the subject matter itself.[*2] In the document domain, however, this is a real concern. The document domain consists of abstractions of document structures and the nature of their relationship to the structure of thought in the text is not obvious. 
         
         footnote:(*2)
             This is not universal. For example, addresses, which are based on hierarchical locations, are typically modeled as flat ordered lists. The order reflects the hierarchy, but the structure does not nest city inside country and street inside city.
@@ -126,9 +126,7 @@ chapter:(#chapter.mechanical-structure) Content as data
                 </ul>
 
         
-        In [*fig.mechanical-address], the phrase "The Example Company" is contained in `li` tags. This is part of a list structure delineated by `ul` tags, so the markup is largely structural in the document domain. The `li` does not tell you what the content itself is about. It does not tell you anything useful beyond what document structure it belongs to.    
-
-        The second example, [*fig.mechanical-vcard], adds vCard microformat markup:
+        In [*fig.mechanical-address], the phrase "The Example Company" is contained in `li` tags. This is part of a list structure delineated by `ul` tags, so the markup is largely structural in the document domain. The `li` tag does not tell you what the content itself is about. It does not tell you anything useful beyond what document structure it belongs to. The second example, [*fig.mechanical-vcard], adds vCard microformat markup:
 
         figure:(*fig.mechanical-vcard) vCard microformat markup for an address
             ```(HTML)
@@ -145,7 +143,7 @@ chapter:(#chapter.mechanical-structure) Content as data
 
         [*fig.mechanical-vcard] adds subject-domain metadata in the form of the class attributes. For example, it says that the phrase "The Example Company" refers to an organization (`org`). This annotation does not modify or refine the constraint expressed by the `li` tag. It is saying something else entirely. 
         
-        But this is not just about suggesting a different way of interpreting "The Example Company" (as an organization name, as well as as a list item).  The {vCard} markup expresses a complex {subject-domain}+(index "subject-domain;address structure in the") structure. Not only is the list item `The Example Company` annotated as `org`, the list that contains it is annotated as `vcard`. The interpretation of `org` actually depends on that annotation being part of a `vcard` structure.
+        But this is not just about suggesting a different way of interpreting "The Example Company" (as an organization name, as well as as a list item).  The {vCard} markup expresses a complex {subject-domain}+(index "subject domain;address structure in the") structure. Not only is the list item "The Example Company" annotated as `org`, the list that contains it is annotated as `vcard`. The interpretation of `org` actually depends on that annotation being part of a `vcard` structure.
         
         In other words, the secondary structure created by the annotations in the [*fig.mechanical-vcard] is equivalent to the pure subject-domain markup shown in [*fig.mechanical-subject].
 
@@ -157,7 +155,7 @@ chapter:(#chapter.mechanical-structure) Content as data
                    tel: 604-555-1234
                    url: http://example.com/
         
-        The microformats overlay a second structure on the list structure. In the world of HTML, this makes sense. {HTML}+(index "HTML;microformats in") needs to be a standardized document-domain language so that browsers can display it for human reading. Humans don't need the vCard annotations to recognize that the content is an address, but algorithms do. So the microformat adds a second, hidden, {subject-domain}+(index "subject-domain;address structure in the") structure to the document for readers that are algorithms rather than people. 
+        The microformats overlay a second structure on the list structure. In the world of HTML, this makes sense. {HTML}+(index "HTML;microformats in") needs to be a standardized document-domain language so that browsers can display it for human reading. Humans don't need the vCard annotations to recognize that the content is an address, but algorithms do. So the microformat adds a second, hidden, {subject-domain}+(index "subject domain;address structure in the") structure to the document for readers that are algorithms rather than people. 
         
         Structured writing constrains both the creation and the interpretation of content. Normally, you expect that the creation of content would be just as constrained as the interpretation. After all, it is hard to reliably interpret structure if the creation of that structure is not constrained. However, in this case the interpretation of the data is more constrained than the creation.
 
