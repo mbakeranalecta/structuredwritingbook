@@ -8,7 +8,7 @@ chapter:(#chapter.lightweight) Lightweight Languages
         
     I commented in [#chapter.markup] that XML does a poor job of partitioning authoring concerns from parsing concerns. XML is a fully general abstract markup language, and its syntax and its logical model are designed to support the creation of any markup language for any purpose whatsoever. This need to support any possible kind of structure makes XML a heavy, verbose language. 
 
-    XML's predecessor, SGML, attempted to be fully general and allow you to define specific markup languages that had a light syntax that was easy to author. Unfortunately, the mechanism for creating such languages is complex and difficult to understand. It also made parsing SGML very complicated. SGML is still used in a few niches, but it has never achieved the kind of widespread use that XML has. 
+    XML's predecessor, {SGML}, attempted to be fully general and allow you to define specific markup languages that had a light syntax that was easy to author. Unfortunately, the mechanism for creating such languages is complex and difficult to understand. It also made parsing SGML very complicated. SGML is still used in a few niches, but it has never achieved the kind of widespread use that XML has. 
     
     Still, XML remains a problem for writers, and a number of languages have been created to try to address the problems created by XML's verbosity. Collectively these are called _lightweight_ markup languages. Lightweight markup languages are designed to use a lightweight syntax, that is, one that imposes a minimal burden on the readability of the raw text of the document.
 
@@ -16,7 +16,7 @@ chapter:(#chapter.lightweight) Lightweight Languages
     
     The primary appeal of lightweight markup languages rests on two related properties: 
     
-    * They have a high degree of {functional lucidity} at the syntactic level (easy to write) and often at the semantic level (what it means) as well. You can usually read the raw markup of a lightweight language more or less as if it were a conventional text document. 
+    * They have a high degree of {functional lucidity}+(index "functional lucidity;lightweight languages and") at the syntactic level (easy to write) and often at the semantic level (what it means) as well. You can usually read the raw markup of a lightweight language more or less as if it were a conventional text document. 
     
     * They can be written effectively using a plain text editor (as opposed to an elaborate structured editor with a graphical editing view). This means that the editing requirements are also lightweight. 
     
@@ -29,7 +29,7 @@ chapter:(#chapter.lightweight) Lightweight Languages
         subjects::type, term
             markup-language, Markdown
     
-        The most prominent of the lightweight languages, and arguably the lightest weight, is Markdown. Invented in 2004 by {John Gruber} as a way to quickly write simple web pages using syntax similar to that of an text-format email, Markdown has spread to all kind of systems and has multiple variants that have been adapted for different purposes. I have used several examples of Markdown in this book. Here is one of them:
+        The most prominent of the lightweight languages, and arguably the lightest weight, is Markdown. Invented in 2004 by {John Gruber} as a way to quickly write simple web pages using syntax similar to that of text-format email, Markdown has spread to all kind of systems and has multiple variants that have been adapted for different purposes. I have used several examples of Markdown in this book. Here is one of them:
 
         ```(markdown)
             Wayne's best yet
@@ -47,33 +47,35 @@ chapter:(#chapter.lightweight) Lightweight Languages
             8e8c6a0b4c9c41bd72fab5fd53e3d967e9688110.
 
 
-        Markdown is a simple {document-domain} language. While its semantics are essentially a subset of HTML, it is more squarely in the document domain than HTML because it lacks any ability to specify formatting or even to create tables (though various Markdown flavors have added support for tables).  
+        Markdown is a simple document-domain language. While its semantics are essentially a subset of HTML, it is more squarely in the document domain than HTML because it lacks any ability to specify formatting or even to create tables (though various Markdown flavors have added support for tables).  
 
         pagination-tweak:
             min-space: 1.5in
             
-        One of the recurring patterns of markup language development -- and technology development generally -- is that when a format becomes popular because of its simplicity, people start to add "just one more thing" to it, and it becomes either more complex (and thus less attractive) or more fragmented (and thus harder to build a tool chain for). Markdown is definitely fragmenting at the moment (though a standardization effort, {CommonMark}, is also under way). There is even a project to add semantic annotation to Markdown as part of the {Lightweight DITA} project.
+        One of the recurring patterns of markup language development -- and technology development generally -- is that when a format becomes popular because of its simplicity, people start to add "just one more thing" to it, and it becomes either more complex (and thus less attractive) or more fragmented (and thus harder to build a tool chain for). Markdown is definitely fragmenting at the moment (though a standardization effort, {CommonMark}, is also under way). There is even a project to add semantic annotation to Markdown as part of the {Lightweight DITA}+(index "Lightweight DITA")+(index "DITA;Lightweight") project.
         
         None of this is a reason not to use Markdown where its structures and syntax make it an appropriate source. Markdown provides useful constraints on the basic formatting of a web page both by factoring out direct formatting features and by providing a limited set of {document-domain} features. These constraints help prevent contributors to a site from indulging in extravagant, non-standard formatting or overly elaborate text structures. It successfully partitions basic web formatting, though not much else. 
         
-        Markdown is also used in conjunction with {static site generators}, such as {Jekyll}, which use Markdown for basic text structures in concert with templating languages such as {Liquid}.[*fn.liquid] Tom Johnson provides a side-by-side comparison of {DITA} and {Jekyll} in a series of posts on his blog ({http://idratherbewriting.com/2015/03/23/new-series-jekyll-versus-dita/}(url)).
+        Markdown is also used in conjunction with {static site generators}, such as {Jekyll}, which use Markdown for basic text structures in concert with templating languages such as {Liquid}.[*fn.liquid] {Tom Johnson} provides a side-by-side comparison of {DITA}+(index "DITA;Lightweight") and {Jekyll} in a series of posts on his blog ({http://idratherbewriting.com/2015/03/23/new-series-jekyll-versus-dita/}(url)).
 
         footnote:(*fn.liquid)
              Liquid is essentially a set of management-domain structures, yielding a result that is comparable to a document-/management-domain hybrid in its capabilities, though not in its style.
 
-        Markdown does not provide any {subject-domain} structures or constraints. This may be a welcome feature when comparing Markdown with more complex {document-domain} languages, many of which include subject-domain structures that can be confusing or that writers may abuse to achieve formatting effects. 
+        Markdown does not provide any {subject-domain}+(index "subject domain;Markdown and the") structures or constraints. This may be a welcome feature when comparing Markdown with more complex document-domain languages, many of which include subject-domain structures that can be confusing or that writers may abuse to achieve formatting effects. 
         
         Because the inspiration for its syntax, text-format emails, has faded to obscurity, it is not clear that everyone automatically knows how to write Markdown, which was the original design intent. However, a lot of it remains obvious and intuitive, meaning that, within its limits, Markdown has good functional lucidity. It works well if you don't need any of the features it partitions by omission.
         
     section: Wiki markup
     
         subjects:: type, term
-            markup-language, Wiki markup
-            tool, WikiWikiWeb
-    
-        Another popular lightweight format is {Wiki markup}, introduced by {Ward Cunningham}(person "Cunningham, Ward") in 1995 as the writing format for {WikiWikiWeb}, the first {wiki}(tool).[https://en.wikipedia.org/wiki/WikiWikiWeb] Wiki markup is similar to Markdown in many respects (most lightweight languages share the same basic syntax conventions, based on the imitation of formatted document features in plain text documents).
+            markup-language, wiki
 
-        What makes Wiki markup distinct is how it is tied into the operation of a wiki. One notable feature is how it handles {linking}. In the original WikiWikiWeb markup, any word with internal capitals was considered a _WikiWord_ and instantly became a link to a page with that WikiWord as the title. Such a page was created automatically if it did not already exist. This was a simple implementation of a {linking algorithm} based on annotation rather than the naming of resources. 
+        block-index:
+            {wiki}+(index "wiki;markup")
+            
+        Another popular lightweight format is wiki markup, introduced by {Ward Cunningham}(person "Cunningham, Ward") in 1995 as the writing format for {WikiWikiWeb}, the first {wiki}(tool).[https://en.wikipedia.org/wiki/WikiWikiWeb] Wiki markup is similar to Markdown in many respects (most lightweight languages share the same basic syntax conventions, based on the imitation of formatted document features in plain text documents).
+
+        What makes wiki markup distinct is how it is tied into the operation of a wiki. One notable feature is how it handles {linking}+(index "linking;wiki markup for"). In the original WikiWikiWeb markup, any word with internal capitals was considered a _WikiWord_ and instantly became a link to a page with that WikiWord as the title. Such a page was created automatically if it did not already exist. This was a simple implementation of a {linking algorithm} based on annotation rather than the naming of resources. 
 
         Different wikis support different markup. [*fig.mediawiki] shows a small example of {MediaWiki} markup. ({MediaWiki} is the system that runs {Wikipedia}).
 
@@ -88,15 +90,15 @@ chapter:(#chapter.lightweight) Lightweight Languages
                 "You mean you can't take ''less''?" said the Hatter. 
                 "It's very easy to take ''more'' than nothing."
         
-        A wiki is a type of simple {content management system} that allows people to create and edit pages directly from a web browser. A wiki, essentially, is a CMS that partitions and distributes the problem of web content management out to individual contributors, allowing anyone to edit and improve a site. {Wikipedia} is by far the largest and most well-known wiki. Wiki's are a significant example of a {bottom-up information architecture}. Anyone can add a page, and that page is integrated into the overall collection by WikiWord-style linking and by including itself in categories (conventionally, by naming them on the page).
+        A wiki is a type of simple {content management system}+(index "content management system;wiki as a") that allows people to create and edit pages directly from a web browser. A wiki, essentially, is a CMS that partitions and distributes the problem of web content management out to individual contributors, allowing anyone to edit and improve a site. {Wikipedia} is by far the largest and most well-known wiki. Wiki's are a significant example of a {bottom-up information architecture}+(index "bottom-up information architecture;wikis as an example of"). Anyone can add a page, and that page is integrated into the overall collection by WikiWord-style linking and by including itself in categories (conventionally, by naming them on the page).
         
         Cunningham described WikiWikiWeb as "The simplest online database that could possibly work."[http://www.wiki.org/wiki.cgi?WhatIsWiki] Like Markdown, its success has led to additional features, fragmentation, and growing complexity. Some commercial wikis are now complex content management systems. Indeed, it is somewhat difficult today to define the boundaries between wikis, blogging platforms, and conventional CMSs. 
         
-        If wikis have a defining characteristic today it is probably the {bottom-up architecture} rather than the original novelty of in-browser editing, which is now found across many different kinds of CMS. Cunningham designed wikis to be collaborative platforms -- places where people could {collaborate} with people they might not even know to create something new with no central direction or control. The idea was not only architecturally bottom-up but also editorially bottom-up. However, today, most wikis include features that allow you to exercise a degree of central control. {Question-and-answer sites}, such as {Stack Exchange} with its distributed and democratic control systems, may be closer today to Cunningham's idea of a democratic creation space. 
+        If wikis have a defining characteristic today it is probably the {bottom-up architecture}+(index "bottom-up information architecture;wikis as an example of") rather than the original novelty of in-browser editing, which is now found across many different kinds of CMS. Cunningham designed wikis to be collaborative platforms -- places where people could {collaborate} with people they might not even know to create something new with no central direction or control. The idea was not only architecturally bottom-up but also editorially bottom-up. However, today, most wikis include features that allow you to exercise a degree of central control. {Question-and-answer sites}, such as {Stack Exchange}+(index "Stack Exchange") with its distributed and democratic control systems, may be closer today to Cunningham's idea of a democratic creation space. 
         
         What wikis illustrate for structured writing is that simple markup innovations such as the WikiWord can have a revolutionary effect on how content is created and organized. Most wikis today use words between double square brackets for WikiWords, rather than internal capitals, but the principle is the same. You can link to a thing merely by naming it. 
         
-        WikiWords are also a case of {subject-domain} annotation. Marking a phrase as a WikiWord says, "this is a significant subject." It does not provide type information -- as the subject annotation examples shown in this book do -- but merely denoting a phrase as significant says that it names some subject of importance that deserves a page of its own.
+        WikiWords are also a case of {subject-domain}+(index "subject-domain;WikiWords as annotations in the") annotation. Marking a phrase as a WikiWord says, "this is a significant subject." It does not provide type information -- as the subject annotation examples shown in this book do -- but merely denoting a phrase as significant says that it names some subject of importance that deserves a page of its own.
 
         This illustrates a critical point about bottom-up information architectures: structured writing, even in very simple form, can create texts that are capable of self-organization and that can be assembled into meaningful collections without the imposition of any external structure. However, the wiki process leaves much of the complexity of content creation and management unhandled. The slack has to be taken up by human effort, which works well for {Wikipedia}, with its army of volunteer contributors and editors, but is harder to reproduce on a corporate scale. 
     
@@ -105,7 +107,7 @@ chapter:(#chapter.lightweight) Lightweight Languages
         subjects:: type, term
             markup-language, reStructuredText
     
-        {reStructuredText} is a lightweight hybrid markup language most often associated with the {Sphinx} documentation framework, which was developed for documenting the Python programming language. We looked at reStructuredText briefly as an example of a hybrid markup language in [#chapter.markup]. 
+        {reStructuredText} is a lightweight hybrid markup language most often associated with the {Sphinx} documentation framework, which was developed for documenting the Python programming language. I looked at reStructuredText briefly as an example of a hybrid markup language in [#chapter.markup]. 
         
         Similar to Markdown, reStructuredText uses a plain-text formatting approach to basic text structures. This part of the markup looks natural because it uses characters and patterns that you might use to format a document if you only have a plain-text editor (see [*fig.restructuredtext-1]).
 
@@ -134,7 +136,7 @@ chapter:(#chapter.lightweight) Lightweight Languages
                     4. Place eggs in cold water to stop cooking.
                     5. Peel and serve.
 
-        However, reStructuredText also has a feature called _directives_, which you can use to create markup with more complex semantics. [*fig.restructuredtext-2] shows a directive for inserting an image.
+        However, {reStructuredText}+(index "reStructuredText;directives in") also has a feature called {directives}+(italic)+(index "directives, reStructuredText"), which you can use to create markup with more complex semantics. [*fig.restructuredtext-2] shows a directive for inserting an image.
 
         figure:(*fig.restructuredtext-2) reStructuredText directive for inserting an image
             ```(reStructuredText)
@@ -144,16 +146,16 @@ chapter:(#chapter.lightweight) Lightweight Languages
                    :scale: 50
                    :alt: A hard boiled egg.
                
-        In [*fig.restructuredtext-2], {reStructuredText} takes the same approach as XML, using characters in a way that they are almost never used in a normal document. This approach simplifies parsing, because there is seldom any question about whether a particular pattern is intended to be markup or text, but it also makes reStructuredText less natural to read and to write. {reStructuredText} is therefore something of a syntactic hybrid, as well as being a hybrid in the sense that it has both fixed and extensible parts. 
+        In [*fig.restructuredtext-2], {reStructuredText}+(index "reStructuredText;directives in")+(index "directives, reStructuredText") takes the same approach as XML, using characters in a way that they are almost never used in a normal document. This approach simplifies parsing, because there is seldom any question about whether a particular pattern is intended to be markup or text, but it also makes reStructuredText less natural to read and to write. {reStructuredText} is therefore something of a syntactic hybrid, as well as being a hybrid in the sense that it has both fixed and extensible parts. 
         
-        If you are looking for a lightweight {document-domain} markup language of moderate complexity and a degree of extensibility, or if you are interested in {Sphinx} as an authoring and publishing system, {reStructuredText} is an option to consider. 
+        If you are looking for a lightweight document-domain markup language of moderate complexity and a degree of extensibility, or if you are interested in {Sphinx} as an authoring and publishing system, {reStructuredText} is an option to consider. 
     
     section: ASCIIDoc
     
         subjects:: type, term
             markup-language, ASCIIDoc
     
-        {ASCIIDoc} is a lightweight markup language based on the structure of {DocBook}. It is intended for the same sort of document types for which you might choose DocBook, but it allows you to use a lightweight syntax. In appearance it is similar to {Markdown}, as shown in [*fig.asciidoc].
+        {ASCIIDoc} is a lightweight markup language based on the structure of {DocBook}+(index "DocBook;ASCIIDoc and"). It is intended for the same sort of document types for which you might choose DocBook, but it allows you to use a lightweight syntax. In appearance it is similar to {Markdown}+(index "Markdown;ASCIIDoc compared with"), as shown in [*fig.asciidoc].
 
         figure:(*fig.asciidoc) ASCIIDoc example[https://en.wikipedia.org/wiki/AsciiDoc]
             ```(ASCIIDoc)
@@ -179,16 +181,16 @@ chapter:(#chapter.lightweight) Lightweight Languages
                 * tin
                 * lead
             
-        However, while {Markdown} was designed for simple web pages, ASCIIDoc was designed for complex publishing projects with support for a much wider array of document-domain structures, including tables, definition lists, and tables of contents.
+        However, while {Markdown}+(index "Markdown;ASCIIDoc compared with") was designed for simple web pages, ASCIIDoc was designed for complex publishing projects with support for a much wider array of document-domain structures, including tables, definition lists, and tables of contents.
         
-        If you are looking for a lightweight document-domain markup language of medium complexity that is compatible with {DocBook} (meaning you are interested in creating books rather than web pages), ASCIIDoc is an option to consider. 
+        If you are looking for a lightweight document-domain markup language of medium complexity that is compatible with {DocBook}+(index "DocBook;ASCIIDoc and") (meaning you are interested in creating books rather than web pages), ASCIIDoc is an option to consider. 
     
     section: LaTeX
 
         subjects:: type, term
             markup-language, LaTeX
     
-        LaTeX is a {document-domain} markup language used extensively in academia and scientific publishing. It is based on the syntax of {TeX}, a typesetting system developed by Donald Knuth in 1978.[https://en.wikipedia.org/wiki/LaTeX] [*fig.latex] is an example of LaTeX.
+        LaTeX is a document-domain markup language used extensively in academia and scientific publishing. It is based on the syntax of {TeX}, a typesetting system developed by Donald Knuth in 1978.[https://en.wikipedia.org/wiki/LaTeX] [*fig.latex] is an example of LaTeX.
 
         figure:(*fig.latex) LaTeX example
             ```(LaTex)
@@ -225,7 +227,7 @@ chapter:(#chapter.lightweight) Lightweight Languages
         figure:(*fig.latex-out) Output from LaTeX[The original uploader was Bakkedal at English Wikipedia - Own work, CC BY-SA 2.5, https://commons.wikimedia.org/w/index.php?curid=30044147]
             >>>(image ../graphics/Latex_example.xml)
         
-        The equation markup shows why LaTeX is popular for academic and scientific publishing. While not exactly transparent, the markup is compact and {functionally lucid} for anyone with a little experience with it. 
+        The equation markup shows why LaTeX is popular for academic and scientific publishing. While not exactly transparent, the markup is compact and functionally lucid for anyone with a little experience with it. 
         
         Wikipedia offers a comparison of various math markup formats which shows how big a difference syntax can make to the lucidity of a markup language.
 
@@ -238,7 +240,7 @@ chapter:(#chapter.lightweight) Lightweight Languages
         ```(sam)       
             x=\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
             
-        Whereas the XML-based {MathML} version looks like [*fig.mathml]
+        Whereas the XML-based {MathML} version looks like [*fig.mathml].
 
         figure:(*fig.mathml) MathML markup
             ```(xml)
@@ -275,16 +277,16 @@ chapter:(#chapter.lightweight) Lightweight Languages
                  </semantics>
                 </math>
         
-        Clearly MathML was not designed with the idea that anyone would ever try to write it raw. It is intended to be the output of a graphical equation editor.[*1] While you could use a graphical equation editor to create LaTeX math markup, it is certainly possible to write and read raw LaTeX. 
+        Clearly {MathML} was not designed with the idea that anyone would ever try to write it raw. It is intended to be the output of a graphical equation editor.[*1] While you could use a graphical equation editor to create LaTeX math markup, it is certainly possible to write and read raw LaTeX. 
         
         footnote:(*1)
-            Interestingly, MathML comes in two different flavors. Presentation MathML is a {media-domain} language that describes how an equation is presented. Content MathML is a {subject-domain} language that describes what it means.
+            Interestingly, MathML comes in two different flavors. Presentation MathML is a media-domain language that describes how an equation is presented. Content MathML is a subject-domain language that describes what it means.
             
-        LaTeX is not as lightweight as {Markdown}. Its markup is almost entirely explicit -- except for paragraphs, which are delineated by blank lines just as in Markdown. But its syntax is certainly lighter when compared to XML-based languages, and it has much greater {functional lucidity}. The hallmark of a lightweight design is sufficient functional lucidity that you can write in raw markup rather than needing a graphical editor. But LaTeX's structures are barely out of the {media domain}, which limits its usefulness for structured writing. 
+        LaTeX is not as lightweight as {Markdown}+(index "Markdown;LaTeX compared with"). Its markup is almost entirely explicit -- except for paragraphs, which are delineated by blank lines just as in Markdown. But its syntax is certainly lighter when compared to XML-based languages, and it has much greater {functional lucidity}+(index "functional lucidity;LaTeX and"). The hallmark of a lightweight design is sufficient functional lucidity that you can write in raw markup rather than needing a graphical editor. But LaTeX's structures are barely out of the media domain, which limits its usefulness for structured writing. 
         
-    section: Subject-domain Languages
+    section: Subject-domain languages
     
-        So far we have looked at languages that are primarily {document domain} in design. The {document domain} is an obvious choice for a public language since the use of common document types such as books and articles is widespread. But there are public {subject-domain} languages as well. One example, which we looked at in [#chapter.merge], is JavaDoc (see [*fig.javadoc-redux]).
+        So far I have looked at languages that are primarily document domain in design. The document domain is an obvious choice for a public language since the use of common document types such as books and articles is widespread. But there are public {subject-domain}+(index "subject domain;lightweight languages in the") languages as well.
 
         figure:(*fig.javadoc-redux) JavaDoc example
             ```(Java)
@@ -305,9 +307,10 @@ chapter:(#chapter.lightweight) Lightweight Languages
                     // ...body
                 }
         
-        Not only does JavaDoc have {subject-domain} tags for parameters and return values, it effectively incorporates the Java code itself (all computer programs are a kind of structured text). Thus, the JavaDoc processor pulls information from the function header itself to incorporate into the output. 
+        {JavaDoc} ([*fig.javadoc-redux]), which I looked at in  [#chapter.merge], not only has subject-domain tags for parameters and return values, it effectively incorporates the Java code itself (computer programs are a kind of structured text), pulling information from the function header into the output. 
         
-        There are a number of similar languages for documenting different programming languages. One example is {Doxygen}(tool), which is used for multiple languages. Wikipedia maintains an extensive list at: {https://en.wikipedia.org/wiki/Comparison_of_documentation_generators}(url).
+        Many other languages for documenting programming languages exist.[*fn.doc-gen] However, it is difficult to find public subject-domain lightweight markup languages outside the realm of programming language and API documentation. This is probably because only programmers are likely to write their own parser to create a markup language. Most other people are going to choose an extensible language as a base, which today usually means XML. Part of my motivation for creating {SAM} is to provide a way to create {subject-domain}+(index "subject domain;lightweight languages in the") languages with lightweight syntax.
 
-        It is difficult to find public {subject-domain} lightweight markup languages outside the realm of programming language and API documentation. This is probably because only programmers are likely to write their own parser to create a markup language. Most other people are going to choose an extensible language as a base, which today usually means {XML}. Part of my motivation for creating {SAM} is to provide a way to create {subject-domain} languages with lightweight syntax. 
+        footnote:(*fn.doc-gen)
+            Wikipedia maintains a list at: {https://en.wikipedia.org/wiki/Comparison_of_documentation_generators}(url).
 
