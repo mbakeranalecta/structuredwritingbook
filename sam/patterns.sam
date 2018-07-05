@@ -8,13 +8,13 @@ chapter:(#chapter.patterns) Patterns
 
     I noted that lightweight markup languages such as {Markdown} rely on patterns in the text rather than explicit markup characters to delineate basic structures. XML, on the other hand, makes a strict distinction between what is markup and what is text. Markup is always recognized explicitly by markup sequences that cannot occur as normal text in any part of the document. 
     
-    All the same, even XML markup is defined by patterns. The {XML specification}[https://www.w3.org/TR/xml/] defines XML using a series of patterns written in a notation called {EBNF}. The difference between XML syntax and Markdown syntax is that in XML, patterns are defined absolutely, so a markup start character is a markup start character no matter where it occurs, whereas in Markdown, the patterns are defined in context, so a `*` character starts a list item only at the beginning of a line, not the end. 
+    All the same, even XML markup is defined by patterns. The {XML specification}[https://www.w3.org/TR/xml/] defines {XML}+(index "XML;specification") using a series of patterns written in a notation called {EBNF}. The difference between XML syntax and Markdown syntax is that in XML, patterns are defined absolutely, so a markup start character is a markup start character no matter where it occurs, whereas in Markdown, the patterns are defined in context, so a `*` character starts a list item only at the beginning of a line, not the end. 
     
-    Since markup is all about patterns, you are not confined only to the patterns defined by the markup language itself. There are lots of patterns that occur naturally in content, and you can recognize those patterns and act on them with algorithms even if they are not formally marked up in your markup language. 
+    Since markup is all about patterns, you are not confined to the patterns defined by the markup language. Many patterns occur naturally in content, and you can recognize those patterns and act on them with algorithms even if they are not formally marked up. 
     
     A common example of this is the pattern of a URL. In most web-based editors, if you enter a URL as plain text (with no markup identifying it as a URL), the editor recognizes the pattern and turns the URL into a clickable link in the HTML output. 
     
-    Recognizing patterns, rather than forcing writers to mark them up explicitly, can increase functional lucidity significantly. Consider something as simple as a date. A date is a complex piece of data consisting of at least three elements, the year, month, and day. (It gets more complex if you include the day of the week or the time.) If you need those individual components of a date for processing purposes, you might be tempted to require dates to be marked up like this:
+    Recognizing patterns, rather than forcing writers to mark them up explicitly, can increase {functional lucidity}+(index "functional lucidity;patterns and") significantly. Consider something as simple as a date. A date is a complex piece of data consisting of at least three elements, the year, month, and day. (It gets more complex if you include the day of the week or the time.) If you need those individual components of a date for processing purposes, you might be tempted to require dates to be marked up like this:
     
     ```(sam)
         date: {2016}(year)-{08}(month)-{25}(day)
@@ -27,9 +27,9 @@ chapter:(#chapter.patterns) Patterns
             month: 08
             day: 25
         
-    This is fully explicit markup. It places every piece of the data in its own explicit structure. However, it lacks {functional lucidity}. 
+    This is fully explicit markup. It places every piece of the data in its own explicit structure. However, it lacks {functional lucidity}+(index "functional lucidity;patterns and"). 
     
-    A date in the format `2016-08-25` is already a piece of structured markup, which is defined by {ISO 8601}, an international standard. The only problem with marking up a date using this format is that in another context `2016-08-25` could be a mathematical expression that resolves to `1983`. But you can eliminate this potential confusion if you isolate the context so that a processor can recognize when you use an {ISO 8601} date. In other words, all you need to do is create an annotation, as shown here:
+    A {date}+(index "date formats") in the format `2016-08-25` is already a piece of structured markup, which is defined by {ISO 8601}, an international standard. The only problem with marking up a date using this format is that in another context `2016-08-25` could be a mathematical expression that resolves to `1983`. But you can eliminate this potential confusion if you isolate the context so that a processor can recognize when you use an {ISO 8601} date. In other words, all you need to do is create an annotation, as shown here:
     
     ```(sam)
         {1941-12-07}(date) is a day that will live in infamy. 
@@ -40,18 +40,18 @@ chapter:(#chapter.patterns) Patterns
         {December 7, 1941}(date "1941-12-07") is a day 
         that will live in infamy. 
     
-    Of course, a sufficiently clever algorithm could recognize `December 7, 1941` as a date as well, because it is a predictable pattern. One of the defining features of patterns is that you can recognize the semantic equivalence between two patterns that express the same information. You can increase the {functional lucidity} of your markup by recognizing a variety of semantically equivalent patterns, rather than imposing a uniform syntax on writers.
+    Of course, a sufficiently clever algorithm could recognize `December 7, 1941` as a date as well, because it is a predictable pattern. One of the defining features of patterns is that you can recognize the semantic equivalence between two patterns that express the same information. You can increase the {functional lucidity}+(index "functional lucidity;patterns and") of your markup by recognizing a variety of {semantically equivalent patterns}+(index "semantically equivalent patterns")+(index "patterns;semantically equivalent"), rather than imposing a uniform syntax on writers.
     
     section: Design implications
     
-        XML recognizes the value of patterns. The XML data types standard[https://www.w3.org/TR/xmlschema-2/] defines a number of common patterns, and the XML schema language ({XSD})[https://www.w3.org/standards/xml/schema] allows you to define patterns for use in your own markup. It calls these patterns "simple types" (as opposed to "complex types," which are composed of multiple nested elements). Thus, in {XSD}, you can specify that the contents of a date field must conform to the simple type `xs:date`, which is a pattern based on {ISO 8601}. If the schema defines the data type for the `date` element as `xs:date`, you can do following:
+        XML recognizes the value of patterns. The {XML}+(index "XML;data types standard") data types standard[https://www.w3.org/TR/xmlschema-2/] defines a number of common patterns, and the XML schema language ({XSD})[https://www.w3.org/standards/xml/schema] allows you to define patterns for use in your own markup. It calls these patterns "simple types" (as opposed to "complex types," which are composed of multiple nested elements). Thus, in {XSD}+(index "XSD;data types in"), you can specify that the contents of a date field must conform to the simple type `xs:date`, which is a pattern based on {ISO 8601}. If the schema defines the data type for the `date` element as `xs:date`, you can do following:
         
         ```(xml)
             <date>1941-12-07</date> is a day that will live in infamy. 
         
-        It is important to understand what this does. If the type of element `date` in your XML markup language is defined as `xs:date`, then an XSD {schema validator} will accept `1941-12-07` as a valid date but reject `<date>last Thursday</date>` as invalid. It does not break the date down into year, month, and day components. If you need that, you have to get your algorithm to do that job. But your algorithm can reliably break down the date because the markup constrains the interpretation, establishing that it is indeed an {ISO 8601} date. Most programming languages have library functions that know how to manipulate {ISO 8601} dates, so you probably don't have to do any work yourself to get the year, month, and day components of a date. 
+        It is important to understand what this does. If the type of element `date` in your XML markup language is defined as `xs:date`, then an XSD schema validator will accept `1941-12-07` as a valid date but reject `<date>last Thursday</date>` as invalid. It does not break the date down into year, month, and day components. To do that, you need an algorithm. But your algorithm can reliably break down the date because the markup constrains the interpretation, establishing that it is indeed an {ISO 8601} date. Most programming languages have library functions that know how to manipulate {ISO 8601} dates, so you probably don't have to do any work yourself to get the year, month, and day components of a date. 
             
-        For other patterns, most programming languages have a library called "regular expressions," which you can use to rip a pattern apart and get at the pieces. XSD goes a step further and lets you define new patterns using regular expressions. {Regular expressions} let your algorithms decode patterns in your content, as long as those patterns are sufficiently constrained by their context. This frees writers from having to explicitly break down many types of information into separate fields. 
+        For other patterns, most programming languages have a library called "regular expressions," which can rip a pattern apart and get at the pieces. XSD goes a step further and lets you define new patterns using regular expressions. {Regular expressions} let your algorithms decode patterns in your content, as long as those patterns are sufficiently constrained by their context. This frees writers from having to explicitly break down many types of information into separate fields. 
         
         For example, in most of our recipe examples, we have explicitly broken down the items in an ingredient list into ingredient, quantity, and unit of measure like this:
         
@@ -60,7 +60,7 @@ chapter:(#chapter.patterns) Patterns
                 eggs, 12, each
                 water, 2, qt
             
-        That format is not terribly onerous to write, but there is still a small functional lucidity penalty. A writer might more naturally write:
+        That format is not terribly onerous to write, but there is still a small {functional lucidity}+(index "functional lucidity;patterns and") penalty. A writer might more naturally write:
         
         ```(sam)
             ingredients::
@@ -74,6 +74,9 @@ chapter:(#chapter.patterns) Patterns
             
         footnote:(*fn.regex)
             This regular expression is deliberately simple and does not include a full list of all the possible names for units of measures. You would need a more precise expression for production quality code, but it would be distractingly verbose for our present purpose.
+
+        pagination-tweak:
+            min-space: 1.5in
             
         To show you how this works, here is a set of ingredient values:
         
@@ -120,9 +123,9 @@ chapter:(#chapter.patterns) Patterns
         
         Essentially, any expression that you commonly use in text and that follows a well-defined pattern is already structured text, and you don't need to structure it again. All you need to do is to use structure to place it into context so that an algorithm can recognize it reliably. For example, the regular expression for breaking down the components of an ingredient listing only works when applied to text that you are sure is an ingredient listing. Thus, you use normal structured text to delineate the ingredients list and each list item. This provides the necessary context for an algorithm to use the ingredient list pattern to pull out the ingredient, quantity, and unit fields without forcing the writer to make them explicit in the text. 
         
-        Avoiding unnecessary markup of already recognizable patterns both simplifies your markup design and increase the {functional lucidity} of your markup languages. 
+        Avoiding unnecessary markup of already recognizable patterns both simplifies your markup design and increase the {functional lucidity}+(index "functional lucidity;patterns and") of your markup languages. 
         
-        If you were creating this recipe structure in {XML} and using {XML Schema} (XSD) as your schema language, you could create a data type for the ingredient field that would verify that the text matched the expected pattern (see [*fig.xsd-ingredients]).
+        If you were creating this recipe structure in XML and using {XML Schema}+(index "XSD;data types in") (XSD) as your schema language, you could create a data type for the ingredient field that would verify that the text matched the expected pattern (see [*fig.xsd-ingredients]).
 
         figure:(*fig.xsd-ingredients) XSD schema type definition for ingredients
             ```(xsd)

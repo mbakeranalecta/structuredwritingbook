@@ -13,13 +13,13 @@ chapter:(#chapter.constraints) Constraint Languages
 
     Structured writing is about applying constraints to content and recording the constraints that the content follows, both to constrain what writers write and to constrain how algorithms interpret the content. This requires some way to express constraints in a formal and machine readable way. Schema languages partition this problem and redirect it to a common validation algorithm expressed by a standard piece of software that everyone can use. Schema languages are, quite simply, languages for expressing constraints. 
     
-    For {concrete markup languages}, such as {Markdown}, the constraints are established in the code of the processor. A Markdown file is validated when the processor parses that file. (In practice, though, Markdown does no meaningful validation. Anything it does not recognize as markup, it simply outputs as text.)
+    For {concrete markup languages}, such as {Markdown}+(index "Markdown;constraints in"), the constraints are established in the code of the processor. A Markdown file is validated when the processor parses that file. (In practice, though, Markdown does no meaningful validation. Anything it does not recognize as markup, it simply outputs as text.)
 
-    For {abstract markup languages}, such as {XML}, you define structures yourself. Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a {validator}.
+    For {abstract markup languages}, such as {XML}+(index "XML;constraints in"), you define structures yourself. Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a {validator}+(index "validation;software for").
     
     A schema language is a structured language for defining structured languages. The schema for a markup language says what structures are allowed and in what order and relationship. A given document either conforms to those constraints or it does not. 
 
-    [*fig.relaxng] contains a schema fragment in a schema language called {Relax NG}, which is one of several schema languages available for defining {XML}-based markup languages.
+    [*fig.relaxng] contains a schema fragment in a schema language called {Relax NG}, which is one of several schema languages available for defining {XML}+(index "XML;constraints in")-based markup languages.
 
     figure:(*fig.relaxng) Relax NG schema language
         ```(RNG)
@@ -37,10 +37,10 @@ chapter:(#chapter.constraints) Constraint Languages
     [*fig.relaxng] defines two elements and three constraints. The first element is called `book` and the second is called `page`. The constraints are:
     
     * The `page` element must occur inside the `book` element. (Because the `page` element is defined inside the `book` element structure.)
-    * There must be at least one `page` element inside the `book` element, and there can be more. (Because the `page` element is defined inside an Relax NG `oneOrMore` element.)
+    * There must be at least one `page` element inside the `book` element, and there can be more. (Because the `page` element is defined inside a Relax NG `oneOrMore` element.)
     * Text can occur inside the `page` element, but not directly inside the `book` element. (Because the Relax NG `text` element occurs inside the definition of the `page` element, but not as a direct child of the `book` element definition.)
     
-    Thus, if an author writes the passage in [*fig.moby-dick], a validator will report an error because the words "Moby Dick" are directly inside the book element and text is not allowed in that position.
+    Thus, if you write the passage in [*fig.moby-dick], a validator will report an error because the words "Moby Dick" are directly inside the book element and text is not allowed in that position.
 
     figure:(*fig.moby-dick) Passage from Moby Dick, marked up in XML
         ```(xml)
@@ -51,7 +51,7 @@ chapter:(#chapter.constraints) Constraint Languages
                 about a little and see the watery part of the world.</page>
             </book>
         
-    There are several different schema languages for {XML}, each of which is capable of expressing and enforcing different sets of constraints. It is not unusual to combine different schema languages to more completely constrain a markup language. In particular, many schemas, including the DocBook schema, use a schema language called {Schematron} in concert with another schema language such as {Relax NG} or {XSD}.
+    There are several different schema languages for {XML}, each of which is capable of expressing and enforcing different sets of constraints. It is not unusual to combine different schema languages to more completely constrain a markup language. In particular, many schemas, including the DocBook schema, use a schema language called {Schematron} in concert with another schema language, such as {Relax NG} or {XSD}.
 
     While most schema languages work by modeling the structure of a document, as in the {Relax NG} example ([*fig.relaxng]), {Schematron} works by making assertions about the structure in a language called {XPath}(tool). A {Schematron} schema would make a lousy guide for authoring, but it uses assertions to enforce constraints that no other schema language can. 
         

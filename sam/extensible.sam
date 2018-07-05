@@ -6,7 +6,7 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
         concept, extension
         concept, constraints
 
-    The languages we have looked at to this point are publicly specified and have existing tool chains. Some are more constrained than others, and some support different structured writing algorithms and different ways of partitioning and redirecting complexity. Choosing one of them makes sense if the constraints they express and the algorithms they support partition content complexity in a way that is right for your organization. If not, you need to create your own structures to improve how complexity is partitioned and distributed in your organization.
+    The languages I have looked at to this point are publicly specified and have existing tool chains. Some are more constrained than others, and some support different structured writing algorithms and different ways of partitioning and redirecting complexity. Choosing one of them makes sense if the constraints they express and the algorithms they support partition content complexity in a way that is right for your organization. If not, you need to create your own structures to improve how complexity is partitioned and distributed in your organization.
 
     You have three options for doing this:
     
@@ -16,7 +16,7 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
     
     * Take an existing markup language with extensible and/or constrainable semantics, such as DITA or DocBook, and extend and/or constrain it to meet your needs. 
     
-    Each of these approaches has merits and drawbacks. For instance, creating a new language may enable you to achieve exceptional {functional lucidity} for a particular type of information, extending/constraining an existing language may save tool development costs, or defining your own semantics based on an existing syntax may enable you to find the right balance between functional lucidity and development costs. 
+    Each of these approaches has merits and drawbacks. For instance, creating a new language may enable you to achieve exceptional {functional lucidity}+(index "functional lucidity;creating a new language to achieve greater") for a particular type of information, extending/constraining an existing language may save tool development costs, or defining your own semantics based on an existing syntax may enable you to find the right balance between functional lucidity and development costs. 
 
     This chapter looks at extensible and constrainable markup languages.     
 
@@ -29,8 +29,10 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
 
     section: ReStructuredText    
     
-        subjects:: type, term
-            markup-language, reStructuredText
+        block-index:
+            {reStructuredText}+(index "reStructuredText;extending")
+            {reStructuredText}+(index "reStructuredText;directives in")
+            {directives}+(index "directives, reStructuredText")
     
         ReStructuredText defines a base set of structures -- such as paragraphs, titles, and lists -- with a concrete syntax. It defines other blocks using directives. [*fig.restructuredtext-directive] shows a directive that includes an image and a set of attributes for rendering that image. 
 
@@ -44,7 +46,7 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
         
         You extend reStructuredText by adding new directives. However, there is no {schema} language for reStructuredText. To create a new directive, you must create code to process it. 
         
-        There is an important distinction between languages that are extensible by schema and those that are extensible only by writing code to process the extension.
+        There is an important distinction between languages that are extensible by schema and those that are extensible only by writing code to process the {extension}+(index "extension;by schema versus by code").
 
         If a language is extended by writing processing code, the only way to know if the input is valid is by processing it. If it raises a processing error, it is invalid. If you have only one processor for a language, you can treat that processor as normative. That is, the definition of a correct file is any file that can be successfully processed by the normative processor. The language is defined by the processor. But if you have multiple processors, how do you determine who is at fault when one of those processors fails to process a given input file? Is the processor incorrect or the source file?
         
@@ -66,15 +68,15 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
         subjects:: type, term
             markup-language, SAM
     
-        Although lightweight languages provide great {functional lucidity}, they suffer from limited extensibility (which generally requires writing code) and a lack of constraint mechanisms. I believe that a fully extensible, fully constrainable lightweight markup language would be a valuable addition to the structured writing toolkit. This is why I developed {SAM}, the markup language used for most of the examples in this book and for writing the book itself. 
+        Although lightweight languages provide great functional lucidity, they suffer from limited extensibility (which generally requires writing code) and a lack of constraint mechanisms. I believe that a fully extensible, fully constrainable lightweight markup language would be a valuable addition to the structured writing toolkit. This is why I developed {SAM}, the markup language used for most of the examples in this book and for writing the book itself. 
         
-        SAM is a hybrid markup language that combines implicit syntax similar to {Markdown} with an explicit syntax for defining abstract structures called blocks, record sets, and annotations. It also has concrete markup for common features such as insertions, citations, and variable definitions. 
+        SAM is a hybrid markup language that combines implicit syntax similar to {Markdown}+(index "Markdown;SAM compared with")+(index "SAM;Markdown compared with") with an explicit syntax for defining abstract structures called blocks, record sets, and annotations. It also has concrete markup for common features such as insertions, citations, and variable definitions. 
         
-        SAM, like {XML}, is for defining specific markup languages. However, unlike XML, languages defined in SAM share a small common base set of text structures for which SAM provides concrete syntax. This allows SAM to combine lightweight syntax for the most common text structures with the ability to define constrained markup languages for specific purposes, particularly {subject-domain} languages. In other words, SAM represents a different partitioning of the markup design process from both the common lightweight languages and XML.
+        SAM, like XML, is for defining specific markup languages. However, unlike XML, languages defined in SAM share a small common base set of text structures for which SAM provides concrete syntax. This allows SAM to combine lightweight syntax for the most common text structures with the ability to define constrained markup languages for specific purposes, particularly subject-domain languages. In other words, SAM represents a different partitioning of the markup design process from both the common lightweight languages and XML.
                 
-        SAM is designed to be extensible and constrainable through a {schema} language (this is not complete at time of writing, but hopefully will be available by the time you read this). My intent is that the schema language should be able to define and constrain new block structures, constrain the use of existing concrete structures, and constrain the values of fields using patterns.
+        SAM is designed to be extensible and constrainable through a schema language (this is not complete at time of writing, but hopefully will be available by the time you read this). My intent is that the schema language should be able to define and constrain new block structures, constrain the use of existing concrete structures, and constrain the values of fields using patterns.
         
-        SAM is not designed to be as general as XML in its applications. As a result, its syntax is simpler and more {functionally lucid}, and its schema language should also make it simpler and easier for writers to develop their own SAM-based markup languages. 
+        SAM is not designed to be as general as XML in its applications. As a result, its syntax is simpler and more {functionally lucid}+(index "functional lucidity;SAM and"), and its schema language should also make it simpler and easier for writers to develop their own SAM-based markup languages. 
         
         I use SAM for the majority of the examples in this book because SAM is designed to make structure clear. All of the examples could have been expressed in XML, but that would have made them harder to follow. Naturally, to write in SAM you need to know more about the rules of the language, but you should be able to read a typical SAM document and understand its structure with little or no instruction (see [*fig.SAM-structures]).
         
@@ -106,33 +108,38 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
                         """[Mother Goose]
                             Humpty Dumpty sat on a wall.
                         
-        This objective is similar, but not identical, to the aim of mainstream concrete and hybrid languages, such as {Markdown} and {reStructuredText}, which is to have the source file be readable as a document. Those languages are document-domain languages, and they strive to make the document structure clear and readable from the markup. SAM has the same goal, except that SAM was designed primarily for creating {subject-domain} languages. As such, SAM is designed to make the subject-domain structure of a document clear to the reader. 
+        This objective is similar, but not identical, to the aim of mainstream concrete and hybrid languages, such as Markdown and reStructuredText, which is to have the source file be readable as a document. Those languages are document-domain languages, and they strive to make the document structure clear and readable from the markup. SAM has the same goal, except that SAM was designed primarily for creating subject-domain languages. As such, SAM is designed to make the subject-domain structure of a document clear to the reader. 
         
-        A SAM document may not look as much like a finished document as a {Markdown} or {reStructuredText} document. For example, it does not use underlines to visually denote different levels of header. Instead, it focuses on creating a hierarchy of named blocks and fields. In doing so, it uses the kind of markup people commonly use to create named blocks of text and to express a hierarchical relationship between them. As you can see in [*fig.SAM-structures], blocks are introduced with a name followed by a colon, and hierarchy is expressed through indentation. 
+        A SAM document may not look as much like a finished document as a {Markdown}+(index "Markdown;SAM compared with")+(index "SAM;Markdown compared with") or {reStructuredText}+(index "reStructuredText;SAM compared with")+(index "SAM;reStructuredText compared with") document. For example, it does not use underlines to visually denote different levels of header. Instead, it focuses on creating a hierarchy of named blocks and fields. In doing so, it uses the kind of markup people commonly use to create named blocks of text and to express a hierarchical relationship between them. As you can see in [*fig.SAM-structures], blocks are introduced with a name followed by a colon, and hierarchy is expressed through indentation. 
 
         SAM is an open source project. A description of the language and a set of associated tools are available from {https://github.com/mbakeranalecta/sam}(url).
 
     section: DocBook
     
-        subjects:: type, term
-            markup-language, DocBook
+        block-index:
+            {DocBook}+(index "DocBook;extensibility of")
+            {schema}+(index "schema;customizing the DocBook")
     
-        {DocBook} is not really extensible in the same sense as the other languages mentioned here, but it still deserves a mention. DocBook provides a deliberately modular construction that makes it easy to create new {schemas} that include elements from DocBook. DocBook takes full advantage of the extensibility features built into XML schema languages. 
+        DocBook is not really extensible in the same sense as the other languages mentioned here, but it still deserves a mention. DocBook provides a deliberately modular construction that makes it easy to create new schemas that include elements from DocBook. DocBook takes full advantage of the extensibility features built into XML schema languages. 
                
-        DocBook has a large tag set, so if you want a small constrained {document-domain} markup language, you can often create one by sub-setting DocBook. DocBook provides just about any document structure out there, so if you are building a document-domain language, DocBook probably has the pieces you need. You can even add additional constraints.
+        DocBook has a large tag set, so if you want a small constrained document-domain markup language, you can often create one by sub-setting DocBook. DocBook provides just about any document structure out there, so if you are building a document-domain language, DocBook probably has the pieces you need. You can even add additional constraints.
         
-        The great advantage of creating a new language as a subset of DocBook is that the result is also a valid DocBook document and, therefore, can be published by the DocBook tool chain. You don't have to write any new publishing algorithms if you take this approach (other than to customize formatting, which is required with any system). Creating a subset of DocBook allows you to impose more constraints and improve {functional lucidity} significantly, compared to standard DocBook, without having to write any processing code at all.
+        The great advantage of creating a new language as a subset of DocBook is that the result is also a valid DocBook document and, therefore, can be published by the DocBook tool chain. You don't have to write any new publishing algorithms if you take this approach (other than to customize formatting, which is required with any system). Creating a subset of DocBook allows you to impose more constraints and improve {functional lucidity}+(index "functional lucidity;DocBook and") significantly, compared to standard DocBook, without having to write any processing code at all.
         
-        Technically speaking, any {XML}-based markup language is extensible in the same way. However, DocBook's structure, and the implementation of its schemas, was designed to support both extension and sub-setting, which is not true for many markup languages.
+        Technically speaking, any {XML}+(index "XML;extensibility of")-based markup language is extensible in the same way. However, DocBook's structure, and the implementation of its schemas, was designed to support both extension and sub-setting, which is not true for many markup languages.
         
     section: DITA
     
         subjects:: type, term
             markup-language, DITA
+
+        block-index:
+            {DITA}+(index "DITA;specialization")
+            {specialization}+(index "specialization")
     
-        {DITA}'s approach to extension is unique among markup languages. In fact, it is something of a misnomer to call DITA a markup language. The DITA standard calls it an information typing architecture. What is an information typing architecture?  
+        DITA's approach to extension is unique among markup languages. In fact, it is something of a misnomer to call DITA a markup language. The DITA standard calls it an information typing architecture. What is an information typing architecture?  
         
-        The conventional way to define a document type is to use a {schema language}. That is how XML and SAM do it. Schema languages describe constraints on markup structures. So what does an information typing architecture provide over and above what a schema language provides?
+        The conventional way to define a document type is to use a schema language. That is how XML and SAM do it. Schema languages describe constraints on markup structures. So what does an information typing architecture provide over and above what a schema language provides?
 
         An architecture is a set of principles for addressing a certain kind of problem. For instance, there are several different architectures for building bridges, including the beam bridge, the truss bridge, the arch bridge, and the suspension bridge. [#figure.bridgearchitectures] shows four basic architectural types, which you can see in hundreds of different bridges. 
 
@@ -146,7 +153,7 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
 
         Architectures partition the design problem for a structure. They divide the design space into pieces and provide design and construction guidance within each piece. A single architecture cannot address all cases. The suspension bridge is a great solution for crossing some gaps, but a beam or truss bridge is simpler and more economical for most common gaps. An architecture does not tell you what type of bridge to build; it helps you build a particular type of bridge once you know which type you need.
 
-        At the heart of each architecture you usually find one simple idea or principle. The arch bridge depends on the strength of the arch to support the load. The truss bridge depends on the rigidity of the triangle to provide strength, and the suspension bridge uses cables to transfer weight to towers. At the heart of the DITA architecture is a similarly simple idea, which I call the {block-and-map architecture}. That is, DITA treats information products as being constructed of blocks of information (which it calls _topics_) according to a hierarchical map. The {Assemble from Pieces}+(index "assemble-from-pieces reuse") {reuse algorithm} discussed in [#chapter.reuse] is an example of a block-and-map architecture.[*fn.block-and-map]
+        At the heart of each architecture you usually find one simple idea or principle. The arch bridge depends on the strength of the arch to support the load. The truss bridge depends on the rigidity of the triangle to provide strength, and the suspension bridge uses cables to transfer weight to towers. At the heart of the DITA architecture is a similarly simple idea, which I call the {block-and-map architecture}. That is, DITA treats information products as being constructed of blocks of information (which it calls _topics_) according to a hierarchical map. The {assemble-from-pieces}+(index "assemble-from-pieces reuse") {reuse algorithm} discussed in [#chapter.reuse] is an example of a block-and-map architecture.[*fn.block-and-map]
 
         footnote:(*fn.block-and-map)
             Note that DITA is not the only block-and-map architecture, and maps are not the only way to assemble blocks.
@@ -160,7 +167,7 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
 
         Just as every out-of-the-box tool has passionate advocates who will tell you it is right for every problem, there are passionate advocates of architectures like DITA who will tell you that it is right for all content systems. But the very nature of an architecture is to make it easier to address a particular class of problems by implementing a particular kind of solution. A universal architecture would have no content. Architectures get their usefulness by being specific and limited, not by being general or all-encompassing.
 
-        Although DITA is unique in calling itself an information typing architecture, there are other content architectures. For example, Adobe {FrameMaker} is based on an architecture that builds a document out of a set of nested frames. {Wikis} are based on an architecture that connects pages to each other using references -- wikiwords and categories -- embedded in the pages themselves. (In other words, a wiki is a block architecture where assembly is not based on maps.) Blog platforms implement a block-based architecture based on temporal sequence supplemented by categorization and tagging.
+        Although DITA is unique in calling itself an information typing architecture, there are other content architectures. For example, Adobe {FrameMaker}+(index "FrameMaker;architecture of") is based on an architecture that builds a document out of a set of nested frames. {Wikis}+(index "wiki;architecture of") are based on an architecture that connects pages to each other using references -- wikiwords and categories -- embedded in the pages themselves. (In other words, a wiki is a block architecture where assembly is not based on maps.) Blog platforms implement a block-based architecture based on temporal sequence supplemented by categorization and tagging.
 
         Even though all of these examples are architectures, they have not been described or formalized as architectures outside of the tools that implement them. The only other architecture I know of that is being formalized in this way is the one I am developing myself, {SPFE}, which I describe briefly later in this chapter. 
         
@@ -186,6 +193,10 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
 
         section: Basics of the DITA architecture
         
+            block-index:
+                {DITA}+(index "DITA;architecture")
+                {block-and-map architecture}+(index "block-and-map architecture")
+
             The fundamental block-and-map architecture of DITA consists of these pieces:
 
             1. A collection of schemas for a set of base block types ("topics" in DITA parlance)
@@ -205,7 +216,7 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
             pagination-tweak:
                 min-space: 1.5in
             
-            The DITA specification defines information typing as follows:  
+            The {DITA}+(index "DITA;information types in") specification defines {information typing}+(index "information typing;DITA") as follows:  
         
             """[Darwin Information Typing Architecture (DITA) Version 1.3 Part 3: All-Inclusive Edition]
                 Information typing is the practice of identifying types of topics, such as concept, reference, and task, to clearly distinguish between different types of information.[*XX]
@@ -213,7 +224,7 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
             footnote:(*XX)
                 {http://docs.oasis-open.org/dita/dita/v1.3/csd01/part3-all-inclusive/dita-v1.3-csd01-part3-all-inclusive.html#information-typing}(url)
 
-            Unfortunately this definition is largely circular -- information typing defines information types. But it does help establish a scale. Information typing is about defining a unit of information called a {topic}.
+            Unfortunately this definition is largely circular -- information typing defines information types. But it does help establish a scale. Information typing is about defining a unit of information called a {topic}+(index "topics;DITA").
 
             pagination-tweak:
                 min-space: 1.5in
@@ -234,9 +245,12 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
         
         section: Specialization
 
-            What is DITA {specialization}? XML syntax defines abstract structures that do not occur in documents: elements, attributes, etc. To create a markup language in XML, you define named elements and attributes for the structures you are creating. This is a type of specialization.
+            block-index:
+                {specialization}+(index "specialization")
+                {DITA}+(index "DITA;specialization")
+            What is DITA specialization? XML syntax defines abstract structures that do not occur in documents: elements, attributes, etc. To create a markup language in XML, you define named elements and attributes for the structures you are creating. This is a type of specialization.
 
-            For example, in {DocBook}, `para` is a type of element. `para` has what is called an _is-a_ relationship to elements: `para` is an element, but it is a special type of element. An XML parser will process a `para` generically as an element, reporting its name to another algorithm whose job is to interpret and act on that structure. This algorithm must supply a rule that processes just this specialized `para` element (and not the also specialized but different `title` element). All of the algorithms in this book act on structures reported to them by a parser.
+            For example, in DocBook, `para` is a type of element. `para` has what is called an _is-a_ relationship to elements: `para` is an element, but it is a special type of element. An XML parser will process a `para` generically as an element, reporting its name to another algorithm whose job is to interpret and act on that structure. This algorithm must supply a rule that processes just this specialized `para` element (and not the also specialized but different `title` element). All of the algorithms in this book act on structures reported to them by a parser.
         
             DITA specialization follows the same principle, but moves it up a level. The base `topic` topic type is the abstract structure. You can create a more specific type, such as `knitting-pattern` or `ingredients-list`, as a specialization of `topic` (or of other topic types that are themselves specializations of `topic`).  Each of these specialized types has an _is-a_ relationship with the type it was specialized from. So `knitting-pattern` _is a_ `topic`.
         
@@ -250,11 +264,11 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
 
             Then you might decide to impose still more constraints to describe different kinds of mammals, so you create the type `horse-description`, which is a specialization of `mammal-description`. This type would be processed as a `mammal-description` if no specific processing is provided for `horse-description`; as `animal-description` if no specific `mammal-description` processing is provided; and as `topic` if no specific `animal-description` processing is provided. 
         
-            The third way in which information typing in DITA differs from creating a language from scratch is that DITA information types share a common approach to processing and to information architecture. In particular, they inherit a common set of {management-domain} structures and their associated management semantics. 
+            The third way in which information typing in DITA differs from creating a language from scratch is that DITA information types share a common approach to processing and to information architecture. In particular, they inherit a common set of {management-domain}+(index "management domain;DITA and the") structures and their associated management semantics. 
 
             A DITA topic, then, comes with a lot of built-in functionality and structure that you don't have to reinvent when you create a specialized topic type. But the corollary is that not all content types are specialized instances of a DITA generic topic. This means that while the set of information types that you can create using specialization is unbounded in number, it is not unbounded in type. There are types you can't create by specialization, at least if you want to maintain the _is-a_ relationship to the base type (without which specialization isn't specialization at all). 
 
-            When we factored the ingredients of a recipe out of a {document-domain} list into a {subject-domain} record structure it was, in part, to make them independent of the decision to format them as a {table} or as a {list}. 
+            When we factored the ingredients of a recipe out of a {document-domain}+(index "document domain;moving content to the subject domain from the") list into a {subject-domain}+(index "subject domain;moving content from the document domain to the") record structure it was, in part, to make them independent of the decision to format them as a {table} or as a {list}. 
 
             figure:(*fig.ingredients-list) Subject-domain ingredients list
                 ```(sam)
@@ -263,11 +277,11 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
                         salt, 1, tsp
                         butter, .5, cup 
 
-            The ingredient record set in [*fig.ingredients-list] no longer has an _is-a_ relationship to a {table} or a {list}. The point was to break that relationship so you could present this content any way you wanted to. Because any structure specialized from a DITA topic should maintain an _is-a_ relationship to a DITA topic, which is a generic document-domain structure, you can use specialization to create subject-domain structures that intersect with the document domain, such as the `introduction`, `ingredients`, and `preparation` sections in a `recipe` document. However, you can't take the next step of factoring out the presentation, as I've done in [*fig.ingredients-list], since factoring out presentation breaks the _is-a_ relationship with the document domain.  
+            The ingredient record set in [*fig.ingredients-list] no longer has an _is-a_ relationship to a table or a list. The point was to break that relationship so you could present this content any way you wanted to. Because any structure specialized from a DITA topic should maintain an _is-a_ relationship to a DITA topic, which is a generic document-domain structure, you can use specialization to create subject-domain structures that intersect with the document domain, such as the `introduction`, `ingredients`, and `preparation` sections in a `recipe` document. However, you can't take the next step of factoring out the presentation, as I've done in [*fig.ingredients-list], since factoring out presentation breaks the _is-a_ relationship with the document domain.  
 
             In other words, the specialization mechanism lets you create any element name you like as a specialization of any other element name you like. As such, it can create any structure you like. But the entire justification of the specialization mechanism rests on the maintenance of the _is-a_ relationship between the specialized element and the base element. Once this is broken, code inheritance and fallback processing no longer work, and specialization simply becomes an unnecessarily complex and error prone way of writing a new and unrelated schema.
     
-            Labels are a big part of document-domain content. When we created a subject-domain structure for recording nutritional information for a recipe, we factored out all of the labels by putting the content in named fields. In other words, as shown in [*fig.nutrition], the labels went from being data (in the content) to {metadata} (part of the structure).
+            Labels are a big part of document-domain content. When we created a subject-domain structure for recording nutritional information for a recipe, we factored out all of the {labels}+(index "labels") by putting the content in named fields. In other words, as shown in [*fig.nutrition], the labels went from being data (in the content) to metadata (part of the structure).
 
             figure:(*fig.nutrition) Subject-domain structure for nutritional information
                 ```(sam)
@@ -304,14 +318,18 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
                     * 0.6 g    
                     * 6 g    
 
-            In short, there is no _is-a_ relationship between a pure {subject-domain} structure and a generic {document-domain} structure. The subject-domain structures are simply data fields with no presumption about presentation attached to them. 
+            In short, there is no _is-a_ relationship between a pure subject-domain structure and a generic document-domain structure. The subject-domain structures are simply data fields with no presumption about presentation attached to them. 
 
-            Does this mean that you cannot create a {subject-domain} structure using DITA's {specialization} mechanism? No, you can usually create the structure you want, and in a way that meets the syntax requirements of a DITA specialization. However, it won't be an actual {specialization} of its base type. Because it is a {subject-domain} structure, it breaks the _is-a_ relationship with the {document domain}. As I noted at the end of [#chapter.linking], {subject-domain} algorithms work completely differently from those of the {document domain}, so inheriting some of the processing of a base {document-domain} structure is moot once you move to the {subject domain}. Your new {subject-domain} structure will be an essentially unrelated structure for which you must create completely new processing algorithms, just as you would if you had defined your structure from scratch.
+            Does this mean that you cannot create a subject-domain structure using DITA's {specialization}+(index "specialization;creating a subject-domain structure with") mechanism? No, you can usually create the structure you want, and in a way that meets the syntax requirements of a DITA specialization. However, it won't be an actual specialization of its base type. Because it is a subject-domain structure, it breaks the _is-a_ relationship with the document domain. As I noted at the end of [#chapter.linking], subject-domain algorithms work completely differently from those of the document domain, so inheriting some of the processing of a base document-domain structure is moot once you move to the subject domain. Your new subject-domain structure will be an essentially unrelated structure for which you must create completely new processing algorithms, just as you would if you had defined your structure from scratch.
         
             Generally, the fewer pieces of an architecture you use, the less value there is to basing your work on that architecture, both because you have more work to do and because you take less advantage of the infrastructure, tools, and expertise surrounding that architecture. If you get too far away from the intention of architecture, you will create a system that is less understandable to people versed in the architecture. All this betrays a poor fit between the system partitioning you need and the partitioning the architecture provides. All architectures come with overhead, and even if you don't use their features, you have to live with the overhead, which adds cost and complexity to your system. Thus, while you can use DITA and depart from the default DITA way of doing things, the value of using DITA diminishes the further you depart from the DITA way. The same is true of any information typing architecture, just as it is true of any content development system.
 
         section: Limits on rhetorical constraint
         
+            block-index:
+                {rhetorical constraints}+(index "rhetorical constraints;limits on")
+                {DITA}+(index "DITA;rhetorical constraints in")
+
             Throughout this book I have stressed the value of constraining rhetoric, not only to improve rhetoric itself, but also to improve process. One of the limits imposed by DITA's topic and map architecture is that it limits the size of unit to which you can apply rhetorical constraints.
 
             For instance, if you regard a recipe as being made up of three topics -- one concept, one reference, and one task -- DITA lets you constrain the rhetoric of a specialized ingredient list reference topic, or a preparation task topic, but not of the recipe as a whole. DITA lets you write a map to combine a concept topic containing an introduction, a reference topic containing a list of ingredients, and a task topic containing preparation instructions. But it does not let you specify that a recipe topic consists of one concept topic, one reference topic, and one task topic in a particular order. In other words, DITA does not provide any direct way to define larger types or the overall rhetorical structure of documents.[*fn.specialize_map]
@@ -319,12 +337,12 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
             footnote:(*fn.specialize_map)
                 Actually, it might be technically possible to create a map that was constrained in this way through specialization. That is, you could create a recipe map that is allowed to contain exactly one recipe-intro topic, one ingredients-list topic, and one preparation topic in that order. But there is no higher level way of specifying this kind of constrained map and the {functional lucidity} of such an approach is clearly low. But the real point here is not the technical limitation but the limits of the block-and-map architecture itself to support effective rhetorical constraint. 
             
-            You can define a recipe topic type in DITA, but to do so you need to adopt a different view about how atomic a DITA topic is. Some DITA practitioners might say that a recipe is not a map made up of three information types, but a single task topic. In this view, a task topic is much more than what {Information Mapping} would call a procedure. It allows for the introduction of a task, a list of requirements, and the procedure steps all within the definition of a single topic. However, this approach abandons DITA's principle of segregating information types into separate files.[*fn.specialize-recipe]
+            You can define a {recipe}+(index "recipe;DITA model for a") topic type in DITA, but to do so you need to adopt a different view about how atomic a DITA topic is. Some DITA practitioners might say that a recipe is not a map made up of three information types, but a single task topic. In this view, a task topic is much more than what {Information Mapping} would call a procedure. It allows for the introduction of a task, a list of requirements, and the procedure steps all within the definition of a single topic. However, this approach abandons DITA's principle of segregating information types into separate files.[*fn.specialize-recipe]
 
             footnote:(*fn.specialize-recipe)
                 I have asked a number of DITA practitioners how a recipe should be modeled in DITA and have received each answer from multiple people. 
             
-            One of the reasons for this uncertainty about how to define an atomic topic in DITA is DITA's focus on {content reuse}. DITA topics are not only units of information typing, they are units of reuse. Making a recipe a single topic leaves you with fewer, larger units of content, which makes individual topics harder to reuse. The atomic unit of content that is small enough to maximize potential reuse is much smaller than the atomic unit of  content that contains a complete {rhetorical pattern}. The atomic unit of reuse is smaller than the atomic unit of use.
+            One of the reasons for this uncertainty about how to define an atomic topic in DITA is DITA's focus on {content reuse}+(index "content reuse;DITA"). DITA topics are not only units of information typing, they are units of reuse. Making a recipe a single topic leaves you with fewer, larger units of content, which makes individual topics harder to reuse. The atomic unit of content that is small enough to maximize potential reuse is much smaller than the atomic unit of  content that contains a complete {rhetorical pattern}+(index "rhetorical pattern;content reuse and"). The atomic unit of reuse is smaller than the atomic unit of use.
             
             Because DITA has no direct mechanism for describing models larger than a topic, a DITA practitioner must choose between modeling for maximum reuse and modeling to constrain a topic type to rhetorical structure. In practice, DITA users make different decisions about how atomic their topic types should be based on their business needs. 
 
@@ -333,27 +351,30 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
         subjects:: type, term
             tool, SPFE
     
-        {SPFE} is another project of mine. It is an architecture for implementing structured writing algorithms. Its structure follows the model I laid out in [#chapter.publishing]. Every structured writing publishing chain uses a similar model, since every publishing chain has to get content from the {subject domain} or the {document domain} into the {media domain}. But how that processing is partitioned is key to which structured writing algorithms you can implement in the publishing process and how cleanly you can insert them. SPFE specifies a division of responsibilities in a publishing tool chain that is intended to allow for the efficient partitioning of the content process and the development of structured writing algorithms. 
+        block-index:
+            {SPFE}+(index "SPFE;extensibility")
 
-        However, that is a little too general a description. As I said, no architecture can be optimized for all cases. The SPFE architecture, just like the DITA architecture, is optimized to favor certain algorithms and certain information designs. For instance, DITA is optimized for the {reuse algorithm} and {hierarchical information architectures}, while SPFE is optimized for the {linking algorithm} and a {hypertext} or {bottom-up information architecture}. This does not mean you can't do reuse in SPFE or linking in DITA. It simply means that these things are at the heart of the design of each. Architectures are just a starting point for building systems. They don't determine the detailed features of a specific system, they provide guidance and tools for building systems of a particular type. 
+        SPFE is another project of mine. It is an architecture for implementing structured writing algorithms. Its structure follows the model I laid out in [#chapter.publishing]. Every structured writing publishing chain uses a similar model, since every publishing chain has to get content from the subject domain or the document domain into the media domain. But how that processing is partitioned is key to which structured writing algorithms you can implement in the publishing process and how cleanly you can insert them. SPFE specifies a division of responsibilities in a publishing tool chain that is intended to allow for the efficient partitioning of the content process and the development of structured writing algorithms. 
 
-        SPFE and DITA are also optimized for working in different structured writing domains. DITA is based in the {document domain}, since its base topic types are document domain types, and like all document-domain systems, it makes heavy use of management-domain structures. SPFE does not include any base types in the architecture, so it is not tied to one domain in the same way DITA is, but it is intended mainly to support the {subject domain}. (The subject domain requires an additional processing stage compared to document-domain systems and the SPFE architecture supports that additional stage.) Since the SPFE architecture is not based on any particular content model, it supports pulling in content from diverse sources and source formats.
+        However, that is a little too general a description. As I said, no architecture can be optimized for all cases. The SPFE architecture, just like the DITA architecture, is optimized to favor certain algorithms and certain information designs. For instance, DITA is optimized for the reuse algorithm and hierarchical information architectures, while SPFE is optimized for the linking algorithm and a hypertext or {bottom-up information architecture}+(index "bottom-up information architecture;SPFE and"). This does not mean you can't do reuse in SPFE or linking in DITA. It simply means that these things are at the heart of the design of each. Architectures are just a starting point for building systems. They don't determine the features of a specific system, they provide guidance and tools for building systems of a particular type. 
+
+        SPFE and DITA are also optimized for working in different structured writing domains. DITA is based in the document domain, since its base topic types are document domain types, and like all document-domain systems, it makes heavy use of management-domain structures. SPFE does not include any base types in the architecture, so it is not tied to one domain in the same way DITA is, but it is intended mainly to support the subject domain. (The subject domain requires an additional processing stage compared to document-domain systems and the SPFE architecture supports that additional stage.) Since the SPFE architecture is not based on any particular content model, it supports pulling in content from diverse sources and source formats.
 
         Another big contrast between DITA and SPFE is that DITA is a {block-and-map architecture}, whereas SPFE is designed to support automatic collection and linking of content based on metadata, meaning that no maps are required. Of course, this means that information architects or content engineers have to write the algorithms to do the desired collection and linking for a specific information set, as opposed to using a generic mechanism as in DITA. The SPFE architecture is designed to support this work. 
 
-        One of the features of the {subject domain} is that it allows you to greatly reduce the amount of {management domain} features you need. Generating information architecture from metadata rather than specifying it with maps, means writers don't need to know how to link or assemble the pieces they write. Together, these features mean that authors don't need to know much if anything about the publishing system. While writers working in {DITA} typically require extensive DITA training, individual writers working in a {subject-domain} SPFE system need to know little or nothing about how SPFE works, as long as they follow the constraints of the markup language they are using.
+        One of the features of the subject domain is that it allows you to greatly reduce the amount of {management domain}+(index "management domain;minimizing the need for the") features you need. Generating information architecture from metadata rather than specifying it with maps, means writers don't need to know how to link or assemble the pieces they write. Together, these features mean that authors don't need to know much if anything about the publishing system. While writers working in {DITA}+(index "DITA;training requirements") typically require extensive DITA training, individual writers working in a subject-domain SPFE system need to know little or nothing about how SPFE works, as long as they follow the constraints of the markup language they are using.
 
-        I have noted that the DITA architecture allows some ambiguity about whether a {DITA} topic is a {rhetorical block} or merely a {semantic block} and that DITA cannot constrain any unit larger than a topic. However, the real source of this problem for DITA is the block-and-map architecture. SPFE places no inherent constraint on the size of units processed by a SPFE system, so it does not place limits on the rhetorical constraints you can apply. However, if you try to implement block-and-map reuse below the level of a rhetorical block with any system, including SPFE, you will encounter the same problem. There are forms of reuse, particularly in the subject domain, that avoid these issues, though they are not as general as block-and-map reuse in the document domain.
+        I have noted that the DITA architecture allows some ambiguity about whether a DITA topic is a rhetorical block or merely a semantic block and that DITA cannot constrain any unit larger than a topic. However, the real source of this problem for DITA is the block-and-map architecture. SPFE places no inherent constraint on the size of units processed by a SPFE system, so it does not place limits on the rhetorical constraints you can apply. However, if you try to implement block-and-map reuse below the level of a rhetorical block with any system, including SPFE, you will encounter the same problem. There are forms of reuse, particularly in the subject domain, that avoid these issues, though they are not as general as block-and-map reuse in the document domain.
         
         SPFE does not define a base set of content structures the way DITA does, nor does it develop information types by specialization the way DITA does. In SPFE, you can do information typing from scratch, as long as you follow certain guidelines. But SPFE also supports a higher level of information typing that uses a technique called composition.
 
-        As with {DITA} {specialization}, SPFE composition includes both content structures and the code that processes them. But rather than creating one topic type from another by specialization, SPFE lets you assemble an information type, of any scale, by assembling existing definitions of {semantic blocks} and their associated algorithms, like building a model out of Lego blocks. Because a semantic block can also serve as a {structural block} in assembling a larger semantic block, this process also works iteratively. The result is that you can take advantage of existing design work and coding in the creation of your information types without the restrictions on size and type that come with DITA specialization. 
+        As with {DITA}+(index "DITA;specialization versus SPFE composition") {specialization}, {SPFE}+(index "SPFE;composition") composition includes both content structures and the code that processes them. But rather than creating one topic type from another by specialization, SPFE lets you assemble an information type, of any scale, by assembling existing definitions of {semantic blocks}+(index "semantic blocks;SPFE") and their associated algorithms, like building a model out of Lego blocks. Because a semantic block can also serve as a structural block in assembling a larger semantic block, this process also works iteratively. The result is that you can take advantage of existing design work and coding in the creation of your information types without the restrictions on size and type that come with DITA specialization. 
 
-        To create a {subject-domain} {markup language} in {SPFE}, therefore, you define the key subject-domain fields and blocks that are essential to your business. You can include all the other {semantic blocks} you need, such as paragraphs, lists, tables, and common annotations, using pre-built components, along with their default processing code. 
+        To create a subject-domain markup language in {SPFE}+(index "SPFE;creating a subject-domain language with"), therefore, you define the key subject-domain fields and blocks that are essential to your business. You can include all the other semantic blocks you need, such as paragraphs, lists, tables, and common annotations, using pre-built components, along with their default processing code. 
 
-        By strictly segregating the presentation and formatting layers, SPFE reduces the effort required to process custom markup formats. Custom formats are processed to a common {document-domain} markup language which is then processed to all required {media-domain} output formats. The {SPFE Open Tool Kit} includes a basic {document-domain} language for this purpose, but you can also use {DocBook} or {DITA} in this role, allowing you to take advantage of their existing publishing capabilities. This also allows you to install SPFE as an authoring layer on top of an existing DITA or DocBook tool chain.      
+        By strictly segregating the presentation and formatting layers, SPFE reduces the effort required to process custom markup formats. Custom formats are processed to a common document-domain markup language which is then processed to all required media-domain output formats. The {SPFE Open Tool Kit} includes a basic document-domain language for this purpose, but you can also use {DocBook}+(index "DocBook;tool chain") or {DITA}+(index "DITA;tool chain") in this role, allowing you to take advantage of their existing publishing capabilities. This also allows you to install SPFE as an authoring layer on top of an existing DITA or DocBook tool chain.      
 
-        I developed SPFE because I am not a fan of the block-and-map architecture, of which DITA is the most widely known example today. Block-and-map architectures provide good support for ad hoc {reuse}, but at the expense of poor support for many other structured writing algorithms, for the {subject domain}, and for {functional lucidity}. I believe that many organizations would benefit from a different partitioning of their content systems supported by a different architecture. But picking a architecture is all about meeting your business goals efficiently and if extensive ad hoc reuse is the overwhelming driver of your content system redesign, then a block-and-map architecture like DITA (but not just DITA) is something you should look at.   
+        I developed SPFE because I am not a fan of the block-and-map architecture, of which DITA is the most widely known example today. Block-and-map architectures provide good support for ad hoc {reuse}+(index "content reuse;ad hoc"), but at the expense of poor support for many other structured writing algorithms, for the subject domain, and for functional lucidity. I believe that many organizations would benefit from a different partitioning of their content systems supported by a different architecture. But picking a architecture is all about meeting your business goals efficiently and if extensive ad hoc reuse is the overwhelming driver of your content system redesign, then a block-and-map architecture like DITA (but not just DITA) is something you should look at.   
         
         Both {SAM} and {XML} are supported as markup syntax for {SPFE}, and you can freely mix and match SAM and XML content. 
         
