@@ -76,7 +76,7 @@ chapter:(#chapter.constraints) Constraint Languages
     
     In the {Schematron} example ([*fig.schematron]), the schema is a series of constraint statements. The hierarchy of the document is a consequence of meeting all the constraints. Any document is valid as long as it conforms to all the stated constraints. 
     
-    There are two ways to describe constraints:
+    There are two ways to describe {constraints}+(index "constraints;types of schema"):
     
     * Nothing is allowed unless a specific rule allows it.
     * Everything is allowed unless a specific rule forbids it.
@@ -85,13 +85,13 @@ chapter:(#chapter.constraints) Constraint Languages
         
     Starting with the doctrine that everything is allowed is not a good model for structured writing. To write algorithms that can handle a document, you have to know what elements and attributes are allowed and in what combinations. This is why Schematron is seldom used as a standalone schema language. It is more frequently used to express constraints that cannot be expressed in the main schema language. 
 
-    The wider point here is that in the course of writing and publishing content you often need to express and enforce constraints. Some constraints -- for example resolving {key} references -- can be expressed only during the publishing process. You can match a key to a value or resource only after the {synthesis algorithm} is complete and all the elements of the published content set have been assembled and resolved. 
+    The wider point here is that in the course of writing and publishing content you often need to express and enforce constraints. Some constraints -- for example resolving {key} references -- can be expressed only during the publishing process. You can match a key to a value or resource only after the {synthesis algorithm}+(index "synthesis algorithm;key references and the") is complete and all the elements of the published content set have been assembled and resolved. 
 
     Constraints, therefore, do not exist at just a single point in the writing and publishing process. You must consider them across the entire publishing process. In particular, when an error occurs in the publishing process, trace it back to where the constraint that could have prevented it was violated and ask how you could better implement or enforce that constraint.
     
     Two of the most basic design principles of any system are to catch errors as early as possible and to design any error-prone process to make errors less likely. The earlier you catch an error, the less work you waste before the error is detected. And if you can remove the possibility of the error occurring at all, you can avoid all the costs of detecting and fixing the error as well as the greater costs of not catching the error before the content is in the hands of the reader.
 
-    Schema languages are excellent tools for expressing constraints in structured writing. However, in partitioning your content system you also need to determine where each constraint should be enforced. The content process is about getting ideas from the writer's head to dots on a page or screen. Therefore, you need to enforce constraints and catch errors as close as you can to the beginning of the process: the ideas in the writer's head. Rhetorical constraints can play a large role in improving not just quality but also process, because they impose constraints and catch errors nearer to ideas in the writer's head, rather than trying to catch them as dots on the page. 
+    Schema languages are excellent tools for expressing constraints in structured writing. However, in partitioning your content system you also need to determine where each constraint should be enforced. The content process is about getting ideas from the writer's head to dots on a page or screen. Therefore, you need to enforce constraints and catch errors as close as you can to the beginning of the process: the ideas in the writer's head. {Rhetorical constraints}+(index "rhetorical constraints") can play a large role in improving not just quality but also process, because they impose constraints and catch errors nearer to ideas in the writer's head, rather than trying to catch them as dots on the page. 
 
     This means moving your content closer to the subject domain. When you sit down to write a schema, you should not simply think about how to express constraints; you should also think about whether you can factor them out, possibly by moving the content to a different domain. Subject-domain structures tend to be simpler and stricter than document- and media-domain structures. This means that it is easier to write schemas for the subject domain than for the other domains. Schema languages are powerful tools, but they should be used in conjunction with a correct partitioning of the content system.  
     
