@@ -15,7 +15,7 @@ chapter:(#chapter.constraints) Constraint Languages
     
     For {concrete markup languages}, such as {Markdown}+(index "Markdown;constraints in"), the constraints are established in the code of the processor. A Markdown file is validated when the processor parses that file. (In practice, though, Markdown does no meaningful validation. Anything it does not recognize as markup, it simply outputs as text.)
 
-    For {abstract markup languages}, such as {XML}+(index "XML;constraints in"), you define structures yourself. Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a {validator}+(index "validation;software for").
+    For {abstract markup languages}, such as {XML}+(index "XML;constraints in"), you define structures yourself. Basic XML syntax is validated by the parser, but the definition of constraints is the business of a schema language. The validation of those constraints is the business of a piece of software called a {validator}+(index "validation;software for")+(italic).
     
     A schema language is a structured language for defining structured languages. The schema for a markup language says what structures are allowed and in what order and relationship. A given document either conforms to those constraints or it does not. 
 
@@ -55,7 +55,7 @@ chapter:(#chapter.constraints) Constraint Languages
 
     While most schema languages work by modeling the structure of a document, as in the {Relax NG} example ([*fig.relaxng]), {Schematron} works by making assertions about the structure in a language called {XPath}(tool). A {Schematron} schema would make a lousy guide for authoring, but it uses assertions to enforce constraints that no other schema language can. 
         
-    [*fig.schematron] is a simple {Schematron} example. It defines one of the constraints listed above, namely that a book element must contain at least one page element. 
+    [*fig.schematron] is a simple {Schematron} example that defines one of the constraints listed above, namely that a book element must contain a page 240, meaning it must contain at least 240 pages.
 
     figure:(*fig.schematron) Schematron rule that constrains `book` elements to contain at least 240 `page` elements
         ```(schematron)

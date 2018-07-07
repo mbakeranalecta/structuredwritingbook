@@ -237,13 +237,8 @@ chapter:(#chapter.separating) Separating Content from Formatting
         
         To separate content from {formatting}+(index "formatting;separating out abstract") for ordered and unordered {lists}+(index "lists;labeled"), you must separate out some of the content as well. Specifically, you must separate out some of the characters. The distinction between content and formatting is not the same as the distinction between characters and the styles applied to them. Sometimes characters are part of the formatting rather than the content. Consider the following labeled-list structure:        
 
-        |Street| 123 Elm Street       
-
-        |Town| Smallville
-            
-        |Country| USA
-            
-        |Code| 12345
+        
+        >>>(image ../graphics/labeled-list.xml)
         
         The generic structure of a labeled list might look like this:
         
@@ -276,16 +271,16 @@ chapter:(#chapter.separating) Separating Content from Formatting
                     code: 12345
         
         
-        Here, once again, it is important to distinguish {formatting}+(index "formatting;presentation versus") and {presentation}+(index "presentation;formatting versus"). _Formatting_ refers to the precise details of a text's appearance: the font chosen, the width of the text column, the size of the characters, the spacing between lines, the size and shape of the bullet characters, and so forth. _Presentation_ refers to the organization of text.
+        Here, once again, it is important to distinguish {formatting}+(index "formatting;presentation versus") and {presentation}+(index "presentation;formatting versus"). {Formatting}+(italic) refers to the precise details of a text's appearance: the font chosen, the width of the text column, the size of the characters, the spacing between lines, the size and shape of the bullet characters, and so forth. {Presentation}+(italic) refers to the organization of text.
 
         Deciding to use a list for a certain piece of information is a presentation decision, which is independent of the formatting details applied to lists. When you move content from the {media domain}+(index "media domain;moving content from the document domain to the") to the {document domain}+(index "document domain;moving content to the"), you separate the formatting of the content from its presentation. The decision to present the information as a list remains; the decision about what that list looks like is separated out.
 
-        In contrast, moving content from the {document domain}+(index "document domain;moving content to the subject domain from the") to the {subject domain}+(index "subject domain;moving content from the document domain to the") separates the {information}+(italic)+(index "information, separating presentation from") from the _presentation_. The subject-domain structure in [#ex.separate-1] is not a labeled list. It is a data record that can be turned into many different forms of {presentation}+(index "presentation;separating information from"). 
+        In contrast, moving content from the {document domain}+(index "document domain;moving content to the subject domain from the") to the {subject domain}+(index "subject domain;moving content from the document domain to the") separates the {information}+(italic)+(index "information, separating presentation from") from the {presentation}+(italic). The subject-domain structure in [#ex.separate-1] is not a labeled list. It is a data record that can be turned into many different forms of {presentation}+(index "presentation;separating information from"). 
         
         Turning such structures into a specific form of presentation is the job of the presentation algorithm (see [#chapter.publishing]). The presentation algorithm could turn it into a labeled list, a table, a paragraph, or an address label.
         
         In the {subject domain}, with the content separated from both formatting and presentation, you also gain the ability to query and reorganize the content in various interesting and useful ways (which I explore in later chapters). 
         
-        This is as far as you can go in separating content from formatting, and you can't separate all content from formatting to quite this extent. Separating content from format is not a binary operation. There are various degrees of separation that you can apply for various reasons. It is important to understand exactly which degree of separation best serves your needs. 
+        This is as far as you can go in separating content from formatting, and you can't separate all content from formatting to quite this extent. Separating content from formatting is not a binary operation. There are various degrees of separation that you can apply for various reasons. It is important to understand exactly which degree of separation best serves your needs. 
         
     
