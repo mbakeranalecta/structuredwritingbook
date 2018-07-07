@@ -1,5 +1,5 @@
 !smart-quotes: on
-chapter:(#chapter.duplication) Avoiding duplication
+chapter:(#chapter.duplication) Avoiding Duplication
     
     <<<(annotations.sam)
     
@@ -8,8 +8,11 @@ chapter:(#chapter.duplication) Avoiding duplication
         concept, single sourcing
         concept, duplication
         algorithm, avoiding duplication
+
+    block-index:
+        {duplication}+(index "duplication;avoiding")
         
-    Duplicate content is a significant source of complexity in any content organization. Not only is it expensive, but different versions of the content may not agree with each other, which creates complexity for readers. When the subject matter changes, only one of the duplicates may get updated, causing further drift between the two versions (and updating two versions is twice the work). Duplicate and near-duplicate content may also affect search results.[*fn.seo-penalty] The need to detect duplicate content is therefore a major source of complexity in the content system.
+    Duplicate content is a significant source of {complexity}+(index "complexity;duplication as a source of") in any content organization. Not only is it expensive, but different versions of the content may not agree with each other, which creates complexity for readers. When the subject matter changes, only one of the duplicates may get updated, causing further drift between the two versions (and updating two versions is twice the work). Duplicate and near-duplicate content may also affect search results.[*fn.seo-penalty] The need to detect duplicate content is therefore a major source of complexity in the content system.
 
     footnote:(*fn.seo-penalty)
         The issue of how search engines treat duplicate content is complex. A lot of that complexity has to do with how duplicate is defined and how the search engine interprets the intent of the duplication it finds. For example, a search engine may filter duplicate or near duplicate content and list only one of the duplicated pages, which may not be the page your reader is looking for. For more information see {https://www.hobo-web.co.uk/duplicate-content-problems/}(url)  
@@ -20,9 +23,9 @@ chapter:(#chapter.duplication) Avoiding duplication
 
     To avoid creating duplicate content, writers need to determine as quickly as possible whether a piece of content already exists or not. This check takes place countless times, so even if the cost of a single check is small, the cumulative cost can be large, significantly slowing down your content system. Small costs with high repetition rates are often the hardest to detect and least satisfying to fix, whereas the wins from detecting duplication are often more visible and more satisfying. But it is important to make sure that your efforts to limit content duplication don't cost more than they save.  
 
-    This problem obviously affects any attempt at {content reuse}, since every time you set out to reuse content, you have to determine if reusable content exists. The longer that effort takes, the longer, and therefore more expensive, each instance of content reuse becomes. And bear in mind that you incur this cost every time a writer looks for duplicate content, whether it exists or not, but you realize any savings only when reusable content is found. Indeed, failed attempts are often more expensive, since the writer has to exhaust all possibilities, whereas successful attempts end as soon as relevant content is found.
+    This problem obviously affects any attempt at {content reuse}+(index "content reuse;detecting duplicate content"), since every time you set out to reuse content, you have to determine if reusable content exists. The longer that effort takes, the longer, and therefore more expensive, each instance of content reuse becomes. And bear in mind that you incur this cost every time a writer looks for duplicate content, whether it exists or not, but you realize any savings only when reusable content is found. Indeed, failed attempts are often more expensive, since the writer has to exhaust all possibilities, whereas successful attempts end as soon as relevant content is found.
 
-    To implement a system for detecting and eliminating duplicate content, you need a clear plan for exactly how writers are going to detect duplicate content or find content to {reuse}, and you need to ensure that the overhead of using such a system does not outweigh the benefits it provides. 
+    To implement a system for detecting and eliminating duplicate content, you need a clear plan for exactly how writers are going to detect duplicate content or find content to reuse, and you need to ensure that the overhead of using such a system does not outweigh the benefits it provides. 
 
     Given the cost of finding duplicate content by hand, handing the task over to algorithms is highly desirable. But to hand the task over to algorithms, you need to define what constitutes duplication in precise terms and preserve the information that reflects those terms.  
     
@@ -160,7 +163,7 @@ chapter:(#chapter.duplication) Avoiding duplication
         It helps greatly if the duplicate content plays a consistent role. That is the case for the warning for dangerous procedures described in [#chapter.management-domain]. That warning has a clear purpose and a clear anchor point in any document it appears in.[*fn.anchor-point] Without a clear purpose and anchor point, the chances of writers remembering to include the existing content, rather than creating a duplicate, goes down substantially. A subject-domain structure -- the mandatory `is-it-dangerous` field -- can fully define both the purpose and the anchor point, thus making it impossible for writers to forget or neglect to include the warning. This is a clear example of rhetorical structure supporting reliable process.
 
         footnote:(*fn.anchor-point)
-            An _anchor point_ is a defined location in your content where reused text is inserted or referenced. Using the warning example, in a document-domain structure, the anchor point is the position in the text where you would place markup that identifies where the warning should be inserted, and in a subject-domain structure, the anchor point would be the location of the `is-it-dangerous` field.
+            An _anchor point_ is a defined location in your content where reused text is inserted or referenced. Using the warning example, in a document-domain structure, the anchor point is the position in the text where you would place markup that identifies where the warning should be inserted.
 
         Finding a reliable anchor for detecting duplication gets more difficult the smaller the content unit you try to apply it to. For example, should you try to remove duplicate sentences that occur frequently but in different contexts? The phrase "Press OK" occurs frequently in technical document, and it always means the same thing. However, would replacing it with a variable reduce complexity or make any part of the content system more reliable? The number of repeated words, phrases, and sentences in the average technical document is very high and treating them all as duplicate content is obviously not feasible, nor would it solve an obvious problem. So, when should you regard a piece of content below the document level as duplicate?
 
@@ -179,7 +182,7 @@ chapter:(#chapter.duplication) Avoiding duplication
 
     section: Duplication and the level of detail 
         
-        Another problem with identifying duplication deals with the level of detail in which a subject is treated. For example, most {Wikipedia} articles on countries contain a section on the economy of that country. At the beginning of that section there is a link to an entire article describing the economy of that country followed by a brief summary, which is less detailed. There may also be a brief mention of the highlights of the country's economy in the four or five context-setting paragraphs that lead most Wikipedia articles. These different levels of detail serve different user needs, and therefore, each is a valuable contribution to the content set. In other words, they are not duplicates, because, although they address the same subject, they serve different audiences and different purposes.
+        Another problem with identifying duplication deals with the level of detail with which a subject is treated. For example, most {Wikipedia} articles on countries contain a section on the economy of that country. At the beginning of that section there is a link to an entire article describing the economy of that country followed by a brief summary, which is less detailed. There may also be a brief mention of the highlights of the country's economy in the four or five context-setting paragraphs that lead most Wikipedia articles. These different levels of detail serve different user needs, and therefore, each is a valuable contribution to the content set. In other words, they are not duplicates, because, although they address the same subject, they serve different audiences and different purposes.
 
         Everything we know about effective rhetoric tells us that you need to address different audiences and different tasks differently. Taking a piece of content designed for one audience and using it for all other audiences -- or attempting to write generic content that takes no account of any audience's needs or tasks -- is certain to produce content that is significantly less effective. 
 
@@ -246,9 +249,12 @@ chapter:(#chapter.duplication) Avoiding duplication
 
         Having hard and fast rules that define duplication as two pieces of content having the same values in the same set of fields works well when the subject matter lends itself to that degree of structure. But not all content can be structured this precisely. Fortunately, structured writing techniques can be used to implement some less formal approaches to detecting duplication. These approaches are more probabilistic than certain and may be more appropriate as {audit} tools rather than tools you would expect writers to use before starting to write. Still, they can be useful, and they can detect duplication that other methods might not find.
     
-        For instance, if your content contains index entries -- like those we looked at in [#chapter.linking]  -- that list the subjects they cover by type and term, you could have an algorithm compare index entries across your topic set and flag pairs of topics whose index entries contain the same type/term combinations. Often it is appropriate for topics of different types, such as a programming topic and an API reference topic, to have similar or identical index terms, since these topics treat the same API functions in different ways (same subject but different audience or purpose). However, if you find topics of the same type with matching or near-matching sets of index terms, those topics may contain duplicate content.
+        For instance, if your content contains block-level subject annotations -- like those we looked at in [#chapter.linking] -- that list the subjects they cover by type and term, you could have an algorithm compare those annotations across your topic set and flag pairs of topics on the same subject. Often it is appropriate for topics of different types, such as a programming topic and an API reference topic, to have similar or identical subject annotations, since these topics treat the same API functions in different ways (same subject but different audience or purpose). However, if you find topics of the same type with matching or near-matching sets of subject annotations, those topics may contain duplicate content.
 
-        You can do a similar check based on {subject annotations}. This is less precise than the index approach, because subject annotations annotate subjects the topic refers to rather than subjects the topic describes. However, if two topics contain subject annotations that refer to many of the same subjects, those topics may contain duplicate content.      
+        You can do a similar check based on inline {subject annotations} on phrases. This is less precise than comparing block-level annotations, because inline subject annotations annotate subjects the phrase refers to rather than subjects the topic describes.[*fn.normalization-phrase] However, if two topics contain subject annotations that refer to many of the same subjects, those topics may contain duplicate content.      
+
+        footnote:(*fn.normalization-phrase)
+            That is, phrase-level annotations tell you what subjects are mentioned in the course of describing the subject of a topic. For example, John Wayne may be mentioned in a review of {Rio Brave}(citetitle), but the review is about the movie, not John Wayne.
 
         There are tools available that claim to detect duplication using natural language methods. I'm not going to comment on the specific capabilities of such tools, but there are a few obvious downsides to these methods. First, they can only compare two completed texts to see if they are duplicates. They can't detect whether the text you are thinking of creating already exists. Second, these methods look for the same or similar text, which is not the same as looking for the same or similar information. Similar information can be expressed using very different words, and similar words can convey very different information.   
   
@@ -277,7 +283,7 @@ chapter:(#chapter.duplication) Avoiding duplication
 
         The extent to which you can do this depends on how well-structured your content types are. Let's look at some scenarios:
 
-        * The ideal scenario is that the content model factors out repeated content altogether. If our `procedure` structure contains a compulsory `is-it-dangerous` field, then the warning text has been completely factored out. All the writer has to do is correctly fill out the `is-it-dangerous` field. 
+        * The ideal scenario is that the content model factors out repeated content altogether. If your `procedure` structure contains a compulsory `is-it-dangerous` field, then the warning text has been completely factored out. All the writer has to do is correctly fill out the `is-it-dangerous` field. 
 
         * Merging sources is also a powerful approach, since the material for both versions is now created by the same writer at the same time. 
 

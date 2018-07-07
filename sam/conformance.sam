@@ -8,7 +8,7 @@ chapter:(#chapter.conformance) Conformance
 
     Structured writing uses constraints to govern rhetoric and to partition and redirect process complexity. In doing so, it transfers decisions from one partition to another. When you transfer a decision, you must transfer the information needed to make the decision, which in turn depends on everyone conforming to the applicable constraints. Every failure to conform means that some piece of information is not transferred and, therefore, some complexity goes unhandled. Since {complexity}+(index "complexity;conformance and") cannot be destroyed, it falls through to a downstream process and ultimately to the reader. Therefore, a key part of developing a structured writing system is designing structures that support and express conformance to constraints.
     
-    Conformance is a complex problem. You can't expect to be successful if you just make up structures and systems and demand conformance to their constraints without any thought as to how conformance is to be specified and assessed. It is possible (and all too common) to invent a system that would operate flawlessly if everyone conformed, but which fails in the real world because it is impossible to conform to the constraints.
+    Conformance is a complex problem. You can't expect to be successful if you just make up structures and systems and demand conformance to their constraints without any thought as to how conformance is to be supported and assessed. It is possible (and all too common) to invent a system that would operate flawlessly if everyone conformed, but which fails in the real world because it is impossible to conform to the constraints.
     
     Constraints have always been part of writing. Style guides and grammatical reference works express constraints that writers are expected to follow. Editorial guidelines tell writers what kind of content a publisher is looking for, at what length, and in what format. If a publisher says that manuscripts must be delivered in DocBook or Microsoft Word, that is a constraint. When the government says that you must submit your online tax return in a particular file format, that is a constraint. 
     
@@ -81,7 +81,7 @@ chapter:(#chapter.conformance) Conformance
         
         Being consistent simply means abiding by constraints. You can either enforce the constraint by having writers use a required structure or, preferably, factor out the constraint so that it is handled by an algorithm. We have looked at how you can factor out constraints in both the document domain and the subject domain.
         
-        If you annotate the important things in your content set, such as the tool in [#fig.inline-annotation], you can use the annotations to check for naming consistency. For example, if a writer accidentally uses the term "spanner" rather than "wrench," you can catch the error in an audit against a list of approved tool names. This can reveal both incorrect names (consistency) and tools that may be missing from the official list (completeness).
+        If you annotate the important things in your content set, such as the tool in [#fig.inline-annotation], you can use the annotations to check for naming consistency, as described in [#chapter.taxonomy]. For example, if a writer accidentally uses the term "spanner" rather than "wrench," you can catch the error in an audit against a list of approved tool names. This can reveal both incorrect names (consistency) and tools that may be missing from the official list (completeness).
         
         The same applies to values in fields such as the wine match field in the recipe example. You can use the wine match field to compile a list of wines mentioned or check each mention against an approved list. More on this in [#chapter.taxonomy].
         
@@ -215,7 +215,7 @@ chapter:(#chapter.conformance) Conformance
             {constraints}+(index "constraints;data entry")
             {validation}+(index "validation")
             
-        If algorithms can read the data in your structures, they can check one piece of information against another. For instance, if you have `date-of-birth` and `age`, you can calculate current age from `date-of-birth` and compare it with `age`. If the values don't match, the writer has made an error, and you can report it. [#ex.age-data-pseudo] shows pseudocode for such a test.
+        If algorithms can read the data in your structures, they can check one piece of information against another. For instance, if you have `date-of-birth` and `age` (as in [#fig.person-46]), you can calculate current age from `date-of-birth` and compare it with `age`. If the values don't match, the writer has made an error, and you can report it. [#ex.age-data-pseudo] shows pseudocode for such a test.
 
         figure:(#ex.age-data-pseudo) Pseudocode to compare `age` field with calculated age
             ```(pseudocode)
@@ -226,7 +226,7 @@ chapter:(#chapter.conformance) Conformance
 
         block-index:
             {referential integrity}+(index "referential integrity")
-        In the management domain, there are a set of constraints that I call referential integrity constraints.[*fn.referential-integrity] Referential integrity simply means that if you refer to something, that thing should exist. In the management domain, we often give {IDs}+(index "IDs;referential integrity of") to structures and use those IDs to refer to those structures for purposes such as content reuse.
+        In the management domain, there are a set of referential integrity constraints.[*fn.referential-integrity] Referential integrity simply means that if you refer to something, that thing should exist. In the management domain, we often give {IDs}+(index "IDs;referential integrity of") to structures and use those IDs to refer to those structures for purposes such as content reuse.
 
         footnote:(*fn.referential-integrity)
             The term referential integrity comes from the relational database world, where it has the same meaning.
@@ -317,7 +317,7 @@ chapter:(#chapter.conformance) Conformance
 
         If you create structures that are difficult for writers to understand (for example, if they are complex management-domain structures that require complex abstract IDs), then they have to think about issues outside of their area of expertise. And when you dump complexity on writers that they are ill-equipped to handle, they have to stop thinking about writing and their subject matter and start thinking about the system. Since most writers don't really understand how complex structured writing systems work, they tend to do whatever it takes to make the system stop throwing errors and accept their work. This often produces dumb compliance to mechanical system constraints rather than intelligent conformance to content constraints. And this dumb compliance dumps the complexity that the writer could not handle on the reader or another part of the organization. 
 
-        The key to achieving conformance is to create structures that are easy to conform to. For most content, conformance is not about trying to catch evil doers. The writers are on your side, and they try to produce good content. Writers who understand structured content may impose constraints as an aid to their own work, just as a carpenter, for instance, might design a jig to guide their saw. Constraints are a tool for writers, not a defense against them. Constraints may force lazy writers to pull up their socks and do some more research or force inattentive writers to recast their first draft into a more consistent format. But constraints should never prevent a diligent writer from doing good work. 
+        The key to achieving conformance is to create structures that are easy to conform to. For most content, conformance is not about trying to catch evil doers. The writers are on your side, and they try to produce good content. Writers who understand structured content may impose constraints as an aid to their own work, just as a carpenter, for instance, might design a jig to guide their saw. Constraints are a tool for writers, not a defense against misconduct. Constraints may force lazy writers to pull up their socks and do some more research or force inattentive writers to recast their first draft into a more consistent format. But constraints should never prevent a diligent writer from doing good work. 
         
         Therefore, the real core of compliance in structured writing is not enforcement; it's creating structures that clearly and specifically:
         

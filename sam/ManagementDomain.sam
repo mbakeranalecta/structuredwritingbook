@@ -111,7 +111,7 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
                     step: Press the big red button.
         
         
-        This markup identifies the procedure as dangerous, a fact about the subject matter that our rhetorical standards require us to mention. Rather than making writers remember that a warning is required, locate the warning file, and include a reference to the file, we delegate those decisions to the {publication algorithm}. The algorithm, not the writer, must remember to include the material in `files/shared/admonitions/danger` whenever the `is-it-dangerous` field of a `procedure` structure is set to `yes`. Algorithms are much better at this sort of task than humans are.
+        This markup identifies the procedure as dangerous, a fact about the subject matter that your rhetorical standards require you to mention. Rather than making the writer remember that a warning is required, locate the warning file, and include a reference to the file, you delegate those decisions to the {publication algorithm}. The algorithm, not the writer, must remember to include the material in `files/shared/admonitions/danger` when the value of the `is-it-dangerous` field of a `procedure` structure is set to `yes`. Algorithms are much better at this sort of task than humans are.
 
         Of course, writers still must remember to set `is-it-dangerous` to `yes` when they write a procedure (another example of creating a new constraint when we factor out an old one). But you can make it much easier for them to remember this requirement by making `is-it-dangerous` a mandatory field in the procedure structure and raising an error if the field is not included. This transfers the complexity of remembering the requirement and fulfilling it from the writer to the {conformance} and {publication} algorithms. 
 
@@ -132,7 +132,7 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
         figure:(*ex.md-7) DITA product attribute example
             ```(DITA)
                 <p>
-                the car seats <ph product="CX-5">5</ph><ph product="CX-9">7</ph>
+                The car seats <ph product="CX-5">5</ph><ph product="CX-9">7</ph>
                 </p>
         
                 

@@ -128,13 +128,13 @@ chapter:(#chapter.wide) Wide Structures
         block-index:
             {tables}+(index "tables;alternatives to")
     
-        Structured writing is about partitioning and redirecting the complexity of content so that it is always handled by someone with the attention, knowledge, and resources to handle it. As the discussion above demonstrates, table markup dumps a lot of complexity on writers, complexity they are not fully able to handle because they don't control the final formatting of content in all the media and devices it will be presented on. The best way to partition the problem, therefore, is to factor out the decision to present information as a table. Let writers capture information, and move the decision on whether to present that information as a table or in some other form down the road. 
+        Structured writing is about partitioning and redirecting the complexity of content so that it is always handled by someone with the attention, knowledge, and resources to handle it. As the discussion above demonstrates, table markup dumps a lot of complexity on writers, complexity they are not fully able to handle because they don't control the final formatting of content in all the media and devices it will be presented on. The best way to partition the problem, therefore, is to factor out the decision to present information as a table. Let writers capture information as data, and move the decision on whether to present that information as a table or in some other form down the road. 
         
         What can you factor the content into? There are a number of alternatives, depending on what you are using the table for. 
         
         section: Alternate presentations
         
-            In many cases, tables simply aren't necessary. There are other ways to present the content with no loss of comprehensibility or quality. Sometimes, tables are just used to format lists, particularly lists with two levels of nesting. If a list is an equally effective way of presenting content, choose a list rather than a table when writing in the document domain. Sometimes only part of the content needs to be in tabular format and can be express just as well as other, simpler structures that contain a table or tables within them.
+            In many cases, tables simply aren't necessary. There are other ways to present the content with no loss of comprehensibility or quality. Sometimes, tables are just used to format lists, particularly lists with two levels of nesting. If a list is an equally effective way of presenting content, choose a list rather than a table when writing in the document domain. Sometimes only part of the content needs to be in tabular format and can be expressed just as well using other, simpler structures that contain a table or tables within them.
         
         section: Subject-domain structure
 
@@ -169,11 +169,11 @@ chapter:(#chapter.wide) Wide Structures
             
         There are some texts, particularly computer code and data, in which line breaks are meaningful. (Poetry is another example, but its issues are simpler than those of code, so I will stick to talking about code.) Code is a form of structured writing and, in many languages, whitespace -- meaning line breaks, spaces, and indentation -- is part of the markup that defines the structure of the program. Therefore, when you present code in a document, you have to respect whitespace. 
         
-        Furthermore, programmers usually work in a fixed-width font, meaning that all the letters are the same width when displayed. Programmers align similar structures with whitespace to make them easier to read; using a proportional width font for code in documentation messes up formatting and looks weird to programmers. It also makes the code less recognizable as code, which could reduce {information scent}.
+        Furthermore, programmers usually work in a fixed-width font, meaning that all the letters are the same width when displayed. Programmers align similar structures with whitespace to make them easier to read; using a proportional-width font for code in documentation messes up formatting and looks weird to programmers. It also makes the code less recognizable as code, which could reduce {information scent}.
 
         Therefore, computer code, data, and other similar formats where whitespace is meaningful must be presented in a fixed-width font with line breaks placed where they are supposed to be. That makes code samples wide objects, just like tables, with many of the same issues when it comes to rendering them on small devices. One saving grace is that programming examples are less likely to have issues with height.
 
-        There is not much you can do to help the {rendering}+(index "rendering algorithm;programming examples and the") algorithm when it comes to code. The options for fitting wide code on a narrow display are: shrink to fit, scroll to view, or truncate. You probably do not want your rendering algorithm to make a different choice for different kinds of code. Needless to say, putting a code block inside another wide structure, such as a table, is a recipe for disaster, as [#broken-table-formatting] shows. It would be wisest not to allow this in your markup language design.
+        There is not much you can do to help the {rendering}+(index "rendering algorithm;programming examples and the") algorithm when it comes to code. The options for fitting wide code on a narrow display are: shrink to fit, scroll to view, truncate, or introduce extra line breaks, which may or may not following coding rules. You probably do not want your rendering algorithm to make a different choice for different kinds of code. Needless to say, putting a code block inside another wide structure, such as a table, is a recipe for disaster, as [#broken-table-formatting] shows. It would be wisest not to allow this in your markup language design.
 
         What is essential is that your document-domain or subject-domain markup clearly indicate when a piece of text is code. Preferably it should also indicate what kind of code it is, since knowing this can allow the formatting algorithm to do syntax highlighting for code in a known language and can allow the linking algorithm to detect and link API calls to the API reference. In some cases it might even allow an algorithm to validate the code to make sure it runs or uses the current version of the API.
 
@@ -314,7 +314,7 @@ chapter:(#chapter.wide) Wide Structures
                 $graphic = find graphic where type = dialog box 
                     and name = $dialog-box-name
                     and platform = $current-build-platform
-                insert graphic
+                insert $graphic
                 
         There are several benefits to this partitioning of the image problem:
         
@@ -341,7 +341,7 @@ chapter:(#chapter.wide) Wide Structures
 
         The XML file in [#fig.sam.inclusion] describes the idea of the image, listing not only its source file and both of its renderings, but even a text description for use when the graphic cannot be displayed. By including this file instead of an image file, I was able to include the idea of the graphic in my content. When the content is processed, the {presentation algorithm} loads and reads the `assemble.xml` file and uses the information in it to generate the conditionalized {DocBook}+(index "DocBook;graphics handling in") file that becomes the source file for the {formatting algorithm}+(index "formatting;DocBook tool chain"), which is implemented by the publisher's existing DocBook tool chain. 
 
-        figure:(#fig.sam.inclusion) Graphics inclusion example
+        figure:(#fig.sam.inclusion) Graphics metadata file example
             ```(xml)
                 <?xml version="1.0" encoding="UTF-8"?>
                 <image>

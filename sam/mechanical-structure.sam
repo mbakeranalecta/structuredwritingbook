@@ -1,5 +1,5 @@
 !smart-quotes: on
-chapter:(#chapter.mechanical-structure) Content as data
+chapter:(#chapter.mechanical-structure) Content as Data
 
     <<<(annotations.sam)
     
@@ -39,7 +39,7 @@ chapter:(#chapter.mechanical-structure) Content as data
 
         As Flynn's research illustrates, there is a good chance that writers don't think of their arguments as a strict hierarchy of points. Rather, they think of them as a sequence of points with headings occasionally inserted to break up the text or signal a change in emphasis or subject matter. 
         
-        To clearly define the rhetorical structure of a document, you have to divide it into blocks such as introduction, ingredients, and preparation. And, as previously noted, treating these parts of the rhetorical structure as blocks is essential to establishing a context where blocks can be identified and processed by algorithms.
+        Nevertheless, to clearly define the rhetorical structure of a document, you have to divide it into blocks such as introduction, ingredients, and preparation. And, as previously noted, treating these parts of the rhetorical structure as blocks is essential to establishing a context where blocks can be identified and processed by algorithms.
 
         Some semantic and rhetorical blocks are naturally more hierarchical than others. Even so, structured writing forces writers to think more hierarchically than they might otherwise, which means imposing a little bit of complexity on them to support all the partitioning and redirection of complexity needed for the content system overall. However, there is no need to do any more of this than the partitioning system demands.          
                 
@@ -54,7 +54,7 @@ chapter:(#chapter.mechanical-structure) Content as data
         
         * Use a flat {document-domain}+(index "document domain;flat versus hierarchical design") language. Examples are HTML and Markdown. The problem here is that a flat language imposes few constraints, and the lack of context-setting hierarchy makes it hard to model different types of document structures without creating hundreds of tags, which negates any {functional lucidity}+(index "functional lucidity;flat versus hierarchical design and") that you gain by keeping the language flat.
         
-        * Use a hierarchical document-domain language that has a permissive structure, so you can put blocks inside blocks in lots of different ways. An example of this is {DocBook}+(index "DocBook;hierarchy in"). The problem here is that the permutations make writing algorithms difficult, and you often need to impose additional writing constraints that go beyond those expressed or enforced by the markup itself. This again diminishes {functional lucidity}+(index "functional lucidity;flat versus hierarchical design and") and compromises {conformance}+(index "conformance;flat versus hierarchical design and"). (An interesting property of this approach is that the flexibility of the language means that writers can create documents that are very hierarchical or very flat. However, this is not really a virtue, because it is not clear how this choice contributes to improved content quality.)
+        * Use a hierarchical document-domain language that has a permissive structure, so you can put blocks inside blocks in lots of different ways. An example of this is {DocBook}+(index "DocBook;hierarchy in"). The problem here is that the permutations make writing algorithms difficult, and you often need to impose additional writing constraints that go beyond those expressed or enforced by the markup language itself. This again diminishes {functional lucidity}+(index "functional lucidity;flat versus hierarchical design and") and compromises {conformance}+(index "conformance;flat versus hierarchical design and"). (An interesting property of this approach is that the flexibility of the language means that writers can create documents that are very hierarchical or very flat. However, this is not really a virtue, because it is not clear how this choice contributes to improved content quality.)
         
         * Create a smaller, stricter document-domain language that fits the types of documents you want to write. The main difficulty with this approach is that you have to design your own language, which many organizations try to avoid. (In some cases you can reduce this effort by using a restricted subset of an existing language such as DocBook, something we will look at in [#chapter.extensible].) 
         
@@ -198,7 +198,7 @@ chapter:(#chapter.mechanical-structure) Content as data
         
         Different markup languages have different levels of support for additional annotation on blocks, so this issue is affected by the markup language you choose. SAM, for instance, supports only a limited, fixed set of additional annotations on blocks. Therefore, if you want to add constraints on interpretation, you have to use child blocks.  
         
-        In XML, however, there is broad (though not unlimited) support for additional annotations on blocks in the form of {attributes}+(index "attributes as annotations")+(index "XML;attributes versus elements as annotations"). In the XML world there is considerable choice, and considerable debate, about when and where to use elements versus. attributes in your content models.         
+        In XML, however, there is broad (though not unlimited) support for additional annotations on blocks in the form of {attributes}+(index "attributes as annotations")+(index "XML;attributes versus elements as annotations"). In the XML world there is considerable choice, and considerable debate, about when and where to use elements versus attributes in your content models.         
         
         Consider, for example, this XML element that contains two attributes but no content:
 
@@ -239,7 +239,7 @@ chapter:(#chapter.mechanical-structure) Content as data
                url="http://example.com/"
             />
         
-        The first says that `fn`, `org`, `tel`, and `url` are independent structures that belong as members to a `vcard` structure. The second says that the `vcard` structure has a number of data fields -- annotations -- that complete its meaning. 
+        The first says that `fn`, `org`, `tel`, and `url` are independent structures that belong together as members of a `vcard` structure. The second says that the `vcard` structure has a number of data fields -- annotations -- that complete its meaning. 
         
         Does this distinction matter terribly? Both allow you to get at the information you want. Both constrain the creation and the interpretation of data. There are limits to the version that uses attributes. In XML markup, you can't have more than one attribute with the same name, whereas you could have more than one child block with the same name (multiple `tel` elements for someone with more than one telephone number for instance). Also, XML specifies that attributes are unordered, so you can't restrain either the order in which writers create them or the order in which the parser reports them to a processing application. 
 
@@ -271,13 +271,13 @@ chapter:(#chapter.mechanical-structure) Content as data
                     </SPEECH>
                     …
 
-        Had this markup employed the normal refactoring of text into markup described in the discussions about the document and subject domains, then the number and title of scenes would have been factored out so that instead of:
+        The number and title of scenes can be factored out by refactoring text into markup using the techniques described in [#chapter.document-domain] and [#chapter.subject-domain]. If you do that, instead of:
         
         ```(xml)
             <SCENE>
                 <TITLE>SCENE I. Rousillon. The COUNT's palace.</TITLE>
         
-        you might have factored out the scene number and the word "SCENE" like this:
+        you can factor out the scene number and the word "SCENE" like this:
         
         ```(xml)
             <SCENE>

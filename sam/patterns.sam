@@ -63,11 +63,11 @@ chapter:(#chapter.patterns) Patterns
         That format is not terribly onerous to write, but there is still a small {functional lucidity}+(index "functional lucidity;patterns and") penalty. A writer might more naturally write:
         
         ```(sam)
-            ingredients::
+            ingredients:: ingredient
                 eggs 12
                 water 2qt
         
-        Ingredient name, quantity, and unit of measure are still distinct. Any human reader can see them instantly. The trick is to get an algorithm to read them the same way. This trick can be accomplished fairly easily using a regular expression:[*fn.regex]
+        Ingredient name, quantity, and unit of measure are still distinct. Any human reader can see them instantly. The trick is to get an algorithm to read them the same way. This trick can be accomplished using a regular expression:[*fn.regex]
         
         ```(re)
             (?P<ingredient>.+?)(?P<quantity>\d+)(?P<unit>qt|tsp|tbsp)?

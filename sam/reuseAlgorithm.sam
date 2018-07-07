@@ -110,14 +110,14 @@ chapter:(#chapter.reuse) Reuse
         
     section: Variable into variable
     
-        The {variable-into-variable}+(index "variable-into-variable reuse") technique is a variation on common into variable in which you select different common elements to pull into a set of variable documents.
+        The {variable-into-variable}+(index "variable-into-variable reuse") technique is a variation on common-into-variable reuse in which you select different common elements to pull into a set of variable documents.
         
         For example, suppose you decide to sell your product line in a new market. The new market has different safety regulations, which means you need to insert a different standard warning into your manuals for that market. In this case, you want to swap out the common elements used in your home market and substitute the common elements for the foreign market (see [*fig.variable2variable-diagram]). 
 
         figure:(*fig.variable2variable-diagram) Variable-into-variable diagram
             >>>(image ../graphics/variable2variable.xml)
         
-        In the common-into-variable example, you inserted the contents of a file that contained a standard warning. But for variable into variable, this approach does not work. Variable into variable requires you to load a different file for each market, but the content specifies a particular file name, making it difficult to select a different file for the new market. 
+        In the common-into-variable example, you inserted the contents of a file that contained a standard warning. But for variable-into-variable reuse, this approach does not work. Variable-into-variable reuse requires you to load a different file for each market, but the content specifies a particular file name, making it difficult to select a different file for the new market. 
     
         As always in structured writing, you look for a way to factor out the problematic content. So here, you look for a way to factor out the file name and replace it with something else.
         
@@ -233,7 +233,7 @@ chapter:(#chapter.reuse) Reuse
                       
             One downside of keys is that, by themselves, they can only point to a whole resource. This can force you to keep your reusable units in separate files. To avoid this, you can combine keys with IDs. [*fig.variable2variable-key-6] combines both danger warnings into one file and gives each an ID.
 
-            figure:(*fig.variable2variable-key-6) Keys and IDs combined
+            figure:(*fig.variable2variable-key-6) Warnings file with different versions identified by IDs
                 ```(sam)
                     warnings:
                         warning:(#warn_danger_domestic) 
@@ -264,7 +264,7 @@ chapter:(#chapter.reuse) Reuse
             
             This method partitions the warnings into separate files and also partitions the location of those files from the writer. Using keys as a bridge between two partitions can be a convenient way to manage content relationships without having to update source files every time the relationships change. 
 
-            The downside is that keys introduce an abstract element into the writer's world, and abstractions are a form of {complexity}+(index "complexity;keys and") that can be difficult to deal with. Instead of deciding which warning to use, writers have to decide which key or ID to use. However, that decision is not necessarily easier to make, and it requires more system knowledge and a more abstract way of thinking than the original decision that was factored out. Keys and IDs abstract out the actual act of inclusion, but that is the least complex part of ensuring that the standard warning is used. 
+            The downside is that keys introduce an abstract element into the writer's world, and abstractions are a form of {complexity}+(index "complexity;keys and") that can be difficult to deal with. Instead of deciding which warning to use, writers have to decide which key or ID to use. That decision is not necessarily easier to make, and it requires more system knowledge and a more abstract way of thinking than the original decision that was factored out. Keys and IDs abstract out the actual act of inclusion, but that is the least complex part of ensuring that the standard warning is used. 
         
     section: Common with conditions
     
@@ -539,7 +539,7 @@ chapter:(#chapter.reuse) Reuse
             
             With many reuse techniques, writers have to look for reusable content frequently. Not only does this take time and add complexity, writers have to pay that cost every time they look for content to reuse, whether they find it or not. Indeed, if writers must look for reusable content before they write anything, much of their time may be taken up with unsuccessful content queries. Reducing the expense of content queries, therefore, has to be a major component of any general reuse strategy. I look  at this in more detail in [#chapter.duplication].
 
-            Localized and constrained forms of reuse can avoid this cost trap. For instance, if your reuse is focused on producing manuals for different versions of a product, you can avoid having writers make frequent broad-based content queries to find reusable content. You merely need to ensure that writers are aware of the reuse strategies used for their projects.
+            Localized and constrained forms of reuse can avoid this cost trap. For instance, if your reuse is focused on producing manuals for different versions of a product, you can train writers on techniques specifically for this purpose, thus avoiding the need for them to make frequent, broad-based queries to find reusable content.
     
             Some content reuse techniques are easy to use in non-structured ways, and early in a project, it may seem like a non-structured approach to reuse speeds things up by allowing writers to reuse content wherever they find it. Over time, however, this approach can lead to a rat's nest of dependencies and relationships that makes it hard to update the content with any confidence. 
             
@@ -555,7 +555,7 @@ chapter:(#chapter.reuse) Reuse
     
         Here are three alternatives to content reuse:
         
-        |Duplicate but label| Allow information to be expressed in more than one place but clearly label the information so you can easily find it when you need to do an update. If this sounds like an inferior solution, consider that reuse techniques cannot possibly eliminate all repeated information without adding more complexity than they eliminate. Therefore, no matter how much reuse you do, when you have a major change in subject matter, you will still have to search your content for places that need to be updated.
+        |Duplicate but label| Allow information to be stored in more than one place but clearly label the information so you can easily find it when you need to do an update. If this sounds like an inferior solution, consider that reuse techniques cannot possibly eliminate all repeated information without adding more complexity than they eliminate. Therefore, no matter how much reuse you do, when you have a major change in subject matter, you will still have to search your content for places that need to be updated.
 
         |Reduce duplication| Content reuse is always content duplication. Reuse is predicated on the idea that you actually want to duplicate information in multiple publications. This idea is out of date. In the paper world, you had to give each customer a book that contained all the information needed, even if the same information occurred in many different books. But in an online environment, you don't need to duplicate information to make it available to every user who needs it. Maintaining the information once and linking to it whenever it is needed is often a much less complex solution. To do this efficiently may require some of the techniques described in [#chapter.linking].
         

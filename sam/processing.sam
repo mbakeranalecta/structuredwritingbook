@@ -12,7 +12,7 @@ chapter:(#chapter.processing) Processing Structured Text
     
         Moving content from the {media domain}+(index "media domain;factoring out invariants in the") to the {document domain}+(index "document domain;factoring out invariants in the") or the {subject domain} involves progressively factoring out invariants in the content. Each step in this process creates two artifacts: the structured content and the {invariant}+(index "invariants;reversing the factoring out of") piece that was factored out. 
         
-        Processing structured text is about putting the pieces back together -- combining the structured content with the invariants that were factored out. But processing structured text is also about making and/or executing the decisions that were partitioned away from the writer. These decisions may be invariant, such as applying approved corporate style, or they may be variable, such as presenting content differently in different media or for different audiences. Invariant decisions are always made the same way for a given purpose. They may be made differently for different purposes but still the same way for each purpose. 
+        Processing structured text is about putting the pieces back together -- combining the structured content with the invariants that were factored out. But processing structured text is also about making and/or executing the decisions that were partitioned away from the writer. These decisions may be invariant, such as applying approved corporate style, or they may be variable, such as presenting content differently in different media or for different audiences. 
 
         If factoring out the invariants moves content toward the document or subject domains, recombining the content with the invariants moves it in the opposite direction, toward the {media domain}. This could mean moving the content from the subject domain to the document domain or from the document domain to the media domain, or simply from a more abstract form in the media domain to a more concrete form, which is our first example.
 
@@ -224,7 +224,7 @@ chapter:(#chapter.processing) Processing Structured Text
                 title: Review of {Rio Bravo}(movie)
             
         
-        When you process, the processor will execute the `section/title` rule to deal with the title structure and the `movie` rule when the `movie` structure occurs in the course of processing the content of the `title` structure. The results are as follows:
+        When the content is processed, the processor will execute the `section/title` rule to deal with the title structure and the `movie` rule when the `movie` structure occurs in the course of processing the content of the `title` structure. The results are as follows:
         
         ```(html)
             <h3>Review of <i>Rio Bravo</i></h3>
@@ -236,7 +236,7 @@ chapter:(#chapter.processing) Processing Structured Text
         
         * For each rule, specify the new structure(s) and where to place the content in the new structure(s).
         
-        * For each rule, specify where to process any nested structures. I use the term `continue` for this function.
+        * For each rule, specify where to process any nested structures. In my pseudocode, I use the term `continue` for this function.
         
         * If you want a different rule for a structure that occurs in different contexts, write a separate rule for each context.
         
