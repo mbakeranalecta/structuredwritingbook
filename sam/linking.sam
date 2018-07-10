@@ -9,7 +9,7 @@ chapter:(#chapter.linking) Linking
     block-index:
         {linking algorithm}+(index "linking;algorithm")
         
-    A large part of the complexity of content is that readers do not read in a straight line. Numerous studies[*1] have shown that readers often read opportunistically, looking for one piece of information or the answer to a particular question. Their behavior can best be described as {information foraging}. They are sniffing for the scent of the information they want and will follow its trail as long as the scent gets stronger and the trail is easy to follow. 
+    A large part of the complexity of rhetoric and information architecture arises because readers do not read in a straight line. Numerous studies[*1] have shown that readers often read opportunistically, looking for one piece of information or the answer to a particular question. Their behavior can best be described as {information foraging}. They are sniffing for the scent of the information they want and will follow its trail as long as the scent gets stronger and the trail is easy to follow. 
 
     footnote:(*1)
         For a discussion of these studies and their implications for how we write, see my book {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}.
@@ -26,13 +26,13 @@ chapter:(#chapter.linking) Linking
     
     The trail readers follows through an information set has junction points, places where they can decide to keep going straight through the current document or turn aside to look at a different document. While readers can decide to switch documents at any point and for any reason, the most common reason for switching is because they want more information about, or are simply more interested in, a subject mentioned in the current document.
 
-    Even if each document describes just one subject, it still mentions many other subjects in the course of describing its own subject. Thus, a movie review mentions actors, directors, and other movies; a recipe mentions cooking techniques such as whisking and grilling; and a programming topic mentions functions, libraries, and data structures.
-
     section:(*sect.linking-subject-affinities) Subject affinities
         subjects:: type, term
             concept, subject affinities
-        
-        I call the points where a document mentions related subjects {subject affinities}+(italic). Subject affinities are the junction points where the subjects of different pieces of content intersect, the points were the reader may choose to turn or to go straight on. 
+            
+        Even if each document describes just one subject, it still mentions many other subjects in the course of describing its own subject. Thus, a movie review mentions actors, directors, and other movies; a recipe mentions cooking techniques such as whisking and grilling; and a programming topic mentions functions, libraries, and data structures.
+
+        I call the points where a document mentions related subjects {subject affinities}+(italic). Subject affinities are the junction points where the subjects of different pieces of content intersect -- the points where the reader may choose to turn or to go straight on. 
 
         Suppose you are reading a recipe and come across the instruction "sweat the onions," but you don't know how to do that. You can't continue without that knowledge, so you turn aside in search of it. The words "sweat the onions" are a point of subject affinity between the recipe and the cooking technique of sweating vegetables. Your decision to turn in search of additional information at this point is not arbitrary. It follows from the relationship between the task of making the dish and a cooking technique used in that task. Writers can anticipate that some readers will need to make this turn at this point of subject affinity. 
 
@@ -48,7 +48,7 @@ chapter:(#chapter.linking) Linking
     
         Thus, you should not think solely in terms of managing links. Instead, you should think about managing {subject affinities}+(index "subject affinities;alternatives to linking for") and supporting them in a way that works best with each of your output formats.
     
-        One of the biggest problems with {link management}+(index "link management") is that it's complex and often time-consuming. As a result, many organizations do not link their content adequately, nor do they provide alternative ways to handle subject affinities. They just dump the complexity of finding the next piece of information right back on the reader.
+        One of the biggest problems with {link management}+(index "link management") is that it is complex and often time-consuming. As a result, many organizations do not link their content adequately, nor do they provide alternative ways to handle subject affinities. They just dump the complexity of finding the next piece of information right back on the reader.
     
         However, there are ways to {partition}+(index "partitioning;link management and") the complexity of link management and subject affinity management that make it much easier and more economical for writers to provide good subject affinity support. To understand how to do this, it is useful to look at how link and subject affinity management works in each of the {structured writing domains}.
       
@@ -313,7 +313,7 @@ chapter:(#chapter.linking) Linking
 
         Partitioning always introduces new complexity to replace what has been partitioned out. In this case, the new complexity is the effort required to create {subject-domain}+(index "subject domain;subject affinities in the") annotations. However, this partitioning is particularly effective both because annotating subject affinities requires only knowledge the writer already has and because the same annotation is useful for so many other algorithms. This is one of the best features of the subject domain -- its structures can serve multiple algorithms rather than just one, which is, in itself, a highly effective partitioning of complexity.
 
-        However, although the responsibility of finding resources to link to has been partitioned away from writers, you still need to consider the people and processes that are now required to locate appropriate resources. They do this by looking up resources based on the subject information (type and term) captured by the subject annotation. For this you need content that is annotated at the document level using those types and terms (or their semantic equivalents). You can annotate your document to describe their subjects by adding fields at the document level. (This is {metadata}.) If you have a page on John Wayne, you can annotate it's subjects as shown in [*fig.linking-index].
+        However, although the responsibility of finding resources to link to has been partitioned away from writers, you still need to consider the people and processes that are now required to locate appropriate resources. They do this by looking up resources based on the subject information (type and term) captured by the subject annotation. For this you need content that is annotated at the document level using those types and terms (or their semantic equivalents). You can annotate your documents to describe their subjects by adding fields at the document level. (This is {metadata}.) If you have a page on John Wayne, you can annotate its subjects as shown in [*fig.linking-index].
 
         figure:(*fig.linking-index) Index information about John Wayne
             ```(sam)
@@ -378,8 +378,8 @@ chapter:(#chapter.linking) Linking
         
         In the {document domain}+(index "document domain;subject affinities in the"), the data structures tend to have a one-to-one correspondence with their algorithms. As system designers determine they need a particular algorithm, they create structures to support that algorithm. Thus, document-domain languages have separate structures for linking, reuse, indexing, and single sourcing. (Some of these may be {management-domain}+(index "management domain;subject affinities in the") structures, of course.)
         
-        In the {subject domain}+(index "subject domain;subject affinities in the"), however, the data structures reflect the subject matter. You won't find a one-to-one correspondence between a structure and the algorithm it supports. Thus, you will not find markup for links, {reuse}, indexing, or {single sourcing} in the subject domain. You will find subject annotations that clarify and delineate the subject matter of the content. Any algorithm must interpret {subject annotations} and use them as the basis for creating whatever kind of document or {media-domain}+(index "media domain;subject affinities in the") structure you need for publishing.
+        In the {subject domain}+(index "subject domain;subject affinities in the"), however, the data structures reflect the subject matter. You won't find a one-to-one correspondence between a structure and the algorithm it supports. Thus, you will not find markup for links, {reuse}, indexing, or {single sourcing} in the subject domain. You will find subject annotations that clarify and delineate the subject matter of the content. Algorithms that work on subject-domain content must interpret {subject annotations} and use them as the basis for creating whatever kind of document or {media-domain}+(index "media domain;subject affinities in the") structure you need for publishing.
         
-        System designers still must decide which algorithms they need, so they can ensure that the information that drives those algorithms is present in the content. However, since every subject structure can drive many publishing algorithms, you will often find that your subject-domain content already supports any new algorithm you want to apply. This helps {future proof} your content.
+        System designers still must decide which algorithms they need, so they can ensure that the information that drives those algorithms is present in the content. However, since every subject structure can drive many publishing algorithms, you will often find that your subject-domain content already supports any new algorithm you want to apply.
                 
         Therefore, moving from the document domain to the subject domain is not a matter of looking for the subject-domain equivalent of a document-domain structure. Instead, it's a matter of asking what information in the subject domain drives the creation of document-domain structures. Subject-domain content can look very different from its document-domain counterpart, and it will often be starkly simpler and easier to understand. This represents a better partitioning of complexity. But as noted before, all complexity has to go somewhere, and the use of the subject domain tends to transfer more of the complexity to the information architect or content engineer.
