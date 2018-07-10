@@ -380,4 +380,51 @@
       <xs:element name="p" type="p-type"/>
     </xs:sequence>
   </xs:complexType>
+  <xs:element name="index">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="index-see">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="record">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="term" type="xs:string"/>
+                    <xs:element name="see" type="xs:string"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="index-see-also">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="record">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="term" type="xs:string"/>
+                    <xs:element name="see-also" type="xs:string"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="index-use-see-if-secondary">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="record">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="term" type="xs:string"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
