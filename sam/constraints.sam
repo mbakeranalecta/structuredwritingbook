@@ -70,7 +70,7 @@ chapter:(#chapter.constraints) Constraint Languages
                 </pattern>
             </schema>
 
-    The rule says that in the context of the element `book`, the assertion that there is an element `page` that is number 240 in the sequence of pages must be true. In other words, there must be at least 240 pages in a book. If not, the message in the `assert` element is displayed. 
+    The rule says that in the {context}+(index "context") of the element `book`, the assertion that there is an element `page` that is number 240 in the sequence of pages must be true. In other words, there must be at least 240 pages in a book. If not, the message in the `assert` element is displayed. 
     
     In the {Relax NG} schema example ([*fig.relaxng]), the schema is essentially a template that models the hierarchy of the document. The constraints are consequences of the structure of that hierarchy. For example, the `book` element cannot contain text because there is no place for text in that part of the hierarchy. Only documents that conform to the template are valid.
     
