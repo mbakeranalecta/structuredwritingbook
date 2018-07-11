@@ -1251,9 +1251,20 @@
                 </xsl:for-each>   
                     
             </xsl:if>
+            
+            <!-- If the section has subsections, the index end terms need to be tucked inside the last subsection.
+                But this can't be done from the processing of this section. It has to come as part of the processing 
+                of the subsection. This means a section has to look back up its parent tree of sections and 
+                determine if it needs to do end index range markers for any of them. 
+                
+                Logically, this only applies to a section that has no subsections, since otherwise any end markers 
+                would have to be inside its last subjection. That is what the test below is doing for chapter
+                end range markers, but it needs to do it for any parent sections as well.
+            
+            -->
 
             <xsl:if test="not(following::section) and not(section)">
-                <xsl:for-each select="/chapter/subjects/record">
+                <xsl:for-each select="/chapter/subjects/record | ancestor::section/subjects/record">
                     <xsl:variable name="term" select="term"/>
                     <xsl:variable name="type" select="type"/>         
                     <db:indexterm class="endofrange">
@@ -1272,7 +1283,7 @@
                     </xsl:if>
                 </xsl:for-each>
 
-                <xsl:for-each select="block-index/p/phrase/annotation[@type = 'index']">
+                <xsl:for-each select="/chapter/block-index/p/phrase/annotation[@type = 'index'] | ancestor::section/block-index/p/phrase/annotation[@type = 'index']">
                     <db:indexterm class="endofrange">
                         <xsl:attribute name="startref">
                             <xsl:value-of select="generate-id()"/>
