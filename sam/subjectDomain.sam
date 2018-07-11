@@ -140,7 +140,7 @@ chapter:(#chapter.subject-domain) Writing in the Subject Domain
     
     Something interesting has happened here. Enforcing a rhetorical constraint -- you must specify prep time and number of servings -- moves you from markup that specifies presentation to markup that merely records data. In other words, `prep-time` and `serves` are data-oriented {subject-domain}+(index "subject domain;data-oriented structures in the") structures that do not specify presentation at all. By enforcing one rhetorical decision (always include prep time and servings), you factor out another rhetorical decision (how and where to express prep time and servings). Partitioning this required information from the presentation of the recipe shifts responsibility for conformance from the writer to the constraints imposed by the structures, making the design more testable and {repeatable}. 
     
-    Factoring out a {constraint}+(index "constraints;factoring out vs. enforcing") rather than enforcing it can be a difficult idea to adjust to. Our natural first instinct when trying to achieve a particular presentation is to specify it in detail. But this can be difficult, especially for rhetorical constraints such as requiring a recipe to contain certain pieces of information. Nor is it flexible if you want to vary the presentation. When you look at these kinds of problems, the first question should be, "Is there any way to factor out this constraint?" Impose a constraint only if you cannot factor it out. 
+    Factoring out a {constraint}+(index "constraints;factoring out") rather than enforcing it can be a difficult idea to adjust to. Our natural first instinct when trying to achieve a particular presentation is to specify it in detail. But this can be difficult, especially for rhetorical constraints such as requiring a recipe to contain certain pieces of information. Nor is it flexible if you want to vary the presentation. When you look at these kinds of problems, the first question should be, "Is there any way to factor out this constraint?" Impose a constraint only if you cannot factor it out. 
 
     When you _enforce_ a constraint, the information architect has made the decision, but the writer must execute that decision in the content. When you _factor out_ a constraint, the information architect has still made the decision, but an algorithm executes the decision, rather than the writer. Not only does this make the writer's job simpler, but it helps ensure conformance to the constraint and allows you to change the decision without changing the writer's content.
 
@@ -176,6 +176,9 @@ chapter:(#chapter.subject-domain) Writing in the Subject Domain
 
     section: Using subjects to establish context
 
+        block-index:
+            {context}+(index "context;subject as a way to set")
+            
         In [#chapter.document-domain], I noted that you can use context to identify the role that structures play in a document, which allows you to get away with fewer structures. For instance, you can use a single `title` tag for all titles because you can differentiate different types of titles from the context in which they occur. The same is true with {subject-domain}+(index "subject domain;using context in the") structures. They can provide context that allows you to treat basic text structures differently. 
             
         For example, consider the markup for the preparation steps in [*ex.subj-recipe-sam].

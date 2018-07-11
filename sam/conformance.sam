@@ -106,7 +106,7 @@ chapter:(#chapter.conformance) Conformance
         block-index:
             {constraints}+(index "constraints;semantic")
             {constraints}+(index "constraints;structural")
-            {semantic constraints}{semantic}+(index "semantic constraints")
+            {semantic constraints}+(index "semantic constraints")
             {structural constraints}+(index "structural constraints")
             
         We can divide constraints into two types: structural constraints and semantic constraints. Structural constraints deal with the relationships between text structures. Semantic constraints deal with the meaning of the content. For instance, consider the structure in [#fig.person-middle-age].[*fn.age-date]
@@ -235,7 +235,7 @@ chapter:(#chapter.conformance) Conformance
         
         Many management-domain algorithms go beyond this constraint and require referential integrity not only within a single document but between documents. Conformance to this type of referential integrity constraint can sometimes only be judged by the {publishing algorithm}+(index "publishing algorithm;referential integrity and the") when you publish a particular combination of documents. Thus, it is possible for a document to have referential integrity when published in one collection and to lack it when published in another. 
         
-        Since it is best to validate a constraint as early as possible, a content management system that is aware of the referential integrity constraints of a system (such as a {DITA CMS}+(index "DITA;content management system"), for example) may validate the referential integrity of content in all its potential combinations prior to publication.
+        Since it is best to validate a constraint as early as possible, a content management system that is aware of the referential integrity constraints of a system (such as a {DITA CMS}-(index)+(index "DITA;content management system"), for example) may validate the referential integrity of content in all its potential combinations prior to publication.
         
         Nevertheless, referential integrity constraints of this complexity still present a management and authoring headache, even with content management system support. So it is worth looking for a way to factor them out. One example of how this can be done is found in the various approaches to the {linking algorithm}+(index "linking;referential integrity and") (see [#chapter.linking]).
             
@@ -309,7 +309,7 @@ chapter:(#chapter.conformance) Conformance
             
         Mechanical constraints can do a lot to ensure and validate conformance. But conformance is fundamentally a human activity, and you need humans to conform to constraints that cannot be easily expressed or validated in purely mechanical terms. 
     
-        Schemas and downstream algorithms can verify that writers have created the required {mechanical structures}+(index "mechanical structures;conformance and") and, in some cases, whether they created them with content in the required form. But in most cases there is little or nothing that algorithms can do to verify that the content of a structure is actually what the structure says it is.  
+        Schemas and downstream algorithms can verify that writers have created the required {mechanical structures}+(index "mechanical structure;conformance and") and, in some cases, whether they created them with content in the required form. But in most cases there is little or nothing that algorithms can do to verify that the content of a structure is actually what the structure says it is.  
 
         If writers don't understand what a structure is for, or if they are not on-board with creating content according to the structure, they are not likely to create content that obeys the constraints that the structure expresses. And no mechanical conformance algorithm can ensure that they did not just write their content the way they wanted to and then wrap the required structured tags around it to make it pass the validation tests.
 

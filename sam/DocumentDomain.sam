@@ -91,6 +91,9 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
         
     section: Context and structure
         
+        block-index:
+            {context}+(index "context;structure and")
+
         Does the need for separate ordered and unordered list objects imply that you need a separate document-domain list structure for every possible way you might format a list? No. In fact, that would be working in the media domain by proxy. When you work in the document domain, you think in terms of document structures, not formatting, which means that each document-domain object must make sense in the document domain, not the media domain. Otherwise, the partitioning falls apart. 
         
         For example, consider nested {lists}+(index "lists;nested"). Items in a nested list are formatted differently from the list that contains them. At a minimum, they are indented more, and they usually have different number or bullet styles. In the {media domain}+(index "media domain;lists in the"), you would need a different style for each level.
@@ -131,7 +134,7 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
                 1. Tobermory
 
 
-        Both the inner and outer lists are ordered lists in the document domain, but in the media domain they are formatted differently based on context.
+        Both the inner and outer lists are ordered lists in the document domain, but in the media domain they are formatted differently based on {context}+(index "context;processing based on").
         
         In this case, the algorithm that formats the page distinguishes the inner and outer lists by looking at their parents. For instance, [*ex.nested-css] shows a CSS rule for a list item nested one deep.
 

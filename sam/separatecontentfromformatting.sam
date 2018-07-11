@@ -157,6 +157,9 @@ chapter:(#chapter.separating) Separating Content from Formatting
     section: Create containers to provide context
         subjects:: type, term
             structure, containers
+
+        block-index:
+            {context}+(index "content;structure as a way to define")
        
         One problem with this approach to creating lists is that you have to apply a different style to the first item of a list. It would be better if you could use the same style for each list item and have the numbering just work. However, this is hard to do because nothing in the content says where one numbered list ends and the next begins. For this you need a new abstraction. So far, you have {abstractions}+(index "abstractions;list") for ordered and unordered list items, but you don't have an abstraction for {lists}+(index "lists;containers for") themselves. 
         
@@ -193,7 +196,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
                 ordered-list-item:Repeat
         
        
-        To avoid this type of error, move the {abstraction}+(index "abstractions;move to containers") outward. Instead of creating ordered and unordered list items, create ordered and unordered lists:
+        To avoid this type of error, move the {abstraction}+(index "abstractions;moving to containers") outward. Instead of creating ordered and unordered list items, create ordered and unordered lists:
         
         ```
             paragraph: To wash hair:
@@ -219,7 +222,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
         
         Some markup languages take better advantage of containers than others. For example, {HTML}+(index "HTML;containers in") and {Markdown}+(index "Markdown;containers in") both provide six different heading levels. However, content under an `H2` or an `H5` heading is not in any container. The content simply comes after the heading. This means that is it perfectly possible and legal to use heading elements in any order you want. Writers must select the heading level and ensure that it fits the structure of their document.
           
-        By contrast, {DocBook}+(index "DocBook;containers in") has a {section}(element (DocBook)) structure. Like a list, a section records your interpretation of what you are creating in the document. The {section} structure instantiates the concept of a section. And once you have the instantiation of a section, you don't need six levels of heading. You can have one structure called {title}(element (DocBook)). Sections can be nested inside other sections, and the formatting algorithm applies the correct style to the title based on context.
+        By contrast, {DocBook}+(index "DocBook;containers in") has a {section}(element (DocBook)) structure. Like a list, a section records your interpretation of what you are creating in the document. The {section} structure instantiates the concept of a section. And once you have the instantiation of a section, you don't need six levels of heading. You can have one structure called {title}(element (DocBook)). Sections can be nested inside other sections, and the formatting algorithm applies the correct style to the title based on {context}+(index "context;processing based on").
 
         This eliminates decisions about which heading element to use; there is just one: `title`. This ensures that {headings}+(index "headings;hierarchy in") in output consistently reflect the document's section and subsection structure.[*fn.signposts] 
                
@@ -271,7 +274,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
                     code: 12345
         
         
-        Here, once again, it is important to distinguish {formatting}+(index "formatting;presentation versus") and {presentation}+(index "presentation;formatting versus"). {Formatting}+(italic) refers to the precise details of a text's appearance: the font chosen, the width of the text column, the size of the characters, the spacing between lines, the size and shape of the bullet characters, and so forth. {Presentation}+(italic) refers to the organization of text.
+        Here, once again, it is important to distinguish {formatting}+(index "formatting;presentation versus") and {presentation}+(index "presentation;formatting versus"). {Formatting}-(index)+(italic) refers to the precise details of a text's appearance: the font chosen, the width of the text column, the size of the characters, the spacing between lines, the size and shape of the bullet characters, and so forth. {Presentation}-(index)+(italic) refers to the organization of text.
 
         Deciding to use a list for a certain piece of information is a presentation decision, which is independent of the formatting details applied to lists. When you move content from the {media domain}+(index "media domain;moving content from the document domain to the") to the {document domain}+(index "document domain;moving content to the"), you separate the formatting of the content from its presentation. The decision to present the information as a list remains; the decision about what that list looks like is separated out.
 
