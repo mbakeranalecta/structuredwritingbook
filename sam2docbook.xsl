@@ -1264,7 +1264,7 @@
             -->
 
             <xsl:if test="not(following::section) and not(section)">
-                <xsl:for-each select="/chapter/subjects/record | ancestor::section/subjects/record">
+                <xsl:for-each select="/chapter/subjects/record">
                     <xsl:variable name="term" select="term"/>
                     <xsl:variable name="type" select="type"/>         
                     <db:indexterm class="endofrange">
@@ -1282,8 +1282,34 @@
                         </db:indexterm>
                     </xsl:if>
                 </xsl:for-each>
-
-                <xsl:for-each select="/chapter/block-index/p/phrase/annotation[@type = 'index'] | ancestor::section/block-index/p/phrase/annotation[@type = 'index']">
+                
+                <xsl:for-each select="ancestor::section/subjects/record">
+                    <xsl:variable name="term" select="term"/>
+                    <xsl:variable name="type" select="type"/>         
+                    <db:indexterm class="endofrange">
+                        <xsl:attribute name="startref">
+                            <xsl:value-of select="generate-id()"/>
+                        </xsl:attribute>
+                    </db:indexterm>
+                    
+                    <xsl:if test="$annotation-types/type/name = $type">
+                        <db:indexterm class="endofrange">
+                            <xsl:attribute name="startref">
+                                <xsl:value-of select="generate-id()"/>
+                                <xsl:text>x</xsl:text>
+                            </xsl:attribute>
+                        </db:indexterm>
+                    </xsl:if>
+                </xsl:for-each>
+                
+                <xsl:for-each select="/chapter/block-index/p/phrase/annotation[@type = 'index']">
+                    <db:indexterm class="endofrange">
+                        <xsl:attribute name="startref">
+                            <xsl:value-of select="generate-id()"/>
+                        </xsl:attribute>
+                    </db:indexterm>
+                </xsl:for-each>   
+                <xsl:for-each select=" ancestor::section/block-index/p/phrase/annotation[@type = 'index']">
                     <db:indexterm class="endofrange">
                         <xsl:attribute name="startref">
                             <xsl:value-of select="generate-id()"/>
