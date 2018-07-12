@@ -280,33 +280,7 @@
 
             </xsl:if>
 
-<!--            <xsl:if test="not(following::section) and not(section)">
-                <xsl:for-each select="/chapter/subjects/record/term">
-                    <db:indexterm class="endofrange">
-                        <xsl:attribute name="startref">
-                            <xsl:value-of select="generate-id()"/>
-                        </xsl:attribute>
-                    </db:indexterm>
-                </xsl:for-each>
-
-                <xsl:for-each select="/chapter/subjects/record/term">
-                    <db:indexterm class="endofrange">
-                        <xsl:attribute name="startref">
-                            <xsl:value-of select="generate-id()"/>
-                            <xsl:text>x</xsl:text>
-                        </xsl:attribute>
-                    </db:indexterm>
-                </xsl:for-each>
-
-                <xsl:for-each select="block-index/p/phrase/annotation[@type = 'index']">
-                    <db:indexterm class="endofrange">
-                        <xsl:attribute name="startref">
-                            <xsl:value-of select="generate-id()"/>
-                        </xsl:attribute>
-                    </db:indexterm>
-                </xsl:for-each>
-            </xsl:if>
--->        </db:chapter>
+        </db:chapter>
     </xsl:template>
 
     <xsl:template match="/preface">
@@ -1221,6 +1195,8 @@
             <xsl:apply-templates/>
 
             <!-- Index range end elements -->
+            
+            <!-- If you don't have any child sections, generate the end markeres for your own block indexes. -->
 
             <xsl:if test="not(section)">
                 <xsl:for-each select="subjects/record">
@@ -1263,7 +1239,7 @@
             
             -->
 
-            <xsl:if test="not(following::section) and not(section)">
+            <xsl:if test="not(following-sibling::section) and not(section)">
                 <xsl:for-each select="/chapter/subjects/record">
                     <xsl:variable name="term" select="term"/>
                     <xsl:variable name="type" select="type"/>         
