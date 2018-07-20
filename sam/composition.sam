@@ -24,7 +24,7 @@ chapter:(#chapter.composition) Composable Structures
                  {structures}+(index "structures;combining")
                  {XML}+(index "XML;combining structures in")
                  
-        The second requirement of composability is that the result of combining markup structures must be a valid document (must conform to the appropriate constraints for that document). The hierarchical nature of XML means that you can take a well-formed chunk of a {DocBook} file and drop in into the middle of a {DITA} file. The result would be an XML document that an XML parser could successfully parse, but it would not conform to the constraints of either {DITA} or {DocBook}. The tool chains for either language would not be able to process it. You need to do composition in a way that creates a document that meets the constraints of the target language. 
+        The second requirement of composability is that the result of combining markup structures must be a valid document (must conform to the appropriate constraints for that document). The hierarchical nature of XML means that you can take a well-formed chunk of a {DocBook} file and drop in into the middle of a {DITA} file. The result would be an XML document that an XML parser could successfully parse, but it would not conform to the constraints of either {DITA} or {DocBook}. The {tool chains} for either language would not be able to process it. You need to do composition in a way that creates a document that meets the constraints of the target language. 
           
         The most obvious way to do this it to make sure that all of your pieces come from the same markup language. Thus, DITA has good support for structural composability but only when all of the pieces are DITA. 
         
@@ -41,7 +41,7 @@ chapter:(#chapter.composition) Composable Structures
             
         While composability of structures is vital, it is not always sufficient. You could have pieces in a {media-domain}+(index "media domain;structural compatibility in the") language that are structurally compatible but formatted differently. The resulting document would be valid and would publish successfully, but it would be a mess of competing styles and fonts. Similarly you could have two pieces in the {document domain}+(index "document domain;structural compatibility in the") that are structurally compatible but have incompatible rhetoric. The resulting document would also publish successfully but might be incomprehensible.
 
-        You need to ensure that you have stylistic and rhetorical compatibility between the pieces you are composing, which you can ensure either by imposing stylistic and rhetorical constraints externally or by factoring them out by moving your content to the {subject domain}.
+        You need to ensure that you have stylistic and rhetorical compatibility between the pieces you are composing, which you can ensure either by imposing stylistic and rhetorical constraints externally or by factoring them out by moving your content to the {subject domain}+(index "subject domain;rhetorical constraints in the").
 
     section: Narrative flow
 

@@ -10,11 +10,11 @@ chapter:(#chapter.processing) Processing Structured Text
     
     section: Two into one: reversing the factoring out of invariants
     
-        Moving content from the {media domain}+(index "media domain;factoring out invariants in the") to the {document domain}+(index "document domain;factoring out invariants in the") or the {subject domain} involves progressively factoring out invariants in the content. Each step in this process creates two artifacts: the structured content and the {invariant}+(index "invariants;restoring factored-out") piece that was factored out. 
+        Moving content from the {media domain}+(index "media domain;factoring out invariants in the") to the {document domain}+(index "document domain;factoring out invariants in the") or the {subject domain}+(index "subject domain;factoring out invariants in the") involves progressively factoring out invariants in the content. Each step in this process creates two artifacts: the structured content and the {invariant}+(index "invariants;restoring factored-out") piece that was factored out. 
         
         Processing structured text is about putting the pieces back together -- combining the structured content with the invariants that were factored out. But processing structured text is also about making and/or executing the decisions that were partitioned away from the writer. These decisions may be invariant, such as applying approved corporate style, or they may be variable, such as presenting content differently in different media or for different audiences. 
 
-        If factoring out the invariants moves content toward the document or subject domains, recombining the content with the invariants moves it in the opposite direction, toward the {media domain}. This could mean moving the content from the subject domain to the document domain or from the document domain to the media domain, or simply from a more abstract form in the media domain to a more concrete form, which is our first example.
+        If factoring out the invariants moves content toward the document or subject domains, recombining the content with the invariants moves it in the opposite direction, toward the {media domain}+(index "media domain;factoring out invariants in the"). This could mean moving the content from the subject domain to the document domain or from the document domain to the media domain, or simply from a more abstract form in the media domain to a more concrete form, which is our first example.
 
         pagination-tweak:
             min-space: 1.5in
@@ -94,7 +94,7 @@ chapter:(#chapter.processing) Processing Structured Text
         subjects:: type, term
             concept, structural rules
     
-        The tools that do this sort of processing do not literally use search and replace like this. Rather, they parse the source document to pull out the structures and allow you to specify your processing {rules}+(index "rules;processing") by referring to those structures.  
+        The tools that do this sort of processing do not literally use search and replace like this. Rather, they parse the source document to pull out the structures and allow you to specify your processing {rules}+(index "rules, processing")+(index "processing rules") by referring to those structures.  
         
         The mechanism by which a processing tool recognizes structure is not the focus here. You just tell the tool what to do when it finds a structure. So, the next set of rules match structures rather than looking for literal strings in the text:
         
@@ -240,12 +240,15 @@ chapter:(#chapter.processing) Processing Structured Text
         
         * If you want a different rule for a structure that occurs in different contexts, write a separate rule for each context.
         
-        Why is it important to understand this pattern? Because when you abstract out invariants to move content to the {document domain} or {subject domain}, understanding how those invariants will be factored back in can help you recognize them in your source and give you the confidence to factor them out. Writing pseudocode helps you validate that you have factored out invariants correctly, that the structures are easy to process, and that the processing rules are clear, consistent, and reliable. 
+        Why is it important to understand this pattern? Because when you abstract out invariants to move content to the {document domain}+(index "document domain;factoring out invariants in the") or {subject domain}+(index "subject domain;factoring out invariants in the"), understanding how those invariants will be factored back in can help you recognize them in your source and give you the confidence to factor them out. Writing pseudocode helps you validate that you have factored out invariants correctly, that the structures are easy to process, and that the processing rules are clear, consistent, and reliable. 
         
         Obviously, building a complete processing system is much more complex, and I won't go into all the details here, but let's look at a few common cases.
         
     section: Processing container structures
-        
+
+        block-index:
+            {containers}+(index "containers")
+
         When you move content to the {document domain}+(index "document domain;processing containers in the") or the {subject domain}+(index "subject domain;processing containers in the"), you often create container structures to provide context. These container structures have no media-domain analog, so what do you do with them when you publish? The containers provide context for the rest of your processing rules, but what do you do with the containers themselves?
         
         In the previous example the content was contained in a `section` structure. So how does the `section` structure get processed? 
@@ -286,7 +289,7 @@ chapter:(#chapter.processing) Processing Structured Text
                 continue
             
         
-        Now let's deal with the `ordered-list`. The {ordered list}+(index "ordered lists") structure is just a container, so you don't need to create an output structure for it. But because this is an ordered list, you need to start a count to number the items in the {list}+(index "lists;numbering in ordered"). That means you need a variable to store the current count. The `$` prefix indicates that you are creating a variable:
+        Now let's deal with the `ordered-list`. The {ordered list}+(index "ordered lists") structure is just a {container}+(index "containers;list"), so you don't need to create an output structure for it. But because this is an ordered list, you need to start a count to number the items in the {list}+(index "lists;numbering in ordered"). That means you need a variable to store the current count. The `$` prefix indicates that you are creating a variable:
         
         ```
             match ordered-list
@@ -334,7 +337,7 @@ chapter:(#chapter.processing) Processing Structured Text
             {font: 10pt "Century Schoolbook"}[em dash][tab]Gold
             
 
-        This process flattens the structure and removes the document-domain containers. You are back in the media domain, with a flat structure that specifies formatting and text. 
+        This process flattens the structure and removes the document-domain {containers}+(index "containers;list"). You are back in the media domain, with a flat structure that specifies formatting and text. 
         
     section: Processing in multiple steps
 

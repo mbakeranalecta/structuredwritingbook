@@ -22,7 +22,7 @@ chapter:(#chapter.linking) Linking
 
     These are all pointers to some next page that a reader may need. However, even the most prescient writer cannot make every possibility the next page in a {linear narrative}+(index "linear narrative")+(index "narrative flow;linear"). To serve readers, writers need to pave all of the possible paths, and the way to do that is with {hypertext} links.
     
-    This means that linking is not something that happens at arbitrary points where the writer feels like adding a link. Linking must be planned for as part of the {information architecture}+(index "information architecture;information foraging and"). Whether you specify hard links in the {media domain}+(index "media domain;link markup in the") or the {document domain}+(index "document domain;link markup in the"), manage links with keys in the {management domain}+(index "management domain;link markup in the"), or generate them from {subject annotations}+(index "subject annotation;generating links from") in the {subject domain}+(index "subject domain;link markup in the"), links should be created in a disciplined and consistent manner according to a deliberate plan.
+    This means that linking is not something that happens at arbitrary points where the writer feels like adding a link. Linking must be planned for as part of the {information architecture}+(index "information architecture;information foraging and"). Whether you specify hard links in the {media domain}+(index "media domain;linking in the") or the {document domain}+(index "document domain;linking in the"), manage links with keys in the {management domain}+(index "management domain;linking in the"), or generate them from {subject annotations}+(index "subject annotation;generating links from") in the {subject domain}+(index "subject domain;linking in the"), links should be created in a disciplined and consistent manner according to a deliberate plan.
     
     The trail readers follows through an information set has junction points, places where they can decide to keep going straight through the current document or turn aside to look at a different document. While readers can decide to switch documents at any point and for any reason, the most common reason for switching is because they want more information about, or are simply more interested in, a subject mentioned in the current document.
 
@@ -38,7 +38,7 @@ chapter:(#chapter.linking) Linking
 
         This particular subject affinity, between a recipe and a cooking technique, is neither arbitrary nor unique. The subject affinity between recipes and basic cooking techniques applies universally and can be modeled using structured writing techniques.
 
-        The need to seek more information on a subject or task is part of the {complexity}+(index "complexity;information seeking as a source of")+(index "usability;complexity and") of information seeking. The goal of information delivery is to make information seeking simpler. If you don't make it possible for your readers to find this information when they need it, you are dumping the complexity of {navigating}+(index "navigation;subject affinities and") the subject affinity onto them. Managing subject affinities, therefore, is an important part of managing the overall complexity of the content system. Making sure that every part of the complexity of the content system is handled by a person or process that has the skill, time, and resources to handle it extends to the reader. You don't want to give readers any navigational complexity that they are not fully equipped to handle. Indeed, you want to make it as easy as you can for them to navigate subject affinities.
+        The need to seek more information on a subject or task is part of the {complexity}+(index "complexity;information seeking as a source of")+(index "usability") of information seeking. The goal of information delivery is to make information seeking simpler. If you don't make it possible for your readers to find this information when they need it, you are dumping the complexity of {navigating}+(index "navigation;subject affinities and") the subject affinity onto them. Managing subject affinities, therefore, is an important part of managing the overall complexity of the content system. Making sure that every part of the complexity of the content system is handled by a person or process that has the skill, time, and resources to handle it extends to the reader. You don't want to give readers any navigational complexity that they are not fully equipped to handle. Indeed, you want to make it as easy as you can for them to navigate subject affinities.
 
         The most obvious, and generally the most powerful, way of handling subject affinities is to create links from the point in the text where the affinity occurs to a suitable resource that provides the needed information. If you force readers to use search, go to a table of contents, or consult an index when you could easily provide a direct link, you are dumping complexity on them.
     
@@ -152,7 +152,7 @@ chapter:(#chapter.linking) Linking
             plays an ex-Union colonel out for revenge.</p>
         
         
-        Somewhere in the {DITA}+(index "DITA;keys") map for each publication, the key `John_Wayne` points to a topic. Publications link the `keyref` to the resource pointed to by that key in each of their DITA maps. This allows you to link to different resources in each publication.
+        Somewhere in the {DITA}+(index "DITA;keys")+(index "DITA;map") map for each publication, the key `John_Wayne` points to a topic. Publications link the `keyref` to the resource pointed to by that key in each of their DITA {maps}+(index "map;DITA"). This allows you to link to different resources in each publication.
         
     section: The problem with IDs and keys
 
@@ -184,7 +184,7 @@ chapter:(#chapter.linking) Linking
         subjects:: type, term
             concept, relationship tables
 
-        The problem with {relationship tables}+(index "relationship tables; problems with") is that they separate the link from the subject affinity it supports. The link was created to serve a subject affinity in the content -- a point where readers might encounter something they don't understand or might need more information -- but the relationship table does not record the subject affinity, it simply says that there is some connection between topic A and topic B. And it does not say where in topic A the subject affinity is located. Therefore, there is no way to insert a link at the point where the subject affinity occurs. Links generated by relationship tables end up in a block, usually at the end of the page.[*3]
+        The problem with relationship tables is that they separate the link from the subject affinity it supports. The link was created to serve a subject affinity in the content -- a point where readers might encounter something they don't understand or might need more information -- but the relationship table does not record the subject affinity, it simply says that there is some connection between topic A and topic B. And it does not say where in topic A the subject affinity is located. Therefore, there is no way to insert a link at the point where the subject affinity occurs. Links generated by relationship tables end up in a block, usually at the end of the page.[*3]
 
         footnote:(*3)
             It is not impossible to imagine a markup system in which you could markup the source of the subject affinity in topic A and then have the relationship table reference that point by ID, thus allowing you to insert a link at the subject affinity. But this would be cumbersome for writers, and it would complicate the management task. I don't know of any systems that work this way. 
@@ -229,9 +229,9 @@ chapter:(#chapter.linking) Linking
     section: Subject affinities in the subject domain
 
         block-index:
-            {subject domain}(index "subject domain;subject affinities in the")
+            {subject domain}+(index "subject domain;subject affinities in the")
 
-        As described in [#chapter.reuse], you can often eliminate the need for management-domain structures by moving content to the {subject domain}. The same is true with subject affinities. In the subject domain, you can mark up subject affinities as subject affinities. This means that you can move away from managing links and manage subject affinities instead. [*fig.linking-duke-xml] and [*fig.linking-duke-sam] show what this looks like in {XML} and {SAM}.
+        As described in [#chapter.reuse], you can often eliminate the need for management-domain structures by moving content to the {subject domain}+(index "subject domain;subject affinities in the"). The same is true with subject affinities. In the subject domain, you can mark up subject affinities as subject affinities. This means that you can move away from managing links and manage subject affinities instead. [*fig.linking-duke-xml] and [*fig.linking-duke-sam] show what this looks like in {XML} and {SAM}.
 
         figure:(*fig.linking-duke-xml) Subject-domain subject affinity markup in XML
             ```(xml)
@@ -247,9 +247,9 @@ chapter:(#chapter.linking) Linking
         
         This markup clarifies that "the Duke" (a subject affinity) refers to the actor John Wayne (its subject). It specifies both the type of the subject (actor) and its value (John Wayne). 
         
-        This is {subject annotation}, not link markup. Unlike {document-domain}+(index "document domain;link markup in the") `xref` markup, it does not insist that a reference should be created nor does it specify any resource to link to. Instead, it simply states what the subject of the text is. Specifically, it clarifies that the phrase "the Duke" refers to the actor named John Wayne (and not the Duke of Wellington or the Duke of Earl) and that the phrase "Rio Bravo" refers to the movie (and not the city in Texas or the nature reserve in Belize).
+        This is {subject annotation}, not link markup. Unlike {document-domain}+(index "document domain;linking in the") `xref` markup, it does not insist that a reference should be created nor does it specify any resource to link to. Instead, it simply states what the subject of the text is. Specifically, it clarifies that the phrase "the Duke" refers to the actor named John Wayne (and not the Duke of Wellington or the Duke of Earl) and that the phrase "Rio Bravo" refers to the movie (and not the city in Texas or the nature reserve in Belize).
         
-        Given this markup, you can easily render the subject affinity in a manner that works for print by having the {presentation algorithm}+(index "presentation algorithm;rendering subject affinities with the") take the value of the `specifically` attribute (as this annotation is called in {SAM}) and output it between parentheses, as shown in [*fig.linking-duke-html].
+        Given this markup, you can easily render the subject affinity in a manner that works for print by having the {presentation algorithm}+(index "presentation algorithm;rendering subject affinities with the")+(index "subject affinities") take the value of the `specifically` attribute (as this annotation is called in {SAM}) and output it between parentheses, as shown in [*fig.linking-duke-html].
 
         figure:(*fig.linking-duke-html) Subject affinity rendered for print
             ```(html)
@@ -258,7 +258,7 @@ chapter:(#chapter.linking) Linking
         
         Marking up a phrase as a subject affinity does not oblige the publishing algorithm to create a link. If you decide to have the publishing algorithm create a link on the web and a cross reference on paper, nothing in the markup obliges you to use any particular formatting or target any particular resource. I'll describe how to create a link from a subject annotation later in this chapter. 
         
-        In all the previous examples, mentions of _Rio Bravo_ were not marked up, even though the names of movies are clearly subject affinities in a movie review. This reflects the writer's decision not to create a link to support this subject affinity. But what if you want to make a different choice later? By marking up _Rio Bravo_ with a subject annotation, you keep your options open by transferring the information needed to make the decision to a different partition. You can tell the {presentation algorithm}+(index "presentation algorithm;rendering subject affinities with the") to create links on the names of movies if you want to, but you don't have to.
+        In all the previous examples, mentions of _Rio Bravo_ were not marked up, even though the names of movies are clearly {subject affinities} in a movie review. This reflects the writer's decision not to create a link to support this subject affinity. But what if you want to make a different choice later? By marking up _Rio Bravo_ with a subject annotation, you keep your options open by transferring the information needed to make the decision to a different partition. You can tell the {presentation algorithm}+(index "presentation algorithm;rendering subject affinities with the") to create links on the names of movies if you want to, but you don't have to.
         
         There are additional reasons to annotate _Rio Bravo_ as a subject, because that annotation can be used for other purposes as well.      
         
@@ -299,7 +299,7 @@ chapter:(#chapter.linking) Linking
         
         * In a {reuse}+(index "content reuse;subject annotations and") scenario, you never have to worry about broken links or creating relationship tables. The {presentation algorithm} generates appropriate links to whatever topics are available.
         
-        * In a {differential single sourcing}+(index "differential single sourcing;subject annotations and")+(index "single sourcing;subject affinities and") scenario, you are never tied to one mechanism for handling the subject affinity. You can generate any mechanism you like in whatever media you like.
+        * In a {differential single sourcing}+(index "differential single sourcing;subject annotations and")+(index "single sourcing;subject affinities and") scenario, you are never tied to one mechanism for handling the {subject affinity}. You can generate any mechanism you like in whatever media you like.
         
         * You don't have to worry about maintaining links in your content because your source content does not contain any links. The subject annotations in your content are objective statements about your subject matter, so they don't change. All the links in the published content are generated by the linking algorithm, so no management is required.
         
@@ -378,7 +378,7 @@ chapter:(#chapter.linking) Linking
         
         In the {document domain}+(index "document domain;subject affinities in the"), the data structures tend to have a one-to-one correspondence with their algorithms. As system designers determine they need a particular algorithm, they create structures to support that algorithm. Thus, document-domain languages have separate structures for linking, reuse, indexing, and single sourcing. (Some of these may be {management-domain}+(index "management domain;subject affinities in the") structures, of course.)
         
-        In the {subject domain}+(index "subject domain;subject affinities in the"), however, the data structures reflect the subject matter. You won't find a one-to-one correspondence between a structure and the algorithm it supports. Thus, you will not find markup for links, {reuse}, indexing, or {single sourcing} in the subject domain. You will find subject annotations that clarify and delineate the subject matter of the content. Algorithms that work on subject-domain content must interpret {subject annotations} and use them as the basis for creating whatever kind of document or {media-domain}+(index "media domain;subject affinities in the") structure you need for publishing.
+        In the {subject domain}+(index "subject domain;subject affinities in the"), however, the data structures reflect the subject matter. You won't find a one-to-one correspondence between a structure and the algorithm it supports. Thus, you will not find markup for links, {reuse}, indexing, or single sourcing in the subject domain. You will find subject annotations that clarify and delineate the subject matter of the content. Algorithms that work on subject-domain content must interpret {subject annotations} and use them as the basis for creating whatever kind of document or {media-domain}+(index "media domain;subject affinities in the")+(index "subject affinities") structure you need for publishing.
         
         System designers still must decide which algorithms they need, so they can ensure that the information that drives those algorithms is present in the content. However, since every subject structure can drive many publishing algorithms, you will often find that your subject-domain content already supports any new algorithm you want to apply.
                 

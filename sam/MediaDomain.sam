@@ -5,8 +5,6 @@ chapter:(#chapter.media-domain) Writing in the Media Domain
 
     subjects:: type, term
         concept, media domain
-        concept, document domain 
-        concept, subject domain
         concept, formatting algorithm
         concept, presentation algorithm
         concept, rendering algorithm
@@ -48,12 +46,16 @@ chapter:(#chapter.media-domain) Writing in the Media Domain
 
     section: Partitioning font information
 
-        Just as a vector graphics program represents a circle as a circle object, it represents text as a text object. A text object is a rectangular area that contains characters. It has numerous {media-domain}+(index "media domain;font properties in the") properties, such as margins, background and foreground colors, the text string, and the {font} face, size, and weight used to display that text (see [*text-object]).
+        block-index:
+            {fonts}+(index "fonts;partitioning information about")
+            {partitioning}+(index "partitioning;font information")
+            
+        Just as a vector graphics program represents a circle as a circle object, it represents text as a text object. A text object is a rectangular area that contains characters. It has numerous {media-domain}+(index "media domain;font properties in the") properties, such as margins, background and foreground colors, the text string, and the font face, size, and weight used to display that text (see [*text-object]).
 
         figure:(*text-object) A vector graphics text object
             >>>(image ../graphics/text-object.xml)
 
-        A {vector graphics}+(index "vector graphics;text rendering in") program displays {text} in a chosen font. If you change the value of the text object's font attribute, it immediately redraws the text in the new font, meaning you can change the font and font attributes as much as you like without editing the text itself.
+        A {vector graphics}+(index "vector graphics;text rendering in") program displays text in a chosen font. If you change the value of the text object's font attribute, it immediately redraws the text in the new font, meaning you can change the font and font attributes as much as you like without editing the text itself.
         
         The vector graphics program needs to know the shape of each character to render a text object in the media domain. However, that information is not stored as part of the text object. The representation of the text in the paint program includes the shape of the letters but in the vector graphics program it does not. That information has been moved out into a font file. 
 

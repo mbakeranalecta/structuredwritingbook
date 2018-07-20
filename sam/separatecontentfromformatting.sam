@@ -152,7 +152,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
         
         (`++count` here means add one to `count` and then display it.)
 
-        This is pretty much how {FrameMaker}, {Microsoft Word}, and many other tools handle lists. The reason for going through this example in such detail is to point out how much is involved in even this simple bit of partitioning. You began by removing formatting commands, followed by characters, which forced you to include characters in the style definitions. And then you had to calculate the value of characters. At each step, you had to consider all possible cases and create abstractions to handle them. 
+        This is pretty much how {FrameMaker}, {Microsoft Word}+(index "Microsoft Word;lists in")+(index "lists;Microsoft Word"), and many other tools handle lists. The reason for going through this example in such detail is to point out how much is involved in even this simple bit of partitioning. You began by removing formatting commands, followed by characters, which forced you to include characters in the style definitions. And then you had to calculate the value of characters. At each step, you had to consider all possible cases and create abstractions to handle them. 
         
     section: Create containers to provide context
         subjects:: type, term
@@ -163,7 +163,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
        
         One problem with this approach to creating lists is that you have to apply a different style to the first item of a list. It would be better if you could use the same style for each list item and have the numbering just work. However, this is hard to do because nothing in the content says where one numbered list ends and the next begins. For this you need a new abstraction. So far, you have {abstractions}+(index "abstractions;list") for ordered and unordered list items, but you don't have an abstraction for {lists}+(index "lists;containers for") themselves. 
         
-        Up to this point, everything has been purely in the {media domain}+(index "media domain;lists in the"). You replaced direct formatting definitions with indirect definitions through styles. But now it's necessary to venture into the {document domain}+(index "document domain;lists in the"), creating the abstract idea of a list and inserting that abstract idea into your content.
+        Up to this point, everything has been purely in the {media domain}+(index "media domain;lists in the")+(index "lists;media-domain"). You replaced direct formatting definitions with indirect definitions through styles. But now it's necessary to venture into the {document domain}+(index "document domain;lists in the")+(index "lists;document-domain"), creating the abstract idea of a list and inserting that abstract idea into your content.
         
         ```
             paragraph: To wash hair:
@@ -263,7 +263,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
         
         But what if you have hundreds of addresses, all with the same labels? Are the labels content or are they presentation? Since the labels don't change from one list to another, you could look at them as being part of the presentation rather than the content. So let's look for a way to separate them from the content. 
         
-        As always, when you separate something from your content, you have to replace it with something else. In [#ex.separate-1], named structures reflect the subject matter of the entries, which moves this content into the {subject domain}+(index "subject domain;lists in the").
+        As always, when you separate something from your content, you have to replace it with something else. In [#ex.separate-1], named structures reflect the subject matter of the entries, which moves this content into the {subject domain}+(index "subject domain;lists in the")+(index "lists;subject-domain").
 
         figure:(#ex.separate-1) Address markup in the subject domain
             ```(sam)
@@ -276,13 +276,13 @@ chapter:(#chapter.separating) Separating Content from Formatting
         
         Here, once again, it is important to distinguish {formatting}+(index "formatting;presentation versus") and {presentation}+(index "presentation;formatting versus"). {Formatting}-(index)+(italic) refers to the precise details of a text's appearance: the font chosen, the width of the text column, the size of the characters, the spacing between lines, the size and shape of the bullet characters, and so forth. {Presentation}-(index)+(italic) refers to the organization of text.
 
-        Deciding to use a list for a certain piece of information is a presentation decision, which is independent of the formatting details applied to lists. When you move content from the {media domain}+(index "media domain;moving content from the document domain to the") to the {document domain}+(index "document domain;moving content to the"), you separate the formatting of the content from its presentation. The decision to present the information as a list remains; the decision about what that list looks like is separated out.
+        Deciding to use a list for a certain piece of information is a presentation decision, which is independent of the formatting details applied to lists. When you move content from the {media domain}+(index "media domain;moving from the document domain to the") to the {document domain}+(index "document domain;moving content to the"), you separate the formatting of the content from its presentation. The decision to present the information as a list remains; the decision about what that list looks like is separated out.
 
         In contrast, moving content from the {document domain}+(index "document domain;moving content to the subject domain from the") to the {subject domain}+(index "subject domain;moving content from the document domain to the") separates the {information}+(italic)+(index "information, separating presentation from") from the {presentation}+(italic). The subject-domain structure in [#ex.separate-1] is not a labeled list. It is a data record that can be turned into many different forms of {presentation}+(index "presentation;separating information from"). 
         
         Turning such structures into a specific form of presentation is the job of the presentation algorithm (see [#chapter.publishing]). The presentation algorithm could turn it into a labeled list, a table, a paragraph, or an address label.
         
-        In the {subject domain}, with the content separated from both formatting and presentation, you also gain the ability to query and reorganize the content in various interesting and useful ways (which I explore in later chapters). 
+        In the {subject domain}+(index "subject domain;moving content from the document domain to the") separates the {information}+(italic)+(index "information, separating presentation from") from the {presentation}+(italic). The subject-domain struct, with the content separated from both formatting and presentation, you also gain the ability to query and reorganize the content in various interesting and useful ways (which I explore in later chapters). 
         
         This is as far as you can go in separating content from formatting, and you can't separate all content from formatting to quite this extent. Separating content from formatting is not a binary operation. There are various degrees of separation that you can apply for various reasons. It is important to understand exactly which degree of separation best serves your needs. 
         

@@ -6,7 +6,7 @@ chapter:(#chapter.patterns) Patterns
     subjects::type, term
         concept, patterns
 
-    I noted that lightweight markup languages such as {Markdown} rely on patterns in the text rather than explicit markup characters to delineate basic structures. XML, on the other hand, makes a strict distinction between what is markup and what is text. Markup is always recognized explicitly by markup sequences that cannot occur as normal text in any part of the document. 
+    I noted that lightweight markup languages such as Markdown rely on patterns in the text rather than explicit markup characters to delineate basic structures. XML, on the other hand, makes a strict distinction between what is markup and what is text. Markup is always recognized explicitly by markup sequences that cannot occur as normal text in any part of the document. 
     
     All the same, even XML markup is defined by patterns. The {XML specification}[https://www.w3.org/TR/xml/] defines {XML}+(index "XML;specification") using a series of patterns written in a notation called {EBNF}. The difference between XML syntax and Markdown syntax is that in XML, patterns are defined absolutely, so a markup start character is a markup start character no matter where it occurs, whereas in Markdown, the patterns are defined in context, so a `*` character starts a list item only at the beginning of a line, not the end. 
     
@@ -44,7 +44,7 @@ chapter:(#chapter.patterns) Patterns
     
     section: Design implications
     
-        XML recognizes the value of patterns. The {XML}+(index "XML;data types standard") data types standard[https://www.w3.org/TR/xmlschema-2/] defines a number of common patterns, and the XML schema language ({XSD})[https://www.w3.org/standards/xml/schema] allows you to define patterns for use in your own markup. It calls these patterns "simple types" (as opposed to "complex types," which are composed of multiple nested elements). Thus, in {XSD}+(index "XSD;data types in"), you can specify that the contents of a date field must conform to the simple type `xs:date`, which is a pattern based on {ISO 8601}. If the schema defines the data type for the `date` element as `xs:date`, you can do following:
+        XML recognizes the value of patterns. The {XML}+(index "XML;XML Schema Datatypes standard")+(italic) {Schema Datatypes}+(italic)-(index) standard[https://www.w3.org/TR/xmlschema-2/] defines a number of common patterns, and the XML schema language (XSD)[https://www.w3.org/standards/xml/schema] allows you to define patterns for use in your own markup. It calls these patterns "simple types" (as opposed to "complex types," which are composed of multiple nested elements). Thus, in {XSD}+(index "XSD;data types in"), you can specify that the contents of a date field must conform to the simple type `xs:date`, which is a pattern based on {ISO 8601}. If the schema defines the data type for the `date` element as `xs:date`, you can do following:
         
         ```(xml)
             <date>1941-12-07</date> is a day that will live in infamy. 

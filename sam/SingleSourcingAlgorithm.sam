@@ -118,7 +118,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
                 </html>
         
         
-        Outputting to paper (or to PDF, which is a kind of virtual paper) is more complex. On the web, you output to a screen which is of flexible width and infinite length. The browser wraps lines of text to the screen width (unless formatting commands tell it to do otherwise), and there is no issue with breaking text from one page to another. For {paper}+(index "paper;formatting issues")+(index "print output;formatting issues with"), however, you have to fit content into a set of fixed-size pages.   
+        Outputting to paper (or to PDF, which is a kind of virtual paper) is more complex. On the web, you output to a screen which is of flexible width and infinite length. The browser wraps lines of text to the screen width (unless formatting commands tell it to do otherwise), and there is no issue with breaking text from one page to another. For {paper}+(index "print;formatting")+(index "formatting;print"), however, you have to fit content into a set of fixed-size pages.   
         
         This introduces a number of formatting issues, including the following:
         
@@ -129,7 +129,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         Because of issues like this, you don't write a formatting algorithm for paper the same the way you write an algorithm for HTML. Instead, you use an intermediate typesetting system that already knows how to handle tasks such as inserting page-number references and handling line and page breaks. Rather than handling these things yourself, you give the typesetting system general guidance and then let it do its job.
 
-        One such typesetting system is {XSL-FO} (Extensible Stylesheet Language - Formatting Objects). Other typesetting systems include {TeX} and newer versions of {CSS}+(index "cascading style sheets (CSS);print formatting with"). XSL-FO is a typesetting language written in {XML}. To format your content using {XSL-FO}, you transform your source content into {XSL-FO} markup, just the way you transform it into {HTML} for the web. But then you run the {XSL-FO} markup through an {XSL-FO} processor to produce your final output, typically {PDF}. 
+        One such typesetting system is {XSL-FO} (Extensible Stylesheet Language - Formatting Objects). Other typesetting systems include {TeX} and newer versions of {CSS}+(index "cascading style sheets (CSS);print formatting with"). XSL-FO is a {typesetting language} written in {XML}. To format your content using {XSL-FO}, you transform your source content into {XSL-FO} markup, just the way you transform it into {HTML} for the web. But then you run the {XSL-FO} markup through an {XSL-FO} processor to produce your final output, typically {PDF}. 
         
         Here is a small example of XSL-FO markup:
         
@@ -141,7 +141,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
             </fo:block>
         
         
-        The {XSL-FO} code contains {media-domain}+(index "media domain;XSL-FO and the") instructions for spacing and font choices. There is no division between content structures and formatting structures as there is with {HTML} and CSS. Also, as a pure media-domain language, XSL-FO does not have document-domain structures such as paragraphs and titles. To XSL-FO, a document is simply a set of blocks with specific formatting properties attached to them.
+        The {XSL-FO} code contains {media-domain}+(index "media domain;XSL-FO and the") instructions for spacing and {font} choices. There is no division between content structures and formatting structures as there is with {HTML} and CSS. Also, as a pure media-domain language, XSL-FO does not have document-domain structures such as paragraphs and titles. To XSL-FO, a document is simply a set of blocks with specific formatting properties attached to them.
         
         To limit the amount of detail, the algorithm in [*fig.ssa-fo-algorithm] shows only a portion of the pseudocode for handling recipe markup (The point here is not to teach {XSL-FO}, but to show how the algorithm works).
 
@@ -154,7 +154,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
                         output '</fo:wrapper>'
                     output '</fo:block>'
         
-        The rule shown in [*fig.ssa-fo-algorithm] simply wraps the XSL-FO formatting structures around the text of the title. It unpacks the text from a {document-domain} structure and inserts it into a {media-domain} structure. 
+        The rule shown in [*fig.ssa-fo-algorithm] simply wraps the XSL-FO formatting structures around the text of the title. It unpacks the text from a {document-domain}+(index "document domain;XSL-FO and the") structure and inserts it into a {media-domain}+(index "media domain;XSL-FO and the") structure. 
         
         
     section: Differential single sourcing
@@ -164,7 +164,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
     
         Basic single sourcing outputs the same document presentation to different media. However, each medium is different, and what works well in one medium does not always work as well in another. Thus the rhetoric that is appropriate to one media may not be appropriate to another, This is what I meant when I said at the beginning that single sourcing is a rhetoric problem as well as a process problem. 
 
-        For example, online media generally support {hypertext}+(index "hypertext;single sourcing and") {links}+(index "links;single sourcing and"), while paper does not. Suppose you have a piece of content that includes a link:
+        For example, online media generally support {hypertext}+(index "hypertext;single sourcing and") {links}+(index "linking;single sourcing and"), while paper does not. Suppose you have a piece of content that includes a link:
         
         ```
             In Rio Bravo, {the Duke}(link "http://JohnWayne.com")
@@ -203,7 +203,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         But suppose you want to output this same content to paper. If you output it to PDF, you can still create a link as with HTML, but when that PDF is printed, all that's left is a slight color change in the text and maybe an underline. Readers cannot follow the link. 
         
-        You can't print an active {link}+(index "links;single sourcing and")+(index "hypertext;single sourcing and") on paper, but you can print the URL, so the reader can type it into a browser. Your algorithm can print the link inline or as a footnote. [*fig.ssa-specifically-2] shows the algorithm for printing the URL inline. (I dispense with the detailed XSL-FO syntax this time.)
+        You can't {print}+(index "print") an active {link}+(index "linking;single sourcing and")+(index "hypertext;single sourcing and") on paper, but you can print the URL, so the reader can type it into a browser. Your algorithm can print the link inline or as a footnote. [*fig.ssa-specifically-2] shows the algorithm for printing the URL inline. (I dispense with the detailed XSL-FO syntax this time.)
 
         figure:(*fig.ssa-specifically-2) Algorithm to display the URL for a link in print
         
@@ -239,11 +239,11 @@ chapter:(#chapter.single-sourcing) Single Sourcing
 
         This provides readers with less information, in the sense that it does not give them access to all the information on `JohnWayne.com`, but it does a better job of disambiguation, and it does so in a more paper-like way. It is a rhetoric appropriate to the media. Losing the reference to `JohnWayne.com` is probably not an issue here. Following that link by typing it into a browser is a lot more work than simply clicking on a web link. Someone who wants more information on John Wayne is far more likely to type "John Wayne" into Google than type "JohnWayne.com" into the browser address bar.   
         
-        As written, the source content provides no easy way to produce this preferred form for paper. The content is in the {document domain}+(index "document domain;link presentation in the"), which specifies the presentation of the content. Therefore, it is not a neutral format between media that require different forms of presentation. The choice to specify a link directly in the markup gives it a strong bias towards the web and online media rather than paper. A {document-domain}+(index "document domain;link presentation in the") approach that favored paper would similarly lead to a poorer online presentation by omitting the {link}+(index "links;single sourcing and"). 
+        As written, the source content provides no easy way to produce this preferred form for paper. The content is in the {document domain}+(index "document domain;link presentation in the"), which specifies the presentation of the content. Therefore, it is not a neutral format between media that require different forms of presentation. The choice to specify a link directly in the markup gives it a strong bias towards the web and online media rather than paper. A {document-domain}+(index "document domain;link presentation in the") approach that favored paper would similarly lead to a poorer online presentation by omitting the {link}+(index "linking;single sourcing and"). 
         
         Because different media require a different rhetoric, you need a _differential_ approach to single sourcing, one that allows you to differ not only the formatting but the presentation of the content for different media.
         
-        One way to accomplish differential single sourcing is to record the content in the {subject domain}+(index "subject domain;link markup in the"), thus removing the prejudice of the document-domain presentation for one class of media or another. Here is how this markup might look:
+        One way to accomplish differential single sourcing is to record the content in the {subject domain}+(index "subject domain;linking in the"), thus removing the prejudice of the document-domain presentation for one class of media or another. Here is how this markup might look:
         
         ```(sam)
             {The Duke}(actor "John Wayne") plays an ex-Union colonel.
@@ -291,7 +291,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         # pix of timetable and routing widget ???
 
-        In this scenario, you move content to the {subject domain} to partition the presentation from the information, which allows you to produce a different information design for different media (see [*ex.ssa-differential]). I examine these scenarios in more depth in [#chapter.wide]. 
+        In this scenario, you move content to the {subject domain}+(index "subject domain;presentation algorithm and the") to partition the presentation from the information, which allows you to produce a different information design for different media (see [*ex.ssa-differential]). I examine these scenarios in more depth in [#chapter.wide]. 
         
         figure:(*ex.ssa-differential) Information design for single sourcing
             >>>(image ../graphics/Differential.xml)
@@ -342,7 +342,7 @@ chapter:(#chapter.single-sourcing) Single Sourcing
         
         While differential single sourcing can help you output documents with the appropriate rhetoric in multiple {media}+(index "media, primary and secondary"), there are limits to how far this approach can take you. 
         
-        {Books}+(index "books;linear structure of") are a linear medium in which one chapter follows another in order. The {web}+(index "web;navigational approach") is a {hypertext}+(index "hypertext;navigational approach") medium in which every page is page one. Readers arrive at a page via search, and they navigate by following hypertext links. The linear and hypertext approaches are fundamentally different ways of writing that invite fundamentally different ways of navigating and using information.[*eppo] Even moving content to the {subject domain} as much as possible does not entirely factor out these fundamental differences in approach. 
+        {Books}+(index "books;linear structure of") are a linear medium in which one chapter follows another in order. The {web}+(index "web;navigational approach") is a {hypertext}+(index "hypertext;navigational approach") medium in which every page is page one. Readers arrive at a page via search, and they navigate by following hypertext links. The linear and hypertext approaches are fundamentally different ways of writing that invite fundamentally different ways of navigating and using information.[*eppo] Even moving content to the subject domain as much as possible does not entirely factor out these fundamental differences in approach. 
 
         footnote:(*eppo)
             For a full examination of the differences, see my book {Every Page is Page One: Topic-based Writing for Technical Communication and the Web}.
