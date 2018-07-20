@@ -7,7 +7,7 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
         concept, management domain
         
 
-    So far I have talked about three domains: the {media domain}, the {document domain}, and the {subject domain}. But there is a fourth domain that intrudes into this picture: the {management domain}.
+    So far I have talked about three domains: the media domain, the document domain, and the subject domain. But there is a fourth domain that intrudes into this picture: the {management domain}.
 
     Why do I call the management domain an intrusion? Because while the subject, document, and media domains are about recording the content itself, the management domain is not about the content itself; it's about the process of managing content.         
     
@@ -33,7 +33,7 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
 
     Any decision imposes two burdens: making the decision, which requires knowledge, and executing the decision, which requires skills. A conditional text system removes the execution of the decision (including or excluding the text at build time), but leaves the decision making (where and what to include) with the writer. But it also introduces new knowledge and skill requirements, since the writer has to know how to apply conditions and apply them correctly, which is not always a simple matter. 
 
-    This is a common pattern with management-domain structures; the knowledge requirements they introduce are often greater then the ones they factor out. When we factored out list formatting in the {document domain}+(index "document domain;lists in the"), it was a simple reduction in requirements. Writers still had to decide whether to create a list and record the fact that they were creating a list, but we removed the requirement to format the list and added nothing new to learn. But in this case, writers must learn something new: conditional markup and its logic and behavior. Let's look at another example that exhibits the same pattern.
+    This is a common pattern with management-domain structures; the knowledge requirements they introduce are often greater then the ones they factor out. When we factored out list formatting in the {document domain}+(index "document domain;lists in the")+(index "lists;document-domain"), it was a simple reduction in requirements. Writers still had to decide whether to create a list and record the fact that they were creating a list, but we removed the requirement to format the list and added nothing new to learn. But in this case, writers must learn something new: conditional markup and its logic and behavior. Let's look at another example that exhibits the same pattern.
    
     section: Including boilerplate content
     
@@ -69,7 +69,7 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
                 </procedure>
         
         
-        Why is this operation part of the {management domain}+(index "management domain;inclusions in the"), rather than the {document domain}? Because it deals with a system operation: locating a file in the system and loading its contents. If you were purely in the document domain, the writer would perform this operation by finding the file with the warning in it, opening it, and copying the contents into the document. The `include` instruction is just that: an instruction. It is not a declaration about the subject matter or structure of a document, such as you would find in {subject-domain} or document-domain markup. It is an instruction to a machine to perform an operation. The {management domain} consists of either instructions or the declaration of data required to perform specific management instructions. It requires the writer to understand these instructions and other features of the content management system, such as the location of files. 
+        Why is this operation part of the {management domain}+(index "management domain;inclusions in the"), rather than the {document domain}+(index "document domain;inclusions in the")? Because it deals with a system operation: locating a file in the system and loading its contents. If you were purely in the document domain, the writer would perform this operation by finding the file with the warning in it, opening it, and copying the contents into the document. The `include` instruction is just that: an instruction. It is not a declaration about the subject matter or structure of a document, such as you would find in subject-domain or document-domain markup. It is an instruction to a machine to perform an operation. The {management domain} consists of either instructions or the declaration of data required to perform specific management instructions. It requires the writer to understand these instructions and other features of the content management system, such as the location of files. 
 
         Different structured writing systems have different instruction sets for handling the situation described above. In {DITA}+(index "DITA;conref"), for instance, this use case is handled using something called a {conref}(element (DITA)) or a {conkeyref}(element (DITA)). {DocBook}+(index "DocBook;XInclude in") uses a generic XML facility called {XInclude}, which is shown in [*ex.md-3]. Thus writers need to learn the specific management features of the languages and tools they are using.
 
@@ -123,7 +123,7 @@ chapter:(#chapter.management-domain) The Management Domain: an Intrusion
 
     section: Hybrid approaches
     
-        It is not always an either/or decision to use pure {management-domain} or pure {subject-domain} approaches. Management-domain structures tend to be used in generic {document-domain} languages, since such languages are not designed to be specific to any particular subject matter. Nonetheless, such languages often have roots in particular fields and sometimes include {subject-domain} structures from those fields. Both DocBook and DITA, for instance, originated in the field of software documentation, and both include structures, such as code blocks, that are related to the subject of software. 
+        It is not always an either/or decision to use pure management-domain or pure subject-domain approaches. Management-domain structures tend to be used in generic document-domain languages, since such languages are not designed to be specific to any particular subject matter. Nonetheless, such languages often have roots in particular fields and sometimes include subject-domain structures from those fields. Both DocBook and DITA, for instance, originated in the field of software documentation, and both include structures, such as code blocks, that are related to the subject of software. 
         
         Some languages mix subject-domain structures into their management structures. One example is the {product}(attribute (DITA)) attribute, which is part of DITA's conditional-text processing system. 
         

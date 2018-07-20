@@ -26,7 +26,7 @@ chapter:(#chapter.active) Active content
     
     In principle, therefore, you support active content the same way you support these algorithms in any form of structured writing: you create content in the appropriate domain and with the appropriate structures to reliably support the algorithms you need.
 
-    Reliability is key. If you create static {books} or {web pages}, you have the opportunity to review the output and even hand tweak it to fix any issues, but you can't do that with active content. You need to trust the algorithm 100%, which means you need to trust the content it is working on 100%. This makes {conformance}+(index "conformance;importance with active content") crucial to an {active-content} project, and, as we have seen, different domains support conformance with varying degrees of reliability. 
+    Reliability is key. If you create static {books} or web pages, you have the opportunity to review the output and even hand tweak it to fix any issues, but you can't do that with active content. You need to trust the algorithm 100%, which means you need to trust the content it is working on 100%. This makes {conformance}+(index "conformance;importance with active content") crucial to an {active-content} project, and, as we have seen, different domains support conformance with varying degrees of reliability. 
     
     Another factor to consider is that while active content essentially postpones the execution of one or more algorithms until the content is in the user's hands, you don't necessarily want to postpone running those algorithms on the whole page. You usually postpone execution only for those parts of the page that you want to make active.
 
@@ -46,7 +46,7 @@ chapter:(#chapter.active) Active content
     
     This means that only those parts of the content that you want displayed as active content need to be captured in the domain and structures required to reliably run the applicable algorithms. The rest of the content can be in a different domain. In practice, this usually means that you embed {subject-domain}+(index "subject domain;active content in the") structures to support the active content in {document-domain}+(index "document domain;active content in the") structures. Of course, you can have all your content in the subject domain, in which case you would run the {presentation algorithm} on the content you want to deliver statically, and pass the subject-domain representation of the active content to the system that will run the active-content algorithms.
 
-    However, this is not likely to be a straightforward pass through. The downstream system that will execute the active-content algorithm -- for example, a JavaScript app running in the web browser -- may expect or require the subject-domain information to be in a particular format. For instance, you might have to embed the ticker symbol in a function call that returns stock quotes:
+    However, this is not likely to be a straightforward pass through. The downstream system that will execute the active-content algorithm -- for example, a {JavaScript}+(index "JavaScript") app running in the web browser -- may expect or require the subject-domain information to be in a particular format. For instance, you might have to embed the ticker symbol in a function call that returns stock quotes:
 
     figure:(*fig.active-quote) HTML markup to get a stock quote
         ```(xml)
