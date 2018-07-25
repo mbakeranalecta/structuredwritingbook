@@ -10,13 +10,13 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
 
     You have three options for doing this:
     
-    * Create your own language entirely from scratch, creating both the syntax and the semantics. (This is what {John Gruber} did when he created Markdown.)
+    * Create your own concrete language entirely from scratch, creating both the syntax and the semantics. (This is what {John Gruber} did when he created Markdown.)
     
     * Use an existing abstract markup syntax, such as XML or SAM, and create your own semantics by defining named structures using that syntax (as described in [#chapter.markup]).
     
     * Take an existing markup language with extensible and/or constrainable semantics, such as DITA or DocBook, and extend and/or constrain it to meet your needs. 
     
-    Each of these approaches has merits and drawbacks. For instance, creating a new language may enable you to achieve exceptional {functional lucidity}+(index "functional lucidity;creating a new language to achieve greater") for a particular type of information, extending/constraining an existing language may save tool development costs, or defining your own semantics based on an existing syntax may enable you to find the right balance between functional lucidity and development costs. 
+    Each of these approaches has merits and drawbacks. For instance, creating a new concrete language may enable you to achieve exceptional {functional lucidity}+(index "functional lucidity;creating a new language to achieve greater") for a particular type of information; extending/constraining an existing language may save tool development costs; defining your own semantics based on an existing syntax may enable you to find the right balance between functional lucidity and development costs. 
 
     This chapter looks at extensible and constrainable markup languages.     
 
@@ -70,7 +70,7 @@ chapter:(#chapter.extensible) Extensible and Constrainable Languages
     
         Although lightweight languages provide great functional lucidity, they suffer from limited extensibility (which generally requires writing code) and a lack of constraint mechanisms. I believe that a fully extensible, fully constrainable lightweight markup language would be a valuable addition to the structured writing toolkit. This is why I developed {SAM}, the markup language used for most of the examples in this book and for writing the book itself. 
         
-        SAM is a hybrid markup language that combines implicit syntax similar to {Markdown}+(index "Markdown;SAM compared with")+(index "SAM;Markdown compared with") with an explicit syntax for defining abstract structures called blocks, record sets, and annotations. It also has concrete markup for common features such as insertions, citations, and variable definitions. 
+        SAM is a hybrid markup language that combines concrete markup similar to {Markdown}+(index "Markdown;SAM compared with")+(index "SAM;Markdown compared with") with an explicit syntax for defining abstract structures called blocks, record sets, and annotations. It also has concrete markup for common features such as insertions, citations, and variable definitions. 
         
         SAM, like XML, is for defining specific markup languages. However, unlike XML, languages defined in SAM share a small common base set of text structures for which SAM provides concrete syntax. This allows SAM to combine lightweight syntax for the most common text structures with the ability to define constrained markup languages for specific purposes, particularly subject-domain languages. In other words, SAM represents a different partitioning of the markup design process from both the common lightweight languages and XML.
                 
