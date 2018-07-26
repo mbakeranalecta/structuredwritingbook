@@ -222,19 +222,19 @@ chapter:(#chapter.markup) Markup
                 Or to put it another way, as a designer of markup languages you can choose to:
         
                 * Design a concrete language from scratch (or modify and existing one)
-                * Use an abstract language (probably XML) to design a concrete language
-                * Use a hybrid language to design a concrete language
+                * Use an abstract language (probably XML) to design a specific instance language
+                * Use a hybrid language to design a specific instance language
         
                 As a writer, you can use:
         
-                * A concrete language with ad-hoc syntax (like {Markdown})
-                * The concrete parts of a hybrid markup language (like {reStructuredText}) without extensions
-                * A concrete language (like {DocBook}) based on an abstract language (probably XML)
-                * A concrete language (like the recipe markup language used in this book) based on a hybrid language ({SAM} in this case)
+                * A concrete language with ad-hoc syntax (like Markdown)
+                * The concrete parts of a hybrid markup language (like reStructuredText) without extensions
+                * A specific instance language (like DocBook) based on an abstract language (probably XML)
+                * A specific instance language (like the recipe markup language used in this book) based on a hybrid language (SAM in this case)
         
             section: Concrete languages in abstract clothing
     
-                The key defining characteristic of an abstract language is the use of abstract named structures such as XML elements. All XML elements share a common markup start sequence followed by the element name. This creates a named block of content.  But concrete languages can use named blocks too. For example, {JavaDoc}, a concrete language for describing {Java}+(index "Java;API documentation") APIs, uses named blocks using an at sign (`@`) as a markup start character.
+                The key defining characteristic of an abstract language is the use of abstract named structures such as XML elements. All XML elements share a common markup start sequence followed by the element name. This creates a named block of content.  But concrete languages can use named blocks too. For example, {JavaDoc}+(index "JavaDoc;API documentation using"), a concrete language for describing {Java}+(index "Java;API documentation") APIs, uses named blocks using an at sign (`@`) as a markup start character.
 
                 In [*fig.javadoc], `@param` and `@return` are named blocks. But in JavaDoc, there is a fixed set of named blocks that are defined as part of the language. You can't create a new language by defining your own block names. By contrast, XML itself defines absolutely no element names. Only instances of XML, like DocBook, define element names. 
         
