@@ -211,7 +211,7 @@ chapter:(#chapter.markup) Markup
         
                 Since specific markup languages like DocBook are instances of XML, I need to revise my earlier statement: We can usefully divide markup languages into *four* types: concrete, abstract, instances of abstract, and hybrid. In fact (spoiler alert), let's revise it again: We can usefully divide markup languages into *five* types: concrete, abstract, instances of abstract, hybrid, and instances of hybrid. 
         
-                You can't write directly in a abstract language like XML, only in an instance. You can write directly in some hybrid languages, as I'll describe later in this chapter, but not in all of them.  
+                You can't write directly in an abstract language like XML, only in an instance. You can write directly in some hybrid languages, as I'll describe later in this chapter, but not in all of them.  
         
                 footnote:(*3)
                     Or to put it another way, you write in DocBook semantics using XML syntax. Alternatively, since DocBook originated in the days of XML's predecessor abstract language, SGML, you can write DocBook semantics in SGML syntax. 
@@ -222,19 +222,19 @@ chapter:(#chapter.markup) Markup
                 Or to put it another way, as a designer of markup languages you can choose to:
         
                 * Design a concrete language from scratch (or modify and existing one)
-                * Use an abstract language (probably XML) to design a concrete language
-                * Use a hybrid language to design a concrete language
+                * Use an abstract language (probably XML) to design a specific instance language
+                * Use a hybrid language to design a specific instance language
         
                 As a writer, you can use:
         
-                * A concrete language with ad-hoc syntax (like {Markdown})
-                * The concrete parts of a hybrid markup language (like {reStructuredText}) without extensions
-                * A concrete language (like {DocBook}) based on an abstract language (probably XML)
-                * A concrete language (like the recipe markup language used in this book) based on a hybrid language ({SAM} in this case)
+                * A concrete language with ad-hoc syntax (like Markdown)
+                * The concrete parts of a hybrid markup language (like reStructuredText) without extensions
+                * A specific instance language (like DocBook) based on an abstract language (probably XML)
+                * A specific instance language (like the recipe markup language used in this book) based on a hybrid language (SAM in this case)
         
             section: Concrete languages in abstract clothing
     
-                The key defining characteristic of an abstract language is the use of abstract named structures such as XML elements. All XML elements share a common markup start sequence followed by the element name. This creates a named block of content.  But concrete languages can use named blocks too. For example, {JavaDoc}, a concrete language for describing {Java}+(index "Java;API documentation") APIs, uses named blocks using an at sign (`@`) as a markup start character.
+                The key defining characteristic of an abstract language is the use of abstract named structures such as XML elements. All XML elements share a common markup start sequence followed by the element name. This creates a named block of content.  But concrete languages can use named blocks too. For example, {JavaDoc}+(index "JavaDoc;API documentation using"), a concrete language for describing {Java}+(index "Java;API documentation") APIs, uses named blocks using an at sign (`@`) as a markup start character.
 
                 In [*fig.javadoc], `@param` and `@return` are named blocks. But in JavaDoc, there is a fixed set of named blocks that are defined as part of the language. You can't create a new language by defining your own block names. By contrast, XML itself defines absolutely no element names. Only instances of XML, like DocBook, define element names. 
         
@@ -292,7 +292,7 @@ chapter:(#chapter.markup) Markup
 
                 To reliably create structured content, writers need to see the structures they are creating. In the {media domain}+(index "media domain;authoring structure in the") a WYSIWYG interface shows you the media-domain structures you are creating by visually rendering them on screen. But what about the other domains? The {document domain}+(index "document domain;authoring structure in the") creates abstract document structures that are deliberately separated from their formatting. The {subject domain}+(index "subject domain;authoring structure in the") creates subject-based structures that don't have a one-to-one relationship with any organization or formatting of a document. The {management domain}+(index "management domain;authoring structure in the") creates structures that have nothing to do with the representation of content at all. How does the writer get to see these structures when writing in these domains?
         
-                This is a big problem with {XML}+(index "XML;authoring structure in"), the only abstract language in widespread use today. XML tends to hide structure. As an abstract language, an XML document is a hierarchy of elements and attributes -- not the concrete {subject}-(index)+(index "subject domain;authoring structure in the")-, {document}+(index "document domain;authoring structure in the")-, {management}+(index "management domain;authoring structure in the")-, or {media-domain}+(index "media domain;authoring structure in the") structures the writer is supposed to be creating. Those concrete structures are present in the markup because their names are there, but they are not visually distinguished the way the basic document structures are in a concrete language like {Markdown}+(index "Markdown;authoring structure in the"). And XML syntax is verbose, meaning that there is a lot of clutter in the raw text of an XML document, which makes it hard to discern both the structure and the content. XML's verbose syntax and strict hierarchy were designed to make it easy to parse and to help guard against transmission errors. It was not designed to be a format to write in. Thus, it does a poor job of partitioning parsing issues from authoring issues. 
+                This is a big problem with {XML}+(index "XML;authoring structure in"), the only abstract language in widespread use today. XML tends to hide structure. As an abstract language, an XML document is a hierarchy of elements and attributes -- not the {subject}-(index)+(index "subject domain;authoring structure in the")-, {document}+(index "document domain;authoring structure in the")-, {management}+(index "management domain;authoring structure in the")-, or {media-domain}+(index "media domain;authoring structure in the") structures the writer is supposed to be creating. Those structures are present in the markup because their names are there, but they are not visually distinguished the way the basic document structures are in a concrete language like {Markdown}+(index "Markdown;authoring structure in the"). And XML syntax is verbose, meaning that there is a lot of clutter in the raw text of an XML document, which makes it hard to discern both the structure and the content. XML's verbose syntax and strict hierarchy were designed to make it easy to parse and to help guard against transmission errors. It was not designed to be a format to write in. Thus, it does a poor job of partitioning parsing issues from authoring issues. 
         
                 To remove that clutter, many writers use {XML editors} that provide a graphical view of the content similar to that of a word processor. But while graphical XML editors remove visual clutter, they also hide the structure. Even if the writer is supposed to be working in the document domain or the subject domain, the editor is displaying content in the media domain. This greatly reduces the functional lucidity of the {document-domain}+(index "document domain;functional lucidity in the") or {subject-domain}+(index "subject domain;functional lucidity in the") language and encourages backsliding into the {media domain}+(index "media domain;functional lucidity in the"). 
         
