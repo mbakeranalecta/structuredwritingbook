@@ -174,7 +174,7 @@ chapter:(#chapter.reuse) Reuse
             subjects:: type, term
                 concept, keys 
         
-            Another way to do this is with another {management-domain}+(index "management domain;keys in the") structure called a _key_. A key is similar to an ID, but it is not directly tied to a resource. Instead, the same key can point to different resources at different times. Since a key does not represent any one concrete resource, you don't assign the key to a resource. Instead, you use an intermediate {lookup table}+(index "lookup table for keys")+(index "keys;lookup table for") to resolve keys to particular resources for a particular purpose.
+            Another way to do this is with another {management-domain}+(index "management domain;keys in the") structure called a _key_. A key is similar to an ID, but it is not directly tied to a resource. Instead, the same key can point to different resources at different times. Since a key does not represent any one concrete resource, you don't assign the key to a resource. Instead, you use an intermediate {lookup table}+(index "lookup table for keys")+(index "keys;lookup algorithm") to resolve keys to particular resources for a particular purpose.
             
             Suppose you have the warning in a file called `files/shared/admonitions/domestic/danger` with the content shown in [*fig.variable2variable-key-1] (no ID):
 
@@ -210,7 +210,7 @@ chapter:(#chapter.reuse) Reuse
                             name: warn_danger
                             resource: files/shared/admonitions/domestic/danger            
             
-            When the algorithm in [*fig.variable2variable-key-4] processes the procedure, it sees the key reference `%warn_danger` and looks it up in the key lookup table. The key lookup table tells the {algorithm}+(index "keys;lookup algorithm") that the key resolves to the resource `files/shared/admonitions/domestic/danger`. The algorithm then loads that file and inserts the contents into the output.
+            When the algorithm in [*fig.variable2variable-key-4] processes the procedure, it sees the key reference `%warn_danger` and looks it up in the key lookup table. The {key}+(index "keys;lookup algorithm") lookup table tells the algorithm that the key resolves to the resource `files/shared/admonitions/domestic/danger`. The algorithm then loads that file and inserts the contents into the output.
 
             figure:(*fig.variable2variable-key-4) Pseudocode for the key lookup algorithm
                 ```(pseudo)
