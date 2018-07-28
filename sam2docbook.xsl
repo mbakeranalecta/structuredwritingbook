@@ -11,6 +11,8 @@
     <xsl:variable name="annotation-types" select='document("annotation-types.xml")/annotation-types'/>
     <xsl:variable name="index-use-see-if-secondary"
         select='document("intermediate/index.xml")/index/index-use-see-if-secondary'/>
+    <xsl:variable name="index-see-also"
+        select='document("intermediate/index.xml")/index/index-see-also'/>
 
     <xsl:template match="@* | node()">
         <xsl:copy>
@@ -180,6 +182,12 @@
                     <db:primary>
                         <xsl:value-of select="$term"/>
                     </db:primary>
+                    <xsl:if test="$term = $index-see-also/record/term">
+                         <db:seealso>
+                             <xsl:value-of select="$index-see-also/record[term=$term]/see-also"/>
+                         </db:seealso>
+                    </xsl:if>
+
                 </db:indexterm>
 
                  <!-- Generate primaries for types and secondaries for terms-->
@@ -202,6 +210,12 @@
                                  <xsl:value-of select="$term"/>
                              </db:see>
                          </xsl:if>
+                         <xsl:if test="$term = $index-see-also/record/term">
+                             <db:seealso>
+                                 <xsl:value-of select="$index-see-also/record[term=$term]/see-also"/>
+                             </db:seealso>
+                         </xsl:if>
+
                      </db:indexterm>
                  </xsl:if>
 
@@ -239,11 +253,19 @@
                             </db:secondary>
                         </xsl:when>
                         <xsl:otherwise>
+                            <xsl:variable name="index-term" select="normalize-space($index-components[1])"/>
                             <db:primary>
-                                <xsl:value-of select="normalize-space($index-components[1])"/>
+                                <xsl:value-of select="$index-term"/>
                             </db:primary>
+                            <xsl:if test="$index-term = $index-see-also/record/term">
+                                 <db:seealso>
+                                     <xsl:value-of select="$index-see-also/record[term=$index-term]/see-also"/>
+                                 </db:seealso>
+                             </xsl:if>
+
                        </xsl:otherwise>
                     </xsl:choose>
+
 
                 </db:indexterm>
 
@@ -552,9 +574,16 @@
             </xsl:when>
             <xsl:otherwise>
                 <db:indexterm>
+                    <xsl:variable name="index-term" select="normalize-space(@specifically)"/>
                     <db:primary>
-                        <xsl:value-of select="normalize-space(@specifically)"/>
+                        <xsl:value-of select="$index-term"/>
                     </db:primary>
+                    <xsl:if test="$index-term = $index-see-also/record/term">
+                         <db:seealso>
+                             <xsl:value-of select="$index-see-also/record[term=$index-term]/see-also"/>
+                         </db:seealso>
+                     </xsl:if>
+
                 </db:indexterm>
             </xsl:otherwise>
         </xsl:choose>
@@ -571,14 +600,14 @@
 
 
     <xsl:template match="index-see/record">
-        <db:indexterm>
+<!--        <db:indexterm>
             <db:primary>
                 <xsl:value-of select="term"/>
             </db:primary>
             <db:see>
                 <xsl:value-of select="see"/>
             </db:see>
-        </db:indexterm>
+        </db:indexterm>  -->
     </xsl:template>
 
     <xsl:template match="annotation[@type = 'also-index-as']">
@@ -664,6 +693,12 @@
                         <db:primary>
                             <xsl:value-of select="$index-term"/>
                         </db:primary>
+                        <xsl:if test="$index-term = $index-see-also/record/term">
+                             <db:seealso>
+                                 <xsl:value-of select="$index-see-also/record[term=$index-term]/see-also"/>
+                             </db:seealso>
+                        </xsl:if>
+
                     </db:indexterm>
                     <xsl:if test="$annotation-types/type/name = $subjects-type">
                         <xsl:choose>
@@ -681,6 +716,11 @@
                                     <db:see>
                                         <xsl:value-of select="$index-term"/>
                                     </db:see>
+                                    <xsl:if test="$index-term = $index-see-also/record/term">
+                                         <db:seealso>
+                                             <xsl:value-of select="$index-see-also/record[term=$index-term]/see-also"/>
+                                         </db:seealso>
+                                    </xsl:if>
                                 </db:indexterm>
                             </xsl:when>
                             <xsl:otherwise>
@@ -693,6 +733,11 @@
                                     <db:secondary>
                                         <xsl:value-of select="$index-term"/>
                                     </db:secondary>
+                                    <xsl:if test="$index-term = $index-see-also/record/term">
+                                         <db:seealso>
+                                             <xsl:value-of select="$index-see-also/record[term=$index-term]/see-also"/>
+                                         </db:seealso>
+                                    </xsl:if>
                                 </db:indexterm>
                             </xsl:otherwise>
                         </xsl:choose>
@@ -1123,6 +1168,12 @@
                     <db:primary>
                         <xsl:value-of select="$term"/>
                     </db:primary>
+                    <xsl:if test="$term = $index-see-also/record/term">
+                         <db:seealso>
+                             <xsl:value-of select="$index-see-also/record[term=$term]/see-also"/>
+                         </db:seealso>
+                    </xsl:if>
+
                 </db:indexterm>                        
                 
                  <!-- Generate primaries for types and secondaries for terms-->
@@ -1144,7 +1195,13 @@
                              <db:see>
                                  <xsl:value-of select="$term"/>
                              </db:see>
-                         </xsl:if>  
+                         </xsl:if>
+                         <xsl:if test="$term = $index-see-also/record/term">
+                             <db:seealso>
+                                 <xsl:value-of select="$index-see-also/record[term=$term]/see-also"/>
+                             </db:seealso>
+                        </xsl:if>
+
                      </db:indexterm>          
                  </xsl:if>
                 
@@ -1182,12 +1239,17 @@
                             </db:secondary>
                         </xsl:when>
                         <xsl:otherwise>
+                            <xsl:variable name="index-term" select="normalize-space($index-components[1])"/>
                             <db:primary>
-                                <xsl:value-of select="normalize-space($index-components[1])"/>
+                                <xsl:value-of select="$index-term"/>
                             </db:primary>
+                            <xsl:if test="$index-term = $index-see-also/record/term">
+                                 <db:seealso>
+                                     <xsl:value-of select="$index-see-also/record[term=$index-term]/see-also"/>
+                                 </db:seealso>
+                            </xsl:if>
                        </xsl:otherwise>
-                    </xsl:choose>
-                    
+                    </xsl:choose>                  
                 </db:indexterm>
 
             </xsl:for-each>
