@@ -29,7 +29,7 @@ chapter:(#chapter.wide) Wide Structures
         figure:(#broken-table-formatting) Broken table formatting
             >>>(image ../graphics/tableformatting.xml)
         
-        This table is difficult because one wide thing (a table) contains another wide thing (pre-formatted program code). I don't know exactly how this table was marked up, which domain the content was written in, or how the {formatting algorithm} failed, resulting in the mess above, but including pre-formatted text in a table cell creates a no-win situation for a rendering algorithm. Does it:
+        This table is difficult because one wide thing (a table) contains another wide thing (pre-formatted program code). I don't know how this table was marked up, which domain the content was written in, or how the {formatting algorithm} failed, resulting in the mess in [#broken-table-formatting]. However, including pre-formatted text in a table cell creates a no-win situation for a rendering algorithm. Does it:
 
         * violate the formatting of the program code by introducing extra line breaks.
         
@@ -173,7 +173,7 @@ chapter:(#chapter.wide) Wide Structures
 
         Therefore, computer code, data, and other similar formats where whitespace is meaningful must be presented in a fixed-width font with line breaks placed where they are supposed to be. That makes code samples wide objects, just like tables, with many of the same issues when it comes to rendering them on small devices. One saving grace is that programming examples are less likely to have issues with height.
 
-        There is not much you can do to help the {rendering}+(index "rendering algorithm;programming examples and the") algorithm when it comes to code. The options for fitting wide code on a narrow display are: shrink to fit, scroll to view, truncate, or introduce extra line breaks, which may or may not following coding rules. You probably do not want your rendering algorithm to make a different choice for different kinds of code. Needless to say, putting a code block inside another wide structure, such as a table, is a recipe for disaster, as [#broken-table-formatting] shows. It would be wisest not to allow this in your markup language design.
+        There is not much you can do to help the {rendering}+(index "rendering algorithm;programming examples and the") algorithm when it comes to code. The options for fitting wide code on a narrow display are: shrink to fit, scroll to view, truncate, or introduce extra line breaks, which may or may not follow coding rules. You probably do not want your rendering algorithm to make a different choice for different kinds of code. Needless to say, putting a code block inside another wide structure, such as a table, is a recipe for disaster, as [#broken-table-formatting] shows. It would be wisest not to allow this in your markup language design.
 
         What is essential is that your document-domain or subject-domain markup clearly indicate when a piece of text is code. Preferably it should also indicate what kind of code it is, since knowing this can allow the formatting algorithm to do syntax highlighting for code in a known language and can allow the linking algorithm to detect and link API calls to the API reference. In some cases it might even allow an algorithm to validate the code to make sure it runs or uses the current version of the API.
 
