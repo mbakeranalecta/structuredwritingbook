@@ -6,6 +6,9 @@ chapter:(#chapter.separating) Separating Content from Formatting
     subjects:: type, term
         concept, separating content from formatting
 
+    block-index:
+        {formatting}+(index "formatting;separating content from")
+
     If there is one phrase that most people associate with structured writing, it is "separating content from formatting." This basic, well-known structured writing algorithm can be used to achieve a number of process and rhetorical goals. It is a useful place to start the study of algorithms because it illustrates the strategies used for all the other algorithms. Separating content from formatting separates decisions about the appearance of a document from decisions about its content.
     
     section: Separate out style instructions
@@ -180,7 +183,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
             
         By creating the idea of a list, you further separate list formatting from the list content. Now, an algorithm can recognize a list and make formatting decisions based on that knowledge. 
         
-        The second important thing is that the content no longer refers to style names. Instead you have structures. `list` is a structure and so are `paragraph` and `ordered-list-item`. You can give the same structure a different style depending on where it is in the document. The {formatting algorithm} can determine which `ordered-list-item` is first and format it accordingly; this is {how list formatting works in CSS.}[https://css-tricks.com/numbering-in-style/]
+        The second important thing is that the content no longer refers to style names. Instead you have structures. `list` is a structure and so are `paragraph` and `ordered-list-item`. You can give the same structure a different style depending on where it is in the document. The {formatting algorithm}+(index "formatting;list") can determine which `ordered-list-item` is first and format it accordingly; this is {how list formatting works in CSS.}[https://css-tricks.com/numbering-in-style/]
         
         Now, writers no longer apply {styles}+(index "styles;using structure to apply") directly to content, even styles with abstract names. Rather they place content in structures and allow the formatting algorithm to apply styles appropriately. This separates the content even more from the formatting.
         
@@ -216,7 +219,7 @@ chapter:(#chapter.separating) Separating Content from Formatting
                 list-item:Gold
         
 
-        Now, you have a single `list-item` structure that you can use in either an unordered list or an ordered list; the {formatting algorithm} determines the formatting based on which type of list the list-item belongs to. The name `list-item` describes a role in the document that is entirely separate from formatting.
+        Now, you have a single `list-item` structure that you can use in either an unordered list or an ordered list; the {formatting algorithm}+(index "formatting;list") determines the formatting based on which type of list the list-item belongs to. The name `list-item` describes a role in the document that is entirely separate from formatting.
         
         Moving the abstraction out to the {container}+(index "containers;moving abstractions to") is an important part of the algorithm for separating content from formatting. It partitions ordered and unordered lists, making the construction of each simpler and more reliable. This helps keep things consistent and reduces the number of things writers have to remember. (Notice that this requires writers to decide whether a list is ordered or unordered, but they had to decide this anyway; the decision is implicit in the rhetoric of the piece.)
         
@@ -274,11 +277,11 @@ chapter:(#chapter.separating) Separating Content from Formatting
                     code: 12345
         
         
-        Here, once again, it is important to distinguish {formatting}+(index "formatting;presentation versus") and {presentation}+(index "presentation;formatting versus"). {Formatting}-(index)+(italic) refers to the precise details of a text's appearance: the font chosen, the width of the text column, the size of the characters, the spacing between lines, the size and shape of the bullet characters, and so forth. {Presentation}-(index)+(italic) refers to the organization of text.
+        Here, once again, it is important to distinguish {formatting}+(index "formatting;presentation versus") and {presentation}+(index "presentation;formatting versus"). {Formatting}+(italic)+(index "formatting;presentation versus") refers to the precise details of a text's appearance: the font chosen, the width of the text column, the size of the characters, the spacing between lines, the size and shape of the bullet characters, and so forth. {Presentation}+(index "presentation;formatting versus")+(italic) refers to the organization of text.
 
         Deciding to use a list for a certain piece of information is a presentation decision, which is independent of the formatting details applied to lists. When you move content from the {media domain}+(index "media domain;moving from the document domain to the") to the {document domain}+(index "document domain;moving content to the"), you separate the _formatting_ of the content from its _presentation_. The decision to present the information as a list remains; the decision about what that list looks like is separated out.
 
-        In contrast, moving content from the {document domain}+(index "document domain;moving content to the subject domain from the") to the {subject domain}+(index "subject domain;moving content from the document domain to the") separates the {information}+(italic)+(index "information, separating presentation from") from the {presentation}+(italic). The subject-domain structure in [#ex.separate-1] is not a labeled list. It is a data record that can be turned into many different forms of {presentation}+(index "presentation;separating information from"). 
+        In contrast, moving content from the {document domain}+(index "document domain;moving content to the subject domain from the") to the {subject domain}+(index "subject domain;moving content from the document domain to the") separates the {information}+(italic)+(index "information, separating presentation from") from the {presentation}+(index "presentation;formatting versus")+(italic). The subject-domain structure in [#ex.separate-1] is not a labeled list. It is a data record that can be turned into many different forms of {presentation}+(index "presentation;separating information from"). 
         
         Turning such structures into a specific form of presentation is the job of the presentation algorithm (see [#chapter.publishing]). The presentation algorithm could turn it into a labeled list, a table, a paragraph, or an address label.
 

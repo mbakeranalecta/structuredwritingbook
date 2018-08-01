@@ -29,7 +29,7 @@ chapter:(#chapter.wide) Wide Structures
         figure:(#broken-table-formatting) Broken table formatting
             >>>(image ../graphics/tableformatting.xml)
         
-        This table is difficult because one wide thing (a table) contains another wide thing (pre-formatted program code). I don't know how this table was marked up, which domain the content was written in, or how the {formatting algorithm} failed, resulting in the mess in [#broken-table-formatting]. However, including pre-formatted text in a table cell creates a no-win situation for a rendering algorithm. Does it:
+        This table is difficult because one wide thing (a table) contains another wide thing (pre-formatted program code). I don't know how this table was marked up, which domain the content was written in, or how the formatting algorithm failed, resulting in the mess in [#broken-table-formatting]. However, including pre-formatted text in a table cell creates a no-win situation for a rendering algorithm. Does it:
 
         * violate the formatting of the program code by introducing extra line breaks.
         
@@ -158,7 +158,7 @@ chapter:(#chapter.wide) Wide Structures
         
             Many reference works have traditionally been presented as tables on paper. But most such works are really {databases}+(index "databases;tables as"). They are designed to be queried, not read. That is, they are used to look up individual pieces of data in a large set. For a database of this sort, {differential single sourcing} requires that you provide the best method of querying the data for each output medium; that is, the method whose interface fits best in the available viewport. To support differential single sourcing, you should not record data in tables, at least, not in media-domain tables. You should record it in whatever database format best suits the data and the kinds of queries your readers want to make. 
             
-            If you want to support printed tables for print media, then you should {extract}+(index "extracting;data to create a table") content from the database to create the printed table. The additional semantic information available from the database structure allows the {formatting algorithm}+(index "formatting;table") to supply appropriate rendering hints to the {rendering algorithm}+(index "rendering algorithm;tables and the").       
+            If you want to support printed tables for print media, then you should {extract}+(index "extract algorithm;tables and the") content from the database to create the printed table. The additional semantic information available from the database structure allows the {formatting algorithm}+(index "formatting;table") to supply appropriate rendering hints to the {rendering algorithm}+(index "rendering algorithm;tables and the").       
 
             When you have done all of that, you will probably be left with two kinds of tables to deal with: small ad-hoc grid layouts and one-of-a-kind database tables. These are tables that occur just once and don't justify the overhead of creating a subject-domain data structure. For these, you need some form of document-domain table markup. Which markup you choose will come down to how much fancy formatting of tables you require and how willing you are to let the rendering algorithm format your tables without extensive hinting.
 
@@ -363,7 +363,7 @@ chapter:(#chapter.wide) Wide Structures
 
         Could I have factored out the filename `assemble.xml` as well? Certainly. There are a number of other ways that I could have chosen to represent the idea of the graphic in the content. There are times when it makes a lot of sense to do that. If you are including screen shots in a procedure, for instance, the name of a dialog box is a good way of representing the idea of a graphic that is semantically relevant to the procedure itself. 
                 
-        But in the case of the images in this book, their relationship to the text is a little more arbitrary than the relationship of a screen shot to a step in a procedure, so factoring out the filename would have created an abstraction that was actually more difficult to remember as a writer. The point is not to be as abstract as possible, but to combine the highest degree of {functional lucidity} with the constraints that improve content quality, and that will be different for different kinds of material and for different circumstances. 
+        But in the case of the images in this book, their relationship to the text is a little more arbitrary than the relationship of a screen shot to a step in a procedure, so factoring out the filename would have created an abstraction that was actually more difficult to remember as a writer. The point is not to be as abstract as possible, but to combine the highest degree of {functional lucidity}+(index "functional lucidity;factoring out information to improve") with the constraints that improve content quality, and that will be different for different kinds of material and for different circumstances. 
                        
         section: Inline graphics
 

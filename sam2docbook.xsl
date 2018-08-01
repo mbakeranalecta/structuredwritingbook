@@ -600,14 +600,14 @@
 
 
     <xsl:template match="index-see/record">
-<!--        <db:indexterm>
+        <db:indexterm>
             <db:primary>
                 <xsl:value-of select="term"/>
             </db:primary>
             <db:see>
                 <xsl:value-of select="see"/>
             </db:see>
-        </db:indexterm>  -->
+        </db:indexterm> 
     </xsl:template>
 
     <xsl:template match="annotation[@type = 'also-index-as']">
@@ -650,7 +650,8 @@
 
 
     <xsl:template match="index-see-also">
-        <db:para>
+      <!--
+          <db:para>
             <xsl:for-each select="record">
             <db:indexterm>
                 <db:primary>
@@ -661,7 +662,8 @@
                 </db:seealso>
             </db:indexterm>
             </xsl:for-each>
-        </db:para>
+            </db:para>
+            -->
     </xsl:template>
 
 
