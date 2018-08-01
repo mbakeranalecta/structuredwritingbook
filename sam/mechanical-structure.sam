@@ -43,7 +43,7 @@ chapter:(#chapter.mechanical-structure) Content as Data
 
         Some blocks are naturally more hierarchical than others. Even so, structured writing forces writers to think more hierarchically than they might otherwise, which means imposing a little bit of complexity on them to support all the partitioning and redirection of complexity needed for the content system overall. However, there is no need to do any more of this than the partitioning system demands.          
                 
-        If the structured writing {constraints} that you need to express demand hierarchy, while {functional lucidity}+(index "functional lucidity;flat versus hierarchical design and") demands a more punctuated linear model, how do you design a markup language that reconciles these two opposing requirements? 
+        If the structured writing {constraints}+(index "constraints;structured writing")+(index "structured writing;constraints") that you need to express demand hierarchy, while {functional lucidity}+(index "functional lucidity;flat versus hierarchical design and") demands a more punctuated linear model, how do you design a markup language that reconciles these two opposing requirements? 
         
         This is of greatest concern in the design of {document-domain}+(index "document domain;flat versus hierarchical design") languages. The structure of media-domain languages follows the shape of the media they are modeling, which is largely flat. In the {subject domain}+(index "subject domain;flat versus hierarchical design"), content has been abstracted out of strict document order, which means that hierarchy in the {subject domain}+(index "subject domain;flat versus hierarchical design") tends to match the hierarchy of relationships in the subject matter itself.[*2] In the document domain, however, this is a real concern. The document domain consists of {abstractions}+(index "abstractions;document domain") of document structures and the nature of their relationship to the structure of thought in the text is not obvious. 
         
@@ -194,11 +194,14 @@ chapter:(#chapter.mechanical-structure) Content as Data
        
     section: Child blocks versus additional annotations
     
-        As noted above, sometimes the name of a block is not sufficient to fully describe the constraints it meets. In these cases, you can add additional {annotations}+(index "subject annotation;child blocks versus") to a {block}+(index "blocks;subject annotations versus"). But you can also achieve much the same thing by adding child blocks. A child block belongs to the main block, so it is part of it and can constrain the interpretation of the main block just as much as an annotation does. One of the issues in designing data structures for content, therefore, is deciding when to use additional annotations and when to use child blocks. 
+        block-index:
+            {child blocks}+(index "child blocks")
+
+        As noted above, sometimes the name of a block is not sufficient to fully describe the constraints it meets. In these cases, you can add additional {annotations}+(index "annotation;child blocks versus") to a {block}+(index "blocks;subject annotations versus child"). But you can also achieve much the same thing by adding child blocks. A child block belongs to the main block, so it is part of it and can constrain the interpretation of the main block just as much as an annotation does. One of the issues in designing data structures for content, therefore, is deciding when to use additional annotations and when to use child blocks. 
         
         Different markup languages have different levels of support for additional annotation on blocks, so this issue is affected by the markup language you choose. SAM, for instance, supports only a limited, fixed set of additional annotations on blocks. Therefore, if you want to add constraints on interpretation, you have to use child blocks.  
         
-        In XML, however, there is broad (though not unlimited) support for additional annotations on blocks in the form of {attributes}+(index "attributes as annotations")+(index "XML;attributes versus elements as annotations"). In the XML world there is considerable choice, and considerable debate, about when and where to use elements versus attributes in your content models.         
+        In XML, however, there is broad (though not unlimited) support for additional annotations on blocks in the form of {attributes}+(index "attributes as annotations")+(index "XML;attributes versus elements as annotations"). In the XML world there is considerable choice, and considerable debate, about when and where to use elements versus attributes in your {content models}+(index "content models;elements versus attributes in").         
         
         Consider, for example, this XML element that contains two attributes but no content:
 

@@ -26,11 +26,11 @@ chapter:(#chapter.active) Active content
     
     In principle, therefore, you support active content the same way you support these algorithms in any form of structured writing: you create content in the appropriate domain and with the appropriate structures to reliably support the algorithms you need.
 
-    Reliability is key. If you create static {books} or web pages, you have the opportunity to review the output and even hand tweak it to fix any issues, but you can't do that with active content. You need to trust the algorithm 100%, which means you need to trust the content it is working on 100%. This makes {conformance}+(index "conformance;importance with active content") crucial to an {active-content} project, and, as we have seen, different domains support conformance with varying degrees of reliability. 
+    Reliability is key. If you create static books or web pages, you have the opportunity to review the output and even hand tweak it to fix any issues, but you can't do that with active content. You need to trust the algorithm 100%, which means you need to trust the content it is working on 100%. This makes {conformance}+(index "conformance;importance with active content") crucial to an {active-content} project, and, as we have seen, different domains support conformance with varying degrees of reliability. 
     
     Another factor to consider is that while active content essentially postpones the execution of one or more algorithms until the content is in the user's hands, you don't necessarily want to postpone running those algorithms on the whole page. You usually postpone execution only for those parts of the page that you want to make active.
 
-    For instance, if you want real-time stock quotes embedded in your business stories whenever a company is mentioned, there is no reason to postpone running the {synthesis}, {presentation}, and {formatting} algorithms for the entire page; you need to postpone only the synthesis of the stock quote itself. And if you want that quote to continue to update in real time, while the page is displayed, you certainly don't want to redraw the whole page every time the price changes. 
+    For instance, if you want real-time stock quotes embedded in your business stories whenever a company is mentioned, there is no reason to postpone running the synthesis, presentation, and formatting algorithms for the entire page; you need to postpone only the synthesis of the stock quote itself. And if you want that quote to continue to update in real time, while the page is displayed, you certainly don't want to redraw the whole page every time the price changes. 
 
     Displaying stock quotes depends on {subject-domain}+(index "subject domain;active content in the") {metadata}+(index "metadata;active content and") that unambiguously identifies the company mentioned in the content. For example:
     
@@ -67,7 +67,7 @@ chapter:(#chapter.active) Active content
                     create attribute onload = $fncall
                 output ') '
             
-    The document domain represents the desired presentation of a piece of content. Therefore, the only active-content algorithms that you can execute on ordinary document-domain structures are those that leave the {presentation} alone and only affect the {formatting}. For example, you can allow readers to select the font size of a web page, which is a purely formatting concern. 
+    The document domain represents the desired presentation of a piece of content. Therefore, the only active-content algorithms that you can execute on ordinary document-domain structures are those that leave the {presentation} alone and only affect the {formatting}+(index "formatting;active content and"). For example, you can allow readers to select the font size of a web page, which is a purely formatting concern. 
 
     If you want to do active content that dynamically changes the presentation of the content or that changes the text of the content (as in our stock price example), then you need either {subject-domain}+(index "subject domain;active content in the") structures or {document-domain}+(index "document domain;active content in the") structures that are explicitly designed to support active-content algorithms.         
     

@@ -15,7 +15,7 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
          
     Word processors and desktop publishing programs partition the pagination process from the writing process by introducing some document-domain constraints. A document is made up of a series of pages that have margins and contain text flows. Text flows are made up of blocks (paragraphs, headings) inside of which text can flow, even from one page to the next. Common features, such as tables, are supported as objects that can exist in text flows. New pages are created automatically as text expands. In other words, the program creates a bunch of text containers and decides how to fit text into those containers. This leaves writers free to focus on writing and gives pagination decisions to the program.
 
-    Pages, paragraphs, headings, and tables, are all {document-domain} objects. Rather than working on a blank slate, as they do in a graphics program, writers now work within the {constraints} of these document-domain objects.  These constraints remove or limit decisions about positioning of elements, which makes creating documents faster and more consistent. 
+    Pages, paragraphs, headings, and tables, are all {document-domain} objects. Rather than working on a blank slate, as they do in a graphics program, writers now work within the constraints of these document-domain objects.  These constraints remove or limit decisions about positioning of elements, which makes creating documents faster and more consistent. 
 
     But while these constraints are powerful, word processing and desktop publishing impose few other constraints on formatting. While they offer a basic set of document-domain objects -- pages, paragraphs, tables, and so forth -- they use a {WYSIWYG} display, which unifies, rather than partitions, writing and formatting. The writer worries less about pagination but is still thinking mostly in terms of styles and formatting -- the concerns of the media domain. If you want the writer to think less about formatting you need to factor out the media-domain concerns. For that you need to move more fully into the document domain where you can take the formatting decisions out of the writer's hands entirely. 
 
@@ -54,7 +54,7 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
 
     Here is where specifically rhetorical structures enter the picture. In creating a list structure, writers record some of their {rhetorical intent} -- though not all of it by any means -- namely, the intent to express information as a list. Just as recording text as a text object rather than as a set of dots captures its nature as text, recording a list in a list structure rather than as lines preceded by bullet characters captures its nature as a list.
     
-    Once you have a `list` structure, you can create rules -- in a separate file -- about how lists are formatted. You may be familiar with this from {HTML} and {CSS}. [*ex.html-list] shows a list structure in {HTML}+(index "HTML;lists in")+(index "lists;HTML") (actually, this is a slightly more specific structure, but I'll get to that).
+    Once you have a `list` structure, you can create rules -- in a separate file -- about how lists are formatted. You may be familiar with this from HTML and {CSS}+(index "cascading style sheets (CSS);list formatting using"). [*ex.html-list] shows a list structure in {HTML}+(index "HTML;lists in")+(index "lists;HTML") (actually, this is a slightly more specific structure, but I'll get to that).
 
     figure:(*ex.html-list) List structure using HTML
         ```(HTML)
@@ -64,7 +64,7 @@ chapter:(#chapter.document-domain) Writing in the Document Domain
                 <li>Onions</li>
             </ol>
 
-    Now that you have a distinct list object, you can factor out the invariant list formatting rule into a separate file. For {HTML}, you can do this with a {CSS}+(index "cascading style sheets (CSS);list formatting using") style sheet (see [*ex.css-list]):
+    Now that you have a distinct list object, you can factor out the invariant list formatting rule into a separate file. For HTML, you can do this with a {CSS}+(index "cascading style sheets (CSS);list formatting using") style sheet (see [*ex.css-list]):
 
     figure:(*ex.css-list) CSS for a list structure
         ```(CSS)

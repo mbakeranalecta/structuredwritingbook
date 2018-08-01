@@ -6,10 +6,9 @@ chapter:(#chapter.duplication) Avoiding Duplication
     subjects:: type, term
         concept, single source of truth
         concept, single sourcing
-        concept, duplication
 
     block-index:
-        {duplication}+(index "duplication;avoiding")
+        {duplication}+(index "duplicate content;avoiding")
         
     Duplicate content is a significant source of {complexity}+(index "complexity;duplication as a source of") in any content organization. Not only is it expensive, but different versions of the content may not agree with each other, which creates complexity for readers. When the subject matter changes, only one of the duplicates may get updated, causing further drift between the two versions (and updating two versions is twice the work). Duplicate and near-duplicate content may also affect search results.[*fn.seo-penalty] The need to detect duplicate content is therefore a major source of complexity in the content system.
 
@@ -37,7 +36,7 @@ chapter:(#chapter.duplication) Avoiding Duplication
     pagination-tweak:
         min-space: 2in
         
-    How exactly do you construct a set of {constraints}+(index "constraints;detecting duplication using") for detecting duplicate content? First you need to define {duplicate content}+(index "duplicate content, defined"). A reasonable general definition is the following:
+    How exactly do you construct a set of {constraints}+(index "constraints;detecting duplication using") for detecting duplicate content? First you need to define {duplicate content}+(index "duplicate content"). A reasonable general definition is the following:
 
     """
         Duplicate content is content that describes the same subject matter to the same audience for the same purpose.
@@ -154,7 +153,7 @@ chapter:(#chapter.duplication) Avoiding Duplication
     section: The scale of duplication
 
         block-index:
-            {duplication}+(index "duplication;scale of")
+            {duplication}+(index "duplicate content;detecting")
 
         So far, we have looked at detecting duplication of whole documents. But what if you want to avoid duplication that occurs below the level of a document? In [#chapter.management-domain] I looked at the example of a warning that was to be attached to all dangerous procedures. The duplication of that warning occurred at a much smaller scale. It was just a single structure within a procedure. Not only could it occur in many different documents, it could also occur multiple times within a single document. 
 
@@ -172,7 +171,7 @@ chapter:(#chapter.duplication) Avoiding Duplication
     section: Duplication of information versus duplication of text.
 
         block-index:
-            {duplication}+(index "duplication;information versus text")
+            {duplication}+(index "duplicate content;information versus text")
 
         One reason for not wanting to factor out "Press OK" is that anything you replace it with would probably be longer and certainly more abstract. But the most important reason lies in the distinction between duplicating _information_ and duplicating _text_. The same text can occur in multiple places without actually being duplicate information. Each instance of "Press OK" refers to a button in a different dialog box. Those buttons all have the same name, and thus, the instruction to press them is identical. However, they are different buttons. It is entirely possible that a redesign of one of those dialog boxes could result in the OK button being renamed to something more specific to the function of the dialog box, such as Print or Send. Thus, each instance of "Press OK" is a different piece of information, even though it is expressed with the same text. (See [#chapter.modeling] for an approach that eliminates the duplication of "Press OK" without running into this issue.)
 
@@ -218,7 +217,7 @@ chapter:(#chapter.duplication) Avoiding Duplication
 
         Therefore, subdividing your total content set can make for a much more practical approach to duplication detection. You can subdivide your content set in several different ways. Dividing it by document type is the most obvious. However, there are cases where you may want to detect and remove duplication between different document types covering the same subject. 
 
-        For instance, some organizations try to minimize duplication between technical, training, and marketing content for each product. Although these three types of content obviously have different content models, their content models may include key fields that can be used to define a duplication detection rule (they address the same subject, so logically they will have certain subject-domain structures in common). Where the purpose of the content is similar, therefore, you can define anchor points for inserting the same information in multiple places. Of course, you have to keep in mind that technical, training, and marketing content do not always address the same audience for the same purpose, so an over-zealous approach to removing duplication could do more harm than good.  
+        For instance, some organizations try to minimize duplication between technical, training, and marketing content for each product. Although these three types of content obviously have different content models, their {content models}+(index "content models;reducing duplication through consistent") may include key fields that can be used to define a duplication detection rule (they address the same subject, so logically they will have certain subject-domain structures in common). Where the purpose of the content is similar, therefore, you can define anchor points for inserting the same information in multiple places. Of course, you have to keep in mind that technical, training, and marketing content do not always address the same audience for the same purpose, so an over-zealous approach to removing duplication could do more harm than good.  
 
         Finally, the more local the content set you are dealing with is, the more likely it is that everyone who creates and maintains the content set will know, or be able to guess, what content exists. 
 
@@ -305,11 +304,11 @@ chapter:(#chapter.duplication) Avoiding Duplication
 
         * The next best thing after that is for the system to allow writers to query the current collection to determine if there is already a piece of content with those values in those fields. The main difference here is that writers must initiate the query, rather than having the CMS check for duplication before it allows content to be created. This approach requires an interface that allows writers to run queries. However, a {content engineer} or {information architect} can provide pre-defined queries that match the organization's business rules for determining duplication, thus relieving writers from having to learn how to create queries. This approach can be implemented using a much wider variety of tools and does not necessarily require any form of database or content management system. 
 
-        * After this the next best thing is to use a search engine. This is time consuming and uncertain, so it should be supplemented by using structured writing techniques and regularly {auditing} the content set to catch and remove accidental duplication. 
+        * After this the next best thing is to use a search engine. This is time consuming and uncertain, so it should be supplemented by using structured writing techniques and regularly {auditing}+(index "auditing;duplication and") the content set to catch and remove accidental duplication. 
 
         * Then there is the case where writers create content outside of the CMS but must complete a metadata record when submitting the content to the CMS. The CMS can detect duplication in the metadata fields and refuse to accept the content. The downside, of course, is that by the time the CMS detects the duplication, you have already paid for creating the content. Technically, though, the mechanism here is exactly the same as the case in which the writer queries before writing. In practice the difference is a matter of discipline rather than the technical implementation.  
 
-        * Finally, it may be appropriate to accept that certain types of duplication are just too hard to define and detect and that your content system will be simpler overall if you simply tolerate those types and/or handle them with periodic {auditing}, perhaps assisted by structured writing techniques.       
+        * Finally, it may be appropriate to accept that certain types of duplication are just too hard to define and detect and that your content system will be simpler overall if you simply tolerate those types and/or handle them with periodic auditing, perhaps assisted by structured writing techniques.       
 
     section: Optimize the whole, not the parts
 

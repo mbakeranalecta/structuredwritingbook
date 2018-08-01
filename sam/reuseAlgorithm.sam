@@ -13,7 +13,7 @@ chapter:(#chapter.reuse) Reuse
 
     If you are not careful, reuse can lead to more unhandled complexity than you started with, resulting in both process problems and significant damage to {rhetoric}+(index "rhetoric;reuse and its impact on"). Reuse is also an area in which process and rhetorical goals can easily be at odds; although using the same content for multiple purposes can deliver process benefits, it may not be the best rhetorical strategy. 
     
-    It is important to remember that {content reuse}+(index "content reuse;alternatives to") is a means for creating duplication in content. It eliminates duplication on the writing side, but it creates duplication on the output side. It is important to evaluate why you want that duplication at all and see if there are viable alternatives, such as publishing the information once and linking to it from various places. Here are some scenarios where you might want to duplicate information in more than one place: 
+    It is important to remember that {content reuse}+(index "content reuse;alternatives to") is a means for creating {duplication}+(index "duplicate content;reuse and") in content. It eliminates duplication on the writing side, but it creates duplication on the output side. It is important to evaluate why you want that duplication at all and see if there are viable alternatives, such as publishing the information once and linking to it from various places. Here are some scenarios where you might want to duplicate information in more than one place: 
     
     * You are writing about different products that share common technology, and you want to duplicate information on the common features in the documents for each individual product. 
     
@@ -23,7 +23,7 @@ chapter:(#chapter.reuse) Reuse
     
     * You are writing general information (e.g., copyright and trademark statements), and you want to duplicate that information in many different publications. 
     
-    The term _reuse_ can suggest that this activity is akin to rummaging through that jar of old nuts and bolts you have in the garage looking for one that is the right size to fix your lawnmower. While you can do it that way, that approach is neither efficient nor reliable. The efficient and reliable approach involves deliberately creating content for duplication in multiple locations. This means that you need to place {constraints}+(index "constraints;managing reuse") on the content to be reused and the content that reuses it, and that means you are in the realm of structured writing.
+    The term _reuse_ can suggest that this activity is akin to rummaging through that jar of old nuts and bolts you have in the garage looking for one that is the right size to fix your lawnmower. While you can do it that way, that approach is neither efficient nor reliable. The efficient and reliable approach involves deliberately creating content for {duplication}+(index "duplicate content;reuse and") in multiple locations. This means that you need to place {constraints}+(index "constraints;reuse") on the content to be reused and the content that reuses it, and that means you are in the realm of structured writing.
 
     section: Fitting pieces of content together
     
@@ -174,7 +174,7 @@ chapter:(#chapter.reuse) Reuse
             subjects:: type, term
                 concept, keys 
         
-            Another way to do this is with another {management-domain}+(index "management domain;keys in the") structure called a _key_. A key is similar to an ID, but it is not directly tied to a resource. Instead, the same key can point to different resources at different times. Since a key does not represent any one concrete resource, you don't assign the key to a resource. Instead, you use an intermediate {lookup table}+(index "lookup table for keys")+(index "keys;lookup table for") to resolve keys to particular resources for a particular purpose.
+            Another way to do this is with another {management-domain}+(index "management domain;keys in the") structure called a _key_. A key is similar to an ID, but it is not directly tied to a resource. Instead, the same key can point to different resources at different times. Since a key does not represent any one concrete resource, you don't assign the key to a resource. Instead, you use an intermediate {lookup table}+(index "lookup table for keys")+(index "keys;lookup algorithm") to resolve keys to particular resources for a particular purpose.
             
             Suppose you have the warning in a file called `files/shared/admonitions/domestic/danger` with the content shown in [*fig.variable2variable-key-1] (no ID):
 
@@ -210,7 +210,7 @@ chapter:(#chapter.reuse) Reuse
                             name: warn_danger
                             resource: files/shared/admonitions/domestic/danger            
             
-            When the algorithm in [*fig.variable2variable-key-4] processes the procedure, it sees the key reference `%warn_danger` and looks it up in the key lookup table. The key lookup table tells the {algorithm}+(index "keys;lookup algorithm") that the key resolves to the resource `files/shared/admonitions/domestic/danger`. The algorithm then loads that file and inserts the contents into the output.
+            When the algorithm in [*fig.variable2variable-key-4] processes the procedure, it sees the key reference `%warn_danger` and looks it up in the key lookup table. The {key}+(index "keys;lookup algorithm") lookup table tells the algorithm that the key resolves to the resource `files/shared/admonitions/domestic/danger`. The algorithm then loads that file and inserts the contents into the output.
 
             figure:(*fig.variable2variable-key-4) Pseudocode for the key lookup algorithm
                 ```(pseudo)
@@ -428,7 +428,7 @@ chapter:(#chapter.reuse) Reuse
         
         This query retrieves a different set of features from the database depending on how the variable `$model` is defined for the build. Launch the build with `$model = 'compact'` and you get the feature set for the compact model. Launch the build with `$model = 'van'` and you get the feature set for the van model.
         
-        Naturally, this leaves out a lot of detail about how this query gets executed and how the results get structured into a {document-domain} list structure. But those are implementation details. 
+        Naturally, this leaves out a lot of detail about how this query gets executed and how the results get structured into a document-domain list structure. But those are implementation details. 
     
     section: Assemble from pieces
 
@@ -527,7 +527,7 @@ chapter:(#chapter.reuse) Reuse
         
             It is easy to see content reuse as a method to achieve big cost savings. Reusing content means you do not have to write the same content over and over again. It is easy to add up the cost of all that redundant {writing}+(index "writing;complexity of with reuse") and regard that number as pure cost savings from a content reuse strategy.
         
-            But all of the reuse techniques create multiple artifacts -- including content and algorithms -- that need to be managed. You need a mechanism to make sure that your content obeys the {constraints}+(index "constraints;cost of reuse") required to make the pieces of content fit together reliably. You need a mechanism to make sure that your reuse processes produce the documents you need. The cost of such management can be non-trivial, and the consequences if the management breaks down can be significant. 
+            But all of the reuse techniques create multiple artifacts -- including content and algorithms -- that need to be managed. You need a mechanism to make sure that your content obeys the {constraints}+(index "constraints;reuse") required to make the pieces of content fit together reliably. You need a mechanism to make sure that your reuse processes produce the documents you need. The cost of such management can be non-trivial, and the consequences if the management breaks down can be significant. 
             
             While reuse is supposed to reduce the cost of modifying content when the subject matter changes, there are hidden cost traps here as well. It is often not until the subject matter changes that you find out if the content you have treated as common is really common. If not, you have to sort out what is common and what isn't, which can involve complex edits that have to be tested and verified.
 
