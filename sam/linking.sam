@@ -19,7 +19,7 @@ chapter:(#chapter.linking) Linking
 
     These are all pointers to some next page that a reader may need. However, even the most prescient writer cannot make every possibility the next page in a {linear narrative}+(index "linear narrative")+(index "narrative flow;linear"). To serve readers, writers need to pave all of the possible paths, and the way to do that is with {hypertext} links.
     
-    This means that linking is not something that happens at arbitrary points where the writer feels like adding a link. Linking must be planned for as part of the {information architecture}+(index "information architecture;information foraging and"). Whether you specify hard links in the {media domain}+(index "media domain;linking in the") or the {document domain}+(index "document domain;linking in the"), manage links with keys in the {management domain}+(index "management domain;linking in the"), or generate them from {subject annotations}+(index "subject annotation;generating links from") in the {subject domain}+(index "subject domain;linking in the"), links should be created in a disciplined and consistent manner according to a deliberate plan.
+    This means that linking is not something that happens at arbitrary points where the writer feels like adding a link. Linking must be planned for as part of the {information architecture}+(index "information architecture;information foraging and"). Whether you specify explicit links in the {media domain}+(index "media domain;linking in the") or the {document domain}+(index "document domain;linking in the"), manage links with keys in the {management domain}+(index "management domain;linking in the"), or generate them from {subject annotations}+(index "subject annotation;generating links from") in the {subject domain}+(index "subject domain;linking in the"), links should be created in a disciplined and consistent manner according to a deliberate plan.
     
     The trail readers follows through an information set has junction points, places where they can decide to keep going straight through the current document or turn aside to look at a different document. While readers can decide to switch documents at any point and for any reason, the most common reason for switching is because they want more information about, or are simply more interested in, a subject mentioned in the current document.
 
@@ -198,7 +198,7 @@ chapter:(#chapter.linking) Linking
         block-index:
             {conditional linking}+(index "linking;conditional")
         
-        Before leaving the management domain, it is worth mentioning a management-domain approach that could address the differential single sourcing problem and handle subject affinities for both online and print publishing. This approach uses conditional structures to include content for both options in the source file. With a {specialization} to support `media` as a conditional attribute, you could do this in {DITA}+(index "DITA;specialization") as shown in [*fig.linking-dita]..
+        Before leaving the management domain, it is worth mentioning a management-domain approach that could address the differential single sourcing problem and handle subject affinities for both online and print publishing. This approach uses conditional structures to include content for both options in the source file. With a {specialization} to support `media` as a conditional attribute, you could do this in {DITA}+(index "DITA;specialization") as shown in [*fig.linking-dita].
 
         figure:(*fig.linking-dita) Conditional linking in DITA
             ```(DITA)
@@ -312,7 +312,7 @@ chapter:(#chapter.linking) Linking
 
         However, although the responsibility of finding resources to link to has been partitioned away from writers, you still need to consider the people and processes that are now required to locate appropriate resources. They do this by looking up resources based on the subject information (type and term) captured by the subject annotation. For this you need content that is annotated at the document level using those types and terms (or their semantic equivalents). You can annotate your documents to describe their subjects by adding fields at the document level. (This is {metadata}.) If you have a page on John Wayne, you can annotate its subjects as shown in [*fig.linking-index].
 
-        figure:(*fig.linking-index) Index information about John Wayne
+        figure:(*fig.linking-index) Subject annotation for John Wayne biography
             ```(sam)
                 topic: 
                     title: Biography of John Wayne
@@ -326,7 +326,7 @@ chapter:(#chapter.linking) Linking
                 
         Now the {linking}+(index "linking;algorithm") algorithm looks like [*fig.linking-index-algorithm].
 
-        figure:(*fig.linking-index-algorithm) Linking algorithm for indexed content
+        figure:(*fig.linking-index-algorithm) Linking algorithm for subject-annotated content
             ```(pseudo)
                 match actor
                     $target = find href of topic 
@@ -363,9 +363,9 @@ chapter:(#chapter.linking) Linking
         
         There is a lot more to how this mechanism works in practice, including what you do about imperfect matches and what happens when the query returns multiple resources. But that goes into the specifics of individual systems, which is more detail than needed for present purposes. 
         
-        You can also index topics using a {content management system}+(index "content management system;indexing topics in a"), in which case the {linking}+(index "linking;algorithm") algorithm would query the CMS to find topics to link to.  
+        You can also annotate the subjects of topics using a {content management system}+(index "content management system;annotating topics in a"), in which case the {linking}+(index "linking;algorithm") algorithm would query the CMS to find topics to link to.  
         
-        A useful feature of this approach is that you can have the {publishing algorithm} fall back to creating a link to an external resource if an internal one is not available. If a search of the index of your own content fails, you can search indexes of external content. You can build such an index yourself, but some external sites provide indexes, APIs, or search facilities that you can use to locate appropriate pages to link to. 
+        A useful feature of this approach is that you can have the {publishing algorithm}+(index "publishing algorithm;linking and the") fall back to creating a link to an external resource if an internal one is not available. If a search of the annotations in your own content fails, you can search indexes of external content. You can build such an index yourself, but some external sites provide indexes, APIs, or search facilities that you can use to locate appropriate pages to link to. 
         
         Of course, building these linking algorithms adds complexity to your content system. The subject domain partitions complexity away from writers and distributes it to information architects and content engineers. 
                 
