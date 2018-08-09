@@ -6,7 +6,7 @@ chapter:(#chapter.change) Change Management
     subjects:: type, term
         process, change management
 
-    Keeping content in sync with changing subject matter and changing requirements is a major process challenge for all content organizations. Structured writing can do a lot to partition and redirect change and the consequences of change.
+    Keeping content in sync with changing subject matter and changing requirements is a major process challenge for all content organizations. Structured writing can do a lot to partition and redirect the management of change and the consequences of change.
     
     Content changes for many reasons. For our purposes it is useful to consider the following sources of change:
     
@@ -42,9 +42,9 @@ chapter:(#chapter.change) Change Management
     Suppose, instead, that you use subject-domain markup:
     
     ```(sam)
-        ingredients:: ingredient, quantity
-            eggs, 12
-            water, 2qt
+        ingredients:: ingredient, quantity, unit
+            eggs, 12, each
+            water, 2, qt
 
 
     Now, you don't have to change the content to change the {presentation}+(index "presentation;future proofing and"). You just change the {publishing algorithm}+(index "publishing algorithm;future proofing and the")+(index "future proofing") to turn an ingredients record set into a list instead of a table. Thus the subject-domain markup has future proofed your content against this change of presentation. The document-domain reStructuredText markup specified a table, which is not a truth about the subject matter; it's a decision about presentation. That decision can change independent of the subject matter. The subject-domain markup simply specifies that "eggs" is an ingredient and "12" is a quantity. These are truths about the subject matter that will not change. Thus, they are invulnerable to future changes outside of the subject matter itself.

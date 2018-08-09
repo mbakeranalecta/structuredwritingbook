@@ -226,7 +226,7 @@ chapter:(#chapter.wide) Wide Structures
         
         In these cases, how do you include the image in your source content? You can't simply include the source file and scale it, since there are now several source files. You have to go back to the idea of the image -- the image that was in the artist's head -- rather than any of the individual renderings of that image. How do you do that?
         
-        In {DocBook}+(index "DocBook;graphics handling in") you can use conditional processing, as shown in see [#ex.docbook-conditional-image]. In this example, the `condition` attribute on the `imageobject` element specifies a different file to be used for two versions of a book (this book, actually). The `epub` version is for e-readers, most of which cannot render {SVG}) drawings, and so require a raster format ({PNG} in this case), while the `fo` version is for print publication using the {XSL-FO} {page description language} and uses the vector format {SVG} for high-resolution rendering in print. 
+        In {DocBook}+(index "DocBook;graphics handling in") you can use conditional processing, as shown in see [#ex.docbook-conditional-image]. In this example, the `condition` attribute on the `imageobject` element specifies a different file to be used for two versions of a book (this book, actually). The `epub` version is for e-readers, most of which cannot render {SVG} drawings, and so require a raster format ({PNG} in this case), while the `fo` version is for print publication using the {XSL-FO} {page description language} and uses the vector format {SVG} for high-resolution rendering in print. 
 
         figure:(#ex.docbook-conditional-image) DocBook markup for conditional images
             ```(DocBook)
@@ -332,7 +332,7 @@ chapter:(#chapter.wide) Wide Structures
         
         However, when factoring out graphics, you still need to supply the metadata needed to render those graphics. One way to handle this is to create a metadata file for each image that provides the data for multiple renderings of the image and a path to each of the renderings. 
         
-        The simplest way to implement this is to use an include instruction that points to the metadata file instead of the image file. This is what I did in writing this book. The strategy uses the DocBook technique shown in [#ex.docbook-conditional-image], which conditionally includes two different versions of a graphic, one for epub and one for print. But this book is not written in {DocBook}+(index "DocBook;graphics handling in"), it is written in {SAM}+(index "SAM;graphics markup in"). In the SAM source file, the image insertion looks like this:
+        The simplest way to implement this is to use an include instruction that points to the metadata file instead of the image file. This is what I did in writing this book. This strategy uses the DocBook technique shown in [#ex.docbook-conditional-image], which conditionally includes two different versions of a graphic, one for epub and one for print. But this book is not written in {DocBook}+(index "DocBook;graphics handling in"), it is written in {SAM}+(index "SAM;graphics markup in"). In the SAM source file, the image insertion looks like this:
         
         ```(sam)
             >>>(image ../graphics/assemble.xml)

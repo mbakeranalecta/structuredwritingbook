@@ -193,7 +193,7 @@ chapter:(#chapter.markup) Markup
                     is a long book about a big whale.</para>
                 </section>
 
-            The structure described by the XML syntax here is an element (`section`), which contains two other elements (`title` and `para`), one of which contains text (`title`), and one of which (`para`) contains a mix of text and another element (`citetitle`). There is no separate syntax for titles or paragraphs as there is in Markdown. Everything is an element, and every element has a name. To define specific document-domain structures, you use named elements. This allows you to create any set of named elements you like to represent any structure you need. 
+            The structure described by the XML syntax here is an element (`section`), which contains two other elements (`title` and `para`), one of which (`title`) contains text and one of which (`para`) contains a mix of text and another element (`citetitle`). There is no separate syntax for titles or paragraphs as there is in Markdown. Everything is an element, and every element has a name. To define specific document-domain structures, you use named elements. This allows you to create any set of named elements you like to represent any structure you need. 
             
             Unlike a Markdown parser, an XML parser does not see paragraphs or titles. It sees elements. It passes the elements it finds, along with their names, to a processing application that is responsible for knowing what the `section`, `title`, and `para` elements mean in a particular markup language, such as DocBook. The parser is common to all XML-based languages, but the processing application is specific to {DocBook}+(index "DocBook;tool chain").
 
@@ -204,7 +204,7 @@ chapter:(#chapter.markup) Markup
                 block-index:
                     {markup languages}+(index "markup languages;types of")
     
-                This means that DocBook is a instance of the abstract language XML.[*3] XML defines abstract structures, and DocBook defines concrete structures by giving names to XML elements. Many common markup languages are instances of XML.[*2] XML is virtually the only abstract language used for content these days, so it is the only abstract language I am going to talk about.
+                This means that DocBook is a instance of the abstract language XML.[*3] XML defines abstract structures, and DocBook defines specific document structures by giving names to XML elements. Many common markup languages are instances of XML.[*2] XML is virtually the only abstract language used for content these days, so it is the only abstract language I am going to talk about.
         
                 footnote:(*2)
                     Sometimes also referred to as "applications" of XML, though this usage was far more common in the days of {SGML}.
@@ -227,7 +227,7 @@ chapter:(#chapter.markup) Markup
         
                 As a writer, you can use:
         
-                * A concrete language with ad-hoc syntax (like Markdown)
+                * A concrete language (like Markdown)
                 * The concrete parts of a hybrid markup language (like reStructuredText) without extensions
                 * A specific instance language (like DocBook) based on an abstract language (probably XML)
                 * A specific instance language (like the recipe markup language used in this book) based on a hybrid language (SAM in this case)
@@ -268,7 +268,7 @@ chapter:(#chapter.markup) Markup
                 block-index:
                     {extension}+(index "extension")
 
-                The downside of concrete languages is that their concrete syntax defines a fixed set of structures. If you want other structures, there is no way to create them short of inventing your own concrete language, or a variant of an existing one, and coding the parser and all the other tools required to interpret that language. Designing new concrete languages is non-trivial because you must ensure that any combination of characters that the writer types can be interpreted unambiguously. Some versions of {Markdown}, including the original, contain ambiguities about how to interpret certain sequences of characters, which detracts from its reliability and {functional lucidity}. 
+                The downside of concrete languages is that their concrete syntax defines a fixed set of structures. If you want other structures, there is no way to create them short of inventing your own concrete language, or a variant of an existing one, and coding the parser and all the other tools required to interpret that language. Designing new concrete languages is non-trivial because you must ensure that any combination of characters that the writer types can be interpreted unambiguously. Some versions of {Markdown}, including the original, contain ambiguities about how to interpret certain sequences of characters, which detracts from their reliability and {functional lucidity}. 
         
                 If you want to define your own structures to express the constraints that matter to your business, you need an easier method. Abstract languages such as XML make this much easier. You create a {schema} that describes the structures you want and write algorithms to process those structures. (I talk about schemas in [#chapter.constraints].)
 
@@ -280,7 +280,7 @@ chapter:(#chapter.markup) Markup
 
                 Extensibility allows you to add structures to a language but does not place restrictions on where they can occur. Constraints let you limit where structures can be used.
         
-                Extensibility allows you to have elements called `ingredient` and `wine-match`. Constraints allow you to require that `ingredient` only occurs inside an `ingredients` structure and that the content of the `ingredients` structure must be a sequence of `ingredient` elements and nothing else. Constraints let you say that writers can put `wine-match` inside `recipe` after the `servings` field and before the `prep-time` field but not in the `introduction` or in a `step` in the `preparation`. Constraints allow you to require that every recipe have the full list of nutritional information.
+                Extensibility allows you to have structures called `ingredient` and `wine-match`. Constraints allow you to require that `ingredient` only occurs inside an `ingredients` structure and that the content of the `ingredients` structure must be a sequence of `ingredient` structures and nothing else. Constraints let you say that writers can put `wine-match` inside `recipe` after the `servings` field and before the `prep-time` field but not in the `introduction` or in a `step` in the `preparation`. Constraints allow you to require that every recipe have the full list of nutritional information.
         
                 Constraints allow you to partition the content system by creating reliable interfaces between different people and processes. All markup languages have constraints. With a concrete language, you get the constraints that are built into the language. Abstract languages allow you to define your own structures and your own constraints. However, as we shall see in [#chapter.extensible], not all languages that are extensible are also constrainable. 
                
